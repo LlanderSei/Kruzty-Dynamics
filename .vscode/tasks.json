@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Tauri Android: Auto-Detect / Interactive",
+      "type": "shell",
+      "command": "adb reverse tcp:1420 tcp:1420; adb reverse tcp:1421 tcp:1421; npm run tauri android dev",
+      "options": {
+        "env": {
+          "ANDROID_HOME": "D:/Android/android-sdk",
+          "NDK_HOME": "D:/Android/android-sdk/ndk/30.0.16248370",
+          "JAVA_HOME": "D:/Program Files/Softwares/Android Studio/jbr",
+          "PATH": "${env:PATH};D:/Android/android-sdk/platform-tools"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Tauri Android: Virtual Device (Emulator)",
+      "type": "shell",
+      "command": "npm run tauri android dev -- Medium_Phone_API_36.0",
+      "options": {
+        "env": {
+          "ANDROID_HOME": "D:/Android/android-sdk",
+          "NDK_HOME": "D:/Android/android-sdk/ndk/30.0.16248370",
+          "JAVA_HOME": "D:/Program Files/Softwares/Android Studio/jbr",
+          "PATH": "${env:PATH};D:/Android/android-sdk/platform-tools"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Tauri Android: Physical Device",
+      "type": "shell",
+      "command": "adb reverse tcp:1420 tcp:1420; adb reverse tcp:1421 tcp:1421; npm run tauri android dev",
+      "options": {
+        "env": {
+          "ANDROID_HOME": "D:/Android/android-sdk",
+          "NDK_HOME": "D:/Android/android-sdk/ndk/30.0.16248370",
+          "JAVA_HOME": "D:/Program Files/Softwares/Android Studio/jbr",
+          "PATH": "${env:PATH};D:/Android/android-sdk/platform-tools"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Tauri Desktop: Run & Hot-Reload",
+      "type": "shell",
+      "command": "npm run tauri dev",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

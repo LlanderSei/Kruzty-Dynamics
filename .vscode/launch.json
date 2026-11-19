@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Tauri Android: Physical Device",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "adb reverse tcp:1420 tcp:1420; adb reverse tcp:1421 tcp:1421; npm run tauri android dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Virtual Device (Emulator)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android dev -- Medium_Phone_API_36.0",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Auto-Detect / Interactive Choice",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "adb reverse tcp:1420 tcp:1420; adb reverse tcp:1421 tcp:1421; npm run tauri android dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Open in Android Studio",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android dev -- --open",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Desktop: Windows Hot-Reload",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri dev",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
