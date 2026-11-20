@@ -1,4 +1,7 @@
 export type ActivityType = 0 | 1 | 2 | 3 | 5 // 0: Playing, 1: Streaming, 2: Listening, 3: Watching, 5: Competing
+export type DiscordStatus = 'online' | 'idle' | 'dnd' | 'offline' | 'invisible'
+export type AppActivityTypeSelection = ActivityType | 'global'
+export type AppStatusSelection = DiscordStatus | 'global'
 export type MediaType = 'music' | 'video' | 'audio' | 'unknown'
 export type PlaybackState = 'playing' | 'paused' | 'stopped' | 'buffering' | 'none'
 
@@ -44,6 +47,7 @@ export type PriorityMode = 'priority-media' | 'switches-between'
 export type MediaDetectionScope = 'all' | 'enabled-only'
 
 export type MediaActivityTypeMode = 'auto-adaptive' | 'app-profile-override' // auto-adaptive: 2 (Listening) for music/audio, 3 (Watching) for video
+export type PausedMediaResolution = 'show-paused' | 'fallback-app' | 'hide-status'
 
 export interface CustomFallbackConfig {
   name: string
@@ -71,6 +75,11 @@ export interface MediaFieldTemplates {
   smallImage?: string
   bigText?: string
   bigImage?: string
+  customButtonsEnabled?: boolean
+  button1Label?: string
+  button1Url?: string
+  button2Label?: string
+  button2Url?: string
 }
 
 export interface DynamicsConfig {
@@ -78,6 +87,8 @@ export interface DynamicsConfig {
   priorityMode: PriorityMode
   mediaScope: MediaDetectionScope
   mediaActivityTypeMode: MediaActivityTypeMode
+  mediaTimeRemaining?: boolean
+  pausedMediaResolution?: PausedMediaResolution
   outsideBehavior: OutsideAppBehavior
   customFallback?: CustomFallbackConfig
   timestampMode: AppTimestampMode
@@ -91,7 +102,8 @@ export interface AppProfile {
   systemLabel: string
   projectedName: string
   iconOverride?: string
-  activityType: ActivityType
+  activityType: AppActivityTypeSelection
+  activityStatus?: AppStatusSelection
   enabled: boolean
   isMediaApp?: boolean
 }
@@ -104,7 +116,7 @@ export interface PermissionState {
 }
 
 export interface ThemeConfig {
-  mode: 'light' | 'dark' | 'system'
+  mode: 'light' | 'dark' | 'amoled'
   customAccentColor: string
 }
 
