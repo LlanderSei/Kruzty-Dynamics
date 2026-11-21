@@ -11,7 +11,6 @@ import {
   ShieldAlert,
   ShieldCheck,
   LogOut,
-  Plus,
   Sparkles,
   Loader2,
 } from 'lucide-react'
@@ -24,7 +23,7 @@ import { useAccounts } from '../accounts/useAccounts'
 import { useTheme, PRESET_ACCENT_COLORS, DEFAULT_ACCENT_COLOR } from '../settings/ThemeContext'
 import { useAppSettings } from '../settings/useAppSettings'
 import { useTranslation } from '../../i18n/useTranslation'
-import { fetchDiscordUserProfile } from '../accounts/discordAuth'
+import { fetchDiscordUserProfile, buildDiscordOAuthUrl, addLog } from '../accounts/discordAuth'
 import type { DiscordAccount } from '../../types'
 
 interface OnboardingScreenProps {
@@ -42,7 +41,7 @@ type ModalType =
   | null
 
 export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
-  const { permissions, setPermission, requestPermission } = usePermissions()
+  const { permissions, requestPermission } = usePermissions()
   const { accounts, activeAccount, addAccount, removeAccount } = useAccounts()
   const { theme, setMode, setAccentColor } = useTheme()
   const { settings, setLanguage } = useAppSettings()
@@ -52,8 +51,6 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
   const colorInputRef = useRef<HTMLInputElement>(null)
 
   // Discord Login state in modal
-  const [discordToken, setDiscordToken] = useState('')
-  const [tokenUsername, setTokenUsername] = useState('')
   const [loginError, setLoginError] = useState('')
   const [isValidatingToken, setIsValidatingToken] = useState(false)
 
@@ -62,15 +59,18 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
     const handleCaptured = async (e: any) => {
       const token = e.detail?.token
       if (token) {
+        addLog('info', `Onboarding: token captured from native portal (len=${token.length})`)
         setIsValidatingToken(true)
         setLoginError('')
         const result = await fetchDiscordUserProfile(token)
         setIsValidatingToken(false)
 
         if (result.success && result.account) {
+          addLog('info', `Onboarding: native portal login SUCCESS id=${result.account.id} username=${result.account.username}`)
           addAccount(result.account)
           setActiveModal(null)
         } else {
+          addLog('error', `Onboarding: native portal login FAILED ${result.error}`)
           // If network validation failed, save with token directly
           const fallbackAccount: DiscordAccount = {
             id: String(Date.now()),
@@ -88,6 +88,32 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
     window.addEventListener('discordTokenCaptured', handleCaptured)
     return () => window.removeEventListener('discordTokenCaptured', handleCaptured)
+  }, [accounts.length, addAccount])
+
+  // Listen for Discord OAuth2 token from popup callback (web/dev mode)
+  useEffect(() => {
+    const handleOAuthMessage = (e: MessageEvent) => {
+      if (e.origin !== window.location.origin) return
+      if (e.data?.type === 'DISCORD_TOKEN') {
+        const token = e.data.token
+        if (token) {
+          setIsValidatingToken(true)
+          setLoginError('')
+          fetchDiscordUserProfile(token).then((result) => {
+            setIsValidatingToken(false)
+            if (result.success && result.account) {
+              addAccount(result.account)
+              setActiveModal(null)
+            } else {
+              setLoginError(result.error || 'Failed to fetch Discord profile')
+            }
+          })
+        }
+      }
+    }
+
+    window.addEventListener('message', handleOAuthMessage)
+    return () => window.removeEventListener('message', handleOAuthMessage)
   }, [accounts.length, addAccount])
 
   // Pluralization helper for accounts
@@ -114,68 +140,44 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       : t.onboarding.skipForNow
 
   const handleOpenLoginPortal = () => {
+    // Android native bridge: opens in-app WebView OAuth2 portal
     if (window.AndroidNativeBridge?.openDiscordLoginPortal) {
       window.AndroidNativeBridge.openDiscordLoginPortal()
-    } else if (window.AndroidNativeBridge?.openExternalUrl) {
-      window.AndroidNativeBridge.openExternalUrl('https://discord.com/login')
-    } else {
-      window.open('https://discord.com/login', '_blank')
-    }
-  }
-
-  const handleSimulateLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!discordToken.trim()) {
-      setLoginError('Please enter a Discord token.')
       return
     }
 
-    setIsValidatingToken(true)
-    setLoginError('')
+    // Web / dev mode: OAuth2 Implicit Flow via popup
+    const clientId = '1572590527562391713'
+    const redirectUri = 'https://discord.com'
+    const oauthUrl = buildDiscordOAuthUrl({ clientId, redirectUri })
 
-    const result = await fetchDiscordUserProfile(discordToken.trim())
-    setIsValidatingToken(false)
+    const popup = window.open(
+      oauthUrl,
+      'discord-auth',
+      'width=500,height=600,left=100,top=100'
+    )
 
-    if (result.success && result.account) {
-      addAccount(result.account)
-      setDiscordToken('')
-      setTokenUsername('')
-      setLoginError('')
-      setActiveModal(null)
-    } else {
-      // If validation returned an error, check if user provided a manual name
-      if (tokenUsername.trim()) {
-        const username = tokenUsername.trim()
-        const manualAccount: DiscordAccount = {
-          id: String(Date.now()),
-          username,
-          displayName: username,
-          token: discordToken.trim(),
-          isActive: accounts.length === 0,
-          avatarUrl: `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(username)}`,
+    if (!popup) {
+      alert(
+        'Popup was blocked by your browser. Please allow popups for this site, ' +
+        'then try opening the Discord login portal again.'
+      )
+      return
+    }
+
+    // Detect when the popup navigates (Discord redirects to discord.com#access_token=...)
+    const pollPopup = setInterval(() => {
+      try {
+        if (popup.closed) {
+          clearInterval(pollPopup)
+          setLoginError('Discord login window closed before sign-in completed. Try the portal again.')
         }
-        addAccount(manualAccount)
-        setDiscordToken('')
-        setTokenUsername('')
-        setLoginError('')
-        setActiveModal(null)
-      } else {
-        setLoginError(result.error || 'Failed to authenticate token with Discord')
+      } catch {
+        // Cross-origin access blocked — Discord handled the redirect
+        clearInterval(pollPopup)
+        setLoginError('Discord login window closed before sign-in completed. Try the portal again.')
       }
-    }
-  }
-
-  const handleQuickDemoLogin = () => {
-    const demoAccount: DiscordAccount = {
-      id: String(Date.now()),
-      username: 'KruztyPilot',
-      displayName: 'Kruzty Pilot',
-      token: 'demo_token_' + Math.random().toString(36).substring(2, 10),
-      isActive: true,
-      avatarUrl: 'https://api.dicebear.com/7.x/bottts/svg?seed=kruzty',
-    }
-    addAccount(demoAccount)
-    setActiveModal(null)
+    }, 1000)
   }
 
   return (
@@ -232,8 +234,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           <div className="space-y-2">
             {/* 1. Special App Access > Notification Access */}
             <div
-              onClick={() => setActiveModal('perm_notification')}
-              className="w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]"
+              onClick={() => !permissions.notificationListener && setActiveModal('perm_notification')}
+              className={`w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all ${permissions.notificationListener ? '' : 'cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]'}`}
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
                 borderColor: permissions.notificationListener
@@ -301,8 +303,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
             {/* 2. Usage Stats Access */}
             <div
-              onClick={() => setActiveModal('perm_usage')}
-              className="w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]"
+              onClick={() => !permissions.usageStats && setActiveModal('perm_usage')}
+              className={`w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all ${permissions.usageStats ? '' : 'cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]'}`}
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
                 borderColor: 'var(--color-border)',
@@ -366,8 +368,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
             {/* 3. Battery Optimizations */}
             <div
-              onClick={() => setActiveModal('perm_battery')}
-              className="w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]"
+              onClick={() => !permissions.batteryOptimizationsIgnored && setActiveModal('perm_battery')}
+              className={`w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all ${permissions.batteryOptimizationsIgnored ? '' : 'cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]'}`}
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
                 borderColor: 'var(--color-border)',
@@ -420,8 +422,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
             {/* 4. Foreground Service Post Notification */}
             <div
-              onClick={() => setActiveModal('perm_post_notifications')}
-              className="w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]"
+              onClick={() => !permissions.postNotifications && setActiveModal('perm_post_notifications')}
+              className={`w-full text-left p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-all ${permissions.postNotifications ? '' : 'cursor-pointer hover:border-[var(--color-accent)] active:scale-[0.99]'}`}
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
                 borderColor: 'var(--color-border)',
@@ -671,34 +673,22 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
       {/* 1. Modal: Special App Access > Notification Access */}
       <Modal
-        isOpen={activeModal === 'perm_notification'}
+        isOpen={activeModal === 'perm_notification' && !permissions.notificationListener}
         onClose={() => setActiveModal(null)}
         title="Notification Access"
         subtitle="Special App Access Configuration"
         footer={
-          <div className="flex items-center gap-2 w-full justify-between">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setPermission('notificationListener', !permissions.notificationListener)
-                setActiveModal(null)
-              }}
-            >
-              {permissions.notificationListener ? 'Revoke (Test)' : 'Toggle Granted'}
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              icon={<ExternalLink className="w-3.5 h-3.5" />}
-              onClick={() => {
-                requestPermission('notificationListener')
-                setActiveModal(null)
-              }}
-            >
-              Open Android Settings
-            </Button>
-          </div>
+          <Button
+            variant="primary"
+            size="sm"
+            icon={<ExternalLink className="w-3.5 h-3.5" />}
+            onClick={() => {
+              requestPermission('notificationListener')
+              setActiveModal(null)
+            }}
+          >
+            Open Android Settings
+          </Button>
         }
       >
         <div className="space-y-3">
@@ -762,34 +752,22 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
       {/* 2. Modal: Usage Stats */}
       <Modal
-        isOpen={activeModal === 'perm_usage'}
+        isOpen={activeModal === 'perm_usage' && !permissions.usageStats}
         onClose={() => setActiveModal(null)}
         title="Usage Access"
         subtitle="Foreground App Detection"
         footer={
-          <div className="flex items-center gap-2 w-full justify-between">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setPermission('usageStats', !permissions.usageStats)
-                setActiveModal(null)
-              }}
-            >
-              {permissions.usageStats ? 'Revoke (Test)' : 'Toggle Granted'}
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              icon={<ExternalLink className="w-3.5 h-3.5" />}
-              onClick={() => {
-                requestPermission('usageStats')
-                setActiveModal(null)
-              }}
-            >
-              Open Usage Access
-            </Button>
-          </div>
+          <Button
+            variant="primary"
+            size="sm"
+            icon={<ExternalLink className="w-3.5 h-3.5" />}
+            onClick={() => {
+              requestPermission('usageStats')
+              setActiveModal(null)
+            }}
+          >
+            Open Usage Access
+          </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
@@ -807,33 +785,21 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
       {/* 3. Modal: Battery Optimizations */}
       <Modal
-        isOpen={activeModal === 'perm_battery'}
+        isOpen={activeModal === 'perm_battery' && !permissions.batteryOptimizationsIgnored}
         onClose={() => setActiveModal(null)}
         title="Battery Optimization"
         subtitle="Background Service Whitelist"
         footer={
-          <div className="flex items-center gap-2 w-full justify-between">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setPermission('batteryOptimizationsIgnored', !permissions.batteryOptimizationsIgnored)
-                setActiveModal(null)
-              }}
-            >
-              {permissions.batteryOptimizationsIgnored ? 'Revoke (Test)' : 'Toggle Granted'}
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                requestPermission('batteryOptimizationsIgnored')
-                setActiveModal(null)
-              }}
-            >
-              Request Exemption
-            </Button>
-          </div>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => {
+              requestPermission('batteryOptimizationsIgnored')
+              setActiveModal(null)
+            }}
+          >
+            Request Exemption
+          </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
@@ -847,33 +813,21 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
 
       {/* 4. Modal: Post Notifications */}
       <Modal
-        isOpen={activeModal === 'perm_post_notifications'}
+        isOpen={activeModal === 'perm_post_notifications' && !permissions.postNotifications}
         onClose={() => setActiveModal(null)}
         title="Foreground Service Notification"
         subtitle="Android 13+ Notification Permission"
         footer={
-          <div className="flex items-center gap-2 w-full justify-between">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setPermission('postNotifications', !permissions.postNotifications)
-                setActiveModal(null)
-              }}
-            >
-              {permissions.postNotifications ? 'Revoke (Test)' : 'Toggle Granted'}
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                requestPermission('postNotifications')
-                setActiveModal(null)
-              }}
-            >
-              Allow Notification
-            </Button>
-          </div>
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => {
+              requestPermission('postNotifications')
+              setActiveModal(null)
+            }}
+          >
+            Allow Notification
+          </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
@@ -915,6 +869,12 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               >
                 Open Portal
               </Button>
+            </div>
+            <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
+              <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
+              <p>
+                The Discord OAuth application is only used to obtain your access token through the redirect link. Kruzty Dynamics saves the token on this device to identify your account and bridge Rich Presence from this app to your Discord profile. It does not send messages or perform other actions as you. You can revoke authorization anytime in Discord User Settings → Authorized Apps.
+              </p>
             </div>
           </div>
 
@@ -962,65 +922,13 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
             </div>
           )}
 
-          {/* Add Account Form via Token */}
-          <form onSubmit={handleSimulateLogin} className="space-y-3">
-            <span className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>
-              Add Account via Token
-            </span>
-
-            <div>
-              <label className="block text-xs font-medium mb-1">Account Display Name (Optional)</label>
-              <input
-                type="text"
-                value={tokenUsername}
-                onChange={e => setTokenUsername(e.target.value)}
-                placeholder="Auto-fetched from Discord @me"
-                className="w-full text-xs px-3 py-2 rounded-xl border focus:outline-hidden"
-                style={{
-                  backgroundColor: 'var(--color-bg-elevated)',
-                  borderColor: 'var(--color-border)',
-                  color: 'var(--color-text-base)',
-                }}
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium mb-1">User Token</label>
-              <input
-                type="password"
-                value={discordToken}
-                onChange={e => setDiscordToken(e.target.value)}
-                placeholder="Enter Discord Token..."
-                className="w-full text-xs px-3 py-2 rounded-xl border focus:outline-hidden font-mono"
-                style={{
-                  backgroundColor: 'var(--color-bg-elevated)',
-                  borderColor: 'var(--color-border)',
-                  color: 'var(--color-text-base)',
-                }}
-              />
-              {loginError && <p className="text-[11px] text-red-400 mt-1">{loginError}</p>}
-            </div>
-
-            <div className="flex items-center gap-2 pt-1">
-              <Button
-                type="submit"
-                size="sm"
-                variant="primary"
-                disabled={isValidatingToken}
-                icon={isValidatingToken ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Plus className="w-3.5 h-3.5" />}
-              >
-                {isValidatingToken ? 'Verifying...' : 'Save Token'}
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                variant="outline"
-                onClick={handleQuickDemoLogin}
-              >
-                Use Demo Account
-              </Button>
-            </div>
-          </form>
+          {isValidatingToken && (
+            <p className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              Verifying your Discord account…
+            </p>
+          )}
+          {loginError && <p className="text-xs text-red-400">{loginError}</p>}
         </div>
       </Modal>
 

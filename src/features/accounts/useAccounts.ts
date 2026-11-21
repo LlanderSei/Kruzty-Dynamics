@@ -23,7 +23,16 @@ export function useAccounts() {
   }, [accounts])
 
   const addAccount = (account: DiscordAccount) => {
+    if (accounts.some(existing => existing.id === account.id)) {
+      window.dispatchEvent(new CustomEvent('app-toast', {
+        detail: { message: 'This Discord account is already added.' },
+      }))
+      return
+    }
+
     setAccounts(prev => {
+      if (prev.some(existing => existing.id === account.id)) return prev
+
       const isFirst = prev.length === 0
       const newAccount = { ...account, isActive: isFirst || account.isActive }
       const updated = isFirst

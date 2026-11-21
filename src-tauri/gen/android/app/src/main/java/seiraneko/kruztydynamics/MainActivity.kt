@@ -7,6 +7,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
@@ -19,8 +21,10 @@ import android.view.ViewGroup
 import android.view.Window
 import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.util.Base64
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -33,6 +37,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import org.json.JSONObject
+import org.json.JSONArray
+import java.io.ByteArrayOutputStream
 
 class MainActivity : TauriActivity() {
   var webViewRef: WebView? = null
@@ -111,6 +117,59 @@ class MainActivity : TauriActivity() {
   }
 
   class AndroidNativeBridge(private val activity: MainActivity) {
+    @JavascriptInterface
+    fun getInstalledAppsAsync(requestId: String) {
+      Thread({
+        val payload = try {
+          loadInstalledApps()
+        } catch (error: Exception) {
+          JSONObject().put("error", error.message ?: "Unable to load installed apps").toString()
+        }
+        val script = "window.dispatchEvent(new CustomEvent('installedAppsLoaded', { detail: { requestId: ${JSONObject.quote(requestId)}, payload: ${JSONObject.quote(payload)} } }));"
+        activity.runOnUiThread {
+          activity.webViewRef?.evaluateJavascript(script, null)
+        }
+      }, "installed-apps-loader").start()
+    }
+
+    private fun loadInstalledApps(): String {
+      val packageManager = activity.packageManager
+      val apps = JSONArray()
+      packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+        .asSequence()
+        .filter { it.packageName != activity.packageName && it.enabled }
+        .filter { packageManager.getLaunchIntentForPackage(it.packageName) != null }
+        .map { info ->
+          packageManager.getApplicationLabel(info).toString() to info.packageName
+        }
+        .sortedBy { it.first.lowercase() }
+        .forEach { (label, packageName) ->
+          val app = JSONObject()
+            .put("systemLabel", label)
+            .put("packageName", packageName)
+          getAppIconBase64(packageName)?.let { app.put("iconBase64", it) }
+          apps.put(app)
+        }
+      return apps.toString()
+    }
+
+    private fun getAppIconBase64(packageName: String): String? {
+      return try {
+        val icon = activity.packageManager.getApplicationIcon(packageName)
+        val bitmap = Bitmap.createBitmap(96, 96, Bitmap.Config.ARGB_8888)
+        icon.setBounds(0, 0, bitmap.width, bitmap.height)
+        icon.draw(Canvas(bitmap))
+        val encoded = ByteArrayOutputStream().use { output ->
+          bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+          Base64.encodeToString(output.toByteArray(), Base64.NO_WRAP)
+        }
+        bitmap.recycle()
+        encoded
+      } catch (_: Exception) {
+        null
+      }
+    }
+
     @JavascriptInterface
     fun setStatusBarTheme(mode: String) {
       activity.runOnUiThread {
@@ -292,26 +351,47 @@ class MainActivity : TauriActivity() {
             settings.userAgentString = "Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
           }
 
-          fun pollToken() {
-            portalWebView.evaluateJavascript(
-              """
-              (function() {
-                try {
-                  var t = window.localStorage.getItem('token') || window.sessionStorage.getItem('token');
-                  if (t) return t.replace(/^"(.*)"$/, '$1');
-                } catch(e) {}
-                return "";
-              })();
-              """.trimIndent()
-            ) { value ->
-              val clean = value?.trim('"', ' ', '\n')
-              if (!clean.isNullOrEmpty() && clean != "null" && clean.length > 20) {
+          val clientId = "1572590527562391713"
+          val redirectUri = "https://discord.com"
+          val oauthUrl = "https://discord.com/api/oauth2/authorize?client_id=$clientId&redirect_uri=$redirectUri&response_type=token&scope=identify&prompt=consent"
+
+          // Intercept OAuth2 callback: Discord redirects with #access_token=... in the URL fragment
+          portalWebView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+              super.onPageFinished(view, url)
+              extractTokenFromUrl(url)
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+              val url = request?.url?.toString() ?: ""
+              if (extractTokenFromUrl(url)) {
+                dialog.dismiss()
+                return true
+              }
+              return false
+            }
+
+            private fun extractTokenFromUrl(url: String?): Boolean {
+              if (url == null) return false
+              val fragmentIndex = url.indexOf('#')
+              if (fragmentIndex < 0) return false
+              val fragment = url.substring(fragmentIndex + 1)
+              val params = fragment.split("&").mapNotNull { parameter ->
+                val separatorIndex = parameter.indexOf('=')
+                if (separatorIndex < 0) return@mapNotNull null
+                parameter.substring(0, separatorIndex) to parameter.substring(separatorIndex + 1)
+              }.toMap()
+              val rawToken = params["access_token"] ?: return false
+              // URL-decode the token (OAuth2 fragment values may be percent-encoded)
+              val token = Uri.decode(rawToken)
+              if (token.isNotEmpty() && token.length > 20) {
                 activity.webViewRef?.evaluateJavascript(
-                  "window.dispatchEvent(new CustomEvent('discordTokenCaptured', { detail: { token: '${clean}' } }));",
+                  "window.dispatchEvent(new CustomEvent('discordTokenCaptured', { detail: { token: ${org.json.JSONObject.quote(token)} } }));",
                   null
                 )
-                dialog.dismiss()
+                return true
               }
+              return false
             }
           }
 
@@ -319,21 +399,13 @@ class MainActivity : TauriActivity() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
               if (newProgress >= 100) {
                 progressBar.visibility = android.view.View.GONE
-                pollToken()
               } else {
                 progressBar.visibility = android.view.View.VISIBLE
               }
             }
           }
 
-          portalWebView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-              super.onPageFinished(view, url)
-              pollToken()
-            }
-          }
-
-          portalWebView.loadUrl("https://discord.com/login")
+          portalWebView.loadUrl(oauthUrl)
           root.addView(portalWebView)
 
           dialog.setContentView(root)

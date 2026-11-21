@@ -3,6 +3,47 @@ import type { ActivityType, DiscordStatus } from '../../types'
 
 const SETTINGS_STORAGE_KEY = 'kd_app_settings'
 const IMAGE_CACHE_KEY = 'kd_asset_cache'
+const APP_PROFILES_KEY = 'kd_app_profiles'
+const IMAGE_CACHE_UPDATED_EVENT = 'kd-image-cache-updated'
+
+interface ImageCacheSummary {
+  total: number
+  customIcons: number
+}
+
+function readImageCacheSummary(): ImageCacheSummary {
+  const urls = new Set<string>()
+  const customIconUrls = new Set<string>()
+  try {
+    const cached = localStorage.getItem(IMAGE_CACHE_KEY)
+    const entries: unknown = cached ? JSON.parse(cached) : []
+    if (Array.isArray(entries)) {
+      for (const entry of entries as Array<Record<string, unknown>>) {
+        if (typeof entry?.remoteUrl !== 'string' || !entry.remoteUrl) continue
+        urls.add(entry.remoteUrl)
+        if (entry.sourceType === 'custom_icon') customIconUrls.add(entry.remoteUrl)
+      }
+    }
+  } catch {
+    // Ignore invalid or unavailable storage.
+  }
+
+  try {
+    const savedProfiles = localStorage.getItem(APP_PROFILES_KEY)
+    const profiles: unknown = savedProfiles ? JSON.parse(savedProfiles) : []
+    if (Array.isArray(profiles)) {
+      for (const profile of profiles as Array<Record<string, unknown>>) {
+        if (typeof profile?.iconOverride !== 'string' || !profile.iconOverride) continue
+        urls.add(profile.iconOverride)
+        customIconUrls.add(profile.iconOverride)
+      }
+    }
+  } catch {
+    // Ignore invalid or unavailable storage.
+  }
+
+  return { total: urls.size, customIcons: customIconUrls.size }
+}
 
 export interface AppSettings {
   language: string
@@ -31,18 +72,17 @@ export function useAppSettings() {
     return DEFAULT_SETTINGS
   })
 
-  const [cachedImageCount, setCachedImageCount] = useState<number>(() => {
-    try {
-      const cached = localStorage.getItem(IMAGE_CACHE_KEY)
-      if (cached) {
-        const parsed = JSON.parse(cached)
-        return Array.isArray(parsed) ? parsed.length : 0
-      }
-    } catch {
-      // Fallback
+  const [imageCacheSummary, setImageCacheSummary] = useState<ImageCacheSummary>(readImageCacheSummary)
+
+  useEffect(() => {
+    const refresh = () => setImageCacheSummary(readImageCacheSummary())
+    window.addEventListener(IMAGE_CACHE_UPDATED_EVENT, refresh)
+    window.addEventListener('storage', refresh)
+    return () => {
+      window.removeEventListener(IMAGE_CACHE_UPDATED_EVENT, refresh)
+      window.removeEventListener('storage', refresh)
     }
-    return 14 // Demo initial count if empty
-  })
+  }, [])
 
   useEffect(() => {
     try {
@@ -72,10 +112,31 @@ export function useAppSettings() {
     setSettings(prev => ({ ...prev, globalActivityStatus }))
   }
 
-  const clearImageCache = () => {
+  const clearImageCache = (includeCustomIcons = false) => {
     try {
-      localStorage.removeItem(IMAGE_CACHE_KEY)
-      setCachedImageCount(0)
+      const cached = localStorage.getItem(IMAGE_CACHE_KEY)
+      const entries: unknown = cached ? JSON.parse(cached) : []
+      const preservedEntries = !includeCustomIcons && Array.isArray(entries)
+        ? (entries as Array<Record<string, unknown>>).filter(entry => entry.sourceType === 'custom_icon')
+        : []
+      if (preservedEntries.length > 0) {
+        localStorage.setItem(IMAGE_CACHE_KEY, JSON.stringify(preservedEntries))
+      } else {
+        localStorage.removeItem(IMAGE_CACHE_KEY)
+      }
+
+      if (includeCustomIcons) {
+        const savedProfiles = localStorage.getItem(APP_PROFILES_KEY)
+        const profiles: unknown = savedProfiles ? JSON.parse(savedProfiles) : []
+        if (Array.isArray(profiles)) {
+          localStorage.setItem(
+            APP_PROFILES_KEY,
+            JSON.stringify((profiles as Array<Record<string, unknown>>).map(profile => ({ ...profile, iconOverride: undefined })))
+          )
+        }
+      }
+      setImageCacheSummary(readImageCacheSummary())
+      window.dispatchEvent(new Event(IMAGE_CACHE_UPDATED_EVENT))
     } catch {
       // Fallback
     }
@@ -83,7 +144,8 @@ export function useAppSettings() {
 
   return {
     settings,
-    cachedImageCount,
+    cachedImageCount: imageCacheSummary.total,
+    customIconCount: imageCacheSummary.customIcons,
     setLanguage,
     setCustomImgbbKey,
     setCustomDiscordAppId,

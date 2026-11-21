@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import {
   ArrowLeft,
   Sliders,
@@ -9,79 +9,105 @@ import {
   Check,
   CheckCheck,
   RotateCcw,
+  Loader2,
 } from 'lucide-react'
 import { Switch } from '../../components/Switch'
 import { Modal } from '../../components/Modal'
 import { Button } from '../../components/Button'
 import { Select } from '../../components/Select'
 import { useBackHandler } from '../navigation/useBackHandler'
+import { useAppSettings } from '../settings/useAppSettings'
+import { invoke } from '@tauri-apps/api/core'
+import { listen } from '@tauri-apps/api/event'
 import type { AppProfile, ActivityType, AppActivityTypeSelection, AppStatusSelection } from '../../types'
 
 interface AppCatalogueProps {
   onBack: () => void
 }
 
-const INITIAL_APPS: AppProfile[] = [
-  {
-    packageName: 'com.mojang.minecraftpe',
-    systemLabel: 'Minecraft',
-    projectedName: 'Minecraft',
-    activityType: 0, // Playing
-    enabled: true,
-  },
-  {
-    packageName: 'com.spotify.music',
-    systemLabel: 'Spotify',
-    projectedName: 'Spotify',
-    activityType: 2, // Listening
-    enabled: true,
-    isMediaApp: true,
-  },
-  {
-    packageName: 'com.miHoYo.GenshinImpact',
-    systemLabel: 'Genshin Impact',
-    projectedName: 'Genshin Impact',
-    activityType: 0,
-    enabled: true,
-  },
-  {
-    packageName: 'com.google.android.apps.youtube.music',
-    systemLabel: 'YouTube Music',
-    projectedName: 'YouTube Music',
-    activityType: 2,
-    enabled: true,
-    isMediaApp: true,
-  },
-  {
-    packageName: 'com.roblox.client',
-    systemLabel: 'Roblox',
-    projectedName: 'Roblox Mobile',
-    activityType: 0,
-    enabled: false,
-  },
-  {
-    packageName: 'com.netflix.mediaclient',
-    systemLabel: 'Netflix',
-    projectedName: 'Netflix',
-    activityType: 3, // Watching
-    enabled: true,
-    isMediaApp: true,
-  },
-  {
-    packageName: 'com.discord',
-    systemLabel: 'Discord',
-    projectedName: 'Discord Android',
-    activityType: 0,
-    enabled: false,
-  },
-  {
-    packageName: 'com.android.chrome',
-    systemLabel: 'Google Chrome',
-    projectedName: 'Browsing the Web',
-    activityType: 0,
-    enabled: true,
-  },
-]
+const APP_PROFILES_STORAGE_KEY = 'kd_app_profiles'
+const INSTALLED_APPS_CACHE_KEY = 'kd_installed_apps_cache'
+
+interface InstalledApp {
+  packageName: string
+  systemLabel: string
+  iconBase64?: string
+}
+
+function loadSavedProfiles(): AppProfile[] {
+  try {
+    const saved = localStorage.getItem(APP_PROFILES_STORAGE_KEY)
+    const parsed: unknown = saved ? JSON.parse(saved) : []
+    return Array.isArray(parsed) ? parsed as AppProfile[] : []
+  } catch {
+    return []
+  }
+}
+
+function loadInstalledAppsCache(): InstalledApp[] {
+  try {
+    const cached = localStorage.getItem(INSTALLED_APPS_CACHE_KEY)
+    const parsed: unknown = cached ? JSON.parse(cached) : []
+    return Array.isArray(parsed) ? parsed as InstalledApp[] : []
+  } catch {
+    return []
+  }
+}
+
+function profilesForInstalledApps(installedApps: InstalledApp[], savedProfiles: AppProfile[]): AppProfile[] {
+  const savedByPackage = new Map(savedProfiles.map(profile => [profile.packageName, profile]))
+  return installedApps.map(installed => {
+    const saved = savedByPackage.get(installed.packageName)
+    return saved
+      ? { ...saved, systemLabel: installed.systemLabel }
+      : {
+          packageName: installed.packageName,
+          systemLabel: installed.systemLabel,
+          projectedName: installed.systemLabel,
+          activityType: 'global',
+          activityStatus: 'global',
+          enabled: false,
+        }
+  })
+}
+
+async function uploadIconToImgBB(
+  file: File,
+  apiKey: string,
+  requestId: string,
+  onProgress: (progress: number) => void
+): Promise<string> {
+  const imageBase64 = await new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onerror = () => reject(new Error('Could not read the selected image.'))
+    reader.onload = () => {
+      const dataUrl = reader.result
+      const image = typeof dataUrl === 'string' ? dataUrl.split(',', 2)[1] : ''
+      if (image) resolve(image)
+      else reject(new Error('The selected file is not a valid image.'))
+    }
+    reader.readAsDataURL(file)
+  })
+
+  const unlisten = await listen<{
+    requestId: string
+    loaded: number
+    total: number
+    progress: number
+  }>('imgbb-upload-progress', event => {
+    if (event.payload.requestId === requestId) onProgress(event.payload.progress)
+  })
+  try {
+    return await invoke<string>('upload_app_icon', {
+      imageBase64,
+      imageName: file.name,
+      apiKey: apiKey || null,
+      requestId,
+    })
+  } finally {
+    unlisten()
+  }
+}
 
 const ACTIVITY_TYPE_LABELS: Record<string | number, string> = {
   global: 'Global Default',
@@ -92,14 +118,34 @@ const ACTIVITY_TYPE_LABELS: Record<string | number, string> = {
   5: 'Competing',
 }
 
-const PLATFORM_OPTIONS = ['Android (Default)', 'PC', 'PlayStation', 'Xbox', 'Nintendo Switch']
+const PLATFORM_OPTIONS = ['Android', 'PC', 'PlayStation', 'Xbox', 'Nintendo Switch']
 
 export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
-  const [apps, setApps] = useState<AppProfile[]>(INITIAL_APPS)
+  const { settings } = useAppSettings()
+  const [initialInstalledApps] = useState<InstalledApp[]>(loadInstalledAppsCache)
+  const [savedProfilesOnLoad] = useState<AppProfile[]>(loadSavedProfiles)
+  const [apps, setApps] = useState<AppProfile[]>(() =>
+    initialInstalledApps.length > 0
+      ? profilesForInstalledApps(initialInstalledApps, savedProfilesOnLoad)
+      : savedProfilesOnLoad
+  )
+  const [appIcons, setAppIcons] = useState<Record<string, string>>(() => Object.fromEntries(
+    initialInstalledApps
+      .filter(app => app.iconBase64)
+      .map(app => [app.packageName, `data:image/png;base64,${app.iconBase64}`])
+  ))
+  const [stagedApps, setStagedApps] = useState<AppProfile[] | null>(null)
+  const [isLoadingApps, setIsLoadingApps] = useState(initialInstalledApps.length === 0)
+  const [appLoadError, setAppLoadError] = useState('')
+  const [profilesLoaded, setProfilesLoaded] = useState(
+    initialInstalledApps.length > 0 || savedProfilesOnLoad.length > 0
+  )
   const [searchQuery, setSearchQuery] = useState('')
   const [filterActive, setFilterActive] = useState(false)
   const [filterEnabledOnly, setFilterEnabledOnly] = useState(false)
-  const [filterActivityType, setFilterActivityType] = useState<number | 'all'>('all')
+  const [filterActivityType, setFilterActivityType] = useState<AppActivityTypeSelection | 'all'>('all')
+  const [filterActivityStatus, setFilterActivityStatus] = useState<AppStatusSelection | 'all'>('all')
+  const [filterPlatform, setFilterPlatform] = useState<string | 'all'>('all')
 
   // Batch Operations Mode state
   const [isBatchMode, setIsBatchMode] = useState(false)
@@ -113,23 +159,133 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
   const [batchToggleState, setBatchToggleState] = useState<boolean | 'keep'>('keep')
   const [batchActivityType, setBatchActivityType] = useState<AppActivityTypeSelection | 'keep'>('keep')
   const [batchActivityStatus, setBatchActivityStatus] = useState<AppStatusSelection | 'keep'>('keep')
+  const [batchPlatform, setBatchPlatform] = useState<string | 'keep'>('keep')
 
   // Per-app customization modal state
   const [customizingApp, setCustomizingApp] = useState<AppProfile | null>(null)
   const [editProjectedName, setEditProjectedName] = useState('')
   const [editActivityType, setEditActivityType] = useState<AppActivityTypeSelection>('global')
   const [editActivityStatus, setEditActivityStatus] = useState<AppStatusSelection>('global')
-  const [editPlatform, setEditPlatform] = useState('Android (Default)')
+  const [editPlatform, setEditPlatform] = useState('Android')
   const [editCustomButtons, setEditCustomButtons] = useState(false)
   const [button1Label, setButton1Label] = useState('')
   const [button1Url, setButton1Url] = useState('')
   const [button2Label, setButton2Label] = useState('')
   const [button2Url, setButton2Url] = useState('')
-  const [uploadProgress, setUploadProgress] = useState<number | null>(null)
+  const [editIconOverride, setEditIconOverride] = useState('')
+  const [iconUploadProgress, setIconUploadProgress] = useState<number | null>(null)
+  const [iconUploadError, setIconUploadError] = useState('')
+  const iconPickerRef = useRef<HTMLInputElement>(null)
+
+  const handleIconFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setIconUploadError('Choose an image file.')
+      return
+    }
+    if (file.size > 32 * 1024 * 1024) {
+      setIconUploadError('Choose an image smaller than 32 MB.')
+      return
+    }
+    setIconUploadError('')
+    setIconUploadProgress(0)
+    try {
+      const requestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`
+      const url = await uploadIconToImgBB(
+        file,
+        settings.customImgbbKey,
+        requestId,
+        setIconUploadProgress
+      )
+      setEditIconOverride(url)
+      setIconUploadProgress(100)
+      window.setTimeout(() => setIconUploadProgress(null), 900)
+    } catch (error) {
+      setIconUploadProgress(null)
+      setIconUploadError(error instanceof Error ? error.message : 'Icon upload failed.')
+    }
+  }
+
+  useEffect(() => {
+    const bridge = (window as Window & {
+      AndroidNativeBridge?: { getInstalledAppsAsync?: (requestId: string) => void }
+    }).AndroidNativeBridge
+
+    if (!bridge?.getInstalledAppsAsync) {
+      setApps(prev => prev.length > 0 ? prev : savedProfilesOnLoad)
+      setAppLoadError('Installed app discovery is available in the Android app.')
+      setIsLoadingApps(false)
+      setProfilesLoaded(true)
+      return
+    }
+
+    const requestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`
+    let timeout: number | undefined
+    const handleInstalledAppsLoaded = (event: Event) => {
+      const detail = (event as CustomEvent<{ requestId: string; payload: string }>).detail
+      if (detail.requestId !== requestId) return
+
+      try {
+        const installedApps = JSON.parse(detail.payload) as InstalledApp[] | { error?: string }
+        if (!Array.isArray(installedApps)) {
+          throw new Error(installedApps.error || 'Unable to load installed apps.')
+        }
+
+        try {
+          localStorage.setItem(INSTALLED_APPS_CACHE_KEY, JSON.stringify(installedApps))
+        } catch {
+          // Continue with in-memory app data if the cache exceeds storage limits.
+        }
+        setAppIcons(Object.fromEntries(
+          installedApps
+            .filter(app => app.iconBase64)
+            .map(app => [app.packageName, `data:image/png;base64,${app.iconBase64}`])
+        ))
+        setApps(prev => profilesForInstalledApps(
+          installedApps,
+          prev.length > 0 ? prev : loadSavedProfiles()
+        ))
+        setAppLoadError('')
+      } catch (error) {
+        setAppLoadError(error instanceof Error ? error.message : 'Unable to load installed apps.')
+      } finally {
+        if (timeout !== undefined) window.clearTimeout(timeout)
+        setIsLoadingApps(false)
+        setProfilesLoaded(true)
+      }
+    }
+
+    window.addEventListener('installedAppsLoaded', handleInstalledAppsLoaded)
+    timeout = window.setTimeout(() => {
+      setIsLoadingApps(false)
+      setAppLoadError('App list refresh timed out. Showing the last saved app list.')
+      setProfilesLoaded(true)
+    }, 15000)
+    bridge.getInstalledAppsAsync(requestId)
+
+    return () => {
+      window.removeEventListener('installedAppsLoaded', handleInstalledAppsLoaded)
+      window.clearTimeout(timeout)
+    }
+  }, [savedProfilesOnLoad])
+
+  useEffect(() => {
+    if (!profilesLoaded) return
+    try {
+      localStorage.setItem(APP_PROFILES_STORAGE_KEY, JSON.stringify(apps))
+    } catch {
+      // Keep profile changes active for this session if storage is unavailable.
+    }
+  }, [apps, profilesLoaded])
+
+  const displayedApps = stagedApps ?? apps
 
   // Filtered Apps
   const filteredApps = useMemo(() => {
-    return apps.filter(app => {
+    return displayedApps.filter(app => {
       const matchesSearch =
         app.systemLabel.toLowerCase().includes(searchQuery.toLowerCase()) ||
         app.projectedName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -140,12 +296,17 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       if (filterEnabledOnly && !app.enabled) return false
 
       if (filterActivityType !== 'all' && app.activityType !== filterActivityType) return false
+      if (filterActivityStatus !== 'all' && (app.activityStatus || 'global') !== filterActivityStatus) return false
+      if (filterPlatform !== 'all' && (app.platform || 'Android') !== filterPlatform) return false
 
       return true
     })
-  }, [apps, searchQuery, filterEnabledOnly, filterActivityType])
+  }, [displayedApps, searchQuery, filterEnabledOnly, filterActivityType, filterActivityStatus, filterPlatform])
 
-  const enabledCount = useMemo(() => apps.filter(a => a.enabled).length, [apps])
+  const hasActiveFilters = filterEnabledOnly || filterActivityType !== 'all' ||
+    filterActivityStatus !== 'all' || filterPlatform !== 'all'
+
+  const enabledCount = useMemo(() => displayedApps.filter(a => a.enabled).length, [displayedApps])
 
   // Single app toggle
   const toggleApp = (packageName: string) => {
@@ -160,13 +321,14 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     setEditProjectedName(app.projectedName)
     setEditActivityType(app.activityType ?? 'global')
     setEditActivityStatus(app.activityStatus ?? 'global')
-    setEditPlatform('Android (Default)')
-    setEditCustomButtons(false)
-    setButton1Label('')
-    setButton1Url('')
-    setButton2Label('')
-    setButton2Url('')
-    setUploadProgress(null)
+    setEditPlatform(app.platform || 'Android')
+    setEditCustomButtons(Boolean(app.buttons?.length))
+    setButton1Label(app.buttons?.[0]?.label || '')
+    setButton1Url(app.buttons?.[0]?.url || '')
+    setButton2Label(app.buttons?.[1]?.label || '')
+    setButton2Url(app.buttons?.[1]?.url || '')
+    setEditIconOverride(app.iconOverride || '')
+    setIconUploadError('')
   }
 
   // Save single app profile customization
@@ -180,27 +342,19 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               projectedName: editProjectedName.trim() || app.systemLabel,
               activityType: editActivityType,
               activityStatus: editActivityStatus,
+              platform: editPlatform,
+              iconOverride: editIconOverride || undefined,
+              buttons: editCustomButtons
+                ? [
+                    { label: button1Label.trim(), url: button1Url.trim() },
+                    { label: button2Label.trim(), url: button2Url.trim() },
+                  ].filter(button => button.label && button.url)
+                : [],
             }
           : app
       )
     )
     setCustomizingApp(null)
-  }
-
-  // Simulate circular upload on icon click
-  const handleSimulateIconUpload = () => {
-    setUploadProgress(10)
-    let progress = 10
-    const interval = setInterval(() => {
-      progress += 25
-      if (progress >= 100) {
-        setUploadProgress(100)
-        clearInterval(interval)
-        setTimeout(() => setUploadProgress(null), 600)
-      } else {
-        setUploadProgress(progress)
-      }
-    }, 150)
   }
 
   // Batch Selection
@@ -214,14 +368,15 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
   }
 
   const applyBatchChanges = () => {
-    setApps(prev =>
-      prev.map(app => {
+    setStagedApps(prev =>
+      (prev ?? apps).map(app => {
         if (!selectedPackages.has(app.packageName)) return app
         return {
           ...app,
           enabled: batchToggleState === 'keep' ? app.enabled : batchToggleState,
           activityType: batchActivityType === 'keep' ? app.activityType : batchActivityType,
           activityStatus: batchActivityStatus === 'keep' ? app.activityStatus : batchActivityStatus,
+          platform: batchPlatform === 'keep' ? app.platform : batchPlatform,
         }
       })
     )
@@ -246,9 +401,16 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     }
   }
 
-  useBackHandler(handleBack)
+  // Let the active modal own Android's back gesture. The catalogue handler
+  // otherwise sits later in the handler stack and navigates away first.
+  useBackHandler(
+    handleBack,
+    !customizingApp && !isBatchModalOpen && !isBatchConfirmOpen && !isDiscardConfirmOpen
+  )
 
   const confirmApplyAll = () => {
+    if (stagedApps) setApps(stagedApps)
+    setStagedApps(null)
     setIsBatchConfirmOpen(false)
     setIsBatchMode(false)
     setSelectedPackages(new Set())
@@ -366,19 +528,19 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               type="button"
               onClick={() => setFilterActive(prev => !prev)}
               className={`p-2 rounded-xl border transition-all cursor-pointer ${
-                filterEnabledOnly || filterActivityType !== 'all' ? 'border-[var(--color-accent)]' : ''
+                hasActiveFilters ? 'border-[var(--color-accent)]' : ''
               }`}
               style={{
                 backgroundColor:
-                  filterEnabledOnly || filterActivityType !== 'all'
+                  hasActiveFilters
                     ? 'var(--color-accent-subtle)'
                     : 'var(--color-bg-elevated)',
                 borderColor:
-                  filterEnabledOnly || filterActivityType !== 'all'
+                  hasActiveFilters
                     ? 'var(--color-accent)'
                     : 'var(--color-border)',
                 color:
-                  filterEnabledOnly || filterActivityType !== 'all'
+                  hasActiveFilters
                     ? 'var(--color-accent)'
                     : 'var(--color-text-muted)',
               }}
@@ -389,12 +551,14 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
             </button>
 
             {/* Clear Filters Button (Only shown when filter active) */}
-            {(filterEnabledOnly || filterActivityType !== 'all') && (
+            {hasActiveFilters && (
               <button
                 type="button"
                 onClick={() => {
                   setFilterEnabledOnly(false)
                   setFilterActivityType('all')
+                  setFilterActivityStatus('all')
+                  setFilterPlatform('all')
                 }}
                 className="p-2 rounded-xl border transition-all cursor-pointer text-red-400"
                 style={{
@@ -450,19 +614,44 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
 
                 <Select
                   value={filterActivityType}
-                  onChange={e =>
-                    setFilterActivityType(
-                      e.target.value === 'all' ? 'all' : Number(e.target.value)
-                    )
-                  }
+                  onChange={e => {
+                    const value = e.target.value
+                    setFilterActivityType(value === 'all' || value === 'global'
+                      ? value
+                      : Number(value) as ActivityType)
+                  }}
                   fullWidth={true}
                 >
-                  <option value="all">All Activities</option>
+                  <option value="all">All Activity Types</option>
+                  <option value="global">Global Default</option>
                   <option value={0}>Playing</option>
                   <option value={1}>Streaming</option>
                   <option value={2}>Listening</option>
                   <option value={3}>Watching</option>
                   <option value={5}>Competing</option>
+                </Select>
+
+                <Select
+                  value={filterActivityStatus}
+                  onChange={e => setFilterActivityStatus(e.target.value as AppStatusSelection | 'all')}
+                  fullWidth={true}
+                >
+                  <option value="all">All Activity Statuses</option>
+                  <option value="global">Global Default</option>
+                  <option value="online">Online</option>
+                  <option value="idle">Idle</option>
+                  <option value="dnd">Do Not Disturb</option>
+                  <option value="offline">Offline</option>
+                  <option value="invisible">Invisible</option>
+                </Select>
+
+                <Select
+                  value={filterPlatform}
+                  onChange={e => setFilterPlatform(e.target.value)}
+                  fullWidth={true}
+                >
+                  <option value="all">All Platforms</option>
+                  {PLATFORM_OPTIONS.map(platform => <option key={platform} value={platform}>{platform}</option>)}
                 </Select>
               </div>
             </div>
@@ -471,9 +660,27 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
 
         {/* Scrollable Apps List */}
         <div className="max-w-xl w-full mx-auto p-4 space-y-2 pb-24">
-          {filteredApps.length === 0 ? (
+          {appLoadError && (
+            <div
+              className="rounded-xl border px-3 py-2 text-[11px]"
+              style={{
+                backgroundColor: 'var(--color-bg-surface)',
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              {appLoadError}
+            </div>
+          )}
+          {isLoadingApps ? (
             <div className="p-8 text-center text-xs" style={{ color: 'var(--color-text-muted)' }}>
-              No applications match your search or filter.
+              Loading installed apps…
+            </div>
+          ) : filteredApps.length === 0 ? (
+            <div className="p-8 text-center text-xs" style={{ color: 'var(--color-text-muted)' }}>
+              {apps.length === 0
+                ? 'No installed apps are available to configure.'
+                : 'No applications match your search or filter.'}
             </div>
           ) : (
             filteredApps.map(app => {
@@ -516,15 +723,24 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   )}
 
                   {/* App Icon */}
-                  <div className="relative shrink-0">
-                    <img
-                      src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-                        app.packageName
-                      )}`}
-                      alt={app.systemLabel}
-                      className="w-10 h-10 rounded-xl object-cover border"
-                      style={{ borderColor: 'var(--color-border)' }}
-                    />
+                  <div
+                    className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border"
+                    style={{
+                      backgroundColor: 'var(--color-bg-elevated)',
+                      borderColor: 'var(--color-border)',
+                    }}
+                  >
+                    {app.iconOverride || appIcons[app.packageName] ? (
+                      <img
+                        src={app.iconOverride || appIcons[app.packageName]}
+                        alt={`${app.systemLabel} icon`}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-sm font-bold" style={{ color: 'var(--color-accent)' }}>
+                        {app.systemLabel.trim().charAt(0).toUpperCase() || '?'}
+                      </span>
+                    )}
                   </div>
 
                   {/* Projected Name + App Name + PackageName */}
@@ -656,10 +872,10 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
         subtitle="Presence profile & projection aliases"
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
-            <Button size="sm" variant="outline" onClick={() => setCustomizingApp(null)}>
+            <Button size="sm" variant="outline" onClick={() => setCustomizingApp(null)} disabled={iconUploadProgress !== null}>
               Cancel
             </Button>
-            <Button size="sm" variant="primary" onClick={saveCustomizeApp}>
+            <Button size="sm" variant="primary" onClick={saveCustomizeApp} disabled={iconUploadProgress !== null}>
               Apply
             </Button>
           </div>
@@ -669,31 +885,56 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
           <div className="divide-y text-xs" style={{ borderColor: 'var(--color-border)' }}>
             {/* 3-Col Header Grid: Icon | Projected Name | Reset */}
             <div className="flex items-end gap-2.5 pb-3.5">
-              {/* Icon Container with Circular Progress Bar around border frame */}
-              <div
-                onClick={handleSimulateIconUpload}
-                className="relative w-12 h-12 rounded-2xl border-2 flex items-center justify-center shrink-0 cursor-pointer overflow-hidden transition-all hover:opacity-90"
-                style={{
-                  borderColor:
-                    uploadProgress !== null ? 'var(--color-accent)' : 'var(--color-border)',
-                  backgroundColor: 'var(--color-bg-elevated)',
-                }}
-                title="Tap to replace app icon"
-              >
-                <img
-                  src={`https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(
-                    customizingApp.packageName
-                  )}`}
-                  alt="App Icon"
-                  className="w-full h-full object-cover"
-                />
-
-                {/* Upload Progress Overlay (Centered percentage) */}
-                {uploadProgress !== null && (
-                  <div className="absolute inset-0 bg-black/75 flex flex-col items-center justify-center text-white">
-                    <span className="text-[10px] font-bold font-mono">{uploadProgress}%</span>
-                  </div>
+              {/* App icon picker and reset */}
+              <div className="relative h-12 w-12 shrink-0">
+                <button
+                  type="button"
+                  disabled={iconUploadProgress !== null}
+                  onClick={() => iconPickerRef.current?.click()}
+                  className="flex h-full w-full items-center justify-center overflow-hidden rounded-2xl border-2 text-lg font-bold"
+                  title="Choose an icon image"
+                  aria-label={`Choose icon for ${customizingApp.systemLabel}`}
+                  style={{
+                    borderColor: 'var(--color-border)',
+                    backgroundColor: 'var(--color-bg-elevated)',
+                    color: 'var(--color-accent)',
+                  }}
+                >
+                  {editIconOverride || appIcons[customizingApp.packageName] ? (
+                    <img
+                      src={editIconOverride || appIcons[customizingApp.packageName]}
+                      alt={`${customizingApp.systemLabel} icon`}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    customizingApp.systemLabel.trim().charAt(0).toUpperCase() || '?'
+                  )}
+                </button>
+                {editIconOverride && (
+                  <button
+                    type="button"
+                    disabled={iconUploadProgress !== null}
+                    onClick={() => setEditIconOverride('')}
+                    className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border shadow"
+                    title="Reset to original app icon"
+                    aria-label="Reset app icon"
+                    style={{
+                      backgroundColor: 'var(--color-bg-surface)',
+                      borderColor: 'var(--color-border)',
+                      color: 'var(--color-text-muted)',
+                    }}
+                  >
+                    <RotateCcw className="h-3 w-3" />
+                  </button>
                 )}
+                <input
+                  ref={iconPickerRef}
+                  type="file"
+                  accept="image/*"
+                  disabled={iconUploadProgress !== null}
+                  className="hidden"
+                  onChange={handleIconFileChange}
+                />
               </div>
 
               {/* Projected App Name input */}
@@ -729,6 +970,9 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
             </div>
+            {iconUploadError && (
+              <p className="pb-2 text-[10px] text-red-400" role="alert">{iconUploadError}</p>
+            )}
 
             {/* Activity Type Dropdown */}
             <div className="flex items-center justify-between gap-4 py-3">
@@ -972,6 +1216,21 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               </Select>
             </div>
           </div>
+
+          {/* Bulk Platform Type */}
+          <div className="flex items-center justify-between gap-4 py-3">
+            <label className="font-semibold text-xs shrink-0">Platform Type</label>
+            <div className="w-48 sm:w-56 shrink-0">
+              <Select
+                value={batchPlatform}
+                onChange={e => setBatchPlatform(e.target.value)}
+                fullWidth={true}
+              >
+                <option value="keep">Keep Current</option>
+                {PLATFORM_OPTIONS.map(platform => <option key={platform} value={platform}>{platform}</option>)}
+              </Select>
+            </div>
+          </div>
         </div>
       </Modal>
 
@@ -1021,6 +1280,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 setIsBatchMode(false)
                 setSelectedPackages(new Set())
                 setHasStagedChanges(false)
+                setStagedApps(null)
               }}
             >
               Discard Changes
@@ -1033,6 +1293,33 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
           changes.
         </p>
       </Modal>
+
+      {iconUploadProgress !== null && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-5 left-1/2 z-[60] w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border p-3 shadow-xl"
+          style={{
+            backgroundColor: 'var(--color-bg-elevated)',
+            borderColor: 'var(--color-border)',
+            color: 'var(--color-text-base)',
+          }}
+        >
+          <div className="mb-2 flex items-center justify-between gap-3 text-xs">
+            <span className="flex items-center gap-2">
+              {iconUploadProgress < 100 && <Loader2 className="h-3.5 w-3.5 animate-spin text-[var(--color-accent)]" />}
+              Uploading app icon to ImgBB
+            </span>
+            <span className="font-mono text-[var(--color-text-muted)]">{iconUploadProgress}%</span>
+          </div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-black/20">
+            <div
+              className="h-full rounded-full bg-[var(--color-accent)] transition-[width] duration-150"
+              style={{ width: `${iconUploadProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -104,6 +104,8 @@ export interface AppProfile {
   iconOverride?: string
   activityType: AppActivityTypeSelection
   activityStatus?: AppStatusSelection
+  platform?: string
+  buttons?: ActivityButton[]
   enabled: boolean
   isMediaApp?: boolean
 }

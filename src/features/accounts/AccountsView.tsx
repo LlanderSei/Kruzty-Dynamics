@@ -6,17 +6,14 @@ import {
   Trash2,
   ArrowLeftRight,
   Plus,
-  MessageSquare,
-  HelpCircle,
-  Eye,
-  EyeOff,
-  Sparkles,
   Loader2,
+  ShieldCheck,
 } from 'lucide-react'
 import type { DiscordAccount } from '../../types'
 import { Modal } from '../../components/Modal'
 import { Button } from '../../components/Button'
-import { fetchDiscordUserProfile } from './discordAuth'
+import { fetchDiscordUserProfile, buildDiscordOAuthUrl, addLog } from './discordAuth'
+import { DiscordIcon } from '../../components/DiscordIcon'
 
 interface AccountsViewProps {
   accounts: DiscordAccount[]
@@ -36,10 +33,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
   onUnuseAccount,
 }) => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
-  const [discordToken, setDiscordToken] = useState('')
-  const [showToken, setShowToken] = useState(false)
   const [loginError, setLoginError] = useState('')
-  const [showTokenHelp, setShowTokenHelp] = useState(false)
   const [accountToDelete, setAccountToDelete] = useState<DiscordAccount | null>(null)
   const [isValidatingToken, setIsValidatingToken] = useState(false)
 
@@ -48,15 +42,18 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
     const handleCaptured = async (e: any) => {
       const token = e.detail?.token
       if (token) {
+        addLog('info', `AccountsView: token captured from native portal (len=${token.length})`)
         setIsValidatingToken(true)
         setLoginError('')
         const result = await fetchDiscordUserProfile(token)
         setIsValidatingToken(false)
 
         if (result.success && result.account) {
+          addLog('info', `AccountsView: native portal login SUCCESS id=${result.account.id} username=${result.account.username}`)
           onAddAccount(result.account)
           setIsLoginModalOpen(false)
         } else {
+          addLog('error', `AccountsView: native portal login FAILED ${result.error}`)
           const fallbackAccount: DiscordAccount = {
             id: String(Date.now()),
             username: 'DiscordUser',
@@ -78,55 +75,44 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
   const inactiveAccounts = accounts.filter(a => !a.isActive)
 
   const handleOpenLoginPortal = () => {
+    // Android native bridge: opens in-app WebView OAuth2 portal
     if (window.AndroidNativeBridge?.openDiscordLoginPortal) {
       window.AndroidNativeBridge.openDiscordLoginPortal()
-    } else if (window.AndroidNativeBridge?.openExternalUrl) {
-      window.AndroidNativeBridge.openExternalUrl('https://discord.com/login')
-    } else {
-      window.open('https://discord.com/login', '_blank')
-    }
-  }
-
-  const handleLoginSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!discordToken.trim()) {
-      setLoginError('Please enter a Discord token.')
       return
     }
 
-    setIsValidatingToken(true)
-    setLoginError('')
+    // Web / dev mode: OAuth2 Implicit Flow via popup
+    const clientId = '1572590527562391713'
+    const redirectUri = 'https://discord.com'
+    const oauthUrl = buildDiscordOAuthUrl({ clientId, redirectUri })
 
-    const result = await fetchDiscordUserProfile(discordToken.trim())
-    setIsValidatingToken(false)
+    const popup = window.open(
+      oauthUrl,
+      'discord-auth',
+      'width=500,height=600,left=100,top=100'
+    )
 
-    if (result.success && result.account) {
-      onAddAccount(result.account)
-      setDiscordToken('')
-      setLoginError('')
-      setIsLoginModalOpen(false)
-    } else {
-      setLoginError(result.error || 'Failed to authenticate token with Discord.')
-    }
-  }
-
-  const handleQuickDemo = () => {
-    const demoNames = ['KruztyPilot', 'EchoWave', 'CyberLynx', 'Starlight']
-    const chosenName = demoNames[accounts.length % demoNames.length]
-
-    const demoAccount: DiscordAccount = {
-      id: String(Date.now()),
-      username: chosenName.toLowerCase(),
-      displayName: chosenName,
-      token: `demo_token_${Math.random().toString(36).substring(2, 12)}`,
-      isActive: accounts.length === 0,
-      avatarUrl: `https://api.dicebear.com/7.x/bottts/svg?seed=${chosenName}`,
+    if (!popup) {
+      alert(
+        'Popup was blocked by your browser. Please allow popups for this site, ' +
+        'then try opening the Discord login portal again.'
+      )
+      return
     }
 
-    onAddAccount(demoAccount)
-    setDiscordToken('')
-    setLoginError('')
-    setIsLoginModalOpen(false)
+    // Detect when the popup navigates (Discord redirects to discord.com#access_token=...)
+    const pollPopup = setInterval(() => {
+      try {
+        if (popup.closed) {
+          clearInterval(pollPopup)
+          setLoginError('Discord login window closed before sign-in completed. Try the portal again.')
+        }
+      } catch {
+        // Cross-origin access blocked — Discord handled the redirect
+        clearInterval(pollPopup)
+        setLoginError('Discord login window closed before sign-in completed. Try the portal again.')
+      }
+    }, 1000)
   }
 
   const confirmDelete = () => {
@@ -165,7 +151,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-medium text-sm transition-all shadow-md active:scale-95 cursor-pointer"
             style={{ backgroundColor: 'var(--color-accent)' }}
           >
-            <MessageSquare className="w-4 h-4 fill-white" />
+            <DiscordIcon className="w-4 h-4 fill-white" />
             <span>Login Discord</span>
           </button>
         </div>
@@ -387,7 +373,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           aria-label="Add Discord Account"
         >
           <div className="relative">
-            <MessageSquare className="w-5 h-5 fill-white" />
+            <DiscordIcon className="w-5 h-5 fill-white" />
             <Plus className="w-3.5 h-3.5 absolute -top-1.5 -right-2 text-white stroke-[3]" />
           </div>
         </button>
@@ -398,7 +384,6 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
         isOpen={isLoginModalOpen}
         onClose={() => {
           setIsLoginModalOpen(false)
-          setDiscordToken('')
           setLoginError('')
         }}
         title="Connect Discord Account"
@@ -422,112 +407,27 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
               <Button
                 size="sm"
                 variant="primary"
-                icon={<MessageSquare className="w-3.5 h-3.5" />}
+                icon={<DiscordIcon className="w-3.5 h-3.5" />}
                 onClick={handleOpenLoginPortal}
               >
                 Open Portal
               </Button>
             </div>
+            <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
+              <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
+              <p>
+                The Discord OAuth application is only used to obtain your access token through the redirect link. Kruzty Dynamics saves the token on this device to identify your account and bridge Rich Presence from this app to your Discord profile. It does not send messages or perform other actions as you. You can revoke authorization anytime in Discord User Settings → Authorized Apps.
+              </p>
+            </div>
           </div>
 
-          <form onSubmit={handleLoginSubmit} className="space-y-4">
-            <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-              Or provide your Discord User Token to authenticate and control your online Rich Presence.
+          {isValidatingToken && (
+            <p className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              Verifying your Discord account…
             </p>
-
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <label
-                htmlFor="discord-token-input"
-                className="text-xs font-semibold"
-                style={{ color: 'var(--color-text-base)' }}
-              >
-                Discord Token
-              </label>
-              <button
-                type="button"
-                onClick={() => setShowTokenHelp(!showTokenHelp)}
-                className="text-[11px] flex items-center gap-1 cursor-pointer transition-colors"
-                style={{ color: 'var(--color-accent)' }}
-              >
-                <HelpCircle className="w-3 h-3" />
-                <span>How to find</span>
-              </button>
-            </div>
-
-            <div className="relative">
-              <input
-                id="discord-token-input"
-                type={showToken ? 'text' : 'password'}
-                value={discordToken}
-                onChange={e => {
-                  setDiscordToken(e.target.value)
-                  if (loginError) setLoginError('')
-                }}
-                placeholder="Paste mfa.xxxx or user token..."
-                className="w-full px-3 py-2 pr-10 text-xs rounded-xl border focus:outline-none transition-colors"
-                style={{
-                  backgroundColor: 'var(--color-bg-elevated)',
-                  borderColor: loginError ? '#ef4444' : 'var(--color-border)',
-                  color: 'var(--color-text-base)',
-                }}
-              />
-              <button
-                type="button"
-                onClick={() => setShowToken(!showToken)}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-zinc-400 hover:text-zinc-200"
-              >
-                {showToken ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-
-            {loginError && <p className="text-[11px] text-red-500">{loginError}</p>}
-          </div>
-
-          {showTokenHelp && (
-            <div
-              className="p-3 rounded-xl border text-[11px] space-y-1"
-              style={{
-                backgroundColor: 'var(--color-bg-base)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-muted)',
-              }}
-            >
-              <p className="font-semibold text-zinc-300">Finding your token:</p>
-              <ol className="list-decimal pl-4 space-y-0.5">
-                <li>Log in to Discord via your mobile or desktop browser.</li>
-                <li>Open DevTools (F12 or inspect), head to Network tab.</li>
-                <li>Send a message or click channels, check request headers for `authorization`.</li>
-              </ol>
-            </div>
           )}
-
-          <div className="pt-2 flex flex-col gap-2">
-            <Button
-              type="submit"
-              variant="primary"
-              className="w-full"
-              disabled={isValidatingToken}
-              icon={isValidatingToken ? <Loader2 className="w-4 h-4 animate-spin" /> : undefined}
-            >
-              {isValidatingToken ? 'Verifying with Discord...' : 'Login Account'}
-            </Button>
-
-            <button
-              type="button"
-              onClick={handleQuickDemo}
-              className="w-full py-2 px-3 rounded-xl border text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-              style={{
-                backgroundColor: 'var(--color-bg-base)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            >
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>Quick Demo Account (Instant Test)</span>
-            </button>
-          </div>
-        </form>
+          {loginError && <p className="text-xs text-red-400">{loginError}</p>}
       </div>
     </Modal>
 

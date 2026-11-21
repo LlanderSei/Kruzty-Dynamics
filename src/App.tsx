@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ThemeProvider } from './features/settings/ThemeContext'
 import { OnboardingScreen } from './features/onboarding/OnboardingScreen'
 import { MainHeader } from './components/MainHeader'
@@ -13,6 +13,8 @@ import { AccountsView } from './features/accounts/AccountsView'
 import { SettingsView } from './features/settings/SettingsView'
 import { useAccounts } from './features/accounts/useAccounts'
 import { Modal } from './components/Modal'
+import { getLogs } from './features/accounts/discordAuth'
+import { Info } from 'lucide-react'
 
 const ONBOARDING_KEY = 'kd_onboarding_completed'
 
@@ -24,10 +26,50 @@ type Subpage =
   | 'media-presence-config'
   | null
 
-function MainShell({ onResetOnboarding }: { onResetOnboarding: () => void }) {
+function ToastViewport() {
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | undefined
+    const handleToast = (event: Event) => {
+      const toastEvent = event as CustomEvent<{ message?: string }>
+      if (!toastEvent.detail?.message) return
+      setMessage(toastEvent.detail.message)
+      if (timeout !== undefined) clearTimeout(timeout)
+      timeout = setTimeout(() => setMessage(''), 3000)
+    }
+
+    window.addEventListener('app-toast', handleToast)
+    return () => {
+      window.removeEventListener('app-toast', handleToast)
+      clearTimeout(timeout)
+    }
+  }, [])
+
+  if (!message) return null
+
+  return (
+    <div
+      role="status"
+      aria-live="polite"
+      className="fixed bottom-24 left-1/2 z-[100] flex max-w-[calc(100vw-2rem)] -translate-x-1/2 items-center gap-2 rounded-xl border px-4 py-3 text-sm shadow-lg"
+      style={{
+        backgroundColor: 'var(--color-bg-elevated)',
+        borderColor: 'var(--color-border)',
+        color: 'var(--color-text-base)',
+      }}
+    >
+      <Info className="h-4 w-4 shrink-0 text-amber-400" />
+      <span>{message}</span>
+    </div>
+  )
+}
+
+function MainShell() {
   const [activeTab, setActiveTab] = useState<NavTab>('service')
   const [currentSubpage, setCurrentSubpage] = useState<Subpage>(null)
   const [isLogModalOpen, setIsLogModalOpen] = useState(false)
+  const [logs, setLogs] = useState(getLogs())
   const {
     accounts,
     activeAccount,
@@ -36,6 +78,13 @@ function MainShell({ onResetOnboarding }: { onResetOnboarding: () => void }) {
     setActiveAccount,
     unuseAccount,
   } = useAccounts()
+
+  // Sync live logs into modal state when opened
+  useEffect(() => {
+    const all = getLogs()
+    setLogs(all)
+    // eslint-disable-next-line no-console
+  }, [isLogModalOpen])
 
   // Render Subpages when navigated into (Footer is hidden for maximum screen space)
   if (currentSubpage === 'app-catalogue') {
@@ -90,7 +139,6 @@ function MainShell({ onResetOnboarding }: { onResetOnboarding: () => void }) {
       <main className="flex-1 overflow-y-auto overscroll-y-contain max-w-xl w-full mx-auto p-4 flex flex-col">
         {activeTab === 'service' && (
           <ServiceDashboard
-            onOpenPermissionsSetup={onResetOnboarding}
             onNavigateToCatalogue={() => setCurrentSubpage('app-catalogue')}
             onNavigateToAppStatusFields={() => setCurrentSubpage('app-status-fields')}
             onNavigateToAppPresenceConfig={() => setCurrentSubpage('app-presence-config')}
@@ -127,16 +175,37 @@ function MainShell({ onResetOnboarding }: { onResetOnboarding: () => void }) {
         subtitle="Live diagnostics output"
       >
         <div
-          className="p-3 rounded-xl border font-mono text-xs space-y-1 overflow-x-auto"
+          className="p-3 rounded-xl border font-mono text-xs space-y-1 overflow-x-auto max-h-[60vh]"
           style={{
             backgroundColor: 'var(--color-bg-elevated)',
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-muted)',
           }}
         >
-          <div>[INFO] System initialized.</div>
-          <div>[INFO] Active tab: {activeTab}</div>
-          <div>[INFO] Discord accounts logged in: {accounts.length}</div>
+          {logs.length === 0 ? (
+            <div className="text-zinc-400">[INFO] No logs yet. Open Discord login or perform actions to generate logs.</div>
+          ) : (
+            logs.map((entry, i) => {
+              const color =
+                entry.level === 'error'
+                  ? '#ef4444'
+                  : entry.level === 'warn'
+                    ? '#fbbf24'
+                    : '#10b981'
+              return (
+                <div
+                  key={i}
+                  className="break-all"
+                  style={{ color }}
+                >
+                  [{new Date(entry.ts).toLocaleTimeString()}] {entry.msg}
+                </div>
+              )
+            })
+          )}
+          <div className="pt-2 border-t text-zinc-500">
+            [INFO] Active tab: {activeTab} | Discord accounts: {accounts.length}
+          </div>
           {activeAccount && (
             <div className="text-emerald-400">
               [INFO] Active Identity: {activeAccount.displayName} ({activeAccount.username})
@@ -158,18 +227,16 @@ export default function App() {
     setHasCompletedOnboarding(true)
   }
 
-  const handleResetOnboarding = () => {
-    localStorage.removeItem(ONBOARDING_KEY)
-    setHasCompletedOnboarding(false)
-  }
-
   return (
     <ThemeProvider>
-      {!hasCompletedOnboarding ? (
-        <OnboardingScreen onComplete={handleComplete} />
-      ) : (
-        <MainShell onResetOnboarding={handleResetOnboarding} />
-      )}
+      <>
+        {!hasCompletedOnboarding ? (
+          <OnboardingScreen onComplete={handleComplete} />
+        ) : (
+          <MainShell />
+        )}
+        <ToastViewport />
+      </>
     </ThemeProvider>
   )
 }

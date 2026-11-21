@@ -26,6 +26,7 @@ import { Select } from '../../components/Select'
 import { openExternalUrl } from '../../utils/externalLinks'
 import { useTranslation } from '../../i18n/useTranslation'
 import type { ActivityType, DiscordStatus } from '../../types'
+import appIcon from '../../../src-tauri/icons/icon.png'
 
 const ACTIVITY_TYPE_NAMES: Record<number, string> = {
   0: 'Playing',
@@ -49,6 +50,7 @@ export const SettingsView: React.FC = () => {
   const {
     settings,
     cachedImageCount,
+    customIconCount,
     setLanguage,
     setCustomImgbbKey,
     setCustomDiscordAppId,
@@ -58,6 +60,15 @@ export const SettingsView: React.FC = () => {
   } = useAppSettings()
   const { permissions, requestPermission } = usePermissions()
   const colorInputRef = useRef<HTMLInputElement>(null)
+  const grantedRequiredPermissionCount = [
+    permissions.usageStats,
+    permissions.notificationListener,
+    permissions.postNotifications,
+  ].filter(Boolean).length
+  const requiredPermissionsGranted = grantedRequiredPermissionCount === 3
+  const permissionSummary = requiredPermissionsGranted
+    ? permissions.batteryOptimizationsIgnored ? 'All Granted' : 'Granted'
+    : `${grantedRequiredPermissionCount}/3 • Granted`
 
   // Collapsible accordion
   const [isLearnMoreExpanded, setIsLearnMoreExpanded] = useState(false)
@@ -78,7 +89,7 @@ export const SettingsView: React.FC = () => {
   // Local modal form states
   const [tempImgbbKey, setTempImgbbKey] = useState('')
   const [tempDiscordAppId, setTempDiscordAppId] = useState('')
-  const [cacheClearedSuccess, setCacheClearedSuccess] = useState(false)
+  const [cacheClearedSuccess, setCacheClearedSuccess] = useState<string | null>(null)
 
   const handleOpenImgbbModal = () => {
     setTempImgbbKey(settings.customImgbbKey || '')
@@ -102,11 +113,11 @@ export const SettingsView: React.FC = () => {
     setActiveModal(null)
   }
 
-  const handleConfirmClearCache = () => {
-    clearImageCache()
-    setCacheClearedSuccess(true)
+  const handleConfirmClearCache = (includeCustomIcons: boolean) => {
+    clearImageCache(includeCustomIcons)
+    setCacheClearedSuccess(includeCustomIcons ? 'All linked image URLs cleared, including custom app icons.' : 'Linked image URL cache cleared. Custom app icons were kept.')
     setTimeout(() => {
-      setCacheClearedSuccess(false)
+      setCacheClearedSuccess(null)
       setActiveModal(null)
     }, 1200)
   }
@@ -133,9 +144,7 @@ export const SettingsView: React.FC = () => {
             border: '2px solid var(--color-accent)',
           }}
         >
-          <span className="text-2xl font-black tracking-tight" style={{ color: 'var(--color-accent)' }}>
-            KD
-          </span>
+          <img src={appIcon} alt="Kruzty Dynamics app icon" className="h-full w-full rounded-[inherit] object-cover" />
           <span
             className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 bg-emerald-500"
             style={{ borderColor: 'var(--color-bg-surface)' }}
@@ -156,6 +165,12 @@ export const SettingsView: React.FC = () => {
           </div>
           <div
             className="py-1.5 px-2 rounded-xl border text-center font-medium"
+            onClick={() => openExternal('https://github.com/LlanderSei')}
+            role="link"
+            tabIndex={0}
+            onKeyDown={event => {
+              if (event.key === 'Enter' || event.key === ' ') openExternal('https://github.com/LlanderSei')
+            }}
             style={{
               backgroundColor: 'var(--color-bg-elevated)',
               borderColor: 'var(--color-border)',
@@ -299,7 +314,7 @@ export const SettingsView: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight">{t.settings.themes}</h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.themesDesc}
               </p>
             </div>
@@ -336,7 +351,7 @@ export const SettingsView: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight">{t.settings.language}</h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.languageDesc} {settings.language}
               </p>
             </div>
@@ -367,7 +382,7 @@ export const SettingsView: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight">{t.settings.globalDefaults}</h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.globalDefaultsDesc}
               </p>
             </div>
@@ -403,7 +418,7 @@ export const SettingsView: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight">{t.settings.imgbbKey}</h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.imgbbKeyDesc}
               </p>
             </div>
@@ -441,7 +456,7 @@ export const SettingsView: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight">{t.settings.discordAppId}</h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.discordAppIdDesc}
               </p>
             </div>
@@ -479,13 +494,16 @@ export const SettingsView: React.FC = () => {
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight">{t.settings.checkPermissions}</h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.checkPermissionsDesc}
               </p>
             </div>
           </div>
-          <span className="text-[11px] font-semibold text-emerald-500 shrink-0">
-            Check
+          <span
+            className="text-xs font-medium shrink-0"
+            style={{ color: requiredPermissionsGranted ? '#22c55e' : '#f59e0b' }}
+          >
+            {permissionSummary}
           </span>
         </div>
 
@@ -512,7 +530,7 @@ export const SettingsView: React.FC = () => {
               <h4 className="text-xs font-semibold leading-tight text-red-500">
                 {t.settings.deleteCache}
               </h4>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                 {t.settings.deleteCacheDesc}
               </p>
             </div>
@@ -1054,7 +1072,7 @@ export const SettingsView: React.FC = () => {
       >
         <div className="space-y-4">
           <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-            Clears associated URLs of uploaded images used on app (including custom) or media status projection. The service will then reupload the images again when needed.
+            {`There are ${cachedImageCount} linked image URLs, including ${customIconCount} custom app icon overrides. You can clear other cached links while keeping custom icons, or clear all links and remove custom overrides. If you clear custom overrides, choose and upload those icons again in the Application Catalogue to restore them.`}
           </p>
 
           <div
@@ -1064,22 +1082,25 @@ export const SettingsView: React.FC = () => {
               borderColor: 'var(--color-border)',
             }}
           >
-            <span>Cached Upload Records:</span>
+            <span>Linked Image URLs:</span>
             <span className="font-mono">{cachedImageCount} URLs</span>
           </div>
 
           {cacheClearedSuccess ? (
             <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 text-xs flex items-center justify-center gap-2">
               <CheckCircle2 className="w-4 h-4" />
-              <span>Image URL cache cleared!</span>
+              <span>{cacheClearedSuccess}</span>
             </div>
           ) : (
-            <div className="flex items-center justify-end gap-2 pt-2">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-2">
               <Button variant="ghost" onClick={() => setActiveModal(null)}>
                 Cancel
               </Button>
-              <Button variant="danger" onClick={handleConfirmClearCache}>
-                Clear Image Cache
+              <Button variant="outline" onClick={() => handleConfirmClearCache(false)}>
+                Clear Cache, Keep Custom Icons
+              </Button>
+              <Button variant="danger" onClick={() => handleConfirmClearCache(true)}>
+                Clear All, Including Custom Icons
               </Button>
             </div>
           )}
@@ -1103,13 +1124,19 @@ export const SettingsView: React.FC = () => {
             </h5>
             <div
               className="p-3 rounded-xl border flex items-center gap-3"
+              onClick={() => openExternal('https://github.com/LlanderSei')}
+              role="link"
+              tabIndex={0}
+              onKeyDown={event => {
+                if (event.key === 'Enter' || event.key === ' ') openExternal('https://github.com/LlanderSei')
+              }}
               style={{
                 backgroundColor: 'var(--color-bg-elevated)',
                 borderColor: 'var(--color-border)',
               }}
             >
               <img
-                src="https://api.dicebear.com/7.x/bottts/svg?seed=seiraneko"
+                src="https://avatars.githubusercontent.com/u/126699188?v=4"
                 alt="Seiraneko"
                 className="w-10 h-10 rounded-full border-2"
                 style={{ borderColor: 'var(--color-accent)' }}
@@ -1182,16 +1209,40 @@ export const SettingsView: React.FC = () => {
 
             <div className="grid grid-cols-3 gap-2 pt-1 text-center">
               {[
-                { name: 'dead8309', role: 'Original Kizzy Creator' },
-                { name: 'satoru8', role: 'Contributor' },
-                { name: 'general-s-slime', role: 'Contributor' },
-                { name: 'x0a0', role: 'Contributor' },
-                { name: 'dread-0', role: 'Contributor' },
-                { name: 'Kizzy Community', role: 'Design & Testers' },
+                { name: 'dead8309', avatar: 'https://avatars.githubusercontent.com/u/68665948?v=4', url: 'https://github.com/dead8309' },
+                { name: 'kyrie25', avatar: 'https://avatars.githubusercontent.com/u/77577746?v=4', url: 'https://github.com/kyrie25' },
+                { name: 'MegaSa1nt', avatar: 'https://avatars.githubusercontent.com/u/49565695?v=4', url: 'https://github.com/MegaSa1nt' },
+                { name: 'kyoyacchi', avatar: 'https://avatars.githubusercontent.com/u/63583961?v=4', url: 'https://github.com/kyoyacchi' },
+                { name: 'BlackusPL', avatar: 'https://avatars.githubusercontent.com/u/45206560?v=4', url: 'https://github.com/BlackusPL' },
+                { name: 'SillyDark', avatar: 'https://avatars.githubusercontent.com/u/116559191?v=4', url: 'https://github.com/SillyDark' },
+                { name: 'rukamori', avatar: 'https://avatars.githubusercontent.com/u/107134739?v=4', url: 'https://github.com/rukamori' },
+                { name: 'adib-yg', avatar: 'https://avatars.githubusercontent.com/u/92677767?v=4', url: 'https://github.com/adib-yg' },
+                { name: 'Keitalith', avatar: 'https://avatars.githubusercontent.com/u/70456337?v=4', url: 'https://github.com/Keitalith' },
+                { name: 'Hiyurin', avatar: 'https://avatars.githubusercontent.com/u/99401538?v=4', url: 'https://github.com/Hiyurin' },
+                { name: 'Luiizx', avatar: 'https://avatars.githubusercontent.com/u/78708921?v=4', url: 'https://github.com/Luiizx' },
+                { name: 'Sencaid', avatar: 'https://avatars.githubusercontent.com/u/146421267?v=4', url: 'https://github.com/Sencaid' },
+                { name: 'Szafranek13', avatar: 'https://avatars.githubusercontent.com/u/53099243?v=4', url: 'https://github.com/Szafranek13' },
+                { name: 'alecchangod', avatar: 'https://avatars.githubusercontent.com/u/88945170?v=4', url: 'https://github.com/alecchangod' },
+                { name: 'clxf12', avatar: 'https://avatars.githubusercontent.com/u/123844876?v=4', url: 'https://github.com/clxf12' },
+                { name: 'pachiris', avatar: 'https://avatars.githubusercontent.com/u/74104241?v=4', url: 'https://github.com/pachiris' },
+                { name: 'fann22', avatar: 'https://avatars.githubusercontent.com/u/116457057?v=4', url: 'https://github.com/fann22' },
+                { name: 'thijsi123', avatar: 'https://avatars.githubusercontent.com/u/64159148?v=4', url: 'https://github.com/thijsi123' },
+                { name: 'OrdinaryEnder', avatar: 'https://avatars.githubusercontent.com/u/109149031?v=4', url: 'https://github.com/OrdinaryEnder' },
+                { name: 'KeffSchwift', avatar: 'https://avatars.githubusercontent.com/u/141948346?v=4', url: 'https://github.com/KeffSchwift' },
+                { name: 'Giasko0', avatar: 'https://avatars.githubusercontent.com/u/42590808?v=4', url: 'https://github.com/Giasko0' },
+                { name: '0123-smallbottle', avatar: 'https://avatars.githubusercontent.com/u/82559028?v=4', url: 'https://github.com/0123-smallbottle' },
+                { name: 'rootdevss', avatar: 'https://avatars.githubusercontent.com/u/230255491?v=4', url: 'https://github.com/rootdevss' },
+                { name: 'mingokrb', avatar: 'https://avatars.githubusercontent.com/u/82242100?v=4', url: 'https://github.com/mingokrb' },
+                { name: 'haz3d', avatar: 'https://avatars.githubusercontent.com/u/125324123?v=4', url: 'https://github.com/haz3d' },
+                { name: 'Lqm1', avatar: 'https://avatars.githubusercontent.com/u/154405627?v=4', url: 'https://github.com/Lqm1' },
+                { name: 'XanderID', avatar: 'https://avatars.githubusercontent.com/u/55838823?v=4', url: 'https://github.com/XanderID' },
+                { name: 'Wans22', avatar: 'https://avatars.githubusercontent.com/u/82324747?v=4', url: 'https://github.com/Wans22' },
+                { name: 'theOrangePaws', avatar: 'https://avatars.githubusercontent.com/u/135684633?v=4', url: 'https://github.com/theOrangePaws' },
+                { name: 'ThanaReka', avatar: 'https://avatars.githubusercontent.com/u/96094922?v=4', url: 'https://github.com/ThanaReka' },
               ].map(c => (
                 <div
                   key={c.name}
-                  onClick={() => openExternal(`https://github.com/${c.name}`)}
+                  onClick={() => openExternal(c.url)}
                   className="p-2 rounded-xl border flex flex-col items-center gap-1 cursor-pointer hover:border-[var(--color-accent)] transition-colors"
                   style={{
                     backgroundColor: 'var(--color-bg-elevated)',
@@ -1199,7 +1250,7 @@ export const SettingsView: React.FC = () => {
                   }}
                 >
                   <img
-                    src={`https://api.dicebear.com/7.x/bottts/svg?seed=${c.name}`}
+                    src={c.avatar}
                     alt={c.name}
                     className="w-8 h-8 rounded-full border"
                     style={{ borderColor: 'var(--color-border)' }}

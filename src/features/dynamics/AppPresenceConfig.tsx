@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ArrowLeft,
   ChevronRight,
@@ -11,6 +11,35 @@ import { Select } from '../../components/Select'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { OutsideAppBehavior, AppTimestampMode } from '../../types'
 
+const APP_CONFIG_STORAGE_KEY = 'kd_app_presence_config'
+
+interface StoredAppConfig {
+  outsidePolicy: OutsideAppBehavior
+  timestampStrategy: AppTimestampMode
+  customDateTime: string
+  customName: string
+  customDetails: string
+  customState: string
+}
+
+const DEFAULT_APP_CONFIG: StoredAppConfig = {
+  outsidePolicy: 'freeze',
+  timestampStrategy: 'persistent',
+  customDateTime: '',
+  customName: 'Chilling on Phone',
+  customDetails: 'Home Screen',
+  customState: 'Away from apps',
+}
+
+function loadAppConfig(): StoredAppConfig {
+  try {
+    const saved = localStorage.getItem(APP_CONFIG_STORAGE_KEY)
+    return saved ? { ...DEFAULT_APP_CONFIG, ...JSON.parse(saved) } : DEFAULT_APP_CONFIG
+  } catch {
+    return DEFAULT_APP_CONFIG
+  }
+}
+
 interface AppPresenceConfigProps {
   onBack: () => void
   onNavigateToCatalogue: () => void
@@ -22,17 +51,33 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
   onNavigateToCatalogue,
   onNavigateToStatusFields,
 }) => {
-  const [outsidePolicy, setOutsidePolicy] = useState<OutsideAppBehavior>('freeze')
-  const [timestampStrategy, setTimestampStrategy] = useState<AppTimestampMode>('persistent')
-  const [customDateTime, setCustomDateTime] = useState<string>('2026-11-20T00:00')
+  const [initialConfig] = useState(loadAppConfig)
+  const [outsidePolicy, setOutsidePolicy] = useState<OutsideAppBehavior>(initialConfig.outsidePolicy)
+  const [timestampStrategy, setTimestampStrategy] = useState<AppTimestampMode>(initialConfig.timestampStrategy)
+  const [customDateTime, setCustomDateTime] = useState<string>(initialConfig.customDateTime)
 
   // Custom Fallback Fields when policy === 'custom'
-  const [customName, setCustomName] = useState('Chilling on Phone')
-  const [customDetails, setCustomDetails] = useState('Home Screen')
-  const [customState, setCustomState] = useState('Away from apps')
+  const [customName, setCustomName] = useState(initialConfig.customName)
+  const [customDetails, setCustomDetails] = useState(initialConfig.customDetails)
+  const [customState, setCustomState] = useState(initialConfig.customState)
 
   // Modals for Help
   const [helpModal, setHelpModal] = useState<'policy' | 'timestamp' | null>(null)
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(APP_CONFIG_STORAGE_KEY, JSON.stringify({
+        outsidePolicy,
+        timestampStrategy,
+        customDateTime,
+        customName,
+        customDetails,
+        customState,
+      }))
+    } catch {
+      // Keep the configuration active for this session if storage is unavailable.
+    }
+  }, [outsidePolicy, timestampStrategy, customDateTime, customName, customDetails, customState])
 
   useBackHandler(onBack)
 

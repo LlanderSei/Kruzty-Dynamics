@@ -1,5 +1,52 @@
 import type { DiscordAccount } from '../../types'
 
+interface LogEntry { level: 'info' | 'warn' | 'error'; msg: string; ts: number }
+const LOG_STORE: LogEntry[] = []
+const MAX_LOGS = 200
+export function addLog(level: LogEntry['level'], msg: string) {
+  const entry = { level, msg, ts: Date.now() }
+  LOG_STORE.push(entry)
+  if (LOG_STORE.length > MAX_LOGS) LOG_STORE.shift()
+  const tag = level === 'error' ? '[ERROR]' : level === 'warn' ? '[WARN]' : '[INFO]'
+  // eslint-disable-next-line no-console
+  console.log(`[Dynamics] ${tag} ${msg}`)
+}
+export function getLogs(): LogEntry[] {
+  return [...LOG_STORE]
+}
+
+/**
+ * Builds a Discord OAuth2 authorization URL (Implicit Flow).
+ * After the user authorizes, Discord redirects to redirect_uri with
+ * the access_token exposed in the URL fragment (#access_token=...).
+ */
+export function buildDiscordOAuthUrl(params: {
+  clientId: string
+  redirectUri: string
+  scope?: string
+}): string {
+  const base = 'https://discord.com/api/oauth2/authorize'
+  const searchParams = new URLSearchParams({
+    client_id: params.clientId,
+    redirect_uri: params.redirectUri,
+    response_type: 'token',
+    scope: params.scope ?? 'identify',
+    prompt: 'consent',
+  })
+  return `${base}?${searchParams.toString()}`
+}
+
+/**
+ * Extracts the access_token from a URL fragment/hash.
+ * Returns null if no token is present.
+ */
+export function extractTokenFromHash(hash: string): string | null {
+  if (!hash) return null
+  const clean = hash.startsWith('#') ? hash.slice(1) : hash
+  const params = new URLSearchParams(clean)
+  return params.get('access_token') || null
+}
+
 interface DiscordApiUser {
   id: string
   username: string
@@ -14,13 +61,21 @@ export async function fetchDiscordUserProfile(rawToken: string): Promise<{
   account?: DiscordAccount
   error?: string
 }> {
-  const token = rawToken.trim().replace(/^"(.*)"$/, '$1')
+  // URL-decode the token (OAuth2 fragment values may be percent-encoded)
+  let decodedToken: string
+  try {
+    decodedToken = decodeURIComponent(rawToken.trim())
+  } catch {
+    decodedToken = rawToken.trim()
+  }
+  const token = decodedToken.replace(/^"(.*)"$/, '$1')
 
   if (!token) {
     return { success: false, error: 'Token cannot be empty' }
   }
 
-  const authHeader = token.startsWith('Bot ') ? token : token
+  // OAuth2 access tokens require the "Bearer " prefix; Bot tokens start with "Bot "
+  const authHeader = token.startsWith('Bot ') ? token : `Bearer ${token}`
 
   try {
     const res = await fetch('https://discord.com/api/v10/users/@me', {

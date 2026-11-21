@@ -20,6 +20,17 @@ const DEFAULT_APP_FIELDS: AppFieldTemplates = {
   bigImage: '{{AppImageLink}}',
 }
 
+const APP_FIELDS_STORAGE_KEY = 'kd_app_field_templates'
+
+function loadAppFields(): AppFieldTemplates {
+  try {
+    const saved = localStorage.getItem(APP_FIELDS_STORAGE_KEY)
+    return saved ? { ...DEFAULT_APP_FIELDS, ...JSON.parse(saved) } : DEFAULT_APP_FIELDS
+  } catch {
+    return DEFAULT_APP_FIELDS
+  }
+}
+
 const APP_TOKENS_DOCS = [
   { token: '{{AppName}}', description: 'Original system label of the currently running foreground application.' },
   { token: '{{AppImageLink}}', description: 'Cached ImgBB remote link of the application icon.' },
@@ -27,8 +38,8 @@ const APP_TOKENS_DOCS = [
 ]
 
 export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBack }) => {
-  const [fields, setFields] = useState<AppFieldTemplates>(DEFAULT_APP_FIELDS)
-  const [initialFields, setInitialFields] = useState<AppFieldTemplates>(DEFAULT_APP_FIELDS)
+  const [fields, setFields] = useState<AppFieldTemplates>(loadAppFields)
+  const [initialFields, setInitialFields] = useState<AppFieldTemplates>(loadAppFields)
   const [isHelpOpen, setIsHelpOpen] = useState(false)
   const [isDiscardConfirmOpen, setIsDiscardConfirmOpen] = useState(false)
 
@@ -43,8 +54,12 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
   }
 
   const handleSave = () => {
+    try {
+      localStorage.setItem(APP_FIELDS_STORAGE_KEY, JSON.stringify(fields))
+    } catch {
+      // Keep the values available for this session if storage is unavailable.
+    }
     setInitialFields(fields)
-    // Saved
   }
 
   const handleBack = () => {
