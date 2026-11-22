@@ -20,6 +20,7 @@ import { useAppSettings } from '../settings/useAppSettings'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import type { AppProfile, ActivityType, AppActivityTypeSelection, AppStatusSelection } from '../../types'
+import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 
 interface AppCatalogueProps {
   onBack: () => void
@@ -276,6 +277,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     if (!profilesLoaded) return
     try {
       localStorage.setItem(APP_PROFILES_STORAGE_KEY, JSON.stringify(apps))
+      notifyServiceConfigChanged()
     } catch {
       // Keep profile changes active for this session if storage is unavailable.
     }

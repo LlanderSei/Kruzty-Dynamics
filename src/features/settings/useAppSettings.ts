@@ -3,6 +3,7 @@ import type { ActivityType, DiscordStatus } from '../../types'
 
 const SETTINGS_STORAGE_KEY = 'kd_app_settings'
 const IMAGE_CACHE_KEY = 'kd_asset_cache'
+const IMAGE_LINKS_KEY = 'kd_presence_image_links'
 const APP_PROFILES_KEY = 'kd_app_profiles'
 const IMAGE_CACHE_UPDATED_EVENT = 'kd-image-cache-updated'
 
@@ -135,8 +136,10 @@ export function useAppSettings() {
           )
         }
       }
+      localStorage.removeItem(IMAGE_LINKS_KEY)
       setImageCacheSummary(readImageCacheSummary())
       window.dispatchEvent(new Event(IMAGE_CACHE_UPDATED_EVENT))
+      window.dispatchEvent(new Event('kd-presence-config-changed'))
     } catch {
       // Fallback
     }

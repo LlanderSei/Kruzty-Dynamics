@@ -2,17 +2,7 @@
 
 ### Privacy Policy
 
-I take your privacy very seriously. **Kizzy** does not collect any user data, and all sensitive information is securely stored in the local application database on your device.
-
-### **Kizzy** will use the following permissions to provide you with the service.
-
-- Usage Access permission (for accessing current running app)
-- Notification permission (for getting current mediaplayback details)
-- Storage permission (to save your custom configs)
-
-### Third Party Services
-
-This policy does not apply to third-party services that you use with **Kizzy**. You can review the privacy policies of the third-party services you use on their websites.
+See the [Kruzty Dynamics Privacy Policy](PRIVACY.md) for details about information handled by the app, Discord authorization, local storage, and third-party image hosting.
 
 ### Open Source License
 

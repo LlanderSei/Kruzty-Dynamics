@@ -1162,6 +1162,7 @@ export const SettingsView: React.FC = () => {
               {[
                 { name: 'Tauri v2', desc: 'Lightweight cross-platform native runtime', url: 'https://v2.tauri.app' },
                 { name: 'Rust Tokio', desc: 'Asynchronous event-driven network runtime', url: 'https://tokio.rs' },
+                { name: 'Discord Social SDK', desc: 'Native Android rich presence integration', url: 'https://discord.com/developers/docs/social-sdk/index.html' },
                 { name: 'React 19', desc: 'Modern user interface component architecture', url: 'https://react.dev' },
                 { name: 'Tailwind CSS v4', desc: 'Utility-first modern responsive styling', url: 'https://tailwindcss.com' },
                 { name: 'Lucide Icons', desc: 'Community crafted clean vector icons', url: 'https://lucide.dev' },

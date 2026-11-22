@@ -10,6 +10,7 @@ declare global {
       checkAllPermissions?: () => string
       requestPermission?: (key: string) => void
       openDiscordLoginPortal?: () => void
+      removeDiscordSocialAccount?: (accountId: string) => void
     }
   }
 }

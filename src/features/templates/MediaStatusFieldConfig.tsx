@@ -6,6 +6,7 @@ import { Divider } from '../../components/Divider'
 import { Switch } from '../../components/Switch'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { MediaFieldTemplates } from '../../types'
+import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 
 interface MediaStatusFieldConfigProps {
   onBack: () => void
@@ -19,7 +20,7 @@ const DEFAULT_MEDIA_FIELDS: MediaFieldTemplates = {
   line2: '{{MediaAlbum ?? MediaDescription}}',
   smallText: '{{PlaybackState}}',
   smallImage: '{{HasDetectablePlaybackState ?? PlaybackStateImageLink : AppImageLink}}',
-  bigText: '{{MediaAlbum}}',
+  bigText: '',
   bigImage: '{{HasMediaImage ?? MediaImageLink : AppImageLink}}',
   customButtonsEnabled: false,
   button1Label: '',
@@ -73,6 +74,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
   const handleSave = () => {
     try {
       localStorage.setItem(MEDIA_FIELDS_STORAGE_KEY, JSON.stringify(fields))
+      notifyServiceConfigChanged()
     } catch {}
     setInitialFields(fields)
   }
@@ -165,7 +167,10 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
         <div className="max-w-xl w-full mx-auto p-4 space-y-4 pb-28">
           {/* Field 1: Title */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Title</label>
+            <label className="text-xs font-semibold block">Media Title (Activity Details)</label>
+            <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
+              The player app name appears in the “Listening to…” header.
+            </p>
             <textarea
               rows={2}
               value={fields.title}
@@ -181,9 +186,9 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
           </div>
           <Divider />
 
-          {/* Field 2: Line 1 (Details) */}
+          {/* Field 2: Line 1 (State / Artist) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Line 1 (Details / Artist)</label>
+            <label className="text-xs font-semibold block">Line 1 (Activity State / Artist)</label>
             <textarea
               rows={2}
               value={fields.line1 || ''}
@@ -199,9 +204,12 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
           </div>
           <Divider />
 
-          {/* Field 3: Line 2 (State / Album) */}
+          {/* Field 3: Line 2 (Large Image Text / Album) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Line 2 (State / Album)</label>
+            <label className="text-xs font-semibold block">Line 2 (Album / Image Text)</label>
+            <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
+              Shown beneath the artist on Discord’s media card.
+            </p>
             <textarea
               rows={2}
               value={fields.line2 || ''}
@@ -255,7 +263,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 6: Big Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Big Text</label>
+            <label className="text-xs font-semibold block">Big Text (Line 2 Fallback)</label>
             <textarea
               rows={2}
               value={fields.bigText || ''}

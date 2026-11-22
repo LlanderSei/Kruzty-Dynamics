@@ -5,6 +5,7 @@ import { Button } from '../../components/Button'
 import { Divider } from '../../components/Divider'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { AppFieldTemplates } from '../../types'
+import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 
 interface AppStatusFieldConfigProps {
   onBack: () => void
@@ -56,6 +57,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
   const handleSave = () => {
     try {
       localStorage.setItem(APP_FIELDS_STORAGE_KEY, JSON.stringify(fields))
+      notifyServiceConfigChanged()
     } catch {
       // Keep the values available for this session if storage is unavailable.
     }

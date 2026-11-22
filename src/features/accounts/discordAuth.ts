@@ -3,13 +3,23 @@ import type { DiscordAccount } from '../../types'
 interface LogEntry { level: 'info' | 'warn' | 'error'; msg: string; ts: number }
 const LOG_STORE: LogEntry[] = []
 const MAX_LOGS = 200
+const SECRET_PATTERN = /(access_token|refresh_token|authorization|bearer|token|secret|client_secret)(["'\s:=]+)([^\s,"'&}]+)/gi
+
+function redactSecrets(value: string): string {
+  return value
+    .replace(/\b(Bearer|Bot)\s+[A-Za-z0-9._-]{20,}/gi, '$1 [REDACTED]')
+    .replace(/\b[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{20,}\b/g, '[REDACTED]')
+    .replace(SECRET_PATTERN, '$1$2[REDACTED]')
+    .replace(/mfa\.[A-Za-z0-9_-]{20,}/g, '[REDACTED]')
+}
+
 export function addLog(level: LogEntry['level'], msg: string) {
-  const entry = { level, msg, ts: Date.now() }
+  const entry = { level, msg: redactSecrets(msg), ts: Date.now() }
   LOG_STORE.push(entry)
   if (LOG_STORE.length > MAX_LOGS) LOG_STORE.shift()
   const tag = level === 'error' ? '[ERROR]' : level === 'warn' ? '[WARN]' : '[INFO]'
   // eslint-disable-next-line no-console
-  console.log(`[Dynamics] ${tag} ${msg}`)
+  console.log(`[Dynamics] ${tag} ${entry.msg}`)
 }
 export function getLogs(): LogEntry[] {
   return [...LOG_STORE]

@@ -1,6 +1,8 @@
 import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
+val discordSocialSdkAar = file("libs/discord_partner_sdk.aar")
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -18,12 +20,14 @@ android {
     compileSdk = 37
     namespace = "seiraneko.kruztydynamics"
     defaultConfig {
+        ndkVersion = "30.0.16248370"
         manifestPlaceholders["usesCleartextTraffic"] = "false"
         applicationId = "seiraneko.kruztydynamics"
         minSdk = 24
         targetSdk = 37
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
         versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
+        buildConfigField("boolean", "DISCORD_SOCIAL_SDK_AVAILABLE", discordSocialSdkAar.exists().toString())
     }
     buildTypes {
         getByName("debug") {
@@ -57,6 +61,15 @@ android {
     }
     buildFeatures {
         buildConfig = true
+        prefab = discordSocialSdkAar.exists()
+    }
+    if (discordSocialSdkAar.exists()) {
+        externalNativeBuild {
+            cmake {
+                path = file("src/main/cpp/CMakeLists.txt")
+                version = "3.22.1"
+            }
+        }
     }
 }
 
@@ -71,6 +84,10 @@ rust {
 }
 
 dependencies {
+    implementation("androidx.browser:browser:1.8.0")
+    if (discordSocialSdkAar.exists()) {
+        implementation(files(discordSocialSdkAar))
+    }
     implementation("androidx.webkit:webkit:1.14.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
     implementation("androidx.activity:activity-ktx:1.10.1")

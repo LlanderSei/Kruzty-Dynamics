@@ -37,7 +37,8 @@ export interface DiscordAccount {
   username: string
   displayName: string
   avatarUrl?: string
-  token: string
+  token?: string
+  socialSdkLinked?: boolean
   isActive: boolean
 }
 
@@ -55,6 +56,10 @@ export interface CustomFallbackConfig {
   state?: string
   largeImage?: string
   largeText?: string
+  smallText?: string
+  smallImage?: string
+  bigText?: string
+  bigImage?: string
 }
 
 export interface AppFieldTemplates {

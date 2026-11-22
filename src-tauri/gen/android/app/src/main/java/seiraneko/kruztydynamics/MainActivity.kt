@@ -39,10 +39,13 @@ import androidx.core.view.WindowCompat
 import org.json.JSONObject
 import org.json.JSONArray
 import java.io.ByteArrayOutputStream
+import java.io.OutputStream
 
 class MainActivity : TauriActivity() {
   var webViewRef: WebView? = null
   var backCallback: OnBackPressedCallback? = null
+  private var pendingLogExport: String? = null
+  private var discordLoginDialog: Dialog? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge()
@@ -58,6 +61,30 @@ class MainActivity : TauriActivity() {
     }
     backCallback = callback
     onBackPressedDispatcher.addCallback(this, callback)
+    current = this
+    runCatching {
+      Class.forName("com.discord.socialsdk.DiscordSocialSdkInit")
+        .getMethod("setEngineActivity", android.app.Activity::class.java)
+        .invoke(null, this)
+    }
+  }
+
+  override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    setIntent(intent)
+    intent.data?.let { handleDiscordAuthCallback(it) }
+  }
+
+  private fun handleDiscordAuthCallback(uri: Uri) {
+    if (!DiscordSocialAuth.isCallback(uri)) return
+    DiscordSocialAuth.handleCallback(this, uri) { profile, error ->
+      if (profile != null) {
+        dispatchServiceEvent("discordSocialAccountLinked", profile)
+      } else {
+        dispatchServiceEvent("discordSocialLoginError", JSONObject().put("message", error ?: "Discord account linking failed"))
+      }
+      runOnUiThread { discordLoginDialog?.dismiss() }
+    }
   }
 
   override fun onResume() {
@@ -66,6 +93,36 @@ class MainActivity : TauriActivity() {
       "window.dispatchEvent(new CustomEvent('androidPermissionsUpdated'));",
       null
     )
+  }
+
+  override fun onDestroy() {
+    if (current === this) current = null
+    super.onDestroy()
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    if (requestCode == LOG_EXPORT_REQUEST && resultCode == RESULT_OK) {
+      val content = pendingLogExport
+      val uri = data?.data
+      if (content != null && uri != null) {
+        runCatching { contentResolver.openOutputStream(uri)?.bufferedWriter()?.use { it.write(content) } }
+        dispatchServiceEvent("dynamicsLogExported", JSONObject().put("success", true))
+      }
+    }
+    pendingLogExport = null
+  }
+
+  companion object {
+    @Volatile private var current: MainActivity? = null
+
+    fun dispatchServiceEvent(name: String, payload: JSONObject) {
+      val activity = current ?: return
+      val script = "window.dispatchEvent(new CustomEvent(${JSONObject.quote(name)}, { detail: ${payload} }));"
+      activity.runOnUiThread { activity.webViewRef?.evaluateJavascript(script, null) }
+    }
+
+    private const val LOG_EXPORT_REQUEST = 2207
   }
 
   override fun onWebViewCreate(webView: WebView) {
@@ -118,6 +175,46 @@ class MainActivity : TauriActivity() {
 
   class AndroidNativeBridge(private val activity: MainActivity) {
     @JavascriptInterface
+    fun startPresenceService(config: String) {
+      val intent = Intent(activity, KruztyDynamicsService::class.java).apply {
+        action = KruztyDynamicsService.ACTION_START
+        putExtra(KruztyDynamicsService.EXTRA_CONFIG, config)
+      }
+      ContextCompat.startForegroundService(activity, intent)
+    }
+
+    @JavascriptInterface
+    fun stopPresenceService() {
+      activity.stopService(Intent(activity, KruztyDynamicsService::class.java))
+    }
+
+    @JavascriptInterface
+    fun removeDiscordSocialAccount(accountId: String) {
+      DiscordSocialAuth.removeAccount(activity, accountId)
+    }
+
+    @JavascriptInterface
+    fun exportLogs(filename: String, content: String) {
+      activity.pendingLogExport = content
+      val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+        addCategory(Intent.CATEGORY_OPENABLE)
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TITLE, filename)
+      }
+      activity.startActivityForResult(intent, LOG_EXPORT_REQUEST)
+    }
+
+    @JavascriptInterface
+    fun isPresenceServiceRunning(): Boolean = KruztyDynamicsService.isRunning
+
+    @JavascriptInterface
+    fun getPresenceServiceStatus(): String {
+      if (!KruztyDynamicsService.isRunning) return "{}"
+      return activity.getSharedPreferences("kd_presence_runtime", Context.MODE_PRIVATE)
+        .getString(KruztyDynamicsService.LAST_STATUS, "{}") ?: "{}"
+    }
+
+    @JavascriptInterface
     fun getInstalledAppsAsync(requestId: String) {
       Thread({
         val payload = try {
@@ -137,7 +234,7 @@ class MainActivity : TauriActivity() {
       val apps = JSONArray()
       packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
         .asSequence()
-        .filter { it.packageName != activity.packageName && it.enabled }
+        .filter { it.enabled }
         .filter { packageManager.getLaunchIntentForPackage(it.packageName) != null }
         .map { info ->
           packageManager.getApplicationLabel(info).toString() to info.packageName
@@ -282,6 +379,7 @@ class MainActivity : TauriActivity() {
       activity.runOnUiThread {
         try {
           val dialog = Dialog(activity, android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen)
+          activity.discordLoginDialog = dialog
           dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
           val root = LinearLayout(activity).apply {
@@ -351,44 +449,13 @@ class MainActivity : TauriActivity() {
             settings.userAgentString = "Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
           }
 
-          val clientId = "1572590527562391713"
-          val redirectUri = "https://discord.com"
-          val oauthUrl = "https://discord.com/api/oauth2/authorize?client_id=$clientId&redirect_uri=$redirectUri&response_type=token&scope=identify&prompt=consent"
+          val oauthUrl = DiscordSocialAuth.createAuthorizationUrl(activity)
 
-          // Intercept OAuth2 callback: Discord redirects with #access_token=... in the URL fragment
           portalWebView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-              super.onPageFinished(view, url)
-              extractTokenFromUrl(url)
-            }
-
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-              val url = request?.url?.toString() ?: ""
-              if (extractTokenFromUrl(url)) {
-                dialog.dismiss()
-                return true
-              }
-              return false
-            }
-
-            private fun extractTokenFromUrl(url: String?): Boolean {
-              if (url == null) return false
-              val fragmentIndex = url.indexOf('#')
-              if (fragmentIndex < 0) return false
-              val fragment = url.substring(fragmentIndex + 1)
-              val params = fragment.split("&").mapNotNull { parameter ->
-                val separatorIndex = parameter.indexOf('=')
-                if (separatorIndex < 0) return@mapNotNull null
-                parameter.substring(0, separatorIndex) to parameter.substring(separatorIndex + 1)
-              }.toMap()
-              val rawToken = params["access_token"] ?: return false
-              // URL-decode the token (OAuth2 fragment values may be percent-encoded)
-              val token = Uri.decode(rawToken)
-              if (token.isNotEmpty() && token.length > 20) {
-                activity.webViewRef?.evaluateJavascript(
-                  "window.dispatchEvent(new CustomEvent('discordTokenCaptured', { detail: { token: ${org.json.JSONObject.quote(token)} } }));",
-                  null
-                )
+              val uri = request?.url ?: return false
+              if (DiscordSocialAuth.isCallback(uri)) {
+                activity.handleDiscordAuthCallback(uri)
                 return true
               }
               return false
@@ -409,6 +476,7 @@ class MainActivity : TauriActivity() {
           root.addView(portalWebView)
 
           dialog.setContentView(root)
+          dialog.setOnDismissListener { activity.discordLoginDialog = null }
           dialog.show()
         } catch (e: Exception) {
           e.printStackTrace()

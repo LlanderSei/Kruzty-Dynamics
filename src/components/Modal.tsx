@@ -9,6 +9,7 @@ interface ModalProps {
   subtitle?: string
   children: React.ReactNode
   footer?: React.ReactNode
+  headerActions?: React.ReactNode
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
@@ -19,6 +20,7 @@ export const Modal: React.FC<ModalProps> = ({
   subtitle,
   children,
   footer,
+  headerActions,
   maxWidth = 'md',
 }) => {
   useBackHandler(onClose, isOpen)
@@ -68,7 +70,7 @@ export const Modal: React.FC<ModalProps> = ({
 
         {/* Header */}
         <div className="flex items-start justify-between pb-3 border-b" style={{ borderColor: 'var(--color-border)' }}>
-          <div>
+          <div className="min-w-0">
             <h3 className="text-lg font-semibold leading-6">{title}</h3>
             {subtitle && (
               <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
@@ -76,6 +78,8 @@ export const Modal: React.FC<ModalProps> = ({
               </p>
             )}
           </div>
+          <div className="flex items-center gap-1 shrink-0">
+          {headerActions}
           <button
             type="button"
             onClick={onClose}
@@ -88,6 +92,7 @@ export const Modal: React.FC<ModalProps> = ({
           >
             <X className="w-4 h-4" />
           </button>
+          </div>
         </div>
 
         {/* Content */}

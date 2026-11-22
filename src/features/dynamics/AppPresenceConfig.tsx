@@ -4,12 +4,18 @@ import {
   ChevronRight,
   HelpCircle,
   Clock,
+  ImagePlus,
+  Loader2,
 } from 'lucide-react'
 import { Modal } from '../../components/Modal'
 import { Button } from '../../components/Button'
 import { Select } from '../../components/Select'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { OutsideAppBehavior, AppTimestampMode } from '../../types'
+import { invoke } from '@tauri-apps/api/core'
+import { listen } from '@tauri-apps/api/event'
+import { useAppSettings } from '../settings/useAppSettings'
+import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 
 const APP_CONFIG_STORAGE_KEY = 'kd_app_presence_config'
 
@@ -20,6 +26,10 @@ interface StoredAppConfig {
   customName: string
   customDetails: string
   customState: string
+  customSmallText: string
+  customSmallImage: string
+  customBigText: string
+  customBigImage: string
 }
 
 const DEFAULT_APP_CONFIG: StoredAppConfig = {
@@ -29,6 +39,10 @@ const DEFAULT_APP_CONFIG: StoredAppConfig = {
   customName: 'Chilling on Phone',
   customDetails: 'Home Screen',
   customState: 'Away from apps',
+  customSmallText: '',
+  customSmallImage: '',
+  customBigText: '',
+  customBigImage: '',
 }
 
 function loadAppConfig(): StoredAppConfig {
@@ -60,6 +74,13 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
   const [customName, setCustomName] = useState(initialConfig.customName)
   const [customDetails, setCustomDetails] = useState(initialConfig.customDetails)
   const [customState, setCustomState] = useState(initialConfig.customState)
+  const [customSmallText, setCustomSmallText] = useState(initialConfig.customSmallText)
+  const [customSmallImage, setCustomSmallImage] = useState(initialConfig.customSmallImage)
+  const [customBigText, setCustomBigText] = useState(initialConfig.customBigText)
+  const [customBigImage, setCustomBigImage] = useState(initialConfig.customBigImage)
+  const [uploadingImage, setUploadingImage] = useState<'small' | 'big' | null>(null)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const { settings } = useAppSettings()
 
   // Modals for Help
   const [helpModal, setHelpModal] = useState<'policy' | 'timestamp' | null>(null)
@@ -73,11 +94,44 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
         customName,
         customDetails,
         customState,
+        customSmallText,
+        customSmallImage,
+        customBigText,
+        customBigImage,
       }))
+      notifyServiceConfigChanged()
     } catch {
       // Keep the configuration active for this session if storage is unavailable.
     }
-  }, [outsidePolicy, timestampStrategy, customDateTime, customName, customDetails, customState])
+  }, [outsidePolicy, timestampStrategy, customDateTime, customName, customDetails, customState, customSmallText, customSmallImage, customBigText, customBigImage])
+
+  const uploadFallbackImage = async (kind: 'small' | 'big', file: File) => {
+    setUploadingImage(kind)
+    setUploadProgress(0)
+    const requestId = `fallback-${kind}-${Date.now()}`
+    try {
+      const imageBase64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onerror = () => reject(new Error('Could not read image.'))
+        reader.onload = () => resolve(String(reader.result).split(',', 2)[1] || '')
+        reader.readAsDataURL(file)
+      })
+      const unlisten = await listen<{ requestId: string; progress: number }>('imgbb-upload-progress', event => {
+        if (event.payload.requestId === requestId) setUploadProgress(event.payload.progress)
+      })
+      try {
+        const url = await invoke<string>('upload_app_icon', { imageBase64, imageName: file.name, apiKey: settings.customImgbbKey || null, requestId })
+        if (kind === 'small') setCustomSmallImage(url)
+        else setCustomBigImage(url)
+      } finally {
+        unlisten()
+      }
+    } catch (error) {
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: error instanceof Error ? error.message : 'Image upload failed.' } }))
+    } finally {
+      setUploadingImage(null)
+    }
+  }
 
   useBackHandler(onBack)
 
@@ -242,6 +296,33 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                     }}
                   />
                 </div>
+
+                {([
+                  ['Small Text', customSmallText, setCustomSmallText],
+                  ['Big Text', customBigText, setCustomBigText],
+                ] as const).map(([label, value, setter]) => (
+                  <div key={label}>
+                    <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>{label}</label>
+                    <input type="text" value={value} onChange={event => setter(event.target.value)} className="w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
+                  </div>
+                ))}
+
+                {([
+                  ['Small Image', customSmallImage, setCustomSmallImage, 'small'],
+                  ['Big Image', customBigImage, setCustomBigImage, 'big'],
+                ] as const).map(([label, value, setter, kind]) => (
+                  <div key={label}>
+                    <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>{label}</label>
+                    <div className="flex gap-2">
+                      <input type="url" value={value} onChange={event => setter(event.target.value)} className="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} placeholder="Image URL" />
+                      <label className="p-2 rounded-lg border cursor-pointer" title={`Upload ${label}`} style={{ borderColor: 'var(--color-border)' }}>
+                        {uploadingImage === kind ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
+                        <input type="file" accept="image/*" className="hidden" disabled={uploadingImage !== null} onChange={event => { const file = event.target.files?.[0]; if (file) void uploadFallbackImage(kind, file); event.currentTarget.value = '' }} />
+                      </label>
+                    </div>
+                  </div>
+                ))}
+                {uploadingImage && <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>Uploading {uploadingImage} image… {uploadProgress}%</div>}
               </div>
             )}
           </div>
@@ -365,8 +446,8 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           ) : (
             <>
               <p>
-                <strong>Persistent (Default):</strong> Maintains the initial application start timestamp
-                even across brief background interruptions.
+                <strong>Persistent (Default):</strong> Uses one shared runtime timestamp for apps and paused media
+                throughout the current service session. It resets when the service restarts.
               </p>
               <p>
                 <strong>Reset:</strong> Restarts the timer at 00:00 every time you launch or refocus the application.

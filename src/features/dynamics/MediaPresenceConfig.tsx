@@ -11,6 +11,7 @@ import type {
   MediaActivityTypeMode,
   PausedMediaResolution,
 } from '../../types'
+import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 
 interface MediaPresenceConfigProps {
   onBack: () => void
@@ -78,6 +79,7 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
           pausedResolution,
         })
       )
+      notifyServiceConfigChanged()
     } catch {}
   }, [priorityMode, mediaScope, activityTypeMode, timeRemaining, pausedResolution])
 

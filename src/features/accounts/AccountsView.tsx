@@ -14,6 +14,7 @@ import { Modal } from '../../components/Modal'
 import { Button } from '../../components/Button'
 import { fetchDiscordUserProfile, buildDiscordOAuthUrl, addLog } from './discordAuth'
 import { DiscordIcon } from '../../components/DiscordIcon'
+import { openExternalUrl } from '../../utils/externalLinks'
 
 interface AccountsViewProps {
   accounts: DiscordAccount[]
@@ -39,6 +40,31 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
 
   // Listen for Discord token captured from native In-App Login Portal
   useEffect(() => {
+    const handleSocialAccountLinked = (event: Event) => {
+      const account = (event as CustomEvent<DiscordAccount>).detail
+      if (!account?.id) return
+      if (accounts.some(existing => existing.id === account.id)) {
+        window.dispatchEvent(new CustomEvent('app-toast', {
+          detail: { message: `Presence link saved for ${account.displayName || account.username}.` },
+        }))
+      } else {
+        onAddAccount({ ...account, socialSdkLinked: true, isActive: accounts.length === 0 })
+        window.dispatchEvent(new CustomEvent('app-toast', {
+          detail: { message: `Discord account linked: ${account.displayName || account.username}.` },
+        }))
+      }
+      window.dispatchEvent(new CustomEvent('kd-presence-config-changed', {
+        detail: { activeAccountId: accounts.length === 0 ? account.id : activeAccount?.id || undefined },
+      }))
+      setIsLoginModalOpen(false)
+      setLoginError('')
+    }
+    const handleSocialLoginError = (event: Event) => {
+      const message = (event as CustomEvent<{ message?: string }>).detail?.message
+      setLoginError(message || 'Discord account linking failed.')
+    }
+    window.addEventListener('discordSocialAccountLinked', handleSocialAccountLinked)
+    window.addEventListener('discordSocialLoginError', handleSocialLoginError)
     const handleCaptured = async (e: any) => {
       const token = e.detail?.token
       if (token) {
@@ -69,8 +95,12 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
     }
 
     window.addEventListener('discordTokenCaptured', handleCaptured)
-    return () => window.removeEventListener('discordTokenCaptured', handleCaptured)
-  }, [accounts.length, onAddAccount])
+    return () => {
+      window.removeEventListener('discordSocialAccountLinked', handleSocialAccountLinked)
+      window.removeEventListener('discordSocialLoginError', handleSocialLoginError)
+      window.removeEventListener('discordTokenCaptured', handleCaptured)
+    }
+  }, [accounts, onAddAccount])
 
   const inactiveAccounts = accounts.filter(a => !a.isActive)
 
@@ -117,6 +147,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
 
   const confirmDelete = () => {
     if (accountToDelete) {
+      window.AndroidNativeBridge?.removeDiscordSocialAccount?.(accountToDelete.id)
       onRemoveAccount(accountToDelete.id)
       setAccountToDelete(null)
     }
@@ -416,7 +447,18 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
             <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
               <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
               <p>
-                The Discord OAuth application is only used to obtain your access token through the redirect link. Kruzty Dynamics saves the token on this device to identify your account and bridge Rich Presence from this app to your Discord profile. It does not send messages or perform other actions as you. You can revoke authorization anytime in Discord User Settings → Authorized Apps.
+                Discord's Social SDK authorization includes broader social capabilities with Rich Presence. Kruzty Dynamics currently uses it to identify your account and publish or clear your configured activity; it does not call the SDK's friend, block, invite, message, or voice APIs. On Android, tokens are encrypted and stored on this device. Read the{' '}
+                <a
+                  href="https://github.com/LlanderSei/Kruzty-Dynamics/blob/master/PRIVACY.md"
+                  onClick={event => {
+                    event.preventDefault()
+                    openExternalUrl(event.currentTarget.href)
+                  }}
+                  className="text-[var(--color-accent)] underline"
+                >
+                  Privacy Policy
+                </a>.
+                {' '}You can revoke authorization anytime in Discord User Settings → Authorized Apps.
               </p>
             </div>
           </div>

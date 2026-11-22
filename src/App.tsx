@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { ThemeProvider } from './features/settings/ThemeContext'
 import { OnboardingScreen } from './features/onboarding/OnboardingScreen'
 import { MainHeader } from './components/MainHeader'
@@ -14,7 +14,10 @@ import { SettingsView } from './features/settings/SettingsView'
 import { useAccounts } from './features/accounts/useAccounts'
 import { Modal } from './components/Modal'
 import { getLogs } from './features/accounts/discordAuth'
-import { Info } from 'lucide-react'
+import { Copy, Download, Info } from 'lucide-react'
+import { addLog } from './features/accounts/discordAuth'
+import { collectPresenceConfig } from './features/dashboard/serviceConfig'
+import { uploadDetectedImage } from './features/dashboard/detectedImageUpload'
 
 const ONBOARDING_KEY = 'kd_onboarding_completed'
 
@@ -28,6 +31,7 @@ type Subpage =
 
 function ToastViewport() {
   const [message, setMessage] = useState('')
+  const [uploadProgress, setUploadProgress] = useState<{ sourceKey: string; progress: number | null } | null>(null)
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | undefined
@@ -38,15 +42,22 @@ function ToastViewport() {
       if (timeout !== undefined) clearTimeout(timeout)
       timeout = setTimeout(() => setMessage(''), 3000)
     }
+    const handleUploadProgress = (event: Event) => {
+      const detail = (event as CustomEvent<{ sourceKey: string; progress: number | null }>).detail
+      setUploadProgress(detail?.progress == null ? null : detail)
+    }
 
     window.addEventListener('app-toast', handleToast)
+    window.addEventListener('detected-image-upload-progress', handleUploadProgress)
     return () => {
       window.removeEventListener('app-toast', handleToast)
+      window.removeEventListener('detected-image-upload-progress', handleUploadProgress)
       clearTimeout(timeout)
     }
   }, [])
 
-  if (!message) return null
+  if (!message && !uploadProgress) return null
+  const uploadLabel = uploadProgress?.sourceKey.replace(/^(app|media):/, '').replaceAll('.', ' ')
 
   return (
     <div
@@ -59,8 +70,8 @@ function ToastViewport() {
         color: 'var(--color-text-base)',
       }}
     >
-      <Info className="h-4 w-4 shrink-0 text-amber-400" />
-      <span>{message}</span>
+        <Info className="h-4 w-4 shrink-0 text-amber-400" />
+        <span>{uploadProgress ? `Uploading ${uploadLabel} image… ${uploadProgress.progress}%` : message}</span>
     </div>
   )
 }
@@ -70,6 +81,31 @@ function MainShell() {
   const [currentSubpage, setCurrentSubpage] = useState<Subpage>(null)
   const [isLogModalOpen, setIsLogModalOpen] = useState(false)
   const [logs, setLogs] = useState(getLogs())
+  const [detectedStatus, setDetectedStatus] = useState<{
+    active?: boolean
+    title?: string
+    line1?: string
+    line2?: string
+    domain?: string
+    packageName?: string
+    activityType?: number
+    playbackState?: string
+    appName?: string
+    mediaType?: string
+    mediaPositionMs?: number
+    mediaDurationMs?: number
+    mediaUpdatedAt?: number
+    playbackRate?: number
+    sessionStartedAt?: number
+    buttons?: Array<{ label: string; url: string }>
+    smallText?: string
+    smallImage?: string
+    bigText?: string
+    bigImage?: string
+    iconUrl?: string
+    iconData?: string
+  } | null>(null)
+  const uploadingImageKeys = useRef(new Set<string>())
   const {
     accounts,
     activeAccount,
@@ -79,12 +115,92 @@ function MainShell() {
     unuseAccount,
   } = useAccounts()
 
+  useEffect(() => {
+    const bridge = (window as Window & { AndroidNativeBridge?: { isPresenceServiceRunning?: () => boolean; startPresenceService?: (config: string) => void } }).AndroidNativeBridge
+    const refreshConfig = (event: Event) => {
+      const linkedAccountId = (event as CustomEvent<{ activeAccountId?: string }>).detail?.activeAccountId
+      if (bridge?.isPresenceServiceRunning?.()) bridge.startPresenceService?.(collectPresenceConfig(linkedAccountId || activeAccount?.id))
+    }
+    window.addEventListener('kd-presence-config-changed', refreshConfig)
+    return () => window.removeEventListener('kd-presence-config-changed', refreshConfig)
+  }, [activeAccount?.id])
+
+  useEffect(() => {
+    const bridge = (window as Window & { AndroidNativeBridge?: { isPresenceServiceRunning?: () => boolean; startPresenceService?: (config: string) => void } }).AndroidNativeBridge
+    if (bridge?.isPresenceServiceRunning?.()) {
+      bridge.startPresenceService?.(collectPresenceConfig(activeAccount?.id))
+    }
+  }, [activeAccount?.id])
+
   // Sync live logs into modal state when opened
+  useEffect(() => {
+    const handleLog = (event: Event) => {
+      const detail = (event as CustomEvent<{ level?: string; message?: string }>).detail
+      if (!detail?.message) return
+      addLog(detail.level === 'warn' || detail.level === 'error' ? detail.level : 'info', detail.message)
+      setLogs(getLogs())
+    }
+    const handleStatus = (event: Event) => {
+      const status = (event as CustomEvent<typeof detectedStatus>).detail
+      setDetectedStatus(status)
+      if (!status?.iconData || !status.packageName || (status.domain !== 'app' && status.domain !== 'media')) return
+      const sourceKey = `${status.domain}:${status.packageName}`
+      if (uploadingImageKeys.current.has(sourceKey)) return
+      uploadingImageKeys.current.add(sourceKey)
+      void uploadDetectedImage(
+        status.iconData,
+        status.domain === 'media' ? 'media_art' : 'app_icon',
+        sourceKey
+      ).catch(() => {
+        addLog('warn', 'Could not upload detected app or media image to ImgBB')
+      }).finally(() => uploadingImageKeys.current.delete(sourceKey))
+    }
+    window.addEventListener('dynamicsLog', handleLog)
+    window.addEventListener('dynamicsStatusUpdated', handleStatus)
+    const bridge = (window as Window & { AndroidNativeBridge?: { getPresenceServiceStatus?: () => string } }).AndroidNativeBridge
+    try {
+      const storedStatus = JSON.parse(bridge?.getPresenceServiceStatus?.() || '{}') as typeof detectedStatus
+      if (storedStatus?.domain) setDetectedStatus(storedStatus)
+    } catch {
+      // Ignore an absent or malformed native status snapshot.
+    }
+    return () => {
+      window.removeEventListener('dynamicsLog', handleLog)
+      window.removeEventListener('dynamicsStatusUpdated', handleStatus)
+    }
+  }, [])
+
   useEffect(() => {
     const all = getLogs()
     setLogs(all)
     // eslint-disable-next-line no-console
   }, [isLogModalOpen])
+
+  const buildLogText = () => logs.map(entry => `[${new Date(entry.ts).toISOString()}] [${entry.level.toUpperCase()}] ${entry.msg}`).join('\n')
+  const copyLogs = async () => {
+    try {
+      await navigator.clipboard.writeText(buildLogText())
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: 'Logs copied to clipboard.' } }))
+    } catch {
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: 'Could not copy logs.' } }))
+    }
+  }
+  const exportLogs = () => {
+    const now = new Date()
+    const stamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}`
+    const filename = `KruztyDynamicsLogs_${stamp}.txt`
+    const bridge = (window as Window & { AndroidNativeBridge?: { exportLogs?: (filename: string, content: string) => void } }).AndroidNativeBridge
+    if (bridge?.exportLogs) {
+      bridge.exportLogs(filename, buildLogText())
+      return
+    }
+    const url = URL.createObjectURL(new Blob([buildLogText()], { type: 'text/plain' }))
+    const link = document.createElement('a')
+    link.href = url
+    link.download = filename
+    link.click()
+    URL.revokeObjectURL(url)
+  }
 
   // Render Subpages when navigated into (Footer is hidden for maximum screen space)
   if (currentSubpage === 'app-catalogue') {
@@ -139,11 +255,13 @@ function MainShell() {
       <main className="flex-1 overflow-y-auto overscroll-y-contain max-w-xl w-full mx-auto p-4 flex flex-col">
         {activeTab === 'service' && (
           <ServiceDashboard
+            activeAccountId={activeAccount?.id}
             onNavigateToCatalogue={() => setCurrentSubpage('app-catalogue')}
             onNavigateToAppStatusFields={() => setCurrentSubpage('app-status-fields')}
             onNavigateToAppPresenceConfig={() => setCurrentSubpage('app-presence-config')}
             onNavigateToMediaStatusFields={() => setCurrentSubpage('media-status-fields')}
             onNavigateToMediaPresenceConfig={() => setCurrentSubpage('media-presence-config')}
+            status={detectedStatus}
           />
         )}
 
@@ -173,6 +291,12 @@ function MainShell() {
         onClose={() => setIsLogModalOpen(false)}
         title="Application Logs"
         subtitle="Live diagnostics output"
+        headerActions={
+          <>
+            <button type="button" onClick={() => void copyLogs()} className="p-1.5 rounded-lg" aria-label="Copy logs" title="Copy logs"><Copy className="w-4 h-4" /></button>
+            <button type="button" onClick={exportLogs} className="p-1.5 rounded-lg" aria-label="Export logs" title="Export logs"><Download className="w-4 h-4" /></button>
+          </>
+        }
       >
         <div
           className="p-3 rounded-xl border font-mono text-xs space-y-1 overflow-x-auto max-h-[60vh]"

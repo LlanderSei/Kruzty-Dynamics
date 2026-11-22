@@ -30,6 +30,20 @@
       "cwd": "${workspaceFolder}"
     },
     {
+      "name": "Tauri Android: Production APK (arm64)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android build -- --target aarch64",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Production APK (Universal)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android build -- --apk",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "Tauri Desktop: Windows Hot-Reload",
       "type": "node-terminal",
       "request": "launch",
