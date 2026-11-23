@@ -144,7 +144,12 @@
     "foregroundDescription": "Wequiwed by Andwoid 13+ to dispway the ongoing fowegwound sewvice notification in youw status baw, confirming that the Discowd pwesence engine is wunning uwu."
   },
   "toast": {
-    "duplicateAccount": "This Discowd account is awweady added uwu."
+    "duplicateAccount": "This Discowd account is awweady added uwu.",
+    "insufficientPermissions": "Not enough pewmissions uwu. Pwease check Settings & More > Check Pewmissions.",
+    "newVersionAvailable": "New Vewsion is Avaiwabwe! uwu",
+    "updateDetected": "A new watest vewsion is detected! uwu",
+    "latestVersion": "This is the watest vewsion! uwu",
+    "updateCheckFailed": "Couwd nyot check fow updates uwu."
   },
   "accountsPage": {
     "emptyTitle": "No account wogged in yet uwu.",
@@ -199,7 +204,7 @@
     "view": "View uwu",
     "done": "Done uwu",
     "developedBy": "Devewoped by uwu",
-    "version": "Kruzty Dynamics v1.0 uwu",
+    "version": "Kruzty Dynamics v{version} uwu",
     "architecture": "Buiwt using Wust Cow (Tokio + Tauri v2) with Weact 19 and TaiwwindCSS Fwontend incwuding Native Andwoid Pwugin Bwidge. Based on the owiginaw Kizzy's Expewimentaw WPC uwu.",
     "cached": "cached uwu",
     "tapCustomize": "Tap to customize uwu",
@@ -237,7 +242,11 @@
     "librarySdk": "Native Andwoid wich pwesence integwashun uwu",
     "libraryReact": "Modewn usew intewface component awchitectuwe uwu",
     "libraryTailwind": "Utiwity-fiwst modewn wesponsive stywing uwu",
-    "libraryLucide": "Community-cwafted cwean vectow icons uwu"
+    "libraryLucide": "Community-cwafted cwean vectow icons uwu",
+    "checkForUpdates": "Check fow Watest Vewsion uwu",
+    "checkForUpdatesDesc": "Check whethew a nyewew vewsion is avaiwabwe uwu.",
+    "check": "Check uwu",
+    "checkingUpdates": "Checking fow updates uwu"
   },
   "configFields": {
     "appTitle": "Appwication Status Fiewd Config uwu",

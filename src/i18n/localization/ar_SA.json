@@ -144,7 +144,12 @@
     "foregroundDescription": "مطلوب بواسطة Android 13+ لعرض إشعار خدمة المقدمة المستمر في شريط الحالة، مما يؤكد أن محرك حضور Discord قيد التشغيل."
   },
   "toast": {
-    "duplicateAccount": "تمت إضافة حساب Discord هذا بالفعل."
+    "duplicateAccount": "تمت إضافة حساب Discord هذا بالفعل.",
+    "insufficientPermissions": "الأذونات غير كافية. يرجى التحقق من «الإعدادات والمزيد» > «التحقق من الأذونات».",
+    "newVersionAvailable": "الإصدار الجديد متوفر الآن!",
+    "updateDetected": "تم الكشف عن إصدار جديد وأحدث!",
+    "latestVersion": "هذه هي أحدث نسخة!",
+    "updateCheckFailed": "تعذر التحقق من وجود تحديثات."
   },
   "accountsPage": {
     "emptyTitle": "لم يتم تسجيل الدخول إلى أي حساب بعد.",
@@ -199,7 +204,7 @@
     "view": "عرض",
     "done": "تم",
     "developedBy": "تم التطوير بواسطة",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "تم البناء باستخدام Rust Core (Tokio + Tauri v2) مع React 19 وواجهة TailwindCSS الأمامية بما في ذلك Native Android Plugin Bridge. بناءً على Kizzy's Experimental RPC الأصلي.",
     "cached": "مخزن مؤقتًا",
     "tapCustomize": "اضغط للتخصيص",
@@ -237,7 +242,11 @@
     "librarySdk": "تكامل حضور غني أصلي لنظام Android",
     "libraryReact": "بنية مكونات واجهة مستخدم حديثة",
     "libraryTailwind": "تصميم حديث سريع الاستجابة يعتمد على الأدوات المساعدة",
-    "libraryLucide": "أيقونات متجهية نظيفة من صنع المجتمع"
+    "libraryLucide": "أيقونات متجهية نظيفة من صنع المجتمع",
+    "checkForUpdates": "التحقق من أحدث إصدار",
+    "checkForUpdatesDesc": "تحقق مما إذا كان هناك إصدار أحدث متاحًا.",
+    "check": "تحقق",
+    "checkingUpdates": "البحث عن التحديثات"
   },
   "configFields": {
     "appTitle": "تكوين حقل حالة التطبيق",

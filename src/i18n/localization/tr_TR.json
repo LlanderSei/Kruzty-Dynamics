@@ -144,7 +144,12 @@
     "foregroundDescription": "Discord durum motorunun çalıştığını doğrulayan, durum çubuğunda devam eden ön plan hizmet bildirimini göstermek için Android 13+ tarafından gereklidir."
   },
   "toast": {
-    "duplicateAccount": "Bu Discord hesabı zaten eklendi."
+    "duplicateAccount": "Bu Discord hesabı zaten eklendi.",
+    "insufficientPermissions": "Yeterli izin yok. Lütfen Ayarlar ve Diğer > İzinleri Kontrol Et seçeneğine göz atın.",
+    "newVersionAvailable": "Yeni Sürüm Çıktı!",
+    "updateDetected": "Yeni bir sürüm tespit edildi!",
+    "latestVersion": "Bu en son sürümdür!",
+    "updateCheckFailed": "Güncellemeleri kontrol edilemedi."
   },
   "accountsPage": {
     "emptyTitle": "Henüz giriş yapmış hesap yok.",
@@ -199,7 +204,7 @@
     "view": "Görüntüle",
     "done": "Tamam",
     "developedBy": "Geliştiren",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rust Çekirdeği (Tokio + Tauri v2), React 19 ve TailwindCSS Ön Yüzü ile Native Android Eklenti Köprüsü kullanılarak oluşturulmuştur. Orijinal Kizzy's Experimental RPC'ye dayanmaktadır.",
     "cached": "önbelleğe alındı",
     "tapCustomize": "Özelleştirmek için dokunun",
@@ -237,7 +242,11 @@
     "librarySdk": "Yerel Android rich presence entegrasyonu",
     "libraryReact": "Modern kullanıcı arayüzü bileşen mimarisi",
     "libraryTailwind": "Yardımcı program öncelikli modern duyarlı stil",
-    "libraryLucide": "Topluluk tarafından hazırlanmış temiz vektör simgeler"
+    "libraryLucide": "Topluluk tarafından hazırlanmış temiz vektör simgeler",
+    "checkForUpdates": "En Son Sürümü Kontrol Edin",
+    "checkForUpdatesDesc": "Daha yeni bir sürümün mevcut olup olmadığını kontrol edin.",
+    "check": "Kontrol et",
+    "checkingUpdates": "Güncellemeleri kontrol etme"
   },
   "configFields": {
     "appTitle": "Uygulama Durum Alanı Yapılandırması",

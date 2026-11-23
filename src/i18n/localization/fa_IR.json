@@ -144,7 +144,12 @@
     "foregroundDescription": "توسط Android 13+ برای نمایش اعلان سرویس پیش‌زمینه در نوار وضعیت شما مورد نیاز است، که تأیید می‌کند موتور حضور Discord در حال اجرا است."
   },
   "toast": {
-    "duplicateAccount": "این حساب Discord قبلاً اضافه شده است."
+    "duplicateAccount": "این حساب Discord قبلاً اضافه شده است.",
+    "insufficientPermissions": "مجوزها ناکافی هستند. لطفاً به تنظیمات و موارد دیگر > بررسی مجوزها بروید.",
+    "newVersionAvailable": "نسخه جدید موجود است!",
+    "updateDetected": "نسخهٔ جدیدترین شناسایی شد!",
+    "latestVersion": "این آخرین نسخه است!",
+    "updateCheckFailed": "نمی‌تواند به‌روزرسانی‌ها را بررسی کند."
   },
   "accountsPage": {
     "emptyTitle": "هنوز هیچ حسابی وارد نشده است.",
@@ -199,7 +204,7 @@
     "view": "مشاهده",
     "done": "انجام شد",
     "developedBy": "توسعه یافته توسط",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "ساخته شده با استفاده از Rust Core (Tokio + Tauri v2) با React 19 و Frontend TailwindCSS شامل Native Android Plugin Bridge. بر اساس Kizzy's Experimental RPC اصلی.",
     "cached": "ذخیره شده در حافظه پنهان",
     "tapCustomize": "برای سفارشی‌سازی ضربه بزنید",
@@ -237,7 +242,11 @@
     "librarySdk": "ادغام بومی rich presence اندروید",
     "libraryReact": "معماری مدرن اجزای رابط کاربری",
     "libraryTailwind": "استایل‌دهی واکنش‌گرای مدرن با اولویت ابزار",
-    "libraryLucide": "نمادهای برداری تمیز ساخته شده توسط جامعه"
+    "libraryLucide": "نمادهای برداری تمیز ساخته شده توسط جامعه",
+    "checkForUpdates": "برای آخرین نسخه بررسی کنید",
+    "checkForUpdatesDesc": "بررسی کنید که آیا نسخه جدیدتری در دسترس است.",
+    "check": "بررسی",
+    "checkingUpdates": "بررسی به‌روزرسانی‌ها"
   },
   "configFields": {
     "appTitle": "پیکربندی فیلد وضعیت برنامه",

@@ -144,7 +144,12 @@
     "foregroundDescription": "Требуется Android 13+ для отображения постоянного уведомления службы переднего плана в строке состояния, подтверждающего работу движка присутствия Discord."
   },
   "toast": {
-    "duplicateAccount": "Эта учётная запись Discord уже добавлена."
+    "duplicateAccount": "Эта учётная запись Discord уже добавлена.",
+    "insufficientPermissions": "Недостаточные права доступа. Пожалуйста, перейдите в раздел «Настройки и другое» > «Проверить права доступа».",
+    "newVersionAvailable": "Вышла новая версия!",
+    "updateDetected": "Обнаружена новая, последняя версия!",
+    "latestVersion": "Это последняя версия!",
+    "updateCheckFailed": "Не удалось проверить наличие обновлений."
   },
   "accountsPage": {
     "emptyTitle": "Пока нет ни одной учётной записи.",
@@ -199,7 +204,7 @@
     "view": "Просмотреть",
     "done": "Готово",
     "developedBy": "Разработано",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Построено на Rust Core (Tokio + Tauri v2) с фронтендом на React 19 и TailwindCSS, включая Native Android Plugin Bridge. Основано на оригинальном Kizzy's Experimental RPC.",
     "cached": "в кеше",
     "tapCustomize": "Нажмите для настройки",
@@ -237,7 +242,11 @@
     "librarySdk": "Нативная интеграция rich presence для Android",
     "libraryReact": "Современная компонентная архитектура интерфейса",
     "libraryTailwind": "Современная адаптивная стилизация utility-first",
-    "libraryLucide": "Чистые векторные иконки, созданные сообществом"
+    "libraryLucide": "Чистые векторные иконки, созданные сообществом",
+    "checkForUpdates": "Проверить наличие последней версии",
+    "checkForUpdatesDesc": "Проверьте, есть ли более новая версия.",
+    "check": "Проверить",
+    "checkingUpdates": "Проверка наличия обновлений"
   },
   "configFields": {
     "appTitle": "Конфигурация полей статуса приложения",

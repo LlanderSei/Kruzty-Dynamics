@@ -144,7 +144,12 @@
     "foregroundDescription": "Diperlukan oleh Android 13+ untuk menampilkan notifikasi layanan latar depan yang sedang berlangsung di bilah status Anda, mengonfirmasi bahwa mesin presence Discord berjalan."
   },
   "toast": {
-    "duplicateAccount": "Akun Discord ini sudah ditambahkan."
+    "duplicateAccount": "Akun Discord ini sudah ditambahkan.",
+    "insufficientPermissions": "Izin tidak mencukupi. Silakan periksa Pengaturan & Lainnya > Periksa Izin.",
+    "newVersionAvailable": "Versi Baru Sudah Tersedia!",
+    "updateDetected": "Telah terdeteksi versi terbaru!",
+    "latestVersion": "Ini adalah versi terbarunya!",
+    "updateCheckFailed": "Tidak dapat memeriksa pembaruan."
   },
   "accountsPage": {
     "emptyTitle": "Belum ada akun yang masuk.",
@@ -199,7 +204,7 @@
     "view": "Lihat",
     "done": "Selesai",
     "developedBy": "Dikembangkan oleh",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Dibangun menggunakan Rust Core (Tokio + Tauri v2) dengan React 19 dan Frontend TailwindCSS termasuk Native Android Plugin Bridge. Berdasarkan Kizzy's Experimental RPC asli.",
     "cached": "di-cache",
     "tapCustomize": "Ketuk untuk menyesuaikan",
@@ -237,7 +242,11 @@
     "librarySdk": "Integrasi rich presence Android native",
     "libraryReact": "Arsitektur komponen antarmuka pengguna modern",
     "libraryTailwind": "Penataan responsif modern berbasis utility-first",
-    "libraryLucide": "Ikon vektor bersih buatan komunitas"
+    "libraryLucide": "Ikon vektor bersih buatan komunitas",
+    "checkForUpdates": "Periksa Versi Terbaru",
+    "checkForUpdatesDesc": "Periksa apakah ada versi yang lebih baru.",
+    "check": "Periksa",
+    "checkingUpdates": "Memeriksa pembaruan"
   },
   "configFields": {
     "appTitle": "Konfigurasi Bidang Status Aplikasi",

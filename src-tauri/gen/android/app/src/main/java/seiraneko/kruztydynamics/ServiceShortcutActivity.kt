@@ -18,6 +18,17 @@ class ServiceShortcutActivity : Activity() {
       stopService(Intent(this, KruztyDynamicsService::class.java))
       Toast.makeText(this, NativeStrings.text(this, "stopped"), Toast.LENGTH_SHORT).show()
     } else {
+      if (!ServicePermissionChecks.hasRequired(this)) {
+        Toast.makeText(
+          this,
+          NativeStrings.text(this, "insufficientPermissions"),
+          Toast.LENGTH_LONG
+        ).show()
+        MainActivity.updateServiceShortcut(this)
+        finish()
+        return
+      }
+
       val startIntent = Intent(this, KruztyDynamicsService::class.java)
         .setAction(KruztyDynamicsService.ACTION_START)
         .putExtra(KruztyDynamicsService.EXTRA_SHOW_SHORTCUT_TOAST, true)

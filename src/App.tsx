@@ -19,8 +19,11 @@ import { addLog } from './features/accounts/discordAuth'
 import { collectPresenceConfig } from './features/dashboard/serviceConfig'
 import { uploadDetectedImage } from './features/dashboard/detectedImageUpload'
 import { useTranslation } from './i18n/useTranslation'
+import { getVersion } from '@tauri-apps/api/app'
+import { findNewerRelease } from './utils/appUpdates'
 
 const ONBOARDING_KEY = 'kd_onboarding_completed'
+let hasCheckedForUpdatesThisLaunch = false
 
 type Subpage =
   | 'app-catalogue'
@@ -75,6 +78,27 @@ function ToastViewport() {
         <span>{uploadProgress ? `Uploading ${uploadLabel} image… ${uploadProgress.progress}%` : message}</span>
     </div>
   )
+}
+
+function LaunchUpdateCheck() {
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    if (hasCheckedForUpdatesThisLaunch) return
+    hasCheckedForUpdatesThisLaunch = true
+
+    void getVersion()
+      .then(version => findNewerRelease(version))
+      .then(release => {
+        if (!release) return
+        window.dispatchEvent(new CustomEvent('app-toast', {
+          detail: { message: t.toast.newVersionAvailable },
+        }))
+      })
+      .catch(() => {})
+  }, [t.toast.newVersionAvailable])
+
+  return null
 }
 
 function MainShell() {
@@ -356,6 +380,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <>
+        <LaunchUpdateCheck />
         {!hasCompletedOnboarding ? (
           <OnboardingScreen onComplete={handleComplete} />
         ) : (

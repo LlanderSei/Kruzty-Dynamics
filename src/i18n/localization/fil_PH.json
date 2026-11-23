@@ -145,7 +145,7 @@
     "view": "Tingnan",
     "done": "Tapos na",
     "developedBy": "Binuo ni",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Ginawa gamit ang Rust Core (Tokio + Tauri v2), React 19, TailwindCSS, at Native Android Plugin Bridge. Batay sa Experimental RPC ng Kizzy.",
     "cached": "naka-cache",
     "tapCustomize": "I-tap para i-customize",
@@ -183,7 +183,11 @@
     "librarySdk": "Native Android integration para sa rich presence",
     "libraryReact": "Modernong arkitektura ng UI component",
     "libraryTailwind": "Responsive styling gamit ang utility classes",
-    "libraryLucide": "Malinis na vector icon na ginawa ng komunidad"
+    "libraryLucide": "Malinis na vector icon na ginawa ng komunidad",
+    "checkForUpdates": "Suriin ang pinakabagong bersyon",
+    "checkForUpdatesDesc": "Suriin kung may mas bagong bersyon.",
+    "check": "Suriin",
+    "checkingUpdates": "Sinusuri ang mga pag-update"
   },
   "configFields": {
     "appTitle": "Config ng Status Field ng App",
@@ -453,6 +457,11 @@
     "empty": "[INFO] Walang mga log pa. Buksan ang Discord login o magsagawa ng mga aksyon upang makabuo ng mga log."
   },
   "toast": {
-    "duplicateAccount": "Naka-add na ang Discord account na ito."
+    "duplicateAccount": "Naka-add na ang Discord account na ito.",
+    "insufficientPermissions": "Hindi sapat na pahintulot. Mangyaring suriin ang Mga Setting at iba pa > Suriin ang mga pahintulot.",
+    "newVersionAvailable": "May bagong bersyon na!",
+    "updateDetected": "Natukoy ang pinakabagong bersyon!",
+    "latestVersion": "Ito ang pinakabagong bersyon!",
+    "updateCheckFailed": "Hindi makapagsuri ng mga pag-update."
   }
 }

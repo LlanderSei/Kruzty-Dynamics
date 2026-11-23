@@ -144,7 +144,12 @@
     "foregroundDescription": "Exigido pelo Android 13+ para exibir a notificação contínua do serviço em primeiro plano na barra de status, confirmando que o mecanismo de presença do Discord está em execução."
   },
   "toast": {
-    "duplicateAccount": "Esta conta do Discord já foi adicionada."
+    "duplicateAccount": "Esta conta do Discord já foi adicionada.",
+    "insufficientPermissions": "Permissões insuficientes. Verifique em “Configurações e mais” > “Verificar permissões”.",
+    "newVersionAvailable": "Já está disponível uma nova versão!",
+    "updateDetected": "Foi detectada uma nova versão mais recente!",
+    "latestVersion": "Esta é a versão mais recente!",
+    "updateCheckFailed": "Não foi possível verificar se há atualizações."
   },
   "accountsPage": {
     "emptyTitle": "Nenhuma conta conectada ainda.",
@@ -199,7 +204,7 @@
     "view": "Ver",
     "done": "Concluído",
     "developedBy": "Desenvolvido por",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Construído usando Rust Core (Tokio + Tauri v2) com React 19 e Frontend TailwindCSS, incluindo Native Android Plugin Bridge. Baseado no RPC Experimental original do Kizzy.",
     "cached": "em cache",
     "tapCustomize": "Toque para personalizar",
@@ -237,7 +242,11 @@
     "librarySdk": "Integração nativa de presença rica do Android",
     "libraryReact": "Arquitetura moderna de componentes de interface do usuário",
     "libraryTailwind": "Estilização responsiva moderna com foco em utilitários",
-    "libraryLucide": "Ícones vetoriais limpos criados pela comunidade"
+    "libraryLucide": "Ícones vetoriais limpos criados pela comunidade",
+    "checkForUpdates": "Verifique se há uma versão mais recente",
+    "checkForUpdatesDesc": "Verifique se há uma versão mais recente disponível.",
+    "check": "Verificar",
+    "checkingUpdates": "Verificando se há atualizações"
   },
   "configFields": {
     "appTitle": "Configuração do Campo de Status do Aplicativo",

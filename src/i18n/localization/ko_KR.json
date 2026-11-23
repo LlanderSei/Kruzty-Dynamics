@@ -144,7 +144,12 @@
     "foregroundDescription": "Discord 프레즌스 엔진이 실행 중임을 확인하는 상시 포그라운드 서비스 알림을 상태 표시줄에 표시하려면 Android 13+에서 필요합니다."
   },
   "toast": {
-    "duplicateAccount": "이 Discord 계정은 이미 추가되었습니다."
+    "duplicateAccount": "이 Discord 계정은 이미 추가되었습니다.",
+    "insufficientPermissions": "권한이 부족합니다. ‘설정 및 기타’ > ‘권한 확인’을 확인해 주세요.",
+    "newVersionAvailable": "새로운 버전이 출시되었습니다!",
+    "updateDetected": "최신 버전이 감지되었습니다!",
+    "latestVersion": "이것이 최신 버전입니다!",
+    "updateCheckFailed": "업데이트를 확인할 수 없습니다."
   },
   "accountsPage": {
     "emptyTitle": "아직 로그인한 계정이 없습니다.",
@@ -199,7 +204,7 @@
     "view": "보기",
     "done": "완료",
     "developedBy": "개발",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rust Core(Tokio + Tauri v2)와 React 19 및 TailwindCSS 프런트엔드, Native Android Plugin Bridge로 구축되었습니다. 원본 Kizzy's Experimental RPC를 기반으로 합니다.",
     "cached": "캐시됨",
     "tapCustomize": "탭하여 사용자 지정",
@@ -237,7 +242,11 @@
     "librarySdk": "네이티브 Android rich presence 통합",
     "libraryReact": "최신 사용자 인터페이스 컴포넌트 아키텍처",
     "libraryTailwind": "유틸리티 우선 최신 반응형 스타일링",
-    "libraryLucide": "커뮤니티가 제작한 깔끔한 벡터 아이콘"
+    "libraryLucide": "커뮤니티가 제작한 깔끔한 벡터 아이콘",
+    "checkForUpdates": "최신 버전 확인하기",
+    "checkForUpdatesDesc": "최신 버전이 있는지 확인해 보세요.",
+    "check": "확인",
+    "checkingUpdates": "업데이트 확인 중"
   },
   "configFields": {
     "appTitle": "애플리케이션 상태 필드 구성",

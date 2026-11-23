@@ -144,7 +144,12 @@
     "foregroundDescription": "Android 13+ zahtijeva prikaz trajne obavijesti usluge u prednjem planu u statusnoj traci, potvrđujući da Discord motor prisutnosti radi."
   },
   "toast": {
-    "duplicateAccount": "Ovaj Discord račun je već dodan."
+    "duplicateAccount": "Ovaj Discord račun je već dodan.",
+    "insufficientPermissions": "Nedovoljna dopuštenja. Molimo provjerite Postavke i još > Provjeri dopuštenja.",
+    "newVersionAvailable": "Dostupna je nova verzija!",
+    "updateDetected": "Detektirana je najnovija verzija!",
+    "latestVersion": "Ovo je najnovija verzija!",
+    "updateCheckFailed": "Nije moguće provjeriti ažuriranja."
   },
   "accountsPage": {
     "emptyTitle": "Još nema prijavljenih računa.",
@@ -199,7 +204,7 @@
     "view": "Prikaži",
     "done": "Gotovo",
     "developedBy": "Razvio",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Izgrađeno pomoću Rust Core (Tokio + Tauri v2) s React 19 i TailwindCSS frontendom, uključujući Native Android Plugin Bridge. Temelji se na originalnom Kizzy's Experimental RPC.",
     "cached": "u predmemoriji",
     "tapCustomize": "Dodirnite za prilagodbu",
@@ -237,7 +242,11 @@
     "librarySdk": "Izvorna Android integracija bogate prisutnosti",
     "libraryReact": "Moderna arhitektura komponenti korisničkog sučelja",
     "libraryTailwind": "Moderni responzivni stilovi orijentirani na uslužne programe",
-    "libraryLucide": "Čiste vektorske ikone koje je izradila zajednica"
+    "libraryLucide": "Čiste vektorske ikone koje je izradila zajednica",
+    "checkForUpdates": "Provjeri najnoviju verziju",
+    "checkForUpdatesDesc": "Provjerite je li dostupna novija verzija.",
+    "check": "Provjeri",
+    "checkingUpdates": "Provjera ažuriranja"
   },
   "configFields": {
     "appTitle": "Konfiguracija polja statusa aplikacije",

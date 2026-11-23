@@ -144,7 +144,12 @@
     "foregroundDescription": "Được yêu cầu bởi Android 13+ để hiển thị thông báo dịch vụ nền trước đang diễn ra trong thanh trạng thái của bạn, xác nhận rằng công cụ hiện diện Discord đang chạy."
   },
   "toast": {
-    "duplicateAccount": "Tài khoản Discord này đã được thêm."
+    "duplicateAccount": "Tài khoản Discord này đã được thêm.",
+    "insufficientPermissions": "Không đủ quyền. Vui lòng kiểm tra Cài đặt & Thêm > Kiểm tra quyền.",
+    "newVersionAvailable": "Phiên bản mới đã ra mắt!",
+    "updateDetected": "Đã phát hiện phiên bản mới nhất!",
+    "latestVersion": "Đây là phiên bản mới nhất!",
+    "updateCheckFailed": "Không thể kiểm tra các bản cập nhật."
   },
   "accountsPage": {
     "emptyTitle": "Chưa có tài khoản nào đăng nhập.",
@@ -199,7 +204,7 @@
     "view": "Xem",
     "done": "Xong",
     "developedBy": "Phát triển bởi",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Được xây dựng bằng Rust Core (Tokio + Tauri v2) với React 19 và Giao diện TailwindCSS bao gồm Cầu nối plugin Android gốc. Dựa trên RPC thử nghiệm ban đầu của Kizzy.",
     "cached": "đã lưu vào bộ nhớ đệm",
     "tapCustomize": "Nhấn để tùy chỉnh",
@@ -237,7 +242,11 @@
     "librarySdk": "Tích hợp rich presence Android gốc",
     "libraryReact": "Kiến trúc thành phần giao diện người dùng hiện đại",
     "libraryTailwind": "Tạo kiểu đáp ứng hiện đại ưu tiên tiện ích",
-    "libraryLucide": "Biểu tượng vector sạch do cộng đồng tạo"
+    "libraryLucide": "Biểu tượng vector sạch do cộng đồng tạo",
+    "checkForUpdates": "Kiểm tra phiên bản mới nhất",
+    "checkForUpdatesDesc": "Kiểm tra xem có phiên bản mới hơn không.",
+    "check": "Kiểm tra",
+    "checkingUpdates": "Kiểm tra các bản cập nhật"
   },
   "configFields": {
     "appTitle": "Cấu hình trường trạng thái ứng dụng",

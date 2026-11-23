@@ -144,7 +144,12 @@
     "foregroundDescription": "Android 13+ 要求顯示狀態列中的持續性前景服務通知，以確認 Discord 狀態引擎正在執行。"
   },
   "toast": {
-    "duplicateAccount": "此 Discord 帳號已新增。"
+    "duplicateAccount": "此 Discord 帳號已新增。",
+    "insufficientPermissions": "權限不足。請前往「設定與更多」>「檢查權限」。",
+    "newVersionAvailable": "新版本已推出！",
+    "updateDetected": "偵測到有新的最新版本！",
+    "latestVersion": "這是最新版本！",
+    "updateCheckFailed": "無法檢查更新。"
   },
   "accountsPage": {
     "emptyTitle": "尚未登入任何帳號。",
@@ -199,7 +204,7 @@
     "view": "檢視",
     "done": "完成",
     "developedBy": "開發者：",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "使用 Rust Core（Tokio + Tauri v2）構建，前端使用 React 19 與 TailwindCSS，並包含原生 Android 外掛橋接。基於原版 Kizzy's Experimental RPC。",
     "cached": "已快取",
     "tapCustomize": "點擊自訂",
@@ -237,7 +242,11 @@
     "librarySdk": "原生 Android 富狀態整合",
     "libraryReact": "現代使用者介面元件架構",
     "libraryTailwind": "實用優先的現代響應式樣式",
-    "libraryLucide": "社群打造的簡潔向量圖示"
+    "libraryLucide": "社群打造的簡潔向量圖示",
+    "checkForUpdates": "檢查最新版本",
+    "checkForUpdatesDesc": "請確認是否有更新版可供下載。",
+    "check": "檢查",
+    "checkingUpdates": "檢查是否有更新"
   },
   "configFields": {
     "appTitle": "應用程式狀態欄位配置",

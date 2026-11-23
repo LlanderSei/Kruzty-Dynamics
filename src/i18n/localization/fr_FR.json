@@ -145,7 +145,7 @@
     "view": "Voir",
     "done": "Terminé",
     "developedBy": "Développé par",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Développé à l'aide de Rust Core (Tokio + Tauri v2) avec React 19 et TailwindCSS pour le front-end, y compris le Native Android Plugin Bridge. Basé sur le RPC expérimental original de Kizzy.",
     "cached": "en cache",
     "tapCustomize": "Appuyez pour personnaliser",
@@ -183,7 +183,11 @@
     "librarySdk": "Intégration native d'Android pour une présence enrichie",
     "libraryReact": "Architecture moderne des composants d'interface utilisateur",
     "libraryTailwind": "Un style moderne et adaptatif, axé avant tout sur la fonctionnalité",
-    "libraryLucide": "Icônes vectorielles épurées créées par la communauté"
+    "libraryLucide": "Icônes vectorielles épurées créées par la communauté",
+    "checkForUpdates": "Vérifier la dernière version",
+    "checkForUpdatesDesc": "Vérifiez si une version plus récente est disponible.",
+    "check": "Vérifier",
+    "checkingUpdates": "Recherche de mises à jour"
   },
   "configFields": {
     "appTitle": "Configuration des champs relatifs au statut de la demande",
@@ -453,6 +457,11 @@
     "empty": "[INFO] Aucun journal pour l'instant. Ouvrez Discord et connectez-vous, ou effectuez des actions pour générer des journaux."
   },
   "toast": {
-    "duplicateAccount": "Ce compte Discord est déjà ajouté."
+    "duplicateAccount": "Ce compte Discord est déjà ajouté.",
+    "insufficientPermissions": "Autorisations insuffisantes. Veuillez consulter « Paramètres et plus » > « Vérifier les autorisations ».",
+    "newVersionAvailable": "Une nouvelle version est disponible !",
+    "updateDetected": "Une nouvelle version plus récente a été détectée !",
+    "latestVersion": "Voici la dernière version !",
+    "updateCheckFailed": "Impossible de vérifier la présence de mises à jour."
   }
 }

@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { getVersion } from '@tauri-apps/api/app'
 import {
   Palette,
   Globe,
@@ -16,6 +17,7 @@ import {
   Check,
   CheckCircle2,
   AlertTriangle,
+  LoaderCircle,
 } from 'lucide-react'
 import { useTheme, PRESET_ACCENT_COLORS, DEFAULT_ACCENT_COLOR } from './ThemeContext'
 import { useAppSettings } from './useAppSettings'
@@ -25,12 +27,20 @@ import { Button } from '../../components/Button'
 import { Select } from '../../components/Select'
 import { openExternalUrl } from '../../utils/externalLinks'
 import { useTranslation } from '../../i18n/useTranslation'
+import { findNewerRelease } from '../../utils/appUpdates'
 import type { ActivityType, DiscordStatus } from '../../types'
 import appIcon from '../../../src-tauri/icons/icon.png'
+
+function formatDisplayVersion(version: string): string {
+  const match = version.trim().match(/^v?(\d+)\.(\d+)(?:\.\d+)?(?:[-+].*)?$/)
+  return match ? `${match[1]}.${match[2]}` : version
+}
 
 export const SettingsView: React.FC = () => {
   const { theme, setMode, setAccentColor } = useTheme()
   const { t } = useTranslation()
+  const [appVersion, setAppVersion] = useState('1.0.0')
+  const [isCheckingUpdates, setIsCheckingUpdates] = useState(false)
   const {
     settings,
     cachedImageCount,
@@ -43,6 +53,19 @@ export const SettingsView: React.FC = () => {
     clearImageCache,
   } = useAppSettings()
   const { permissions, requestPermission } = usePermissions()
+
+  useEffect(() => {
+    let isMounted = true
+    void getVersion()
+      .then(version => {
+        if (isMounted) setAppVersion(version)
+      })
+      .catch(() => {})
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
   const colorInputRef = useRef<HTMLInputElement>(null)
   const grantedRequiredPermissionCount = [
     permissions.usageStats,
@@ -110,6 +133,23 @@ export const SettingsView: React.FC = () => {
     openExternalUrl(url)
   }
 
+  const handleCheckForUpdates = async () => {
+    if (isCheckingUpdates) return
+    setIsCheckingUpdates(true)
+    try {
+      const version = await getVersion()
+      setAppVersion(version)
+      const release = await findNewerRelease(version)
+      const message = release ? t.toast.updateDetected : t.toast.latestVersion
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message } }))
+      if (release) window.setTimeout(() => openExternal(release.url), 500)
+    } catch {
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: t.toast.updateCheckFailed } }))
+    } finally {
+      setIsCheckingUpdates(false)
+    }
+  }
+
   return (
     <div className="flex-1 flex flex-col w-full h-full space-y-4 pb-24">
       {/* Top App Info Card */}
@@ -145,7 +185,7 @@ export const SettingsView: React.FC = () => {
               color: 'var(--color-text-base)',
             }}
           >
-            Kruzty Dynamics v1.0
+            {t.settingsUi.version.replace('{version}', formatDisplayVersion(appVersion))}
           </div>
           <div
             className="min-w-0 flex self-stretch items-center justify-center break-words rounded-xl border px-2 py-1.5 text-center text-xs font-medium leading-tight"
@@ -276,6 +316,40 @@ export const SettingsView: React.FC = () => {
         >
           {t.settings.appPreferences}
         </span>
+
+        {/* Check for app updates */}
+        <button
+          type="button"
+          onClick={() => void handleCheckForUpdates()}
+          disabled={isCheckingUpdates}
+          aria-label={isCheckingUpdates ? t.settingsUi.checkingUpdates : t.settingsUi.checkForUpdates}
+          className="w-full p-3.5 rounded-2xl border flex items-center justify-between gap-3 text-left transition-all hover:border-[var(--color-accent)] active:scale-[0.99] disabled:cursor-default"
+          style={{
+            backgroundColor: 'var(--color-bg-surface)',
+            borderColor: 'var(--color-border)',
+          }}
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+              style={{
+                backgroundColor: 'var(--color-bg-elevated)',
+                color: 'var(--color-text-muted)',
+              }}
+            >
+              <RotateCcw className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="text-xs font-semibold leading-tight">{t.settingsUi.checkForUpdates}</h4>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+                {t.settingsUi.checkForUpdatesDesc}
+              </p>
+            </div>
+          </div>
+          <span className="shrink-0 text-xs font-semibold text-emerald-500">
+            {isCheckingUpdates ? <LoaderCircle className="w-4 h-4 animate-spin" /> : t.settingsUi.check}
+          </span>
+        </button>
 
         {/* 1. Themes and Display */}
         <div

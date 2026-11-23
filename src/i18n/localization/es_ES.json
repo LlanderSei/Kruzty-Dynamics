@@ -145,7 +145,7 @@
     "view": "Ver",
     "done": "Hecho",
     "developedBy": "Desarrollado por",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Desarrollado con Rust Core (Tokio + Tauri v2), React 19, TailwindCSS y el puente nativo de Android. Basado en Experimental RPC de Kizzy.",
     "cached": "en caché",
     "tapCustomize": "Toca para personalizar",
@@ -183,7 +183,11 @@
     "librarySdk": "Integración nativa de «Rich Presence» en Android",
     "libraryReact": "Arquitectura moderna de componentes de interfaz",
     "libraryTailwind": "Estilos modernos y adaptables basados en utilidades",
-    "libraryLucide": "Iconos vectoriales creados por la comunidad"
+    "libraryLucide": "Iconos vectoriales creados por la comunidad",
+    "checkForUpdates": "Comprueba si hay una versión más reciente",
+    "checkForUpdatesDesc": "Comprueba si hay una versión más reciente disponible.",
+    "check": "Comprobar",
+    "checkingUpdates": "Comprobación de actualizaciones"
   },
   "configFields": {
     "appTitle": "Configuración de los campos de estado de la solicitud",
@@ -453,6 +457,11 @@
     "empty": "[INFO] Aún no hay registros. Inicia sesión en Discord o realiza alguna acción para generar registros."
   },
   "toast": {
-    "duplicateAccount": "Esta cuenta de Discord ya está añadida."
+    "duplicateAccount": "Esta cuenta de Discord ya está añadida.",
+    "insufficientPermissions": "Permisos insuficientes. Por favor, comprueba «Configuración y más» > «Comprobar permisos».",
+    "newVersionAvailable": "¡Ya está disponible la nueva versión!",
+    "updateDetected": "¡Se ha detectado una nueva versión más reciente!",
+    "latestVersion": "¡Esta es la última versión!",
+    "updateCheckFailed": "No se han podido buscar actualizaciones."
   }
 }

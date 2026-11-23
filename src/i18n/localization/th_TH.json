@@ -144,7 +144,12 @@
     "foregroundDescription": "จำเป็นโดย Android 13+ เพื่อแสดงการแจ้งเตือนบริการเบื้องหน้าที่กำลังดำเนินอยู่บนแถบสถานะของคุณ เพื่อยืนยันว่าเอ็นจินการแสดงตนของ Discord กำลังทำงาน"
   },
   "toast": {
-    "duplicateAccount": "เพิ่มบัญชี Discord นี้แล้ว"
+    "duplicateAccount": "เพิ่มบัญชี Discord นี้แล้ว",
+    "insufficientPermissions": "Insufficient permissions. Please check Settings & More > Check Permissions.",
+    "newVersionAvailable": "New Version is Available!",
+    "updateDetected": "A new latest version is detected!",
+    "latestVersion": "This is the latest version!",
+    "updateCheckFailed": "Could not check for updates."
   },
   "accountsPage": {
     "emptyTitle": "ยังไม่มีบัญชีที่เข้าสู่ระบบ",
@@ -199,7 +204,7 @@
     "view": "ดู",
     "done": "เสร็จสิ้น",
     "developedBy": "พัฒนาโดย",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "สร้างโดยใช้ Rust Core (Tokio + Tauri v2) กับ React 19 และ Frontend TailwindCSS รวมถึง Native Android Plugin Bridge อิงจาก Kizzy's Experimental RPC ดั้งเดิม",
     "cached": "แคชแล้ว",
     "tapCustomize": "แตะเพื่อปรับแต่ง",
@@ -237,7 +242,11 @@
     "librarySdk": "การรวม Rich Presence บน Android แบบเนทีฟ",
     "libraryReact": "สถาปัตยกรรมคอมโพเนนต์อินเทอร์เฟซผู้ใช้ที่ทันสมัย",
     "libraryTailwind": "สไตล์ที่ตอบสนองที่ทันสมัยโดยเน้นยูทิลิตี้เป็นหลัก",
-    "libraryLucide": "ไอคอนเวกเตอร์ที่สะอาดตาสร้างโดยชุมชน"
+    "libraryLucide": "ไอคอนเวกเตอร์ที่สะอาดตาสร้างโดยชุมชน",
+    "checkForUpdates": "Check for Latest Version",
+    "checkForUpdatesDesc": "Check whether a newer version is available.",
+    "check": "Check",
+    "checkingUpdates": "Checking for updates"
   },
   "configFields": {
     "appTitle": "การกำหนดค่าฟิลด์สถานะแอปพลิเคชัน",

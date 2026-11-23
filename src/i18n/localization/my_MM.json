@@ -144,7 +144,12 @@
     "foregroundDescription": "Discord တည်ရှိမှု အင်ဂျင် အလုပ်လုပ်နေကြောင်း အတည်ပြုရန် သင့်အခြေအနေဘားတွင် ဆက်လက်လုပ်ဆောင်နေသော ရှေ့မျက်နှာပြင် ဝန်ဆောင်မှု အသိပေးချက်ကို ပြသရန် Android 13+ မှ လိုအပ်သည်။"
   },
   "toast": {
-    "duplicateAccount": "ဤ Discord အကောင့်ကို ထည့်သွင်းပြီးဖြစ်ပါသည်။"
+    "duplicateAccount": "ဤ Discord အကောင့်ကို ထည့်သွင်းပြီးဖြစ်ပါသည်။",
+    "insufficientPermissions": "ခွင့်ပြုချက် မလုံလောက်ပါ။ စက်ဆက်တင်များ > ပိုမို > ခွင့်ပြုချက်များကို စစ်ဆေးပါ။",
+    "newVersionAvailable": "ဗားရှင်းအသစ် ရရှိနိုင်ပါပြီ!",
+    "updateDetected": "နောက်ဆုံးထွက်ဗားရှင်းအသစ် တစ်ခု တွေ့ရှိခဲ့သည်!",
+    "latestVersion": "ဤသည် နောက်ဆုံးဗားရှင်းဖြစ်ပါသည်။",
+    "updateCheckFailed": "အပ်ဒိတ်များ စစ်ဆေး၍ မရနိုင်ပါ။"
   },
   "accountsPage": {
     "emptyTitle": "လော့ဂ်အင်ဝင်ထားသော အကောင့် မရှိသေးပါ။",
@@ -199,7 +204,7 @@
     "view": "ကြည့်ရန်",
     "done": "ပြီးပါပြီ",
     "developedBy": "ဖန်တီးသူ",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rust Core (Tokio + Tauri v2) ကို အသုံးပြု၍ React 19 နှင့် TailwindCSS Frontend အပြင် Native Android Plugin Bridge ဖြင့် တည်ဆောက်ထားသည်။ မူရင်း Kizzy's Experimental RPC ကို အခြေခံထားသည်။",
     "cached": "ကက်ရှ်လုပ်ထားသည်",
     "tapCustomize": "စိတ်ကြိုက်ပြင်ဆင်ရန် နှိပ်ပါ",
@@ -237,7 +242,11 @@
     "librarySdk": "Native Android rich presence ပေါင်းစပ်မှု",
     "libraryReact": "ခေတ်သစ် အသုံးပြုသူ အင်တာဖေ့စ် အစိတ်အပိုင်း ဗိသုကာ",
     "libraryTailwind": "အသုံးဝင်မှုကို ဦးစားပေးသော ခေတ်သစ် တုံ့ပြန်မှုရှိသော ပုံစံချခြင်း",
-    "libraryLucide": "အသိုင်းအဝိုင်းမှ ဖန်တီးထားသော သန့်ရှင်းသော ဗက်တာအိုင်ကွန်များ"
+    "libraryLucide": "အသိုင်းအဝိုင်းမှ ဖန်တီးထားသော သန့်ရှင်းသော ဗက်တာအိုင်ကွန်များ",
+    "checkForUpdates": "နောက်ဆုံးဗားရှင်း ရှိမရှိ စစ်ဆေးပါ။",
+    "checkForUpdatesDesc": "နောက်ဆုံးထွက်ဗားရှင်း ရှိမရှိ စစ်ဆေးပါ။",
+    "check": "စစ်ဆေးပါ",
+    "checkingUpdates": "အပ်ဒိတ်များ ရှိမရှိ စစ်ဆေးနေသည်။"
   },
   "configFields": {
     "appTitle": "အက်ပ် အခြေအနေ အကွက် သတ်မှတ်ချက်",

@@ -144,7 +144,12 @@
     "foregroundDescription": "Vereist door Android 13+ om de permanente voorgrondservicemelding in je statusbalk te tonen, ter bevestiging dat de Discord-presence-engine draait."
   },
   "toast": {
-    "duplicateAccount": "Dit Discord-account is al toegevoegd."
+    "duplicateAccount": "Dit Discord-account is al toegevoegd.",
+    "insufficientPermissions": "Onvoldoende rechten. Ga naar Instellingen & meer > Rechten controleren.",
+    "newVersionAvailable": "Er is een nieuwe versie beschikbaar!",
+    "updateDetected": "Er is een nieuwe, meest recente versie gedetecteerd!",
+    "latestVersion": "Dit is de nieuwste versie!",
+    "updateCheckFailed": "Er konden geen updates worden gecontroleerd."
   },
   "accountsPage": {
     "emptyTitle": "Nog geen account ingelogd.",
@@ -199,7 +204,7 @@
     "view": "Bekijken",
     "done": "Klaar",
     "developedBy": "Ontwikkeld door",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Gebouwd met Rust Core (Tokio + Tauri v2) met React 19 en TailwindCSS-frontend, inclusief Native Android Plugin Bridge. Gebaseerd op de originele Kizzy's Experimental RPC.",
     "cached": "gecachet",
     "tapCustomize": "Tik om aan te passen",
@@ -237,7 +242,11 @@
     "librarySdk": "Native Android rich presence-integratie",
     "libraryReact": "Moderne UI-componentarchitectuur",
     "libraryTailwind": "Utility-first moderne responsieve styling",
-    "libraryLucide": "Door de community gemaakte zuivere vectorpictogrammen"
+    "libraryLucide": "Door de community gemaakte zuivere vectorpictogrammen",
+    "checkForUpdates": "Controleer of je de nieuwste versie hebt",
+    "checkForUpdatesDesc": "Controleer of er een nieuwere versie beschikbaar is.",
+    "check": "Controleer",
+    "checkingUpdates": "Controleren op updates"
   },
   "configFields": {
     "appTitle": "Configuratie applicatiestatusvelden",

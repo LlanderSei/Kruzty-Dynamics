@@ -145,7 +145,7 @@
     "view": "Ansehen",
     "done": "Fertig",
     "developedBy": "Entwickelt von",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Entwickelt mit Rust Core (Tokio + Tauri v2) mit React 19 und TailwindCSS im Frontend, einschließlich der Native Android Plugin Bridge. Basierend auf dem ursprünglichen „Kizzy’s Experimental RPC“.",
     "cached": "im Cache",
     "tapCustomize": "Zum Anpassen tippen",
@@ -183,7 +183,11 @@
     "librarySdk": "Native Android-Integration für Rich-Presence-Funktionen",
     "libraryReact": "Moderne Architektur von Benutzeroberflächenkomponenten",
     "libraryTailwind": "Utility-basierte moderne responsive Gestaltung",
-    "libraryLucide": "Von der Community gestaltete Vektor-Symbole"
+    "libraryLucide": "Von der Community gestaltete Vektor-Symbole",
+    "checkForUpdates": "Auf die neueste Version prüfen",
+    "checkForUpdatesDesc": "Prüfen Sie, ob eine neuere Version verfügbar ist.",
+    "check": "Überprüfen",
+    "checkingUpdates": "Auf Updates prüfen"
   },
   "configFields": {
     "appTitle": "Statusfeld-Konfiguration der App",
@@ -453,6 +457,11 @@
     "empty": "[INFO] Es liegen noch keine Protokolle vor. Öffne die Discord-Anmeldung oder führe Aktionen durch, um Protokolle zu erstellen."
   },
   "toast": {
-    "duplicateAccount": "Dieser Discord-Account wurde bereits hinzugefügt."
+    "duplicateAccount": "Dieser Discord-Account wurde bereits hinzugefügt.",
+    "insufficientPermissions": "Unzureichende Berechtigungen. Bitte überprüfen Sie „Einstellungen & Mehr“ > „Berechtigungen prüfen“.",
+    "newVersionAvailable": "Eine neue Version ist verfügbar!",
+    "updateDetected": "Es wurde eine neue, aktuellere Version erkannt!",
+    "latestVersion": "Das ist die neueste Version!",
+    "updateCheckFailed": "Es können keine Updates gesucht werden."
   }
 }

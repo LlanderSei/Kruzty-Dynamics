@@ -144,7 +144,12 @@
     "foregroundDescription": "Required by Android 13+ to display the ongoing foreground service notification in yer status bar, confirm' that the Discord presence engine be runnin'."
   },
   "toast": {
-    "duplicateAccount": "This Discord account already be added, matey."
+    "duplicateAccount": "This Discord account already be added, matey.",
+    "insufficientPermissions": "Arrr, ye lack permissions. Check Settings & More > Check Permissions, matey.",
+    "newVersionAvailable": "A new version has been spotted on the horizon!",
+    "updateDetected": "A new latest version be detected, arr!",
+    "latestVersion": "This be the latest version, matey!",
+    "updateCheckFailed": "Couldn't check fer updates, arr."
   },
   "accountsPage": {
     "emptyTitle": "No account logged in yet.",
@@ -199,7 +204,7 @@
     "view": "View",
     "done": "Done",
     "developedBy": "Developed by",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Built usin' Rust Core (Tokio + Tauri v2) with React 19 an' TailwindCSS Frontend includin' Native Android Plugin Bridge. Based on the original Kizzy's Experimental RPC.",
     "cached": "cached",
     "tapCustomize": "Tap to customize",
@@ -237,7 +242,11 @@
     "librarySdk": "Native Android rich presence integration",
     "libraryReact": "Modern user interface component architecture",
     "libraryTailwind": "Utility-first modern responsive styling",
-    "libraryLucide": "Community-crafted clean vector icons"
+    "libraryLucide": "Community-crafted clean vector icons",
+    "checkForUpdates": "Check fer Latest Version",
+    "checkForUpdatesDesc": "Check if a newer version be sailin' the seas.",
+    "check": "Check",
+    "checkingUpdates": "Checkin' fer updates"
   },
   "configFields": {
     "appTitle": "Application Status Field Config",

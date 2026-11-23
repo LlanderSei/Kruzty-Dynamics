@@ -144,7 +144,12 @@
     "foregroundDescription": "Android 13+ required — ongoing foreground service notification status bar'va display'va — Discord presence engine running'va confirm'va."
   },
   "toast": {
-    "duplicateAccount": "This Discord account already added. K'thun."
+    "duplicateAccount": "This Discord account already added. K'thun.",
+    "insufficientPermissions": "Insufficient permissions, K'thun. Check Settings un More > Check Permissions.",
+    "newVersionAvailable": "New Version is Available!",
+    "updateDetected": "A new latest version is detected!",
+    "latestVersion": "This is the latest version!",
+    "updateCheckFailed": "Could not check for updates."
   },
   "accountsPage": {
     "emptyTitle": "No account logged in yet.",
@@ -199,7 +204,7 @@
     "view": "View",
     "done": "Done",
     "developedBy": "Developed —",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rust Core (Tokio + Tauri v2) — built — React 19 un TailwindCSS Frontend — Native Android Plugin Bridge — including. Original Kizzy's Experimental RPC — based.",
     "cached": "cached",
     "tapCustomize": "Tap — customize'va",
@@ -237,7 +242,11 @@
     "librarySdk": "Native Android rich presence integration",
     "libraryReact": "Modern user interface component architecture",
     "libraryTailwind": "Utility-first modern responsive styling",
-    "libraryLucide": "Community-crafted clean vector icons"
+    "libraryLucide": "Community-crafted clean vector icons",
+    "checkForUpdates": "Zorblax'k Latest Version Check'va",
+    "checkForUpdatesDesc": "Newer version available'va — check'va.",
+    "check": "Check'va",
+    "checkingUpdates": "Updates zorblax'k checking"
   },
   "configFields": {
     "appTitle": "Application Status Field Config",

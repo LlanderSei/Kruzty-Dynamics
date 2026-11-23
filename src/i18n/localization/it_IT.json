@@ -144,7 +144,12 @@
     "foregroundDescription": "Richiesto da Android 13+ per visualizzare la notifica del servizio in primo piano in corso nella barra di stato, confermando che il motore di presence di Discord è in esecuzione."
   },
   "toast": {
-    "duplicateAccount": "Questo account Discord è già stato aggiunto."
+    "duplicateAccount": "Questo account Discord è già stato aggiunto.",
+    "insufficientPermissions": "Autorizzazioni insufficienti. Controlla in \"Impostazioni e altro\" > \"Verifica autorizzazioni\".",
+    "newVersionAvailable": "È disponibile una nuova versione!",
+    "updateDetected": "È stata rilevata una nuova versione più recente!",
+    "latestVersion": "Questa è l'ultima versione!",
+    "updateCheckFailed": "Impossibile verificare la presenza di aggiornamenti."
   },
   "accountsPage": {
     "emptyTitle": "Nessun account connesso.",
@@ -199,7 +204,7 @@
     "view": "Visualizza",
     "done": "Fatto",
     "developedBy": "Sviluppato da",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Costruito utilizzando Rust Core (Tokio + Tauri v2) con React 19 e frontend TailwindCSS incluso Native Android Plugin Bridge. Basato sull'RPC sperimentale originale di Kizzy.",
     "cached": "nella cache",
     "tapCustomize": "Tocca per personalizzare",
@@ -237,7 +242,11 @@
     "librarySdk": "Integrazione nativa della rich presence Android",
     "libraryReact": "Architettura moderna dei componenti dell'interfaccia utente",
     "libraryTailwind": "Stile responsive moderno utility-first",
-    "libraryLucide": "Icone vettoriali pulite create dalla community"
+    "libraryLucide": "Icone vettoriali pulite create dalla community",
+    "checkForUpdates": "Verifica la disponibilità dell'ultima versione",
+    "checkForUpdatesDesc": "Verifica se è disponibile una versione più recente.",
+    "check": "Verifica",
+    "checkingUpdates": "Verifica della disponibilità di aggiornamenti"
   },
   "configFields": {
     "appTitle": "Configurazione campo di stato applicazione",

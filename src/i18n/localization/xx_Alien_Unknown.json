@@ -144,7 +144,12 @@
     "foregroundDescription": "Android 13+ ₦ɆɆĐⱠ ₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₴₮₳₮Ʉ₴ ฿₳Ɽ ₦ØØⱤĐ Discord ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ."
   },
   "toast": {
-    "duplicateAccount": "Discord ₳₵₵ØⱤĐ ₳₵₵ØⱤĐ ₦ØØⱤĐ."
+    "duplicateAccount": "Discord ₳₵₵ØⱤĐ ₳₵₵ØⱤĐ ₦ØØⱤĐ.",
+    "insufficientPermissions": "₦ØØⱤĐ ₦ɆɆĐⱠ ₶₥₦ØØⱤĐ. ₴Ɇ₮₮ł₦₲₴ & ₥ØⱤɆ > ₵ⱧɆ₵₭ ₱ɆⱤ₥ł₴₴łØ₦₴ ₦ØØⱤĐ.",
+    "newVersionAvailable": "₦Ɇ₩ VɆⱤ₴łØ₦ ₳₵₵ØⱤĐ!",
+    "updateDetected": "₦Ɇ₩ Ⱡ₳₮Ɇ₴₮ VɆⱤ₴łØ₦ ₦ØØⱤĐ!",
+    "latestVersion": "Ⱡ₳₮Ɇ₴₮ VɆⱤ₴łØ₦ ₦ØØⱤĐ!",
+    "updateCheckFailed": "Ʉ₱Đ₳₮Ɇ ₵ⱧɆ₵₭ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ."
   },
   "accountsPage": {
     "emptyTitle": "₦Ø ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł.",
@@ -199,7 +204,7 @@
     "view": "VłɆ₩",
     "done": "ĐØ₦Ɇ",
     "developedBy": "ĐɆVɆⱠØ₱ɆĐ ฿Ɏ",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rust Core (Tokio + Tauri v2) ₳₦Đ React 19 ₳₦Đ TailwindCSS ₦ØØⱤĐ ₳₦Đ Native Android Plugin Bridge ₦ØØⱤĐ. Kizzy's Experimental RPC ₦ØØⱤĐ.",
     "cached": "₵₳₵ⱧɆĐ",
     "tapCustomize": "₦ØØⱤĐ ₮ⱤØ₦",
@@ -237,7 +242,11 @@
     "librarySdk": "Native Android ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
     "libraryReact": "₥ØĐɆⱤ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ ₳Ɽ₵Ⱨł₮Ɇ₵₮ɄⱤɆ",
     "libraryTailwind": "Ʉ₮łⱠł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ",
-    "libraryLucide": "₵Ø₥₥Ʉ₦ł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ł₵Ø₦₴"
+    "libraryLucide": "₵Ø₥₥Ʉ₦ł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ł₵Ø₦₴",
+    "checkForUpdates": "₦ØØⱤĐ ₦ɆɆĐⱠ ₵ⱧɆ₵₭",
+    "checkForUpdatesDesc": "₦Ɇ₩ VɆⱤ₴łØ₦ ₦ØØⱤĐ ₵ⱧɆ₵₭.",
+    "check": "₵ⱧɆ₵₭",
+    "checkingUpdates": "₵ⱧɆ₵₭ł₦₲ ₦ØØⱤĐ"
   },
   "configFields": {
     "appTitle": "₳₱₱Ⱡł₵₳₮łØ₦ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",

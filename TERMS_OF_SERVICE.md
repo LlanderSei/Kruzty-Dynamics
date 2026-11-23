@@ -6,4 +6,6 @@ See the [Kruzty Dynamics Privacy Policy](PRIVACY.md) for details about informati
 
 ### Open Source License
 
-**Kizzy** is an open source project under the GNU GPL 3.0 Open Source License ①, which allows you to use, reference, and modify the source code of **Kizzy** for free, but does not allow the modified and derived code to be distributed and sold as closed-source commercial software. For details, please see the full GNU GPL 3.0 Open Source License ②.
+**Kruzty Dynamics** is distributed under the GNU General Public License, version 3 only (GPL-3.0-only). It is derived from **Kizzy**, which is also licensed under GPL-3.0. See [LICENSE](LICENSE) for the full license text.
+
+You may use, modify, and distribute this software, including commercially, subject to the GPL-3.0 terms. When distributing a covered work, you must provide the corresponding source code and preserve the rights the GPL grants to recipients. Third-party components may have additional license terms; consult their notices and package metadata.

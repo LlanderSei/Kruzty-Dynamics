@@ -144,7 +144,12 @@
     "foregroundDescription": "आपकी स्थिति पट्टी में चल रही फोरग्राउंड सेवा अधिसूचना प्रदर्शित करने के लिए Android 13+ द्वारा आवश्यक, यह पुष्टि करते हुए कि Discord उपस्थिति इंजन चल रहा है।"
   },
   "toast": {
-    "duplicateAccount": "यह Discord खाता पहले ही जोड़ा जा चुका है।"
+    "duplicateAccount": "यह Discord खाता पहले ही जोड़ा जा चुका है।",
+    "insufficientPermissions": "अनुपयुक्त अनुमतियाँ। कृपया सेटिंग्स और अधिक > अनुमतियाँ जांचें।",
+    "newVersionAvailable": "नया संस्करण उपलब्ध है!",
+    "updateDetected": "एक नया नवीनतम संस्करण पता चला है!",
+    "latestVersion": "यह नवीनतम संस्करण है!",
+    "updateCheckFailed": "अपडेट्स की जाँच नहीं कर सका।"
   },
   "accountsPage": {
     "emptyTitle": "अभी तक कोई खाता लॉग इन नहीं है।",
@@ -199,7 +204,7 @@
     "view": "देखें",
     "done": "हो गया",
     "developedBy": "द्वारा विकसित",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rust Core (Tokio + Tauri v2) का उपयोग करके React 19 और TailwindCSS फ्रंटएंड के साथ बनाया गया है, जिसमें Native Android Plugin Bridge शामिल है। मूल Kizzy's Experimental RPC पर आधारित।",
     "cached": "कैश्ड",
     "tapCustomize": "अनुकूलित करने के लिए टैप करें",
@@ -237,7 +242,11 @@
     "librarySdk": "नेटिव Android rich presence एकीकरण",
     "libraryReact": "आधुनिक उपयोगकर्ता इंटरफ़ेस घटक वास्तुकला",
     "libraryTailwind": "उपयोगिता-प्रथम आधुनिक उत्तरदायी स्टाइलिंग",
-    "libraryLucide": "समुदाय द्वारा तैयार स्वच्छ वेक्टर आइकन"
+    "libraryLucide": "समुदाय द्वारा तैयार स्वच्छ वेक्टर आइकन",
+    "checkForUpdates": "नवीनतम संस्करण की जाँच करें",
+    "checkForUpdatesDesc": "जाँचें कि क्या कोई नया संस्करण उपलब्ध है।",
+    "check": "जाँचें",
+    "checkingUpdates": "अपडेट्स की जाँच"
   },
   "configFields": {
     "appTitle": "एप्लिकेशन स्थिति फ़ील्ड कॉन्फ़िग",

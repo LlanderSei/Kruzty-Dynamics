@@ -144,7 +144,12 @@
     "foregroundDescription": "Required by Android 13+ to display the ongoing foreground service notification in thy status bar, confirming that the Discord presence engine is running."
   },
   "toast": {
-    "duplicateAccount": "This Discord account is already added."
+    "duplicateAccount": "This Discord account is already added.",
+    "insufficientPermissions": "Thou lackest permissions. Prithee, check Settings & More > Check Permissions.",
+    "newVersionAvailable": "A New Version is Available!",
+    "updateDetected": "A new latest version hath been detected!",
+    "latestVersion": "This is the latest version!",
+    "updateCheckFailed": "Could not check for updates."
   },
   "accountsPage": {
     "emptyTitle": "No account logged in yet.",
@@ -191,6 +196,10 @@
     "privacyPolicy": "Privacy Policy",
     "repository": "Check GitHub Repository",
     "latestRelease": "Go to Latest Release",
+    "checkForUpdates": "Check for Latest Version",
+    "checkForUpdatesDesc": "Check whether a newer version is available.",
+    "check": "Check",
+    "checkingUpdates": "Checking for updates",
     "submitIssue": "Submit an Issue",
     "developerSection": "Kruzty Dynamics",
     "librariesSection": "Libraries Used in this App",
@@ -199,7 +208,7 @@
     "view": "View",
     "done": "Done",
     "developedBy": "Developed by",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Built using Rust Core (Tokio + Tauri v2) with React 19 and TailwindCSS Frontend including Native Android Plugin Bridge. Based on the original Kizzy's Experimental RPC.",
     "cached": "cached",
     "tapCustomize": "Tap to customize",

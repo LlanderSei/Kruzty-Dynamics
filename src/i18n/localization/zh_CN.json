@@ -145,7 +145,7 @@
     "view": "查看",
     "done": "完成",
     "developedBy": "开发者：",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "基于 Rust 核心（Tokio + Tauri v2）构建，前端使用 React 19 与 TailwindCSS，并包含原生 Android 插件桥接。基于原版 Kizzy's Experimental RPC。",
     "cached": "已缓存",
     "tapCustomize": "点击自定义",
@@ -183,7 +183,11 @@
     "librarySdk": "原生 Android 富状态集成",
     "libraryReact": "现代用户界面组件架构",
     "libraryTailwind": "实用优先的现代响应式样式",
-    "libraryLucide": "社区打造的简洁矢量图标"
+    "libraryLucide": "社区打造的简洁矢量图标",
+    "checkForUpdates": "检查最新版本",
+    "checkForUpdatesDesc": "请检查是否有更新版本。",
+    "check": "检查",
+    "checkingUpdates": "检查更新"
   },
   "configFields": {
     "appTitle": "应用状态字段配置",
@@ -453,6 +457,11 @@
     "empty": "[信息] 目前尚无日志。请打开 Discord 登录或执行相关操作以生成日志。"
   },
   "toast": {
-    "duplicateAccount": "该 Discord 账号已添加。"
+    "duplicateAccount": "该 Discord 账号已添加。",
+    "insufficientPermissions": "权限不足。请前往“设置与更多”>“检查权限”。",
+    "newVersionAvailable": "新版本已发布！",
+    "updateDetected": "检测到最新版本！",
+    "latestVersion": "这是最新版本！",
+    "updateCheckFailed": "无法检查更新。"
   }
 }

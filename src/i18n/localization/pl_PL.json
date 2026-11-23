@@ -144,7 +144,12 @@
     "foregroundDescription": "Wymagane przez Android 13+ do wyświetlania trwającego powiadomienia usługi na pierwszym planie na pasku stanu, potwierdzającego, że silnik obecności Discord działa."
   },
   "toast": {
-    "duplicateAccount": "To konto Discord jest już dodane."
+    "duplicateAccount": "To konto Discord jest już dodane.",
+    "insufficientPermissions": "Brak odpowiednich uprawnień. Sprawdź opcję „Ustawienia i więcej” > „Sprawdź uprawnienia”.",
+    "newVersionAvailable": "Dostępna jest nowa wersja!",
+    "updateDetected": "Wykryto nową, najnowszą wersję!",
+    "latestVersion": "To jest najnowsza wersja!",
+    "updateCheckFailed": "Nie udało się sprawdzić dostępności aktualizacji."
   },
   "accountsPage": {
     "emptyTitle": "Brak zalogowanego konta.",
@@ -199,7 +204,7 @@
     "view": "Zobacz",
     "done": "Gotowe",
     "developedBy": "Opracowane przez",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Zbudowane przy użyciu Rust Core (Tokio + Tauri v2) z React 19 i TailwindCSS Frontend, w tym Native Android Plugin Bridge. Oparte na oryginalnym Kizzy's Experimental RPC.",
     "cached": "w pamięci podręcznej",
     "tapCustomize": "Dotknij, aby dostosować",
@@ -237,7 +242,11 @@
     "librarySdk": "Natywna integracja bogatej obecności Androida",
     "libraryReact": "Nowoczesna architektura komponentów interfejsu użytkownika",
     "libraryTailwind": "Nowoczesny, responsywny styl oparty na klasach narzędziowych",
-    "libraryLucide": "Stworzone przez społeczność czyste ikony wektorowe"
+    "libraryLucide": "Stworzone przez społeczność czyste ikony wektorowe",
+    "checkForUpdates": "Sprawdź, czy masz najnowszą wersję",
+    "checkForUpdatesDesc": "Sprawdź, czy dostępna jest nowsza wersja.",
+    "check": "Sprawdź",
+    "checkingUpdates": "Sprawdzanie dostępności aktualizacji"
   },
   "configFields": {
     "appTitle": "Konfiguracja pola statusu aplikacji",

@@ -145,7 +145,7 @@
     "view": "表示",
     "done": "完了",
     "developedBy": "開発者:",
-    "version": "Kruzty Dynamics v1.0",
+    "version": "Kruzty Dynamics v{version}",
     "architecture": "Rustコア（Tokio + Tauri v2）とReact 19、TailwindCSSフロントエンド、ネイティブAndroidプラグインブリッジで構築。オリジナルのKizzy's Experimental RPCをベースにしています。",
     "cached": "キャッシュ済み",
     "tapCustomize": "タップしてカスタマイズ",
@@ -183,7 +183,11 @@
     "librarySdk": "ネイティブAndroid Rich Presence統合",
     "libraryReact": "モダンなUIコンポーネントアーキテクチャ",
     "libraryTailwind": "ユーティリティファーストのモダンでレスポンシブなスタイリング",
-    "libraryLucide": "コミュニティ製のクリーンなベクターアイコン"
+    "libraryLucide": "コミュニティ製のクリーンなベクターアイコン",
+    "checkForUpdates": "最新バージョンを確認する",
+    "checkForUpdatesDesc": "新しいバージョンがリリースされていないか確認してください。",
+    "check": "確認",
+    "checkingUpdates": "アップデートの確認"
   },
   "configFields": {
     "appTitle": "アプリケーションステータスフィールド設定",
@@ -453,6 +457,11 @@
     "empty": "[INFO] まだログがありません。Discordにログインするか、何らかの操作を行ってログを生成してください。"
   },
   "toast": {
-    "duplicateAccount": "このDiscordアカウントはすでに追加されています。"
+    "duplicateAccount": "このDiscordアカウントはすでに追加されています。",
+    "insufficientPermissions": "権限が不十分です。「設定とその他」＞「権限の確認」をご確認ください。",
+    "newVersionAvailable": "新バージョンがリリースされました！",
+    "updateDetected": "新しい最新バージョンが検出されました！",
+    "latestVersion": "これが最新バージョンです！",
+    "updateCheckFailed": "更新の確認ができませんでした。"
   }
 }
