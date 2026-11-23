@@ -7,6 +7,7 @@ import { Switch } from '../../components/Switch'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { MediaFieldTemplates } from '../../types'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
+import { useTranslation } from '../../i18n/useTranslation'
 
 interface MediaStatusFieldConfigProps {
   onBack: () => void
@@ -15,13 +16,14 @@ interface MediaStatusFieldConfigProps {
 const MEDIA_FIELDS_STORAGE_KEY = 'kd_media_field_templates'
 
 const DEFAULT_MEDIA_FIELDS: MediaFieldTemplates = {
+  header: '{{AppName}}',
   title: '{{MediaTitle ?? AppName}}',
   line1: '{{MediaArtist ?? MediaDescription}}',
   line2: '{{MediaAlbum ?? MediaDescription}}',
   smallText: '{{PlaybackState}}',
-  smallImage: '{{HasDetectablePlaybackState ?? PlaybackStateImageLink : AppImageLink}}',
+  smallImage: '{{HasDetectablePlaybackState ?? PlaybackStateImageUrl : AppImageUrl}}',
   bigText: '',
-  bigImage: '{{HasMediaImage ?? MediaImageLink : AppImageLink}}',
+  bigImage: '{{HasMediaImage ?? MediaImageUrl : AppImageUrl}}',
   customButtonsEnabled: false,
   button1Label: '',
   button1Url: '',
@@ -30,18 +32,20 @@ const DEFAULT_MEDIA_FIELDS: MediaFieldTemplates = {
 }
 
 const MEDIA_TOKENS_DOCS = [
-  { token: '{{MediaTitle}}', description: 'Active media song/track title from notification metadata.' },
-  { token: '{{AppName}}', description: 'Fallback application name if track title is empty.' },
-  { token: '{{MediaArtist}}', description: 'Artist name / creator of the playing audio/video.' },
-  { token: '{{MediaAlbum}}', description: 'Album name or playlist container.' },
-  { token: '{{MediaDescription}}', description: 'Video/media description from web or video players.' },
-  { token: '{{PlaybackState}}', description: 'Current playback state (Playing, Paused, Stopped).' },
-  { token: '{{MediaImageLink}}', description: 'Cached ImgBB URL of the media album art / thumbnail.' },
-  { token: '{{PlaybackStateImageLink}}', description: 'Asset image link for current playback indicator.' },
-  { token: '{{AppImageLink}}', description: 'Fallback application icon if no artwork is available.' },
-]
+  { token: '{{AppName}}', description: 'mediaTokenAppName' },
+  { token: '{{MediaTitle}}', description: 'mediaTokenTitle' },
+  { token: '{{MediaArtist}}', description: 'mediaTokenArtist' },
+  { token: '{{MediaAlbum}}', description: 'mediaTokenAlbum' },
+  { token: '{{MediaDescription}}', description: 'mediaTokenDescription' },
+  { token: '{{PlaybackState}}', description: 'mediaTokenPlaybackState' },
+  { token: '{{MediaImageUrl}}', description: 'mediaTokenImageUrl' },
+  { token: '{{PlaybackStateImageUrl}}', description: 'mediaTokenPlaybackImageUrl' },
+  { token: '{{AppImageUrl}}', description: 'mediaTokenFallbackImageUrl' },
+] as const
 
 export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ onBack }) => {
+  const { t } = useTranslation()
+  const mediaTokenIntro = t.configFields.mediaTokenIntro.split('{example}')
   const [fields, setFields] = useState<MediaFieldTemplates>(() => {
     try {
       const saved = localStorage.getItem(MEDIA_FIELDS_STORAGE_KEY)
@@ -116,14 +120,14 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-base)',
             }}
-            aria-label="Back"
+            aria-label={t.configFields.back}
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-bold truncate">Media Status Field Config</h1>
+            <h1 className="text-sm font-bold truncate">{t.configFields.mediaTitle}</h1>
             <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-              Customize expressions for media playback
+              {t.configFields.mediaConfigSubtitle}
             </p>
           </div>
         </div>
@@ -139,8 +143,8 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title="Reset to Defaults"
-            aria-label="Reset Defaults"
+            title={t.configFields.reset}
+            aria-label={t.configFields.reset}
           >
             <RotateCcw className="w-4 h-4" />
           </button>
@@ -154,8 +158,8 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title="Available Tokens Help"
-            aria-label="Help"
+            title={t.configFields.help}
+            aria-label={t.configFields.help}
           >
             <HelpCircle className="w-4 h-4" />
           </button>
@@ -165,11 +169,32 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
       {/* Body: Scrollable medium-height textboxes */}
       <div className="flex-1 overflow-y-auto overscroll-y-contain relative">
         <div className="max-w-xl w-full mx-auto p-4 space-y-4 pb-28">
-          {/* Field 1: Title */}
+          {/* Field 1: Header */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Media Title (Activity Details)</label>
+            <label className="text-xs font-semibold block">{t.configFields.header}</label>
             <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              The player app name appears in the “Listening to…” header.
+              {t.configFields.mediaHeaderDescription}
+            </p>
+            <textarea
+              rows={2}
+              value={fields.header || ''}
+              onChange={e => handleFieldChange('header', e.target.value)}
+              placeholder="e.g. {{AppName}}"
+              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
+              style={{
+                backgroundColor: 'var(--color-bg-surface)',
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text-base)',
+              }}
+            />
+          </div>
+          <Divider />
+
+          {/* Field 2: Title */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold block">{t.configFields.mediaTitleField}</label>
+            <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
+              {t.configFields.mediaTitleDescription}
             </p>
             <textarea
               rows={2}
@@ -188,7 +213,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 2: Line 1 (State / Artist) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Line 1 (Activity State / Artist)</label>
+            <label className="text-xs font-semibold block">{t.configFields.artist}</label>
             <textarea
               rows={2}
               value={fields.line1 || ''}
@@ -206,9 +231,9 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 3: Line 2 (Large Image Text / Album) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Line 2 (Album / Image Text)</label>
+            <label className="text-xs font-semibold block">{t.configFields.album}</label>
             <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              Shown beneath the artist on Discord’s media card.
+              {t.configFields.mediaAlbumDescription}
             </p>
             <textarea
               rows={2}
@@ -227,7 +252,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 4: Small Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Small Text</label>
+            <label className="text-xs font-semibold block">{t.configFields.smallText}</label>
             <textarea
               rows={2}
               value={fields.smallText || ''}
@@ -245,12 +270,12 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 5: Small Image (Fallback Expression) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Small Image (Fallback Exp)</label>
+            <label className="text-xs font-semibold block">{t.configFields.smallImage}</label>
             <textarea
               rows={2}
               value={fields.smallImage || ''}
               onChange={e => handleFieldChange('smallImage', e.target.value)}
-              placeholder="e.g. {{HasDetectablePlaybackState ?? PlaybackStateImageLink : AppImageLink}}"
+              placeholder="e.g. {{HasDetectablePlaybackState ?? PlaybackStateImageUrl : AppImageUrl}}"
               className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
@@ -263,7 +288,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 6: Big Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Big Text (Line 2 Fallback)</label>
+            <label className="text-xs font-semibold block">{t.configFields.bigText}</label>
             <textarea
               rows={2}
               value={fields.bigText || ''}
@@ -281,12 +306,12 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
           {/* Field 7: Big Image (Fallback Expression) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Big Image (Fallback Exp)</label>
+            <label className="text-xs font-semibold block">{t.configFields.bigImage}</label>
             <textarea
               rows={2}
               value={fields.bigImage || ''}
               onChange={e => handleFieldChange('bigImage', e.target.value)}
-              placeholder="e.g. {{HasMediaImage ?? MediaImageLink : AppImageLink}}"
+              placeholder="e.g. {{HasMediaImage ?? MediaImageUrl : AppImageUrl}}"
               className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
@@ -301,16 +326,16 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
           <div className="space-y-3">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <label className="text-xs font-semibold block">Custom Buttons</label>
+                <label className="text-xs font-semibold block">{t.configFields.buttons}</label>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  Add up to 2 interactive presence buttons with token expressions
+                  {t.configFields.mediaButtonDescription}
                 </p>
               </div>
               <div className="shrink-0">
                 <Switch
                   checked={Boolean(fields.customButtonsEnabled)}
                   onChange={checked => handleFieldChange('customButtonsEnabled', checked)}
-                  aria-label="Toggle Custom Buttons"
+                  aria-label={t.catalogue.toggleButtons}
                 />
               </div>
             </div>
@@ -326,17 +351,17 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
                     borderColor: 'var(--color-border)',
                   }}
                 >
-                  <span className="text-xs font-semibold block">Button 1</span>
+                  <span className="text-xs font-semibold block">{t.configFields.button1}</span>
 
                   <div className="space-y-1">
                     <label className="text-[11px] font-medium block" style={{ color: 'var(--color-text-muted)' }}>
-                      Label
+                      {t.configFields.mediaButtonLabel}
                     </label>
                     <input
                       type="text"
                       value={fields.button1Label || ''}
                       onChange={e => handleFieldChange('button1Label', e.target.value)}
-                      placeholder="e.g. {{MediaTitle}}"
+                      placeholder={`${t.configFields.mediaButtonExample}{{MediaTitle}}`}
                       className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -348,13 +373,13 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
                   <div className="space-y-1">
                     <label className="text-[11px] font-medium block" style={{ color: 'var(--color-text-muted)' }}>
-                      URL
+                      {t.configFields.mediaButtonUrl}
                     </label>
                     <input
                       type="text"
                       value={fields.button1Url || ''}
                       onChange={e => handleFieldChange('button1Url', e.target.value)}
-                      placeholder="e.g. https://something.com/{{MediaArtist}}-{{MediaTitle}}/"
+                      placeholder={`${t.configFields.mediaButtonExample}https://something.com/{{MediaArtist}}-{{MediaTitle}}/`}
                       className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -373,17 +398,17 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
                     borderColor: 'var(--color-border)',
                   }}
                 >
-                  <span className="text-xs font-semibold block">Button 2</span>
+                  <span className="text-xs font-semibold block">{t.configFields.button2}</span>
 
                   <div className="space-y-1">
                     <label className="text-[11px] font-medium block" style={{ color: 'var(--color-text-muted)' }}>
-                      Label
+                      {t.configFields.mediaButtonLabel}
                     </label>
                     <input
                       type="text"
                       value={fields.button2Label || ''}
                       onChange={e => handleFieldChange('button2Label', e.target.value)}
-                      placeholder="e.g. Listen on {{AppName}}"
+                      placeholder={`${t.configFields.mediaButtonExample}${t.configFields.mediaButtonListen} {{AppName}}`}
                       className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -395,13 +420,13 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
 
                   <div className="space-y-1">
                     <label className="text-[11px] font-medium block" style={{ color: 'var(--color-text-muted)' }}>
-                      URL
+                      {t.configFields.mediaButtonUrl}
                     </label>
                     <input
                       type="text"
                       value={fields.button2Url || ''}
                       onChange={e => handleFieldChange('button2Url', e.target.value)}
-                      placeholder="e.g. https://music.example.com/search?q={{MediaTitle}}"
+                      placeholder={`${t.configFields.mediaButtonExample}https://music.example.com/search?q={{MediaTitle}}`}
                       className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -427,8 +452,8 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
                 backgroundColor: 'var(--color-accent)',
                 color: '#ffffff',
               }}
-              title="Save Fields"
-              aria-label="Save Fields"
+              title={t.configFields.save}
+              aria-label={t.configFields.save}
             >
               <Check className="w-6 h-6 stroke-[2.5]" />
             </button>
@@ -440,17 +465,17 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
       <Modal
         isOpen={isHelpOpen}
         onClose={() => setIsHelpOpen(false)}
-        title="Media Token Reference"
-        subtitle="Dynamic variables available in media expressions & buttons"
+        title={t.configFields.mediaReference}
+        subtitle={t.configFields.mediaTokenSubtitle}
         footer={
           <Button size="sm" variant="primary" onClick={() => setIsHelpOpen(false)}>
-            Got it
+            {t.configFields.helpDone}
           </Button>
         }
       >
         <div className="space-y-2.5 text-xs">
           <p className="text-[11px] leading-relaxed pb-1" style={{ color: 'var(--color-text-muted)' }}>
-            Tokens can be embedded directly in text fields and button Labels/URLs (e.g. <span className="font-mono text-[var(--color-accent)]">{'https://domain.com/{{MediaArtist}}-{{MediaTitle}}/'}</span>).
+            {mediaTokenIntro[0]}<span className="font-mono text-[var(--color-accent)]">{'https://domain.com/{{MediaArtist}}-{{MediaTitle}}/'}</span>{mediaTokenIntro[1]}
           </p>
           {MEDIA_TOKENS_DOCS.map(item => (
             <div
@@ -463,7 +488,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
             >
               <span className="font-mono font-bold text-[var(--color-accent)]">{item.token}</span>
               <p className="text-[11px] leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                {item.description}
+                {t.configFields[item.description]}
               </p>
             </div>
           ))}
@@ -474,22 +499,21 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
       <Modal
         isOpen={isDiscardConfirmOpen}
         onClose={() => setIsDiscardConfirmOpen(false)}
-        title="Discard Unsaved Changes?"
-        subtitle="Unsaved modifications"
+        title={t.configFields.discard}
+        subtitle={t.configFields.unsaved}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setIsDiscardConfirmOpen(false)}>
-              Keep Editing
+              {t.catalogue.keepEditing}
             </Button>
             <Button size="sm" variant="danger" onClick={onBack}>
-              Discard Changes
+              {t.catalogue.discardChanges}
             </Button>
           </div>
         }
       >
         <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-          You have unsaved changes in your Media Status Fields. Leaving now will revert them to the
-          previous state.
+          {t.configFields.mediaDiscardMessage}
         </p>
       </Modal>
     </div>

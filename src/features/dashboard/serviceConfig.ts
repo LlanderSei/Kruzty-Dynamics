@@ -17,6 +17,7 @@ export function collectPresenceConfig(activeAccountId?: string) {
     appFields: read('kd_app_field_templates'),
     mediaFields: read('kd_media_field_templates'),
     appSettings: read('kd_app_settings'),
+    language: read('kd_app_settings').language || 'English (US)',
     imageLinks: read('kd_presence_image_links'),
     activeAccountId: activeAccountId || '',
   })

@@ -7,6 +7,7 @@
 #include <chrono>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <regex>
 #include <string>
 #include <thread>
@@ -21,6 +22,20 @@ std::atomic<bool> gCallbacksRunning{false};
 std::atomic<bool> gReady{false};
 discordpp::Activity gPendingActivity{};
 bool gHasPendingActivity = false;
+std::optional<discordpp::StatusType> gPendingOnlineStatus;
+
+void setOnlineStatus(discordpp::StatusType status) {
+  if (!gClient || !gReady.load()) return;
+  gClient->SetOnlineStatus(status, [](discordpp::ClientResult result) {
+    if (!result.Successful()) {
+      const auto message = std::string("Online status update failed: type=") +
+        std::to_string(static_cast<int>(result.Type())) +
+        " status=" + std::to_string(static_cast<int>(result.Status())) +
+        " code=" + std::to_string(result.ErrorCode());
+      __android_log_write(ANDROID_LOG_WARN, kTag, message.c_str());
+    }
+  });
+}
 
 std::string safeError(std::string error) {
   static const std::regex tokenPattern(R"((Bearer\s+)?[A-Za-z0-9_-]{32,}\.[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{20,}|mfa\.[A-Za-z0-9_-]{50,})", std::regex::icase);
@@ -47,6 +62,10 @@ void startCallbacks() {
 }
 
 void updatePending() {
+  if (gClient && gReady.load() && gPendingOnlineStatus.has_value()) {
+    setOnlineStatus(*gPendingOnlineStatus);
+    gPendingOnlineStatus.reset();
+  }
   if (gClient && gReady.load() && gHasPendingActivity) {
     gClient->UpdateRichPresence(gPendingActivity, [](discordpp::ClientResult result) {
       if (!result.Successful()) {
@@ -106,9 +125,16 @@ extern "C" JNIEXPORT void JNICALL
 Java_seiraneko_kruztydynamics_DiscordSocialSdkNative_updatePresence(
   JNIEnv* env, jobject, jstring name, jstring details, jstring state,
   jstring largeImage, jstring largeText, jstring smallImage, jstring smallText,
-  jint activityType, jlong startTimestamp, jlong endTimestamp, jobjectArray buttonValues) {
+  jint activityType, jstring supportedPlatform, jlong startTimestamp, jlong endTimestamp, jobjectArray buttonValues) {
   discordpp::Activity activity{};
   activity.SetType(static_cast<discordpp::ActivityTypes>(std::clamp(activityType, 0, 5)));
+  const auto platform = toString(env, supportedPlatform);
+  discordpp::ActivityGamePlatforms platformValue{};
+  if (platform == "Android") platformValue = discordpp::ActivityGamePlatforms::Android;
+  else if (platform == "PC") platformValue = discordpp::ActivityGamePlatforms::Desktop;
+  else if (platform == "PlayStation") platformValue = discordpp::ActivityGamePlatforms::PS5;
+  else if (platform == "Xbox") platformValue = discordpp::ActivityGamePlatforms::Xbox;
+  if (platformValue != discordpp::ActivityGamePlatforms{}) activity.SetSupportedPlatforms(platformValue);
   const auto nameText = toString(env, name);
   const auto detailsText = toString(env, details);
   const auto stateText = toString(env, state);
@@ -151,6 +177,14 @@ Java_seiraneko_kruztydynamics_DiscordSocialSdkNative_updatePresence(
   std::lock_guard<std::mutex> lock(gMutex);
   gPendingActivity = std::move(activity);
   gHasPendingActivity = true;
+  updatePending();
+}
+
+extern "C" JNIEXPORT void JNICALL
+Java_seiraneko_kruztydynamics_DiscordSocialSdkNative_setOnlineStatus(JNIEnv*, jobject, jint status) {
+  std::lock_guard<std::mutex> lock(gMutex);
+  const auto boundedStatus = std::clamp(status, 0, 5);
+  gPendingOnlineStatus = static_cast<discordpp::StatusType>(boundedStatus);
   updatePending();
 }
 

@@ -6,6 +6,7 @@ import { Divider } from '../../components/Divider'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { AppFieldTemplates } from '../../types'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
+import { useTranslation } from '../../i18n/useTranslation'
 
 interface AppStatusFieldConfigProps {
   onBack: () => void
@@ -13,12 +14,12 @@ interface AppStatusFieldConfigProps {
 
 const DEFAULT_APP_FIELDS: AppFieldTemplates = {
   title: '{{AppName}}',
-  line1: '',
-  line2: '',
-  smallText: '',
-  smallImage: '',
+  line1: '{{AppDetails}}',
+  line2: '{{AppState}}',
+  smallText: '{{AppSmallText}}',
+  smallImage: '{{AppSmallUrl}}',
   bigText: '{{AppName}}',
-  bigImage: '{{AppImageLink}}',
+  bigImage: '{{AppImageUrl}}',
 }
 
 const APP_FIELDS_STORAGE_KEY = 'kd_app_field_templates'
@@ -33,12 +34,17 @@ function loadAppFields(): AppFieldTemplates {
 }
 
 const APP_TOKENS_DOCS = [
-  { token: '{{AppName}}', description: 'Original system label of the currently running foreground application.' },
-  { token: '{{AppImageLink}}', description: 'Cached ImgBB remote link of the application icon.' },
-  { token: '{{PackageName}}', description: 'Android package identifier (e.g. com.mojang.minecraftpe).' },
-]
+  { token: '{{AppName}}', description: 'appTokenName' },
+  { token: '{{AppDetails}}', description: 'appTokenDetails' },
+  { token: '{{AppState}}', description: 'appTokenState' },
+  { token: '{{AppSmallText}}', description: 'appTokenSmallText' },
+  { token: '{{AppSmallUrl}}', description: 'appTokenSmallUrl' },
+  { token: '{{AppImageUrl}}', description: 'appTokenImageUrl' },
+  { token: '{{PackageName}}', description: 'appTokenPackageName' },
+] as const
 
 export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBack }) => {
+  const { t } = useTranslation()
   const [fields, setFields] = useState<AppFieldTemplates>(loadAppFields)
   const [initialFields, setInitialFields] = useState<AppFieldTemplates>(loadAppFields)
   const [isHelpOpen, setIsHelpOpen] = useState(false)
@@ -101,14 +107,14 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-base)',
             }}
-            aria-label="Back"
+            aria-label={t.configFields.back}
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-bold truncate">Application Status Field Config</h1>
+            <h1 className="text-sm font-bold truncate">{t.configFields.appTitle}</h1>
             <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-              Customize expressions for app detection
+              {t.configFields.appConfigSubtitle}
             </p>
           </div>
         </div>
@@ -124,8 +130,8 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title="Reset to Defaults"
-            aria-label="Reset Defaults"
+            title={t.configFields.reset}
+            aria-label={t.configFields.reset}
           >
             <RotateCcw className="w-4 h-4" />
           </button>
@@ -139,8 +145,8 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title="Available Tokens Help"
-            aria-label="Help"
+            title={t.configFields.help}
+            aria-label={t.configFields.help}
           >
             <HelpCircle className="w-4 h-4" />
           </button>
@@ -152,7 +158,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
         <div className="max-w-xl w-full mx-auto p-4 space-y-4 pb-28">
           {/* Field 1: Title */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Title</label>
+            <label className="text-xs font-semibold block">{t.configFields.title}</label>
             <textarea
               rows={2}
               value={fields.title}
@@ -170,7 +176,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 2: Line 1 (Details) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Line 1 (Details)</label>
+            <label className="text-xs font-semibold block">{t.configFields.line1}</label>
             <textarea
               rows={2}
               value={fields.line1 || ''}
@@ -188,7 +194,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 3: Line 2 (State) */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Line 2 (State)</label>
+            <label className="text-xs font-semibold block">{t.configFields.line2}</label>
             <textarea
               rows={2}
               value={fields.line2 || ''}
@@ -206,7 +212,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 4: Small Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Small Text</label>
+            <label className="text-xs font-semibold block">{t.configFields.smallText}</label>
             <textarea
               rows={2}
               value={fields.smallText || ''}
@@ -224,7 +230,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 5: Small Image */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Small Image</label>
+            <label className="text-xs font-semibold block">{t.configFields.smallImage}</label>
             <textarea
               rows={2}
               value={fields.smallImage || ''}
@@ -242,7 +248,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 6: Big Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Big Text</label>
+            <label className="text-xs font-semibold block">{t.configFields.bigText}</label>
             <textarea
               rows={2}
               value={fields.bigText || ''}
@@ -260,12 +266,12 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 7: Big Image */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">Big Image</label>
+            <label className="text-xs font-semibold block">{t.configFields.bigImage}</label>
             <textarea
               rows={2}
               value={fields.bigImage || ''}
               onChange={e => handleFieldChange('bigImage', e.target.value)}
-              placeholder="e.g. {{AppImageLink}}"
+              placeholder="e.g. {{AppImageUrl}}"
               className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
               style={{
                 backgroundColor: 'var(--color-bg-surface)',
@@ -287,8 +293,8 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
                 backgroundColor: 'var(--color-accent)',
                 color: '#ffffff',
               }}
-              title="Save Fields"
-              aria-label="Save Fields"
+              title={t.configFields.save}
+              aria-label={t.configFields.save}
             >
               <Check className="w-6 h-6 stroke-[2.5]" />
             </button>
@@ -300,11 +306,11 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
       <Modal
         isOpen={isHelpOpen}
         onClose={() => setIsHelpOpen(false)}
-        title="Application Token Reference"
-        subtitle="Dynamic variables available in field expressions"
+        title={t.configFields.appReference}
+        subtitle={t.configFields.tokenDescription}
         footer={
           <Button size="sm" variant="primary" onClick={() => setIsHelpOpen(false)}>
-            Got it
+            {t.configFields.helpDone}
           </Button>
         }
       >
@@ -320,7 +326,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
             >
               <span className="font-mono font-bold text-[var(--color-accent)]">{item.token}</span>
               <p className="text-[11px] leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                {item.description}
+                {t.configFields[item.description]}
               </p>
             </div>
           ))}
@@ -331,22 +337,21 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
       <Modal
         isOpen={isDiscardConfirmOpen}
         onClose={() => setIsDiscardConfirmOpen(false)}
-        title="Discard Unsaved Changes?"
-        subtitle="Unsaved modifications"
+        title={t.configFields.discard}
+        subtitle={t.configFields.unsaved}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setIsDiscardConfirmOpen(false)}>
-              Keep Editing
+              {t.catalogue.keepEditing}
             </Button>
             <Button size="sm" variant="danger" onClick={onBack}>
-              Discard Changes
+              {t.catalogue.discardChanges}
             </Button>
           </div>
         }
       >
         <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-          You have unsaved changes in your Application Status Fields. Leaving now will revert them to
-          the previous state.
+          {t.configFields.appDiscardMessage}
         </p>
       </Modal>
     </div>

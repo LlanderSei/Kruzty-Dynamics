@@ -18,6 +18,7 @@ import { Copy, Download, Info } from 'lucide-react'
 import { addLog } from './features/accounts/discordAuth'
 import { collectPresenceConfig } from './features/dashboard/serviceConfig'
 import { uploadDetectedImage } from './features/dashboard/detectedImageUpload'
+import { useTranslation } from './i18n/useTranslation'
 
 const ONBOARDING_KEY = 'kd_onboarding_completed'
 
@@ -77,6 +78,7 @@ function ToastViewport() {
 }
 
 function MainShell() {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState<NavTab>('service')
   const [currentSubpage, setCurrentSubpage] = useState<Subpage>(null)
   const [isLogModalOpen, setIsLogModalOpen] = useState(false)
@@ -289,12 +291,12 @@ function MainShell() {
       <Modal
         isOpen={isLogModalOpen}
         onClose={() => setIsLogModalOpen(false)}
-        title="Application Logs"
-        subtitle="Live diagnostics output"
+        title={t.logs.title}
+        subtitle={t.logs.subtitle}
         headerActions={
           <>
-            <button type="button" onClick={() => void copyLogs()} className="p-1.5 rounded-lg" aria-label="Copy logs" title="Copy logs"><Copy className="w-4 h-4" /></button>
-            <button type="button" onClick={exportLogs} className="p-1.5 rounded-lg" aria-label="Export logs" title="Export logs"><Download className="w-4 h-4" /></button>
+            <button type="button" onClick={() => void copyLogs()} className="p-1.5 rounded-lg" aria-label={t.logs.copy} title={t.logs.copy}><Copy className="w-4 h-4" /></button>
+            <button type="button" onClick={exportLogs} className="p-1.5 rounded-lg" aria-label={t.logs.export} title={t.logs.export}><Download className="w-4 h-4" /></button>
           </>
         }
       >
@@ -307,7 +309,7 @@ function MainShell() {
           }}
         >
           {logs.length === 0 ? (
-            <div className="text-zinc-400">[INFO] No logs yet. Open Discord login or perform actions to generate logs.</div>
+            <div className="text-zinc-400">{t.logs.empty}</div>
           ) : (
             logs.map((entry, i) => {
               const color =

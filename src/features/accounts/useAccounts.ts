@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { DiscordAccount } from '../../types'
+import { TRANSLATIONS } from '../../i18n/translations'
 
 const ACCOUNTS_STORAGE_KEY = 'kd_discord_accounts'
 
@@ -25,7 +26,7 @@ export function useAccounts() {
   const addAccount = (account: DiscordAccount) => {
     if (accounts.some(existing => existing.id === account.id)) {
       window.dispatchEvent(new CustomEvent('app-toast', {
-        detail: { message: 'This Discord account is already added.' },
+        detail: { message: TRANSLATIONS.en_US.toast.duplicateAccount },
       }))
       return
     }

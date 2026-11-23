@@ -43,6 +43,18 @@ internal object DiscordSocialPublisher {
           connectedAccountId = accountId
           connectedAccessToken = token
         }
+        val appSettings = config.optJSONObject("appSettings") ?: JSONObject()
+        val status = state.optString("discordStatus")
+          .ifBlank { appSettings.optString("globalActivityStatus", "online") }
+        val statusCode = when (status.lowercase()) {
+          "online" -> 0
+          "offline" -> 1
+          "idle" -> 3
+          "dnd" -> 4
+          "invisible" -> 5
+          else -> -1
+        }
+        if (statusCode >= 0) DiscordSocialSdkNative.setOnlineStatus(statusCode)
         if (!state.optBoolean("active", true) || state.optString("domain") == "idle") {
           DiscordSocialSdkNative.clearPresence()
           return@execute
@@ -62,7 +74,7 @@ internal object DiscordSocialPublisher {
         }
         val packageName = state.optString("packageName")
         val isMedia = state.optString("domain") == "media"
-        val activityName = (if (isMedia) state.optString("appName").ifBlank { state.optString("title") } else state.optString("title")).limitPresenceText()
+        val activityName = (if (isMedia) state.optString("header").ifBlank { state.optString("appName").ifBlank { state.optString("title") } } else state.optString("title")).limitPresenceText()
         val activityDetails = (if (isMedia) state.optString("title") else state.optString("line1")).limitPresenceText()
         val activityState = (if (isMedia) state.optString("line1") else state.optString("line2")).limitPresenceText()
         val largeText = if (isMedia) state.optString("line2").ifBlank { state.optString("bigText") } else state.optString("bigText")
@@ -79,6 +91,7 @@ internal object DiscordSocialPublisher {
           state.optString("smallImage"),
           state.optString("smallText"),
           state.optInt("activityType", 0),
+          state.optString("platform", "Android"),
           start,
           end,
           serializedButtons,

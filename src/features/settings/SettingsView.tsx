@@ -28,22 +28,6 @@ import { useTranslation } from '../../i18n/useTranslation'
 import type { ActivityType, DiscordStatus } from '../../types'
 import appIcon from '../../../src-tauri/icons/icon.png'
 
-const ACTIVITY_TYPE_NAMES: Record<number, string> = {
-  0: 'Playing',
-  1: 'Streaming',
-  2: 'Listening',
-  3: 'Watching',
-  5: 'Competing',
-}
-
-const STATUS_NAMES: Record<string, string> = {
-  online: 'Online',
-  idle: 'Idle',
-  dnd: 'Do Not Disturb',
-  offline: 'Offline',
-  invisible: 'Invisible',
-}
-
 export const SettingsView: React.FC = () => {
   const { theme, setMode, setAccentColor } = useTheme()
   const { t } = useTranslation()
@@ -67,8 +51,8 @@ export const SettingsView: React.FC = () => {
   ].filter(Boolean).length
   const requiredPermissionsGranted = grantedRequiredPermissionCount === 3
   const permissionSummary = requiredPermissionsGranted
-    ? permissions.batteryOptimizationsIgnored ? 'All Granted' : 'Granted'
-    : `${grantedRequiredPermissionCount}/3 • Granted`
+    ? permissions.batteryOptimizationsIgnored ? t.settingsUi.allGranted : t.onboarding.granted
+    : `${grantedRequiredPermissionCount}/3 • ${t.onboarding.granted}`
 
   // Collapsible accordion
   const [isLearnMoreExpanded, setIsLearnMoreExpanded] = useState(false)
@@ -115,7 +99,7 @@ export const SettingsView: React.FC = () => {
 
   const handleConfirmClearCache = (includeCustomIcons: boolean) => {
     clearImageCache(includeCustomIcons)
-    setCacheClearedSuccess(includeCustomIcons ? 'All linked image URLs cleared, including custom app icons.' : 'Linked image URL cache cleared. Custom app icons were kept.')
+    setCacheClearedSuccess(includeCustomIcons ? t.settingsUi.clearedAll : t.settingsUi.clearedKeeping)
     setTimeout(() => {
       setCacheClearedSuccess(null)
       setActiveModal(null)
@@ -154,7 +138,7 @@ export const SettingsView: React.FC = () => {
         {/* 2-col Grid Info */}
         <div className="grid grid-cols-2 gap-2 w-full pt-1 text-xs">
           <div
-            className="py-1.5 px-2 rounded-xl border text-center font-medium"
+            className="min-w-0 flex self-stretch items-center justify-center break-words rounded-xl border px-2 py-1.5 text-center text-xs font-medium leading-tight"
             style={{
               backgroundColor: 'var(--color-bg-elevated)',
               borderColor: 'var(--color-border)',
@@ -164,7 +148,7 @@ export const SettingsView: React.FC = () => {
             Kruzty Dynamics v1.0
           </div>
           <div
-            className="py-1.5 px-2 rounded-xl border text-center font-medium"
+            className="min-w-0 flex self-stretch items-center justify-center break-words rounded-xl border px-2 py-1.5 text-center text-xs font-medium leading-tight"
             onClick={() => openExternal('https://github.com/LlanderSei')}
             role="link"
             tabIndex={0}
@@ -177,13 +161,13 @@ export const SettingsView: React.FC = () => {
               color: 'var(--color-text-base)',
             }}
           >
-            Developed by Seiraneko
+                {t.settingsUi.developedBy} Seiraneko
           </div>
         </div>
 
         {/* Full-width Architecture Description */}
         <p className="text-[11px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-          Built using Rust Core (Tokio + Tauri v2) with React 19 and TailwindCSS Frontend including Native Android Plugin Bridge. Based on the original Kizzy's Experimental RPC.
+          {t.settingsUi.architecture}
         </p>
 
         {/* Expand / Hide Accordion Button */}
@@ -200,7 +184,7 @@ export const SettingsView: React.FC = () => {
           >
             <div className="flex items-center gap-2">
               <Info className="w-3.5 h-3.5" style={{ color: 'var(--color-accent)' }} />
-              <span>Learn More About This App</span>
+              <span>{t.settingsUi.learnMore}</span>
             </div>
             {isLearnMoreExpanded ? (
               <ChevronUp className="w-4 h-4" />
@@ -225,7 +209,7 @@ export const SettingsView: React.FC = () => {
               >
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Privacy Policy</span>
+                  <span>{t.settingsUi.privacyPolicy}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -237,7 +221,7 @@ export const SettingsView: React.FC = () => {
               >
                 <span className="flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Check GitHub Repository</span>
+                  <span>{t.settingsUi.repository}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -249,7 +233,7 @@ export const SettingsView: React.FC = () => {
               >
                 <span className="flex items-center gap-2">
                   <Info className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Go to Latest Release</span>
+                  <span>{t.settingsUi.latestRelease}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -261,7 +245,7 @@ export const SettingsView: React.FC = () => {
               >
                 <span className="flex items-center gap-2">
                   <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Submit an Issue</span>
+                  <span>{t.settingsUi.submitIssue}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -273,10 +257,10 @@ export const SettingsView: React.FC = () => {
               >
                 <span className="flex items-center gap-2">
                   <span className="text-sm">🎖️</span>
-                  <span>Credits</span>
+                  <span>{t.settingsUi.credits}</span>
                 </span>
                 <span className="text-[11px] font-semibold" style={{ color: 'var(--color-accent)' }}>
-                  View
+                  {t.settingsUi.view}
                 </span>
               </button>
             </div>
@@ -325,7 +309,7 @@ export const SettingsView: React.FC = () => {
               style={{ backgroundColor: theme.customAccentColor }}
             />
             <span className="text-xs font-medium capitalize" style={{ color: 'var(--color-text-muted)' }}>
-              {theme.mode}
+              {t.settingsUi[theme.mode]}
             </span>
           </div>
         </div>
@@ -391,9 +375,16 @@ export const SettingsView: React.FC = () => {
             className="flex items-center gap-1.5 shrink-0 text-xs font-medium"
             style={{ color: 'var(--color-text-muted)' }}
           >
-            <span>{ACTIVITY_TYPE_NAMES[settings.globalActivityType]}</span>
+            <span>{[
+              t.catalogue.playing,
+              t.catalogue.streaming,
+              t.catalogue.listening,
+              t.catalogue.watching,
+              '',
+              t.catalogue.competing,
+            ][settings.globalActivityType]}</span>
             <span>•</span>
-            <span className="capitalize">{STATUS_NAMES[settings.globalActivityStatus]}</span>
+            <span>{t.catalogue[settings.globalActivityStatus === 'dnd' ? 'dnd' : settings.globalActivityStatus]}</span>
           </div>
         </div>
 
@@ -536,7 +527,7 @@ export const SettingsView: React.FC = () => {
             </div>
           </div>
           <span className="text-[11px] font-mono px-2 py-0.5 rounded-md border shrink-0 text-zinc-400">
-            {cachedImageCount} cached
+            {cachedImageCount} {t.settingsUi.cached}
           </span>
         </div>
 
@@ -550,12 +541,12 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'theme'}
         onClose={() => setActiveModal(null)}
-        title="Themes and Display"
+        title={t.settings.themes}
       >
         <div className="space-y-4">
           <div className="space-y-1.5">
             <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-              Theme Mode
+              {t.settingsUi.themeMode}
             </label>
             <div className="grid grid-cols-3 gap-2">
               {(['light', 'dark', 'amoled'] as const).map(mode => (
@@ -576,7 +567,7 @@ export const SettingsView: React.FC = () => {
                   }}
                 >
                   {theme.mode === mode && <Check className="w-3.5 h-3.5" />}
-                  <span>{mode}</span>
+                  <span>{t.settingsUi[mode]}</span>
                 </button>
               ))}
             </div>
@@ -585,7 +576,7 @@ export const SettingsView: React.FC = () => {
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-                Accent Color
+                {t.settingsUi.accentColor}
               </label>
               <button
                 type="button"
@@ -593,7 +584,7 @@ export const SettingsView: React.FC = () => {
                 className="text-[11px] cursor-pointer hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                Reset to Default
+                {t.settingsUi.resetAccent}
               </button>
             </div>
             <div className="grid grid-cols-4 gap-2 pt-1">
@@ -647,14 +638,14 @@ export const SettingsView: React.FC = () => {
                 {theme.customAccentColor.toUpperCase()}
               </span>
               <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-                Tap to customize
+                {t.settingsUi.tapCustomize}
               </span>
             </div>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" className="w-full" onClick={() => setActiveModal(null)}>
-              Done
+              {t.settingsUi.done}
             </Button>
           </div>
         </div>
@@ -664,15 +655,15 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'language'}
         onClose={() => setActiveModal(null)}
-        title="Choose Language"
+        title={t.settingsUi.chooseLanguage}
       >
         <div className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            Select your preferred display language for UI labels and notifications.
+            {t.settingsUi.languageDescription}
           </p>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold">Available Languages</label>
+            <label className="text-xs font-semibold">{t.settingsUi.availableLanguages}</label>
             <Select
               value={settings.language}
               onChange={e => {
@@ -682,19 +673,41 @@ export const SettingsView: React.FC = () => {
               options={[
                 { value: 'System Default', label: 'System Default (Recommended)' },
                 { value: 'English (US)', label: 'English (US)' },
+                { value: 'English (Shakespearean)', label: 'English (Shakespearean)' },
+                { value: 'Alien (Zorblaxian)', label: 'Alien (Zorblaxian)' },
+                { value: 'Pirate', label: 'Pirate' },
+                { value: 'Alien (Unknown)', label: 'Alien (Unknown)' },
+                { value: 'UwU', label: 'UwU' },
+                { value: '\u0627\u0644\u0639\u0631\u0628\u064a\u0629', label: '\u0627\u0644\u0639\u0631\u0628\u064a\u0629' },
+                { value: '\u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c', label: '\u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c' },
+                { value: 'Hrvatski', label: 'Hrvatski' },
+                { value: '\u05e2\u05d1\u05e8\u05d9\u05ea', label: '\u05e2\u05d1\u05e8\u05d9\u05ea' },
+                { value: '\u0939\u093f\u0928\u094d\u0926\u0940', label: '\u0939\u093f\u0928\u094d\u0926\u0940' },
+                { value: 'Italiano', label: 'Italiano' },
+                { value: '\u0641\u0627\u0631\u0633\u06cc', label: '\u0641\u0627\u0631\u0633\u06cc' },
+                { value: 'Polski', label: 'Polski' },
+                { value: 'Portugu\u00eas Brasileiro', label: 'Portugu\u00eas Brasileiro' },
+                { value: '\u7e41\u9ad4\u4e2d\u6587', label: '\u7e41\u9ad4\u4e2d\u6587' },
+                { value: 'Ti\u1ebfng Vi\u1ec7t', label: 'Ti\u1ebfng Vi\u1ec7t' },
+                { value: '\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22', label: '\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22' },
                 { value: 'Filipino / Tagalog', label: 'Filipino / Tagalog' },
-                { value: 'Español', label: 'Español' },
-                { value: '日本語 (Japanese)', label: '日本語 (Japanese)' },
+                { value: 'Espa\u00f1ol', label: 'Espa\u00f1ol' },
+                { value: '\u65e5\u672c\u8a9e (Japanese)', label: '\u65e5\u672c\u8a9e (Japanese)' },
                 { value: 'Deutsch', label: 'Deutsch' },
-                { value: 'Français', label: 'Français' },
-                { value: 'Chinese (简体中文)', label: 'Chinese (简体中文)' },
+                { value: 'Fran\u00e7ais', label: 'Fran\u00e7ais' },
+                { value: 'Chinese (\u7b80\u4f53\u4e2d\u6587)', label: 'Chinese (\u7b80\u4f53\u4e2d\u6587)' },
+                { value: 'Bahasa Indonesia', label: 'Bahasa Indonesia' },
+                { value: '\ud55c\uad6d\uc5b4', label: '\ud55c\uad6d\uc5b4' },
+                { value: 'Nederlands', label: 'Nederlands' },
+                { value: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439', label: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439' },
+                { value: 'T\u00fcrk\u00e7e', label: 'T\u00fcrk\u00e7e' },
               ]}
             />
           </div>
 
           <div className="pt-2">
             <Button variant="ghost" className="w-full" onClick={() => setActiveModal(null)}>
-              Close
+              {t.settingsUi.close}
             </Button>
           </div>
         </div>
@@ -704,53 +717,53 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'global-defaults'}
         onClose={() => setActiveModal(null)}
-        title="Global Defaults"
-        subtitle="Default presence configuration for unconfigured apps"
+        title={t.settings.globalDefaults}
+        subtitle={t.settings.globalDefaultsDesc}
       >
         <div className="space-y-4 text-xs">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            These defaults are automatically used when an app or presence activity does not specify its own activity type or status.
+            {t.settingsUi.defaultNote}
           </p>
 
           <div className="space-y-3">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-                Activity Type
+                {t.settingsUi.activityType}
               </label>
               <Select
                 value={settings.globalActivityType}
                 onChange={e => setGlobalActivityType(Number(e.target.value) as ActivityType)}
                 fullWidth={true}
               >
-                <option value={0}>Playing</option>
-                <option value={1}>Streaming</option>
-                <option value={2}>Listening</option>
-                <option value={3}>Watching</option>
-                <option value={5}>Competing</option>
+                <option value={0}>{t.catalogue.playing}</option>
+                <option value={1}>{t.catalogue.streaming}</option>
+                <option value={2}>{t.catalogue.listening}</option>
+                <option value={3}>{t.catalogue.watching}</option>
+                <option value={5}>{t.catalogue.competing}</option>
               </Select>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-                Activity Status
+                {t.settingsUi.activityStatus}
               </label>
               <Select
                 value={settings.globalActivityStatus}
                 onChange={e => setGlobalActivityStatus(e.target.value as DiscordStatus)}
                 fullWidth={true}
               >
-                <option value="online">Online</option>
-                <option value="idle">Idle</option>
-                <option value="dnd">Do Not Disturb</option>
-                <option value="offline">Offline</option>
-                <option value="invisible">Invisible</option>
+                <option value="online">{t.catalogue.online}</option>
+                <option value="idle">{t.catalogue.idle}</option>
+                <option value="dnd">{t.catalogue.dnd}</option>
+                <option value="offline">{t.catalogue.offline}</option>
+                <option value="invisible">{t.catalogue.invisible}</option>
               </Select>
             </div>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" className="w-full" onClick={() => setActiveModal(null)}>
-              Done
+              {t.settingsUi.done}
             </Button>
           </div>
         </div>
@@ -760,12 +773,11 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'imgbb'}
         onClose={() => setActiveModal(null)}
-        title="Set ImgBB API Key"
+        title={t.settings.imgbbKey}
       >
         <form onSubmit={handleSaveImgbb} className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            Set your own ImgBB API Key to upload custom app and media asset images to Discord CDN.
-            Visit{' '}
+            {t.settingsUi.imgbbHelp}{' '}
             <button
               type="button"
               onClick={() => openExternal('https://api.imgbb.com')}
@@ -774,12 +786,12 @@ export const SettingsView: React.FC = () => {
             >
               api.imgbb.com
             </button>{' '}
-            to obtain a key.
+            {t.settingsUi.getApiKey}
           </p>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold">ImgBB API Key</label>
+              <label className="text-xs font-semibold">{t.settings.imgbbKey}</label>
               {settings.customImgbbKey && (
                 <button
                   type="button"
@@ -790,7 +802,7 @@ export const SettingsView: React.FC = () => {
                   className="text-[11px] flex items-center gap-1 text-red-500 cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Reset to Default</span>
+                  <span>{t.configFields.reset}</span>
                 </button>
               )}
             </div>
@@ -803,7 +815,7 @@ export const SettingsView: React.FC = () => {
                 placeholder={
                   settings.customImgbbKey
                     ? '•••••••••••••••• (Custom Key Set)'
-                    : 'Using default system key'
+                    : t.settingsUi.usingDefaultKey
                 }
                 className="w-full px-3 py-2 text-xs rounded-xl border focus:outline-none transition-colors"
                 style={{
@@ -819,7 +831,7 @@ export const SettingsView: React.FC = () => {
                     setTempImgbbKey('')
                     setCustomImgbbKey('')
                   }}
-                  title="Reset to default"
+                  title={t.configFields.reset}
                   className="p-2 rounded-xl border shrink-0 text-zinc-400 hover:text-white"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -828,16 +840,16 @@ export const SettingsView: React.FC = () => {
             </div>
 
             <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              Leaving this field empty resets to the built-in default API key. Custom keys are never exposed in plaintext.
+              {t.settingsUi.apiPrivacy}
             </p>
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="ghost" onClick={() => setActiveModal(null)}>
-              Cancel
+              {t.catalogue.cancel}
             </Button>
             <Button type="submit" variant="primary">
-              Save Key
+              {t.settingsUi.saveKey}
             </Button>
           </div>
         </form>
@@ -847,25 +859,25 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'discord-id'}
         onClose={() => setActiveModal(null)}
-        title="Set Discord Application ID"
+        title={t.settings.discordAppId}
       >
         <form onSubmit={handleSaveDiscordId} className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            Set your own Discord Application ID from the{' '}
+            {t.settingsUi.discordIdHelp}{' '}
             <button
               type="button"
               onClick={() => openExternal('https://discord.com/developers/applications/')}
               className="underline cursor-pointer font-medium"
               style={{ color: 'var(--color-accent)' }}
             >
-              Discord Developer Portal
+              {t.settingsUi.developerPortal}
             </button>
             .
           </p>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold">Discord Application ID</label>
+              <label className="text-xs font-semibold">{t.settings.discordAppId}</label>
               {settings.customDiscordAppId && (
                 <button
                   type="button"
@@ -876,7 +888,7 @@ export const SettingsView: React.FC = () => {
                   className="text-[11px] flex items-center gap-1 text-red-500 cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>Reset to Default</span>
+                  <span>{t.configFields.reset}</span>
                 </button>
               )}
             </div>
@@ -886,7 +898,7 @@ export const SettingsView: React.FC = () => {
                 type="text"
                 value={tempDiscordAppId}
                 onChange={e => setTempDiscordAppId(e.target.value)}
-                placeholder="1572590527562391713 (Default)"
+                placeholder={`1572590527562391713 (${t.settingsUi.idDefault})`}
                 className="w-full px-3 py-2 text-xs rounded-xl border focus:outline-none transition-colors"
                 style={{
                   backgroundColor: 'var(--color-bg-elevated)',
@@ -901,7 +913,7 @@ export const SettingsView: React.FC = () => {
                     setTempDiscordAppId('')
                     setCustomDiscordAppId('')
                   }}
-                  title="Reset to default"
+                  title={t.settingsUi.resetDefault}
                   className="p-2 rounded-xl border shrink-0 text-zinc-400 hover:text-white"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -910,16 +922,16 @@ export const SettingsView: React.FC = () => {
             </div>
 
             <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              Leaving this field empty will reset back to the default Kruzty Dynamics application ID.
+              {t.settingsUi.idPrivacy}
             </p>
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="ghost" onClick={() => setActiveModal(null)}>
-              Cancel
+              {t.settingsUi.cancel}
             </Button>
             <Button type="submit" variant="primary">
-              Save ID
+              {t.settingsUi.saveId}
             </Button>
           </div>
         </form>
@@ -929,11 +941,11 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'permissions'}
         onClose={() => setActiveModal(null)}
-        title="Android System Permissions"
+        title={t.settings.checkPermissions}
       >
         <div className="space-y-3">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            Status of permissions required to read active media notifications and foreground applications:
+            {t.settingsUi.permissionsDescription}
           </p>
 
           <div className="space-y-2">
@@ -946,9 +958,9 @@ export const SettingsView: React.FC = () => {
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">Notification Access</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.notificationTitle}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  Special App Access for media detection
+                  {t.settingsUi.notificationAccessDesc}
                 </p>
               </div>
               <button
@@ -962,7 +974,7 @@ export const SettingsView: React.FC = () => {
                   color: permissions.notificationListener ? '#10b981' : 'var(--color-accent)',
                 }}
               >
-                {permissions.notificationListener ? 'Granted' : 'Grant'}
+                {permissions.notificationListener ? t.onboarding.granted : t.onboarding.grant}
               </button>
             </div>
 
@@ -975,9 +987,9 @@ export const SettingsView: React.FC = () => {
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">Usage Access</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.usageTitle}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  Detect running foreground games & apps
+                  {t.settingsUi.usageAccessDesc}
                 </p>
               </div>
               <button
@@ -991,7 +1003,7 @@ export const SettingsView: React.FC = () => {
                   color: permissions.usageStats ? '#10b981' : 'var(--color-accent)',
                 }}
               >
-                {permissions.usageStats ? 'Granted' : 'Grant'}
+                {permissions.usageStats ? t.onboarding.granted : t.onboarding.grant}
               </button>
             </div>
 
@@ -1004,9 +1016,9 @@ export const SettingsView: React.FC = () => {
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">Battery Optimization</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.batteryTitle}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  Prevents Android from killing presence service
+                  {t.settingsUi.batteryDesc}
                 </p>
               </div>
               <button
@@ -1022,7 +1034,7 @@ export const SettingsView: React.FC = () => {
                     : 'var(--color-accent)',
                 }}
               >
-                {permissions.batteryOptimizationsIgnored ? 'Granted' : 'Grant'}
+                {permissions.batteryOptimizationsIgnored ? t.onboarding.granted : t.onboarding.grant}
               </button>
             </div>
 
@@ -1035,9 +1047,9 @@ export const SettingsView: React.FC = () => {
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">Foreground Service Notification</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.postNotificationTitle}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  Status bar indicator for ongoing Discord presence
+                  {t.settingsUi.foregroundDesc}
                 </p>
               </div>
               <button
@@ -1051,14 +1063,14 @@ export const SettingsView: React.FC = () => {
                   color: permissions.postNotifications ? '#10b981' : 'var(--color-accent)',
                 }}
               >
-                {permissions.postNotifications ? 'Granted' : 'Grant'}
+                {permissions.postNotifications ? t.onboarding.granted : t.onboarding.grant}
               </button>
             </div>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" className="w-full" onClick={() => setActiveModal(null)}>
-              Done
+              {t.appPresence.understood}
             </Button>
           </div>
         </div>
@@ -1068,11 +1080,11 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'clear-cache'}
         onClose={() => setActiveModal(null)}
-        title="Delete Linked Image URLs"
+        title={t.settings.deleteCache}
       >
         <div className="space-y-4">
           <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-            {`There are ${cachedImageCount} linked image URLs, including ${customIconCount} custom app icon overrides. You can clear other cached links while keeping custom icons, or clear all links and remove custom overrides. If you clear custom overrides, choose and upload those icons again in the Application Catalogue to restore them.`}
+            {t.settingsUi.cacheWarning.replace('{total}', String(cachedImageCount)).replace('{custom}', String(customIconCount))}
           </p>
 
           <div
@@ -1082,7 +1094,7 @@ export const SettingsView: React.FC = () => {
               borderColor: 'var(--color-border)',
             }}
           >
-            <span>Linked Image URLs:</span>
+            <span>{t.settingsUi.linkedImageUrls}:</span>
             <span className="font-mono">{cachedImageCount} URLs</span>
           </div>
 
@@ -1094,13 +1106,13 @@ export const SettingsView: React.FC = () => {
           ) : (
             <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-2">
               <Button variant="ghost" onClick={() => setActiveModal(null)}>
-                Cancel
+                {t.settingsUi.cancel}
               </Button>
               <Button variant="outline" onClick={() => handleConfirmClearCache(false)}>
-                Clear Cache, Keep Custom Icons
+                {t.settingsUi.clearCacheKeep}
               </Button>
               <Button variant="danger" onClick={() => handleConfirmClearCache(true)}>
-                Clear All, Including Custom Icons
+                {t.settingsUi.clearCacheAll}
               </Button>
             </div>
           )}
@@ -1111,7 +1123,7 @@ export const SettingsView: React.FC = () => {
       <Modal
         isOpen={activeModal === 'credits'}
         onClose={() => setActiveModal(null)}
-        title="Credits"
+        title={t.settingsUi.credits}
       >
         <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
           {/* Section 1: Kruzty Dynamics Maintainer */}
@@ -1120,7 +1132,7 @@ export const SettingsView: React.FC = () => {
               className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              Kruzty Dynamics
+              {t.settingsUi.developerSection}
             </h5>
             <div
               className="p-3 rounded-xl border flex items-center gap-3"
@@ -1144,7 +1156,7 @@ export const SettingsView: React.FC = () => {
               <div className="min-w-0">
                 <h6 className="text-xs font-bold leading-tight">Seiraneko</h6>
                 <p className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-                  Current Maintainer & Developer
+                  {t.settingsUi.maintainerRole}
                 </p>
               </div>
             </div>
@@ -1156,16 +1168,16 @@ export const SettingsView: React.FC = () => {
               className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              Libraries Used in this App
+              {t.settingsUi.librariesSection}
             </h5>
             <div className="space-y-1 text-xs">
               {[
-                { name: 'Tauri v2', desc: 'Lightweight cross-platform native runtime', url: 'https://v2.tauri.app' },
-                { name: 'Rust Tokio', desc: 'Asynchronous event-driven network runtime', url: 'https://tokio.rs' },
-                { name: 'Discord Social SDK', desc: 'Native Android rich presence integration', url: 'https://discord.com/developers/docs/social-sdk/index.html' },
-                { name: 'React 19', desc: 'Modern user interface component architecture', url: 'https://react.dev' },
-                { name: 'Tailwind CSS v4', desc: 'Utility-first modern responsive styling', url: 'https://tailwindcss.com' },
-                { name: 'Lucide Icons', desc: 'Community crafted clean vector icons', url: 'https://lucide.dev' },
+                { name: 'Tauri v2', desc: t.settingsUi.libraryTauri, url: 'https://v2.tauri.app' },
+                { name: 'Rust Tokio', desc: t.settingsUi.libraryTokio, url: 'https://tokio.rs' },
+                { name: 'Discord Social SDK', desc: t.settingsUi.librarySdk, url: 'https://discord.com/developers/docs/social-sdk/index.html' },
+                { name: 'React 19', desc: t.settingsUi.libraryReact, url: 'https://react.dev' },
+                { name: 'Tailwind CSS v4', desc: t.settingsUi.libraryTailwind, url: 'https://tailwindcss.com' },
+                { name: 'Lucide Icons', desc: t.settingsUi.libraryLucide, url: 'https://lucide.dev' },
               ].map(lib => (
                 <div
                   key={lib.name}
@@ -1194,7 +1206,7 @@ export const SettingsView: React.FC = () => {
               className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              Kizzy Contributors
+              {t.settingsUi.contributorsSection}
             </h5>
             <div
               onClick={() => openExternal('https://github.com/dead8309/Kizzy')}
@@ -1204,7 +1216,7 @@ export const SettingsView: React.FC = () => {
                 borderColor: 'var(--color-border)',
               }}
             >
-              <span className="font-medium">Go to the Kizzy repository</span>
+              <span className="font-medium">{t.settingsUi.repository}</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-60" />
             </div>
 
@@ -1264,7 +1276,7 @@ export const SettingsView: React.FC = () => {
 
           <div className="pt-2">
             <Button variant="ghost" className="w-full" onClick={() => setActiveModal(null)}>
-              Close
+              {t.settingsUi.close}
             </Button>
           </div>
         </div>

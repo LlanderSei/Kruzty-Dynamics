@@ -17,7 +17,7 @@ internal object DiscordSocialAuth {
   private const val OAUTH_PREFS = "kd_discord_social_oauth"
   private const val OAUTH_STATE = "state"
   private const val OAUTH_VERIFIER = "verifier"
-  private const val REDIRECT_URI = "discord-$APPLICATION_ID:/authorize/callback"
+  private const val REDIRECT_URI = "kruzty-dynamics:/authorize/callback"
   private const val TOKEN_URL = "https://discord.com/api/oauth2/token"
   private const val USER_URL = "https://discord.com/api/v10/users/@me"
   private const val SCOPE = "identify openid sdk.social_layer_presence"
@@ -48,7 +48,7 @@ internal object DiscordSocialAuth {
   }
 
   fun isCallback(uri: Uri): Boolean =
-    uri.scheme == "discord-$APPLICATION_ID" && uri.path == "/authorize/callback"
+    uri.scheme == "kruzty-dynamics" && uri.path == "/authorize/callback"
 
   fun handleCallback(
     context: Context,

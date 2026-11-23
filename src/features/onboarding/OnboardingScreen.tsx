@@ -702,8 +702,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_notification' && !permissions.notificationListener}
         onClose={() => setActiveModal(null)}
-        title="Notification Access"
-        subtitle="Special App Access Configuration"
+        title={t.permissions.notificationTitle}
+        subtitle={t.permissions.notificationSubtitle}
         footer={
           <Button
             variant="primary"
@@ -714,7 +714,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            Open Android Settings
+            {t.permissions.openAndroidSettings}
           </Button>
         }
       >
@@ -729,9 +729,9 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           >
             <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
             <div>
-              <p className="font-semibold">Notice for OEM &amp; Android 13+ Devices</p>
+              <p className="font-semibold">{t.permissions.oemNotice}</p>
               <p className="mt-0.5 opacity-90 leading-normal">
-                Android protects notification listener access behind special permission layers. Depending on your phone brand, follow one of the methods below.
+                {t.permissions.notificationExplanation}
               </p>
             </div>
           </div>
@@ -743,12 +743,12 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
             >
               <div className="flex items-center gap-1.5 font-semibold text-amber-400">
-                <span>Method A: Special App Access (Pixel, Motorola, Infinix, Stock)</span>
+                <span>{t.permissions.methodA}</span>
               </div>
               <ol className="list-decimal list-inside space-y-1 pl-1" style={{ color: 'var(--color-text-muted)' }}>
-                <li>Tap <strong>Open Android Settings</strong> below.</li>
-                <li>Go to <strong>Special App Access &gt; Notification Access</strong>.</li>
-                <li>Find <strong>Kruzty Dynamics</strong> and switch on <strong>Allow notification access</strong>.</li>
+                <li>{t.permissions.methodAStep1}</li>
+                <li>{t.permissions.methodAStep2}</li>
+                <li>{t.permissions.methodAStep3}</li>
               </ol>
             </div>
 
@@ -758,21 +758,20 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
             >
               <div className="flex items-center gap-1.5 font-semibold text-amber-400">
-                <span>Method B: App Info &gt; Ellipsis (Xiaomi/HyperOS, Samsung, Oppo)</span>
+                <span>{t.permissions.methodB}</span>
               </div>
               <ol className="list-decimal list-inside space-y-1 pl-1" style={{ color: 'var(--color-text-muted)' }}>
-                <li>Open device Settings &gt; <strong>Apps &gt; Manage Apps / App List</strong>.</li>
-                <li>Find and tap <strong>Kruzty Dynamics</strong>.</li>
+                <li>{t.permissions.methodBStep1}</li>
+                <li>{t.permissions.methodBStep2}</li>
                 <li>Tap the <strong>⋮ (three dots / ellipsis)</strong> at the top-right corner.</li>
-                <li>Tap <strong>Allow restricted settings / Special App Access</strong> &gt; Grant.</li>
-                <li>Return and enable <strong>Notification Access</strong>.</li>
+                <li>{t.permissions.methodBStep4}</li>
+                <li>{t.permissions.methodBStep5}</li>
               </ol>
             </div>
           </div>
 
           <p className="text-[11px] leading-relaxed pt-1" style={{ color: 'var(--color-text-muted)' }}>
-            Notification Access enables Kruzty Dynamics to capture live media session playback events
-            (Song Title, Artist, Album, and Playback State) from Spotify, YouTube Music, and media players.
+            {t.permissions.notificationAccessDescription}
           </p>
         </div>
       </Modal>
@@ -781,8 +780,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_usage' && !permissions.usageStats}
         onClose={() => setActiveModal(null)}
-        title="Usage Access"
-        subtitle="Foreground App Detection"
+        title={t.permissions.usageTitle}
+        subtitle={t.permissions.usageSubtitle}
         footer={
           <Button
             variant="primary"
@@ -793,19 +792,18 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            Open Usage Access
+            {t.permissions.openUsageAccess}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            Usage Access is required to detect which app or game you are currently running in the
-            foreground, so Kruzty Dynamics can match it against your configured Application Catalog.
+            {t.permissions.usageDescription}
           </p>
           <ol className="space-y-1.5 list-decimal list-inside">
-            <li>Tap <strong>Open Usage Access</strong>.</li>
-            <li>Locate <strong>Kruzty Dynamics</strong>.</li>
-            <li>Switch on <strong>Permit usage access</strong>.</li>
+            <li>{t.permissions.usageStep1}</li>
+            <li>{t.permissions.usageStep2}</li>
+            <li>{t.permissions.usageStep3}</li>
           </ol>
         </div>
       </Modal>
@@ -814,8 +812,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_battery' && !permissions.batteryOptimizationsIgnored}
         onClose={() => setActiveModal(null)}
-        title="Battery Optimization"
-        subtitle="Background Service Whitelist"
+        title={t.permissions.batteryTitle}
+        subtitle={t.permissions.batterySubtitle}
         footer={
           <Button
             variant="primary"
@@ -825,15 +823,13 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            Request Exemption
+            {t.permissions.requestExemption}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            Modern Android systems put background processes to sleep after a few minutes.
-            Exempting Kruzty Dynamics from battery optimization ensures continuous, uninterrupted
-            Discord Rich Presence updates.
+            {t.permissions.batteryDescription}
           </p>
         </div>
       </Modal>
@@ -842,8 +838,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_post_notifications' && !permissions.postNotifications}
         onClose={() => setActiveModal(null)}
-        title="Foreground Service Notification"
-        subtitle="Android 13+ Notification Permission"
+        title={t.permissions.foregroundTitle}
+        subtitle={t.permissions.foregroundSubtitle}
         footer={
           <Button
             variant="primary"
@@ -853,14 +849,13 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            Allow Notification
+            {t.permissions.allowNotification}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            Required by Android 13+ to display the ongoing foreground service notification in your
-            status bar, confirming that the Discord presence engine is running.
+            {t.permissions.foregroundDescription}
           </p>
         </div>
       </Modal>
@@ -869,8 +864,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'discord_login'}
         onClose={() => setActiveModal(null)}
-        title="Discord Accounts"
-        subtitle="Manage tokens and identities"
+        title={t.accounts.title}
+        subtitle={t.accounts.subtitle}
       >
         <div className="space-y-4">
           {/* Quick In-App Login Portal Button */}
@@ -883,9 +878,9 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           >
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold block">Discord Login Portal</span>
+                <span className="text-xs font-bold block">{t.accountsPage.portal}</span>
                 <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                  Sign in securely with Discord in-app
+                  {t.accountsPage.signInPortal}
                 </p>
               </div>
               <Button
@@ -894,7 +889,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 icon={<DiscordIcon className="w-3.5 h-3.5" />}
                 onClick={handleOpenLoginPortal}
               >
-                Open Portal
+                {t.accountsPage.openPortal}
               </Button>
             </div>
             <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
@@ -920,7 +915,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           {accounts.length > 0 && (
             <div className="space-y-2">
               <span className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>
-                Connected Accounts ({accounts.length})
+                {t.accountsPage.currentAccount} ({accounts.length})
               </span>
               <div className="space-y-1.5">
                 {accounts.map(acc => (
@@ -942,7 +937,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       <div className="truncate">
                         <div className="font-semibold truncate">{acc.displayName || acc.username}</div>
                         <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                          {acc.isActive ? 'Active Identity' : 'Stored'}
+                          {acc.isActive ? t.accounts.activeIdentity : t.accounts.stored}
                         </div>
                       </div>
                     </div>
@@ -950,7 +945,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       type="button"
                       onClick={() => removeAccount(acc.id)}
                       className="p-1 rounded text-red-400 hover:bg-red-500/10 transition-colors"
-                      title="Remove Account"
+                      title={t.accountsPage.remove}
                     >
                       <LogOut className="w-3.5 h-3.5" />
                     </button>
@@ -974,21 +969,21 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'theme'}
         onClose={() => setActiveModal(null)}
-        title="Theme &amp; Appearance"
-        subtitle="Minimalist styling with customizable accent"
+        title={t.settings.themes}
+        subtitle={t.settings.themesDesc}
       >
         <div className="space-y-5">
           {/* Mode Selector */}
           <div>
             <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--color-text-muted)' }}>
-              Theme Mode
+              {t.settingsUi.themeMode}
             </label>
             <div className="grid grid-cols-3 gap-2">
               {(
                 [
-                  { id: 'dark', label: 'Dark' },
-                  { id: 'light', label: 'Light' },
-                  { id: 'amoled', label: 'AMOLED' },
+                  { id: 'dark', label: t.settingsUi.dark },
+                  { id: 'light', label: t.settingsUi.light },
+                  { id: 'amoled', label: t.settingsUi.amoled },
                 ] as const
               ).map(item => {
                 const isSelected = theme.mode === item.id
@@ -1016,7 +1011,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>
-                Primary Accent Color
+                {t.settingsUi.accentColor}
               </label>
               <button
                 type="button"
@@ -1024,7 +1019,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 className="text-[11px] hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                Reset to Default Orange
+                {t.settingsUi.resetAccent}
               </button>
             </div>
 
@@ -1074,7 +1069,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 className="w-7 h-7 rounded-lg cursor-pointer bg-transparent border-0 p-0 shrink-0"
               />
               <span className="text-xs font-mono font-medium flex-1">{theme.customAccentColor.toUpperCase()}</span>
-              <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>Tap to customize</span>
+              <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{t.settingsUi.tapCustomize}</span>
             </div>
           </div>
         </div>
@@ -1084,19 +1079,41 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'language'}
         onClose={() => setActiveModal(null)}
-        title="Select Language"
-        subtitle="Application interface localization"
+        title={t.settingsUi.chooseLanguage}
+        subtitle={t.settingsUi.languageDescription}
       >
         <div className="space-y-1.5">
           {[
             { id: 'default', label: 'System Default' },
             { id: 'en_US', label: 'English (US)' },
+            { id: 'en_Shakespearean', label: 'English (Shakespearean)' },
+            { id: 'xx_Alien_Zorblaxian', label: 'Alien (Zorblaxian)' },
+            { id: 'xx_Pirate', label: 'Pirate' },
+            { id: 'xx_Alien_Unknown', label: 'Alien (Unknown)' },
+            { id: 'xx_UwU', label: 'UwU' },
+            { id: 'ar_SA', label: '\u0627\u0644\u0639\u0631\u0628\u064a\u0629' },
+            { id: 'my_MM', label: '\u1019\u103c\u1014\u103a\u1019\u102c\u1018\u102c\u101e\u102c' },
+            { id: 'hr_HR', label: 'Hrvatski' },
+            { id: 'he_IL', label: '\u05e2\u05d1\u05e8\u05d9\u05ea' },
+            { id: 'hi_IN', label: '\u0939\u093f\u0928\u094d\u0926\u0940' },
+            { id: 'it_IT', label: 'Italiano' },
+            { id: 'fa_IR', label: '\u0641\u0627\u0631\u0633\u06cc' },
+            { id: 'pl_PL', label: 'Polski' },
+            { id: 'pt_BR', label: 'Portugu\u00eas Brasileiro' },
+            { id: 'zh_TW', label: '\u7e41\u9ad4\u4e2d\u6587' },
+            { id: 'vi_VN', label: 'Ti\u1ebfng Vi\u1ec7t' },
+            { id: 'th_TH', label: '\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22' },
             { id: 'fil_PH', label: 'Filipino / Tagalog' },
-            { id: 'es_ES', label: 'Español' },
-            { id: 'ja_JP', label: '日本語 (Japanese)' },
+            { id: 'es_ES', label: 'Espa\u00f1ol' },
+            { id: 'ja_JP', label: '\u65e5\u672c\u8a9e (Japanese)' },
             { id: 'de_DE', label: 'Deutsch' },
-            { id: 'fr_FR', label: 'Français' },
-            { id: 'zh_CN', label: 'Chinese (简体中文)' },
+            { id: 'fr_FR', label: 'Fran\u00e7ais' },
+            { id: 'zh_CN', label: 'Chinese (\u7b80\u4f53\u4e2d\u6587)' },
+            { id: 'id_ID', label: 'Bahasa Indonesia' },
+            { id: 'ko_KR', label: '\ud55c\uad6d\uc5b4' },
+            { id: 'nl_NL', label: 'Nederlands' },
+            { id: 'ru_RU', label: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439' },
+            { id: 'tr_TR', label: 'T\u00fcrk\u00e7e' },
           ].map(lang => {
             const isSelected = settings.language === lang.label
             return (

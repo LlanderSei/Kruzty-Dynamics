@@ -8,7 +8,7 @@ The Android build enables the JNI rich presence bridge only when this file exist
 
 For the native Authorization Code + PKCE flow, configure the Discord application as a public OAuth2 client and register this redirect URI in the OAuth2 redirect list:
 
-`discord-1572590527562391713:/authorize/callback`
+`kruzty-dynamics:/authorize/callback`
 
 The requested scopes are `identify openid sdk.social_layer_presence`. Access and refresh tokens are stored in an Android Keystore encrypted store and are not passed into the WebView.
 

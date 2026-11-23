@@ -51,23 +51,40 @@ class KruztyDynamicsService : Service() {
     super.onCreate()
     createChannel()
     isRunning = true
+    MainActivity.updateServiceShortcut(this)
     serviceStartedAt = System.currentTimeMillis()
     runCatching {
       config = JSONObject(getSharedPreferences(PREFS, MODE_PRIVATE).getString(EXTRA_CONFIG, "{}") ?: "{}")
     }
     getSharedPreferences(PREFS, MODE_PRIVATE).edit().remove(LAST_STATUS).apply()
-    startForeground(NOTIFICATION_ID, buildNotification(DEFAULT_TITLE, null, null))
+    startForeground(NOTIFICATION_ID, buildNotification(NativeStrings.text(this, "running"), null, null))
     MainActivity.dispatchServiceEvent(
       "dynamicsStatusUpdated",
-      JSONObject().put("domain", "idle").put("title", DEFAULT_TITLE).put("active", false),
+      JSONObject().put("domain", "idle").put("title", NativeStrings.text(this, "running")).put("active", false),
     )
     DiscordSocialPublisher.publish(this, config, JSONObject().put("domain", "idle").put("active", false))
-    emitLog("info", "Service started; local app and media detection enabled")
+    emitLog("info", "Service started; app and media detection enabled")
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     if (intent?.action == ACTION_STOP) {
       stopSelf()
+      return START_NOT_STICKY
+    }
+    if (intent?.action == ACTION_RESTART) {
+      val restartConfig = config.toString()
+      DiscordSocialPublisher.stop()
+      stopSelfResult(startId)
+      Handler(Looper.getMainLooper()).postDelayed({
+        val restartIntent = Intent(applicationContext, KruztyDynamicsService::class.java)
+          .setAction(ACTION_START)
+          .putExtra(EXTRA_CONFIG, restartConfig)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+          applicationContext.startForegroundService(restartIntent)
+        } else {
+          applicationContext.startService(restartIntent)
+        }
+      }, 250L)
       return START_NOT_STICKY
     }
     intent?.getStringExtra(EXTRA_CONFIG)?.let { raw ->
@@ -81,12 +98,17 @@ class KruztyDynamicsService : Service() {
     }
     handler.removeCallbacks(poll)
     handler.post(poll)
+    MainActivity.dispatchServiceEvent("dynamicsServiceStarted", JSONObject())
+    if (intent?.getBooleanExtra(EXTRA_SHOW_SHORTCUT_TOAST, false) == true) {
+      android.widget.Toast.makeText(this, NativeStrings.text(this, "started"), android.widget.Toast.LENGTH_SHORT).show()
+    }
     return START_STICKY
   }
 
   override fun onDestroy() {
     handler.removeCallbacks(poll)
     isRunning = false
+    MainActivity.updateServiceShortcut(this)
     emitLog("info", "Service stopped")
     DiscordSocialPublisher.stop()
     getSharedPreferences(PREFS, MODE_PRIVATE).edit().remove(LAST_STATUS).apply()
@@ -132,7 +154,7 @@ class KruztyDynamicsService : Service() {
       val mediaSessionEnded = previous?.optString("domain") == "media"
       if (previouslyDisabledApp || mediaSessionEnded) {
         val outsidePolicy = (config.optJSONObject("appConfig") ?: JSONObject()).optString("outsidePolicy", "freeze")
-        val idleState = if (outsidePolicy == "custom") resolveOutside() else JSONObject().put("domain", "idle").put("title", DEFAULT_TITLE).put("active", false)
+        val idleState = if (outsidePolicy == "custom") resolveOutside() else JSONObject().put("domain", "idle").put("title", NativeStrings.text(this, "running")).put("active", false)
         publishState(idleState)
       }
       return
@@ -178,12 +200,14 @@ class KruztyDynamicsService : Service() {
       state.optString("line1"), state.optString("line2"), state.optString("playbackState"),
       state.optString("sessionStartedAt"), state.optString("activityType"), state.optString("iconUrl"),
       state.optString("smallImage"), state.optString("bigText"), state.optString("appName"),
+      state.optString("header"),
+      state.optString("discordStatus"), state.optString("platform"),
       state.optString("mediaType"), state.optString("buttons"),
       config.optString("activeAccountId"),
     ).joinToString("|")
     if (fingerprint == lastFingerprint) return
     lastFingerprint = fingerprint
-    val title = state.optString("title").ifBlank { DEFAULT_TITLE }
+    val title = state.optString("title").ifBlank { NativeStrings.text(this, "running") }
     val lines = listOf(state.optString("line1"), state.optString("line2")).filter { it.isNotBlank() }
     val content = lines.joinToString(" • ").ifBlank { null }
     val iconUrl = state.optString("iconUrl")
@@ -371,17 +395,29 @@ class KruztyDynamicsService : Service() {
     }
     val fields = config.optJSONObject("appFields") ?: JSONObject()
     val appSettings = config.optJSONObject("appSettings") ?: JSONObject()
+    val customDetailsEnabled = profile.optBoolean("customDetailsEnabled")
+    val customSmallEnabled = profile.optBoolean("customSmallEnabled")
     val values = JSONObject().put("AppName", projectedName).put("OriginalAppName", appName).put("ProjectedName", projectedName)
-      .put("PackageName", packageName).put("AppImageLink", icon)
+      .put("PackageName", packageName).put("AppImageUrl", icon)
+      .put("AppDetails", if (customDetailsEnabled) profile.optString("customDetails") else "")
+      .put("AppState", if (customDetailsEnabled) profile.optString("customState") else "")
+      .put("AppSmallText", if (customSmallEnabled) profile.optString("customSmallText") else "")
+      .put("AppSmallUrl", if (customSmallEnabled) profile.optString("customSmallUrl") else "")
     val activityType = resolveActivityType(profile.optString("activityType", "global"), appSettings.optInt("globalActivityType", 0))
-    val bigImage = render(fields.optString("bigImage", "{{AppImageLink}}"), values).ifBlank { icon }
+    val discordStatus = profile.optString("activityStatus", "global")
+      .takeUnless { it == "global" }
+      ?: appSettings.optString("globalActivityStatus", "online")
+    val platform = profile.optString("platform").ifBlank { "Android" }
+    val bigImage = render(fields.optString("bigImage", "{{AppImageUrl}}"), values).ifBlank { icon }
     return JSONObject().put("domain", "app").put("packageName", packageName)
       .put("title", render(fields.optString("title", "{{AppName}}"), values).ifBlank { projectedName })
-      .put("line1", render(fields.optString("line1"), values))
-      .put("line2", render(fields.optString("line2"), values))
+      .put("line1", render(fields.optString("line1", "{{AppDetails}}"), values))
+      .put("line2", render(fields.optString("line2", "{{AppState}}"), values))
       .put("activityType", activityType)
-      .put("smallText", render(fields.optString("smallText"), values))
-      .put("smallImage", render(fields.optString("smallImage"), values))
+      .put("discordStatus", discordStatus)
+      .put("platform", platform)
+      .put("smallText", render(fields.optString("smallText", "{{AppSmallText}}"), values))
+      .put("smallImage", render(fields.optString("smallImage", "{{AppSmallUrl}}"), values))
       .put("bigText", render(fields.optString("bigText"), values))
       .put("bigImage", bigImage)
       .put("iconUrl", bigImage)
@@ -395,25 +431,31 @@ class KruztyDynamicsService : Service() {
       imageLink("app", media.packageName).ifBlank { media.packageName }
     } ?: imageLink("app", media.packageName).ifBlank { media.packageName }
     val mediaImage = imageLink("media", media.packageName)
-    val values = JSONObject().put("AppName", appName).put("AppImageLink", icon)
+    val values = JSONObject().put("AppName", appName).put("AppImageUrl", icon)
       .put("PackageName", media.packageName).put("MediaTitle", media.title.ifBlank { appName })
       .put("MediaArtist", media.artist).put("MediaAlbum", media.album)
-      .put("MediaImageLink", mediaImage)
+      .put("MediaImageUrl", mediaImage)
       .put("MediaDescription", media.description).put("PlaybackState", media.state)
-      .put("PlaybackStateImageLink", if (media.state == "Playing") "mediaplay" else "mediapause")
+      .put("PlaybackStateImageUrl", if (media.state == "Playing") "mediaplay" else "mediapause")
+    val header = render(fields.optString("header", "{{AppName}}"), values).ifBlank { appName }
     val title = render(fields.optString("title", "{{MediaTitle ?? AppName}}"), values).ifBlank { media.title.ifBlank { appName } }
     val appSettings = config.optJSONObject("appSettings") ?: JSONObject()
+    val discordStatus = profile?.optString("activityStatus", "global")
+      ?.takeUnless { it == "global" }
+      ?: appSettings.optString("globalActivityStatus", "online")
+    val platform = profile?.optString("platform")?.ifBlank { "Android" } ?: "Android"
     val mediaSettings = config.optJSONObject("mediaConfig") ?: JSONObject()
     val activityType = if (mediaSettings.optString("activityTypeMode", "auto-adaptive") == "app-profile-override" && profile != null) {
       resolveActivityType(profile.optString("activityType", "global"), appSettings.optInt("globalActivityType", 0))
     } else if (media.mediaType == "video") 3 else 2
-    val bigImage = render(fields.optString("bigImage", "{{HasMediaImage ?? MediaImageLink : AppImageLink}}"), values).ifBlank { icon }
+    val bigImage = render(fields.optString("bigImage", "{{HasMediaImage ?? MediaImageUrl : AppImageUrl}}"), values).ifBlank { icon }
     return JSONObject().put("domain", "media").put("packageName", media.packageName)
-      .put("title", title).put("appName", appName)
+      .put("title", title).put("appName", appName).put("header", header)
+      .put("discordStatus", discordStatus).put("platform", platform)
       .put("line1", render(fields.optString("line1", "{{MediaArtist ?? MediaDescription}}"), values))
       .put("line2", render(fields.optString("line2", "{{MediaAlbum ?? MediaDescription}}"), values)).put("iconUrl", bigImage)
       .put("activityType", activityType).put("smallText", render(fields.optString("smallText", "{{PlaybackState}}"), values))
-      .put("smallImage", render(fields.optString("smallImage", "{{HasDetectablePlaybackState ?? PlaybackStateImageLink : AppImageLink}}"), values))
+      .put("smallImage", render(fields.optString("smallImage", "{{HasDetectablePlaybackState ?? PlaybackStateImageUrl : AppImageUrl}}"), values))
       .put("bigText", render(fields.optString("bigText", "{{MediaAlbum}}"), values)).put("bigImage", bigImage)
       .put("mediaPlaying", media.state == "Playing").put("playbackState", media.state).put("mediaType", media.mediaType)
       .put("mediaPositionMs", media.positionMs).put("mediaDurationMs", media.durationMs)
@@ -427,12 +469,13 @@ class KruztyDynamicsService : Service() {
     val appConfig = config.optJSONObject("appConfig") ?: JSONObject()
     val policy = appConfig.optString("outsidePolicy", "freeze")
     if (policy == "freeze" && lastFingerprint.isNotBlank()) return JSONObject()
-    if (policy == "drop") return JSONObject().put("domain", "idle").put("title", DEFAULT_TITLE)
+    if (policy == "drop") return JSONObject().put("domain", "idle").put("title", NativeStrings.text(this, "running"))
     val fields = appConfig
     val title = fields.optString("customName", fields.optString("name", "Chilling on Phone"))
     val appSettings = config.optJSONObject("appSettings") ?: JSONObject()
     val bigImage = fields.optString("customBigImage").ifBlank { fields.optString("largeImage", "kruztydynamicsicon") }
     return JSONObject().put("domain", "custom-fallback").put("title", title)
+      .put("discordStatus", appSettings.optString("globalActivityStatus", "online"))
       .put("line1", fields.optString("customDetails", fields.optString("details", "")))
       .put("line2", fields.optString("customState", fields.optString("state", "")))
       .put("activityType", appSettings.optInt("globalActivityType", 0))
@@ -543,13 +586,16 @@ class KruztyDynamicsService : Service() {
     }
     val stopIntent = Intent(this, KruztyDynamicsService::class.java).setAction(ACTION_STOP)
     val stopPending = android.app.PendingIntent.getService(this, 1, stopIntent, android.app.PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag())
+    val restartIntent = Intent(this, KruztyDynamicsService::class.java).setAction(ACTION_RESTART)
+    val restartPending = android.app.PendingIntent.getService(this, 2, restartIntent, android.app.PendingIntent.FLAG_UPDATE_CURRENT or immutableFlag())
     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
       .setSmallIcon(R.mipmap.ic_launcher)
       .setContentTitle(title)
       .setOngoing(true)
       .setOnlyAlertOnce(true)
       .setPriority(NotificationCompat.PRIORITY_LOW)
-      .addAction(0, "Stop", stopPending)
+      .addAction(0, NativeStrings.text(this, "restart"), restartPending)
+      .addAction(0, NativeStrings.text(this, "stop"), stopPending)
     if (contentIntent != null) builder.setContentIntent(contentIntent)
     if (!content.isNullOrBlank()) builder.setContentText(content)
     if (largeIcon != null) builder.setLargeIcon(largeIcon)
@@ -560,7 +606,7 @@ class KruztyDynamicsService : Service() {
 
   private fun createChannel() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      val channel = NotificationChannel(CHANNEL_ID, "Kruzty Dynamics Service", NotificationManager.IMPORTANCE_LOW)
+      val channel = NotificationChannel(CHANNEL_ID, NativeStrings.text(this, "channel"), NotificationManager.IMPORTANCE_LOW)
       getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
     }
   }
@@ -572,12 +618,13 @@ class KruztyDynamicsService : Service() {
   companion object {
     const val ACTION_START = "seiraneko.kruztydynamics.START"
     const val ACTION_STOP = "seiraneko.kruztydynamics.STOP"
+    const val ACTION_RESTART = "seiraneko.kruztydynamics.RESTART"
     const val EXTRA_CONFIG = "config"
+    const val EXTRA_SHOW_SHORTCUT_TOAST = "show_shortcut_toast"
     private const val CHANNEL_ID = "kruzty_dynamics_presence"
     private const val PREFS = "kd_presence_runtime"
     const val LAST_STATUS = "last_status"
     private const val NOTIFICATION_ID = 4201
-    private const val DEFAULT_TITLE = "Kruzty Dynamics Service is running"
     private const val POLL_INTERVAL_MS = 1800L
     private const val PAUSED_SESSION_MAX_AGE_MS = 90_000L
     @Volatile var isRunning = false

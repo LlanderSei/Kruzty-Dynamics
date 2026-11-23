@@ -15,6 +15,7 @@ import type { OutsideAppBehavior, AppTimestampMode } from '../../types'
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import { useAppSettings } from '../settings/useAppSettings'
+import { useTranslation } from '../../i18n/useTranslation'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 
 const APP_CONFIG_STORAGE_KEY = 'kd_app_presence_config'
@@ -65,6 +66,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
   onNavigateToCatalogue,
   onNavigateToStatusFields,
 }) => {
+  const { t } = useTranslation()
   const [initialConfig] = useState(loadAppConfig)
   const [outsidePolicy, setOutsidePolicy] = useState<OutsideAppBehavior>(initialConfig.outsidePolicy)
   const [timestampStrategy, setTimestampStrategy] = useState<AppTimestampMode>(initialConfig.timestampStrategy)
@@ -161,14 +163,14 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-base)',
           }}
-          aria-label="Back"
+          aria-label={t.configFields.back}
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-bold truncate">Application Presence Configuration</h1>
+          <h1 className="text-sm font-bold truncate">{t.appPresence.title}</h1>
           <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-            Outside app policy and timestamp behavior
+            {t.appPresence.subtitle}
           </p>
         </div>
       </header>
@@ -186,9 +188,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">Application Catalogue</span>
+              <span className="text-xs font-bold block">{t.appPresence.catalogue}</span>
               <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                View, filter, and customize individual app projections
+                {t.appPresence.catalogueDesc}
               </p>
             </div>
             <div className="p-1.5 rounded-xl border" style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}>
@@ -206,9 +208,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">Outside Detected App Policies</span>
+                <span className="text-xs font-bold block">{t.appPresence.outsidePolicies}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  Behavior when you leave or switch away from enabled apps
+                  {t.appPresence.outsideDescription}
                 </p>
               </div>
 
@@ -217,7 +219,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 onClick={() => setHelpModal('policy')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title="Policy Help"
+                title={t.appPresence.policyHelp}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -228,9 +230,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
               onChange={e => setOutsidePolicy(e.target.value as OutsideAppBehavior)}
               fullWidth={true}
             >
-              <option value="freeze">Freeze (Default)</option>
-              <option value="custom">Custom Fallback</option>
-              <option value="drop">Drop (Clear presence)</option>
+              <option value="freeze">{t.appPresence.freeze}</option>
+              <option value="custom">{t.appPresence.customFallback}</option>
+              <option value="drop">{t.appPresence.drop}</option>
             </Select>
 
             {/* If Custom is selected: Expands custom fallback fields */}
@@ -243,12 +245,12 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 }}
               >
                 <span className="text-[11px] font-semibold block text-[var(--color-accent)]">
-                  Custom Fallback Presence
+                  {t.appPresence.fallbackPresence}
                 </span>
 
                 <div>
                   <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                    Activity Name
+                    {t.appPresence.activityName}
                   </label>
                   <input
                     type="text"
@@ -265,7 +267,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
 
                 <div>
                   <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                    Details
+                    {t.appPresence.details}
                   </label>
                   <input
                     type="text"
@@ -282,7 +284,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
 
                 <div>
                   <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                    State
+                    {t.appPresence.state}
                   </label>
                   <input
                     type="text"
@@ -298,8 +300,8 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 </div>
 
                 {([
-                  ['Small Text', customSmallText, setCustomSmallText],
-                  ['Big Text', customBigText, setCustomBigText],
+                  [t.appPresence.smallText, customSmallText, setCustomSmallText],
+                  [t.appPresence.bigText, customBigText, setCustomBigText],
                 ] as const).map(([label, value, setter]) => (
                   <div key={label}>
                     <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>{label}</label>
@@ -308,21 +310,21 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 ))}
 
                 {([
-                  ['Small Image', customSmallImage, setCustomSmallImage, 'small'],
-                  ['Big Image', customBigImage, setCustomBigImage, 'big'],
+                  [t.appPresence.smallImage, customSmallImage, setCustomSmallImage, 'small'],
+                  [t.appPresence.bigImage, customBigImage, setCustomBigImage, 'big'],
                 ] as const).map(([label, value, setter, kind]) => (
                   <div key={label}>
                     <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>{label}</label>
                     <div className="flex gap-2">
-                      <input type="url" value={value} onChange={event => setter(event.target.value)} className="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} placeholder="Image URL" />
-                      <label className="p-2 rounded-lg border cursor-pointer" title={`Upload ${label}`} style={{ borderColor: 'var(--color-border)' }}>
+                    <input type="url" value={value} onChange={event => setter(event.target.value)} className="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} placeholder={t.appPresence.imageUrl} />
+                      <label className="p-2 rounded-lg border cursor-pointer" title={`${t.appPresence.uploadImage} ${label}`} style={{ borderColor: 'var(--color-border)' }}>
                         {uploadingImage === kind ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
                         <input type="file" accept="image/*" className="hidden" disabled={uploadingImage !== null} onChange={event => { const file = event.target.files?.[0]; if (file) void uploadFallbackImage(kind, file); event.currentTarget.value = '' }} />
                       </label>
                     </div>
                   </div>
                 ))}
-                {uploadingImage && <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>Uploading {uploadingImage} image… {uploadProgress}%</div>}
+                {uploadingImage && <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>{t.appPresence.uploadingImage} {uploadProgress}%</div>}
               </div>
             )}
           </div>
@@ -337,9 +339,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">Timestamp Strategy</span>
+                <span className="text-xs font-bold block">{t.appPresence.timestampStrategy}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  How activity timers are resolved across app sessions
+                  {t.appPresence.timestampDescription}
                 </p>
               </div>
 
@@ -348,7 +350,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 onClick={() => setHelpModal('timestamp')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title="Timestamp Help"
+                title={t.appPresence.timestampHelp}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -359,9 +361,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
               onChange={e => setTimestampStrategy(e.target.value as AppTimestampMode)}
               fullWidth={true}
             >
-              <option value="persistent">Persistent (Default)</option>
-              <option value="reset">Reset on Launch</option>
-              <option value="custom">Custom Fixed Time</option>
+              <option value="persistent">{t.appPresence.persistent}</option>
+              <option value="reset">{t.appPresence.resetOnLaunch}</option>
+              <option value="custom">{t.appPresence.customFixedTime}</option>
             </Select>
 
             {/* If Custom is selected: Expands DateTime picker */}
@@ -376,7 +378,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-[var(--color-accent)]" />
                   <span className="text-[11px] font-semibold text-[var(--color-accent)]">
-                    Fixed Start Timestamp
+                    {t.appPresence.fixedStart}
                   </span>
                 </div>
                 <input
@@ -404,9 +406,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">Status Field Configuration</span>
+              <span className="text-xs font-bold block">{t.appPresence.statusFieldConfig}</span>
               <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                Customize Title, Line 1, Line 2, and artwork expressions
+                {t.appPresence.statusFieldDescription}
               </p>
             </div>
             <div className="p-1.5 rounded-xl border" style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}>
@@ -420,11 +422,11 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
       <Modal
         isOpen={Boolean(helpModal)}
         onClose={() => setHelpModal(null)}
-        title={helpModal === 'policy' ? 'Outside App Policies' : 'Timestamp Strategies'}
-        subtitle="Configuration details"
+        title={helpModal === 'policy' ? t.appPresence.outsideHelpTitle : t.appPresence.timestampHelpTitle}
+        subtitle={t.appPresence.configurationDetails}
         footer={
           <Button size="sm" variant="primary" onClick={() => setHelpModal(null)}>
-            Understood
+            {t.appPresence.understood}
           </Button>
         }
       >
@@ -432,28 +434,25 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           {helpModal === 'policy' ? (
             <>
               <p>
-                <strong>Freeze (Default):</strong> Pauses and preserves the last projected presence state
-                without dropping the socket or clearing your presence.
+                <strong>{t.appPresence.freeze}:</strong> {t.appPresence.freezeHelp}
               </p>
               <p>
-                <strong>Custom:</strong> Immediately projects your customized fallback presence card (e.g.
-                &quot;Browsing Phone&quot;).
+                <strong>{t.appPresence.customFallback}:</strong> {t.appPresence.customHelp}
               </p>
               <p>
-                <strong>Drop:</strong> Clears your Discord activity card until you return to an enabled application.
+                <strong>{t.appPresence.drop}:</strong> {t.appPresence.dropHelp}
               </p>
             </>
           ) : (
             <>
               <p>
-                <strong>Persistent (Default):</strong> Uses one shared runtime timestamp for apps and paused media
-                throughout the current service session. It resets when the service restarts.
+                <strong>{t.appPresence.persistent}:</strong> {t.appPresence.persistentHelp}
               </p>
               <p>
-                <strong>Reset:</strong> Restarts the timer at 00:00 every time you launch or refocus the application.
+                <strong>{t.appPresence.resetOnLaunch}:</strong> {t.appPresence.resetHelp}
               </p>
               <p>
-                <strong>Custom:</strong> Locks the presence timer to a specific fixed start date &amp; time.
+                <strong>{t.appPresence.customFixedTime}:</strong> {t.appPresence.fixedHelp}
               </p>
             </>
           )}

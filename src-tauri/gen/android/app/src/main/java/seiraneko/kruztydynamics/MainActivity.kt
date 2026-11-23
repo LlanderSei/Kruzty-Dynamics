@@ -7,9 +7,12 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -62,6 +65,7 @@ class MainActivity : TauriActivity() {
     backCallback = callback
     onBackPressedDispatcher.addCallback(this, callback)
     current = this
+    updateServiceShortcut(this)
     runCatching {
       Class.forName("com.discord.socialsdk.DiscordSocialSdkInit")
         .getMethod("setEngineActivity", android.app.Activity::class.java)
@@ -123,6 +127,23 @@ class MainActivity : TauriActivity() {
     }
 
     private const val LOG_EXPORT_REQUEST = 2207
+    fun updateServiceShortcut(context: Context) {
+      if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) return
+      val manager = context.getSystemService(ShortcutManager::class.java) ?: return
+      val running = KruztyDynamicsService.isRunning
+      val shortcut = ShortcutInfo.Builder(context, "kd_service_toggle")
+        .setShortLabel(NativeStrings.text(context, if (running) "stopShort" else "startShort"))
+        .setLongLabel(NativeStrings.text(context, if (running) "stopLong" else "startLong"))
+        .setIcon(Icon.createWithResource(context, if (running) R.drawable.kd_service_stop else R.drawable.kd_service_start))
+        .setIntent(Intent(context, ServiceShortcutActivity::class.java)
+          .setAction(ServiceShortcutActivity.ACTION_TOGGLE))
+        .build()
+      if (manager.dynamicShortcuts.any { it.id == shortcut.id }) {
+        manager.updateShortcuts(listOf(shortcut))
+      } else {
+        manager.setDynamicShortcuts(listOf(shortcut))
+      }
+    }
   }
 
   override fun onWebViewCreate(webView: WebView) {
@@ -176,6 +197,8 @@ class MainActivity : TauriActivity() {
   class AndroidNativeBridge(private val activity: MainActivity) {
     @JavascriptInterface
     fun startPresenceService(config: String) {
+      activity.getSharedPreferences("kd_presence_runtime", Context.MODE_PRIVATE)
+        .edit().putString(KruztyDynamicsService.EXTRA_CONFIG, config).apply()
       val intent = Intent(activity, KruztyDynamicsService::class.java).apply {
         action = KruztyDynamicsService.ACTION_START
         putExtra(KruztyDynamicsService.EXTRA_CONFIG, config)

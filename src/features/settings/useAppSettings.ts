@@ -6,6 +6,7 @@ const IMAGE_CACHE_KEY = 'kd_asset_cache'
 const IMAGE_LINKS_KEY = 'kd_presence_image_links'
 const APP_PROFILES_KEY = 'kd_app_profiles'
 const IMAGE_CACHE_UPDATED_EVENT = 'kd-image-cache-updated'
+const APP_SETTINGS_UPDATED_EVENT = 'kd-app-settings-updated'
 
 interface ImageCacheSummary {
   total: number
@@ -75,42 +76,66 @@ export function useAppSettings() {
 
   const [imageCacheSummary, setImageCacheSummary] = useState<ImageCacheSummary>(readImageCacheSummary)
 
+  const updateSettings = (updater: (previous: AppSettings) => AppSettings) => {
+    const next = updater(settings)
+    setSettings(next)
+    try {
+      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(next))
+    } catch {
+      // Storage unavailable
+    }
+    window.dispatchEvent(new CustomEvent<AppSettings>(APP_SETTINGS_UPDATED_EVENT, { detail: next }))
+  }
+
   useEffect(() => {
     const refresh = () => setImageCacheSummary(readImageCacheSummary())
+    const refreshSettings = (event?: Event) => {
+      const detail = event instanceof CustomEvent ? event.detail as AppSettings | undefined : undefined
+      if (detail) {
+        setSettings(detail)
+        return
+      }
+      try {
+        const saved = localStorage.getItem(SETTINGS_STORAGE_KEY)
+        if (saved) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(saved) })
+      } catch {
+        // Ignore invalid or unavailable storage.
+      }
+    }
     window.addEventListener(IMAGE_CACHE_UPDATED_EVENT, refresh)
     window.addEventListener('storage', refresh)
+    window.addEventListener(APP_SETTINGS_UPDATED_EVENT, refreshSettings)
+    window.addEventListener('storage', refreshSettings)
     return () => {
       window.removeEventListener(IMAGE_CACHE_UPDATED_EVENT, refresh)
       window.removeEventListener('storage', refresh)
+      window.removeEventListener(APP_SETTINGS_UPDATED_EVENT, refreshSettings)
+      window.removeEventListener('storage', refreshSettings)
     }
   }, [])
 
   useEffect(() => {
-    try {
-      localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings))
-    } catch {
-      // Storage unavailable
-    }
-  }, [settings])
+    window.dispatchEvent(new Event('kd-presence-config-changed'))
+  }, [settings.globalActivityStatus])
 
   const setLanguage = (language: string) => {
-    setSettings(prev => ({ ...prev, language }))
+    updateSettings(prev => ({ ...prev, language }))
   }
 
   const setCustomImgbbKey = (customImgbbKey: string) => {
-    setSettings(prev => ({ ...prev, customImgbbKey: customImgbbKey.trim() }))
+    updateSettings(prev => ({ ...prev, customImgbbKey: customImgbbKey.trim() }))
   }
 
   const setCustomDiscordAppId = (customDiscordAppId: string) => {
-    setSettings(prev => ({ ...prev, customDiscordAppId: customDiscordAppId.trim() }))
+    updateSettings(prev => ({ ...prev, customDiscordAppId: customDiscordAppId.trim() }))
   }
 
   const setGlobalActivityType = (globalActivityType: ActivityType) => {
-    setSettings(prev => ({ ...prev, globalActivityType }))
+    updateSettings(prev => ({ ...prev, globalActivityType }))
   }
 
   const setGlobalActivityStatus = (globalActivityStatus: DiscordStatus) => {
-    setSettings(prev => ({ ...prev, globalActivityStatus }))
+    updateSettings(prev => ({ ...prev, globalActivityStatus }))
   }
 
   const clearImageCache = (includeCustomIcons = false) => {

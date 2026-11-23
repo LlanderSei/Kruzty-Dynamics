@@ -1,35 +1,98 @@
-name: Build Debug Apk
+name: Android Debug APK
 
-on: 
+on:
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
-    name: Build Apk
+    name: Build arm64 debug APK
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.5.0
-        with:
-          access_token: ${{ github.token }}
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v3
-
-      - name: Setup jdk-17
-        uses: actions/setup-java@main
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          java-version: 17
-          distribution: 'adopt'
+          node-version: 22
+          cache: npm
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
           cache: gradle
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
 
-      - name: Assemble Debug
-        run: ./gradlew assembleDebug
+      - name: Install Android SDK components
+        run: |
+          sdkmanager --install \
+            "platforms;android-37" \
+            "build-tools;37.0.0" \
+            "ndk;30.0.16248370" \
+            "cmake;3.22.1"
+          echo "NDK_HOME=$ANDROID_HOME/ndk/30.0.16248370" >> "$GITHUB_ENV"
 
-      - name: Upload APK
+      - name: Set up Rust Android target
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
+      - name: Fetch Rust dependencies
+        run: cargo fetch --locked --manifest-path src-tauri/Cargo.toml
+
+      - name: Configure Tauri Android Gradle path
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          import pathlib
+          import re
+          import subprocess
+
+          metadata = json.loads(subprocess.check_output([
+              "cargo", "metadata", "--format-version", "1", "--locked",
+              "--manifest-path", "src-tauri/Cargo.toml",
+          ], text=True))
+          tauri = next(
+              package for package in metadata["packages"]
+              if package["name"] == "tauri" and package["source"]
+          )
+          tauri_android = pathlib.Path(tauri["manifest_path"]).parent / "mobile" / "android"
+          settings = pathlib.Path("src-tauri/gen/android/tauri.settings.gradle")
+          contents, replacements = re.subn(
+              r"(?m)^project\(':tauri-android'\)\.projectDir = new File\(.*\)$",
+              f"project(':tauri-android').projectDir = new File(\"{tauri_android.as_posix()}\")",
+              settings.read_text(encoding="utf-8"),
+          )
+          if replacements != 1:
+              raise SystemExit(f"Expected one Tauri Android path in {settings}, found {replacements}")
+          settings.write_text(contents, encoding="utf-8")
+          PY
+
+      - name: Build arm64 debug APK
+        working-directory: src-tauri/gen/android
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleArm64Debug
+
+      - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: apk-debug
-          path: app/build/outputs/apk/debug/**.apk
+          name: kruzty-dynamics-android-arm64-debug
+          path: src-tauri/gen/android/app/build/outputs/apk/arm64/debug/*.apk
+          if-no-files-found: error
+          retention-days: 14

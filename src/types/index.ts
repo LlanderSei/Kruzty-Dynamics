@@ -73,6 +73,7 @@ export interface AppFieldTemplates {
 }
 
 export interface MediaFieldTemplates {
+  header?: string
   title: string
   line1?: string
   line2?: string
@@ -107,6 +108,12 @@ export interface AppProfile {
   systemLabel: string
   projectedName: string
   iconOverride?: string
+  customDetailsEnabled?: boolean
+  customDetails?: string
+  customState?: string
+  customSmallEnabled?: boolean
+  customSmallText?: string
+  customSmallUrl?: string
   activityType: AppActivityTypeSelection
   activityStatus?: AppStatusSelection
   platform?: string

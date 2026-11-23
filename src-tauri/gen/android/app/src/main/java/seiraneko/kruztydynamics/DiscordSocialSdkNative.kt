@@ -16,10 +16,12 @@ internal object DiscordSocialSdkNative {
     smallImage: String,
     smallText: String,
     activityType: Int,
+    supportedPlatform: String,
     startTimestamp: Long,
     endTimestamp: Long,
     buttons: Array<String>,
   )
+  external fun setOnlineStatus(status: Int)
   external fun clearPresence()
   external fun disconnect()
 }

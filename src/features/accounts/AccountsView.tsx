@@ -15,6 +15,7 @@ import { Button } from '../../components/Button'
 import { fetchDiscordUserProfile, buildDiscordOAuthUrl, addLog } from './discordAuth'
 import { DiscordIcon } from '../../components/DiscordIcon'
 import { openExternalUrl } from '../../utils/externalLinks'
+import { useTranslation } from '../../i18n/useTranslation'
 
 interface AccountsViewProps {
   accounts: DiscordAccount[]
@@ -33,6 +34,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
   onSetActiveAccount,
   onUnuseAccount,
 }) => {
+  const { t } = useTranslation()
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [loginError, setLoginError] = useState('')
   const [accountToDelete, setAccountToDelete] = useState<DiscordAccount | null>(null)
@@ -45,14 +47,16 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
       if (!account?.id) return
       if (accounts.some(existing => existing.id === account.id)) {
         window.dispatchEvent(new CustomEvent('app-toast', {
-          detail: { message: `Presence link saved for ${account.displayName || account.username}.` },
+          detail: { message: t.toast.duplicateAccount },
         }))
-      } else {
-        onAddAccount({ ...account, socialSdkLinked: true, isActive: accounts.length === 0 })
-        window.dispatchEvent(new CustomEvent('app-toast', {
-          detail: { message: `Discord account linked: ${account.displayName || account.username}.` },
-        }))
+        setIsLoginModalOpen(false)
+        setLoginError('')
+        return
       }
+      onAddAccount({ ...account, socialSdkLinked: true, isActive: accounts.length === 0 })
+      window.dispatchEvent(new CustomEvent('app-toast', {
+        detail: { message: `Discord account linked: ${account.displayName || account.username}.` },
+      }))
       window.dispatchEvent(new CustomEvent('kd-presence-config-changed', {
         detail: { activeAccountId: accounts.length === 0 ? account.id : activeAccount?.id || undefined },
       }))
@@ -100,7 +104,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
       window.removeEventListener('discordSocialLoginError', handleSocialLoginError)
       window.removeEventListener('discordTokenCaptured', handleCaptured)
     }
-  }, [accounts, onAddAccount])
+  }, [accounts, onAddAccount, t.toast.duplicateAccount])
 
   const inactiveAccounts = accounts.filter(a => !a.isActive)
 
@@ -170,9 +174,9 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-base font-semibold">No account logged in yet.</h3>
+            <h3 className="text-base font-semibold">{t.accountsPage.emptyTitle}</h3>
             <p className="text-xs max-w-xs" style={{ color: 'var(--color-text-muted)' }}>
-              Connect your Discord account to begin projecting Rich Presence statuses for games, apps, and media.
+              {t.accountsPage.emptyDescription}
             </p>
           </div>
 
@@ -183,7 +187,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
             style={{ backgroundColor: 'var(--color-accent)' }}
           >
             <DiscordIcon className="w-4 h-4 fill-white" />
-            <span>Login Discord</span>
+            <span>{t.accountsPage.login}</span>
           </button>
         </div>
       )}
@@ -198,12 +202,12 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 className="text-[11px] font-bold uppercase tracking-wider"
                 style={{ color: 'var(--color-text-muted)' }}
               >
-                Current Logged In Account
+                {t.accountsPage.currentAccount}
               </span>
               {activeAccount && (
                 <span className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-500">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  Active Presence
+                  {t.accountsPage.activePresence}
                 </span>
               )}
             </div>
@@ -249,8 +253,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                     <button
                       type="button"
                       onClick={onUnuseAccount}
-                      title="Unuse / Drop from active presence"
-                      aria-label="Unuse Account"
+                      title={t.accountsPage.unuse}
+                      aria-label={t.accountsPage.unuse}
                       className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer hover:border-amber-500/50 hover:text-amber-500 active:scale-95"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -259,14 +263,14 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                       }}
                     >
                       <LogOut className="w-3.5 h-3.5" />
-                      <span>Unuse</span>
+                      <span>{t.accountsPage.unuse}</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setAccountToDelete(activeAccount)}
-                      title="Logout account"
-                      aria-label="Logout Account"
+                      title={t.accounts.remove}
+                      aria-label={t.accounts.remove}
                       className="p-1.5 rounded-xl border transition-all cursor-pointer hover:border-red-500/50 hover:text-red-500 active:scale-95"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -289,7 +293,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
               >
                 <UserCheck className="w-5 h-5 mx-auto opacity-50" />
                 <p className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                  No selected account. Choose one of the logged in accounts below.
+                {t.accountsPage.noActiveAccount}
                 </p>
               </div>
             )}
@@ -302,7 +306,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 className="text-[11px] font-bold uppercase tracking-wider"
                 style={{ color: 'var(--color-text-muted)' }}
               >
-                Accounts List ({inactiveAccounts.length})
+                {t.accountsPage.storedAccounts} ({inactiveAccounts.length})
               </span>
             </div>
 
@@ -315,7 +319,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 }}
               >
                 <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                  You can add more accounts by clicking the Discord button below.
+                  {t.accounts.addAccount}
                 </p>
               </div>
             ) : (
@@ -357,8 +361,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                       <button
                         type="button"
                         onClick={() => onSetActiveAccount(account.id)}
-                        title="Switch / Activate presence"
-                        aria-label="Switch Account"
+                        title={t.accountsPage.switch}
+                        aria-label={t.accountsPage.switch}
                         className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer hover:border-[var(--color-accent)] active:scale-95"
                         style={{
                           backgroundColor: 'var(--color-bg-elevated)',
@@ -367,14 +371,14 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                         }}
                       >
                         <ArrowLeftRight className="w-3.5 h-3.5" />
-                        <span>Switch</span>
+                        <span>{t.accountsPage.switch}</span>
                       </button>
 
                       <button
                         type="button"
                         onClick={() => setAccountToDelete(account)}
-                        title="Logout account"
-                        aria-label="Logout Account"
+                        title={t.accounts.remove}
+                        aria-label={t.accounts.remove}
                         className="p-1.5 rounded-xl border transition-all cursor-pointer hover:border-red-500/50 hover:text-red-500 active:scale-95"
                         style={{
                           backgroundColor: 'var(--color-bg-elevated)',
@@ -400,8 +404,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           onClick={() => setIsLoginModalOpen(true)}
           className="fixed right-5 bottom-20 z-30 p-3.5 rounded-full text-white shadow-xl flex items-center justify-center cursor-pointer transition-transform hover:scale-105 active:scale-95"
           style={{ backgroundColor: 'var(--color-accent)' }}
-          title="Add Discord Account"
-          aria-label="Add Discord Account"
+          title={t.accountsPage.addAccount}
+          aria-label={t.accountsPage.addAccount}
         >
           <div className="relative">
             <DiscordIcon className="w-5 h-5 fill-white" />
@@ -417,7 +421,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           setIsLoginModalOpen(false)
           setLoginError('')
         }}
-        title="Connect Discord Account"
+          title={t.accountsPage.addAccountTitle}
       >
         <div className="space-y-4">
           {/* Quick In-App Login Portal Card */}
@@ -430,9 +434,9 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           >
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold block">Discord Login Portal</span>
+                <span className="text-xs font-bold block">{t.accountsPage.portal}</span>
                 <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                  Sign in directly via the in-app Discord portal
+                  {t.accountsPage.signInPortal}
                 </p>
               </div>
               <Button
@@ -441,13 +445,13 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 icon={<DiscordIcon className="w-3.5 h-3.5" />}
                 onClick={handleOpenLoginPortal}
               >
-                Open Portal
+                {t.accountsPage.openPortal}
               </Button>
             </div>
             <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
               <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
               <p>
-                Discord's Social SDK authorization includes broader social capabilities with Rich Presence. Kruzty Dynamics currently uses it to identify your account and publish or clear your configured activity; it does not call the SDK's friend, block, invite, message, or voice APIs. On Android, tokens are encrypted and stored on this device. Read the{' '}
+                {t.accountsPage.privacyText}{' '}
                 <a
                   href="https://github.com/LlanderSei/Kruzty-Dynamics/blob/master/PRIVACY.md"
                   onClick={event => {
@@ -456,9 +460,9 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                   }}
                   className="text-[var(--color-accent)] underline"
                 >
-                  Privacy Policy
+                  {t.settingsUi.privacyPolicy}
                 </a>.
-                {' '}You can revoke authorization anytime in Discord User Settings → Authorized Apps.
+                {' '}{t.accountsPage.revokeText}
               </p>
             </div>
           </div>
@@ -466,7 +470,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           {isValidatingToken && (
             <p className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
               <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              Verifying your Discord account…
+              {t.accountsPage.verifying}
             </p>
           )}
           {loginError && <p className="text-xs text-red-400">{loginError}</p>}
@@ -477,23 +481,23 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
       <Modal
         isOpen={Boolean(accountToDelete)}
         onClose={() => setAccountToDelete(null)}
-        title="Logout Account"
+        title={t.accountsPage.logoutTitle}
       >
         <div className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            Are you sure you want to remove account{' '}
+            {t.accountsPage.removePrefix}{' '}
             <strong style={{ color: 'var(--color-text-base)' }}>
               @{accountToDelete?.username}
             </strong>
-            ? This will remove saved credentials from this device.
+            {t.accountsPage.removeSuffix}
           </p>
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="ghost" onClick={() => setAccountToDelete(null)}>
-              Cancel
+              {t.catalogue.cancel}
             </Button>
             <Button variant="danger" onClick={confirmDelete}>
-              Confirm Logout
+              {t.accountsPage.confirmLogout}
             </Button>
           </div>
         </div>

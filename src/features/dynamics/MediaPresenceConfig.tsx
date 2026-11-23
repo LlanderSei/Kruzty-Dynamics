@@ -12,6 +12,7 @@ import type {
   PausedMediaResolution,
 } from '../../types'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
+import { useTranslation } from '../../i18n/useTranslation'
 
 interface MediaPresenceConfigProps {
   onBack: () => void
@@ -24,6 +25,7 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
   onBack,
   onNavigateToStatusFields,
 }) => {
+  const { t } = useTranslation()
   const [priorityMode, setPriorityMode] = useState<PriorityMode>(() => {
     try {
       const saved = localStorage.getItem(MEDIA_CONFIG_STORAGE_KEY)
@@ -113,14 +115,14 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-base)',
           }}
-          aria-label="Back"
+          aria-label={t.configFields.back}
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-bold truncate">Media Presence Configuration</h1>
+          <h1 className="text-sm font-bold truncate">{t.mediaPresence.title}</h1>
           <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-            Resolution priorities, timestamps, and playback states
+            {t.mediaPresence.subtitle}
           </p>
         </div>
       </header>
@@ -138,9 +140,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">Media Priority</span>
+                <span className="text-xs font-bold block">{t.mediaPresence.priority}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  Controls whether media overrides gaming/app sessions
+                  {t.mediaPresence.priorityDesc}
                 </p>
               </div>
 
@@ -149,8 +151,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
                 onClick={() => setHelpModal('priority')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title="Priority Help"
-                aria-label="Media Priority Help"
+                title={t.mediaPresence.priorityHelp}
+                aria-label={t.mediaPresence.priorityHelp}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -161,8 +163,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setPriorityMode(e.target.value as PriorityMode)}
               fullWidth={true}
             >
-              <option value="priority-media">Priority Playing Media (Default)</option>
-              <option value="switches-between">Switches Between</option>
+              <option value="priority-media">{t.mediaPresence.priorityPlaying}</option>
+              <option value="switches-between">{t.mediaPresence.switchesBetween}</option>
             </Select>
           </div>
 
@@ -175,9 +177,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div>
-              <span className="text-xs font-bold block">Media Detection Scope</span>
+              <span className="text-xs font-bold block">{t.mediaPresence.scope}</span>
               <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                Filter which apps trigger media rich presence
+                {t.mediaPresence.scopeDesc}
               </p>
             </div>
 
@@ -186,8 +188,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setMediaScope(e.target.value as MediaDetectionScope)}
               fullWidth={true}
             >
-              <option value="all">All Media Sessions (Default)</option>
-              <option value="enabled-only">Only Enabled Apps</option>
+              <option value="all">{t.mediaPresence.allSessions}</option>
+              <option value="enabled-only">{t.mediaPresence.enabledAppsOnly}</option>
             </Select>
           </div>
 
@@ -200,9 +202,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div>
-              <span className="text-xs font-bold block">Media Type Resolution</span>
+              <span className="text-xs font-bold block">{t.mediaPresence.typeResolution}</span>
               <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                How listening vs watching activities are classified
+                {t.mediaPresence.typeResolutionDesc}
               </p>
             </div>
 
@@ -211,8 +213,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setActivityTypeMode(e.target.value as MediaActivityTypeMode)}
               fullWidth={true}
             >
-              <option value="auto-adaptive">Auto-Adaptive (Default)</option>
-              <option value="app-profile-override">App Profile Override</option>
+              <option value="auto-adaptive">{t.mediaPresence.autoAdaptive}</option>
+              <option value="app-profile-override">{t.mediaPresence.profileOverride}</option>
             </Select>
           </div>
 
@@ -225,11 +227,11 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">Time Remaining</span>
+              <span className="text-xs font-bold block">{t.mediaPresence.timeRemaining}</span>
               <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
                 {timeRemaining
-                  ? 'Shows the usual start/current-end time remaining'
-                  : "Uses the app's timestamp instead"}
+                  ? t.mediaPresence.timeRemainingDesc
+                  : t.mediaPresence.appTimestamp}
               </p>
             </div>
 
@@ -237,7 +239,7 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               <Switch
                 checked={timeRemaining}
                 onChange={setTimeRemaining}
-                aria-label="Toggle Time Remaining"
+                aria-label={t.mediaPresence.timeRemaining}
               />
             </div>
           </div>
@@ -252,9 +254,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">Paused Media Resolution</span>
+                <span className="text-xs font-bold block">{t.mediaPresence.pausedResolution}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  Presence behavior when active playback is paused
+                  {t.mediaPresence.pausedDesc}
                 </p>
               </div>
 
@@ -263,8 +265,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
                 onClick={() => setHelpModal('paused')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title="Paused Resolution Help"
-                aria-label="Paused Media Resolution Help"
+                title={t.mediaPresence.pausedHelp}
+                aria-label={t.mediaPresence.pausedHelp}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -275,9 +277,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setPausedResolution(e.target.value as PausedMediaResolution)}
               fullWidth={true}
             >
-              <option value="show-paused">Show Paused State (Default)</option>
-              <option value="fallback-app">Fallback to Detected App</option>
-              <option value="hide-status">Hide Paused State</option>
+              <option value="show-paused">{t.mediaPresence.showPaused}</option>
+              <option value="fallback-app">{t.mediaPresence.fallbackApp}</option>
+              <option value="hide-status">{t.mediaPresence.hidePaused}</option>
             </Select>
           </div>
 
@@ -291,9 +293,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">Media Status Field Configuration</span>
+              <span className="text-xs font-bold block">{t.mediaPresence.statusFields}</span>
               <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                Customize Title, Artist, Album, and artwork fallback expressions
+                {t.mediaPresence.statusFieldsDesc}
               </p>
             </div>
             <div className="p-1.5 rounded-xl border" style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}>
@@ -307,24 +309,20 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
       <Modal
         isOpen={helpModal === 'priority'}
         onClose={() => setHelpModal(null)}
-        title="Media Priority Strategy"
-        subtitle="Resolution logic between gaming and media sessions"
+        title={t.mediaPresence.priorityStrategy}
+        subtitle={t.mediaPresence.priorityStrategyDesc}
         footer={
           <Button size="sm" variant="primary" onClick={() => setHelpModal(null)}>
-            Understood
+            {t.appPresence.understood}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            <strong>Priority Playing Media (Default):</strong> When media is actively playing (e.g. Spotify,
-            YouTube Music), it takes immediate precedence over whatever app you are running, projecting
-            your current track or video.
+            <strong>{t.mediaPresence.priorityPlaying}:</strong> {t.mediaPresence.priorityHelpText}
           </p>
           <p>
-            <strong>Switches Between:</strong> Projects media presence only while you are actively inside
-            the media player application. When you switch to a game or another enabled app, the game presence
-            takes over.
+            <strong>{t.mediaPresence.switchesBetween}:</strong> {t.mediaPresence.switchHelpText}
           </p>
         </div>
       </Modal>
@@ -333,23 +331,23 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
       <Modal
         isOpen={helpModal === 'paused'}
         onClose={() => setHelpModal(null)}
-        title="Paused Media Resolution"
-        subtitle="Options when active playback is paused"
+        title={t.mediaPresence.pausedResolution}
+        subtitle={t.mediaPresence.pausedOptions}
         footer={
           <Button size="sm" variant="primary" onClick={() => setHelpModal(null)}>
-            Understood
+            {t.appPresence.understood}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            <strong>Show Paused State (Default):</strong> Shows the paused state on your Discord profile, keeping the media presence active with paused indicators.
+            <strong>{t.mediaPresence.showPaused}:</strong> {t.mediaPresence.showPausedHelp}
           </p>
           <p>
-            <strong>Fallback to Detected App:</strong> Falls back to your previously or currently detected app or custom fallback presence (if any) while media is paused.
+            <strong>{t.mediaPresence.fallbackApp}:</strong> {t.mediaPresence.fallbackHelp}
           </p>
           <p>
-            <strong>Hide Paused State:</strong> Hides your presence status completely while media is paused, including any background detected app.
+            <strong>{t.mediaPresence.hidePaused}:</strong> {t.mediaPresence.hidePausedHelp}
           </p>
         </div>
       </Modal>

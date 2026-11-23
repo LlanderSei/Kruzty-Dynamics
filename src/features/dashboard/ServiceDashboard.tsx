@@ -19,6 +19,7 @@ import { Modal } from '../../components/Modal'
 import { Button } from '../../components/Button'
 import { usePermissions } from '../permissions/usePermissions'
 import { collectPresenceConfig } from './serviceConfig'
+import { useTranslation } from '../../i18n/useTranslation'
 
 const SERVICE_STATE_STORAGE_KEY = 'kd_presence_service_enabled'
 
@@ -32,6 +33,7 @@ interface ServiceDashboardProps {
   status?: {
     active?: boolean
     title?: string
+    header?: string
     line1?: string
     line2?: string
     domain?: string
@@ -63,6 +65,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
   onNavigateToMediaPresenceConfig,
   status,
 }) => {
+  const { t } = useTranslation()
   const { permissions, requestPermission } = usePermissions()
   const [showPermissionsModal, setShowPermissionsModal] = useState(false)
   const [isServiceEnabled, setIsServiceEnabled] = useState(() => {
@@ -85,9 +88,14 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
   }, [])
 
   useEffect(() => {
+    const onStarted = () => setIsServiceEnabled(true)
     const onStopped = () => setIsServiceEnabled(false)
+    window.addEventListener('dynamicsServiceStarted', onStarted)
     window.addEventListener('dynamicsServiceStopped', onStopped)
-    return () => window.removeEventListener('dynamicsServiceStopped', onStopped)
+    return () => {
+      window.removeEventListener('dynamicsServiceStarted', onStarted)
+      window.removeEventListener('dynamicsServiceStopped', onStopped)
+    }
   }, [])
 
   useEffect(() => {
@@ -123,25 +131,25 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
       }
       setIsServiceEnabled(nextState)
     } catch {
-      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: 'Could not start the Android presence service.' } }))
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: t.permissions.serviceStartError } }))
     }
   }
 
   const missingPermissions = [
     {
       key: 'usageStats' as const,
-      label: 'Usage Access',
-      description: 'Required to detect which app is currently in the foreground.',
+      label: t.permissions.usageTitle,
+      description: t.permissions.usageGuardDescription,
     },
     {
       key: 'notificationListener' as const,
-      label: 'Notification Access',
-      description: 'Required to detect media playback and its metadata.',
+      label: t.permissions.notificationTitle,
+      description: t.permissions.notificationGuardDescription,
     },
     {
       key: 'postNotifications' as const,
-      label: 'Foreground Service Notifications',
-      description: 'Allows Android to show the service notification while it runs.',
+      label: t.permissions.foregroundGuardTitle,
+      description: t.permissions.foregroundGuardDescription,
     },
   ].filter(permission => !permissions[permission.key])
 
@@ -209,7 +217,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
       >
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h2 className="text-sm font-bold tracking-tight">Kruzty Dynamics Service</h2>
+            <h2 className="text-sm font-bold tracking-tight">{t.service.title}</h2>
             {isServiceEnabled && (
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             )}
@@ -220,7 +228,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
               color: isServiceEnabled ? '#22c55e' : 'var(--color-text-muted)',
             }}
           >
-            {isServiceEnabled ? 'Service is enabled locally.' : 'Service not started.'}
+            {isServiceEnabled ? t.service.running : t.service.stopped}
           </p>
         </div>
 
@@ -244,9 +252,9 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
           }}
         >
           <div className="flex-1 min-w-0 pr-2">
-            <h3 className="text-xs font-bold tracking-tight">Application Presence</h3>
+            <h3 className="text-xs font-bold tracking-tight">{t.service.applicationPresence}</h3>
             <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-              Configure app profiles for local presence detection
+              {t.service.appDescription}
             </p>
           </div>
 
@@ -261,8 +269,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title="Application Catalogue"
-              aria-label="Application Catalogue"
+              title={t.service.applicationCatalogue}
+              aria-label={t.service.applicationCatalogue}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
@@ -276,8 +284,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title="Status Field Config"
-              aria-label="Status Field Config"
+              title={t.service.statusFieldConfig}
+              aria-label={t.service.statusFieldConfig}
             >
               <FileEdit className="w-4 h-4" />
             </button>
@@ -291,8 +299,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title="Presence Configuration"
-              aria-label="Presence Configuration"
+              title={t.service.presenceConfiguration}
+              aria-label={t.service.presenceConfiguration}
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>
@@ -308,9 +316,9 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
           }}
         >
           <div className="flex-1 min-w-0 pr-2">
-            <h3 className="text-xs font-bold tracking-tight">Media Presence</h3>
+            <h3 className="text-xs font-bold tracking-tight">{t.service.mediaPresence}</h3>
             <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-              Configure media behavior and status templates
+              {t.service.mediaDescription}
             </p>
           </div>
 
@@ -325,8 +333,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title="Status Field Config"
-              aria-label="Status Field Config"
+              title={t.service.statusFieldConfig}
+              aria-label={t.service.statusFieldConfig}
             >
               <FileEdit className="w-4 h-4" />
             </button>
@@ -340,8 +348,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title="Presence Configuration"
-              aria-label="Presence Configuration"
+              title={t.service.presenceConfiguration}
+              aria-label={t.service.presenceConfiguration}
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>
@@ -369,7 +377,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
               <PowerOff className="w-5 h-5" />
             </div>
             <p className="text-xs max-w-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-              Service is stopped. Turn it on to detect enabled apps and active media.
+              {t.service.stoppedDescription}
             </p>
           </div>
         ) : (
@@ -377,7 +385,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
             <div className="mb-3 flex items-center justify-between text-xs" style={{ color: 'var(--color-text-muted)' }}>
               <span>{hasActivity
                 ? status?.domain === 'media'
-                  ? `${mediaHeader} ${status.appName || 'Media'}`
+                  ? `${mediaHeader} ${status.header || status.appName || 'Media'}`
                   : activityTypeLabels[status?.activityType ?? 0] || 'Playing'
                 : 'Activity Preview'}</span>
               <Ellipsis className="h-4 w-4" />
@@ -439,7 +447,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
             ) : (
               <div className="flex items-center gap-3 py-1 text-sm" style={{ color: 'var(--color-text-muted)' }}>
                 <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: 'var(--color-bg-elevated)' }}><Radio className="h-7 w-7" /></div>
-                <span>No configured app or active media detected.</span>
+                <span>{t.service.noPresence}</span>
               </div>
             )}
           </div>
@@ -449,11 +457,11 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
       <Modal
         isOpen={showPermissionsModal}
         onClose={() => setShowPermissionsModal(false)}
-        title="Permissions required"
-        subtitle="Grant these Android permissions before starting the service."
+        title={t.permissions.requiredTitle}
+        subtitle={t.permissions.requiredSubtitle}
         footer={
-          <Button size="sm" variant="outline" onClick={() => setShowPermissionsModal(false)}>
-            Done
+              <Button size="sm" variant="outline" onClick={() => setShowPermissionsModal(false)}>
+            {t.permissions.done}
           </Button>
         }
       >
@@ -464,7 +472,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
               style={{ borderColor: 'var(--color-border)' }}
             >
               <ShieldCheck className="h-4 w-4 shrink-0" />
-              All required permissions are granted. Turn on the service to continue.
+              {t.permissions.allGranted}
             </div>
           ) : (
             missingPermissions.map(permission => (
@@ -480,13 +488,13 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                   </p>
                 </div>
                 <Button size="sm" onClick={() => requestPermission(permission.key)}>
-                  Grant
+                  {t.permissions.grant}
                 </Button>
               </div>
             ))
           )}
           <p className="text-[10px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-            After granting access in Android Settings, return here and enable the service.
+            {t.permissions.returnHint}
           </p>
         </div>
       </Modal>

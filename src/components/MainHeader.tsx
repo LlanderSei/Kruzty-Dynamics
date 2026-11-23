@@ -22,19 +22,20 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
   const { t } = useTranslation()
 
   // Title & Subtext based on active tab
-  let title = 'Welcome!'
-  let subtext = 'Kruzty Dynamics Dashboard'
+  let title = t.header.welcome
+  let subtext = t.header.dashboardSubtitle
 
   if (activeTab === 'service') {
     const name = activeAccount?.displayName || activeAccount?.username
-    title = name ? `Welcome, ${name}!` : 'Welcome!'
-    subtext = 'Kruzty Dynamics Dashboard'
+    title = name ? t.header.welcomeNamed.replace('{name}', name) : t.header.welcome
+    subtext = t.header.dashboardSubtitle
   } else if (activeTab === 'accounts') {
     title = t.accounts.title
     subtext =
       accountCount === 0
         ? t.accounts.noAccounts
-        : `${accountCount} ${accountCount === 1 ? 'account' : 'accounts'} logged in.`
+      : (accountCount === 1 ? t.header.accountsLoggedInOne : t.header.accountsLoggedInMany)
+        .replace('{n}', String(accountCount))
   } else if (activeTab === 'settings') {
     title = t.settings.title
     subtext = t.settings.subtitle
@@ -74,8 +75,8 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-muted)',
           }}
-          title="Live Logs"
-          aria-label="View Logs"
+          title={t.header.liveLogs}
+          aria-label={t.header.viewLogs}
         >
           <ScrollText className="w-4 h-4" />
         </button>
