@@ -41,8 +41,8 @@
     </tr>
     <tr>
       <td><img src="assets/github/readme/images/screenshots/Screenshot_20261124-213951.jpg" width="160" alt="Rich Presence on Discord" /></td>
-      <td><img src="assets/github/readme/images/screenshots/Discord_11-24-2026 09-21-59-304-PM.png" width="160" alt="Discord Preview" /></td>
       <td><img src="assets/github/readme/images/screenshots/26-11-24_21-31-07-633.jpg" width="160" alt="Notification Preview" /></td>
+      <td><img src="assets/github/readme/images/screenshots/Discord_11-24-2026 09-21-59-304-PM.png" width="160" alt="Discord Preview" /></td>
       <td></td>
       <td></td>
     </tr>
