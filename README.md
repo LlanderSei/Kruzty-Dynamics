@@ -100,7 +100,6 @@
 - **Discord OAuth / Social SDK login** — full PKCE authorization flow with encrypted token storage (AES-GCM + Android Keystore)
 - **In-app Discord login portal** — opens a WebView portal for seamless sign-in without leaving the app
 - **Multiple account support** — add, switch between, and remove Discord accounts
-- Manual token entry with server-side validation fallback
 
 ### ⚙️ Settings & Personalization
 - **Themes**: Light, Dark, and AMOLED modes
