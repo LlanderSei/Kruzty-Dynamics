@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/github/readme/images/hero.png" alt="Kruzty Dynamics" width="180" />
+  <img src="assets/github/readme/images/hero.png" alt="Kruzty Dynamics" width="1080" />
 
   <h1>Kruzty Dynamics</h1>
 
