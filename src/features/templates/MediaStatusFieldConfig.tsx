@@ -6,6 +6,7 @@ import { Divider } from '../../components/Divider'
 import { Switch } from '../../components/Switch'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { MediaFieldTemplates } from '../../types'
+import { DEFAULT_MEDIA_FIELDS, normalizeMediaFieldTemplates } from './fieldTemplates'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 import { useTranslation } from '../../i18n/useTranslation'
 
@@ -14,22 +15,6 @@ interface MediaStatusFieldConfigProps {
 }
 
 const MEDIA_FIELDS_STORAGE_KEY = 'kd_media_field_templates'
-
-const DEFAULT_MEDIA_FIELDS: MediaFieldTemplates = {
-  header: '{{AppName}}',
-  title: '{{MediaTitle ?? AppName}}',
-  line1: '{{MediaArtist ?? MediaDescription}}',
-  line2: '{{MediaAlbum ?? MediaDescription}}',
-  smallText: '{{PlaybackState}}',
-  smallImage: '{{HasDetectablePlaybackState ?? PlaybackStateImageUrl : AppImageUrl}}',
-  bigText: '',
-  bigImage: '{{HasMediaImage ?? MediaImageUrl : AppImageUrl}}',
-  customButtonsEnabled: false,
-  button1Label: '',
-  button1Url: '',
-  button2Label: '',
-  button2Url: '',
-}
 
 const MEDIA_TOKENS_DOCS = [
   { token: '{{AppName}}', description: 'mediaTokenAppName' },
@@ -49,7 +34,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
   const [fields, setFields] = useState<MediaFieldTemplates>(() => {
     try {
       const saved = localStorage.getItem(MEDIA_FIELDS_STORAGE_KEY)
-      if (saved) return { ...DEFAULT_MEDIA_FIELDS, ...JSON.parse(saved) }
+      if (saved) return normalizeMediaFieldTemplates(JSON.parse(saved))
     } catch {}
     return DEFAULT_MEDIA_FIELDS
   })
@@ -57,7 +42,7 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
   const [initialFields, setInitialFields] = useState<MediaFieldTemplates>(() => {
     try {
       const saved = localStorage.getItem(MEDIA_FIELDS_STORAGE_KEY)
-      if (saved) return { ...DEFAULT_MEDIA_FIELDS, ...JSON.parse(saved) }
+      if (saved) return normalizeMediaFieldTemplates(JSON.parse(saved))
     } catch {}
     return DEFAULT_MEDIA_FIELDS
   })
@@ -169,84 +154,24 @@ export const MediaStatusFieldConfig: React.FC<MediaStatusFieldConfigProps> = ({ 
       {/* Body: Scrollable medium-height textboxes */}
       <div className="flex-1 overflow-y-auto overscroll-y-contain relative">
         <div className="max-w-xl w-full mx-auto p-4 space-y-4 pb-28">
-          {/* Field 1: Header */}
+          {/* Discord activity name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.header}</label>
-            <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.configFields.mediaHeaderDescription}
-            </p>
-            <textarea
-              rows={2}
-              value={fields.header || ''}
-              onChange={e => handleFieldChange('header', e.target.value)}
-              placeholder="e.g. {{AppName}}"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
+            <label className="text-xs font-semibold block">{t.configFields.titleHeader}</label>
+            <textarea rows={2} value={fields.title} onChange={e => handleFieldChange('title', e.target.value)} placeholder="e.g. {{AppName}}" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
-          {/* Field 2: Title */}
+          {/* Discord activity details */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.mediaTitleField}</label>
-            <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.configFields.mediaTitleDescription}
-            </p>
-            <textarea
-              rows={2}
-              value={fields.title}
-              onChange={e => handleFieldChange('title', e.target.value)}
-              placeholder="e.g. {{MediaTitle ?? AppName}}"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
+            <label className="text-xs font-semibold block">{t.configFields.detailsField}</label>
+            <textarea rows={2} value={fields.details} onChange={e => handleFieldChange('details', e.target.value)} placeholder="e.g. {{MediaTitle ?? AppName}}" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
-          {/* Field 2: Line 1 (State / Artist) */}
+          {/* Discord activity state */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.artist}</label>
-            <textarea
-              rows={2}
-              value={fields.line1 || ''}
-              onChange={e => handleFieldChange('line1', e.target.value)}
-              placeholder="e.g. {{MediaArtist ?? MediaDescription}}"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
-          </div>
-          <Divider />
-
-          {/* Field 3: Line 2 (Large Image Text / Album) */}
-          <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.album}</label>
-            <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.configFields.mediaAlbumDescription}
-            </p>
-            <textarea
-              rows={2}
-              value={fields.line2 || ''}
-              onChange={e => handleFieldChange('line2', e.target.value)}
-              placeholder="e.g. {{MediaAlbum ?? MediaDescription}}"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
+            <label className="text-xs font-semibold block">{t.configFields.stateField}</label>
+            <textarea rows={2} value={fields.state} onChange={e => handleFieldChange('state', e.target.value)} placeholder="e.g. {{MediaArtist ?? MediaDescription}}" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 

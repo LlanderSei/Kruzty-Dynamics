@@ -23,6 +23,7 @@ import { listen } from '@tauri-apps/api/event'
 import type { AppProfile, ActivityType, AppActivityTypeSelection, AppStatusSelection } from '../../types'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 import { useTranslation } from '../../i18n/useTranslation'
+import { addLog } from '../accounts/discordAuth'
 
 interface AppCatalogueProps {
   onBack: () => void
@@ -41,7 +42,10 @@ function loadSavedProfiles(): AppProfile[] {
   try {
     const saved = localStorage.getItem(APP_PROFILES_STORAGE_KEY)
     const parsed: unknown = saved ? JSON.parse(saved) : []
-    return Array.isArray(parsed) ? parsed as AppProfile[] : []
+    if (!Array.isArray(parsed)) return []
+    return (parsed as AppProfile[]).map(profile => Number(profile.activityType) === 1
+      ? { ...profile, activityType: 'global', activityStatus: 'streaming' }
+      : profile)
   } catch {
     return []
   }
@@ -101,12 +105,18 @@ async function uploadIconToImgBB(
     if (event.payload.requestId === requestId) onProgress(event.payload.progress)
   })
   try {
-    return await invoke<string>('upload_app_icon', {
+    addLog('info', `Custom app icon upload started: file=${file.name} bytes=${file.size} requestId=${requestId}`)
+    const url = await invoke<string>('upload_app_icon', {
       imageBase64,
       imageName: file.name,
       apiKey: apiKey || null,
       requestId,
     })
+    addLog('info', `Custom app icon upload successful: file=${file.name} url=${url}`)
+    return url
+  } catch (error) {
+    addLog('error', `Custom app icon upload failed: file=${file.name} error=${error instanceof Error ? error.message : String(error)}`)
+    throw error
   } finally {
     unlisten()
   }
@@ -115,7 +125,6 @@ async function uploadIconToImgBB(
 const ACTIVITY_TYPE_LABELS: Record<string | number, string> = {
   global: 'Global Default',
   0: 'Playing',
-  1: 'Streaming',
   2: 'Listening',
   3: 'Watching',
   5: 'Competing',
@@ -675,7 +684,6 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   <option value="all">{t.catalogue.allActivityTypes}</option>
                   <option value="global">{t.catalogue.globalDefault}</option>
                   <option value={0}>{t.catalogue.playing}</option>
-                  <option value={1}>{t.catalogue.streaming}</option>
                   <option value={2}>{t.catalogue.listening}</option>
                   <option value={3}>{t.catalogue.watching}</option>
                   <option value={5}>{t.catalogue.competing}</option>
@@ -693,6 +701,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   <option value="dnd">{t.catalogue.dnd}</option>
                   <option value="offline">{t.catalogue.offline}</option>
                   <option value="invisible">{t.catalogue.invisible}</option>
+                  <option value="streaming">{t.catalogue.streaming}</option>
                 </Select>
 
                 <Select
@@ -1039,7 +1048,6 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   >
                     <option value="global">{t.catalogue.globalDefault}</option>
                     <option value={0}>{t.catalogue.playing}</option>
-                    <option value={1}>{t.catalogue.streaming}</option>
                     <option value={2}>{t.catalogue.listening}</option>
                     <option value={3}>{t.catalogue.watching}</option>
                     <option value={5}>{t.catalogue.competing}</option>
@@ -1062,6 +1070,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                     <option value="dnd">{t.catalogue.dnd}</option>
                     <option value="offline">{t.catalogue.offline}</option>
                     <option value="invisible">{t.catalogue.invisible}</option>
+                    <option value="streaming">{t.catalogue.streaming}</option>
                   </Select>
                 </div>
               </div>
@@ -1320,7 +1329,6 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 <option value="keep">{t.catalogue.keepCurrent}</option>
                 <option value="global">{t.catalogue.globalDefault}</option>
                 <option value={0}>{t.catalogue.playing}</option>
-                <option value={1}>{t.catalogue.streaming}</option>
                 <option value={2}>{t.catalogue.listening}</option>
                 <option value={3}>{t.catalogue.watching}</option>
                 <option value={5}>{t.catalogue.competing}</option>
@@ -1348,6 +1356,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 <option value="dnd">{t.catalogue.dnd}</option>
                 <option value="offline">{t.catalogue.offline}</option>
                 <option value="invisible">{t.catalogue.invisible}</option>
+                <option value="streaming">{t.catalogue.streaming}</option>
               </Select>
             </div>
           </div>

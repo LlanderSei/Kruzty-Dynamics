@@ -2,6 +2,9 @@ import java.util.Properties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 val discordSocialSdkAar = file("libs/discord_partner_sdk.aar")
+val compressNativeLibs = providers.gradleProperty("compressNativeLibs")
+    .map { it.toBoolean() }
+    .getOrElse(false)
 
 plugins {
     id("com.android.application")
@@ -53,6 +56,11 @@ android {
                   exclude("build/**")
                 }.files.toTypedArray()
             )
+        }
+    }
+    packaging {
+        jniLibs {
+            useLegacyPackaging = compressNativeLibs
         }
     }
     compileOptions {

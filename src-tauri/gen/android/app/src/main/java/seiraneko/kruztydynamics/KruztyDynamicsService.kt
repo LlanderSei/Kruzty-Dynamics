@@ -20,6 +20,7 @@ import android.os.IBinder
 import android.os.Looper
 import android.util.Base64
 import android.os.SystemClock
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import org.json.JSONArray
 import org.json.JSONObject
@@ -63,7 +64,6 @@ class KruztyDynamicsService : Service() {
       JSONObject().put("domain", "idle").put("title", NativeStrings.text(this, "running")).put("active", false),
     )
     DiscordSocialPublisher.publish(this, config, JSONObject().put("domain", "idle").put("active", false))
-    emitLog("info", "Service started; app and media detection enabled")
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -96,6 +96,7 @@ class KruztyDynamicsService : Service() {
       }
         .onFailure { emitLog("warn", "Could not load service configuration") }
     }
+    logStartupConfiguration()
     handler.removeCallbacks(poll)
     handler.post(poll)
     MainActivity.dispatchServiceEvent("dynamicsServiceStarted", JSONObject())
@@ -197,19 +198,39 @@ class KruztyDynamicsService : Service() {
   private fun publishState(state: JSONObject, mediaArtwork: Bitmap? = null) {
     val fingerprint = listOf(
       state.optString("domain"), state.optString("packageName"), state.optString("title"),
-      state.optString("line1"), state.optString("line2"), state.optString("playbackState"),
+      state.optString("details"), state.optString("state"), state.optString("playbackState"),
       state.optString("sessionStartedAt"), state.optString("activityType"), state.optString("iconUrl"),
       state.optString("smallImage"), state.optString("bigText"), state.optString("appName"),
-      state.optString("header"),
       state.optString("discordStatus"), state.optString("platform"),
       state.optString("mediaType"), state.optString("buttons"),
       config.optString("activeAccountId"),
     ).joinToString("|")
     if (fingerprint == lastFingerprint) return
     lastFingerprint = fingerprint
-    val title = state.optString("title").ifBlank { NativeStrings.text(this, "running") }
-    val lines = listOf(state.optString("line1"), state.optString("line2")).filter { it.isNotBlank() }
-    val content = lines.joinToString(" • ").ifBlank { null }
+    val notificationFields = config.optJSONObject("notificationFields") ?: JSONObject()
+    val isMedia = state.optString("domain") == "media"
+    val fieldValues = JSONObject()
+      .put("AppActivityType", activityTypeName(state.optInt("activityType", 0)))
+      .put("AppTitle", state.optString("title"))
+      .put("AppDetails", state.optString("details"))
+      .put("AppState", state.optString("state"))
+      .put("AppBigText", state.optString("bigText"))
+      .put("MediaDetails", state.optString("details"))
+      .put("MediaState", state.optString("state"))
+      .put("MediaBigText", state.optString("bigText"))
+    val titleTemplate = notificationFields.optString(
+      if (isMedia) "mediaTitle" else "appTitle",
+      if (isMedia) "{{getFieldCfgStr(\"MediaDetails\")}}"
+      else "{{AppActivityType == \"Playing\" ?? getFieldCfgStr(\"AppTitle\") : getFieldCfgStr(\"AppDetails\")}}",
+    )
+    val subtitleTemplate = notificationFields.optString(
+      if (isMedia) "mediaSubtitle" else "appSubtitle",
+      if (isMedia) "{{joinNonBlank(getFieldCfgStr(\"MediaState\"), getFieldCfgStr(\"MediaBigText\"))}}"
+      else "{{AppActivityType == \"Playing\" ?? joinNonBlank(getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\")) : joinNonBlank(getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"))}}",
+    )
+    val title = render(titleTemplate, fieldValues).ifBlank { state.optString("title") }
+      .ifBlank { NativeStrings.text(this, "running") }
+    val content = render(subtitleTemplate, fieldValues).ifBlank { null }
     val iconUrl = state.optString("iconUrl")
     val packageName = state.optString("packageName")
     if (mediaArtwork != null) state.put("iconData", bitmapDataUrl(mediaArtwork))
@@ -240,7 +261,7 @@ class KruztyDynamicsService : Service() {
     getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(LAST_STATUS, state.toString()).apply()
     MainActivity.dispatchServiceEvent("dynamicsStatusUpdated", state)
     DiscordSocialPublisher.publish(this, config, state)
-    emitLog("info", "Detected ${state.optString("domain")} activity")
+    emitLog("info", formatDetectedState(state))
   }
 
   private fun detectForegroundPackage(): String {
@@ -397,28 +418,28 @@ class KruztyDynamicsService : Service() {
     val appSettings = config.optJSONObject("appSettings") ?: JSONObject()
     val customDetailsEnabled = profile.optBoolean("customDetailsEnabled")
     val customSmallEnabled = profile.optBoolean("customSmallEnabled")
+    val activityType = resolveActivityType(profile.optString("activityType", "global"), appSettings.optInt("globalActivityType", 0))
+    val platform = profile.optString("platform").ifBlank { "Android" }
     val values = JSONObject().put("AppName", projectedName).put("OriginalAppName", appName).put("ProjectedName", projectedName)
       .put("PackageName", packageName).put("AppImageUrl", icon)
+      .put("AppActivityType", activityTypeName(activityType)).put("AppPlatformType", platform)
       .put("AppDetails", if (customDetailsEnabled) profile.optString("customDetails") else "")
       .put("AppState", if (customDetailsEnabled) profile.optString("customState") else "")
       .put("AppSmallText", if (customSmallEnabled) profile.optString("customSmallText") else "")
       .put("AppSmallUrl", if (customSmallEnabled) profile.optString("customSmallUrl") else "")
-    val activityType = resolveActivityType(profile.optString("activityType", "global"), appSettings.optInt("globalActivityType", 0))
-    val discordStatus = profile.optString("activityStatus", "global")
-      .takeUnless { it == "global" }
-      ?: appSettings.optString("globalActivityStatus", "online")
-    val platform = profile.optString("platform").ifBlank { "Android" }
+    val discordStatus = resolveDiscordStatus(profile, appSettings)
     val bigImage = render(fields.optString("bigImage", "{{AppImageUrl}}"), values).ifBlank { icon }
     return JSONObject().put("domain", "app").put("packageName", packageName)
-      .put("title", render(fields.optString("title", "{{AppName}}"), values).ifBlank { projectedName })
-      .put("line1", render(fields.optString("line1", "{{AppDetails}}"), values))
-      .put("line2", render(fields.optString("line2", "{{AppState}}"), values))
+      .put("appName", projectedName)
+      .put("title", render(fields.optString("title", "{{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}}"), values).ifBlank { projectedName })
+      .put("details", render(fields.optString("details", "{{AppActivityType == \"Playing\" ?? AppDetails : AppName}}"), values))
+      .put("state", render(fields.optString("state", "{{AppActivityType == \"Playing\" ?? AppState : AppDetails}}"), values))
       .put("activityType", activityType)
       .put("discordStatus", discordStatus)
       .put("platform", platform)
       .put("smallText", render(fields.optString("smallText", "{{AppSmallText}}"), values))
       .put("smallImage", render(fields.optString("smallImage", "{{AppSmallUrl}}"), values))
-      .put("bigText", render(fields.optString("bigText"), values))
+      .put("bigText", render(fields.optString("bigText", "{{AppActivityType == \"Playing\" ?? AppName : AppState}}"), values))
       .put("bigImage", bigImage)
       .put("iconUrl", bigImage)
       .put("buttons", profile.optJSONArray("buttons") ?: JSONArray())
@@ -437,12 +458,8 @@ class KruztyDynamicsService : Service() {
       .put("MediaImageUrl", mediaImage)
       .put("MediaDescription", media.description).put("PlaybackState", media.state)
       .put("PlaybackStateImageUrl", if (media.state == "Playing") "mediaplay" else "mediapause")
-    val header = render(fields.optString("header", "{{AppName}}"), values).ifBlank { appName }
-    val title = render(fields.optString("title", "{{MediaTitle ?? AppName}}"), values).ifBlank { media.title.ifBlank { appName } }
     val appSettings = config.optJSONObject("appSettings") ?: JSONObject()
-    val discordStatus = profile?.optString("activityStatus", "global")
-      ?.takeUnless { it == "global" }
-      ?: appSettings.optString("globalActivityStatus", "online")
+    val discordStatus = resolveDiscordStatus(profile, appSettings)
     val platform = profile?.optString("platform")?.ifBlank { "Android" } ?: "Android"
     val mediaSettings = config.optJSONObject("mediaConfig") ?: JSONObject()
     val activityType = if (mediaSettings.optString("activityTypeMode", "auto-adaptive") == "app-profile-override" && profile != null) {
@@ -450,14 +467,17 @@ class KruztyDynamicsService : Service() {
     } else if (media.mediaType == "video") 3 else 2
     val bigImage = render(fields.optString("bigImage", "{{HasMediaImage ?? MediaImageUrl : AppImageUrl}}"), values).ifBlank { icon }
     return JSONObject().put("domain", "media").put("packageName", media.packageName)
-      .put("title", title).put("appName", appName).put("header", header)
+      .put("title", render(fields.optString("title", "{{AppName}}"), values).ifBlank { appName })
+      .put("appName", appName)
+      .put("details", render(fields.optString("details", "{{MediaTitle ?? AppName}}"), values))
+      .put("state", render(fields.optString("state", "{{MediaArtist ?? MediaDescription}}"), values))
       .put("discordStatus", discordStatus).put("platform", platform)
-      .put("line1", render(fields.optString("line1", "{{MediaArtist ?? MediaDescription}}"), values))
-      .put("line2", render(fields.optString("line2", "{{MediaAlbum ?? MediaDescription}}"), values)).put("iconUrl", bigImage)
+      .put("iconUrl", bigImage)
       .put("activityType", activityType).put("smallText", render(fields.optString("smallText", "{{PlaybackState}}"), values))
       .put("smallImage", render(fields.optString("smallImage", "{{HasDetectablePlaybackState ?? PlaybackStateImageUrl : AppImageUrl}}"), values))
-      .put("bigText", render(fields.optString("bigText", "{{MediaAlbum}}"), values)).put("bigImage", bigImage)
+      .put("bigText", render(fields.optString("bigText", "{{MediaAlbum ?? MediaDescription}}"), values)).put("bigImage", bigImage)
       .put("mediaPlaying", media.state == "Playing").put("playbackState", media.state).put("mediaType", media.mediaType)
+      .put("mediaImageUrl", mediaImage).put("appImageUrl", icon)
       .put("mediaPositionMs", media.positionMs).put("mediaDurationMs", media.durationMs)
       .put("mediaDescription", media.description).put("buttons", resolveMediaButtons(fields))
   }
@@ -476,9 +496,9 @@ class KruztyDynamicsService : Service() {
     val bigImage = fields.optString("customBigImage").ifBlank { fields.optString("largeImage", "kruztydynamicsicon") }
     return JSONObject().put("domain", "custom-fallback").put("title", title)
       .put("discordStatus", appSettings.optString("globalActivityStatus", "online"))
-      .put("line1", fields.optString("customDetails", fields.optString("details", "")))
-      .put("line2", fields.optString("customState", fields.optString("state", "")))
-      .put("activityType", appSettings.optInt("globalActivityType", 0))
+      .put("details", fields.optString("customDetails", fields.optString("details", "")))
+      .put("state", fields.optString("customState", fields.optString("state", "")))
+      .put("activityType", resolveActivityType("global", appSettings.optInt("globalActivityType", 0)))
       .put("smallText", fields.optString("customSmallText"))
       .put("smallImage", fields.optString("customSmallImage"))
       .put("bigText", fields.optString("customBigText"))
@@ -491,18 +511,65 @@ class KruztyDynamicsService : Service() {
     val tokens = Regex("\\{\\{([^{}]+)\\}\\}")
     repeat(3) {
       result = tokens.replace(result) { match ->
-        val expression = match.groupValues[1].trim()
-        val parts = expression.split("??", limit = 2)
-        val value = values.optString(parts[0].trim())
-        if (value.isNotBlank()) value else if (parts.size > 1) {
-          values.optString(parts[1].substringBefore(":").trim())
-        } else ""
+        evaluateExpression(match.groupValues[1].trim(), values)
       }
     }
     return result.replace(Regex("\\s{2,}"), " ").trim()
   }
 
-  private fun resolveActivityType(selection: String, global: Int): Int = selection.toIntOrNull() ?: global
+  private fun evaluateExpression(expression: String, values: JSONObject): String {
+    val conditional = Regex("^(.+?)\\s*(==|!=)\\s*(.+?)\\s*\\?\\?\\s*(.*?):(.*)$").matchEntire(expression)
+    if (conditional != null) {
+      val left = resolveExpressionValue(conditional.groupValues[1], values)
+      val right = resolveExpressionValue(conditional.groupValues[3], values)
+      val equal = left == right
+      val branch = if ((conditional.groupValues[2] == "==") == equal) conditional.groupValues[4] else conditional.groupValues[5]
+      return resolveExpressionValue(branch, values)
+    }
+    val parts = expression.split("??", limit = 2)
+    val value = resolveExpressionValue(parts[0], values)
+    if (value.isNotBlank() || parts.size == 1) return value
+    return resolveExpressionValue(parts[1].substringBefore(":"), values)
+  }
+
+  private fun resolveExpressionValue(raw: String, values: JSONObject): String {
+    val value = raw.trim()
+    if (value.length >= 2 && value.first() == '\"' && value.last() == '\"') return value.substring(1, value.length - 1)
+    val fieldReference = Regex("""^getFieldCfgStr\("([^"]+)"\)$""").matchEntire(value)
+    if (fieldReference != null) return values.optString(fieldReference.groupValues[1])
+    val joinedFields = Regex("""^joinNonBlank\((.*),\s*(.*)\)$""").matchEntire(value)
+    if (joinedFields != null) {
+      return listOf(
+        resolveExpressionValue(joinedFields.groupValues[1], values),
+        resolveExpressionValue(joinedFields.groupValues[2], values),
+      ).filter { it.isNotBlank() }.joinToString(" • ")
+    }
+    return if (values.has(value)) values.optString(value) else ""
+  }
+
+  private fun resolveActivityType(selection: String, global: Int): Int {
+    val resolved = selection.toIntOrNull() ?: global
+    return if (resolved == 1) 0 else resolved
+  }
+
+  private fun resolveDiscordStatus(profile: JSONObject?, appSettings: JSONObject): String {
+    val selected = profile?.optString("activityStatus", "global")
+      ?.takeUnless { it == "global" }
+      ?: appSettings.optString("globalActivityStatus", "online")
+    val profileHasLegacyStreaming = profile?.optString("activityType") == "1"
+    val globalHasLegacyStreaming = appSettings.optInt("globalActivityType", 0) == 1
+    return if (profileHasLegacyStreaming || (globalHasLegacyStreaming && (profile == null || profile.optString("activityStatus", "global") == "global"))) {
+      "streaming"
+    } else selected
+  }
+
+  private fun activityTypeName(type: Int): String = when (type) {
+    1 -> "Streaming"
+    2 -> "Listening"
+    3 -> "Watching"
+    5 -> "Competing"
+    else -> "Playing"
+  }
 
   private fun resolveAppStartTimestamp(resumedAt: Long): Long {
     val appConfig = config.optJSONObject("appConfig") ?: JSONObject()
@@ -611,8 +678,55 @@ class KruztyDynamicsService : Service() {
     }
   }
 
+  private fun logStartupConfiguration() {
+    val profiles = config.optJSONArray("profiles") ?: JSONArray()
+    val enabled = (0 until profiles.length()).count { profiles.optJSONObject(it)?.optBoolean("enabled") == true }
+    val appFields = config.optJSONObject("appFields") ?: JSONObject()
+    val mediaFields = config.optJSONObject("mediaFields") ?: JSONObject()
+    val notificationFields = config.optJSONObject("notificationFields") ?: JSONObject()
+    val appConfig = config.optJSONObject("appConfig") ?: JSONObject()
+    val mediaConfig = config.optJSONObject("mediaConfig") ?: JSONObject()
+    val settings = config.optJSONObject("appSettings") ?: JSONObject()
+    emitLog("info", "Service configuration loaded: enabledProfiles=$enabled totalProfiles=${profiles.length()} mediaEnabled=${mediaConfig.optBoolean("enabled", true)} mediaScope=${mediaConfig.optString("mediaScope", "all")} mediaPriority=${mediaConfig.optString("priorityMode", "priority-media")} activityType=${activityTypeName(settings.optInt("globalActivityType", 0))} activityStatus=${settings.optString("globalActivityStatus", "online")} accountSelected=${settings.optString("activeAccountId").isNotBlank()}")
+    emitLog("info", "App presence config: outsidePolicy=${appConfig.optString("outsidePolicy", "freeze")} timestampStrategy=${appConfig.optString("timestampStrategy", "persistent")} fields=${appFields.toSafeTemplateSummary()}")
+    emitLog("info", "Media presence config: enabled=${mediaConfig.optBoolean("enabled", true)} priority=${mediaConfig.optString("priorityMode", "priority-media")} pausedResolution=${mediaConfig.optString("pausedResolution", "show-paused")} activityTypeMode=${mediaConfig.optString("activityTypeMode", "auto-adaptive")} fields=${mediaFields.toSafeTemplateSummary()}")
+    emitLog("info", "Notification projection config: fields=${notificationFields.toSafeTemplateSummary()}")
+  }
+
+  private fun formatDetectedState(state: JSONObject): String {
+    val domain = state.optString("domain")
+    val packageName = state.optString("packageName")
+    val profiles = config.optJSONArray("profiles") ?: JSONArray()
+    val profile = (0 until profiles.length()).mapNotNull { profiles.optJSONObject(it) }
+      .firstOrNull { it.optString("packageName") == packageName }
+    val cached = state.optString("iconUrl").startsWith("http")
+    if (domain == "media") {
+      return "Media detected: title='${state.optString("title")}' artist='${state.optString("artist")}' album='${state.optString("album")}' appName='${state.optString("appName")}' packageName='$packageName' mediaType=${state.optString("mediaType")} playbackState=${state.optString("playbackState")} resolvedImageCached=$cached resolvedImageUrl='${state.optString("iconUrl")}' mediaArtCached=${state.optString("mediaImageUrl").startsWith("http")} mediaArtUrl='${state.optString("mediaImageUrl")}' appIconCached=${state.optString("appImageUrl").startsWith("http")} appIconUrl='${state.optString("appImageUrl")}' titleHeader='${state.optString("title")}' details='${state.optString("details")}' state='${state.optString("state")}' bigText='${state.optString("bigText")}'"
+    }
+    val profileSummary = profile?.let {
+      "enabled=${it.optBoolean("enabled")},projectedName='${it.optString("projectedName")}',customDetailsEnabled=${it.optBoolean("customDetailsEnabled")},customDetails='${it.optString("customDetails")}',customState='${it.optString("customState")}',activityType=${it.optString("activityType")},activityStatus=${it.optString("activityStatus")},platform=${it.optString("platform")},customIcon=${it.optString("iconOverride").isNotBlank()}"
+    } ?: "missing"
+    return "App detected: systemName='${state.optString("appName")}' projectedName='${state.optString("appName")}' titleHeader='${state.optString("title")}' packageName='$packageName' profile={$profileSummary} imageCached=$cached imageUrl='${state.optString("iconUrl")}' details='${state.optString("details")}' state='${state.optString("state")}' bigText='${state.optString("bigText")}' activityType=${activityTypeName(state.optInt("activityType", 0))} discordStatus=${state.optString("discordStatus")} platform='${state.optString("platform")}'"
+  }
+
+  private fun JSONObject.toSafeTemplateSummary(): String = keys().asSequence()
+    .filter { it !in setOf("button1Url", "button2Url") }
+    .joinToString(",", "{", "}") { key -> "$key='${optString(key).take(120)}'" }
+
   private fun emitLog(level: String, message: String) {
-    MainActivity.dispatchServiceEvent("dynamicsLog", JSONObject().put("level", level).put("message", message))
+    val safeMessage = message
+      .replace(Regex("(?i)(api[_-]?key|access[_-]?token|refresh[_-]?token|authorization|client[_-]?secret)([=:\\s]+)[^\\s,;]+")) { match ->
+        "${match.groupValues[1]}${match.groupValues[2]}[REDACTED]"
+      }
+      .replace(Regex("(?i)([?&](?:key|api_key|access_token|refresh_token)=)[^&#\\s]+")) { match -> "${match.groupValues[1]}[REDACTED]" }
+      .replace(Regex("(?i)Bearer\\s+[A-Za-z0-9._-]{20,}"), "Bearer [REDACTED]")
+      .replace(Regex("[A-Za-z0-9_-]{20,}\\.[A-Za-z0-9_-]{6,}\\.[A-Za-z0-9_-]{20,}"), "[REDACTED]")
+    when (level.lowercase()) {
+      "error" -> Log.e("KruztyDynamics", safeMessage)
+      "warn" -> Log.w("KruztyDynamics", safeMessage)
+      else -> Log.i("KruztyDynamics", safeMessage)
+    }
+    MainActivity.dispatchServiceEvent("dynamicsLog", JSONObject().put("level", level).put("message", safeMessage))
   }
 
   companion object {

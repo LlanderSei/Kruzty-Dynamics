@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   AlertTriangle,
   LoaderCircle,
+  BellRing,
 } from 'lucide-react'
 import { useTheme, PRESET_ACCENT_COLORS, DEFAULT_ACCENT_COLOR } from './ThemeContext'
 import { useAppSettings } from './useAppSettings'
@@ -36,7 +37,11 @@ function formatDisplayVersion(version: string): string {
   return match ? `${match[1]}.${match[2]}` : version
 }
 
-export const SettingsView: React.FC = () => {
+interface SettingsViewProps {
+  onNavigateToNotificationProjection?: () => void
+}
+
+export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotificationProjection }) => {
   const { theme, setMode, setAccentColor } = useTheme()
   const { t } = useTranslation()
   const [appVersion, setAppVersion] = useState('1.0.0')
@@ -351,6 +356,32 @@ export const SettingsView: React.FC = () => {
           </span>
         </button>
 
+        {/* Notification status projection */}
+        <button
+          type="button"
+          onClick={onNavigateToNotificationProjection}
+          className="w-full p-3.5 rounded-2xl border flex items-center justify-between gap-3 text-left transition-all hover:border-[var(--color-accent)] active:scale-[0.99]"
+          style={{
+            backgroundColor: 'var(--color-bg-surface)',
+            borderColor: 'var(--color-border)',
+          }}
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+              style={{ backgroundColor: 'var(--color-bg-elevated)', color: 'var(--color-text-muted)' }}
+            >
+              <BellRing className="w-4 h-4" />
+            </div>
+            <div className="min-w-0">
+              <h4 className="text-xs font-semibold leading-tight">{t.settings.notificationProjection}</h4>
+              <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+                {t.settings.notificationProjectionDesc}
+              </p>
+            </div>
+          </div>
+        </button>
+
         {/* 1. Themes and Display */}
         <div
           onClick={() => setActiveModal('theme')}
@@ -451,7 +482,7 @@ export const SettingsView: React.FC = () => {
           >
             <span>{[
               t.catalogue.playing,
-              t.catalogue.streaming,
+              '',
               t.catalogue.listening,
               t.catalogue.watching,
               '',
@@ -810,7 +841,6 @@ export const SettingsView: React.FC = () => {
                 fullWidth={true}
               >
                 <option value={0}>{t.catalogue.playing}</option>
-                <option value={1}>{t.catalogue.streaming}</option>
                 <option value={2}>{t.catalogue.listening}</option>
                 <option value={3}>{t.catalogue.watching}</option>
                 <option value={5}>{t.catalogue.competing}</option>
@@ -831,6 +861,7 @@ export const SettingsView: React.FC = () => {
                 <option value="dnd">{t.catalogue.dnd}</option>
                 <option value="offline">{t.catalogue.offline}</option>
                 <option value="invisible">{t.catalogue.invisible}</option>
+                <option value="streaming">{t.catalogue.streaming}</option>
               </Select>
             </div>
           </div>

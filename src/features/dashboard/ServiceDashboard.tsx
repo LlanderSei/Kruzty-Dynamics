@@ -33,9 +33,8 @@ interface ServiceDashboardProps {
   status?: {
     active?: boolean
     title?: string
-    header?: string
-    line1?: string
-    line2?: string
+    details?: string
+    state?: string
     domain?: string
     activityType?: number
     playbackState?: string
@@ -155,7 +154,6 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
 
   const activityTypeLabels: Record<number, string> = {
     0: 'Playing',
-    1: 'Streaming',
     2: 'Listening',
     3: 'Watching',
     5: 'Competing in',
@@ -385,7 +383,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
             <div className="mb-3 flex items-center justify-between text-xs" style={{ color: 'var(--color-text-muted)' }}>
               <span>{hasActivity
                 ? status?.domain === 'media'
-                  ? `${mediaHeader} ${status.header || status.appName || 'Media'}`
+                  ? `${mediaHeader} ${status.appName || 'Media'}`
                   : activityTypeLabels[status?.activityType ?? 0] || 'Playing'
                 : 'Activity Preview'}</span>
               <Ellipsis className="h-4 w-4" />
@@ -409,8 +407,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 </div>
                 <div className="min-w-0 space-y-0.5 text-[13px] leading-[1.35]" style={{ color: 'var(--color-text-muted)' }}>
                   <div className="break-words font-semibold" style={{ color: 'var(--color-text-base)' }}>{status?.title}</div>
-                  {status?.line1 && <div className="break-words">{status.line1}</div>}
-                  {status?.line2 && <div className="break-words">{status.line2}</div>}
+                  {status?.details && <div className="break-words">{status.details}</div>}
+                  {status?.state && <div className="break-words">{status.state}</div>}
                   {status?.domain === 'app' && status.sessionStartedAt && (
                     <div className="mt-1 flex items-center gap-1.5 text-xs tabular-nums text-emerald-500">
                       <Gamepad2 className="h-4 w-4" />

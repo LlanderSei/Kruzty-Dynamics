@@ -1,5 +1,5 @@
-export type ActivityType = 0 | 1 | 2 | 3 | 5 // 0: Playing, 1: Streaming, 2: Listening, 3: Watching, 5: Competing
-export type DiscordStatus = 'online' | 'idle' | 'dnd' | 'offline' | 'invisible'
+export type ActivityType = 0 | 2 | 3 | 5 // 0: Playing, 2: Listening, 3: Watching, 5: Competing
+export type DiscordStatus = 'online' | 'idle' | 'dnd' | 'offline' | 'invisible' | 'streaming'
 export type AppActivityTypeSelection = ActivityType | 'global'
 export type AppStatusSelection = DiscordStatus | 'global'
 export type MediaType = 'music' | 'video' | 'audio' | 'unknown'
@@ -64,8 +64,8 @@ export interface CustomFallbackConfig {
 
 export interface AppFieldTemplates {
   title: string
-  line1?: string
-  line2?: string
+  details: string
+  state: string
   smallText?: string
   smallImage?: string
   bigText?: string
@@ -73,10 +73,9 @@ export interface AppFieldTemplates {
 }
 
 export interface MediaFieldTemplates {
-  header?: string
   title: string
-  line1?: string
-  line2?: string
+  details: string
+  state: string
   smallText?: string
   smallImage?: string
   bigText?: string
@@ -86,6 +85,13 @@ export interface MediaFieldTemplates {
   button1Url?: string
   button2Label?: string
   button2Url?: string
+}
+
+export interface NotificationProjectionTemplates {
+  appTitle: string
+  appSubtitle: string
+  mediaTitle: string
+  mediaSubtitle: string
 }
 
 export interface DynamicsConfig {
@@ -101,6 +107,7 @@ export interface DynamicsConfig {
   customTimestampOffset?: number
   appFields: AppFieldTemplates
   mediaFields: MediaFieldTemplates
+  notificationFields: NotificationProjectionTemplates
 }
 
 export interface AppProfile {

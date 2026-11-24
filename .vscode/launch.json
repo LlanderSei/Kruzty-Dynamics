@@ -37,10 +37,38 @@
       "cwd": "${workspaceFolder}"
     },
     {
+      "name": "Tauri Android: Production APK (armv7)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android build -- --target armv7",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Production APK (x86)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android build -- --target i686",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Production APK (x86_64)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run tauri android build -- --target x86_64",
+      "cwd": "${workspaceFolder}"
+    },
+    {
       "name": "Tauri Android: Production APK (Universal)",
       "type": "node-terminal",
       "request": "launch",
       "command": "npm run tauri android build -- --apk",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Tauri Android: Production APK (Universal, Compressed)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "ORG_GRADLE_PROJECT_compressNativeLibs=true npm.cmd run tauri android build -- --apk",
       "cwd": "${workspaceFolder}"
     },
     {

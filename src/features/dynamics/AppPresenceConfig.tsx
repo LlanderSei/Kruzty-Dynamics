@@ -17,6 +17,7 @@ import { listen } from '@tauri-apps/api/event'
 import { useAppSettings } from '../settings/useAppSettings'
 import { useTranslation } from '../../i18n/useTranslation'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
+import { addLog } from '../accounts/discordAuth'
 
 const APP_CONFIG_STORAGE_KEY = 'kd_app_presence_config'
 
@@ -122,9 +123,14 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
         if (event.payload.requestId === requestId) setUploadProgress(event.payload.progress)
       })
       try {
+        addLog('info', `Fallback image upload started: kind=${kind} file=${file.name} bytes=${file.size} requestId=${requestId}`)
         const url = await invoke<string>('upload_app_icon', { imageBase64, imageName: file.name, apiKey: settings.customImgbbKey || null, requestId })
+        addLog('info', `Fallback image upload successful: kind=${kind} url=${url}`)
         if (kind === 'small') setCustomSmallImage(url)
         else setCustomBigImage(url)
+      } catch (error) {
+        addLog('error', `Fallback image upload failed: kind=${kind} error=${error instanceof Error ? error.message : String(error)}`)
+        throw error
       } finally {
         unlisten()
       }

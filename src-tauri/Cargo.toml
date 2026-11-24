@@ -1,7 +1,7 @@
 [package]
 name = "KruztyDynamics"
 version = "1.0.0"
-description = "Also known as Kizzy | A Discord Rich Presence manager for Android that (soon to be) rewritten with Rust in backend and React+TailwindCSS in frontend using Tauri framework. The sole purpose of this repo is to make \"Experimental\" feature into full fledged working module, which will be renamed into \"Dynamics\". Whilst adding personal features to it..."
+description = "Also known as Kizzy | A Discord Rich Presence manager for Android rewritten with Rust in backend and React+TailwindCSS in frontend using Tauri framework. The sole purpose of this repo is to make \"Experimental\" feature into full fledged working module, which will be renamed into \"Dynamics\". Whilst adding personal features to it..."
 authors = ["Seiraneko"]
 license = "GPL-3.0-only"
 repository = "https://github.com/LlanderSei/Kruzty-Dynamics"

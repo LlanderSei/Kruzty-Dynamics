@@ -7,6 +7,7 @@ import { ServiceDashboard } from './features/dashboard/ServiceDashboard'
 import { AppCatalogue } from './features/apps-catalog/AppCatalogue'
 import { AppStatusFieldConfig } from './features/templates/AppStatusFieldConfig'
 import { MediaStatusFieldConfig } from './features/templates/MediaStatusFieldConfig'
+import { NotificationStatusConfig } from './features/templates/NotificationStatusConfig'
 import { AppPresenceConfig } from './features/dynamics/AppPresenceConfig'
 import { MediaPresenceConfig } from './features/dynamics/MediaPresenceConfig'
 import { AccountsView } from './features/accounts/AccountsView'
@@ -30,6 +31,7 @@ type Subpage =
   | 'app-status-fields'
   | 'app-presence-config'
   | 'media-status-fields'
+  | 'notification-status-config'
   | 'media-presence-config'
   | null
 
@@ -110,8 +112,8 @@ function MainShell() {
   const [detectedStatus, setDetectedStatus] = useState<{
     active?: boolean
     title?: string
-    line1?: string
-    line2?: string
+    details?: string
+    state?: string
     domain?: string
     packageName?: string
     activityType?: number
@@ -251,6 +253,10 @@ function MainShell() {
     return <MediaStatusFieldConfig onBack={() => setCurrentSubpage(null)} />
   }
 
+  if (currentSubpage === 'notification-status-config') {
+    return <NotificationStatusConfig onBack={() => setCurrentSubpage(null)} />
+  }
+
   if (currentSubpage === 'media-presence-config') {
     return (
       <MediaPresenceConfig
@@ -302,7 +308,9 @@ function MainShell() {
           />
         )}
 
-        {activeTab === 'settings' && <SettingsView />}
+        {activeTab === 'settings' && (
+          <SettingsView onNavigateToNotificationProjection={() => setCurrentSubpage('notification-status-config')} />
+        )}
       </main>
 
       {/* Footer Navigation Bar */}

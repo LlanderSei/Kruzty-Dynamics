@@ -37,6 +37,7 @@ internal object DiscordSocialPublisher {
           return@execute
         }
         if (connectedAccountId != accountId || connectedAccessToken != token) {
+          log("info", "Discord SDK connection requested: accountId=$accountId token=Bearer [REDACTED]")
           runCatching { DiscordSocialSdkNative.clearPresence() }
           DiscordSocialSdkNative.initialize(DiscordSocialAuth.APPLICATION_ID.toLong())
           DiscordSocialSdkNative.connect(token)
@@ -52,9 +53,13 @@ internal object DiscordSocialPublisher {
           "idle" -> 3
           "dnd" -> 4
           "invisible" -> 5
+          "streaming" -> 6
           else -> -1
         }
-        if (statusCode >= 0) DiscordSocialSdkNative.setOnlineStatus(statusCode)
+        if (statusCode >= 0) {
+          log("info", "Discord online status send: value=$status sdkCode=$statusCode")
+          DiscordSocialSdkNative.setOnlineStatus(statusCode)
+        }
         if (!state.optBoolean("active", true) || state.optString("domain") == "idle") {
           DiscordSocialSdkNative.clearPresence()
           return@execute
@@ -74,10 +79,10 @@ internal object DiscordSocialPublisher {
         }
         val packageName = state.optString("packageName")
         val isMedia = state.optString("domain") == "media"
-        val activityName = (if (isMedia) state.optString("header").ifBlank { state.optString("appName").ifBlank { state.optString("title") } } else state.optString("title")).limitPresenceText()
-        val activityDetails = (if (isMedia) state.optString("title") else state.optString("line1")).limitPresenceText()
-        val activityState = (if (isMedia) state.optString("line1") else state.optString("line2")).limitPresenceText()
-        val largeText = if (isMedia) state.optString("line2").ifBlank { state.optString("bigText") } else state.optString("bigText")
+        val activityName = state.optString("title").ifBlank { state.optString("appName") }.limitPresenceText()
+        val activityDetails = state.optString("details").limitPresenceText()
+        val activityState = state.optString("state").limitPresenceText()
+        val largeText = state.optString("bigText")
         val configuredBigImage = state.optString("bigImage")
         val bigImage = if (
           configuredBigImage.isBlank() || configuredBigImage == packageName
@@ -96,10 +101,27 @@ internal object DiscordSocialPublisher {
           end,
           serializedButtons,
         )
+        log("info", "Discord presence send: domain=${state.optString("domain")} activityType=${state.optInt("activityType", 0)} platform=${state.optString("platform", "Android")} header='${activityName}' title='${activityDetails}' state='${activityState}' assetTooltip='${largeText}' imageConfigured=${bigImage.isNotBlank()} buttons=${serializedButtons.size}")
       } catch (error: Exception) {
-        Log.w(TAG, "Discord Social SDK presence update failed (${error.javaClass.simpleName})")
+        log("error", "Discord Social SDK presence send failed: ${error.javaClass.simpleName}: ${error.message ?: "no details"}")
       }
     }
+  }
+
+  private fun log(level: String, message: String) {
+    val safeMessage = message
+      .replace(Regex("(?i)(api[_-]?key|access[_-]?token|refresh[_-]?token|authorization|client[_-]?secret)([=:\\s]+)[^\\s,;]+")) { match ->
+        "${match.groupValues[1]}${match.groupValues[2]}[REDACTED]"
+      }
+      .replace(Regex("(?i)([?&](?:key|api_key|access_token|refresh_token)=)[^&#\\s]+")) { match -> "${match.groupValues[1]}[REDACTED]" }
+      .replace(Regex("(?i)Bearer\\s+[A-Za-z0-9._-]{20,}"), "Bearer [REDACTED]")
+      .replace(Regex("[A-Za-z0-9_-]{20,}\\.[A-Za-z0-9_-]{6,}\\.[A-Za-z0-9_-]{20,}"), "[REDACTED]")
+    when (level) {
+      "error" -> Log.e(TAG, safeMessage)
+      "warn" -> Log.w(TAG, safeMessage)
+      else -> Log.i(TAG, safeMessage)
+    }
+    MainActivity.dispatchServiceEvent("dynamicsLog", JSONObject().put("level", level).put("message", safeMessage))
   }
 
   fun stop() {

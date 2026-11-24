@@ -1,6 +1,7 @@
 import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import { notifyServiceConfigChanged } from './serviceConfig'
+import { addLog } from '../accounts/discordAuth'
 
 const IMAGE_CACHE_KEY = 'kd_asset_cache'
 const IMAGE_LINKS_KEY = 'kd_presence_image_links'
@@ -50,9 +51,11 @@ export async function uploadDetectedImage(
   const cache = readJson<CachedImage[]>(IMAGE_CACHE_KEY, [])
   const cachedUrl = cache.find(entry => entry.hash === hash)?.remoteUrl
   if (cachedUrl) {
+    addLog('info', `Image cache HIT: source=${sourceKey} type=${sourceType} hash=${hash.slice(0, 12)} url=${cachedUrl}`)
     saveLink(sourceKey, cachedUrl)
     return
   }
+  addLog('info', `Image cache MISS: source=${sourceKey} type=${sourceType} hash=${hash.slice(0, 12)}; uploading to ImgBB`)
 
   const requestId = `detected-${Date.now()}-${Math.random().toString(36).slice(2)}`
   const settings = readJson<{ customImgbbKey?: string }>(IMAGE_SETTINGS_KEY, {})
@@ -65,6 +68,7 @@ export async function uploadDetectedImage(
   })
 
   try {
+    addLog('info', `ImgBB upload started: source=${sourceKey} type=${sourceType} imageBytes=${image.bytes.byteLength} requestId=${requestId}`)
     const remoteUrl = await invoke<string>('upload_app_icon', {
       imageBase64: image.base64,
       imageName: `${sourceKey.replace(/[^a-zA-Z0-9_-]/g, '-')}.png`,
@@ -75,6 +79,11 @@ export async function uploadDetectedImage(
     nextCache.push({ hash, sourceType, sourceKey, remoteUrl, uploadedAt: Date.now() })
     localStorage.setItem(IMAGE_CACHE_KEY, JSON.stringify(nextCache))
     saveLink(sourceKey, remoteUrl)
+    addLog('info', `ImgBB upload successful: source=${sourceKey} type=${sourceType} cached=true url=${remoteUrl}`)
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    addLog('error', `ImgBB upload failed: source=${sourceKey} type=${sourceType} error=${message}`)
+    throw error
   } finally {
     unlisten()
     window.dispatchEvent(new CustomEvent('detected-image-upload-progress', {

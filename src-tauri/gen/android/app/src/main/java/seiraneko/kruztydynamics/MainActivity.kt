@@ -126,6 +126,11 @@ class MainActivity : TauriActivity() {
       activity.runOnUiThread { activity.webViewRef?.evaluateJavascript(script, null) }
     }
 
+    @JvmStatic
+    fun dispatchSdkLog(level: String, message: String) {
+      dispatchServiceEvent("dynamicsLog", JSONObject().put("level", level).put("message", message))
+    }
+
     private const val LOG_EXPORT_REQUEST = 2207
     fun updateServiceShortcut(context: Context) {
       if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1) return

@@ -9,6 +9,7 @@ function redactSecrets(value: string): string {
   return value
     .replace(/\b(Bearer|Bot)\s+[A-Za-z0-9._-]{20,}/gi, '$1 [REDACTED]')
     .replace(/\b[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{20,}\b/g, '[REDACTED]')
+    .replace(/([?&](?:key|api_key|apiKey|access_token|refresh_token)=)[^&#\s]+/gi, '$1[REDACTED]')
     .replace(SECRET_PATTERN, '$1$2[REDACTED]')
     .replace(/mfa\.[A-Za-z0-9_-]{20,}/g, '[REDACTED]')
 }
@@ -18,8 +19,13 @@ export function addLog(level: LogEntry['level'], msg: string) {
   LOG_STORE.push(entry)
   if (LOG_STORE.length > MAX_LOGS) LOG_STORE.shift()
   const tag = level === 'error' ? '[ERROR]' : level === 'warn' ? '[WARN]' : '[INFO]'
+  const output = `[Dynamics] ${tag} ${entry.msg}`
   // eslint-disable-next-line no-console
-  console.log(`[Dynamics] ${tag} ${entry.msg}`)
+  if (level === 'error') console.error(output)
+  // eslint-disable-next-line no-console
+  else if (level === 'warn') console.warn(output)
+  // eslint-disable-next-line no-console
+  else console.info(output)
 }
 export function getLogs(): LogEntry[] {
   return [...LOG_STORE]

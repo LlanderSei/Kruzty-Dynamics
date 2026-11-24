@@ -17,12 +17,41 @@ namespace {
 constexpr const char* kTag = "KruztyDynamicsSDK";
 std::mutex gMutex;
 std::unique_ptr<discordpp::Client> gClient;
+JavaVM* gJavaVm = nullptr;
+jclass gMainActivityClass = nullptr;
+jmethodID gDispatchSdkLog = nullptr;
 std::thread gCallbackThread;
 std::atomic<bool> gCallbacksRunning{false};
 std::atomic<bool> gReady{false};
 discordpp::Activity gPendingActivity{};
 bool gHasPendingActivity = false;
 std::optional<discordpp::StatusType> gPendingOnlineStatus;
+std::string safeError(std::string error);
+
+void emitDiagnostic(const char* level, const std::string& message) {
+  const int priority = std::string(level) == "error" ? ANDROID_LOG_ERROR :
+    std::string(level) == "warn" ? ANDROID_LOG_WARN : ANDROID_LOG_INFO;
+  __android_log_write(priority, kTag, message.c_str());
+  if (gJavaVm == nullptr) return;
+  JNIEnv* env = nullptr;
+  bool attached = false;
+  const jint status = gJavaVm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6);
+  if (status == JNI_EDETACHED) {
+    if (gJavaVm->AttachCurrentThread(&env, nullptr) != JNI_OK) return;
+    attached = true;
+  } else if (status != JNI_OK) {
+    return;
+  }
+  if (gMainActivityClass != nullptr && gDispatchSdkLog != nullptr) {
+    jstring javaLevel = env->NewStringUTF(level);
+    jstring javaMessage = env->NewStringUTF(message.c_str());
+    env->CallStaticVoidMethod(gMainActivityClass, gDispatchSdkLog, javaLevel, javaMessage);
+    env->DeleteLocalRef(javaLevel);
+    env->DeleteLocalRef(javaMessage);
+  }
+  if (env->ExceptionCheck()) env->ExceptionClear();
+  if (attached) gJavaVm->DetachCurrentThread();
+}
 
 void setOnlineStatus(discordpp::StatusType status) {
   if (!gClient || !gReady.load()) return;
@@ -31,15 +60,20 @@ void setOnlineStatus(discordpp::StatusType status) {
       const auto message = std::string("Online status update failed: type=") +
         std::to_string(static_cast<int>(result.Type())) +
         " status=" + std::to_string(static_cast<int>(result.Status())) +
-        " code=" + std::to_string(result.ErrorCode());
-      __android_log_write(ANDROID_LOG_WARN, kTag, message.c_str());
+        " code=" + std::to_string(result.ErrorCode()) +
+        " response=" + safeError(result.Error());
+      emitDiagnostic("warn", message);
+    } else {
+      emitDiagnostic("info", "Discord SDK online status accepted: status=" +
+        std::to_string(static_cast<int>(result.Status())) + " response=" + safeError(result.ResponseBody()));
     }
   });
 }
 
 std::string safeError(std::string error) {
   static const std::regex tokenPattern(R"((Bearer\s+)?[A-Za-z0-9_-]{32,}\.[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{20,}|mfa\.[A-Za-z0-9_-]{50,})", std::regex::icase);
-  return std::regex_replace(error, tokenPattern, "[redacted]");
+  static const std::regex keyPattern(R"(([?&](api_key|key|access_token|refresh_token)=)[^&#\s]+)", std::regex::icase);
+  return std::regex_replace(std::regex_replace(error, tokenPattern, "[redacted]"), keyPattern, "$1[redacted]");
 }
 
 std::string toString(JNIEnv* env, jstring value) {
@@ -53,6 +87,7 @@ std::string toString(JNIEnv* env, jstring value) {
 
 void startCallbacks() {
   if (gCallbacksRunning.exchange(true)) return;
+  emitDiagnostic("info", "Discord SDK callback pump started; polling interval=16ms");
   gCallbackThread = std::thread([] {
     while (gCallbacksRunning.load()) {
       discordpp::RunCallbacks();
@@ -67,6 +102,7 @@ void updatePending() {
     gPendingOnlineStatus.reset();
   }
   if (gClient && gReady.load() && gHasPendingActivity) {
+    emitDiagnostic("info", "Discord SDK gateway ready; sending rich presence update");
     gClient->UpdateRichPresence(gPendingActivity, [](discordpp::ClientResult result) {
       if (!result.Successful()) {
         const auto message = std::string("Rich presence update failed: type=") +
@@ -75,11 +111,30 @@ void updatePending() {
           " code=" + std::to_string(result.ErrorCode()) +
           " retryable=" + (result.Retryable() ? "true" : "false") +
           " error=" + safeError(result.Error());
-        __android_log_write(ANDROID_LOG_WARN, kTag, message.c_str());
+        emitDiagnostic("warn", message);
+      } else {
+        emitDiagnostic("info", "Discord SDK presence accepted: status=" +
+          std::to_string(static_cast<int>(result.Status())) + " response=" + safeError(result.ResponseBody()));
       }
     });
   }
 }
+
+}
+
+extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void*) {
+  gJavaVm = vm;
+  JNIEnv* env = nullptr;
+  if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) == JNI_OK) {
+    jclass localClass = env->FindClass("seiraneko/kruztydynamics/MainActivity");
+    if (localClass != nullptr) {
+      gMainActivityClass = static_cast<jclass>(env->NewGlobalRef(localClass));
+      gDispatchSdkLog = env->GetStaticMethodID(gMainActivityClass, "dispatchSdkLog", "(Ljava/lang/String;Ljava/lang/String;)V");
+      env->DeleteLocalRef(localClass);
+    }
+    if (env->ExceptionCheck()) env->ExceptionClear();
+  }
+  return JNI_VERSION_1_6;
 }
 
 extern "C" JNIEXPORT void JNICALL
@@ -90,6 +145,9 @@ Java_seiraneko_kruztydynamics_DiscordSocialSdkNative_initialize(JNIEnv*, jobject
     gClient->SetApplicationId(static_cast<uint64_t>(applicationId));
     gClient->SetStatusChangedCallback([](discordpp::Client::Status status, discordpp::Client::Error error, int32_t detail) {
       gReady.store(status == discordpp::Client::Status::Ready);
+      emitDiagnostic("info", std::string("Discord SDK gateway state changed: state=") +
+        std::to_string(static_cast<int>(status)) + " ready=" + (gReady.load() ? "true" : "false") +
+        " error=" + std::to_string(static_cast<int>(error)) + " detail=" + std::to_string(detail));
       if (error != discordpp::Client::Error::None) {
         const auto message = std::string("Discord SDK status error: error=") +
           std::to_string(static_cast<int>(error)) + " detail=" + std::to_string(detail);
@@ -183,7 +241,7 @@ Java_seiraneko_kruztydynamics_DiscordSocialSdkNative_updatePresence(
 extern "C" JNIEXPORT void JNICALL
 Java_seiraneko_kruztydynamics_DiscordSocialSdkNative_setOnlineStatus(JNIEnv*, jobject, jint status) {
   std::lock_guard<std::mutex> lock(gMutex);
-  const auto boundedStatus = std::clamp(status, 0, 5);
+  const auto boundedStatus = std::clamp(status, 0, 6);
   gPendingOnlineStatus = static_cast<discordpp::StatusType>(boundedStatus);
   updatePending();
 }

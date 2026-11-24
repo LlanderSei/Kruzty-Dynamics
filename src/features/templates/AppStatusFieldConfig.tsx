@@ -5,6 +5,7 @@ import { Button } from '../../components/Button'
 import { Divider } from '../../components/Divider'
 import { useBackHandler } from '../navigation/useBackHandler'
 import type { AppFieldTemplates } from '../../types'
+import { DEFAULT_APP_FIELDS, normalizeAppFieldTemplates } from './fieldTemplates'
 import { notifyServiceConfigChanged } from '../dashboard/serviceConfig'
 import { useTranslation } from '../../i18n/useTranslation'
 
@@ -12,28 +13,21 @@ interface AppStatusFieldConfigProps {
   onBack: () => void
 }
 
-const DEFAULT_APP_FIELDS: AppFieldTemplates = {
-  title: '{{AppName}}',
-  line1: '{{AppDetails}}',
-  line2: '{{AppState}}',
-  smallText: '{{AppSmallText}}',
-  smallImage: '{{AppSmallUrl}}',
-  bigText: '{{AppName}}',
-  bigImage: '{{AppImageUrl}}',
-}
-
 const APP_FIELDS_STORAGE_KEY = 'kd_app_field_templates'
 
 function loadAppFields(): AppFieldTemplates {
   try {
     const saved = localStorage.getItem(APP_FIELDS_STORAGE_KEY)
-    return saved ? { ...DEFAULT_APP_FIELDS, ...JSON.parse(saved) } : DEFAULT_APP_FIELDS
+    if (!saved) return DEFAULT_APP_FIELDS
+    return normalizeAppFieldTemplates(JSON.parse(saved))
   } catch {
     return DEFAULT_APP_FIELDS
   }
 }
 
 const APP_TOKENS_DOCS = [
+  { token: '{{AppActivityType}}', description: 'appTokenActivityType' },
+  { token: '{{AppPlatformType}}', description: 'appTokenPlatformType' },
   { token: '{{AppName}}', description: 'appTokenName' },
   { token: '{{AppDetails}}', description: 'appTokenDetails' },
   { token: '{{AppState}}', description: 'appTokenState' },
@@ -156,57 +150,24 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
       {/* Body: Scrollable medium-height textboxes */}
       <div className="flex-1 overflow-y-auto overscroll-y-contain relative">
         <div className="max-w-xl w-full mx-auto p-4 space-y-4 pb-28">
-          {/* Field 1: Title */}
+          {/* Discord activity name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.title}</label>
-            <textarea
-              rows={2}
-              value={fields.title}
-              onChange={e => handleFieldChange('title', e.target.value)}
-              placeholder="e.g. {{AppName}}"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
+            <label className="text-xs font-semibold block">{t.configFields.titleHeader}</label>
+            <textarea rows={2} value={fields.title} onChange={e => handleFieldChange('title', e.target.value)} placeholder="e.g. {{AppName}}" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
-          {/* Field 2: Line 1 (Details) */}
+          {/* Discord activity details */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.line1}</label>
-            <textarea
-              rows={2}
-              value={fields.line1 || ''}
-              onChange={e => handleFieldChange('line1', e.target.value)}
-              placeholder="null / empty or custom expression"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
+            <label className="text-xs font-semibold block">{t.configFields.detailsField}</label>
+            <textarea rows={2} value={fields.details} onChange={e => handleFieldChange('details', e.target.value)} placeholder="null / empty or custom expression" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
-          {/* Field 3: Line 2 (State) */}
+          {/* Discord activity state */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.line2}</label>
-            <textarea
-              rows={2}
-              value={fields.line2 || ''}
-              onChange={e => handleFieldChange('line2', e.target.value)}
-              placeholder="null / empty or custom expression"
-              className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none"
-              style={{
-                backgroundColor: 'var(--color-bg-surface)',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-base)',
-              }}
-            />
+            <label className="text-xs font-semibold block">{t.configFields.stateField}</label>
+            <textarea rows={2} value={fields.state} onChange={e => handleFieldChange('state', e.target.value)} placeholder="null / empty or custom expression" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
@@ -315,6 +276,9 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
         }
       >
         <div className="space-y-2.5 text-xs">
+          <p className="text-[11px] leading-snug" style={{ color: 'var(--color-text-muted)' }}>
+            {t.configFields.appExpressionOperators}
+          </p>
           {APP_TOKENS_DOCS.map(item => (
             <div
               key={item.token}

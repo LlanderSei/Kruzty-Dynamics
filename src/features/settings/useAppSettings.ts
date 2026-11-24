@@ -63,11 +63,20 @@ const DEFAULT_SETTINGS: AppSettings = {
   globalActivityStatus: 'online',
 }
 
+function normalizeSavedSettings(value: Partial<AppSettings>): AppSettings {
+  const normalized = { ...DEFAULT_SETTINGS, ...value }
+  if (Number(normalized.globalActivityType) === 1) {
+    normalized.globalActivityType = 0
+    normalized.globalActivityStatus = 'streaming'
+  }
+  return normalized
+}
+
 export function useAppSettings() {
   const [settings, setSettings] = useState<AppSettings>(() => {
     try {
       const saved = localStorage.getItem(SETTINGS_STORAGE_KEY)
-      if (saved) return { ...DEFAULT_SETTINGS, ...JSON.parse(saved) }
+      if (saved) return normalizeSavedSettings(JSON.parse(saved))
     } catch {
       // Fallback
     }
@@ -97,7 +106,7 @@ export function useAppSettings() {
       }
       try {
         const saved = localStorage.getItem(SETTINGS_STORAGE_KEY)
-        if (saved) setSettings({ ...DEFAULT_SETTINGS, ...JSON.parse(saved) })
+        if (saved) setSettings(normalizeSavedSettings(JSON.parse(saved)))
       } catch {
         // Ignore invalid or unavailable storage.
       }
