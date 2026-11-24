@@ -201,7 +201,6 @@ function MainShell() {
   useEffect(() => {
     const all = getLogs()
     setLogs(all)
-    // eslint-disable-next-line no-console
   }, [isLogModalOpen])
 
   const buildLogText = () => logs.map(entry => `[${new Date(entry.ts).toISOString()}] [${entry.level.toUpperCase()}] ${entry.msg}`).join('\n')

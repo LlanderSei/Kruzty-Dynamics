@@ -269,7 +269,12 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     }
 
     const requestId = `${Date.now()}-${Math.random().toString(36).slice(2)}`
-    let timeout: number | undefined
+    const timeout = window.setTimeout(() => {
+      setIsLoadingApps(false)
+      setAppLoadError('App list refresh timed out. Showing the last saved app list.')
+      setProfilesLoaded(true)
+    }, 15000)
+
     const handleInstalledAppsLoaded = (event: Event) => {
       const detail = (event as CustomEvent<{ requestId: string; payload: string }>).detail
       if (detail.requestId !== requestId) return
@@ -305,18 +310,13 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     }
 
     window.addEventListener('installedAppsLoaded', handleInstalledAppsLoaded)
-    timeout = window.setTimeout(() => {
-      setIsLoadingApps(false)
-      setAppLoadError('App list refresh timed out. Showing the last saved app list.')
-      setProfilesLoaded(true)
-    }, 15000)
     bridge.getInstalledAppsAsync(requestId)
 
     return () => {
       window.removeEventListener('installedAppsLoaded', handleInstalledAppsLoaded)
       window.clearTimeout(timeout)
     }
-  }, [savedProfilesOnLoad])
+  }, [savedProfilesOnLoad, t.catalogue.androidOnly, t.catalogue.loadAppsFailed])
 
   useEffect(() => {
     if (!profilesLoaded) return

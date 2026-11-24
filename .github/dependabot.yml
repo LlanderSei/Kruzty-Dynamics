@@ -1,0 +1,29 @@
+version: 2
+updates:
+  # Maintain dependencies for npm (React 19, TailwindCSS, Tauri API)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+
+  # Maintain dependencies for Cargo (Rust / Tauri v2 backend)
+  - package-ecosystem: "cargo"
+    directory: "/src-tauri"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+
+  # Maintain dependencies for Gradle (Android native app & plugins)
+  - package-ecosystem: "gradle"
+    directory: "/src-tauri/gen/android"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+
+  # Maintain dependencies for GitHub Actions workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10

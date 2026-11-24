@@ -79,8 +79,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
     }
     window.addEventListener('discordSocialAccountLinked', handleSocialAccountLinked)
     window.addEventListener('discordSocialLoginError', handleSocialLoginError)
-    const handleCaptured = async (e: any) => {
-      const token = e.detail?.token
+    const handleCaptured = async (e: Event) => {
+      const token = (e as CustomEvent<{ token?: string }>).detail?.token
       if (token) {
         addLog('info', `Onboarding: token captured from native portal (len=${token.length})`)
         setIsValidatingToken(true)
@@ -115,7 +115,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       window.removeEventListener('discordSocialLoginError', handleSocialLoginError)
       window.removeEventListener('discordTokenCaptured', handleCaptured)
     }
-  }, [accounts, addAccount])
+  }, [accounts, addAccount, activeAccount?.id])
 
   // Listen for Discord OAuth2 token from popup callback (web/dev mode)
   useEffect(() => {

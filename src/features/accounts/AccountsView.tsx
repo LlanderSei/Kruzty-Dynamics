@@ -69,8 +69,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
     }
     window.addEventListener('discordSocialAccountLinked', handleSocialAccountLinked)
     window.addEventListener('discordSocialLoginError', handleSocialLoginError)
-    const handleCaptured = async (e: any) => {
-      const token = e.detail?.token
+    const handleCaptured = async (e: Event) => {
+      const token = (e as CustomEvent<{ token?: string }>).detail?.token
       if (token) {
         addLog('info', `AccountsView: token captured from native portal (len=${token.length})`)
         setIsValidatingToken(true)
@@ -104,7 +104,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
       window.removeEventListener('discordSocialLoginError', handleSocialLoginError)
       window.removeEventListener('discordTokenCaptured', handleCaptured)
     }
-  }, [accounts, onAddAccount, t.toast.duplicateAccount])
+  }, [accounts, onAddAccount, t.toast.duplicateAccount, activeAccount?.id])
 
   const inactiveAccounts = accounts.filter(a => !a.isActive)
 

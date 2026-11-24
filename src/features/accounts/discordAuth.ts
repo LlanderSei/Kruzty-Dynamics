@@ -20,11 +20,8 @@ export function addLog(level: LogEntry['level'], msg: string) {
   if (LOG_STORE.length > MAX_LOGS) LOG_STORE.shift()
   const tag = level === 'error' ? '[ERROR]' : level === 'warn' ? '[WARN]' : '[INFO]'
   const output = `[Dynamics] ${tag} ${entry.msg}`
-  // eslint-disable-next-line no-console
   if (level === 'error') console.error(output)
-  // eslint-disable-next-line no-console
   else if (level === 'warn') console.warn(output)
-  // eslint-disable-next-line no-console
   else console.info(output)
 }
 export function getLogs(): LogEntry[] {
@@ -123,11 +120,11 @@ export async function fetchDiscordUserProfile(rawToken: string): Promise<{
     }
 
     return { success: true, account }
-  } catch (err: any) {
+  } catch (err: unknown) {
     // If running in development with CORS / offline restriction, provide informative message or fallback
     return {
       success: false,
-      error: err?.message ? `Network request failed: ${err.message}` : 'Failed to reach Discord API',
+      error: err instanceof Error ? `Network request failed: ${err.message}` : 'Failed to reach Discord API',
     }
   }
 }
