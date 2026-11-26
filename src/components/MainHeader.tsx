@@ -22,23 +22,23 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
   const { t } = useTranslation()
 
   // Title & Subtext based on active tab
-  let title = t.header.welcome
-  let subtext = t.header.dashboardSubtitle
+  let title = t.pages.service.title.welcome
+  let subtext = t.pages.service.subtitle
 
   if (activeTab === 'service') {
     const name = activeAccount?.displayName || activeAccount?.username
-    title = name ? t.header.welcomeNamed.replace('{name}', name) : t.header.welcome
-    subtext = t.header.dashboardSubtitle
+    title = name ? t.pages.service.title.welcomeNamed.replace('{name}', name) : t.pages.service.title.welcome
+    subtext = t.pages.service.subtitle
   } else if (activeTab === 'accounts') {
-    title = t.accounts.title
+    title = t.pages.accounts.title
     subtext =
       accountCount === 0
-        ? t.accounts.noAccounts
-      : (accountCount === 1 ? t.header.accountsLoggedInOne : t.header.accountsLoggedInMany)
+        ? t.pages.accounts.subtitle.noAccounts
+      : (accountCount === 1 ? t.pages.accounts.subtitle.loggedInOne : t.pages.accounts.subtitle.loggedInMany)
         .replace('{n}', String(accountCount))
   } else if (activeTab === 'settings') {
-    title = t.settings.title
-    subtext = t.settings.subtitle
+    title = t.pages.settings.title
+    subtext = t.pages.settings.subtitle
   }
 
   return (
@@ -75,8 +75,8 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-muted)',
           }}
-          title={t.header.liveLogs}
-          aria-label={t.header.viewLogs}
+          title={t.buttons.logs.live}
+          aria-label={t.buttons.logs.view}
         >
           <ScrollText className="w-4 h-4" />
         </button>

@@ -322,12 +322,12 @@ function MainShell() {
       <Modal
         isOpen={isLogModalOpen}
         onClose={() => setIsLogModalOpen(false)}
-        title={t.logs.title}
-        subtitle={t.logs.subtitle}
+        title={t.modals.logs.title}
+        subtitle={t.modals.logs.subtitle}
         headerActions={
           <>
-            <button type="button" onClick={() => void copyLogs()} className="p-1.5 rounded-lg" aria-label={t.logs.copy} title={t.logs.copy}><Copy className="w-4 h-4" /></button>
-            <button type="button" onClick={exportLogs} className="p-1.5 rounded-lg" aria-label={t.logs.export} title={t.logs.export}><Download className="w-4 h-4" /></button>
+            <button type="button" onClick={() => void copyLogs()} className="p-1.5 rounded-lg" aria-label={t.modals.logs.copy} title={t.modals.logs.copy}><Copy className="w-4 h-4" /></button>
+            <button type="button" onClick={exportLogs} className="p-1.5 rounded-lg" aria-label={t.modals.logs.export} title={t.modals.logs.export}><Download className="w-4 h-4" /></button>
           </>
         }
       >
@@ -340,7 +340,7 @@ function MainShell() {
           }}
         >
           {logs.length === 0 ? (
-            <div className="text-zinc-400">{t.logs.empty}</div>
+            <div className="text-zinc-400">{t.modals.logs.empty}</div>
           ) : (
             logs.map((entry, i) => {
               const color =

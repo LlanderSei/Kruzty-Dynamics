@@ -115,14 +115,14 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-base)',
           }}
-          aria-label={t.configFields.back}
+          aria-label={t.subPages.buttons.back}
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-bold truncate">{t.mediaPresence.title}</h1>
+          <h1 className="text-sm font-bold truncate">{t.subPages.media.presenceConfig.title}</h1>
           <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-            {t.mediaPresence.subtitle}
+            {t.subPages.media.presenceConfig.subtitle}
           </p>
         </div>
       </header>
@@ -140,9 +140,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">{t.mediaPresence.priority}</span>
+                <span className="text-xs font-bold block">{t.subPages.media.presenceConfig.mediaPriority.title}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.mediaPresence.priorityDesc}
+                  {t.subPages.media.presenceConfig.mediaPriority.desc}
                 </p>
               </div>
 
@@ -151,8 +151,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
                 onClick={() => setHelpModal('priority')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title={t.mediaPresence.priorityHelp}
-                aria-label={t.mediaPresence.priorityHelp}
+                title={t.subPages.media.presenceConfig.mediaPriority.help}
+                aria-label={t.subPages.media.presenceConfig.mediaPriority.help}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -163,8 +163,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setPriorityMode(e.target.value as PriorityMode)}
               fullWidth={true}
             >
-              <option value="priority-media">{t.mediaPresence.priorityPlaying}</option>
-              <option value="switches-between">{t.mediaPresence.switchesBetween}</option>
+              <option value="priority-media">{t.choices.mediaPriority.priorityPlaying}</option>
+              <option value="switches-between">{t.choices.mediaPriority.switchesBetween}</option>
             </Select>
           </div>
 
@@ -177,9 +177,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div>
-              <span className="text-xs font-bold block">{t.mediaPresence.scope}</span>
+              <span className="text-xs font-bold block">{t.subPages.media.presenceConfig.mediaScope.title}</span>
               <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                {t.mediaPresence.scopeDesc}
+                {t.subPages.media.presenceConfig.mediaScope.desc}
               </p>
             </div>
 
@@ -188,8 +188,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setMediaScope(e.target.value as MediaDetectionScope)}
               fullWidth={true}
             >
-              <option value="all">{t.mediaPresence.allSessions}</option>
-              <option value="enabled-only">{t.mediaPresence.enabledAppsOnly}</option>
+              <option value="all">{t.choices.mediaScope.allSessions}</option>
+              <option value="enabled-only">{t.choices.mediaScope.enabledAppsOnly}</option>
             </Select>
           </div>
 
@@ -202,9 +202,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div>
-              <span className="text-xs font-bold block">{t.mediaPresence.typeResolution}</span>
+              <span className="text-xs font-bold block">{t.subPages.media.presenceConfig.typeResolution.title}</span>
               <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                {t.mediaPresence.typeResolutionDesc}
+                {t.subPages.media.presenceConfig.typeResolution.desc}
               </p>
             </div>
 
@@ -213,8 +213,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setActivityTypeMode(e.target.value as MediaActivityTypeMode)}
               fullWidth={true}
             >
-              <option value="auto-adaptive">{t.mediaPresence.autoAdaptive}</option>
-              <option value="app-profile-override">{t.mediaPresence.profileOverride}</option>
+              <option value="auto-adaptive">{t.choices.typeResolution.autoAdaptive}</option>
+              <option value="app-profile-override">{t.choices.typeResolution.profileOverride}</option>
             </Select>
           </div>
 
@@ -227,11 +227,11 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">{t.mediaPresence.timeRemaining}</span>
+              <span className="text-xs font-bold block">{t.subPages.media.presenceConfig.timeRemaining.title}</span>
               <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
                 {timeRemaining
-                  ? t.mediaPresence.timeRemainingDesc
-                  : t.mediaPresence.appTimestamp}
+                  ? t.subPages.media.presenceConfig.timeRemaining.desc
+                  : t.subPages.media.presenceConfig.timeRemaining.appTimestamp}
               </p>
             </div>
 
@@ -239,7 +239,7 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               <Switch
                 checked={timeRemaining}
                 onChange={setTimeRemaining}
-                aria-label={t.mediaPresence.timeRemaining}
+                aria-label={t.subPages.media.presenceConfig.timeRemaining.title}
               />
             </div>
           </div>
@@ -254,9 +254,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">{t.mediaPresence.pausedResolution}</span>
+                <span className="text-xs font-bold block">{t.subPages.media.presenceConfig.pausedResolution.title}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.mediaPresence.pausedDesc}
+                  {t.subPages.media.presenceConfig.pausedResolution.desc}
                 </p>
               </div>
 
@@ -265,8 +265,8 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
                 onClick={() => setHelpModal('paused')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title={t.mediaPresence.pausedHelp}
-                aria-label={t.mediaPresence.pausedHelp}
+                title={t.subPages.media.presenceConfig.pausedResolution.help}
+                aria-label={t.subPages.media.presenceConfig.pausedResolution.help}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -277,9 +277,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
               onChange={e => setPausedResolution(e.target.value as PausedMediaResolution)}
               fullWidth={true}
             >
-              <option value="show-paused">{t.mediaPresence.showPaused}</option>
-              <option value="fallback-app">{t.mediaPresence.fallbackApp}</option>
-              <option value="hide-status">{t.mediaPresence.hidePaused}</option>
+              <option value="show-paused">{t.choices.pausedResolution.showPaused}</option>
+              <option value="fallback-app">{t.choices.pausedResolution.fallbackApp}</option>
+              <option value="hide-status">{t.choices.pausedResolution.hidePaused}</option>
             </Select>
           </div>
 
@@ -293,9 +293,9 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">{t.mediaPresence.statusFields}</span>
+              <span className="text-xs font-bold block">{t.subPages.media.presenceConfig.statusFieldConfig.title}</span>
               <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.mediaPresence.statusFieldsDesc}
+                {t.subPages.media.presenceConfig.statusFieldConfig.desc}
               </p>
             </div>
             <div className="p-1.5 rounded-xl border" style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}>
@@ -309,20 +309,20 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
       <Modal
         isOpen={helpModal === 'priority'}
         onClose={() => setHelpModal(null)}
-        title={t.mediaPresence.priorityStrategy}
-        subtitle={t.mediaPresence.priorityStrategyDesc}
+        title={t.subPages.media.presenceConfig.mediaPriority.modal.title}
+        subtitle={t.subPages.media.presenceConfig.mediaPriority.modal.desc}
         footer={
           <Button size="sm" variant="primary" onClick={() => setHelpModal(null)}>
-            {t.appPresence.understood}
+            {t.buttons.understood}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            <strong>{t.mediaPresence.priorityPlaying}:</strong> {t.mediaPresence.priorityHelpText}
+            <strong>{t.choices.mediaPriority.priorityPlaying}:</strong> {t.subPages.media.presenceConfig.mediaPriority.modal.details.priorityPlaying}
           </p>
           <p>
-            <strong>{t.mediaPresence.switchesBetween}:</strong> {t.mediaPresence.switchHelpText}
+            <strong>{t.choices.mediaPriority.switchesBetween}:</strong> {t.subPages.media.presenceConfig.mediaPriority.modal.details.switchesBetween}
           </p>
         </div>
       </Modal>
@@ -331,23 +331,23 @@ export const MediaPresenceConfig: React.FC<MediaPresenceConfigProps> = ({
       <Modal
         isOpen={helpModal === 'paused'}
         onClose={() => setHelpModal(null)}
-        title={t.mediaPresence.pausedResolution}
-        subtitle={t.mediaPresence.pausedOptions}
+        title={t.subPages.media.presenceConfig.pausedResolution.title}
+        subtitle={t.subPages.media.presenceConfig.pausedResolution.modal.desc}
         footer={
           <Button size="sm" variant="primary" onClick={() => setHelpModal(null)}>
-            {t.appPresence.understood}
+            {t.buttons.understood}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            <strong>{t.mediaPresence.showPaused}:</strong> {t.mediaPresence.showPausedHelp}
+            <strong>{t.choices.pausedResolution.showPaused}:</strong> {t.subPages.media.presenceConfig.pausedResolution.modal.details.showPaused}
           </p>
           <p>
-            <strong>{t.mediaPresence.fallbackApp}:</strong> {t.mediaPresence.fallbackHelp}
+            <strong>{t.choices.pausedResolution.fallbackApp}:</strong> {t.subPages.media.presenceConfig.pausedResolution.modal.details.fallback}
           </p>
           <p>
-            <strong>{t.mediaPresence.hidePaused}:</strong> {t.mediaPresence.hidePausedHelp}
+            <strong>{t.choices.pausedResolution.hidePaused}:</strong> {t.subPages.media.presenceConfig.pausedResolution.modal.details.hidePaused}
           </p>
         </div>
       </Modal>

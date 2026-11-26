@@ -202,11 +202,11 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     event.target.value = ''
     if (!file) return
     if (!file.type.startsWith('image/')) {
-      setIconUploadError(t.catalogue.chooseImage)
+      setIconUploadError(t.service.imgbb.chooseImage)
       return
     }
     if (file.size > 32 * 1024 * 1024) {
-      setIconUploadError(t.catalogue.imageTooLarge)
+      setIconUploadError(t.service.imgbb.imageTooLarge)
       return
     }
     setIconUploadError('')
@@ -219,7 +219,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       window.setTimeout(() => setIconUploadProgress(null), 900)
     } catch (error) {
       setIconUploadProgress(null)
-      setIconUploadError(error instanceof Error ? error.message : t.catalogue.imageUploadFailed)
+      setIconUploadError(error instanceof Error ? error.message : t.service.imgbb.imageUploadFailed)
     }
   }
 
@@ -229,11 +229,11 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
     if (!file) return
 
     if (!file.type.startsWith('image/')) {
-      setIconUploadError(t.catalogue.chooseImage)
+      setIconUploadError(t.service.imgbb.chooseImage)
       return
     }
     if (file.size > 32 * 1024 * 1024) {
-      setIconUploadError(t.catalogue.imageTooLarge)
+      setIconUploadError(t.service.imgbb.imageTooLarge)
       return
     }
     setIconUploadError('')
@@ -251,7 +251,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       window.setTimeout(() => setIconUploadProgress(null), 900)
     } catch (error) {
       setIconUploadProgress(null)
-      setIconUploadError(error instanceof Error ? error.message : t.catalogue.iconUploadFailed)
+      setIconUploadError(error instanceof Error ? error.message : t.service.imgbb.iconUploadFailed)
     }
   }
 
@@ -262,7 +262,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
 
     if (!bridge?.getInstalledAppsAsync) {
       setApps(prev => prev.length > 0 ? prev : savedProfilesOnLoad)
-      setAppLoadError(t.catalogue.androidOnly)
+      setAppLoadError(t.subPages.application.catalogue.androidOnly)
       setIsLoadingApps(false)
       setProfilesLoaded(true)
       return
@@ -282,7 +282,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       try {
         const installedApps = JSON.parse(detail.payload) as InstalledApp[] | { error?: string }
         if (!Array.isArray(installedApps)) {
-          throw new Error(installedApps.error || t.catalogue.loadAppsFailed)
+          throw new Error(installedApps.error || t.subPages.application.catalogue.loadAppsFailed)
         }
 
         try {
@@ -301,7 +301,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
         ))
         setAppLoadError('')
       } catch (error) {
-        setAppLoadError(error instanceof Error ? error.message : t.catalogue.loadAppsFailed)
+        setAppLoadError(error instanceof Error ? error.message : t.subPages.application.catalogue.loadAppsFailed)
       } finally {
         if (timeout !== undefined) window.clearTimeout(timeout)
         setIsLoadingApps(false)
@@ -316,7 +316,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       window.removeEventListener('installedAppsLoaded', handleInstalledAppsLoaded)
       window.clearTimeout(timeout)
     }
-  }, [savedProfilesOnLoad, t.catalogue.androidOnly, t.catalogue.loadAppsFailed])
+  }, [savedProfilesOnLoad, t.subPages.application.catalogue.androidOnly, t.subPages.application.catalogue.loadAppsFailed])
 
   useEffect(() => {
     if (!profilesLoaded) return
@@ -505,15 +505,15 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-base)',
             }}
-            aria-label={t.catalogue.back}
+            aria-label={t.subPages.buttons.back}
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
 
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-bold truncate">{t.catalogue.title}</h1>
+            <h1 className="text-sm font-bold truncate">{t.subPages.application.catalogue.title}</h1>
             <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-              {t.catalogue.summary.replace('{apps}', String(apps.length)).replace('{enabled}', String(enabledCount))}
+              {t.subPages.application.catalogue.subtitle.replace('{apps}', String(apps.length)).replace('{enabled}', String(enabledCount))}
             </p>
           </div>
         </div>
@@ -533,8 +533,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title={t.catalogue.batch}
-            aria-label={t.catalogue.batch}
+            title={t.buttons.batch}
+            aria-label={t.buttons.batch}
           >
             <CheckSquare className="w-4 h-4" />
           </button>
@@ -567,7 +567,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 type="text"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
-                placeholder={t.catalogue.search}
+                placeholder={t.subPages.application.catalogue.search}
                 className="w-full bg-transparent border-0 focus:outline-hidden text-xs"
                 style={{ color: 'var(--color-text-base)' }}
               />
@@ -603,8 +603,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                     ? 'var(--color-accent)'
                     : 'var(--color-text-muted)',
               }}
-              title={t.catalogue.filter}
-              aria-label={t.catalogue.filter}
+              title={t.subPages.application.catalogue.buttons.filter}
+              aria-label={t.subPages.application.catalogue.buttons.filter}
             >
               <Filter className="w-4 h-4" />
             </button>
@@ -624,8 +624,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   backgroundColor: 'rgba(239, 68, 68, 0.1)',
                   borderColor: 'rgba(239, 68, 68, 0.25)',
                 }}
-                title={t.catalogue.clearFilters}
-                aria-label={t.catalogue.clearFilters}
+                title={t.subPages.application.catalogue.buttons.clearFilters}
+                aria-label={t.subPages.application.catalogue.buttons.clearFilters}
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
@@ -643,14 +643,14 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
             >
               <div className="flex items-center justify-between">
                 <span className="font-semibold" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.catalogue.filterOptions}
+                  {t.labels.filterOptions}
                 </span>
                 <button
                   type="button"
                   onClick={() => setFilterActive(false)}
                   className="text-[11px] text-[var(--color-text-muted)] hover:underline cursor-pointer"
                 >
-                  {t.catalogue.close}
+                  {t.buttons.close}
                 </button>
               </div>
 
@@ -667,7 +667,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                     color: filterEnabledOnly ? 'var(--color-accent)' : 'var(--color-text-base)',
                   }}
                 >
-                  <span className="font-medium text-xs">{t.catalogue.enabledOnly}</span>
+                  <span className="font-medium text-xs">{t.choices.enabledOnly}</span>
                   {filterEnabledOnly && <Check className="w-3.5 h-3.5" />}
                 </button>
 
@@ -681,12 +681,12 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   }}
                   fullWidth={true}
                 >
-                  <option value="all">{t.catalogue.allActivityTypes}</option>
-                  <option value="global">{t.catalogue.globalDefault}</option>
-                  <option value={0}>{t.catalogue.playing}</option>
-                  <option value={2}>{t.catalogue.listening}</option>
-                  <option value={3}>{t.catalogue.watching}</option>
-                  <option value={5}>{t.catalogue.competing}</option>
+                  <option value="all">{t.choices.activityType.all}</option>
+                  <option value="global">{t.choices.globalDefault}</option>
+                  <option value={0}>{t.choices.activityType.playing}</option>
+                  <option value={2}>{t.choices.activityType.listening}</option>
+                  <option value={3}>{t.choices.activityType.watching}</option>
+                  <option value={5}>{t.choices.activityType.competing}</option>
                 </Select>
 
                 <Select
@@ -694,14 +694,14 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   onChange={e => setFilterActivityStatus(e.target.value as AppStatusSelection | 'all')}
                   fullWidth={true}
                 >
-                  <option value="all">{t.catalogue.allActivityStatuses}</option>
-                  <option value="global">{t.catalogue.globalDefault}</option>
-                  <option value="online">{t.catalogue.online}</option>
-                  <option value="idle">{t.catalogue.idle}</option>
-                  <option value="dnd">{t.catalogue.dnd}</option>
-                  <option value="offline">{t.catalogue.offline}</option>
-                  <option value="invisible">{t.catalogue.invisible}</option>
-                  <option value="streaming">{t.catalogue.streaming}</option>
+                  <option value="all">{t.choices.activityStatus.all}</option>
+                  <option value="global">{t.choices.globalDefault}</option>
+                  <option value="online">{t.choices.activityStatus.online}</option>
+                  <option value="idle">{t.choices.activityStatus.idle}</option>
+                  <option value="dnd">{t.choices.activityStatus.dnd}</option>
+                  <option value="offline">{t.choices.activityStatus.offline}</option>
+                  <option value="invisible">{t.choices.activityStatus.invisible}</option>
+                  <option value="streaming">{t.choices.activityStatus.streaming}</option>
                 </Select>
 
                 <Select
@@ -709,7 +709,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   onChange={e => setFilterPlatform(e.target.value)}
                   fullWidth={true}
                 >
-                  <option value="all">{t.catalogue.allPlatforms}</option>
+                  <option value="all">{t.choices.allPlatforms}</option>
                   {PLATFORM_OPTIONS.map(platform => <option key={platform} value={platform}>{platform}</option>)}
                 </Select>
               </div>
@@ -733,7 +733,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
           )}
           {isLoadingApps ? (
             <div className="p-8 text-center text-xs" style={{ color: 'var(--color-text-muted)' }}>
-              {t.catalogue.loading}
+              {t.subPages.application.catalogue.loading}
             </div>
           ) : filteredApps.length === 0 ? (
             <div className="p-8 text-center text-xs" style={{ color: 'var(--color-text-muted)' }}>
@@ -822,7 +822,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                         className="text-[10px] truncate"
                         style={{ color: 'var(--color-text-muted)' }}
                       >
-                        {t.catalogue.original} {app.systemLabel}
+                        {t.subPages.application.catalogue.modal.appProfileCustomization.original} {app.systemLabel}
                       </p>
                     )}
 
@@ -846,8 +846,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                           borderColor: 'var(--color-border)',
                           color: 'var(--color-text-muted)',
                         }}
-                        title={`${t.catalogue.customize} ${app.systemLabel}`}
-                        aria-label={t.catalogue.customize}
+                        title={`${t.subPages.application.catalogue.modal.appProfileCustomization.title} ${app.systemLabel}`}
+                        aria-label={t.subPages.application.catalogue.modal.appProfileCustomization.title}
                       >
                         <Sliders className="w-4 h-4" />
                       </button>
@@ -880,8 +880,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 backgroundColor: 'var(--color-accent)',
                 color: '#ffffff',
               }}
-              title={t.catalogue.bulkConfigure}
-              aria-label={t.catalogue.bulkConfigure}
+              title={t.subPages.application.catalogue.modal.bulkConfigure.title}
+              aria-label={t.subPages.application.catalogue.modal.bulkConfigure.title}
             >
               <Sliders className="w-5 h-5" />
             </button>
@@ -896,8 +896,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-base)',
               }}
-              title={t.catalogue.cancel}
-              aria-label={t.catalogue.cancel}
+              title={t.buttons.cancel}
+              aria-label={t.buttons.cancel}
             >
               <X className="w-5 h-5" />
             </button>
@@ -912,8 +912,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 backgroundColor: '#22c55e',
                 color: '#ffffff',
               }}
-              title={t.catalogue.apply}
-              aria-label={t.catalogue.apply}
+              title={t.buttons.apply}
+              aria-label={t.buttons.apply}
             >
               <CheckCheck className="w-5 h-5" />
             </button>
@@ -927,15 +927,15 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       <Modal
         isOpen={Boolean(customizingApp)}
         onClose={() => setCustomizingApp(null)}
-        title={`${t.catalogue.customize} ${customizingApp?.systemLabel || t.catalogue.appUnit}`}
-        subtitle={t.catalogue.profileSubtitle}
+        title={`${t.subPages.application.catalogue.modal.appProfileCustomization.title} ${customizingApp?.systemLabel || t.pluralization.app.singular}`}
+        subtitle={t.subPages.application.catalogue.modal.appProfileCustomization.subtitle}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setCustomizingApp(null)} disabled={iconUploadProgress !== null}>
-              {t.catalogue.cancel}
+              {t.buttons.cancel}
             </Button>
             <Button size="sm" variant="primary" onClick={saveCustomizeApp} disabled={iconUploadProgress !== null}>
-              {t.catalogue.apply}
+              {t.buttons.apply}
             </Button>
           </div>
         }
@@ -951,7 +951,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   disabled={iconUploadProgress !== null}
                   onClick={() => iconPickerRef.current?.click()}
                   className="flex h-full w-full items-center justify-center overflow-hidden rounded-2xl border-2 text-lg font-bold"
-                  title={t.catalogue.chooseIcon}
+                  title={t.subPages.application.catalogue.modal.appProfileCustomization.buttons.chooseIcon}
                   aria-label={`Choose icon for ${customizingApp.systemLabel}`}
                   style={{
                     borderColor: 'var(--color-border)',
@@ -975,8 +975,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                     disabled={iconUploadProgress !== null}
                     onClick={() => setEditIconOverride('')}
                     className="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full border shadow"
-                    title={t.catalogue.resetIcon}
-                    aria-label={t.catalogue.resetIcon}
+                    title={t.subPages.application.catalogue.modal.appProfileCustomization.buttons.resetIcon}
+                    aria-label={t.subPages.application.catalogue.modal.appProfileCustomization.buttons.resetIcon}
                     style={{
                       backgroundColor: 'var(--color-bg-surface)',
                       borderColor: 'var(--color-border)',
@@ -999,7 +999,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               {/* Projected App Name input */}
               <div className="flex-1 min-w-0">
                 <label className="block text-[11px] font-semibold mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.catalogue.projectedName}
+                  {t.subPages.application.catalogue.modal.appProfileCustomization.projectedName}
                 </label>
                 <input
                   type="text"
@@ -1024,7 +1024,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                   borderColor: 'var(--color-border)',
                   color: 'var(--color-text-muted)',
                 }}
-                title={t.catalogue.resetLabel}
+                title={t.subPages.application.catalogue.modal.appProfileCustomization.buttons.resetLabel}
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -1035,7 +1035,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
 
             {/* Activity Type Dropdown */}
             <div className="flex items-center justify-between gap-4 py-3">
-                <label className="text-xs font-semibold shrink-0">{t.catalogue.activityType}</label>
+                <label className="text-xs font-semibold shrink-0">{t.labels.activityType}</label>
                 <div className="w-48 sm:w-56 shrink-0">
                   <Select
                     value={editActivityType}
@@ -1046,38 +1046,38 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                     }
                     fullWidth={true}
                   >
-                    <option value="global">{t.catalogue.globalDefault}</option>
-                    <option value={0}>{t.catalogue.playing}</option>
-                    <option value={2}>{t.catalogue.listening}</option>
-                    <option value={3}>{t.catalogue.watching}</option>
-                    <option value={5}>{t.catalogue.competing}</option>
+                    <option value="global">{t.choices.globalDefault}</option>
+                    <option value={0}>{t.choices.activityType.playing}</option>
+                    <option value={2}>{t.choices.activityType.listening}</option>
+                    <option value={3}>{t.choices.activityType.watching}</option>
+                    <option value={5}>{t.choices.activityType.competing}</option>
                   </Select>
                 </div>
               </div>
 
               {/* Activity Status Dropdown */}
               <div className="flex items-center justify-between gap-4 py-3">
-                <label className="text-xs font-semibold shrink-0">{t.catalogue.activityStatus}</label>
+                <label className="text-xs font-semibold shrink-0">{t.labels.activityStatus}</label>
                 <div className="w-48 sm:w-56 shrink-0">
                   <Select
                     value={editActivityStatus}
                     onChange={e => setEditActivityStatus(e.target.value as AppStatusSelection)}
                     fullWidth={true}
                   >
-                    <option value="global">{t.catalogue.globalDefault}</option>
-                    <option value="online">{t.catalogue.online}</option>
-                    <option value="idle">{t.catalogue.idle}</option>
-                    <option value="dnd">{t.catalogue.dnd}</option>
-                    <option value="offline">{t.catalogue.offline}</option>
-                    <option value="invisible">{t.catalogue.invisible}</option>
-                    <option value="streaming">{t.catalogue.streaming}</option>
+                    <option value="global">{t.choices.globalDefault}</option>
+                    <option value="online">{t.choices.activityStatus.online}</option>
+                    <option value="idle">{t.choices.activityStatus.idle}</option>
+                    <option value="dnd">{t.choices.activityStatus.dnd}</option>
+                    <option value="offline">{t.choices.activityStatus.offline}</option>
+                    <option value="invisible">{t.choices.activityStatus.invisible}</option>
+                    <option value="streaming">{t.choices.activityStatus.streaming}</option>
                   </Select>
                 </div>
               </div>
 
               {/* Platform Type Dropdown */}
               <div className="flex items-center justify-between gap-4 py-3">
-                <label className="text-xs font-semibold shrink-0">{t.catalogue.platformType}</label>
+                <label className="text-xs font-semibold shrink-0">{t.labels.platformType}</label>
                 <div className="w-48 sm:w-56 shrink-0">
                   <Select
                     value={editPlatform}
@@ -1096,11 +1096,11 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               {/* Custom Details & State */}
               <div className="py-3 space-y-2.5">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-semibold text-xs">{t.catalogue.customDetailsState}</span>
+                  <span className="font-semibold text-xs">{t.labels.customDetailsState}</span>
                   <Switch
                     checked={editCustomDetailsEnabled}
                     onChange={setEditCustomDetailsEnabled}
-                    aria-label={t.catalogue.toggleDetails}
+                    aria-label={t.subPages.application.catalogue.modal.appProfileCustomization.switchToggle.details}
                   />
                 </div>
                 {editCustomDetailsEnabled && (
@@ -1109,7 +1109,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       type="text"
                       value={editCustomDetails}
                       onChange={e => setEditCustomDetails(e.target.value)}
-                      placeholder={`${t.catalogue.details} (AppDetails)`}
+                      placeholder={`${t.placeholders.details} (AppDetails)`}
                       className="w-full h-9 px-3 rounded-xl border text-xs focus:outline-hidden"
                       style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }}
                     />
@@ -1117,7 +1117,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       type="text"
                       value={editCustomState}
                       onChange={e => setEditCustomState(e.target.value)}
-                      placeholder={`${t.catalogue.state} (AppState)`}
+                      placeholder={`${t.placeholders.state} (AppState)`}
                       className="w-full h-9 px-3 rounded-xl border text-xs focus:outline-hidden"
                       style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }}
                     />
@@ -1128,11 +1128,11 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               {/* Custom Small Text and Image */}
               <div className="py-3 space-y-2.5">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-semibold text-xs">{t.catalogue.customSmallImage}</span>
+                  <span className="font-semibold text-xs">{t.labels.customSmallImage}</span>
                   <Switch
                     checked={editCustomSmallEnabled}
                     onChange={setEditCustomSmallEnabled}
-                    aria-label={t.catalogue.toggleSmall}
+                    aria-label={t.subPages.application.catalogue.modal.appProfileCustomization.switchToggle.small}
                   />
                 </div>
                 {editCustomSmallEnabled && (
@@ -1141,7 +1141,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       type="text"
                       value={editCustomSmallText}
                       onChange={e => setEditCustomSmallText(e.target.value)}
-                      placeholder={`${t.catalogue.smallText} (AppSmallText)`}
+                      placeholder={`${t.placeholders.smallText} (AppSmallText)`}
                       className="w-full h-9 px-3 rounded-xl border text-xs focus:outline-hidden"
                       style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }}
                     />
@@ -1150,7 +1150,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                         type="url"
                         value={editCustomSmallUrl}
                         onChange={e => setEditCustomSmallUrl(e.target.value)}
-                        placeholder={`${t.catalogue.smallImageUrl} (AppSmallUrl)`}
+                        placeholder={`${t.placeholders.smallImageUrl} (AppSmallUrl)`}
                         className="flex-1 min-w-0 h-9 px-3 rounded-xl border text-xs focus:outline-hidden"
                         style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }}
                       />
@@ -1160,8 +1160,8 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                         onClick={() => smallImagePickerRef.current?.click()}
                         className="h-9 w-9 shrink-0 flex items-center justify-center rounded-xl border"
                         style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
-                        title={t.catalogue.uploadImage}
-                        aria-label={t.catalogue.uploadImage}
+                        title={t.buttons.uploadImage}
+                        aria-label={t.buttons.uploadImage}
                       >
                         <Upload className="w-4 h-4" />
                       </button>
@@ -1182,16 +1182,16 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
               <div className="py-3 space-y-2.5">
                 <div className="flex items-center justify-between gap-4">
                   <div className="min-w-0">
-                    <span className="font-semibold block text-xs">{t.catalogue.customButtons}</span>
+                    <span className="font-semibold block text-xs">{t.labels.customButtons}</span>
                     <p className="text-[10px] truncate" style={{ color: 'var(--color-text-muted)' }}>
-                      {t.catalogue.customButtonDesc}
+                      {t.subPages.application.catalogue.modal.appProfileCustomization.customBtnDesc}
                     </p>
                   </div>
                   <div className="shrink-0">
                     <Switch
                       checked={editCustomButtons}
                       onChange={setEditCustomButtons}
-                      aria-label={t.catalogue.toggleButtons}
+                      aria-label={t.subPages.application.catalogue.modal.appProfileCustomization.switchToggle.buttons}
                     />
                   </div>
                 </div>
@@ -1206,12 +1206,12 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       borderColor: 'var(--color-border)',
                     }}
                   >
-                    <span className="text-[11px] font-semibold">{t.configFields.button1}</span>
+                    <span className="text-[11px] font-semibold">{t.labels.button1}</span>
                     <input
                       type="text"
                       value={button1Label}
                       onChange={e => setButton1Label(e.target.value)}
-                      placeholder={t.catalogue.buttonLabel}
+                      placeholder={t.placeholders.labelExample}
                       className="w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-surface)',
@@ -1223,7 +1223,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       type="url"
                       value={button1Url}
                       onChange={e => setButton1Url(e.target.value)}
-                      placeholder={t.catalogue.urlExample}
+                      placeholder={t.placeholders.urlExample}
                       className="w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-surface)',
@@ -1240,12 +1240,12 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       borderColor: 'var(--color-border)',
                     }}
                   >
-                    <span className="text-[11px] font-semibold">{t.configFields.button2}</span>
+                    <span className="text-[11px] font-semibold">{t.labels.button2}</span>
                     <input
                       type="text"
                       value={button2Label}
                       onChange={e => setButton2Label(e.target.value)}
-                      placeholder={t.catalogue.buttonLabel}
+                      placeholder={t.placeholders.labelExample}
                       className="w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-surface)',
@@ -1257,7 +1257,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                       type="url"
                       value={button2Url}
                       onChange={e => setButton2Url(e.target.value)}
-                      placeholder={t.catalogue.urlExample}
+                      placeholder={t.placeholders.urlExample}
                       className="w-full px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden"
                       style={{
                         backgroundColor: 'var(--color-bg-surface)',
@@ -1279,15 +1279,15 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       <Modal
         isOpen={isBatchModalOpen}
         onClose={() => setIsBatchModalOpen(false)}
-        title={`${t.catalogue.bulkConfigure} (${selectedPackages.size} ${t.catalogue.appsUnit})`}
-        subtitle={t.catalogue.bulkSubtitle}
+        title={`${t.subPages.application.catalogue.modal.bulkConfigure.title} (${selectedPackages.size} ${t.pluralization.app.plural})`}
+        subtitle={t.subPages.application.catalogue.modal.bulkConfigure.subtitle}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setIsBatchModalOpen(false)}>
-              {t.catalogue.cancel}
+              {t.buttons.cancel}
             </Button>
             <Button size="sm" variant="primary" onClick={applyBatchChanges}>
-              {t.catalogue.stageChanges}
+              {t.buttons.stageChanges}
             </Button>
           </div>
         }
@@ -1295,7 +1295,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
         <div className="divide-y text-xs" style={{ borderColor: 'var(--color-border)' }}>
           {/* Bulk Toggle Status */}
           <div className="flex items-center justify-between gap-4 py-3">
-            <label className="font-semibold text-xs shrink-0">{t.catalogue.presenceToggle}</label>
+            <label className="font-semibold text-xs shrink-0">{t.labels.presenceToggle}</label>
             <div className="w-48 sm:w-56 shrink-0">
               <Select
                 value={batchToggleState === 'keep' ? 'keep' : batchToggleState ? 'enable' : 'disable'}
@@ -1306,16 +1306,16 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 }
                 fullWidth={true}
               >
-                <option value="keep">{t.catalogue.keepCurrent}</option>
-                <option value="enable">{t.catalogue.enableAll}</option>
-                <option value="disable">{t.catalogue.disableAll}</option>
+                <option value="keep">{t.choices.keepCurrent}</option>
+                <option value="enable">{t.choices.enableAll}</option>
+                <option value="disable">{t.choices.disableAll}</option>
               </Select>
             </div>
           </div>
 
           {/* Bulk Activity Type */}
           <div className="flex items-center justify-between gap-4 py-3">
-            <label className="font-semibold text-xs shrink-0">{t.catalogue.activityType}</label>
+            <label className="font-semibold text-xs shrink-0">{t.labels.activityType}</label>
             <div className="w-48 sm:w-56 shrink-0">
               <Select
                 value={batchActivityType}
@@ -1326,19 +1326,19 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 }
                 fullWidth={true}
               >
-                <option value="keep">{t.catalogue.keepCurrent}</option>
-                <option value="global">{t.catalogue.globalDefault}</option>
-                <option value={0}>{t.catalogue.playing}</option>
-                <option value={2}>{t.catalogue.listening}</option>
-                <option value={3}>{t.catalogue.watching}</option>
-                <option value={5}>{t.catalogue.competing}</option>
+                <option value="keep">{t.choices.keepCurrent}</option>
+                <option value="global">{t.choices.globalDefault}</option>
+                <option value={0}>{t.choices.activityType.playing}</option>
+                <option value={2}>{t.choices.activityType.listening}</option>
+                <option value={3}>{t.choices.activityType.watching}</option>
+                <option value={5}>{t.choices.activityType.competing}</option>
               </Select>
             </div>
           </div>
 
           {/* Bulk Activity Status */}
           <div className="flex items-center justify-between gap-4 py-3">
-            <label className="font-semibold text-xs shrink-0">{t.catalogue.activityStatus}</label>
+            <label className="font-semibold text-xs shrink-0">{t.labels.activityStatus}</label>
             <div className="w-48 sm:w-56 shrink-0">
               <Select
                 value={batchActivityStatus}
@@ -1349,28 +1349,28 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 }
                 fullWidth={true}
               >
-                <option value="keep">{t.catalogue.keepCurrent}</option>
-                <option value="global">{t.catalogue.globalDefault}</option>
-                <option value="online">{t.catalogue.online}</option>
-                <option value="idle">{t.catalogue.idle}</option>
-                <option value="dnd">{t.catalogue.dnd}</option>
-                <option value="offline">{t.catalogue.offline}</option>
-                <option value="invisible">{t.catalogue.invisible}</option>
-                <option value="streaming">{t.catalogue.streaming}</option>
+                <option value="keep">{t.choices.keepCurrent}</option>
+                <option value="global">{t.choices.globalDefault}</option>
+                <option value="online">{t.choices.activityStatus.online}</option>
+                <option value="idle">{t.choices.activityStatus.idle}</option>
+                <option value="dnd">{t.choices.activityStatus.dnd}</option>
+                <option value="offline">{t.choices.activityStatus.offline}</option>
+                <option value="invisible">{t.choices.activityStatus.invisible}</option>
+                <option value="streaming">{t.choices.activityStatus.streaming}</option>
               </Select>
             </div>
           </div>
 
           {/* Bulk Platform Type */}
           <div className="flex items-center justify-between gap-4 py-3">
-            <label className="font-semibold text-xs shrink-0">{t.catalogue.platformType}</label>
+            <label className="font-semibold text-xs shrink-0">{t.labels.platformType}</label>
             <div className="w-48 sm:w-56 shrink-0">
               <Select
                 value={batchPlatform}
                 onChange={e => setBatchPlatform(e.target.value)}
                 fullWidth={true}
               >
-                <option value="keep">{t.catalogue.keepCurrent}</option>
+                <option value="keep">{t.choices.keepCurrent}</option>
                 {PLATFORM_OPTIONS.map(platform => <option key={platform} value={platform}>{platform}</option>)}
               </Select>
             </div>
@@ -1384,21 +1384,21 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       <Modal
         isOpen={isBatchConfirmOpen}
         onClose={() => setIsBatchConfirmOpen(false)}
-        title={t.catalogue.applyBatchTitle}
-        subtitle={t.catalogue.confirmation}
+        title={t.subPages.application.catalogue.modal.bulkConfigure.apply.title}
+        subtitle={t.subPages.application.catalogue.modal.bulkConfigure.apply.subtitle}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setIsBatchConfirmOpen(false)}>
-              {t.catalogue.cancel}
+              {t.buttons.cancel}
             </Button>
             <Button size="sm" variant="primary" onClick={confirmApplyAll}>
-              {t.catalogue.confirmApply}
+              {t.buttons.confirm}
             </Button>
           </div>
         }
       >
         <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-            {t.catalogue.applyMessage} <strong>{selectedPackages.size}</strong> {t.catalogue.selectedApps}
+            {t.subPages.application.catalogue.modal.bulkConfigure.apply.desc} <strong>{selectedPackages.size}</strong> {t.subPages.application.catalogue.modal.bulkConfigure.apply.selectedApps}
         </p>
       </Modal>
 
@@ -1408,12 +1408,12 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
       <Modal
         isOpen={isDiscardConfirmOpen}
         onClose={() => setIsDiscardConfirmOpen(false)}
-        title={t.catalogue.discardBatch}
-        subtitle={t.catalogue.unsavedBatch}
+        title={t.subPages.application.catalogue.modal.bulkConfigure.discard.title}
+        subtitle={t.subPages.application.catalogue.modal.bulkConfigure.discard.subtitle}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setIsDiscardConfirmOpen(false)}>
-              {t.catalogue.keepEditing}
+              {t.buttons.keepEditing}
             </Button>
             <Button
               size="sm"
@@ -1426,13 +1426,13 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
                 setStagedApps(null)
               }}
             >
-              {t.catalogue.discardChanges}
+              {t.buttons.discardChanges}
             </Button>
           </div>
         }
       >
         <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-          {t.catalogue.discardMessage}
+          {t.subPages.application.catalogue.modal.bulkConfigure.discard.desc}
         </p>
       </Modal>
 
@@ -1450,7 +1450,7 @@ export const AppCatalogue: React.FC<AppCatalogueProps> = ({ onBack }) => {
           <div className="mb-2 flex items-center justify-between gap-3 text-xs">
             <span className="flex items-center gap-2">
               {iconUploadProgress < 100 && <Loader2 className="h-3.5 w-3.5 animate-spin text-[var(--color-accent)]" />}
-              {t.catalogue.uploadProgress}
+              {t.subPages.application.catalogue.uploadProgress}
             </span>
             <span className="font-mono text-[var(--color-text-muted)]">{iconUploadProgress}%</span>
           </div>

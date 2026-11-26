@@ -174,9 +174,9 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           </div>
 
           <div className="space-y-1">
-            <h3 className="text-base font-semibold">{t.accountsPage.emptyTitle}</h3>
+            <h3 className="text-base font-semibold">{t.pages.accounts.body.noAccount.title}</h3>
             <p className="text-xs max-w-xs" style={{ color: 'var(--color-text-muted)' }}>
-              {t.accountsPage.emptyDescription}
+              {t.pages.accounts.body.noAccount.desc}
             </p>
           </div>
 
@@ -187,7 +187,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
             style={{ backgroundColor: 'var(--color-accent)' }}
           >
             <DiscordIcon className="w-4 h-4 fill-white" />
-            <span>{t.accountsPage.login}</span>
+            <span>{t.pages.accounts.body.noAccount.login}</span>
           </button>
         </div>
       )}
@@ -202,12 +202,12 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 className="text-[11px] font-bold uppercase tracking-wider"
                 style={{ color: 'var(--color-text-muted)' }}
               >
-                {t.accountsPage.currentAccount}
+                {t.pages.accounts.body.hasAccount.currentAccount}
               </span>
               {activeAccount && (
                 <span className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-500">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  {t.accountsPage.activePresence}
+                  {t.pages.accounts.body.hasAccount.activePresence}
                 </span>
               )}
             </div>
@@ -253,8 +253,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                     <button
                       type="button"
                       onClick={onUnuseAccount}
-                      title={t.accountsPage.unuse}
-                      aria-label={t.accountsPage.unuse}
+                      title={t.pages.accounts.body.hasAccount.buttons.unuse}
+                      aria-label={t.pages.accounts.body.hasAccount.buttons.unuse}
                       className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer hover:border-amber-500/50 hover:text-amber-500 active:scale-95"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -263,14 +263,14 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                       }}
                     >
                       <LogOut className="w-3.5 h-3.5" />
-                      <span>{t.accountsPage.unuse}</span>
+                      <span>{t.pages.accounts.body.hasAccount.buttons.unuse}</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setAccountToDelete(activeAccount)}
-                      title={t.accounts.remove}
-                      aria-label={t.accounts.remove}
+                      title={t.buttons.remove}
+                      aria-label={t.buttons.remove}
                       className="p-1.5 rounded-xl border transition-all cursor-pointer hover:border-red-500/50 hover:text-red-500 active:scale-95"
                       style={{
                         backgroundColor: 'var(--color-bg-elevated)',
@@ -293,7 +293,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
               >
                 <UserCheck className="w-5 h-5 mx-auto opacity-50" />
                 <p className="text-xs font-medium" style={{ color: 'var(--color-text-muted)' }}>
-                {t.accountsPage.noActiveAccount}
+                {t.pages.accounts.body.hasAccount.noActiveAccount}
                 </p>
               </div>
             )}
@@ -306,7 +306,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 className="text-[11px] font-bold uppercase tracking-wider"
                 style={{ color: 'var(--color-text-muted)' }}
               >
-                {t.accountsPage.storedAccounts} ({inactiveAccounts.length})
+                {t.pages.accounts.body.hasAccount.storedAccounts} ({inactiveAccounts.length})
               </span>
             </div>
 
@@ -319,7 +319,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 }}
               >
                 <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.accounts.addAccount}
+                  {t.pages.accounts.body.hasAccount.buttons.addAccount}
                 </p>
               </div>
             ) : (
@@ -361,8 +361,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                       <button
                         type="button"
                         onClick={() => onSetActiveAccount(account.id)}
-                        title={t.accountsPage.switch}
-                        aria-label={t.accountsPage.switch}
+                        title={t.pages.accounts.body.hasAccount.buttons.switch}
+                        aria-label={t.pages.accounts.body.hasAccount.buttons.switch}
                         className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer hover:border-[var(--color-accent)] active:scale-95"
                         style={{
                           backgroundColor: 'var(--color-bg-elevated)',
@@ -371,14 +371,14 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                         }}
                       >
                         <ArrowLeftRight className="w-3.5 h-3.5" />
-                        <span>{t.accountsPage.switch}</span>
+                        <span>{t.pages.accounts.body.hasAccount.buttons.switch}</span>
                       </button>
 
                       <button
                         type="button"
                         onClick={() => setAccountToDelete(account)}
-                        title={t.accounts.remove}
-                        aria-label={t.accounts.remove}
+                        title={t.buttons.remove}
+                        aria-label={t.buttons.remove}
                         className="p-1.5 rounded-xl border transition-all cursor-pointer hover:border-red-500/50 hover:text-red-500 active:scale-95"
                         style={{
                           backgroundColor: 'var(--color-bg-elevated)',
@@ -404,8 +404,8 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           onClick={() => setIsLoginModalOpen(true)}
           className="fixed right-5 bottom-20 z-30 p-3.5 rounded-full text-white shadow-xl flex items-center justify-center cursor-pointer transition-transform hover:scale-105 active:scale-95"
           style={{ backgroundColor: 'var(--color-accent)' }}
-          title={t.accountsPage.addAccount}
-          aria-label={t.accountsPage.addAccount}
+          title={t.pages.accounts.body.hasAccount.buttons.addAccount}
+          aria-label={t.pages.accounts.body.hasAccount.buttons.addAccount}
         >
           <div className="relative">
             <DiscordIcon className="w-5 h-5 fill-white" />
@@ -421,7 +421,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           setIsLoginModalOpen(false)
           setLoginError('')
         }}
-          title={t.accountsPage.addAccountTitle}
+          title={t.modals.discordLogin.title}
       >
         <div className="space-y-4">
           {/* Quick In-App Login Portal Card */}
@@ -434,9 +434,9 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           >
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold block">{t.accountsPage.portal}</span>
+                <span className="text-xs font-bold block">{t.modals.discordLogin.content.title}</span>
                 <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.accountsPage.signInPortal}
+                  {t.modals.discordLogin.content.subtitle}
                 </p>
               </div>
               <Button
@@ -445,13 +445,13 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                 icon={<DiscordIcon className="w-3.5 h-3.5" />}
                 onClick={handleOpenLoginPortal}
               >
-                {t.accountsPage.openPortal}
+                {t.buttons.openPortal}
               </Button>
             </div>
             <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
               <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
               <p>
-                {t.accountsPage.privacyText}{' '}
+                {t.modals.discordLogin.content.privacyText}{' '}
                 <a
                   href="https://github.com/LlanderSei/Kruzty-Dynamics/blob/master/PRIVACY.md"
                   onClick={event => {
@@ -460,9 +460,9 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
                   }}
                   className="text-[var(--color-accent)] underline"
                 >
-                  {t.settingsUi.privacyPolicy}
+                  {t.modals.discordLogin.content.privacyPolicy}
                 </a>.
-                {' '}{t.accountsPage.revokeText}
+                {' '}{t.modals.discordLogin.content.revokeText}
               </p>
             </div>
           </div>
@@ -470,7 +470,7 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
           {isValidatingToken && (
             <p className="flex items-center gap-2 text-xs" style={{ color: 'var(--color-text-muted)' }}>
               <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              {t.accountsPage.verifying}
+              {t.modals.discordLogin.content.verifying}
             </p>
           )}
           {loginError && <p className="text-xs text-red-400">{loginError}</p>}
@@ -481,23 +481,23 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
       <Modal
         isOpen={Boolean(accountToDelete)}
         onClose={() => setAccountToDelete(null)}
-        title={t.accountsPage.logoutTitle}
+        title={t.pages.accounts.body.hasAccount.modal.logout.title}
       >
         <div className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.accountsPage.removePrefix}{' '}
+            {t.pages.accounts.body.hasAccount.modal.logout.removePrefix}{' '}
             <strong style={{ color: 'var(--color-text-base)' }}>
               @{accountToDelete?.username}
             </strong>
-            {t.accountsPage.removeSuffix}
+            {t.pages.accounts.body.hasAccount.modal.logout.removeSuffix}
           </p>
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="ghost" onClick={() => setAccountToDelete(null)}>
-              {t.catalogue.cancel}
+              {t.buttons.cancel}
             </Button>
             <Button variant="danger" onClick={confirmDelete}>
-              {t.accountsPage.confirmLogout}
+              {t.pages.accounts.body.hasAccount.modal.logout.confirmLogout}
             </Button>
           </div>
         </div>

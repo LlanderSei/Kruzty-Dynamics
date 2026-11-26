@@ -130,25 +130,25 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
       }
       setIsServiceEnabled(nextState)
     } catch {
-      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: t.permissions.serviceStartError } }))
+      window.dispatchEvent(new CustomEvent('app-toast', { detail: { message: t.pages.service.body.service.startError } }))
     }
   }
 
   const missingPermissions = [
     {
       key: 'usageStats' as const,
-      label: t.permissions.usageTitle,
-      description: t.permissions.usageGuardDescription,
+      label: t.onboarding.surface.permissionsSection.usageAccess.title,
+      description: t.pages.service.body.service.guard.modal.usageAccess.desc,
     },
     {
       key: 'notificationListener' as const,
-      label: t.permissions.notificationTitle,
-      description: t.permissions.notificationGuardDescription,
+      label: t.onboarding.surface.permissionsSection.notificationAccess.title,
+      description: t.pages.service.body.service.guard.modal.notificationAccess.desc,
     },
     {
       key: 'postNotifications' as const,
-      label: t.permissions.foregroundGuardTitle,
-      description: t.permissions.foregroundGuardDescription,
+      label: t.pages.service.body.service.guard.modal.foregroundService.title,
+      description: t.pages.service.body.service.guard.modal.foregroundService.desc,
     },
   ].filter(permission => !permissions[permission.key])
 
@@ -215,7 +215,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
       >
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h2 className="text-sm font-bold tracking-tight">{t.service.title}</h2>
+            <h2 className="text-sm font-bold tracking-tight">{t.pages.service.body.service.title}</h2>
             {isServiceEnabled && (
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             )}
@@ -226,7 +226,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
               color: isServiceEnabled ? '#22c55e' : 'var(--color-text-muted)',
             }}
           >
-            {isServiceEnabled ? t.service.running : t.service.stopped}
+            {isServiceEnabled ? t.pages.service.body.service.running : t.pages.service.body.service.stopped}
           </p>
         </div>
 
@@ -250,9 +250,9 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
           }}
         >
           <div className="flex-1 min-w-0 pr-2">
-            <h3 className="text-xs font-bold tracking-tight">{t.service.applicationPresence}</h3>
+            <h3 className="text-xs font-bold tracking-tight">{t.pages.service.body.application.title}</h3>
             <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-              {t.service.appDescription}
+              {t.pages.service.body.application.desc}
             </p>
           </div>
 
@@ -267,8 +267,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title={t.service.applicationCatalogue}
-              aria-label={t.service.applicationCatalogue}
+              title={t.pages.service.body.buttons.applicationCatalogue}
+              aria-label={t.pages.service.body.buttons.applicationCatalogue}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
@@ -282,8 +282,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title={t.service.statusFieldConfig}
-              aria-label={t.service.statusFieldConfig}
+              title={t.pages.service.body.buttons.statusFieldConfig}
+              aria-label={t.pages.service.body.buttons.statusFieldConfig}
             >
               <FileEdit className="w-4 h-4" />
             </button>
@@ -297,8 +297,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title={t.service.presenceConfiguration}
-              aria-label={t.service.presenceConfiguration}
+              title={t.pages.service.body.buttons.presenceConfiguration}
+              aria-label={t.pages.service.body.buttons.presenceConfiguration}
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>
@@ -314,9 +314,9 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
           }}
         >
           <div className="flex-1 min-w-0 pr-2">
-            <h3 className="text-xs font-bold tracking-tight">{t.service.mediaPresence}</h3>
+            <h3 className="text-xs font-bold tracking-tight">{t.pages.service.body.media.title}</h3>
             <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-              {t.service.mediaDescription}
+              {t.pages.service.body.media.desc}
             </p>
           </div>
 
@@ -331,8 +331,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title={t.service.statusFieldConfig}
-              aria-label={t.service.statusFieldConfig}
+              title={t.pages.service.body.buttons.statusFieldConfig}
+              aria-label={t.pages.service.body.buttons.statusFieldConfig}
             >
               <FileEdit className="w-4 h-4" />
             </button>
@@ -346,8 +346,8 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                 borderColor: 'var(--color-border)',
                 color: 'var(--color-text-muted)',
               }}
-              title={t.service.presenceConfiguration}
-              aria-label={t.service.presenceConfiguration}
+              title={t.pages.service.body.buttons.presenceConfiguration}
+              aria-label={t.pages.service.body.buttons.presenceConfiguration}
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>
@@ -375,7 +375,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
               <PowerOff className="w-5 h-5" />
             </div>
             <p className="text-xs max-w-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-              {t.service.stoppedDescription}
+              {t.pages.service.body.preview.stoppedDescription}
             </p>
           </div>
         ) : (
@@ -445,7 +445,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
             ) : (
               <div className="flex items-center gap-3 py-1 text-sm" style={{ color: 'var(--color-text-muted)' }}>
                 <div className="flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-lg" style={{ backgroundColor: 'var(--color-bg-elevated)' }}><Radio className="h-7 w-7" /></div>
-                <span>{t.service.noPresence}</span>
+                <span>{t.pages.service.body.preview.noPresence}</span>
               </div>
             )}
           </div>
@@ -455,11 +455,11 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
       <Modal
         isOpen={showPermissionsModal}
         onClose={() => setShowPermissionsModal(false)}
-        title={t.permissions.requiredTitle}
-        subtitle={t.permissions.requiredSubtitle}
+        title={t.pages.service.body.service.guard.modal.title}
+        subtitle={t.pages.service.body.service.guard.modal.subtitle}
         footer={
               <Button size="sm" variant="outline" onClick={() => setShowPermissionsModal(false)}>
-            {t.permissions.done}
+            {t.buttons.done}
           </Button>
         }
       >
@@ -470,7 +470,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
               style={{ borderColor: 'var(--color-border)' }}
             >
               <ShieldCheck className="h-4 w-4 shrink-0" />
-              {t.permissions.allGranted}
+              {t.pages.service.body.service.guard.modal.allGranted}
             </div>
           ) : (
             missingPermissions.map(permission => (
@@ -486,13 +486,13 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                   </p>
                 </div>
                 <Button size="sm" onClick={() => requestPermission(permission.key)}>
-                  {t.permissions.grant}
+                  {t.buttons.grant}
                 </Button>
               </div>
             ))
           )}
           <p className="text-[10px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-            {t.permissions.returnHint}
+            {t.pages.service.body.service.guard.modal.returnHint}
           </p>
         </div>
       </Modal>

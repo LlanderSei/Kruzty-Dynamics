@@ -11,6 +11,7 @@ import nlNL from './localization/nl_NL.json'
 import ruRU from './localization/ru_RU.json'
 import trTR from './localization/tr_TR.json'
 import enShakespearean from './localization/en_Shakespearean.json'
+import enHmphBaka from './localization/en_HmphBaka.json'
 import enAlienZorblaxian from './localization/xx_Alien_Zorblaxian.json'
 import enPirate from './localization/xx_Pirate.json'
 import enAlienUnknown from './localization/xx_Alien_Unknown.json'
@@ -28,11 +29,12 @@ import zhTW from './localization/zh_TW.json'
 import viVN from './localization/vi_VN.json'
 import thTH from './localization/th_TH.json'
 
-export type LocaleId = 'en_US' | 'en_Shakespearean' | 'xx_Alien_Zorblaxian' | 'xx_Pirate' | 'xx_Alien_Unknown' | 'xx_UwU' | 'ar_SA' | 'my_MM' | 'hr_HR' | 'he_IL' | 'hi_IN' | 'it_IT' | 'fa_IR' | 'pl_PL' | 'pt_BR' | 'zh_TW' | 'vi_VN' | 'th_TH' | 'fil_PH' | 'es_ES' | 'ja_JP' | 'de_DE' | 'fr_FR' | 'zh_CN' | 'id_ID' | 'ko_KR' | 'nl_NL' | 'ru_RU' | 'tr_TR'
+export type LocaleId = 'en_US' | 'en_Shakespearean' | 'en_HmphBaka' | 'xx_Alien_Zorblaxian' | 'xx_Pirate' | 'xx_Alien_Unknown' | 'xx_UwU' | 'ar_SA' | 'my_MM' | 'hr_HR' | 'he_IL' | 'hi_IN' | 'it_IT' | 'fa_IR' | 'pl_PL' | 'pt_BR' | 'zh_TW' | 'vi_VN' | 'th_TH' | 'fil_PH' | 'es_ES' | 'ja_JP' | 'de_DE' | 'fr_FR' | 'zh_CN' | 'id_ID' | 'ko_KR' | 'nl_NL' | 'ru_RU' | 'tr_TR'
 export type SupportedLanguage =
   | 'System Default'
   | 'English (US)'
   | 'English (Shakespearean)'
+  | 'Hmph!!... Baka...'
   | 'Alien (Zorblaxian)'
   | 'Pirate'
   | 'Alien (Unknown)'
@@ -65,6 +67,7 @@ export type TranslationDictionary = typeof enUS
 export const LOCALE_IDS: Record<Exclude<SupportedLanguage, 'System Default'>, LocaleId> = {
   'English (US)': 'en_US',
   'English (Shakespearean)': 'en_Shakespearean',
+  'Hmph!!... Baka...': 'en_HmphBaka',
   'Alien (Zorblaxian)': 'xx_Alien_Zorblaxian',
   'Pirate': 'xx_Pirate',
   'Alien (Unknown)': 'xx_Alien_Unknown',
@@ -111,6 +114,7 @@ function withEnglishFallback<T>(base: T, localized: unknown): T {
 export const TRANSLATIONS: Record<LocaleId, TranslationDictionary> = {
   en_US: enUS,
   en_Shakespearean: withEnglishFallback(enUS, enShakespearean),
+  en_HmphBaka: withEnglishFallback(enUS, enHmphBaka),
   xx_Alien_Zorblaxian: withEnglishFallback(enUS, enAlienZorblaxian),
   xx_Pirate: withEnglishFallback(enUS, enPirate),
   xx_Alien_Unknown: withEnglishFallback(enUS, enAlienUnknown),

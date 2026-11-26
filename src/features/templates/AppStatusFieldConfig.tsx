@@ -26,15 +26,15 @@ function loadAppFields(): AppFieldTemplates {
 }
 
 const APP_TOKENS_DOCS = [
-  { token: '{{AppActivityType}}', description: 'appTokenActivityType' },
-  { token: '{{AppPlatformType}}', description: 'appTokenPlatformType' },
-  { token: '{{AppName}}', description: 'appTokenName' },
-  { token: '{{AppDetails}}', description: 'appTokenDetails' },
-  { token: '{{AppState}}', description: 'appTokenState' },
-  { token: '{{AppSmallText}}', description: 'appTokenSmallText' },
-  { token: '{{AppSmallUrl}}', description: 'appTokenSmallUrl' },
-  { token: '{{AppImageUrl}}', description: 'appTokenImageUrl' },
-  { token: '{{PackageName}}', description: 'appTokenPackageName' },
+  { token: '{{AppActivityType}}', description: 'appActivityType' },
+  { token: '{{AppPlatformType}}', description: 'appPlatformType' },
+  { token: '{{AppName}}', description: 'appName' },
+  { token: '{{AppDetails}}', description: 'appDetails' },
+  { token: '{{AppState}}', description: 'appState' },
+  { token: '{{AppSmallText}}', description: 'appSmallText' },
+  { token: '{{AppSmallUrl}}', description: 'appSmallUrl' },
+  { token: '{{AppImageUrl}}', description: 'appImageUrl' },
+  { token: '{{PackageName}}', description: 'appPackageName' },
 ] as const
 
 export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBack }) => {
@@ -101,14 +101,14 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-base)',
             }}
-            aria-label={t.configFields.back}
+            aria-label={t.subPages.buttons.back}
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-bold truncate">{t.configFields.appTitle}</h1>
+            <h1 className="text-sm font-bold truncate">{t.subPages.application.statusFieldConfig.title}</h1>
             <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-              {t.configFields.appConfigSubtitle}
+              {t.subPages.application.statusFieldConfig.subtitle}
             </p>
           </div>
         </div>
@@ -124,8 +124,8 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title={t.configFields.reset}
-            aria-label={t.configFields.reset}
+            title={t.subPages.buttons.reset}
+            aria-label={t.subPages.buttons.reset}
           >
             <RotateCcw className="w-4 h-4" />
           </button>
@@ -139,8 +139,8 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
               borderColor: 'var(--color-border)',
               color: 'var(--color-text-muted)',
             }}
-            title={t.configFields.help}
-            aria-label={t.configFields.help}
+            title={t.subPages.buttons.help}
+            aria-label={t.subPages.buttons.help}
           >
             <HelpCircle className="w-4 h-4" />
           </button>
@@ -152,28 +152,28 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
         <div className="max-w-xl w-full mx-auto p-4 space-y-4 pb-28">
           {/* Discord activity name */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.titleHeader}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.title}</label>
             <textarea rows={2} value={fields.title} onChange={e => handleFieldChange('title', e.target.value)} placeholder="e.g. {{AppName}}" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
           {/* Discord activity details */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.detailsField}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.line1}</label>
             <textarea rows={2} value={fields.details} onChange={e => handleFieldChange('details', e.target.value)} placeholder="null / empty or custom expression" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
           {/* Discord activity state */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.stateField}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.line2}</label>
             <textarea rows={2} value={fields.state} onChange={e => handleFieldChange('state', e.target.value)} placeholder="null / empty or custom expression" className="w-full px-3 py-2 rounded-xl border font-mono text-xs focus:outline-hidden resize-none" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} />
           </div>
           <Divider />
 
           {/* Field 4: Small Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.smallText}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.smallText}</label>
             <textarea
               rows={2}
               value={fields.smallText || ''}
@@ -191,7 +191,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 5: Small Image */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.smallImage}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.smallImage}</label>
             <textarea
               rows={2}
               value={fields.smallImage || ''}
@@ -209,7 +209,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 6: Big Text */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.bigText}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.bigText}</label>
             <textarea
               rows={2}
               value={fields.bigText || ''}
@@ -227,7 +227,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
 
           {/* Field 7: Big Image */}
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold block">{t.configFields.bigImage}</label>
+            <label className="text-xs font-semibold block">{t.configFields.status.bigImage}</label>
             <textarea
               rows={2}
               value={fields.bigImage || ''}
@@ -254,8 +254,8 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
                 backgroundColor: 'var(--color-accent)',
                 color: '#ffffff',
               }}
-              title={t.configFields.save}
-              aria-label={t.configFields.save}
+              title={t.buttons.save.fields}
+              aria-label={t.buttons.save.fields}
             >
               <Check className="w-6 h-6 stroke-[2.5]" />
             </button>
@@ -267,17 +267,17 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
       <Modal
         isOpen={isHelpOpen}
         onClose={() => setIsHelpOpen(false)}
-        title={t.configFields.appReference}
-        subtitle={t.configFields.tokenDescription}
+        title={t.modals.tokenReference.application.title}
+        subtitle={t.modals.tokenReference.application.desc}
         footer={
           <Button size="sm" variant="primary" onClick={() => setIsHelpOpen(false)}>
-            {t.configFields.helpDone}
+            {t.buttons.helpDone}
           </Button>
         }
       >
         <div className="space-y-2.5 text-xs">
           <p className="text-[11px] leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-            {t.configFields.appExpressionOperators}
+            {t.modals.tokenReference.application.expressionOps}
           </p>
           {APP_TOKENS_DOCS.map(item => (
             <div
@@ -290,7 +290,7 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
             >
               <span className="font-mono font-bold text-[var(--color-accent)]">{item.token}</span>
               <p className="text-[11px] leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                {t.configFields[item.description]}
+                {t.tokens[item.description]}
               </p>
             </div>
           ))}
@@ -301,21 +301,21 @@ export const AppStatusFieldConfig: React.FC<AppStatusFieldConfigProps> = ({ onBa
       <Modal
         isOpen={isDiscardConfirmOpen}
         onClose={() => setIsDiscardConfirmOpen(false)}
-        title={t.configFields.discard}
-        subtitle={t.configFields.unsaved}
+        title={t.modals.unsavedChanges.discard}
+        subtitle={t.modals.unsavedChanges.unsaved}
         footer={
           <div className="flex items-center gap-2 justify-end w-full">
             <Button size="sm" variant="outline" onClick={() => setIsDiscardConfirmOpen(false)}>
-              {t.catalogue.keepEditing}
+              {t.buttons.keepEditing}
             </Button>
             <Button size="sm" variant="danger" onClick={onBack}>
-              {t.catalogue.discardChanges}
+              {t.buttons.discardChanges}
             </Button>
           </div>
         }
       >
         <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-          {t.configFields.appDiscardMessage}
+          {t.subPages.application.statusFieldConfig.discardMsg}
         </p>
       </Modal>
     </div>

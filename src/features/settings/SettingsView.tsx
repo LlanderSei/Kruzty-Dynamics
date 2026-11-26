@@ -79,8 +79,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
   ].filter(Boolean).length
   const requiredPermissionsGranted = grantedRequiredPermissionCount === 3
   const permissionSummary = requiredPermissionsGranted
-    ? permissions.batteryOptimizationsIgnored ? t.settingsUi.allGranted : t.onboarding.granted
-    : `${grantedRequiredPermissionCount}/3 • ${t.onboarding.granted}`
+    ? permissions.batteryOptimizationsIgnored ? t.tags.allGranted : t.tags.granted
+    : `${grantedRequiredPermissionCount}/3 • ${t.tags.granted}`
 
   // Collapsible accordion
   const [isLearnMoreExpanded, setIsLearnMoreExpanded] = useState(false)
@@ -127,7 +127,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
 
   const handleConfirmClearCache = (includeCustomIcons: boolean) => {
     clearImageCache(includeCustomIcons)
-    setCacheClearedSuccess(includeCustomIcons ? t.settingsUi.clearedAll : t.settingsUi.clearedKeeping)
+    setCacheClearedSuccess(includeCustomIcons ? t.modals.settings.deleteCachedUrls.clearedAll : t.modals.settings.deleteCachedUrls.clearedKeeping)
     setTimeout(() => {
       setCacheClearedSuccess(null)
       setActiveModal(null)
@@ -190,7 +190,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               color: 'var(--color-text-base)',
             }}
           >
-            {t.settingsUi.version.replace('{version}', formatDisplayVersion(appVersion))}
+            {t.pages.settings.cardInfo.version.replace('{version}', formatDisplayVersion(appVersion))}
           </div>
           <div
             className="min-w-0 flex self-stretch items-center justify-center break-words rounded-xl border px-2 py-1.5 text-center text-xs font-medium leading-tight"
@@ -206,13 +206,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               color: 'var(--color-text-base)',
             }}
           >
-                {t.settingsUi.developedBy} Seiraneko
+                {t.pages.settings.cardInfo.developedBy} Seiraneko
           </div>
         </div>
 
         {/* Full-width Architecture Description */}
         <p className="text-[11px] leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-          {t.settingsUi.architecture}
+          {t.pages.settings.cardInfo.architecture}
         </p>
 
         {/* Expand / Hide Accordion Button */}
@@ -229,7 +229,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
           >
             <div className="flex items-center gap-2">
               <Info className="w-3.5 h-3.5" style={{ color: 'var(--color-accent)' }} />
-              <span>{t.settingsUi.learnMore}</span>
+              <span>{t.pages.settings.cardInfo.learnMore}</span>
             </div>
             {isLearnMoreExpanded ? (
               <ChevronUp className="w-4 h-4" />
@@ -254,7 +254,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               >
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>{t.settingsUi.privacyPolicy}</span>
+                  <span>{t.modals.discordLogin.content.privacyPolicy}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -266,7 +266,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               >
                 <span className="flex items-center gap-2">
                   <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                  <span>{t.settingsUi.repository}</span>
+                  <span>{t.pages.settings.cardInfo.repository}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -278,7 +278,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               >
                 <span className="flex items-center gap-2">
                   <Info className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{t.settingsUi.latestRelease}</span>
+                  <span>{t.pages.settings.cardInfo.latestRelease}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -290,7 +290,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               >
                 <span className="flex items-center gap-2">
                   <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
-                  <span>{t.settingsUi.submitIssue}</span>
+                  <span>{t.pages.settings.cardInfo.submitIssue}</span>
                 </span>
                 <ExternalLink className="w-3 h-3 opacity-60" />
               </button>
@@ -302,10 +302,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               >
                 <span className="flex items-center gap-2">
                   <span className="text-sm">🎖️</span>
-                  <span>{t.settingsUi.credits}</span>
+                  <span>{t.pages.settings.cardInfo.credits}</span>
                 </span>
                 <span className="text-[11px] font-semibold" style={{ color: 'var(--color-accent)' }}>
-                  {t.settingsUi.view}
+                  {t.tags.view}
                 </span>
               </button>
             </div>
@@ -319,7 +319,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
           className="text-[11px] font-bold uppercase tracking-wider px-1"
           style={{ color: 'var(--color-text-muted)' }}
         >
-          {t.settings.appPreferences}
+          {t.pages.settings.appPreferences.title}
         </span>
 
         {/* Check for app updates */}
@@ -327,7 +327,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
           type="button"
           onClick={() => void handleCheckForUpdates()}
           disabled={isCheckingUpdates}
-          aria-label={isCheckingUpdates ? t.settingsUi.checkingUpdates : t.settingsUi.checkForUpdates}
+          aria-label={isCheckingUpdates ? t.tags.checkingUpdates : t.pages.settings.appPreferences.checkUpdates.title}
           className="w-full p-3.5 rounded-2xl border flex items-center justify-between gap-3 text-left transition-all hover:border-[var(--color-accent)] active:scale-[0.99] disabled:cursor-default"
           style={{
             backgroundColor: 'var(--color-bg-surface)',
@@ -345,14 +345,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <RotateCcw className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settingsUi.checkForUpdates}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.checkUpdates.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settingsUi.checkForUpdatesDesc}
+                {t.pages.settings.appPreferences.checkUpdates.desc}
               </p>
             </div>
           </div>
           <span className="shrink-0 text-xs font-semibold text-emerald-500">
-            {isCheckingUpdates ? <LoaderCircle className="w-4 h-4 animate-spin" /> : t.settingsUi.check}
+            {isCheckingUpdates ? <LoaderCircle className="w-4 h-4 animate-spin" /> : t.tags.check}
           </span>
         </button>
 
@@ -374,9 +374,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <BellRing className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.notificationProjection}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.notificationProjection.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.notificationProjectionDesc}
+                {t.pages.settings.appPreferences.notificationProjection.desc}
               </p>
             </div>
           </div>
@@ -402,9 +402,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <Palette className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.themes}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.themes.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.themesDesc}
+                {t.pages.settings.appPreferences.themes.desc}
               </p>
             </div>
           </div>
@@ -414,7 +414,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               style={{ backgroundColor: theme.customAccentColor }}
             />
             <span className="text-xs font-medium capitalize" style={{ color: 'var(--color-text-muted)' }}>
-              {t.settingsUi[theme.mode]}
+              {t.choices.theme[theme.mode]}
             </span>
           </div>
         </div>
@@ -439,9 +439,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <Globe className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.language}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.language.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.languageDesc} {settings.language}
+                {t.pages.settings.appPreferences.language.desc} {settings.language}
               </p>
             </div>
           </div>
@@ -470,9 +470,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <SlidersHorizontal className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.globalDefaults}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.globalDefaults.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.globalDefaultsDesc}
+                {t.pages.settings.appPreferences.globalDefaults.desc}
               </p>
             </div>
           </div>
@@ -481,15 +481,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
             style={{ color: 'var(--color-text-muted)' }}
           >
             <span>{[
-              t.catalogue.playing,
+              t.choices.activityType.playing,
               '',
-              t.catalogue.listening,
-              t.catalogue.watching,
+              t.choices.activityType.listening,
+              t.choices.activityType.watching,
               '',
-              t.catalogue.competing,
+              t.choices.activityType.competing,
             ][settings.globalActivityType]}</span>
             <span>•</span>
-            <span>{t.catalogue[settings.globalActivityStatus === 'dnd' ? 'dnd' : settings.globalActivityStatus]}</span>
+            <span>{t.choices.activityStatus[settings.globalActivityStatus === 'dnd' ? 'dnd' : settings.globalActivityStatus]}</span>
           </div>
         </div>
 
@@ -513,9 +513,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <KeyRound className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.imgbbKey}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.imgBbKey.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.imgbbKeyDesc}
+                {t.pages.settings.appPreferences.imgBbKey.desc}
               </p>
             </div>
           </div>
@@ -527,7 +527,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               color: settings.customImgbbKey ? 'var(--color-accent)' : 'var(--color-text-muted)',
             }}
           >
-            {settings.customImgbbKey ? 'Custom' : 'Default'}
+            {settings.customImgbbKey ? t.tags.custom : t.tags.default}
           </span>
         </div>
 
@@ -551,9 +551,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <Hash className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.discordAppId}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.discordAppId.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.discordAppIdDesc}
+                {t.pages.settings.appPreferences.discordAppId.desc}
               </p>
             </div>
           </div>
@@ -565,7 +565,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               color: settings.customDiscordAppId ? 'var(--color-accent)' : 'var(--color-text-muted)',
             }}
           >
-            {settings.customDiscordAppId ? 'Custom' : 'Default'}
+            {settings.customDiscordAppId ? t.tags.custom : t.tags.default}
           </span>
         </div>
 
@@ -589,9 +589,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h4 className="text-xs font-semibold leading-tight">{t.settings.checkPermissions}</h4>
+              <h4 className="text-xs font-semibold leading-tight">{t.pages.settings.appPreferences.checkPermissions.title}</h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.checkPermissionsDesc}
+                {t.pages.settings.appPreferences.checkPermissions.desc}
               </p>
             </div>
           </div>
@@ -624,15 +624,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
             </div>
             <div className="min-w-0">
               <h4 className="text-xs font-semibold leading-tight text-red-500">
-                {t.settings.deleteCache}
+                {t.pages.settings.appPreferences.deleteCachedUrls.title}
               </h4>
               <p className="text-[11px] leading-snug mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settings.deleteCacheDesc}
+                {t.pages.settings.appPreferences.deleteCachedUrls.desc}
               </p>
             </div>
           </div>
           <span className="text-[11px] font-mono px-2 py-0.5 rounded-md border shrink-0 text-zinc-400">
-            {cachedImageCount} {t.settingsUi.cached}
+            {cachedImageCount} {t.tags.cached}
           </span>
         </div>
 
@@ -646,12 +646,12 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'theme'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.themes}
+        title={t.pages.settings.appPreferences.themes.title}
       >
         <div className="space-y-4">
           <div className="space-y-1.5">
             <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-              {t.settingsUi.themeMode}
+              {t.modals.settings.themes.themeMode}
             </label>
             <div className="grid grid-cols-3 gap-2">
               {(['light', 'dark', 'amoled'] as const).map(mode => (
@@ -672,7 +672,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                   }}
                 >
                   {theme.mode === mode && <Check className="w-3.5 h-3.5" />}
-                  <span>{t.settingsUi[mode]}</span>
+                  <span>{t.choices.theme[mode]}</span>
                 </button>
               ))}
             </div>
@@ -681,7 +681,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-                {t.settingsUi.accentColor}
+                {t.modals.settings.themes.accentColor}
               </label>
               <button
                 type="button"
@@ -689,7 +689,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 className="text-[11px] cursor-pointer hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {t.settingsUi.resetAccent}
+                {t.modals.settings.themes.resetAccent}
               </button>
             </div>
             <div className="grid grid-cols-4 gap-2 pt-1">
@@ -743,14 +743,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 {theme.customAccentColor.toUpperCase()}
               </span>
               <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settingsUi.tapCustomize}
+                {t.modals.settings.themes.tapCustomize}
               </span>
             </div>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" className="w-full" onClick={() => setActiveModal(null)}>
-              {t.settingsUi.done}
+              {t.buttons.done}
             </Button>
           </div>
         </div>
@@ -760,15 +760,15 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'language'}
         onClose={() => setActiveModal(null)}
-        title={t.settingsUi.chooseLanguage}
+        title={t.modals.settings.language.title}
       >
         <div className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.settingsUi.languageDescription}
+            {t.modals.settings.language.desc}
           </p>
 
           <div className="space-y-1">
-            <label className="text-xs font-semibold">{t.settingsUi.availableLanguages}</label>
+            <label className="text-xs font-semibold">{t.modals.settings.language.availableLanguages}</label>
             <Select
               value={settings.language}
               onChange={e => {
@@ -806,13 +806,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 { value: 'Nederlands', label: 'Nederlands' },
                 { value: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439', label: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439' },
                 { value: 'T\u00fcrk\u00e7e', label: 'T\u00fcrk\u00e7e' },
+                { value: 'Hmph!!... Baka...', label: 'Hmph!!... Baka...' },
               ]}
             />
           </div>
 
           <div className="pt-2">
             <Button variant="ghost" className="w-full" onClick={() => setActiveModal(null)}>
-              {t.settingsUi.close}
+              {t.buttons.close}
             </Button>
           </div>
         </div>
@@ -822,53 +823,53 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'global-defaults'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.globalDefaults}
-        subtitle={t.settings.globalDefaultsDesc}
+        title={t.pages.settings.appPreferences.globalDefaults.title}
+        subtitle={t.pages.settings.appPreferences.globalDefaults.desc}
       >
         <div className="space-y-4 text-xs">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.settingsUi.defaultNote}
+            {t.modals.settings.globalDefaults.note}
           </p>
 
           <div className="space-y-3">
             <div className="space-y-1.5">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-                {t.settingsUi.activityType}
+                {t.modals.settings.globalDefaults.activityType}
               </label>
               <Select
                 value={settings.globalActivityType}
                 onChange={e => setGlobalActivityType(Number(e.target.value) as ActivityType)}
                 fullWidth={true}
               >
-                <option value={0}>{t.catalogue.playing}</option>
-                <option value={2}>{t.catalogue.listening}</option>
-                <option value={3}>{t.catalogue.watching}</option>
-                <option value={5}>{t.catalogue.competing}</option>
+                <option value={0}>{t.choices.activityType.playing}</option>
+                <option value={2}>{t.choices.activityType.listening}</option>
+                <option value={3}>{t.choices.activityType.watching}</option>
+                <option value={5}>{t.choices.activityType.competing}</option>
               </Select>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-base)' }}>
-                {t.settingsUi.activityStatus}
+                {t.modals.settings.globalDefaults.activityStatus}
               </label>
               <Select
                 value={settings.globalActivityStatus}
                 onChange={e => setGlobalActivityStatus(e.target.value as DiscordStatus)}
                 fullWidth={true}
               >
-                <option value="online">{t.catalogue.online}</option>
-                <option value="idle">{t.catalogue.idle}</option>
-                <option value="dnd">{t.catalogue.dnd}</option>
-                <option value="offline">{t.catalogue.offline}</option>
-                <option value="invisible">{t.catalogue.invisible}</option>
-                <option value="streaming">{t.catalogue.streaming}</option>
+                <option value="online">{t.choices.activityStatus.online}</option>
+                <option value="idle">{t.choices.activityStatus.idle}</option>
+                <option value="dnd">{t.choices.activityStatus.dnd}</option>
+                <option value="offline">{t.choices.activityStatus.offline}</option>
+                <option value="invisible">{t.choices.activityStatus.invisible}</option>
+                <option value="streaming">{t.choices.activityStatus.streaming}</option>
               </Select>
             </div>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" className="w-full" onClick={() => setActiveModal(null)}>
-              {t.settingsUi.done}
+              {t.buttons.done}
             </Button>
           </div>
         </div>
@@ -878,11 +879,11 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'imgbb'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.imgbbKey}
+        title={t.pages.settings.appPreferences.imgBbKey.title}
       >
         <form onSubmit={handleSaveImgbb} className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.settingsUi.imgbbHelp}{' '}
+            {t.modals.settings.imgBb.help}{' '}
             <button
               type="button"
               onClick={() => openExternal('https://api.imgbb.com')}
@@ -891,12 +892,12 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
             >
               api.imgbb.com
             </button>{' '}
-            {t.settingsUi.getApiKey}
+            {t.modals.settings.imgBb.getApiKey}
           </p>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold">{t.settings.imgbbKey}</label>
+              <label className="text-xs font-semibold">{t.pages.settings.appPreferences.imgBbKey.title}</label>
               {settings.customImgbbKey && (
                 <button
                   type="button"
@@ -907,7 +908,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                   className="text-[11px] flex items-center gap-1 text-red-500 cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>{t.configFields.reset}</span>
+                  <span>{t.subPages.buttons.reset}</span>
                 </button>
               )}
             </div>
@@ -920,7 +921,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 placeholder={
                   settings.customImgbbKey
                     ? '•••••••••••••••• (Custom Key Set)'
-                    : t.settingsUi.usingDefaultKey
+                    : t.modals.settings.imgBb.usingDefaultKey
                 }
                 className="w-full px-3 py-2 text-xs rounded-xl border focus:outline-none transition-colors"
                 style={{
@@ -936,7 +937,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                     setTempImgbbKey('')
                     setCustomImgbbKey('')
                   }}
-                  title={t.configFields.reset}
+                  title={t.subPages.buttons.reset}
                   className="p-2 rounded-xl border shrink-0 text-zinc-400 hover:text-white"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -945,16 +946,16 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
             </div>
 
             <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.settingsUi.apiPrivacy}
+              {t.modals.settings.imgBb.apiPrivacy}
             </p>
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="ghost" onClick={() => setActiveModal(null)}>
-              {t.catalogue.cancel}
+              {t.buttons.cancel}
             </Button>
             <Button type="submit" variant="primary">
-              {t.settingsUi.saveKey}
+              {t.buttons.save.key}
             </Button>
           </div>
         </form>
@@ -964,25 +965,25 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'discord-id'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.discordAppId}
+        title={t.pages.settings.appPreferences.discordAppId.title}
       >
         <form onSubmit={handleSaveDiscordId} className="space-y-4">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.settingsUi.discordIdHelp}{' '}
+            {t.modals.settings.discordApp.help}{' '}
             <button
               type="button"
               onClick={() => openExternal('https://discord.com/developers/applications/')}
               className="underline cursor-pointer font-medium"
               style={{ color: 'var(--color-accent)' }}
             >
-              {t.settingsUi.developerPortal}
+              {t.modals.settings.discordApp.developerPortal}
             </button>
             .
           </p>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold">{t.settings.discordAppId}</label>
+              <label className="text-xs font-semibold">{t.pages.settings.appPreferences.discordAppId.title}</label>
               {settings.customDiscordAppId && (
                 <button
                   type="button"
@@ -993,7 +994,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                   className="text-[11px] flex items-center gap-1 text-red-500 cursor-pointer"
                 >
                   <RotateCcw className="w-3 h-3" />
-                  <span>{t.configFields.reset}</span>
+                  <span>{t.subPages.buttons.reset}</span>
                 </button>
               )}
             </div>
@@ -1003,7 +1004,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 type="text"
                 value={tempDiscordAppId}
                 onChange={e => setTempDiscordAppId(e.target.value)}
-                placeholder={`1572590527562391713 (${t.settingsUi.idDefault})`}
+                placeholder={`1572590527562391713 (${t.tags.default})`}
                 className="w-full px-3 py-2 text-xs rounded-xl border focus:outline-none transition-colors"
                 style={{
                   backgroundColor: 'var(--color-bg-elevated)',
@@ -1018,7 +1019,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                     setTempDiscordAppId('')
                     setCustomDiscordAppId('')
                   }}
-                  title={t.settingsUi.resetDefault}
+                  title={t.buttons.resetDefault}
                   className="p-2 rounded-xl border shrink-0 text-zinc-400 hover:text-white"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -1027,16 +1028,16 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
             </div>
 
             <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.settingsUi.idPrivacy}
+              {t.modals.settings.discordApp.idPrivacy}
             </p>
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <Button variant="ghost" onClick={() => setActiveModal(null)}>
-              {t.settingsUi.cancel}
+              {t.buttons.cancel}
             </Button>
             <Button type="submit" variant="primary">
-              {t.settingsUi.saveId}
+              {t.buttons.save.id}
             </Button>
           </div>
         </form>
@@ -1046,11 +1047,11 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'permissions'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.checkPermissions}
+        title={t.pages.settings.appPreferences.checkPermissions.title}
       >
         <div className="space-y-3">
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.settingsUi.permissionsDescription}
+            {t.modals.settings.checkPermissions.desc}
           </p>
 
           <div className="space-y-2">
@@ -1063,9 +1064,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">{t.onboarding.notificationTitle}</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.surface.permissionsSection.notificationAccess.title}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.settingsUi.notificationAccessDesc}
+                  {t.modals.settings.checkPermissions.notificationAccessDesc}
                 </p>
               </div>
               <button
@@ -1079,7 +1080,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                   color: permissions.notificationListener ? '#10b981' : 'var(--color-accent)',
                 }}
               >
-                {permissions.notificationListener ? t.onboarding.granted : t.onboarding.grant}
+                {permissions.notificationListener ? t.tags.granted : t.buttons.grant}
               </button>
             </div>
 
@@ -1092,9 +1093,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">{t.onboarding.usageTitle}</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.surface.permissionsSection.usageAccess.title}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.settingsUi.usageAccessDesc}
+                  {t.modals.settings.checkPermissions.usageAccessDesc}
                 </p>
               </div>
               <button
@@ -1108,7 +1109,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                   color: permissions.usageStats ? '#10b981' : 'var(--color-accent)',
                 }}
               >
-                {permissions.usageStats ? t.onboarding.granted : t.onboarding.grant}
+                {permissions.usageStats ? t.tags.granted : t.buttons.grant}
               </button>
             </div>
 
@@ -1121,9 +1122,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">{t.onboarding.batteryTitle}</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.surface.permissionsSection.batteryOptimization.title}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.settingsUi.batteryDesc}
+                  {t.modals.settings.checkPermissions.batteryDesc}
                 </p>
               </div>
               <button
@@ -1139,7 +1140,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                     : 'var(--color-accent)',
                 }}
               >
-                {permissions.batteryOptimizationsIgnored ? t.onboarding.granted : t.onboarding.grant}
+                {permissions.batteryOptimizationsIgnored ? t.tags.granted : t.buttons.grant}
               </button>
             </div>
 
@@ -1152,9 +1153,9 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               }}
             >
               <div className="min-w-0 pr-2">
-                <h5 className="text-xs font-semibold">{t.onboarding.postNotificationTitle}</h5>
+                <h5 className="text-xs font-semibold">{t.onboarding.surface.permissionsSection.foregroundNotification.title}</h5>
                 <p className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.settingsUi.foregroundDesc}
+                  {t.modals.settings.checkPermissions.foregroundDesc}
                 </p>
               </div>
               <button
@@ -1168,14 +1169,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                   color: permissions.postNotifications ? '#10b981' : 'var(--color-accent)',
                 }}
               >
-                {permissions.postNotifications ? t.onboarding.granted : t.onboarding.grant}
+                {permissions.postNotifications ? t.tags.granted : t.buttons.grant}
               </button>
             </div>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" className="w-full" onClick={() => setActiveModal(null)}>
-              {t.appPresence.understood}
+              {t.buttons.understood}
             </Button>
           </div>
         </div>
@@ -1185,11 +1186,11 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'clear-cache'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.deleteCache}
+        title={t.pages.settings.appPreferences.deleteCachedUrls.title}
       >
         <div className="space-y-4">
           <p className="text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-            {t.settingsUi.cacheWarning.replace('{total}', String(cachedImageCount)).replace('{custom}', String(customIconCount))}
+            {t.modals.settings.deleteCachedUrls.cacheWarning.replace('{total}', String(cachedImageCount)).replace('{custom}', String(customIconCount))}
           </p>
 
           <div
@@ -1199,7 +1200,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               borderColor: 'var(--color-border)',
             }}
           >
-            <span>{t.settingsUi.linkedImageUrls}:</span>
+            <span>{t.modals.settings.deleteCachedUrls.linkedImageUrls}:</span>
             <span className="font-mono">{cachedImageCount} URLs</span>
           </div>
 
@@ -1211,13 +1212,13 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
           ) : (
             <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2 pt-2">
               <Button variant="ghost" onClick={() => setActiveModal(null)}>
-                {t.settingsUi.cancel}
+                {t.buttons.cancel}
               </Button>
               <Button variant="outline" onClick={() => handleConfirmClearCache(false)}>
-                {t.settingsUi.clearCacheKeep}
+                {t.modals.settings.deleteCachedUrls.buttons.clearCacheKeep}
               </Button>
               <Button variant="danger" onClick={() => handleConfirmClearCache(true)}>
-                {t.settingsUi.clearCacheAll}
+                {t.modals.settings.deleteCachedUrls.buttons.clearCacheAll}
               </Button>
             </div>
           )}
@@ -1228,7 +1229,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
       <Modal
         isOpen={activeModal === 'credits'}
         onClose={() => setActiveModal(null)}
-        title={t.settingsUi.credits}
+        title={t.pages.settings.cardInfo.credits}
       >
         <div className="space-y-4 max-h-[70vh] overflow-y-auto pr-1">
           {/* Section 1: Kruzty Dynamics Maintainer */}
@@ -1237,7 +1238,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              {t.settingsUi.developerSection}
+              {t.modals.settings.credits.developerSection}
             </h5>
             <div
               className="p-3 rounded-xl border flex items-center gap-3"
@@ -1261,7 +1262,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               <div className="min-w-0">
                 <h6 className="text-xs font-bold leading-tight">Seiraneko</h6>
                 <p className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.settingsUi.maintainerRole}
+                  {t.modals.settings.credits.maintainerRole}
                 </p>
               </div>
             </div>
@@ -1273,16 +1274,16 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              {t.settingsUi.librariesSection}
+              {t.modals.settings.credits.librariesSection}
             </h5>
             <div className="space-y-1 text-xs">
               {[
-                { name: 'Tauri v2', desc: t.settingsUi.libraryTauri, url: 'https://v2.tauri.app' },
-                { name: 'Rust Tokio', desc: t.settingsUi.libraryTokio, url: 'https://tokio.rs' },
-                { name: 'Discord Social SDK', desc: t.settingsUi.librarySdk, url: 'https://discord.com/developers/docs/social-sdk/index.html' },
-                { name: 'React 19', desc: t.settingsUi.libraryReact, url: 'https://react.dev' },
-                { name: 'Tailwind CSS v4', desc: t.settingsUi.libraryTailwind, url: 'https://tailwindcss.com' },
-                { name: 'Lucide Icons', desc: t.settingsUi.libraryLucide, url: 'https://lucide.dev' },
+                { name: 'Tauri v2', desc: t.modals.settings.credits.libraries.tauri, url: 'https://v2.tauri.app' },
+                { name: 'Rust Tokio', desc: t.modals.settings.credits.libraries.tokio, url: 'https://tokio.rs' },
+                { name: 'Discord Social SDK', desc: t.modals.settings.credits.libraries.sdk, url: 'https://discord.com/developers/docs/social-sdk/index.html' },
+                { name: 'React 19', desc: t.modals.settings.credits.libraries.react, url: 'https://react.dev' },
+                { name: 'Tailwind CSS v4', desc: t.modals.settings.credits.libraries.tailwind, url: 'https://tailwindcss.com' },
+                { name: 'Lucide Icons', desc: t.modals.settings.credits.libraries.lucide, url: 'https://lucide.dev' },
               ].map(lib => (
                 <div
                   key={lib.name}
@@ -1311,7 +1312,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
               className="text-[11px] font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              {t.settingsUi.contributorsSection}
+              {t.modals.settings.credits.contributorsSection}
             </h5>
             <div
               onClick={() => openExternal('https://github.com/dead8309/Kizzy')}
@@ -1321,7 +1322,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 borderColor: 'var(--color-border)',
               }}
             >
-              <span className="font-medium">{t.settingsUi.repository}</span>
+              <span className="font-medium">{t.pages.settings.cardInfo.repository}</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-60" />
             </div>
 
@@ -1381,7 +1382,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
 
           <div className="pt-2">
             <Button variant="ghost" className="w-full" onClick={() => setActiveModal(null)}>
-              {t.settingsUi.close}
+              {t.buttons.close}
             </Button>
           </div>
         </div>

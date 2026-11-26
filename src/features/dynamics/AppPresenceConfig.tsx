@@ -169,14 +169,14 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
             borderColor: 'var(--color-border)',
             color: 'var(--color-text-base)',
           }}
-          aria-label={t.configFields.back}
+          aria-label={t.subPages.buttons.back}
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div className="flex-1 min-w-0">
-          <h1 className="text-sm font-bold truncate">{t.appPresence.title}</h1>
+          <h1 className="text-sm font-bold truncate">{t.subPages.application.presenceConfig.title}</h1>
           <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-            {t.appPresence.subtitle}
+            {t.subPages.application.presenceConfig.subtitle}
           </p>
         </div>
       </header>
@@ -194,9 +194,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">{t.appPresence.catalogue}</span>
+              <span className="text-xs font-bold block">{t.subPages.application.presenceConfig.catalogue.title}</span>
               <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.appPresence.catalogueDesc}
+                {t.subPages.application.presenceConfig.catalogue.desc}
               </p>
             </div>
             <div className="p-1.5 rounded-xl border" style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}>
@@ -214,9 +214,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">{t.appPresence.outsidePolicies}</span>
+                <span className="text-xs font-bold block">{t.subPages.application.presenceConfig.outsidePolicies.title}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.appPresence.outsideDescription}
+                  {t.subPages.application.presenceConfig.outsidePolicies.desc}
                 </p>
               </div>
 
@@ -225,7 +225,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 onClick={() => setHelpModal('policy')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title={t.appPresence.policyHelp}
+                title={t.subPages.application.presenceConfig.outsidePolicies.help}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -236,9 +236,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
               onChange={e => setOutsidePolicy(e.target.value as OutsideAppBehavior)}
               fullWidth={true}
             >
-              <option value="freeze">{t.appPresence.freeze}</option>
-              <option value="custom">{t.appPresence.customFallback}</option>
-              <option value="drop">{t.appPresence.drop}</option>
+              <option value="freeze">{t.choices.outsidePolicies.freeze}</option>
+              <option value="custom">{t.choices.outsidePolicies.customFallback}</option>
+              <option value="drop">{t.choices.outsidePolicies.drop}</option>
             </Select>
 
             {/* If Custom is selected: Expands custom fallback fields */}
@@ -251,12 +251,12 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 }}
               >
                 <span className="text-[11px] font-semibold block text-[var(--color-accent)]">
-                  {t.appPresence.fallbackPresence}
+                  {t.subPages.application.presenceConfig.outsidePolicies.fallbackPresence}
                 </span>
 
                 <div>
                   <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                    {t.appPresence.activityName}
+                    {t.subPages.application.presenceConfig.fallbackFields.activityName}
                   </label>
                   <input
                     type="text"
@@ -273,7 +273,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
 
                 <div>
                   <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                    {t.appPresence.details}
+                    {t.subPages.application.presenceConfig.fallbackFields.details}
                   </label>
                   <input
                     type="text"
@@ -290,7 +290,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
 
                 <div>
                   <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>
-                    {t.appPresence.state}
+                    {t.subPages.application.presenceConfig.fallbackFields.state}
                   </label>
                   <input
                     type="text"
@@ -306,8 +306,8 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 </div>
 
                 {([
-                  [t.appPresence.smallText, customSmallText, setCustomSmallText],
-                  [t.appPresence.bigText, customBigText, setCustomBigText],
+                  [t.subPages.application.presenceConfig.fallbackFields.smallText, customSmallText, setCustomSmallText],
+                  [t.subPages.application.presenceConfig.fallbackFields.bigText, customBigText, setCustomBigText],
                 ] as const).map(([label, value, setter]) => (
                   <div key={label}>
                     <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>{label}</label>
@@ -316,21 +316,21 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 ))}
 
                 {([
-                  [t.appPresence.smallImage, customSmallImage, setCustomSmallImage, 'small'],
-                  [t.appPresence.bigImage, customBigImage, setCustomBigImage, 'big'],
+                  [t.subPages.application.presenceConfig.fallbackFields.smallImage, customSmallImage, setCustomSmallImage, 'small'],
+                  [t.subPages.application.presenceConfig.fallbackFields.bigImage, customBigImage, setCustomBigImage, 'big'],
                 ] as const).map(([label, value, setter, kind]) => (
                   <div key={label}>
                     <label className="block text-[10px] font-medium mb-1" style={{ color: 'var(--color-text-muted)' }}>{label}</label>
                     <div className="flex gap-2">
-                    <input type="url" value={value} onChange={event => setter(event.target.value)} className="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} placeholder={t.appPresence.imageUrl} />
-                      <label className="p-2 rounded-lg border cursor-pointer" title={`${t.appPresence.uploadImage} ${label}`} style={{ borderColor: 'var(--color-border)' }}>
+                    <input type="url" value={value} onChange={event => setter(event.target.value)} className="min-w-0 flex-1 px-2.5 py-1.5 rounded-lg border text-xs focus:outline-hidden" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }} placeholder={t.subPages.application.presenceConfig.fallbackFields.imageUrl} />
+                      <label className="p-2 rounded-lg border cursor-pointer" title={`${t.subPages.application.presenceConfig.fallbackFields.uploadImage} ${label}`} style={{ borderColor: 'var(--color-border)' }}>
                         {uploadingImage === kind ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
                         <input type="file" accept="image/*" className="hidden" disabled={uploadingImage !== null} onChange={event => { const file = event.target.files?.[0]; if (file) void uploadFallbackImage(kind, file); event.currentTarget.value = '' }} />
                       </label>
                     </div>
                   </div>
                 ))}
-                {uploadingImage && <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>{t.appPresence.uploadingImage} {uploadProgress}%</div>}
+                {uploadingImage && <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>{t.subPages.application.presenceConfig.fallbackFields.uploadingImage} {uploadProgress}%</div>}
               </div>
             )}
           </div>
@@ -345,9 +345,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           >
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
-                <span className="text-xs font-bold block">{t.appPresence.timestampStrategy}</span>
+                <span className="text-xs font-bold block">{t.subPages.application.presenceConfig.timestampStrategy.title}</span>
                 <p className="text-[11px] mt-0.5 leading-snug" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.appPresence.timestampDescription}
+                  {t.subPages.application.presenceConfig.timestampStrategy.desc}
                 </p>
               </div>
 
@@ -356,7 +356,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 onClick={() => setHelpModal('timestamp')}
                 className="p-1.5 rounded-xl border hover:border-[var(--color-accent)] text-[var(--color-text-muted)] shrink-0 transition-colors"
                 style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
-                title={t.appPresence.timestampHelp}
+                title={t.subPages.application.presenceConfig.timestampStrategy.help}
               >
                 <HelpCircle className="w-3.5 h-3.5" />
               </button>
@@ -367,9 +367,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
               onChange={e => setTimestampStrategy(e.target.value as AppTimestampMode)}
               fullWidth={true}
             >
-              <option value="persistent">{t.appPresence.persistent}</option>
-              <option value="reset">{t.appPresence.resetOnLaunch}</option>
-              <option value="custom">{t.appPresence.customFixedTime}</option>
+              <option value="persistent">{t.choices.timestampStrategy.persistent}</option>
+              <option value="reset">{t.choices.timestampStrategy.resetOnLaunch}</option>
+              <option value="custom">{t.choices.timestampStrategy.customFixedTime}</option>
             </Select>
 
             {/* If Custom is selected: Expands DateTime picker */}
@@ -384,7 +384,7 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-[var(--color-accent)]" />
                   <span className="text-[11px] font-semibold text-[var(--color-accent)]">
-                    {t.appPresence.fixedStart}
+                    {t.subPages.application.presenceConfig.timestampStrategy.fixedStart}
                   </span>
                 </div>
                 <input
@@ -412,9 +412,9 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
             }}
           >
             <div className="flex-1 min-w-0">
-              <span className="text-xs font-bold block">{t.appPresence.statusFieldConfig}</span>
+              <span className="text-xs font-bold block">{t.subPages.application.presenceConfig.statusFieldConfig.title}</span>
               <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                {t.appPresence.statusFieldDescription}
+                {t.subPages.application.presenceConfig.statusFieldConfig.desc}
               </p>
             </div>
             <div className="p-1.5 rounded-xl border" style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}>
@@ -428,11 +428,11 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
       <Modal
         isOpen={Boolean(helpModal)}
         onClose={() => setHelpModal(null)}
-        title={helpModal === 'policy' ? t.appPresence.outsideHelpTitle : t.appPresence.timestampHelpTitle}
-        subtitle={t.appPresence.configurationDetails}
+        title={helpModal === 'policy' ? t.subPages.application.presenceConfig.outsidePolicies.modal.title : t.subPages.application.presenceConfig.timestampStrategy.modal.title}
+        subtitle={t.subPages.application.presenceConfig.configurationDetails}
         footer={
           <Button size="sm" variant="primary" onClick={() => setHelpModal(null)}>
-            {t.appPresence.understood}
+            {t.buttons.understood}
           </Button>
         }
       >
@@ -440,25 +440,25 @@ export const AppPresenceConfig: React.FC<AppPresenceConfigProps> = ({
           {helpModal === 'policy' ? (
             <>
               <p>
-                <strong>{t.appPresence.freeze}:</strong> {t.appPresence.freezeHelp}
+                <strong>{t.choices.outsidePolicies.freeze}:</strong> {t.subPages.application.presenceConfig.outsidePolicies.modal.details.freeze}
               </p>
               <p>
-                <strong>{t.appPresence.customFallback}:</strong> {t.appPresence.customHelp}
+                <strong>{t.choices.outsidePolicies.customFallback}:</strong> {t.subPages.application.presenceConfig.outsidePolicies.modal.details.custom}
               </p>
               <p>
-                <strong>{t.appPresence.drop}:</strong> {t.appPresence.dropHelp}
+                <strong>{t.choices.outsidePolicies.drop}:</strong> {t.subPages.application.presenceConfig.outsidePolicies.modal.details.drop}
               </p>
             </>
           ) : (
             <>
               <p>
-                <strong>{t.appPresence.persistent}:</strong> {t.appPresence.persistentHelp}
+                <strong>{t.choices.timestampStrategy.persistent}:</strong> {t.subPages.application.presenceConfig.timestampStrategy.modal.details.persistent}
               </p>
               <p>
-                <strong>{t.appPresence.resetOnLaunch}:</strong> {t.appPresence.resetHelp}
+                <strong>{t.choices.timestampStrategy.resetOnLaunch}:</strong> {t.subPages.application.presenceConfig.timestampStrategy.modal.details.reset}
               </p>
               <p>
-                <strong>{t.appPresence.customFixedTime}:</strong> {t.appPresence.fixedHelp}
+                <strong>{t.choices.timestampStrategy.customFixedTime}:</strong> {t.subPages.application.presenceConfig.timestampStrategy.modal.details.fixed}
               </p>
             </>
           )}

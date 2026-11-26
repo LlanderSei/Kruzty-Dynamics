@@ -147,8 +147,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
   const accountCount = accounts.length
   const accountSubtext =
     accountCount === 0
-      ? t.onboarding.discordLoginDesc
-      : `${accountCount} ${t.onboarding.accountsConnected}`
+      ? t.onboarding.surface.userSection.discordLogin.desc
+      : `${accountCount} ${t.onboarding.surface.userSection.discordLogin.accountsConnected}`
 
   // Check if all permissions are granted and at least 1 account is connected
   const allPermissionsGranted =
@@ -161,10 +161,10 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
   const isFullyConfigured = allPermissionsGranted && hasAccount
 
   const footerButtonText = isFullyConfigured
-    ? t.onboarding.finishSetup
+    ? t.onboarding.footer.buttons.finishSetup
     : hasAccount
-      ? t.onboarding.continueForNow
-      : t.onboarding.skipForNow
+      ? t.onboarding.footer.buttons.continueForNow
+      : t.onboarding.footer.buttons.skipForNow
 
   const handleOpenLoginPortal = () => {
     // Android native bridge: opens in-app WebView OAuth2 portal
@@ -230,14 +230,14 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: 'var(--color-accent)' }}
             />
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight">{t.onboarding.title}</h1>
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight">{t.onboarding.surface.title}</h1>
           </div>
           <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-            {t.onboarding.subtitle}
+            {t.onboarding.surface.subtitle}
           </p>
           <div className="flex items-center gap-1.5 text-[11px] pt-0.5" style={{ color: 'var(--color-text-muted)' }}>
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-            <span>{t.onboarding.privacyNotice}</span>
+            <span>{t.onboarding.surface.privacyNotice}</span>
           </div>
         </div>
       </header>
@@ -251,10 +251,10 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               className="text-xs font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              {t.onboarding.permissionsSection}
+              {t.onboarding.surface.permissionsSection.title}
             </h2>
             <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.onboarding.permissionsRequired}
+              {t.onboarding.surface.permissionsSection.desc}
             </span>
           </div>
 
@@ -286,7 +286,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="text-sm font-semibold">{t.onboarding.notificationTitle}</span>
+                    <span className="text-sm font-semibold">{t.onboarding.surface.permissionsSection.notificationAccess.title}</span>
                     {!permissions.notificationListener && (
                       <span
                         className="text-[10px] px-1.5 py-0.5 rounded font-medium"
@@ -295,7 +295,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                           color: 'var(--color-accent)',
                         }}
                       >
-                        {t.onboarding.notificationCrucial}
+                        {t.tags.notificationCrucial}
                       </span>
                     )}
                   </div>
@@ -303,7 +303,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                     className="text-xs mt-0.5 leading-snug"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    {t.onboarding.notificationDesc}
+                    {t.onboarding.surface.permissionsSection.notificationAccess.desc}
                   </p>
                 </div>
               </div>
@@ -311,7 +311,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 {permissions.notificationListener ? (
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    {t.onboarding.granted}
+                    {t.tags.granted}
                   </span>
                 ) : (
                   <Button
@@ -322,7 +322,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       setActiveModal('perm_notification')
                     }}
                   >
-                    {t.onboarding.grant}
+                    {t.buttons.grant}
                   </Button>
                 )}
               </div>
@@ -351,7 +351,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="text-sm font-semibold">{t.onboarding.usageTitle}</span>
+                    <span className="text-sm font-semibold">{t.onboarding.surface.permissionsSection.usageAccess.title}</span>
                     {!permissions.usageStats && (
                       <span
                         className="text-[10px] px-1.5 py-0.5 rounded font-medium"
@@ -360,7 +360,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                           color: 'var(--color-accent)',
                         }}
                       >
-                        {t.onboarding.notificationCrucial}
+                        {t.tags.notificationCrucial}
                       </span>
                     )}
                   </div>
@@ -368,7 +368,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                     className="text-xs mt-0.5 leading-snug"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    {t.onboarding.usageDesc}
+                    {t.onboarding.surface.permissionsSection.usageAccess.desc}
                   </p>
                 </div>
               </div>
@@ -376,7 +376,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 {permissions.usageStats ? (
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    {t.onboarding.granted}
+                    {t.tags.granted}
                   </span>
                 ) : (
                   <Button
@@ -387,7 +387,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       setActiveModal('perm_usage')
                     }}
                   >
-                    {t.onboarding.grant}
+                    {t.buttons.grant}
                   </Button>
                 )}
               </div>
@@ -417,12 +417,12 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                   <BatteryCharging className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-sm font-semibold">{t.onboarding.batteryTitle}</span>
+                  <span className="text-sm font-semibold">{t.onboarding.surface.permissionsSection.batteryOptimization.title}</span>
                   <p
                     className="text-xs mt-0.5 leading-snug"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    {t.onboarding.batteryDesc}
+                    {t.onboarding.surface.permissionsSection.batteryOptimization.desc}
                   </p>
                 </div>
               </div>
@@ -430,7 +430,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 {permissions.batteryOptimizationsIgnored ? (
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    {t.onboarding.granted}
+                    {t.tags.granted}
                   </span>
                 ) : (
                   <Button
@@ -441,7 +441,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       setActiveModal('perm_battery')
                     }}
                   >
-                    {t.onboarding.grant}
+                    {t.buttons.grant}
                   </Button>
                 )}
               </div>
@@ -471,12 +471,12 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                   <Bell className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-sm font-semibold">{t.onboarding.postNotificationTitle}</span>
+                  <span className="text-sm font-semibold">{t.onboarding.surface.permissionsSection.foregroundNotification.title}</span>
                   <p
                     className="text-xs mt-0.5 leading-snug"
                     style={{ color: 'var(--color-text-muted)' }}
                   >
-                    {t.onboarding.postNotificationDesc}
+                    {t.onboarding.surface.permissionsSection.foregroundNotification.desc}
                   </p>
                 </div>
               </div>
@@ -484,7 +484,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 {permissions.postNotifications ? (
                   <span className="inline-flex items-center gap-1 text-xs font-medium text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
                     <CheckCircle2 className="w-3.5 h-3.5" />
-                    {t.onboarding.granted}
+                    {t.tags.granted}
                   </span>
                 ) : (
                   <Button
@@ -495,7 +495,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       setActiveModal('perm_post_notifications')
                     }}
                   >
-                    {t.onboarding.grant}
+                    {t.buttons.grant}
                   </Button>
                 )}
               </div>
@@ -513,10 +513,10 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               className="text-xs font-bold uppercase tracking-wider"
               style={{ color: 'var(--color-text-muted)' }}
             >
-              {t.onboarding.userControlSection}
+              {t.onboarding.surface.userSection.title}
             </h2>
             <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>
-              {t.onboarding.userControlDesc}
+              {t.onboarding.surface.userSection.desc}
             </span>
           </div>
 
@@ -542,7 +542,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold">{t.onboarding.discordLoginTitle}</span>
+                    <span className="text-sm font-semibold">{t.onboarding.surface.userSection.discordLogin.title}</span>
                     {accounts.length > 0 && (
                       <span className="w-2 h-2 rounded-full bg-emerald-500" />
                     )}
@@ -601,7 +601,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                   <Palette className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-sm font-semibold">{t.onboarding.themeTitle}</span>
+                  <span className="text-sm font-semibold">{t.onboarding.surface.userSection.themeTitle}</span>
                   <p
                     className="text-xs mt-0.5 capitalize leading-snug"
                     style={{ color: 'var(--color-text-muted)' }}
@@ -641,7 +641,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                   <Globe className="w-5 h-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-sm font-semibold">{t.onboarding.languageTitle}</span>
+                  <span className="text-sm font-semibold">{t.onboarding.surface.userSection.languageTitle}</span>
                   <p
                     className="text-xs mt-0.5 leading-snug"
                     style={{ color: 'var(--color-text-muted)' }}
@@ -672,12 +672,12 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
             {isFullyConfigured ? (
               <>
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                <span className="text-emerald-500 font-medium">{t.onboarding.allSet}</span>
+                <span className="text-emerald-500 font-medium">{t.onboarding.footer.allSet}</span>
               </>
             ) : (
               <>
                 <Sparkles className="w-3.5 h-3.5" style={{ color: 'var(--color-accent)' }} />
-                <span>{t.onboarding.readyWhenYouAre}</span>
+                <span>{t.onboarding.footer.readyWhenYouAre}</span>
               </>
             )}
           </div>
@@ -702,8 +702,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_notification' && !permissions.notificationListener}
         onClose={() => setActiveModal(null)}
-        title={t.permissions.notificationTitle}
-        subtitle={t.permissions.notificationSubtitle}
+        title={t.onboarding.surface.permissionsSection.notificationAccess.title}
+        subtitle={t.onboarding.surface.permissionsSection.notificationAccess.modal.subtitle}
         footer={
           <Button
             variant="primary"
@@ -714,7 +714,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            {t.permissions.openAndroidSettings}
+            {t.onboarding.surface.permissionsSection.notificationAccess.modal.openAndroidSettings}
           </Button>
         }
       >
@@ -729,9 +729,9 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           >
             <ShieldAlert className="w-5 h-5 shrink-0 mt-0.5" style={{ color: 'var(--color-accent)' }} />
             <div>
-              <p className="font-semibold">{t.permissions.oemNotice}</p>
+              <p className="font-semibold">{t.onboarding.surface.permissionsSection.notificationAccess.modal.oemNotice.title}</p>
               <p className="mt-0.5 opacity-90 leading-normal">
-                {t.permissions.notificationExplanation}
+                {t.onboarding.surface.permissionsSection.notificationAccess.modal.oemNotice.desc}
               </p>
             </div>
           </div>
@@ -743,12 +743,12 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
             >
               <div className="flex items-center gap-1.5 font-semibold text-amber-400">
-                <span>{t.permissions.methodA}</span>
+                <span>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodA.title}</span>
               </div>
               <ol className="list-decimal list-inside space-y-1 pl-1" style={{ color: 'var(--color-text-muted)' }}>
-                <li>{t.permissions.methodAStep1}</li>
-                <li>{t.permissions.methodAStep2}</li>
-                <li>{t.permissions.methodAStep3}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodA.step1}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodA.step2}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodA.step3}</li>
               </ol>
             </div>
 
@@ -758,20 +758,20 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               style={{ backgroundColor: 'var(--color-bg-elevated)', borderColor: 'var(--color-border)' }}
             >
               <div className="flex items-center gap-1.5 font-semibold text-amber-400">
-                <span>{t.permissions.methodB}</span>
+                <span>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodB.title}</span>
               </div>
               <ol className="list-decimal list-inside space-y-1 pl-1" style={{ color: 'var(--color-text-muted)' }}>
-                <li>{t.permissions.methodBStep1}</li>
-                <li>{t.permissions.methodBStep2}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodB.step1}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodB.step2}</li>
                 <li>Tap the <strong>⋮ (three dots / ellipsis)</strong> at the top-right corner.</li>
-                <li>{t.permissions.methodBStep4}</li>
-                <li>{t.permissions.methodBStep5}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodB.step4}</li>
+                <li>{t.onboarding.surface.permissionsSection.notificationAccess.modal.methodB.step5}</li>
               </ol>
             </div>
           </div>
 
           <p className="text-[11px] leading-relaxed pt-1" style={{ color: 'var(--color-text-muted)' }}>
-            {t.permissions.notificationAccessDescription}
+            {t.onboarding.surface.permissionsSection.notificationAccess.modal.desc}
           </p>
         </div>
       </Modal>
@@ -780,8 +780,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_usage' && !permissions.usageStats}
         onClose={() => setActiveModal(null)}
-        title={t.permissions.usageTitle}
-        subtitle={t.permissions.usageSubtitle}
+        title={t.onboarding.surface.permissionsSection.usageAccess.title}
+        subtitle={t.onboarding.surface.permissionsSection.usageAccess.modal.subtitle}
         footer={
           <Button
             variant="primary"
@@ -792,18 +792,18 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            {t.permissions.openUsageAccess}
+            {t.onboarding.surface.permissionsSection.usageAccess.modal.openUsageAccess}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            {t.permissions.usageDescription}
+            {t.onboarding.surface.permissionsSection.usageAccess.modal.desc}
           </p>
           <ol className="space-y-1.5 list-decimal list-inside">
-            <li>{t.permissions.usageStep1}</li>
-            <li>{t.permissions.usageStep2}</li>
-            <li>{t.permissions.usageStep3}</li>
+            <li>{t.onboarding.surface.permissionsSection.usageAccess.modal.step1}</li>
+            <li>{t.onboarding.surface.permissionsSection.usageAccess.modal.step2}</li>
+            <li>{t.onboarding.surface.permissionsSection.usageAccess.modal.step3}</li>
           </ol>
         </div>
       </Modal>
@@ -812,8 +812,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_battery' && !permissions.batteryOptimizationsIgnored}
         onClose={() => setActiveModal(null)}
-        title={t.permissions.batteryTitle}
-        subtitle={t.permissions.batterySubtitle}
+        title={t.onboarding.surface.permissionsSection.batteryOptimization.title}
+        subtitle={t.onboarding.surface.permissionsSection.batteryOptimization.modal.subtitle}
         footer={
           <Button
             variant="primary"
@@ -823,13 +823,13 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            {t.permissions.requestExemption}
+            {t.onboarding.surface.permissionsSection.batteryOptimization.modal.requestExemption}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            {t.permissions.batteryDescription}
+            {t.onboarding.surface.permissionsSection.batteryOptimization.modal.desc}
           </p>
         </div>
       </Modal>
@@ -838,8 +838,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'perm_post_notifications' && !permissions.postNotifications}
         onClose={() => setActiveModal(null)}
-        title={t.permissions.foregroundTitle}
-        subtitle={t.permissions.foregroundSubtitle}
+        title={t.onboarding.surface.permissionsSection.foregroundNotification.modal.title}
+        subtitle={t.onboarding.surface.permissionsSection.foregroundNotification.modal.subtitle}
         footer={
           <Button
             variant="primary"
@@ -849,13 +849,13 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
               setActiveModal(null)
             }}
           >
-            {t.permissions.allowNotification}
+            {t.onboarding.surface.permissionsSection.foregroundNotification.modal.allowNotification}
           </Button>
         }
       >
         <div className="space-y-3 text-xs leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
           <p>
-            {t.permissions.foregroundDescription}
+            {t.onboarding.surface.permissionsSection.foregroundNotification.modal.desc}
           </p>
         </div>
       </Modal>
@@ -864,8 +864,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'discord_login'}
         onClose={() => setActiveModal(null)}
-        title={t.accounts.title}
-        subtitle={t.accounts.subtitle}
+        title={t.pages.accounts.title}
+        subtitle={t.modals.discordLogin.content.subtitle}
       >
         <div className="space-y-4">
           {/* Quick In-App Login Portal Button */}
@@ -878,9 +878,9 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           >
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs font-bold block">{t.accountsPage.portal}</span>
+                <span className="text-xs font-bold block">{t.modals.discordLogin.content.title}</span>
                 <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                  {t.accountsPage.signInPortal}
+                  {t.modals.discordLogin.content.subtitle}
                 </p>
               </div>
               <Button
@@ -889,7 +889,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 icon={<DiscordIcon className="w-3.5 h-3.5" />}
                 onClick={handleOpenLoginPortal}
               >
-                {t.accountsPage.openPortal}
+                {t.buttons.openPortal}
               </Button>
             </div>
             <div className="flex items-start gap-2 rounded-xl border p-2.5 text-[11px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
@@ -915,7 +915,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           {accounts.length > 0 && (
             <div className="space-y-2">
               <span className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>
-                {t.accountsPage.currentAccount} ({accounts.length})
+                {t.pages.accounts.body.hasAccount.currentAccount} ({accounts.length})
               </span>
               <div className="space-y-1.5">
                 {accounts.map(acc => (
@@ -937,7 +937,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       <div className="truncate">
                         <div className="font-semibold truncate">{acc.displayName || acc.username}</div>
                         <div className="text-[10px]" style={{ color: 'var(--color-text-muted)' }}>
-                          {acc.isActive ? t.accounts.activeIdentity : t.accounts.stored}
+                          {acc.isActive ? t.modals.discordLogin.onboarding.activeIdentity : t.modals.discordLogin.onboarding.stored}
                         </div>
                       </div>
                     </div>
@@ -945,7 +945,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                       type="button"
                       onClick={() => removeAccount(acc.id)}
                       className="p-1 rounded text-red-400 hover:bg-red-500/10 transition-colors"
-                      title={t.accountsPage.remove}
+                      title={t.buttons.remove}
                     >
                       <LogOut className="w-3.5 h-3.5" />
                     </button>
@@ -969,21 +969,21 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'theme'}
         onClose={() => setActiveModal(null)}
-        title={t.settings.themes}
-        subtitle={t.settings.themesDesc}
+        title={t.pages.settings.appPreferences.themes.title}
+        subtitle={t.pages.settings.appPreferences.themes.desc}
       >
         <div className="space-y-5">
           {/* Mode Selector */}
           <div>
             <label className="block text-xs font-semibold mb-2" style={{ color: 'var(--color-text-muted)' }}>
-              {t.settingsUi.themeMode}
+              {t.modals.settings.themes.themeMode}
             </label>
             <div className="grid grid-cols-3 gap-2">
               {(
                 [
-                  { id: 'dark', label: t.settingsUi.dark },
-                  { id: 'light', label: t.settingsUi.light },
-                  { id: 'amoled', label: t.settingsUi.amoled },
+                  { id: 'dark', label: t.choices.theme.dark },
+                  { id: 'light', label: t.choices.theme.light },
+                  { id: 'amoled', label: t.choices.theme.amoled },
                 ] as const
               ).map(item => {
                 const isSelected = theme.mode === item.id
@@ -1011,7 +1011,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-xs font-semibold" style={{ color: 'var(--color-text-muted)' }}>
-                {t.settingsUi.accentColor}
+                {t.modals.settings.themes.accentColor}
               </label>
               <button
                 type="button"
@@ -1019,7 +1019,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 className="text-[11px] hover:underline"
                 style={{ color: 'var(--color-accent)' }}
               >
-                {t.settingsUi.resetAccent}
+                {t.modals.settings.themes.resetAccent}
               </button>
             </div>
 
@@ -1069,7 +1069,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
                 className="w-7 h-7 rounded-lg cursor-pointer bg-transparent border-0 p-0 shrink-0"
               />
               <span className="text-xs font-mono font-medium flex-1">{theme.customAccentColor.toUpperCase()}</span>
-              <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{t.settingsUi.tapCustomize}</span>
+              <span className="text-[11px]" style={{ color: 'var(--color-text-muted)' }}>{t.modals.settings.themes.tapCustomize}</span>
             </div>
           </div>
         </div>
@@ -1079,8 +1079,8 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
       <Modal
         isOpen={activeModal === 'language'}
         onClose={() => setActiveModal(null)}
-        title={t.settingsUi.chooseLanguage}
-        subtitle={t.settingsUi.languageDescription}
+        title={t.modals.settings.language.title}
+        subtitle={t.modals.settings.language.desc}
       >
         <div className="space-y-1.5">
           {[
@@ -1114,6 +1114,7 @@ export const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }
             { id: 'nl_NL', label: 'Nederlands' },
             { id: 'ru_RU', label: '\u0420\u0443\u0441\u0441\u043a\u0438\u0439' },
             { id: 'tr_TR', label: 'T\u00fcrk\u00e7e' },
+            { id: 'en_HmphBaka', label: 'Hmph!!... Baka...' },
           ].map(lang => {
             const isSelected = settings.language === lang.label
             return (
