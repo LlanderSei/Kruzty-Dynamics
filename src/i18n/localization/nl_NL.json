@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Eerste configuratie",
-    "subtitle": "Configureer de benodigde machtigingen en accounts om dynamische Discord Rich Presence in te schakelen.",
-    "privacyNotice": "Deze app verzamelt of verzendt geen gebruikersgegevens.",
-    "permissionsSection": "Machtigingenbeheer",
-    "permissionsRequired": "Vereist voor detectie",
-    "notificationTitle": "Toegang tot meldingen",
-    "notificationDesc": "Speciale app-toegang nodig om media en afspelen te detecteren",
-    "notificationCrucial": "Cruciaal",
-    "usageTitle": "Toegang tot gebruiksgegevens",
-    "usageDesc": "Vereist om de huidige actieve voorgrond-app of game te detecteren",
-    "batteryTitle": "Batterijoptimalisatie",
-    "batteryDesc": "Sluit de app uit om te voorkomen dat de achtergronddienst in slaap valt",
-    "postNotificationTitle": "Voorgrondmelding",
-    "postNotificationDesc": "Android 13+ machtiging voor permanente servicemelding",
-    "grant": "Toestaan",
-    "granted": "Toegestaan",
-    "userControlSection": "Gebruikersbeheer",
-    "userControlDesc": "Aanpassing en account",
-    "discordLoginTitle": "Discord-login",
-    "discordLoginDesc": "Verbind je Discord-account om Rich Presence te tonen",
-    "accountsConnected": "account ingelogd.",
-    "themeTitle": "Thema",
-    "languageTitle": "Taal",
-    "finishSetup": "Configuratie voltooien",
-    "continueForNow": "Voorlopig doorgaan",
-    "skipForNow": "Voorlopig overslaan",
-    "allSet": "Helemaal klaar! Klaar om te tonen",
-    "readyWhenYouAre": "Klaar wanneer jij dat bent"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Actieve identiteit",
+        "stored": "Opgeslagen"
+      },
+      "content": {
+        "subtitle": "Beheer tokens en identiteiten",
+        "title": "Discord-loginportaal",
+        "privacyText": "Discord-autorisatie vraagt toegang tot sociale functies naast Rich Presence. Kruzty Dynamics gebruikt de SDK om je account te identificeren en je geconfigureerde activiteit te publiceren of te wissen; het gebruikt geen vrienden-, blokkeer-, uitnodigings-, bericht- of spraakfuncties. Op Android worden tokens versleuteld en op dit apparaat opgeslagen. Lees de",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Privacybeleid"
+      },
+      "title": "Discord-account verbinden"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Expressies ondersteunen de vergelijkingen == en !=. Gebruik {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} om AppName te kiezen wanneer het activiteitstype \"Playing\" is, en anders AppPlatformType.",
+        "title": "Referentie applicatietokens",
+        "desc": "Dynamische variabelen beschikbaar in veldexpressies"
+      },
+      "media": {
+        "title": "Referentie mediatokens",
+        "intro": "Tokens kunnen rechtstreeks in tekstvelden en knoplabels of URL's worden gebruikt (bijv. {example}).",
+        "desc": "Dynamische variabelen die beschikbaar zijn in media-uitdrukkingen en knoppen"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Niet-opgeslagen wijzigingen negeren?",
+      "unsaved": "Niet-opgeslagen wijzigingen"
+    },
+    "logs": {
+      "copy": "Logs kopiëren",
+      "empty": "[INFO] Nog geen logs. Open de Discord-login of voer acties uit om logs te genereren.",
+      "export": "Logs exporteren",
+      "subtitle": "Live diagnostische uitvoer",
+      "title": "Applicatielogs"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Primaire accentkleur",
+        "resetAccent": "Terug naar standaard oranje",
+        "tapCustomize": "Tik om aan te passen",
+        "themeMode": "Themamodus"
+      },
+      "globalDefaults": {
+        "activityStatus": "Activiteitsstatus",
+        "activityType": "Activiteitstype",
+        "note": "Deze standaardwaarden worden automatisch gebruikt wanneer een app of presence-activiteit geen eigen activiteitstype of status opgeeft."
+      },
+      "imgBb": {
+        "apiPrivacy": "Als je dit veld leeg laat, wordt de ingebouwde standaardsleutel hersteld. Aangepaste sleutels worden nooit in platte tekst weergegeven.",
+        "getApiKey": "om een sleutel te verkrijgen.",
+        "help": "Stel je eigen ImgBB API-sleutel in om aangepaste app- en media-afbeeldingen naar Discord CDN te uploaden. Bezoek",
+        "usingDefaultKey": "Standaardsysteemsleutel in gebruik"
+      },
+      "language": {
+        "availableLanguages": "Beschikbare talen",
+        "title": "Taal kiezen",
+        "desc": "Selecteer je voorkeurstaal voor UI-labels en meldingen."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Voorkomt dat Android de presenceservice beëindigt",
+        "foregroundDesc": "Statusbalkindicator voor doorlopende Discord-presence",
+        "notificationAccessDesc": "Speciale app-toegang voor mediadetectie",
+        "desc": "Status van machtigingen die nodig zijn om actieve mediameldingen en voorgrondapplicaties te lezen:",
+        "usageAccessDesc": "Detecteer actieve voorgrondgames en -apps"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "Er zijn {total} gekoppelde afbeeldings-URL's, waarvan {custom} aangepaste app-pictogramoverschrijvingen. Je kunt gecachte links wissen terwijl je aangepaste pictogrammen behoudt, of alle links wissen en aangepaste overschrijvingen verwijderen. Als je overschrijvingen verwijdert, upload die pictogrammen dan opnieuw in de Applicatiecatalogus.",
+        "buttons": {
+          "clearCacheAll": "Alles wissen, inclusief aangepaste pictogrammen",
+          "clearCacheKeep": "Cache wissen, aangepaste pictogrammen behouden"
+        },
+        "clearedAll": "Alle gekoppelde afbeeldings-URL's gewist, inclusief aangepaste app-pictogrammen.",
+        "clearedKeeping": "Cache van gekoppelde afbeeldings-URL's gewist. Aangepaste app-pictogrammen zijn behouden.",
+        "linkedImageUrls": "Gekoppelde afbeeldings-URL's"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy-bijdragers",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Bibliotheken gebruikt in deze app",
+        "libraries": {
+          "lucide": "Door de community gemaakte zuivere vectorpictogrammen",
+          "react": "Moderne UI-componentarchitectuur",
+          "sdk": "Native Android rich presence-integratie",
+          "tailwind": "Utility-first moderne responsieve styling",
+          "tauri": "Lichtgewicht platformonafhankelijke native runtime",
+          "tokio": "Asynchrone, gebeurtenisgestuurde netwerkruntime"
+        },
+        "maintainerRole": "Huidige beheerder en ontwikkelaar"
+      },
+      "discordApp": {
+        "developerPortal": "Discord Developer Portal",
+        "help": "Stel je eigen Discord Application ID in via de",
+        "idPrivacy": "Als je dit veld leeg laat, wordt teruggezet naar de standaard Kruzty Dynamics Application ID."
+      }
+    }
   },
-  "nav": {
-    "service": "Service",
-    "accounts": "Accounts",
-    "settings": "Instellingen en meer"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Account toevoegen",
+            "switch": "Wisselen",
+            "unuse": "Niet gebruiken"
+          },
+          "activePresence": "Actieve presence",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Uitloggen bevestigen",
+              "title": "Account uitloggen",
+              "removePrefix": "Weet je zeker dat je het account wilt verwijderen",
+              "removeSuffix": ". Hiermee worden opgeslagen inloggegevens van dit apparaat verwijderd."
+            }
+          },
+          "currentAccount": "Momenteel ingelogd account",
+          "noActiveAccount": "Geen account geselecteerd. Kies hieronder een van de ingelogde accounts.",
+          "storedAccounts": "Opgeslagen accounts"
+        },
+        "noAccount": {
+          "desc": "Verbind je Discord-account om Rich Presence-statussen voor games, apps en media te tonen.",
+          "title": "Nog geen account ingelogd.",
+          "login": "Inloggen bij Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Geen Discord-accounts",
+        "loggedInMany": "{n} accounts ingelogd.",
+        "loggedInOne": "{n} account ingelogd."
+      },
+      "title": "Discord-accounts"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics-dashboard",
+      "title": {
+        "welcome": "Welkom!",
+        "welcomeNamed": "Welkom, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Alle vereiste machtigingen zijn verleend. Schakel de service in om door te gaan.",
+              "foregroundService": {
+                "desc": "Hiermee kan Android de servicemelding tonen terwijl de service draait.",
+                "title": "Voorgrondservicemeldingen"
+              },
+              "notificationAccess": {
+                "desc": "Vereist om media-afspelen en de metadata ervan te detecteren."
+              },
+              "subtitle": "Verleen deze Android-machtigingen voordat je de service start.",
+              "title": "Vereiste machtigingen",
+              "returnHint": "Keer na het verlenen van toegang in Android-instellingen hier terug en schakel de service in.",
+              "usageAccess": {
+                "desc": "Vereist om te detecteren welke app momenteel op de voorgrond staat."
+              }
+            }
+          },
+          "startError": "Kan de Android-presenceservice niet starten.",
+          "running": "Service is actief.",
+          "stopped": "Service niet gestart.",
+          "title": "Kruzty Dynamics-service"
+        },
+        "application": {
+          "desc": "Configureer app-profielen voor lokale presencedetectie",
+          "title": "Applicatiepresence"
+        },
+        "buttons": {
+          "applicationCatalogue": "Applicatiecatalogus",
+          "presenceConfiguration": "Presenceconfiguratie",
+          "statusFieldConfig": "Statusveldconfiguratie"
+        },
+        "media": {
+          "desc": "Configureer mediagedrag en statussjablonen",
+          "title": "Mediapresence"
+        },
+        "preview": {
+          "noPresence": "Geen geconfigureerde app of actieve media gedetecteerd.",
+          "stoppedDescription": "Service is gestopt. Schakel deze in om ingeschakelde apps en actieve media te detecteren."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "App-voorkeuren",
+        "checkPermissions": {
+          "title": "Machtigingen controleren",
+          "desc": "Bekijk verleende en optionele systeemtoegangsmachtigingen"
+        },
+        "deleteCachedUrls": {
+          "title": "Gekoppelde afbeeldings-URL's verwijderen",
+          "desc": "Wist gekoppelde URL's van geüploade afbeeldingen die worden gebruikt in app- of mediastatus"
+        },
+        "discordAppId": {
+          "title": "Discord Application ID instellen",
+          "desc": "Stel je eigen Discord Application ID in. Bezoek: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "Globale standaardwaarden",
+          "desc": "Activiteitstype en status voor niet-geconfigureerde apps"
+        },
+        "imgBbKey": {
+          "title": "ImgBB API-sleutel instellen",
+          "desc": "Stel je eigen ImgBB API-sleutel in. Bezoek: api.imgbb.com"
+        },
+        "language": {
+          "title": "Taal",
+          "desc": "Momenteel ingesteld:"
+        },
+        "notificationProjection": {
+          "title": "Weergave van meldingsstatus aanpassen",
+          "desc": "Pas de titels en ondertitels van app- en media-meldingen aan."
+        },
+        "themes": {
+          "title": "Thema's en weergave",
+          "desc": "Stel je thema en accentkleur in."
+        },
+        "checkUpdates": {
+          "title": "Controleer of je de nieuwste versie hebt",
+          "desc": "Controleer of er een nieuwere versie beschikbaar is."
+        }
+      },
+      "subtitle": "App-voorkeuren en diagnostiek",
+      "title": "Instellingen en meer",
+      "cardInfo": {
+        "architecture": "Gebouwd met Rust Core (Tokio + Tauri v2) met React 19 en TailwindCSS-frontend, inclusief Native Android Plugin Bridge. Gebaseerd op de originele Kizzy's Experimental RPC.",
+        "credits": "Credits",
+        "developedBy": "Ontwikkeld door",
+        "latestRelease": "Naar nieuwste release",
+        "learnMore": "Meer informatie over deze app",
+        "repository": "GitHub-repository bekijken",
+        "submitIssue": "Een probleem melden",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "Welkom!",
-    "welcomeNamed": "Welkom, {name}!",
-    "dashboardSubtitle": "Kruzty Dynamics-dashboard",
-    "accountsLoggedInOne": "{n} account ingelogd.",
-    "accountsLoggedInMany": "{n} accounts ingelogd.",
-    "liveLogs": "Live logs",
-    "viewLogs": "Logs bekijken",
-    "serviceActive": "Actief",
-    "serviceInactive": "Inactief",
-    "serviceStarting": "Starten",
-    "serviceStopped": "Gestopt"
-  },
-  "accounts": {
-    "title": "Discord-accounts",
-    "subtitle": "Beheer tokens en identiteiten",
-    "loginPortal": "Inloggen via Discord-portaal",
-    "loginWithToken": "Account toevoegen via token",
-    "addAccount": "Account toevoegen",
-    "activeIdentity": "Actieve identiteit",
-    "stored": "Opgeslagen",
+  "buttons": {
     "remove": "Verwijderen",
-    "noAccounts": "Geen Discord-accounts",
-    "noAccountsDesc": "Voeg je Discord-account toe via het portaal of een gebruikerstoken om rich presence te tonen."
-  },
-  "settings": {
-    "title": "Instellingen en meer",
-    "subtitle": "App-voorkeuren en diagnostiek",
-    "appPreferences": "App-voorkeuren",
-    "notificationProjection": "Weergave van meldingsstatus aanpassen",
-    "notificationProjectionDesc": "Pas de titels en ondertitels van app- en media-meldingen aan.",
-    "themes": "Thema's en weergave",
-    "themesDesc": "Stel je thema en accentkleur in.",
-    "language": "Taal",
-    "languageDesc": "Momenteel ingesteld:",
-    "globalDefaults": "Globale standaardwaarden",
-    "globalDefaultsDesc": "Activiteitstype en status voor niet-geconfigureerde apps",
-    "imgbbKey": "ImgBB API-sleutel instellen",
-    "imgbbKeyDesc": "Stel je eigen ImgBB API-sleutel in. Bezoek: api.imgbb.com",
-    "discordAppId": "Discord Application ID instellen",
-    "discordAppIdDesc": "Stel je eigen Discord Application ID in. Bezoek: discord.com/developers",
-    "checkPermissions": "Machtigingen controleren",
-    "checkPermissionsDesc": "Bekijk verleende en optionele systeemtoegangsmachtigingen",
-    "deleteCache": "Gekoppelde afbeeldings-URL's verwijderen",
-    "deleteCacheDesc": "Wist gekoppelde URL's van geüploade afbeeldingen die worden gebruikt in app- of mediastatus"
-  },
-  "service": {
-    "title": "Kruzty Dynamics-service",
-    "running": "Service is actief.",
-    "stopped": "Service niet gestart.",
-    "applicationPresence": "Applicatiepresence",
-    "appDescription": "Configureer app-profielen voor lokale presencedetectie",
-    "applicationCatalogue": "Applicatiecatalogus",
-    "statusFieldConfig": "Statusveldconfiguratie",
-    "presenceConfiguration": "Presenceconfiguratie",
-    "mediaPresence": "Mediapresence",
-    "mediaDescription": "Configureer mediagedrag en statussjablonen",
-    "noPresence": "Geen geconfigureerde app of actieve media gedetecteerd.",
-    "stoppedDescription": "Service is gestopt. Schakel deze in om ingeschakelde apps en actieve media te detecteren."
-  },
-  "logs": {
-    "title": "Applicatielogs",
-    "subtitle": "Live diagnostische uitvoer",
-    "copy": "Logs kopiëren",
-    "export": "Logs exporteren",
-    "empty": "[INFO] Nog geen logs. Open de Discord-login of voer acties uit om logs te genereren."
-  },
-  "permissions": {
-    "requiredTitle": "Vereiste machtigingen",
-    "requiredSubtitle": "Verleen deze Android-machtigingen voordat je de service start.",
-    "done": "Klaar",
-    "allGranted": "Alle vereiste machtigingen zijn verleend. Schakel de service in om door te gaan.",
-    "grant": "Toestaan",
-    "returnHint": "Keer na het verlenen van toegang in Android-instellingen hier terug en schakel de service in.",
-    "notificationTitle": "Toegang tot meldingen",
-    "notificationSubtitle": "Configuratie speciale app-toegang",
-    "openAndroidSettings": "Android-instellingen openen",
-    "oemNotice": "Melding voor OEM- en Android 13+ apparaten",
-    "notificationExplanation": "Android beschermt toegang tot de meldingslistener achter speciale machtigingslagen. Afhankelijk van je telefoonmerk volg je een van de onderstaande methoden.",
-    "methodA": "Methode A: Speciale app-toegang (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "Tik hieronder op Android-instellingen openen.",
-    "methodAStep2": "Ga naar Speciale app-toegang > Toegang tot meldingen.",
-    "methodAStep3": "Zoek Kruzty Dynamics en schakel Toegang tot meldingen toestaan in.",
-    "methodB": "Methode B: App-info > Ellips (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Open Apparaatinstellingen > Apps > Apps beheren / App-lijst.",
-    "methodBStep2": "Zoek en tik op Kruzty Dynamics.",
-    "methodBStep3": "Tik op de drie puntjes in de rechterbovenhoek.",
-    "methodBStep4": "Tik op Beperkte instellingen toestaan / Speciale app-toegang > Toestaan.",
-    "methodBStep5": "Keer terug en schakel Toegang tot meldingen in.",
-    "notificationAccessDescription": "Toegang tot meldingen stelt Kruzty Dynamics in staat live media-sessieafspeelgebeurtenissen (nummer, artiest, album en afspeelstatus) vast te leggen van Spotify, YouTube Music en mediaspelers.",
-    "usageTitle": "Toegang tot gebruiksgegevens",
-    "usageSubtitle": "Detectie van voorgrond-apps",
-    "openUsageAccess": "Toegang tot gebruiksgegevens openen",
-    "usageDescription": "Toegang tot gebruiksgegevens is vereist om te detecteren welke app of game je momenteel op de voorgrond gebruikt, zodat Kruzty Dynamics deze kan matchen met je geconfigureerde applicatiecatalogus.",
-    "usageStep1": "Tik op Toegang tot gebruiksgegevens openen.",
-    "usageStep2": "Zoek Kruzty Dynamics.",
-    "usageStep3": "Schakel Gebruikstoegang toestaan in.",
-    "batteryTitle": "Batterijoptimalisatie",
-    "batterySubtitle": "Whitelist voor achtergrondservice",
-    "requestExemption": "Vrijstelling aanvragen",
-    "batteryDescription": "Moderne Android-systemen laten achtergrondprocessen na een paar minuten in slaap vallen. Kruzty Dynamics vrijstellen van batterijoptimalisatie zorgt voor continue, ononderbroken Discord Rich Presence-updates.",
-    "foregroundTitle": "Voorgrondservicemelding",
-    "foregroundSubtitle": "Android 13+ meldingsmachtiging",
-    "foregroundGuardTitle": "Voorgrondservicemeldingen",
-    "usageGuardDescription": "Vereist om te detecteren welke app momenteel op de voorgrond staat.",
-    "notificationGuardDescription": "Vereist om media-afspelen en de metadata ervan te detecteren.",
-    "foregroundGuardDescription": "Hiermee kan Android de servicemelding tonen terwijl de service draait.",
-    "serviceStartError": "Kan de Android-presenceservice niet starten.",
-    "allowNotification": "Melding toestaan",
-    "foregroundDescription": "Vereist door Android 13+ om de permanente voorgrondservicemelding in je statusbalk te tonen, ter bevestiging dat de Discord-presence-engine draait."
-  },
-  "toast": {
-    "duplicateAccount": "Dit Discord-account is al toegevoegd.",
-    "insufficientPermissions": "Onvoldoende rechten. Ga naar Instellingen & meer > Rechten controleren.",
-    "newVersionAvailable": "Er is een nieuwe versie beschikbaar!",
-    "updateDetected": "Er is een nieuwe, meest recente versie gedetecteerd!",
-    "latestVersion": "Dit is de nieuwste versie!",
-    "updateCheckFailed": "Er konden geen updates worden gecontroleerd."
-  },
-  "accountsPage": {
-    "emptyTitle": "Nog geen account ingelogd.",
-    "emptyDescription": "Verbind je Discord-account om Rich Presence-statussen voor games, apps en media te tonen.",
-    "login": "Inloggen bij Discord",
-    "currentAccount": "Momenteel ingelogd account",
-    "activePresence": "Actieve presence",
-    "storedAccounts": "Opgeslagen accounts",
-    "switch": "Wisselen",
-    "unuse": "Niet gebruiken",
-    "remove": "Verwijderen",
-    "cancel": "Annuleren",
-    "deleteTitle": "Discord-account verwijderen?",
-    "loginTitle": "Discord-loginportaal",
-    "noActiveAccount": "Geen account geselecteerd. Kies hieronder een van de ingelogde accounts.",
-    "addAccountTitle": "Discord-account verbinden",
-    "portal": "Discord-loginportaal",
-    "signInPortal": "Veilig inloggen met Discord in de app",
     "openPortal": "Portaal openen",
-    "privacyText": "Discord-autorisatie vraagt toegang tot sociale functies naast Rich Presence. Kruzty Dynamics gebruikt de SDK om je account te identificeren en je geconfigureerde activiteit te publiceren of te wissen; het gebruikt geen vrienden-, blokkeer-, uitnodigings-, bericht- of spraakfuncties. Op Android worden tokens versleuteld en op dit apparaat opgeslagen. Lees de",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Account uitloggen",
-    "removePrefix": "Weet je zeker dat je het account wilt verwijderen",
-    "removeSuffix": ". Hiermee worden opgeslagen inloggegevens van dit apparaat verwijderd.",
-    "confirmLogout": "Uitloggen bevestigen",
-    "addAccount": "Discord-account toevoegen",
-    "noSelection": "Geen account geselecteerd. Kies hieronder een van de ingelogde accounts.",
-    "addMoreAccounts": "Je kunt meer accounts toevoegen door op de Discord-knop hieronder te klikken."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Taal kiezen",
-    "languageDescription": "Selecteer je voorkeurstaal voor UI-labels en meldingen.",
-    "availableLanguages": "Beschikbare talen",
-    "close": "Sluiten",
-    "linkedImageUrls": "Gekoppelde afbeeldings-URL's",
-    "clearCacheKeep": "Cache wissen, aangepaste pictogrammen behouden",
-    "clearCacheAll": "Alles wissen, inclusief aangepaste pictogrammen",
-    "credits": "Credits",
-    "themeMode": "Themamodus",
-    "accentColor": "Primaire accentkleur",
-    "resetAccent": "Terug naar standaard oranje",
-    "learnMore": "Meer informatie over deze app",
-    "privacyPolicy": "Privacybeleid",
-    "repository": "GitHub-repository bekijken",
-    "latestRelease": "Naar nieuwste release",
-    "submitIssue": "Een probleem melden",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Bibliotheken gebruikt in deze app",
-    "contributorsSection": "Kizzy-bijdragers",
-    "maintainerRole": "Huidige beheerder en ontwikkelaar",
-    "view": "Bekijken",
-    "done": "Klaar",
-    "developedBy": "Ontwikkeld door",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Gebouwd met Rust Core (Tokio + Tauri v2) met React 19 en TailwindCSS-frontend, inclusief Native Android Plugin Bridge. Gebaseerd op de originele Kizzy's Experimental RPC.",
-    "cached": "gecachet",
-    "tapCustomize": "Tik om aan te passen",
-    "defaultNote": "Deze standaardwaarden worden automatisch gebruikt wanneer een app of presence-activiteit geen eigen activiteitstype of status opgeeft.",
-    "activityType": "Activiteitstype",
-    "activityStatus": "Activiteitsstatus",
-    "imgbbHelp": "Stel je eigen ImgBB API-sleutel in om aangepaste app- en media-afbeeldingen naar Discord CDN te uploaden. Bezoek",
-    "getApiKey": "om een sleutel te verkrijgen.",
-    "apiPrivacy": "Als je dit veld leeg laat, wordt de ingebouwde standaardsleutel hersteld. Aangepaste sleutels worden nooit in platte tekst weergegeven.",
-    "saveKey": "Sleutel opslaan",
-    "discordIdHelp": "Stel je eigen Discord Application ID in via de",
-    "developerPortal": "Discord Developer Portal",
-    "idDefault": "Standaard",
-    "idPrivacy": "Als je dit veld leeg laat, wordt teruggezet naar de standaard Kruzty Dynamics Application ID.",
-    "saveId": "ID opslaan",
-    "permissionsDescription": "Status van machtigingen die nodig zijn om actieve mediameldingen en voorgrondapplicaties te lezen:",
-    "notificationAccessDesc": "Speciale app-toegang voor mediadetectie",
-    "usageAccessDesc": "Detecteer actieve voorgrondgames en -apps",
-    "batteryDesc": "Voorkomt dat Android de presenceservice beëindigt",
-    "foregroundDesc": "Statusbalkindicator voor doorlopende Discord-presence",
-    "saveIdPlaceholder": "1572590527562391713 (standaard)",
-    "resetDefault": "Terug naar standaard",
-    "cancel": "Annuleren",
-    "cacheWarning": "Er zijn {total} gekoppelde afbeeldings-URL's, waarvan {custom} aangepaste app-pictogramoverschrijvingen. Je kunt gecachte links wissen terwijl je aangepaste pictogrammen behoudt, of alle links wissen en aangepaste overschrijvingen verwijderen. Als je overschrijvingen verwijdert, upload die pictogrammen dan opnieuw in de Applicatiecatalogus.",
-    "allGranted": "Allemaal verleend",
-    "clearedAll": "Alle gekoppelde afbeeldings-URL's gewist, inclusief aangepaste app-pictogrammen.",
-    "clearedKeeping": "Cache van gekoppelde afbeeldings-URL's gewist. Aangepaste app-pictogrammen zijn behouden.",
-    "usingDefaultKey": "Standaardsysteemsleutel in gebruik",
-    "customKeySet": "Aangepaste sleutel ingesteld",
-    "light": "Licht",
-    "dark": "Donker",
-    "amoled": "AMOLED",
-    "libraryTauri": "Lichtgewicht platformonafhankelijke native runtime",
-    "libraryTokio": "Asynchrone, gebeurtenisgestuurde netwerkruntime",
-    "librarySdk": "Native Android rich presence-integratie",
-    "libraryReact": "Moderne UI-componentarchitectuur",
-    "libraryTailwind": "Utility-first moderne responsieve styling",
-    "libraryLucide": "Door de community gemaakte zuivere vectorpictogrammen",
-    "checkForUpdates": "Controleer of je de nieuwste versie hebt",
-    "checkForUpdatesDesc": "Controleer of er een nieuwere versie beschikbaar is.",
-    "check": "Controleer",
-    "checkingUpdates": "Controleren op updates"
-  },
-  "configFields": {
-    "appTitle": "Configuratie applicatiestatusvelden",
-    "mediaTitle": "Configuratie mediastatusvelden",
-    "back": "Terug",
-    "reset": "Terug naar standaard",
-    "help": "Help voor beschikbare tokens",
-    "title": "Titel",
-    "line1": "Regel 1 (details)",
-    "line2": "Regel 2 (status)",
-    "smallText": "Kleine tekst",
-    "smallImage": "Kleine afbeelding",
-    "bigText": "Grote tekst",
-    "bigImage": "Grote afbeelding",
-    "header": "Kop (luistert naar / kijkt)",
-    "mediaTitleField": "Mediatitel (activiteitsdetails)",
-    "artist": "Regel 1 (activiteitsstatus / artiest)",
-    "album": "Regel 2 (album / afbeeldingstekst)",
-    "buttons": "Aangepaste knoppen",
-    "button1": "Knop 1",
-    "button2": "Knop 2",
-    "save": "Velden opslaan",
-    "appReference": "Referentie applicatietokens",
-    "mediaReference": "Referentie mediatokens",
-    "tokenDescription": "Dynamische variabelen beschikbaar in veldexpressies",
-    "mediaTokenDescription": "Video- of mediabeschrijving van websites of videospelers.",
-    "discard": "Niet-opgeslagen wijzigingen negeren?",
-    "unsaved": "Niet-opgeslagen wijzigingen",
-    "helpDone": "Begrepen",
-    "appTokenName": "Weergegeven applicatienaam in de activiteit.",
-    "appHeader": "Koptekst",
-    "titleHeader": "Titel/koptekst van de activiteit",
-    "detailsField": "Details van de activiteit",
-    "stateField": "Activiteitsstatus",
-    "notificationConfigSubtitle": "Pas de titel en ondertitel aan die in de servicemelding op de voorgrond worden weergegeven.",
-    "notificationAppSection": "Melding over de status van de app",
-    "notificationMediaSection": "Melding over het afspelen van media",
-    "notificationSubtitleLabel": "Ondertitel van de kennisgeving",
-    "notificationHelpIntro": "Gebruik getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") en getFieldCfgStr(\"MediaBigText\") om de weergegeven veldwaarden in te voegen. Gebruik joinNonBlank(field1, field2) om niet-lege waarden met een opsommingsteken te verbinden. Sjablonen voor app-meldingen ondersteunen de voorwaarde AppActivityType == \"Playing\". Uitdrukkingen ondersteunen ook ==- en !=-vergelijkingen.",
-    "notificationDiscardMessage": "Er zijn nog niet-opgeslagen wijzigingen in de weergave van meldingen. Als je nu weggaat, gaan deze verloren.",
-    "appTokenActivityType": "Voor dit app-profiel is het activiteitstype ‘Rich Presence’ geselecteerd, zoals ‘Spelen’, ‘Luisteren’, ‘Kijken’ of ‘Meedoen’.",
-    "appTokenPlatformType": "Platformtoken van dit app-profiel, zoals Android, pc of Xbox.",
-    "appExpressionOperators": "Expressies ondersteunen de vergelijkingen == en !=. Gebruik {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} om AppName te kiezen wanneer het activiteitstype \"Playing\" is, en anders AppPlatformType.",
-    "appTokenDetails": "Aangepaste detailtekst in het profiel van deze app; leeg als uitgeschakeld of niet ingevuld.",
-    "appTokenState": "Aangepaste statustekst in het profiel van deze app; leeg als uitgeschakeld of niet ingevuld.",
-    "appTokenSmallText": "Aangepast label voor kleine afbeelding in het profiel van deze app; leeg als uitgeschakeld of niet ingevuld.",
-    "appTokenSmallUrl": "Aangepaste URL voor kleine afbeelding in het profiel van deze app; leeg als uitgeschakeld of niet ingevuld.",
-    "appTokenImageUrl": "Gecachte ImgBB-URL van het app-pictogram.",
-    "appTokenPackageName": "Android-pakketidentificatie (bijv. com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Tokens kunnen rechtstreeks in tekstvelden en knoplabels of URL's worden gebruikt (bijv. {example}).",
-    "mediaTokenAppName": "Naam van de mediaspeler-app in de Discord-kop Listening to of Watching.",
-    "mediaTokenTitle": "Huidige titel van nummer of video uit meldingsmetadata.",
-    "mediaTokenArtist": "Artiest of maker van de afgespeelde audio of video.",
-    "mediaTokenAlbum": "Albumnaam of afspeellijst.",
-    "mediaTokenPlaybackState": "Huidige afspeelstatus (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "Gecachte ImgBB-URL van albumhoes of miniatuur.",
-    "mediaTokenPlaybackImageUrl": "URL van de afbeeldingsasset voor de huidige afspeelindicator.",
-    "mediaTokenFallbackImageUrl": "Terugvalpictogram voor de app als er geen illustratie beschikbaar is.",
-    "appConfigSubtitle": "Pas expressies voor appdetectie aan.",
-    "mediaConfigSubtitle": "Pas expressies voor media-afspelen aan.",
-    "mediaHeaderDescription": "De appnaam in de mediaheader van Discord. Het activiteitstype bepaalt of Listening to of Watching wordt weergegeven.",
-    "mediaTitleDescription": "Dit komt overeen met de mediatitel/details. Stel de spelernaam apart in bij Header hierboven.",
-    "mediaAlbumDescription": "Wordt onder de artiest op de mediakaart van Discord weergegeven.",
-    "mediaButtonDescription": "Voeg maximaal 2 interactieve presenceknoppen met tokenexpressies toe.",
-    "mediaButtonLabel": "Label",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "bijv. ",
-    "mediaButtonListen": "Luister op",
-    "appDiscardMessage": "Er zijn onopgeslagen wijzigingen in de velden voor de applicatiestatus. Als u nu de pagina verlaat, worden deze wijzigingen ongedaan gemaakt en keert de status terug naar de vorige stand.",
-    "mediaDiscardMessage": "Je hebt onopgeslagen wijzigingen in je mediastatusvelden. Als je nu weggaat, worden deze teruggezet naar de vorige staat.",
-    "mediaTokenSubtitle": "Dynamische variabelen die beschikbaar zijn in media-uitdrukkingen en knoppen"
-  },
-  "catalogue": {
-    "title": "Applicatiecatalogus",
-    "back": "Terug",
+    "understood": "Begrepen",
+    "apply": "Toepassen",
     "batch": "Batchbewerkingen",
-    "search": "Applicaties zoeken...",
-    "filter": "Apps filteren",
-    "clearFilters": "Filters wissen",
-    "enabledOnly": "Alleen ingeschakeld",
-    "allActivityTypes": "Alle activiteitstypes",
-    "allActivityStatuses": "Alle activiteitsstatussen",
+    "cancel": "Annuleren",
+    "close": "Sluiten",
+    "confirm": "Bevestigen en toepassen",
+    "discardChanges": "Wijzigingen negeren",
+    "keepEditing": "Doorgaan met bewerken",
+    "stageChanges": "Wijzigingen klaarzetten",
+    "uploadImage": "Afbeelding uploaden naar ImgBB",
+    "helpDone": "Begrepen",
+    "save": {
+      "fields": "Velden opslaan",
+      "id": "ID opslaan",
+      "key": "Sleutel opslaan"
+    },
+    "logs": {
+      "live": "Live logs",
+      "view": "Logs bekijken"
+    },
+    "grant": "Toestaan",
+    "done": "Klaar",
+    "resetDefault": "Terug naar standaard"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Activiteitsnaam",
+          "bigImage": "Grote afbeelding",
+          "bigText": "Grote tekst",
+          "details": "Details",
+          "imageUrl": "Afbeeldings-URL",
+          "smallImage": "Kleine afbeelding",
+          "smallText": "Kleine tekst",
+          "state": "Status",
+          "uploadImage": "Afbeelding uploaden",
+          "uploadingImage": "Afbeelding uploaden..."
+        },
+        "catalogue": {
+          "title": "Applicatiecatalogus",
+          "desc": "Bekijk, filter en pas individuele app-projecties aan"
+        },
+        "configurationDetails": "Configuratiedetails",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Projecteert onmiddellijk de aangepaste terugvalpresence.",
+              "drop": "Wist je Discord-activiteit totdat je terugkeert naar een ingeschakelde applicatie.",
+              "freeze": "Pauzeert en behoudt de laatst geprojecteerde presence totdat er weer een ingeschakelde app wordt gedetecteerd."
+            },
+            "title": "Beleid buiten app"
+          },
+          "fallbackPresence": "Aangepaste terugvalpresence",
+          "desc": "Gedrag wanneer je een ingeschakelde app verlaat of ernaar wisselt",
+          "title": "Beleid buiten gedetecteerde app",
+          "help": "Beleidshulp"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Vergrendelt de presence-timer op een specifieke vaste startdatum en -tijd.",
+              "persistent": "Gebruikt één gedeelde runtime-tijdstempel voor apps en gepauzeerde media tijdens deze servicesessie.",
+              "reset": "Start de timer opnieuw op 00:00 wanneer de app wordt gestart of opnieuw focus krijgt."
+            },
+            "title": "Tijdstempelstrategieën"
+          },
+          "fixedStart": "Vaste starttijdstempel",
+          "desc": "Hoe activiteitstimers worden bepaald across app-sessies",
+          "help": "Tijdstempelhulp",
+          "title": "Tijdstempelstrategie"
+        },
+        "statusFieldConfig": {
+          "title": "Configuratie statusvelden",
+          "desc": "Pas titel-, detail-, status- en artwork-expressies aan"
+        },
+        "subtitle": "Beleid buiten app en tijdstempelgedrag",
+        "title": "Configuratie applicatiepresence"
+      },
+      "catalogue": {
+        "androidOnly": "Detectie van geïnstalleerde apps is beschikbaar in de Android-app.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Batchwijzigingen toepassen?",
+              "desc": "Je staat op het punt klaargezette configuratiewijzigingen permanent toe te passen op",
+              "subtitle": "Bevestiging",
+              "selectedApps": "geselecteerde applicaties."
+            },
+            "title": "Bulk configureren",
+            "subtitle": "Wijzigingen toepassen op alle geselecteerde applicaties",
+            "discard": {
+              "title": "Klaargezette wijzigingen negeren?",
+              "desc": "Je hebt niet-opgeslagen batchconfiguraties. Als je de batchmodus nu verlaat, worden alle klaargezette wijzigingen genegeerd.",
+              "subtitle": "Niet-opgeslagen batchwijzigingen"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Kies een pictogramafbeelding",
+              "resetIcon": "Terug naar origineel app-pictogram",
+              "resetLabel": "Terug naar origineel label"
+            },
+            "customBtnDesc": "Voeg maximaal 2 interactieve presence-knoppen toe",
+            "title": "Aanpassen",
+            "original": "Origineel:",
+            "subtitle": "Presenceprofiel en projectie-aliassen",
+            "projectedName": "Geprojecteerde naam",
+            "switchToggle": {
+              "buttons": "Aangepaste knoppen in-/uitschakelen",
+              "details": "Aangepaste details en status in-/uitschakelen",
+              "small": "Aangepaste kleine tekst en afbeelding in-/uitschakelen"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Filters wissen",
+          "filter": "Apps filteren"
+        },
+        "loadAppsFailed": "Kan geïnstalleerde apps niet laden.",
+        "loading": "Laden...",
+        "search": "Applicaties zoeken...",
+        "subtitle": "{apps} apps | {enabled} ingeschakeld",
+        "title": "Applicatiecatalogus",
+        "uploadProgress": "App-pictogram uploaden naar ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Pas expressies voor appdetectie aan.",
+        "discardMsg": "Er zijn onopgeslagen wijzigingen in de velden voor de applicatiestatus. Als u nu de pagina verlaat, worden deze wijzigingen ongedaan gemaakt en keert de status terug naar de vorige stand.",
+        "title": "Configuratie applicatiestatusvelden"
+      }
+    },
+    "buttons": {
+      "back": "Terug",
+      "help": "Help voor beschikbare tokens",
+      "reset": "Terug naar standaard"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Voeg maximaal 2 interactieve presenceknoppen met tokenexpressies toe.",
+        "subtitle": "Pas expressies voor media-afspelen aan.",
+        "discardMsg": "Je hebt onopgeslagen wijzigingen in je mediastatusvelden. Als je nu weggaat, worden deze teruggezet naar de vorige staat.",
+        "title": "Configuratie mediastatusvelden"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "App-tijdstempel",
+          "title": "Resterende tijd",
+          "desc": "Toont de gebruikelijke resterende start/huidige-eind-tijd"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Gebruikt de eerder of momenteel gedetecteerde app of aangepaste terugval terwijl media is gepauzeerd.",
+              "hidePaused": "Verbergt presence terwijl media is gepauzeerd, inclusief een gedetecteerde app.",
+              "showPaused": "Houdt mediapresence actief tijdens pauze en toont gepauzeerde indicatoren."
+            },
+            "desc": "Opties wanneer actief afspelen is gepauzeerd"
+          },
+          "desc": "Presencegedrag wanneer actief afspelen is gepauzeerd",
+          "help": "Hulp voor gepauzeerde resolutie",
+          "title": "Resolutie gepauzeerde media"
+        },
+        "mediaPriority": {
+          "title": "Mediaprioriteit",
+          "desc": "Bepaalt of media gaming-/appsessies overschrijft",
+          "help": "Prioriteitshulp",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Wanneer media actief speelt, krijgt het voorrang boven de app die je gebruikt en wordt het huidige nummer of de video geprojecteerd.",
+              "switchesBetween": "Projecteert media alleen terwijl je je in de mediaspeler bevindt. Overschakelen naar een game of ingeschakelde app laat die app overnemen."
+            },
+            "title": "Strategie mediaprioriteit",
+            "desc": "Resolutielogica tussen gaming- en mediasessies"
+          }
+        },
+        "mediaScope": {
+          "title": "Bereik mediadetectie",
+          "desc": "Filter welke apps media-rich presence triggeren"
+        },
+        "statusFieldConfig": {
+          "title": "Configuratie mediastatusvelden",
+          "desc": "Pas titel-, artiest-, album- en artwork-terugvalexpressies aan"
+        },
+        "subtitle": "Resolutieprioriteiten, tijdstempels en afspeelstatussen",
+        "title": "Configuratie mediapresence",
+        "typeResolution": {
+          "title": "Resolutie mediatype",
+          "desc": "Hoe luister- versus kijkactiviteiten worden geclassificeerd"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "Melding over de status van de app",
+        "media": "Melding over het afspelen van media"
+      },
+      "subtitle": "Pas de titel en ondertitel aan die in de servicemelding op de voorgrond worden weergegeven.",
+      "discard": "Er zijn nog niet-opgeslagen wijzigingen in de weergave van meldingen. Als je nu weggaat, gaan deze verloren.",
+      "helpIntro": "Gebruik getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") en getFieldCfgStr(\"MediaBigText\") om de weergegeven veldwaarden in te voegen. Gebruik joinNonBlank(field1, field2) om niet-lege waarden met een opsommingsteken te verbinden. Sjablonen voor app-meldingen ondersteunen de voorwaarde AppActivityType == \"Playing\". Uitdrukkingen ondersteunen ook ==- en !=-vergelijkingen."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Aangepaste terugval",
+      "drop": "Laten vallen (presence wissen)",
+      "freeze": "Bevriezen (standaard)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Aangepaste vaste tijd",
+      "persistent": "Persistent (standaard)",
+      "resetOnLaunch": "Resetten bij starten"
+    },
+    "activityStatus": {
+      "all": "Alle activiteitsstatussen",
+      "dnd": "Niet storen",
+      "idle": "Inactief",
+      "invisible": "Onzichtbaar",
+      "offline": "Offline",
+      "online": "Online",
+      "streaming": "Streamt"
+    },
+    "activityType": {
+      "all": "Alle activiteitstypes",
+      "competing": "Wedijvert",
+      "listening": "Luistert",
+      "playing": "Speelt",
+      "watching": "Kijkt"
+    },
     "allPlatforms": "Alle platforms",
+    "disableAll": "Alles uitschakelen",
+    "enableAll": "Alles inschakelen",
+    "enabledOnly": "Alleen ingeschakeld",
     "globalDefault": "Globale standaard",
-    "playing": "Speelt",
-    "streaming": "Streamt",
-    "listening": "Luistert",
-    "watching": "Kijkt",
-    "competing": "Wedijvert",
-    "online": "Online",
-    "idle": "Inactief",
-    "dnd": "Niet storen",
-    "offline": "Offline",
-    "invisible": "Onzichtbaar",
-    "customize": "Aanpassen",
-    "profileSubtitle": "Presenceprofiel en projectie-aliassen",
-    "activityType": "Activiteitstype",
+    "keepCurrent": "Huidige behouden",
+    "mediaScope": {
+      "allSessions": "Alle mediasessies (standaard)",
+      "enabledAppsOnly": "Alleen ingeschakelde apps"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Automatisch adaptief (standaard)",
+      "profileOverride": "Overschrijving app-profiel"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Terugvallen op gedetecteerde app",
+      "hidePaused": "Gepauzeerde status verbergen",
+      "showPaused": "Gepauzeerde status tonen (standaard)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Prioriteit aan spelende media (standaard)",
+      "switchesBetween": "Wisselt tussen"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Donker",
+      "light": "Licht"
+    }
+  },
+  "labels": {
     "activityStatus": "Activiteitsstatus",
-    "platformType": "Platformtype",
+    "activityType": "Activiteitstype",
+    "customButtons": "Aangepaste knoppen",
     "customDetailsState": "Aangepaste details en status",
     "customSmallImage": "Aangepaste kleine tekst en afbeelding",
-    "customButtons": "Aangepaste knoppen",
-    "bulkConfigure": "Bulk configureren",
-    "cancel": "Annuleren",
-    "stageChanges": "Wijzigingen klaarzetten",
-    "apply": "Toepassen",
-    "confirm": "Bevestigen en toepassen",
-    "keepCurrent": "Huidige behouden",
-    "enableAll": "Alles inschakelen",
-    "disableAll": "Alles uitschakelen",
-    "discardBatch": "Klaargezette wijzigingen negeren?",
-    "chooseIcon": "Kies een pictogramafbeelding",
-    "resetIcon": "Terug naar origineel app-pictogram",
-    "resetLabel": "Terug naar origineel label",
-    "details": "Details",
-    "state": "Status",
-    "smallText": "Kleine tekst",
-    "smallImageUrl": "URL kleine afbeelding",
-    "uploadImage": "Afbeelding uploaden naar ImgBB",
-    "buttonLabel": "Label (bijv. Deelnemen aan game)",
-    "presenceToggle": "Presence-schakelaar",
-    "bulkSubtitle": "Wijzigingen toepassen op alle geselecteerde applicaties",
-    "applyBatchTitle": "Batchwijzigingen toepassen?",
-    "confirmation": "Bevestiging",
-    "unsavedBatch": "Niet-opgeslagen batchwijzigingen",
-    "confirmApply": "Bevestigen en toepassen",
     "filterOptions": "Filteropties",
-    "close": "Sluiten",
-    "loading": "Laden...",
-    "original": "Origineel:",
-    "projectedName": "Geprojecteerde naam",
-    "customButtonDesc": "Voeg maximaal 2 interactieve presence-knoppen toe",
-    "toggleDetails": "Aangepaste details en status in-/uitschakelen",
-    "toggleSmall": "Aangepaste kleine tekst en afbeelding in-/uitschakelen",
-    "toggleButtons": "Aangepaste knoppen in-/uitschakelen",
-    "uploadProgress": "App-pictogram uploaden naar ImgBB",
-    "keepEditing": "Doorgaan met bewerken",
-    "discardChanges": "Wijzigingen negeren",
-    "discardMessage": "Je hebt niet-opgeslagen batchconfiguraties. Als je de batchmodus nu verlaat, worden alle klaargezette wijzigingen genegeerd.",
-    "applyMessage": "Je staat op het punt klaargezette configuratiewijzigingen permanent toe te passen op",
-    "selectedApps": "geselecteerde applicaties.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} apps | {enabled} ingeschakeld",
-    "chooseImage": "Kies een afbeeldingsbestand.",
-    "imageTooLarge": "Kies een afbeelding kleiner dan 32 MB.",
-    "imageUploadFailed": "Uploaden van afbeelding mislukt.",
-    "iconUploadFailed": "Uploaden van pictogram mislukt.",
-    "androidOnly": "Detectie van geïnstalleerde apps is beschikbaar in de Android-app.",
-    "loadAppsFailed": "Kan geïnstalleerde apps niet laden.",
-    "appUnit": "App",
-    "appsUnit": "Apps"
+    "platformType": "Platformtype",
+    "presenceToggle": "Presence-schakelaar",
+    "button1": "Knop 1",
+    "button2": "Knop 2",
+    "label": "Label",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Configuratie applicatiepresence",
-    "subtitle": "Beleid buiten app en tijdstempelgedrag",
-    "catalogue": "Applicatiecatalogus",
-    "catalogueDesc": "Bekijk, filter en pas individuele app-projecties aan",
-    "outsidePolicies": "Beleid buiten gedetecteerde app",
-    "outsideDescription": "Gedrag wanneer je een ingeschakelde app verlaat of ernaar wisselt",
-    "policyHelp": "Beleidshulp",
-    "freeze": "Bevriezen (standaard)",
-    "customFallback": "Aangepaste terugval",
-    "drop": "Laten vallen (presence wissen)",
-    "fallbackPresence": "Aangepaste terugvalpresence",
-    "activityName": "Activiteitsnaam",
+  "pluralization": {
+    "app": {
+      "plural": "Apps",
+      "singular": "App"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Label (bijv. Deelnemen aan game)",
     "details": "Details",
-    "state": "Status",
+    "smallImageUrl": "URL kleine afbeelding",
     "smallText": "Kleine tekst",
-    "bigText": "Grote tekst",
-    "smallImage": "Kleine afbeelding",
-    "bigImage": "Grote afbeelding",
-    "imageUrl": "Afbeeldings-URL",
-    "uploadingImage": "Afbeelding uploaden...",
-    "timestampStrategy": "Tijdstempelstrategie",
-    "timestampDescription": "Hoe activiteitstimers worden bepaald across app-sessies",
-    "timestampHelp": "Tijdstempelhulp",
-    "persistent": "Persistent (standaard)",
-    "resetOnLaunch": "Resetten bij starten",
-    "customFixedTime": "Aangepaste vaste tijd",
-    "fixedStart": "Vaste starttijdstempel",
-    "statusFieldConfig": "Configuratie statusvelden",
-    "statusFieldDescription": "Pas titel-, detail-, status- en artwork-expressies aan",
-    "configurationDetails": "Configuratiedetails",
-    "outsideHelpTitle": "Beleid buiten app",
-    "timestampHelpTitle": "Tijdstempelstrategieën",
-    "understood": "Begrepen",
-    "freezeHelp": "Pauzeert en behoudt de laatst geprojecteerde presence totdat er weer een ingeschakelde app wordt gedetecteerd.",
-    "customHelp": "Projecteert onmiddellijk de aangepaste terugvalpresence.",
-    "dropHelp": "Wist je Discord-activiteit totdat je terugkeert naar een ingeschakelde applicatie.",
-    "persistentHelp": "Gebruikt één gedeelde runtime-tijdstempel voor apps en gepauzeerde media tijdens deze servicesessie.",
-    "resetHelp": "Start de timer opnieuw op 00:00 wanneer de app wordt gestart of opnieuw focus krijgt.",
-    "fixedHelp": "Vergrendelt de presence-timer op een specifieke vaste startdatum en -tijd.",
-    "uploadImage": "Afbeelding uploaden"
+    "state": "Status",
+    "urlExample": "URL (https://...)",
+    "example": "bijv. ",
+    "listenOn": "Luister op"
   },
-  "mediaPresence": {
-    "title": "Configuratie mediapresence",
-    "subtitle": "Resolutieprioriteiten, tijdstempels en afspeelstatussen",
-    "priority": "Mediaprioriteit",
-    "priorityDesc": "Bepaalt of media gaming-/appsessies overschrijft",
-    "priorityHelp": "Prioriteitshulp",
-    "priorityPlaying": "Prioriteit aan spelende media (standaard)",
-    "switchesBetween": "Wisselt tussen",
-    "scope": "Bereik mediadetectie",
-    "scopeDesc": "Filter welke apps media-rich presence triggeren",
-    "allSessions": "Alle mediasessies (standaard)",
-    "enabledAppsOnly": "Alleen ingeschakelde apps",
-    "typeResolution": "Resolutie mediatype",
-    "typeResolutionDesc": "Hoe luister- versus kijkactiviteiten worden geclassificeerd",
-    "autoAdaptive": "Automatisch adaptief (standaard)",
-    "profileOverride": "Overschrijving app-profiel",
-    "timeRemaining": "Resterende tijd",
-    "timeRemainingDesc": "Toont de gebruikelijke resterende start/huidige-eind-tijd",
-    "appTimestamp": "App-tijdstempel",
-    "pausedResolution": "Resolutie gepauzeerde media",
-    "pausedDesc": "Presencegedrag wanneer actief afspelen is gepauzeerd",
-    "pausedHelp": "Hulp voor gepauzeerde resolutie",
-    "showPaused": "Gepauzeerde status tonen (standaard)",
-    "fallbackApp": "Terugvallen op gedetecteerde app",
-    "hidePaused": "Gepauzeerde status verbergen",
-    "statusFields": "Configuratie mediastatusvelden",
-    "statusFieldsDesc": "Pas titel-, artiest-, album- en artwork-terugvalexpressies aan",
-    "priorityStrategy": "Strategie mediaprioriteit",
-    "priorityStrategyDesc": "Resolutielogica tussen gaming- en mediasessies",
-    "pausedOptions": "Opties wanneer actief afspelen is gepauzeerd",
-    "priorityHelpText": "Wanneer media actief speelt, krijgt het voorrang boven de app die je gebruikt en wordt het huidige nummer of de video geprojecteerd.",
-    "switchHelpText": "Projecteert media alleen terwijl je je in de mediaspeler bevindt. Overschakelen naar een game of ingeschakelde app laat die app overnemen.",
-    "showPausedHelp": "Houdt mediapresence actief tijdens pauze en toont gepauzeerde indicatoren.",
-    "fallbackHelp": "Gebruikt de eerder of momenteel gedetecteerde app of aangepaste terugval terwijl media is gepauzeerd.",
-    "hidePausedHelp": "Verbergt presence terwijl media is gepauzeerd, inclusief een gedetecteerde app."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Kies een afbeeldingsbestand.",
+      "iconUploadFailed": "Uploaden van pictogram mislukt.",
+      "imageTooLarge": "Kies een afbeelding kleiner dan 32 MB.",
+      "imageUploadFailed": "Uploaden van afbeelding mislukt."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "Grote afbeelding",
+      "bigText": "Grote tekst",
+      "line1": "Details van de activiteit",
+      "smallImage": "Kleine afbeelding",
+      "smallText": "Kleine tekst",
+      "line2": "Activiteitsstatus",
+      "title": "Titel/koptekst van de activiteit"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "account ingelogd.",
+          "desc": "Verbind je Discord-account om Rich Presence te tonen",
+          "title": "Discord-login"
+        },
+        "languageTitle": "Taal",
+        "themeTitle": "Thema",
+        "desc": "Aanpassing en account",
+        "title": "Gebruikersbeheer"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Sluit de app uit om te voorkomen dat de achtergronddienst in slaap valt",
+          "title": "Batterijoptimalisatie",
+          "modal": {
+            "desc": "Moderne Android-systemen laten achtergrondprocessen na een paar minuten in slaap vallen. Kruzty Dynamics vrijstellen van batterijoptimalisatie zorgt voor continue, ononderbroken Discord Rich Presence-updates.",
+            "subtitle": "Whitelist voor achtergrondservice",
+            "requestExemption": "Vrijstelling aanvragen"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Speciale app-toegang nodig om media en afspelen te detecteren",
+          "title": "Toegang tot meldingen",
+          "modal": {
+            "methodA": {
+              "title": "Methode A: Speciale app-toegang (Pixel, Motorola, Infinix, Stock)",
+              "step1": "Tik hieronder op Android-instellingen openen.",
+              "step2": "Ga naar Speciale app-toegang > Toegang tot meldingen.",
+              "step3": "Zoek Kruzty Dynamics en schakel Toegang tot meldingen toestaan in."
+            },
+            "methodB": {
+              "title": "Methode B: App-info > Ellips (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Open Apparaatinstellingen > Apps > Apps beheren / App-lijst.",
+              "step2": "Zoek en tik op Kruzty Dynamics.",
+              "step4": "Tik op Beperkte instellingen toestaan / Speciale app-toegang > Toestaan.",
+              "step5": "Keer terug en schakel Toegang tot meldingen in."
+            },
+            "desc": "Toegang tot meldingen stelt Kruzty Dynamics in staat live media-sessieafspeelgebeurtenissen (nummer, artiest, album en afspeelstatus) vast te leggen van Spotify, YouTube Music en mediaspelers.",
+            "oemNotice": {
+              "desc": "Android beschermt toegang tot de meldingslistener achter speciale machtigingslagen. Afhankelijk van je telefoonmerk volg je een van de onderstaande methoden.",
+              "title": "Melding voor OEM- en Android 13+ apparaten"
+            },
+            "subtitle": "Configuratie speciale app-toegang",
+            "openAndroidSettings": "Android-instellingen openen"
+          }
+        },
+        "desc": "Vereist voor detectie",
+        "title": "Machtigingenbeheer",
+        "foregroundNotification": {
+          "desc": "Android 13+ machtiging voor permanente servicemelding",
+          "title": "Voorgrondmelding",
+          "modal": {
+            "allowNotification": "Melding toestaan",
+            "desc": "Vereist door Android 13+ om de permanente voorgrondservicemelding in je statusbalk te tonen, ter bevestiging dat de Discord-presence-engine draait.",
+            "subtitle": "Android 13+ meldingsmachtiging",
+            "title": "Voorgrondservicemelding"
+          }
+        },
+        "usageAccess": {
+          "desc": "Vereist om de huidige actieve voorgrond-app of game te detecteren",
+          "title": "Toegang tot gebruiksgegevens",
+          "modal": {
+            "openUsageAccess": "Toegang tot gebruiksgegevens openen",
+            "desc": "Toegang tot gebruiksgegevens is vereist om te detecteren welke app of game je momenteel op de voorgrond gebruikt, zodat Kruzty Dynamics deze kan matchen met je geconfigureerde applicatiecatalogus.",
+            "step1": "Tik op Toegang tot gebruiksgegevens openen.",
+            "step2": "Zoek Kruzty Dynamics.",
+            "step3": "Schakel Gebruikstoegang toestaan in.",
+            "subtitle": "Detectie van voorgrond-apps"
+          }
+        }
+      },
+      "privacyNotice": "Deze app verzamelt of verzendt geen gebruikersgegevens.",
+      "subtitle": "Configureer de benodigde machtigingen en accounts om dynamische Discord Rich Presence in te schakelen.",
+      "title": "Eerste configuratie"
+    },
+    "footer": {
+      "allSet": "Helemaal klaar! Klaar om te tonen",
+      "buttons": {
+        "continueForNow": "Voorlopig doorgaan",
+        "finishSetup": "Configuratie voltooien",
+        "skipForNow": "Voorlopig overslaan"
+      },
+      "readyWhenYouAre": "Klaar wanneer jij dat bent"
+    }
+  },
+  "tags": {
+    "granted": "Toegestaan",
+    "notificationCrucial": "Cruciaal",
+    "allGranted": "Allemaal verleend",
+    "cached": "gecachet",
+    "check": "Controleer",
+    "checkingUpdates": "Controleren op updates",
+    "default": "Standaard",
+    "view": "Bekijken"
   }
 }

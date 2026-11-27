@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "पहली बार सेटअप",
-    "subtitle": "डायनामिक Discord Rich Presence को सक्षम करने के लिए आवश्यक अनुमतियाँ और खाते कॉन्फ़िगर करें।",
-    "privacyNotice": "यह ऐप उपयोगकर्ता डेटा एकत्र या प्रसारित नहीं करता है।",
-    "permissionsSection": "अनुमति नियंत्रण",
-    "permissionsRequired": "पहचान के लिए आवश्यक",
-    "notificationTitle": "अधिसूचना पहुँच",
-    "notificationDesc": "मीडिया और प्लेबैक का पता लगाने के लिए विशेष ऐप एक्सेस आवश्यक है",
-    "notificationCrucial": "महत्वपूर्ण",
-    "usageTitle": "उपयोग पहुँच",
-    "usageDesc": "वर्तमान में चल रहे फोरग्राउंड एप्लिकेशन या गेम का पता लगाने के लिए आवश्यक",
-    "batteryTitle": "बैटरी अनुकूलन",
-    "batteryDesc": "पृष्ठभूमि सेवा को सोने से रोकने के लिए ऐप को छूट दें",
-    "postNotificationTitle": "फोरग्राउंड अधिसूचना",
-    "postNotificationDesc": "लगातार सेवा अधिसूचना के लिए Android 13+ अनुमति",
-    "grant": "अनुदान दें",
-    "granted": "अनुदान दिया गया",
-    "userControlSection": "उपयोगकर्ता नियंत्रण",
-    "userControlDesc": "अनुकूलन और खाता",
-    "discordLoginTitle": "Discord लॉगिन",
-    "discordLoginDesc": "Rich Presence को प्रोजेक्ट करने के लिए अपना Discord खाता कनेक्ट करें",
-    "accountsConnected": "खाते लॉग इन हैं।",
-    "themeTitle": "थीम",
-    "languageTitle": "भाषा",
-    "finishSetup": "सेटअप समाप्त करें",
-    "continueForNow": "अभी के लिए जारी रखें",
-    "skipForNow": "अभी के लिए छोड़ें",
-    "allSet": "सब तैयार! प्रोजेक्ट करने के लिए तैयार",
-    "readyWhenYouAre": "जब आप तैयार हों तब तैयार"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "सक्रिय पहचान",
+        "stored": "संग्रहीत"
+      },
+      "content": {
+        "subtitle": "टोकन और पहचान प्रबंधित करें",
+        "title": "Discord लॉगिन पोर्टल",
+        "privacyText": "Discord प्राधिकरण Rich Presence के साथ-साथ सामाजिक सुविधाओं तक पहुँच का अनुरोध करता है। Kruzty Dynamics आपके खाते को पहचानने और आपकी कॉन्फ़िगर की गई गतिविधि को प्रकाशित या साफ़ करने के लिए SDK का उपयोग करता है; यह मित्र, ब्लॉक, आमंत्रण, संदेश या ध्वनि सुविधाओं का उपयोग नहीं करता है। Android पर, टोकन एन्क्रिप्ट किए जाते हैं और इस डिवाइस पर संग्रहीत होते हैं। पढ़ें",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "गोपनीयता नीति"
+      },
+      "title": "Discord खाता कनेक्ट करें"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "एक्सप्रेशन == और != तुलनाओं का समर्थन करते हैं। {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} का उपयोग तब AppName चुनने के लिए करें जब गतिविधि का प्रकार Playing हो, अन्यथा AppPlatformType।",
+        "title": "एप्लिकेशन टोकन संदर्भ",
+        "desc": "फ़ील्ड अभिव्यक्तियों में उपलब्ध गतिशील चर"
+      },
+      "media": {
+        "title": "मीडिया टोकन संदर्भ",
+        "intro": "टोकन सीधे टेक्स्ट फ़ील्ड और बटन लेबल या URL में एम्बेड किए जा सकते हैं (उदा. {example})।",
+        "desc": "मीडिया अभिव्यक्तियों और बटनों में उपलब्ध गतिशील चर"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "सहेजे न गए परिवर्तनों को छोड़ें?",
+      "unsaved": "सहेजे न गए संशोधन"
+    },
+    "logs": {
+      "copy": "लॉग कॉपी करें",
+      "empty": "[INFO] अभी तक कोई लॉग नहीं। Discord लॉगिन खोलें या लॉग उत्पन्न करने के लिए क्रियाएँ करें।",
+      "export": "लॉग निर्यात करें",
+      "subtitle": "लाइव निदान आउटपुट",
+      "title": "एप्लिकेशन लॉग"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "प्राथमिक एक्सेंट रंग",
+        "resetAccent": "डिफ़ॉल्ट नारंगी पर रीसेट करें",
+        "tapCustomize": "अनुकूलित करने के लिए टैप करें",
+        "themeMode": "थीम मोड"
+      },
+      "globalDefaults": {
+        "activityStatus": "गतिविधि स्थिति",
+        "activityType": "गतिविधि प्रकार",
+        "note": "ये डिफ़ॉल्ट स्वचालित रूप से उपयोग किए जाते हैं जब कोई ऐप या उपस्थिति गतिविधि अपना स्वयं का गतिविधि प्रकार या स्थिति निर्दिष्ट नहीं करती है।"
+      },
+      "imgBb": {
+        "apiPrivacy": "इस फ़ील्ड को खाली छोड़ने पर अंतर्निहित डिफ़ॉल्ट API कुंजी पर रीसेट हो जाता है। कस्टम कुंजियाँ कभी भी सादे टेक्स्ट में उजागर नहीं होती हैं।",
+        "getApiKey": "कुंजी प्राप्त करने के लिए।",
+        "help": "कस्टम ऐप और मीडिया एसेट छवियों को Discord CDN पर अपलोड करने के लिए अपनी ImgBB API कुंजी सेट करें। पर जाएँ",
+        "usingDefaultKey": "डिफ़ॉल्ट सिस्टम कुंजी का उपयोग करना"
+      },
+      "language": {
+        "availableLanguages": "उपलब्ध भाषाएँ",
+        "title": "भाषा चुनें",
+        "desc": "UI लेबल और अधिसूचनाओं के लिए अपनी पसंदीदा प्रदर्शन भाषा चुनें।"
+      },
+      "checkPermissions": {
+        "batteryDesc": "Android को उपस्थिति सेवा को मारने से रोकता है",
+        "foregroundDesc": "चल रही Discord उपस्थिति के लिए स्थिति पट्टी सूचक",
+        "notificationAccessDesc": "मीडिया पहचान के लिए विशेष ऐप एक्सेस",
+        "desc": "सक्रिय मीडिया सूचनाओं और फोरग्राउंड एप्लिकेशन को पढ़ने के लिए आवश्यक अनुमतियों की स्थिति:",
+        "usageAccessDesc": "चल रहे फोरग्राउंड गेम और ऐप्स का पता लगाएं"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "{total} लिंक किए गए छवि URL हैं, जिनमें {custom} कस्टम ऐप आइकन ओवरराइड शामिल हैं। आप कस्टम आइकन रखते हुए कैश्ड लिंक साफ़ कर सकते हैं, या सभी लिंक साफ़ कर सकते हैं और कस्टम ओवरराइड हटा सकते हैं। यदि आप ओवरराइड हटाते हैं, तो उन आइकनों को एप्लिकेशन कैटलॉग में फिर से अपलोड करें।",
+        "buttons": {
+          "clearCacheAll": "सभी साफ़ करें, कस्टम आइकन सहित",
+          "clearCacheKeep": "कैश साफ़ करें, कस्टम आइकन रखें"
+        },
+        "clearedAll": "कस्टम ऐप आइकन सहित सभी लिंक किए गए छवि URL साफ़ किए गए।",
+        "clearedKeeping": "लिंक किए गए छवि URL कैश साफ़ किया गया। कस्टम ऐप आइकन रखे गए थे।",
+        "linkedImageUrls": "लिंक किए गए छवि URL"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy योगदानकर्ता",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "इस ऐप में उपयोग की जाने वाली लाइब्रेरी",
+        "libraries": {
+          "lucide": "समुदाय द्वारा तैयार स्वच्छ वेक्टर आइकन",
+          "react": "आधुनिक उपयोगकर्ता इंटरफ़ेस घटक वास्तुकला",
+          "sdk": "नेटिव Android rich presence एकीकरण",
+          "tailwind": "उपयोगिता-प्रथम आधुनिक उत्तरदायी स्टाइलिंग",
+          "tauri": "हल्का क्रॉस-प्लेटफ़ॉर्म नेटिव रनटाइम",
+          "tokio": "अतुल्यकालिक घटना-संचालित नेटवर्क रनटाइम"
+        },
+        "maintainerRole": "वर्तमान अनुरक्षक और डेवलपर"
+      },
+      "discordApp": {
+        "developerPortal": "Discord डेवलपर पोर्टल",
+        "help": "अपनी Discord Application ID यहाँ से सेट करें",
+        "idPrivacy": "इस फ़ील्ड को खाली छोड़ने पर डिफ़ॉल्ट Kruzty Dynamics एप्लिकेशन ID पर रीसेट हो जाएगा।"
+      }
+    }
   },
-  "nav": {
-    "service": "सेवा",
-    "accounts": "खाते",
-    "settings": "सेटिंग्स और अधिक"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "खाता जोड़ें",
+            "switch": "स्विच करें",
+            "unuse": "अनुपयोग करें"
+          },
+          "activePresence": "सक्रिय उपस्थिति",
+          "modal": {
+            "logout": {
+              "confirmLogout": "लॉगआउट की पुष्टि करें",
+              "title": "खाता लॉगआउट करें",
+              "removePrefix": "क्या आप वाकई खाता हटाना चाहते हैं",
+              "removeSuffix": "। यह इस डिवाइस से सहेजे गए क्रेडेंशियल्स को हटा देगा।"
+            }
+          },
+          "currentAccount": "वर्तमान लॉग इन खाता",
+          "noActiveAccount": "कोई खाता चयनित नहीं। नीचे दिए गए लॉग इन खातों में से एक चुनें।",
+          "storedAccounts": "संग्रहीत खाते"
+        },
+        "noAccount": {
+          "desc": "गेम, ऐप्स और मीडिया के लिए Rich Presence स्थितियों को प्रोजेक्ट करना शुरू करने के लिए अपना Discord खाता कनेक्ट करें।",
+          "title": "अभी तक कोई खाता लॉग इन नहीं है।",
+          "login": "Discord लॉगिन करें"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "कोई Discord खाता नहीं",
+        "loggedInMany": "{n} खाते लॉग इन हैं।",
+        "loggedInOne": "{n} खाता लॉग इन है।"
+      },
+      "title": "Discord खाते"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics डैशबोर्ड",
+      "title": {
+        "welcome": "स्वागत है!",
+        "welcomeNamed": "स्वागत है, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "सभी आवश्यक अनुमतियाँ दी गई हैं। जारी रखने के लिए सेवा चालू करें।",
+              "foregroundService": {
+                "desc": "Android को चलने के दौरान सेवा अधिसूचना दिखाने की अनुमति देता है।",
+                "title": "फोरग्राउंड सेवा अधिसूचनाएं"
+              },
+              "notificationAccess": {
+                "desc": "मीडिया प्लेबैक और उसके मेटाडेटा का पता लगाने के लिए आवश्यक है।"
+              },
+              "subtitle": "सेवा शुरू करने से पहले ये Android अनुमतियाँ दें।",
+              "title": "आवश्यक अनुमतियाँ",
+              "returnHint": "Android सेटिंग्स में एक्सेस देने के बाद, यहाँ वापस आएं और सेवा सक्षम करें।",
+              "usageAccess": {
+                "desc": "यह पहचानने के लिए आवश्यक है कि वर्तमान में कौन सा ऐप फोरग्राउंड में है।"
+              }
+            }
+          },
+          "startError": "Android उपस्थिति सेवा प्रारंभ नहीं की जा सकी।",
+          "running": "सेवा चल रही है।",
+          "stopped": "सेवा प्रारंभ नहीं हुई।",
+          "title": "Kruzty Dynamics सेवा"
+        },
+        "application": {
+          "desc": "स्थानीय उपस्थिति पहचान के लिए ऐप प्रोफाइल कॉन्फ़िगर करें",
+          "title": "एप्लिकेशन उपस्थिति"
+        },
+        "buttons": {
+          "applicationCatalogue": "एप्लिकेशन कैटलॉग",
+          "presenceConfiguration": "उपस्थिति कॉन्फ़िगरेशन",
+          "statusFieldConfig": "स्थिति फ़ील्ड कॉन्फ़िग"
+        },
+        "media": {
+          "desc": "मीडिया व्यवहार और स्थिति टेम्पलेट कॉन्फ़िगर करें",
+          "title": "मीडिया उपस्थिति"
+        },
+        "preview": {
+          "noPresence": "कोई कॉन्फ़िगर किया गया ऐप या सक्रिय मीडिया नहीं मिला।",
+          "stoppedDescription": "सेवा रुकी हुई है। सक्षम ऐप्स और सक्रिय मीडिया का पता लगाने के लिए इसे चालू करें।"
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "ऐप प्राथमिकताएं",
+        "checkPermissions": {
+          "title": "अनुमतियाँ जाँचें",
+          "desc": "दी गई और वैकल्पिक सिस्टम एक्सेस अनुमतियों की समीक्षा करें"
+        },
+        "deleteCachedUrls": {
+          "title": "लिंक किए गए छवि URL हटाएं",
+          "desc": "ऐप या मीडिया स्थिति पर उपयोग की जाने वाली अपलोड की गई छवियों के संबंधित URL साफ़ करता है"
+        },
+        "discordAppId": {
+          "title": "Discord Application ID सेट करें",
+          "desc": "अपनी Discord Application ID सेट करें। पर जाएँ: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "वैश्विक डिफ़ॉल्ट",
+          "desc": "अकॉन्फ़िगर किए गए ऐप्स के लिए गतिविधि प्रकार और स्थिति"
+        },
+        "imgBbKey": {
+          "title": "ImgBB API कुंजी सेट करें",
+          "desc": "अपनी ImgBB API कुंजी सेट करें। पर जाएँ: api.imgbb.com"
+        },
+        "language": {
+          "title": "भाषा",
+          "desc": "वर्तमान में सेट:"
+        },
+        "notificationProjection": {
+          "title": "अधिसूचना स्थिति प्रदर्शन को अनुकूलित करें",
+          "desc": "एप्लिकेशन और मीडिया सूचनाओं के शीर्षक और उपशीर्षक को अनुकूलित करें।"
+        },
+        "themes": {
+          "title": "थीम और प्रदर्शन",
+          "desc": "अपनी थीम और एक्सेंट रंग सेट करें।"
+        },
+        "checkUpdates": {
+          "title": "नवीनतम संस्करण की जाँच करें",
+          "desc": "जाँचें कि क्या कोई नया संस्करण उपलब्ध है।"
+        }
+      },
+      "subtitle": "ऐप प्राथमिकताएं और निदान",
+      "title": "सेटिंग्स और अधिक",
+      "cardInfo": {
+        "architecture": "Rust Core (Tokio + Tauri v2) का उपयोग करके React 19 और TailwindCSS फ्रंटएंड के साथ बनाया गया है, जिसमें Native Android Plugin Bridge शामिल है। मूल Kizzy's Experimental RPC पर आधारित।",
+        "credits": "श्रेय",
+        "developedBy": "द्वारा विकसित",
+        "latestRelease": "नवीनतम रिलीज पर जाएं",
+        "learnMore": "इस ऐप के बारे में और जानें",
+        "repository": "GitHub रिपॉजिटरी जांचें",
+        "submitIssue": "समस्या सबमिट करें",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "स्वागत है!",
-    "welcomeNamed": "स्वागत है, {name}!",
-    "dashboardSubtitle": "Kruzty Dynamics डैशबोर्ड",
-    "accountsLoggedInOne": "{n} खाता लॉग इन है।",
-    "accountsLoggedInMany": "{n} खाते लॉग इन हैं।",
-    "liveLogs": "लाइव लॉग",
-    "viewLogs": "लॉग देखें",
-    "serviceActive": "सक्रिय",
-    "serviceInactive": "निष्क्रिय",
-    "serviceStarting": "प्रारंभ हो रहा है",
-    "serviceStopped": "रुका हुआ"
-  },
-  "accounts": {
-    "title": "Discord खाते",
-    "subtitle": "टोकन और पहचान प्रबंधित करें",
-    "loginPortal": "Discord पोर्टल के माध्यम से लॉगिन करें",
-    "loginWithToken": "टोकन के माध्यम से खाता जोड़ें",
-    "addAccount": "खाता जोड़ें",
-    "activeIdentity": "सक्रिय पहचान",
-    "stored": "संग्रहीत",
+  "buttons": {
     "remove": "हटाएं",
-    "noAccounts": "कोई Discord खाता नहीं",
-    "noAccountsDesc": "rich presence को प्रोजेक्ट करना शुरू करने के लिए पोर्टल या उपयोगकर्ता टोकन का उपयोग करके अपना Discord खाता जोड़ें।"
-  },
-  "settings": {
-    "title": "सेटिंग्स और अधिक",
-    "subtitle": "ऐप प्राथमिकताएं और निदान",
-    "appPreferences": "ऐप प्राथमिकताएं",
-    "notificationProjection": "अधिसूचना स्थिति प्रदर्शन को अनुकूलित करें",
-    "notificationProjectionDesc": "एप्लिकेशन और मीडिया सूचनाओं के शीर्षक और उपशीर्षक को अनुकूलित करें।",
-    "themes": "थीम और प्रदर्शन",
-    "themesDesc": "अपनी थीम और एक्सेंट रंग सेट करें।",
-    "language": "भाषा",
-    "languageDesc": "वर्तमान में सेट:",
-    "globalDefaults": "वैश्विक डिफ़ॉल्ट",
-    "globalDefaultsDesc": "अकॉन्फ़िगर किए गए ऐप्स के लिए गतिविधि प्रकार और स्थिति",
-    "imgbbKey": "ImgBB API कुंजी सेट करें",
-    "imgbbKeyDesc": "अपनी ImgBB API कुंजी सेट करें। पर जाएँ: api.imgbb.com",
-    "discordAppId": "Discord Application ID सेट करें",
-    "discordAppIdDesc": "अपनी Discord Application ID सेट करें। पर जाएँ: discord.com/developers",
-    "checkPermissions": "अनुमतियाँ जाँचें",
-    "checkPermissionsDesc": "दी गई और वैकल्पिक सिस्टम एक्सेस अनुमतियों की समीक्षा करें",
-    "deleteCache": "लिंक किए गए छवि URL हटाएं",
-    "deleteCacheDesc": "ऐप या मीडिया स्थिति पर उपयोग की जाने वाली अपलोड की गई छवियों के संबंधित URL साफ़ करता है"
-  },
-  "service": {
-    "title": "Kruzty Dynamics सेवा",
-    "running": "सेवा चल रही है।",
-    "stopped": "सेवा प्रारंभ नहीं हुई।",
-    "applicationPresence": "एप्लिकेशन उपस्थिति",
-    "appDescription": "स्थानीय उपस्थिति पहचान के लिए ऐप प्रोफाइल कॉन्फ़िगर करें",
-    "applicationCatalogue": "एप्लिकेशन कैटलॉग",
-    "statusFieldConfig": "स्थिति फ़ील्ड कॉन्फ़िग",
-    "presenceConfiguration": "उपस्थिति कॉन्फ़िगरेशन",
-    "mediaPresence": "मीडिया उपस्थिति",
-    "mediaDescription": "मीडिया व्यवहार और स्थिति टेम्पलेट कॉन्फ़िगर करें",
-    "noPresence": "कोई कॉन्फ़िगर किया गया ऐप या सक्रिय मीडिया नहीं मिला।",
-    "stoppedDescription": "सेवा रुकी हुई है। सक्षम ऐप्स और सक्रिय मीडिया का पता लगाने के लिए इसे चालू करें।"
-  },
-  "logs": {
-    "title": "एप्लिकेशन लॉग",
-    "subtitle": "लाइव निदान आउटपुट",
-    "copy": "लॉग कॉपी करें",
-    "export": "लॉग निर्यात करें",
-    "empty": "[INFO] अभी तक कोई लॉग नहीं। Discord लॉगिन खोलें या लॉग उत्पन्न करने के लिए क्रियाएँ करें।"
-  },
-  "permissions": {
-    "requiredTitle": "आवश्यक अनुमतियाँ",
-    "requiredSubtitle": "सेवा शुरू करने से पहले ये Android अनुमतियाँ दें।",
-    "done": "हो गया",
-    "allGranted": "सभी आवश्यक अनुमतियाँ दी गई हैं। जारी रखने के लिए सेवा चालू करें।",
-    "grant": "अनुदान दें",
-    "returnHint": "Android सेटिंग्स में एक्सेस देने के बाद, यहाँ वापस आएं और सेवा सक्षम करें।",
-    "notificationTitle": "अधिसूचना पहुँच",
-    "notificationSubtitle": "विशेष ऐप एक्सेस कॉन्फ़िगरेशन",
-    "openAndroidSettings": "Android सेटिंग्स खोलें",
-    "oemNotice": "OEM और Android 13+ उपकरणों के लिए सूचना",
-    "notificationExplanation": "Android विशेष अनुमति परतों के पीछे अधिसूचना श्रोता पहुँच की रक्षा करता है। अपने फ़ोन ब्रांड के आधार पर, नीचे दी गई विधियों में से एक का पालन करें।",
-    "methodA": "विधि A: विशेष ऐप एक्सेस (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "नीचे Android सेटिंग्स खोलें पर टैप करें।",
-    "methodAStep2": "विशेष ऐप एक्सेस > अधिसूचना पहुँच पर जाएँ।",
-    "methodAStep3": "Kruzty Dynamics खोजें और अधिसूचना पहुँच की अनुमति दें चालू करें।",
-    "methodB": "विधि B: ऐप जानकारी > इलिप्सिस (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "डिवाइस सेटिंग्स > ऐप्स > ऐप्स प्रबंधित करें / ऐप सूची खोलें।",
-    "methodBStep2": "Kruzty Dynamics खोजें और टैप करें।",
-    "methodBStep3": "ऊपर दाएँ कोने में तीन बिंदुओं पर टैप करें।",
-    "methodBStep4": "प्रतिबंधित सेटिंग्स की अनुमति दें / विशेष ऐप एक्सेस > अनुदान दें पर टैप करें।",
-    "methodBStep5": "वापस लौटें और अधिसूचना पहुँच सक्षम करें।",
-    "notificationAccessDescription": "अधिसूचना पहुँच Kruzty Dynamics को Spotify, YouTube Music और मीडिया प्लेयर से लाइव मीडिया सत्र प्लेबैक ईवेंट (गाने का शीर्षक, कलाकार, एल्बम और प्लेबैक स्थिति) कैप्चर करने में सक्षम बनाती है।",
-    "usageTitle": "उपयोग पहुँच",
-    "usageSubtitle": "फोरग्राउंड ऐप पहचान",
-    "openUsageAccess": "उपयोग पहुँच खोलें",
-    "usageDescription": "यह पहचानने के लिए उपयोग पहुँच आवश्यक है कि आप वर्तमान में कौन सा ऐप या गेम फोरग्राउंड में चला रहे हैं, ताकि Kruzty Dynamics इसे आपके कॉन्फ़िगर किए गए एप्लिकेशन कैटलॉग से मिला सके।",
-    "usageStep1": "उपयोग पहुँच खोलें पर टैप करें।",
-    "usageStep2": "Kruzty Dynamics का पता लगाएं।",
-    "usageStep3": "उपयोग पहुँच की अनुमति दें चालू करें।",
-    "batteryTitle": "बैटरी अनुकूलन",
-    "batterySubtitle": "पृष्ठभूमि सेवा श्वेतसूची",
-    "requestExemption": "छूट का अनुरोध करें",
-    "batteryDescription": "आधुनिक Android सिस्टम कुछ मिनटों के बाद पृष्ठभूमि प्रक्रियाओं को सुला देते हैं। Kruzty Dynamics को बैटरी अनुकूलन से छूट देने से निरंतर, निर्बाध Discord Rich Presence अपडेट सुनिश्चित होते हैं।",
-    "foregroundTitle": "फोरग्राउंड सेवा अधिसूचना",
-    "foregroundSubtitle": "Android 13+ अधिसूचना अनुमति",
-    "foregroundGuardTitle": "फोरग्राउंड सेवा अधिसूचनाएं",
-    "usageGuardDescription": "यह पहचानने के लिए आवश्यक है कि वर्तमान में कौन सा ऐप फोरग्राउंड में है।",
-    "notificationGuardDescription": "मीडिया प्लेबैक और उसके मेटाडेटा का पता लगाने के लिए आवश्यक है।",
-    "foregroundGuardDescription": "Android को चलने के दौरान सेवा अधिसूचना दिखाने की अनुमति देता है।",
-    "serviceStartError": "Android उपस्थिति सेवा प्रारंभ नहीं की जा सकी।",
-    "allowNotification": "अधिसूचना की अनुमति दें",
-    "foregroundDescription": "आपकी स्थिति पट्टी में चल रही फोरग्राउंड सेवा अधिसूचना प्रदर्शित करने के लिए Android 13+ द्वारा आवश्यक, यह पुष्टि करते हुए कि Discord उपस्थिति इंजन चल रहा है।"
-  },
-  "toast": {
-    "duplicateAccount": "यह Discord खाता पहले ही जोड़ा जा चुका है।",
-    "insufficientPermissions": "अनुपयुक्त अनुमतियाँ। कृपया सेटिंग्स और अधिक > अनुमतियाँ जांचें।",
-    "newVersionAvailable": "नया संस्करण उपलब्ध है!",
-    "updateDetected": "एक नया नवीनतम संस्करण पता चला है!",
-    "latestVersion": "यह नवीनतम संस्करण है!",
-    "updateCheckFailed": "अपडेट्स की जाँच नहीं कर सका।"
-  },
-  "accountsPage": {
-    "emptyTitle": "अभी तक कोई खाता लॉग इन नहीं है।",
-    "emptyDescription": "गेम, ऐप्स और मीडिया के लिए Rich Presence स्थितियों को प्रोजेक्ट करना शुरू करने के लिए अपना Discord खाता कनेक्ट करें।",
-    "login": "Discord लॉगिन करें",
-    "currentAccount": "वर्तमान लॉग इन खाता",
-    "activePresence": "सक्रिय उपस्थिति",
-    "storedAccounts": "संग्रहीत खाते",
-    "switch": "स्विच करें",
-    "unuse": "अनुपयोग करें",
-    "remove": "हटाएं",
-    "cancel": "रद्द करें",
-    "deleteTitle": "Discord खाता हटाएं?",
-    "loginTitle": "Discord लॉगिन पोर्टल",
-    "noActiveAccount": "कोई खाता चयनित नहीं। नीचे दिए गए लॉग इन खातों में से एक चुनें।",
-    "addAccountTitle": "Discord खाता कनेक्ट करें",
-    "portal": "Discord लॉगिन पोर्टल",
-    "signInPortal": "ऐप में Discord के साथ सुरक्षित रूप से साइन इन करें",
     "openPortal": "पोर्टल खोलें",
-    "privacyText": "Discord प्राधिकरण Rich Presence के साथ-साथ सामाजिक सुविधाओं तक पहुँच का अनुरोध करता है। Kruzty Dynamics आपके खाते को पहचानने और आपकी कॉन्फ़िगर की गई गतिविधि को प्रकाशित या साफ़ करने के लिए SDK का उपयोग करता है; यह मित्र, ब्लॉक, आमंत्रण, संदेश या ध्वनि सुविधाओं का उपयोग नहीं करता है। Android पर, टोकन एन्क्रिप्ट किए जाते हैं और इस डिवाइस पर संग्रहीत होते हैं। पढ़ें",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "खाता लॉगआउट करें",
-    "removePrefix": "क्या आप वाकई खाता हटाना चाहते हैं",
-    "removeSuffix": "। यह इस डिवाइस से सहेजे गए क्रेडेंशियल्स को हटा देगा।",
-    "confirmLogout": "लॉगआउट की पुष्टि करें",
-    "addAccount": "Discord खाता जोड़ें",
-    "noSelection": "कोई खाता चयनित नहीं। नीचे दिए गए लॉग इन खातों में से एक चुनें।",
-    "addMoreAccounts": "आप नीचे Discord बटन पर क्लिक करके और खाते जोड़ सकते हैं।"
-  },
-  "settingsUi": {
-    "chooseLanguage": "भाषा चुनें",
-    "languageDescription": "UI लेबल और अधिसूचनाओं के लिए अपनी पसंदीदा प्रदर्शन भाषा चुनें।",
-    "availableLanguages": "उपलब्ध भाषाएँ",
-    "close": "बंद करें",
-    "linkedImageUrls": "लिंक किए गए छवि URL",
-    "clearCacheKeep": "कैश साफ़ करें, कस्टम आइकन रखें",
-    "clearCacheAll": "सभी साफ़ करें, कस्टम आइकन सहित",
-    "credits": "श्रेय",
-    "themeMode": "थीम मोड",
-    "accentColor": "प्राथमिक एक्सेंट रंग",
-    "resetAccent": "डिफ़ॉल्ट नारंगी पर रीसेट करें",
-    "learnMore": "इस ऐप के बारे में और जानें",
-    "privacyPolicy": "गोपनीयता नीति",
-    "repository": "GitHub रिपॉजिटरी जांचें",
-    "latestRelease": "नवीनतम रिलीज पर जाएं",
-    "submitIssue": "समस्या सबमिट करें",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "इस ऐप में उपयोग की जाने वाली लाइब्रेरी",
-    "contributorsSection": "Kizzy योगदानकर्ता",
-    "maintainerRole": "वर्तमान अनुरक्षक और डेवलपर",
-    "view": "देखें",
-    "done": "हो गया",
-    "developedBy": "द्वारा विकसित",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Rust Core (Tokio + Tauri v2) का उपयोग करके React 19 और TailwindCSS फ्रंटएंड के साथ बनाया गया है, जिसमें Native Android Plugin Bridge शामिल है। मूल Kizzy's Experimental RPC पर आधारित।",
-    "cached": "कैश्ड",
-    "tapCustomize": "अनुकूलित करने के लिए टैप करें",
-    "defaultNote": "ये डिफ़ॉल्ट स्वचालित रूप से उपयोग किए जाते हैं जब कोई ऐप या उपस्थिति गतिविधि अपना स्वयं का गतिविधि प्रकार या स्थिति निर्दिष्ट नहीं करती है।",
-    "activityType": "गतिविधि प्रकार",
-    "activityStatus": "गतिविधि स्थिति",
-    "imgbbHelp": "कस्टम ऐप और मीडिया एसेट छवियों को Discord CDN पर अपलोड करने के लिए अपनी ImgBB API कुंजी सेट करें। पर जाएँ",
-    "getApiKey": "कुंजी प्राप्त करने के लिए।",
-    "apiPrivacy": "इस फ़ील्ड को खाली छोड़ने पर अंतर्निहित डिफ़ॉल्ट API कुंजी पर रीसेट हो जाता है। कस्टम कुंजियाँ कभी भी सादे टेक्स्ट में उजागर नहीं होती हैं।",
-    "saveKey": "कुंजी सहेजें",
-    "discordIdHelp": "अपनी Discord Application ID यहाँ से सेट करें",
-    "developerPortal": "Discord डेवलपर पोर्टल",
-    "idDefault": "डिफ़ॉल्ट",
-    "idPrivacy": "इस फ़ील्ड को खाली छोड़ने पर डिफ़ॉल्ट Kruzty Dynamics एप्लिकेशन ID पर रीसेट हो जाएगा।",
-    "saveId": "ID सहेजें",
-    "permissionsDescription": "सक्रिय मीडिया सूचनाओं और फोरग्राउंड एप्लिकेशन को पढ़ने के लिए आवश्यक अनुमतियों की स्थिति:",
-    "notificationAccessDesc": "मीडिया पहचान के लिए विशेष ऐप एक्सेस",
-    "usageAccessDesc": "चल रहे फोरग्राउंड गेम और ऐप्स का पता लगाएं",
-    "batteryDesc": "Android को उपस्थिति सेवा को मारने से रोकता है",
-    "foregroundDesc": "चल रही Discord उपस्थिति के लिए स्थिति पट्टी सूचक",
-    "saveIdPlaceholder": "1572590527562391713 (डिफ़ॉल्ट)",
-    "resetDefault": "डिफ़ॉल्ट पर रीसेट करें",
-    "cancel": "रद्द करें",
-    "cacheWarning": "{total} लिंक किए गए छवि URL हैं, जिनमें {custom} कस्टम ऐप आइकन ओवरराइड शामिल हैं। आप कस्टम आइकन रखते हुए कैश्ड लिंक साफ़ कर सकते हैं, या सभी लिंक साफ़ कर सकते हैं और कस्टम ओवरराइड हटा सकते हैं। यदि आप ओवरराइड हटाते हैं, तो उन आइकनों को एप्लिकेशन कैटलॉग में फिर से अपलोड करें।",
-    "allGranted": "सभी अनुदान दिए गए",
-    "clearedAll": "कस्टम ऐप आइकन सहित सभी लिंक किए गए छवि URL साफ़ किए गए।",
-    "clearedKeeping": "लिंक किए गए छवि URL कैश साफ़ किया गया। कस्टम ऐप आइकन रखे गए थे।",
-    "usingDefaultKey": "डिफ़ॉल्ट सिस्टम कुंजी का उपयोग करना",
-    "customKeySet": "कस्टम कुंजी सेट",
-    "light": "लाइट",
-    "dark": "डार्क",
-    "amoled": "AMOLED",
-    "libraryTauri": "हल्का क्रॉस-प्लेटफ़ॉर्म नेटिव रनटाइम",
-    "libraryTokio": "अतुल्यकालिक घटना-संचालित नेटवर्क रनटाइम",
-    "librarySdk": "नेटिव Android rich presence एकीकरण",
-    "libraryReact": "आधुनिक उपयोगकर्ता इंटरफ़ेस घटक वास्तुकला",
-    "libraryTailwind": "उपयोगिता-प्रथम आधुनिक उत्तरदायी स्टाइलिंग",
-    "libraryLucide": "समुदाय द्वारा तैयार स्वच्छ वेक्टर आइकन",
-    "checkForUpdates": "नवीनतम संस्करण की जाँच करें",
-    "checkForUpdatesDesc": "जाँचें कि क्या कोई नया संस्करण उपलब्ध है।",
-    "check": "जाँचें",
-    "checkingUpdates": "अपडेट्स की जाँच"
-  },
-  "configFields": {
-    "appTitle": "एप्लिकेशन स्थिति फ़ील्ड कॉन्फ़िग",
-    "mediaTitle": "मीडिया स्थिति फ़ील्ड कॉन्फ़िग",
-    "back": "वापस",
-    "reset": "डिफ़ॉल्ट पर रीसेट करें",
-    "help": "उपलब्ध टोकन सहायता",
-    "title": "शीर्षक",
-    "line1": "पंक्ति 1 (विवरण)",
-    "line2": "पंक्ति 2 (स्थिति)",
-    "smallText": "छोटा टेक्स्ट",
-    "smallImage": "छोटी छवि",
-    "bigText": "बड़ा टेक्स्ट",
-    "bigImage": "बड़ी छवि",
-    "header": "हेडर (सुन रहे हैं / देख रहे हैं)",
-    "mediaTitleField": "मीडिया शीर्षक (गतिविधि विवरण)",
-    "artist": "पंक्ति 1 (गतिविधि स्थिति / कलाकार)",
-    "album": "पंक्ति 2 (एल्बम / छवि टेक्स्ट)",
-    "buttons": "कस्टम बटन",
-    "button1": "बटन 1",
-    "button2": "बटन 2",
-    "save": "फ़ील्ड सहेजें",
-    "appReference": "एप्लिकेशन टोकन संदर्भ",
-    "mediaReference": "मीडिया टोकन संदर्भ",
-    "tokenDescription": "फ़ील्ड अभिव्यक्तियों में उपलब्ध गतिशील चर",
-    "mediaTokenDescription": "वेब या वीडियो प्लेयर से वीडियो या मीडिया विवरण।",
-    "discard": "सहेजे न गए परिवर्तनों को छोड़ें?",
-    "unsaved": "सहेजे न गए संशोधन",
-    "helpDone": "समझ गया",
-    "appTokenName": "गतिविधि में दिखाया गया प्रक्षेपित एप्लिकेशन नाम।",
-    "appHeader": "शीर्षक",
-    "titleHeader": "गतिविधि शीर्षक/शीर्षक",
-    "detailsField": "गतिविधि विवरण",
-    "stateField": "गतिविधि की स्थिति",
-    "notificationConfigSubtitle": "फ़ोरग्राउंड सेवा सूचना में दिखाए गए शीर्षक और उपशीर्षक को अनुकूलित करें।",
-    "notificationAppSection": "ऐप स्थिति सूचना",
-    "notificationMediaSection": "मीडिया प्लेबैक सूचना",
-    "notificationSubtitleLabel": "सूचना उपशीर्षक",
-    "notificationHelpIntro": "getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), का उपयोग करें getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), और getFieldCfgStr(\"MediaBigText\") का उपयोग रेंडर किए गए फ़ील्ड मानों को सम्मिलित करने के लिए करें। joinNonBlank(field1, field2) का उपयोग खाली न होने वाले मानों को बुलेट से जोड़ने के लिए करें। ऐप सूचना टेम्पलेट्स AppActivityType == \"Playing\" शर्त का समर्थन करते हैं। अभिव्यक्तियाँ == और != तुलनाओं का भी समर्थन करती हैं।",
-    "notificationDiscardMessage": "आपके पास अनसaved नोटिफिकेशन प्रोजेक्शन परिवर्तन हैं। अब छोड़ने पर वे रद्द हो जाएंगे।",
-    "appTokenActivityType": "इस ऐप प्रोफ़ाइल के लिए चयनित रिच प्रेजेंस गतिविधि प्रकार, जैसे कि खेलना, सुनना, देखना, या प्रतिस्पर्धा करना।",
-    "appTokenPlatformType": "इस ऐप प्रोफ़ाइल से प्लेटफ़ॉर्म टोकन, जैसे Android, PC, या Xbox।",
-    "appExpressionOperators": "एक्सप्रेशन == और != तुलनाओं का समर्थन करते हैं। {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} का उपयोग तब AppName चुनने के लिए करें जब गतिविधि का प्रकार Playing हो, अन्यथा AppPlatformType।",
-    "appTokenDetails": "इस ऐप प्रोफ़ाइल पर सहेजा गया कस्टम विवरण टेक्स्ट, या अक्षम या रिक्त होने पर खाली।",
-    "appTokenState": "इस ऐप प्रोफ़ाइल पर सहेजा गया कस्टम स्थिति टेक्स्ट, या अक्षम या रिक्त होने पर खाली।",
-    "appTokenSmallText": "इस ऐप प्रोफ़ाइल पर सहेजा गया कस्टम छोटा छवि लेबल, या अक्षम या रिक्त होने पर खाली।",
-    "appTokenSmallUrl": "इस ऐप प्रोफ़ाइल पर सहेजा गया कस्टम छोटा छवि URL, या अक्षम या रिक्त होने पर खाली।",
-    "appTokenImageUrl": "एप्लिकेशन आइकन का कैश्ड ImgBB दूरस्थ URL।",
-    "appTokenPackageName": "Android पैकेज पहचानकर्ता (उदा. com.mojang.minecraftpe)।",
-    "mediaTokenIntro": "टोकन सीधे टेक्स्ट फ़ील्ड और बटन लेबल या URL में एम्बेड किए जा सकते हैं (उदा. {example})।",
-    "mediaTokenAppName": "Discord के सुन रहे हैं या देख रहे हैं हेडर में दिखाया गया प्लेयर एप्लिकेशन नाम।",
-    "mediaTokenTitle": "अधिसूचना मेटाडेटा से सक्रिय मीडिया गाना या वीडियो शीर्षक।",
-    "mediaTokenArtist": "चल रहे ऑडियो या वीडियो के कलाकार या निर्माता।",
-    "mediaTokenAlbum": "एल्बम नाम या प्लेलिस्ट कंटेनर।",
-    "mediaTokenPlaybackState": "वर्तमान प्लेबैक स्थिति (चल रहा है, रुका हुआ, रुका हुआ)।",
-    "mediaTokenImageUrl": "मीडिया एल्बम कला या थंबनेल का कैश्ड ImgBB URL।",
-    "mediaTokenPlaybackImageUrl": "वर्तमान प्लेबैक सूचक के लिए एसेट छवि URL।",
-    "mediaTokenFallbackImageUrl": "यदि कोई आर्टवर्क उपलब्ध नहीं है तो फ़ॉलबैक एप्लिकेशन आइकन।",
-    "appConfigSubtitle": "ऐप पहचान के लिए अभिव्यक्तियाँ अनुकूलित करें।",
-    "mediaConfigSubtitle": "मीडिया प्लेबैक के लिए अभिव्यक्तियाँ अनुकूलित करें।",
-    "mediaHeaderDescription": "Discord के मीडिया हेडर में दिखाया गया ऐप नाम। गतिविधि प्रकार सुन रहे हैं या देख रहे हैं का चयन करता है।",
-    "mediaTitleDescription": "यह मीडिया शीर्षक/विवरण टेक्स्ट पर मैप होता है। ऊपर हेडर में प्लेयर नाम अलग से कॉन्फ़िगर करें।",
-    "mediaAlbumDescription": "Discord के मीडिया कार्ड पर कलाकार के नीचे दिखाया गया।",
-    "mediaButtonDescription": "टोकन अभिव्यक्तियों के साथ 2 इंटरैक्टिव उपस्थिति बटन तक जोड़ें।",
-    "mediaButtonLabel": "लेबल",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "उदा. ",
-    "mediaButtonListen": "पर सुनें",
-    "appDiscardMessage": "आपके एप्लिकेशन स्थिति फ़ील्ड में सहेजे न गए परिवर्तन हैं। अभी छोड़ने पर वे पिछली स्थिति में वापस आ जाएंगे।",
-    "mediaDiscardMessage": "आपके मीडिया स्थिति फ़ील्ड में सहेजे न गए परिवर्तन हैं। अभी छोड़ने पर वे पिछली स्थिति में वापस आ जाएंगे।",
-    "mediaTokenSubtitle": "मीडिया अभिव्यक्तियों और बटनों में उपलब्ध गतिशील चर"
-  },
-  "catalogue": {
-    "title": "एप्लिकेशन कैटलॉग",
-    "back": "वापस",
+    "understood": "समझ गया",
+    "apply": "लागू करें",
     "batch": "बैच संचालन",
-    "search": "एप्लिकेशन खोजें...",
-    "filter": "ऐप्स फ़िल्टर करें",
-    "clearFilters": "फ़िल्टर साफ़ करें",
-    "enabledOnly": "केवल सक्षम",
-    "allActivityTypes": "सभी गतिविधि प्रकार",
-    "allActivityStatuses": "सभी गतिविधि स्थितियाँ",
+    "cancel": "रद्द करें",
+    "close": "बंद करें",
+    "confirm": "पुष्टि करें और लागू करें",
+    "discardChanges": "परिवर्तन छोड़ें",
+    "keepEditing": "संपादन जारी रखें",
+    "stageChanges": "परिवर्तनों को स्टेज करें",
+    "uploadImage": "ImgBB पर छवि अपलोड करें",
+    "helpDone": "समझ गया",
+    "save": {
+      "fields": "फ़ील्ड सहेजें",
+      "id": "ID सहेजें",
+      "key": "कुंजी सहेजें"
+    },
+    "logs": {
+      "live": "लाइव लॉग",
+      "view": "लॉग देखें"
+    },
+    "grant": "अनुदान दें",
+    "done": "हो गया",
+    "resetDefault": "डिफ़ॉल्ट पर रीसेट करें"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "गतिविधि नाम",
+          "bigImage": "बड़ी छवि",
+          "bigText": "बड़ा टेक्स्ट",
+          "details": "विवरण",
+          "imageUrl": "छवि URL",
+          "smallImage": "छोटी छवि",
+          "smallText": "छोटा टेक्स्ट",
+          "state": "स्थिति",
+          "uploadImage": "छवि अपलोड करें",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "एप्लिकेशन कैटलॉग",
+          "desc": "व्यक्तिगत ऐप अनुमानों को देखें, फ़िल्टर करें और अनुकूलित करें"
+        },
+        "configurationDetails": "कॉन्फ़िगरेशन विवरण",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "अनुकूलित फ़ॉलबैक उपस्थिति को तुरंत प्रोजेक्ट करता है।",
+              "drop": "जब तक आप सक्षम एप्लिकेशन पर वापस नहीं आते तब तक आपकी Discord गतिविधि साफ़ करता है।",
+              "freeze": "अंतिम प्रक्षेपित उपस्थिति को तब तक रोकता है और सुरक्षित रखता है जब तक कि सक्षम ऐप का फिर से पता न चल जाए।"
+            },
+            "title": "ऐप के बाहर की नीतियां"
+          },
+          "fallbackPresence": "कस्टम फ़ॉलबैक उपस्थिति",
+          "desc": "सक्षम ऐप्स को छोड़ने या दूर स्विच करने पर व्यवहार",
+          "title": "पता लगाए गए ऐप के बाहर की नीतियां",
+          "help": "नीति सहायता"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "उपस्थिति टाइमर को एक विशिष्ट निश्चित प्रारंभ तिथि और समय पर लॉक करता है।",
+              "persistent": "इस सेवा सत्र के दौरान ऐप्स और रुके हुए मीडिया के लिए एक साझा रनटाइम टाइमस्टैम्प का उपयोग करता है।",
+              "reset": "ऐप लॉन्च या रीफोकस होने पर टाइमर को 00:00 पर पुनः आरंभ करता है।"
+            },
+            "title": "टाइमस्टैम्प रणनीतियाँ"
+          },
+          "fixedStart": "निश्चित प्रारंभ टाइमस्टैम्प",
+          "desc": "ऐप सत्रों में गतिविधि टाइमर कैसे हल होते हैं",
+          "help": "टाइमस्टैम्प सहायता",
+          "title": "टाइमस्टैम्प रणनीति"
+        },
+        "statusFieldConfig": {
+          "title": "स्थिति फ़ील्ड कॉन्फ़िगरेशन",
+          "desc": "शीर्षक, विवरण, स्थिति और आर्टवर्क अभिव्यक्तियाँ अनुकूलित करें"
+        },
+        "subtitle": "ऐप के बाहर नीति और टाइमस्टैम्प व्यवहार",
+        "title": "एप्लिकेशन उपस्थिति कॉन्फ़िगरेशन"
+      },
+      "catalogue": {
+        "androidOnly": "इंस्टॉल किए गए ऐप की खोज Android ऐप में उपलब्ध है।",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "बैच परिवर्तन लागू करें?",
+              "desc": "आप स्टेज किए गए कॉन्फ़िगरेशन परिवर्तनों को स्थायी रूप से लागू करने वाले हैं",
+              "subtitle": "पुष्टि",
+              "selectedApps": "चयनित एप्लिकेशन।"
+            },
+            "title": "बल्क कॉन्फ़िगर करें",
+            "subtitle": "सभी चयनित एप्लिकेशन पर परिवर्तन लागू करें",
+            "discard": {
+              "title": "स्टेज किए गए परिवर्तनों को छोड़ें?",
+              "desc": "आपके पास अप्रतिबद्ध बैच कॉन्फ़िगरेशन हैं। अभी बैच मोड छोड़ने पर सभी स्टेज किए गए परिवर्तन छोड़ दिए जाएंगे।",
+              "subtitle": "सहेजे न गए बैच संशोधन"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "एक आइकन छवि चुनें",
+              "resetIcon": "मूल ऐप आइकन पर रीसेट करें",
+              "resetLabel": "मूल लेबल पर रीसेट करें"
+            },
+            "customBtnDesc": "2 इंटरैक्टिव उपस्थिति बटन तक जोड़ें",
+            "title": "अनुकूलित करें",
+            "original": "मूल:",
+            "subtitle": "उपस्थिति प्रोफ़ाइल और प्रोजेक्शन उपनाम",
+            "projectedName": "प्रक्षेपित नाम",
+            "switchToggle": {
+              "buttons": "कस्टम बटन टॉगल करें",
+              "details": "कस्टम विवरण और स्थिति टॉगल करें",
+              "small": "कस्टम छोटा टेक्स्ट और छवि टॉगल करें"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "फ़िल्टर साफ़ करें",
+          "filter": "ऐप्स फ़िल्टर करें"
+        },
+        "loadAppsFailed": "इंस्टॉल किए गए ऐप्स लोड करने में असमर्थ।",
+        "loading": "",
+        "search": "एप्लिकेशन खोजें...",
+        "subtitle": "{apps} ऐप्स | {enabled} सक्षम",
+        "title": "एप्लिकेशन कैटलॉग",
+        "uploadProgress": "ImgBB पर ऐप आइकन अपलोड हो रहा है"
+      },
+      "statusFieldConfig": {
+        "subtitle": "ऐप पहचान के लिए अभिव्यक्तियाँ अनुकूलित करें।",
+        "discardMsg": "आपके एप्लिकेशन स्थिति फ़ील्ड में सहेजे न गए परिवर्तन हैं। अभी छोड़ने पर वे पिछली स्थिति में वापस आ जाएंगे।",
+        "title": "एप्लिकेशन स्थिति फ़ील्ड कॉन्फ़िग"
+      }
+    },
+    "buttons": {
+      "back": "वापस",
+      "help": "उपलब्ध टोकन सहायता",
+      "reset": "डिफ़ॉल्ट पर रीसेट करें"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "टोकन अभिव्यक्तियों के साथ 2 इंटरैक्टिव उपस्थिति बटन तक जोड़ें।",
+        "subtitle": "मीडिया प्लेबैक के लिए अभिव्यक्तियाँ अनुकूलित करें।",
+        "discardMsg": "आपके मीडिया स्थिति फ़ील्ड में सहेजे न गए परिवर्तन हैं। अभी छोड़ने पर वे पिछली स्थिति में वापस आ जाएंगे।",
+        "title": "मीडिया स्थिति फ़ील्ड कॉन्फ़िग"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "शेष समय",
+          "desc": "सामान्य प्रारंभ/वर्तमान-अंत शेष समय दिखाता है"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "मीडिया रुके होने के दौरान पहले या वर्तमान में पता लगाए गए ऐप या कस्टम फ़ॉलबैक का उपयोग करता है।",
+              "hidePaused": "मीडिया रुके होने के दौरान उपस्थिति छिपाता है, जिसमें कोई भी पता लगाया गया ऐप शामिल है।",
+              "showPaused": "रुके रहने के दौरान मीडिया उपस्थिति को सक्रिय रखता है और रुके हुए संकेतक दिखाता है।"
+            },
+            "desc": "सक्रिय प्लेबैक रुकने पर विकल्प"
+          },
+          "desc": "सक्रिय प्लेबैक रुकने पर उपस्थिति व्यवहार",
+          "help": "पॉज़्ड रिज़ॉल्यूशन सहायता",
+          "title": "रुके हुए मीडिया का रिज़ॉल्यूशन"
+        },
+        "mediaPriority": {
+          "title": "मीडिया प्राथमिकता",
+          "desc": "नियंत्रित करता है कि मीडिया गेमिंग/ऐप सत्रों को ओवरराइड करता है या नहीं",
+          "help": "प्राथमिकता सहायता",
+          "modal": {
+            "details": {
+              "priorityPlaying": "जब मीडिया सक्रिय रूप से चल रहा होता है, तो यह आपके द्वारा उपयोग किए जा रहे ऐप पर पूर्वता लेता है और वर्तमान ट्रैक या वीडियो को प्रोजेक्ट करता है।",
+              "switchesBetween": "मीडिया केवल तभी प्रोजेक्ट करता है जब आप मीडिया प्लेयर के अंदर हों। किसी गेम या सक्षम ऐप पर स्विच करने से वह ऐप नियंत्रण ले लेता है।"
+            },
+            "title": "मीडिया प्राथमिकता रणनीति",
+            "desc": "गेमिंग और मीडिया सत्रों के बीच रिज़ॉल्यूशन तर्क"
+          }
+        },
+        "mediaScope": {
+          "title": "मीडिया पहचान का दायरा",
+          "desc": "फ़िल्टर करें कि कौन से ऐप्स मीडिया rich presence को ट्रिगर करते हैं"
+        },
+        "statusFieldConfig": {
+          "title": "मीडिया स्थिति फ़ील्ड कॉन्फ़िगरेशन",
+          "desc": "शीर्षक, कलाकार, एल्बम और आर्टवर्क फ़ॉलबैक अभिव्यक्तियाँ अनुकूलित करें"
+        },
+        "subtitle": "रिज़ॉल्यूशन प्राथमिकताएं, टाइमस्टैम्प और प्लेबैक स्थितियां",
+        "title": "मीडिया उपस्थिति कॉन्फ़िगरेशन",
+        "typeResolution": {
+          "title": "मीडिया प्रकार रिज़ॉल्यूशन",
+          "desc": "सुनने और देखने की गतिविधियों को कैसे वर्गीकृत किया जाता है"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "ऐप स्थिति सूचना",
+        "media": "मीडिया प्लेबैक सूचना"
+      },
+      "subtitle": "फ़ोरग्राउंड सेवा सूचना में दिखाए गए शीर्षक और उपशीर्षक को अनुकूलित करें।",
+      "discard": "आपके पास अनसaved नोटिफिकेशन प्रोजेक्शन परिवर्तन हैं। अब छोड़ने पर वे रद्द हो जाएंगे।",
+      "helpIntro": "getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), का उपयोग करें getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), और getFieldCfgStr(\"MediaBigText\") का उपयोग रेंडर किए गए फ़ील्ड मानों को सम्मिलित करने के लिए करें। joinNonBlank(field1, field2) का उपयोग खाली न होने वाले मानों को बुलेट से जोड़ने के लिए करें। ऐप सूचना टेम्पलेट्स AppActivityType == \"Playing\" शर्त का समर्थन करते हैं। अभिव्यक्तियाँ == और != तुलनाओं का भी समर्थन करती हैं।"
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "कस्टम फ़ॉलबैक",
+      "drop": "ड्रॉप (उपस्थिति साफ़ करें)",
+      "freeze": "फ़्रीज़ (डिफ़ॉल्ट)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "कस्टम निश्चित समय",
+      "persistent": "लगातार (डिफ़ॉल्ट)",
+      "resetOnLaunch": "लॉन्च पर रीसेट करें"
+    },
+    "activityStatus": {
+      "all": "सभी गतिविधि स्थितियाँ",
+      "dnd": "परेशान न करें",
+      "idle": "निष्क्रिय",
+      "invisible": "अदृश्य",
+      "offline": "ऑफ़लाइन",
+      "online": "ऑनलाइन",
+      "streaming": "स्ट्रीमिंग"
+    },
+    "activityType": {
+      "all": "सभी गतिविधि प्रकार",
+      "competing": "प्रतिस्पर्धा कर रहे हैं",
+      "listening": "सुन रहे हैं",
+      "playing": "खेल रहे हैं",
+      "watching": "देख रहे हैं"
+    },
     "allPlatforms": "सभी प्लेटफ़ॉर्म",
+    "disableAll": "सभी अक्षम करें",
+    "enableAll": "सभी सक्षम करें",
+    "enabledOnly": "केवल सक्षम",
     "globalDefault": "वैश्विक डिफ़ॉल्ट",
-    "playing": "खेल रहे हैं",
-    "streaming": "स्ट्रीमिंग",
-    "listening": "सुन रहे हैं",
-    "watching": "देख रहे हैं",
-    "competing": "प्रतिस्पर्धा कर रहे हैं",
-    "online": "ऑनलाइन",
-    "idle": "निष्क्रिय",
-    "dnd": "परेशान न करें",
-    "offline": "ऑफ़लाइन",
-    "invisible": "अदृश्य",
-    "customize": "अनुकूलित करें",
-    "profileSubtitle": "उपस्थिति प्रोफ़ाइल और प्रोजेक्शन उपनाम",
-    "activityType": "गतिविधि प्रकार",
+    "keepCurrent": "वर्तमान रखें",
+    "mediaScope": {
+      "allSessions": "सभी मीडिया सत्र (डिफ़ॉल्ट)",
+      "enabledAppsOnly": "केवल सक्षम ऐप्स"
+    },
+    "typeResolution": {
+      "autoAdaptive": "ऑटो-अनुकूली (डिफ़ॉल्ट)",
+      "profileOverride": "ऐप प्रोफ़ाइल ओवरराइड"
+    },
+    "pausedResolution": {
+      "fallbackApp": "पता लगाए गए ऐप पर फ़ॉलबैक करें",
+      "hidePaused": "रुकी हुई स्थिति छिपाएं",
+      "showPaused": "रुकी हुई स्थिति दिखाएं (डिफ़ॉल्ट)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "चल रहे मीडिया को प्राथमिकता दें (डिफ़ॉल्ट)",
+      "switchesBetween": "के बीच स्विच करता है"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "डार्क",
+      "light": "लाइट"
+    }
+  },
+  "labels": {
     "activityStatus": "गतिविधि स्थिति",
-    "platformType": "प्लेटफ़ॉर्म प्रकार",
+    "activityType": "गतिविधि प्रकार",
+    "customButtons": "कस्टम बटन",
     "customDetailsState": "कस्टम विवरण और स्थिति",
     "customSmallImage": "कस्टम छोटा टेक्स्ट और छवि",
-    "customButtons": "कस्टम बटन",
-    "bulkConfigure": "बल्क कॉन्फ़िगर करें",
-    "cancel": "रद्द करें",
-    "stageChanges": "परिवर्तनों को स्टेज करें",
-    "apply": "लागू करें",
-    "confirm": "पुष्टि करें और लागू करें",
-    "keepCurrent": "वर्तमान रखें",
-    "enableAll": "सभी सक्षम करें",
-    "disableAll": "सभी अक्षम करें",
-    "discardBatch": "स्टेज किए गए परिवर्तनों को छोड़ें?",
-    "chooseIcon": "एक आइकन छवि चुनें",
-    "resetIcon": "मूल ऐप आइकन पर रीसेट करें",
-    "resetLabel": "मूल लेबल पर रीसेट करें",
-    "details": "विवरण",
-    "state": "स्थिति",
-    "smallText": "छोटा टेक्स्ट",
-    "smallImageUrl": "छोटी छवि URL",
-    "uploadImage": "ImgBB पर छवि अपलोड करें",
-    "buttonLabel": "लेबल (उदा. गेम में शामिल हों)",
-    "presenceToggle": "उपस्थिति टॉगल",
-    "bulkSubtitle": "सभी चयनित एप्लिकेशन पर परिवर्तन लागू करें",
-    "applyBatchTitle": "बैच परिवर्तन लागू करें?",
-    "confirmation": "पुष्टि",
-    "unsavedBatch": "सहेजे न गए बैच संशोधन",
-    "confirmApply": "पुष्टि करें और लागू करें",
     "filterOptions": "फ़िल्टर विकल्प",
-    "close": "बंद करें",
-    "loading": "",
-    "original": "मूल:",
-    "projectedName": "प्रक्षेपित नाम",
-    "customButtonDesc": "2 इंटरैक्टिव उपस्थिति बटन तक जोड़ें",
-    "toggleDetails": "कस्टम विवरण और स्थिति टॉगल करें",
-    "toggleSmall": "कस्टम छोटा टेक्स्ट और छवि टॉगल करें",
-    "toggleButtons": "कस्टम बटन टॉगल करें",
-    "uploadProgress": "ImgBB पर ऐप आइकन अपलोड हो रहा है",
-    "keepEditing": "संपादन जारी रखें",
-    "discardChanges": "परिवर्तन छोड़ें",
-    "discardMessage": "आपके पास अप्रतिबद्ध बैच कॉन्फ़िगरेशन हैं। अभी बैच मोड छोड़ने पर सभी स्टेज किए गए परिवर्तन छोड़ दिए जाएंगे।",
-    "applyMessage": "आप स्टेज किए गए कॉन्फ़िगरेशन परिवर्तनों को स्थायी रूप से लागू करने वाले हैं",
-    "selectedApps": "चयनित एप्लिकेशन।",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} ऐप्स | {enabled} सक्षम",
-    "chooseImage": "एक छवि फ़ाइल चुनें।",
-    "imageTooLarge": "32 MB से छोटी छवि चुनें।",
-    "imageUploadFailed": "छवि अपलोड विफल रहा।",
-    "iconUploadFailed": "आइकन अपलोड विफल रहा।",
-    "androidOnly": "इंस्टॉल किए गए ऐप की खोज Android ऐप में उपलब्ध है।",
-    "loadAppsFailed": "इंस्टॉल किए गए ऐप्स लोड करने में असमर्थ।",
-    "appUnit": "ऐप",
-    "appsUnit": "ऐप्स"
+    "platformType": "प्लेटफ़ॉर्म प्रकार",
+    "presenceToggle": "उपस्थिति टॉगल",
+    "button1": "बटन 1",
+    "button2": "बटन 2",
+    "label": "लेबल",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "एप्लिकेशन उपस्थिति कॉन्फ़िगरेशन",
-    "subtitle": "ऐप के बाहर नीति और टाइमस्टैम्प व्यवहार",
-    "catalogue": "एप्लिकेशन कैटलॉग",
-    "catalogueDesc": "व्यक्तिगत ऐप अनुमानों को देखें, फ़िल्टर करें और अनुकूलित करें",
-    "outsidePolicies": "पता लगाए गए ऐप के बाहर की नीतियां",
-    "outsideDescription": "सक्षम ऐप्स को छोड़ने या दूर स्विच करने पर व्यवहार",
-    "policyHelp": "नीति सहायता",
-    "freeze": "फ़्रीज़ (डिफ़ॉल्ट)",
-    "customFallback": "कस्टम फ़ॉलबैक",
-    "drop": "ड्रॉप (उपस्थिति साफ़ करें)",
-    "fallbackPresence": "कस्टम फ़ॉलबैक उपस्थिति",
-    "activityName": "गतिविधि नाम",
+  "pluralization": {
+    "app": {
+      "plural": "ऐप्स",
+      "singular": "ऐप"
+    }
+  },
+  "placeholders": {
+    "labelExample": "लेबल (उदा. गेम में शामिल हों)",
     "details": "विवरण",
-    "state": "स्थिति",
+    "smallImageUrl": "छोटी छवि URL",
     "smallText": "छोटा टेक्स्ट",
-    "bigText": "बड़ा टेक्स्ट",
-    "smallImage": "छोटी छवि",
-    "bigImage": "बड़ी छवि",
-    "imageUrl": "छवि URL",
-    "uploadingImage": "",
-    "timestampStrategy": "टाइमस्टैम्प रणनीति",
-    "timestampDescription": "ऐप सत्रों में गतिविधि टाइमर कैसे हल होते हैं",
-    "timestampHelp": "टाइमस्टैम्प सहायता",
-    "persistent": "लगातार (डिफ़ॉल्ट)",
-    "resetOnLaunch": "लॉन्च पर रीसेट करें",
-    "customFixedTime": "कस्टम निश्चित समय",
-    "fixedStart": "निश्चित प्रारंभ टाइमस्टैम्प",
-    "statusFieldConfig": "स्थिति फ़ील्ड कॉन्फ़िगरेशन",
-    "statusFieldDescription": "शीर्षक, विवरण, स्थिति और आर्टवर्क अभिव्यक्तियाँ अनुकूलित करें",
-    "configurationDetails": "कॉन्फ़िगरेशन विवरण",
-    "outsideHelpTitle": "ऐप के बाहर की नीतियां",
-    "timestampHelpTitle": "टाइमस्टैम्प रणनीतियाँ",
-    "understood": "समझ गया",
-    "freezeHelp": "अंतिम प्रक्षेपित उपस्थिति को तब तक रोकता है और सुरक्षित रखता है जब तक कि सक्षम ऐप का फिर से पता न चल जाए।",
-    "customHelp": "अनुकूलित फ़ॉलबैक उपस्थिति को तुरंत प्रोजेक्ट करता है।",
-    "dropHelp": "जब तक आप सक्षम एप्लिकेशन पर वापस नहीं आते तब तक आपकी Discord गतिविधि साफ़ करता है।",
-    "persistentHelp": "इस सेवा सत्र के दौरान ऐप्स और रुके हुए मीडिया के लिए एक साझा रनटाइम टाइमस्टैम्प का उपयोग करता है।",
-    "resetHelp": "ऐप लॉन्च या रीफोकस होने पर टाइमर को 00:00 पर पुनः आरंभ करता है।",
-    "fixedHelp": "उपस्थिति टाइमर को एक विशिष्ट निश्चित प्रारंभ तिथि और समय पर लॉक करता है।",
-    "uploadImage": "छवि अपलोड करें"
+    "state": "स्थिति",
+    "urlExample": "URL (https://...)",
+    "example": "उदा. ",
+    "listenOn": "पर सुनें"
   },
-  "mediaPresence": {
-    "title": "मीडिया उपस्थिति कॉन्फ़िगरेशन",
-    "subtitle": "रिज़ॉल्यूशन प्राथमिकताएं, टाइमस्टैम्प और प्लेबैक स्थितियां",
-    "priority": "मीडिया प्राथमिकता",
-    "priorityDesc": "नियंत्रित करता है कि मीडिया गेमिंग/ऐप सत्रों को ओवरराइड करता है या नहीं",
-    "priorityHelp": "प्राथमिकता सहायता",
-    "priorityPlaying": "चल रहे मीडिया को प्राथमिकता दें (डिफ़ॉल्ट)",
-    "switchesBetween": "के बीच स्विच करता है",
-    "scope": "मीडिया पहचान का दायरा",
-    "scopeDesc": "फ़िल्टर करें कि कौन से ऐप्स मीडिया rich presence को ट्रिगर करते हैं",
-    "allSessions": "सभी मीडिया सत्र (डिफ़ॉल्ट)",
-    "enabledAppsOnly": "केवल सक्षम ऐप्स",
-    "typeResolution": "मीडिया प्रकार रिज़ॉल्यूशन",
-    "typeResolutionDesc": "सुनने और देखने की गतिविधियों को कैसे वर्गीकृत किया जाता है",
-    "autoAdaptive": "ऑटो-अनुकूली (डिफ़ॉल्ट)",
-    "profileOverride": "ऐप प्रोफ़ाइल ओवरराइड",
-    "timeRemaining": "शेष समय",
-    "timeRemainingDesc": "सामान्य प्रारंभ/वर्तमान-अंत शेष समय दिखाता है",
-    "appTimestamp": "",
-    "pausedResolution": "रुके हुए मीडिया का रिज़ॉल्यूशन",
-    "pausedDesc": "सक्रिय प्लेबैक रुकने पर उपस्थिति व्यवहार",
-    "pausedHelp": "पॉज़्ड रिज़ॉल्यूशन सहायता",
-    "showPaused": "रुकी हुई स्थिति दिखाएं (डिफ़ॉल्ट)",
-    "fallbackApp": "पता लगाए गए ऐप पर फ़ॉलबैक करें",
-    "hidePaused": "रुकी हुई स्थिति छिपाएं",
-    "statusFields": "मीडिया स्थिति फ़ील्ड कॉन्फ़िगरेशन",
-    "statusFieldsDesc": "शीर्षक, कलाकार, एल्बम और आर्टवर्क फ़ॉलबैक अभिव्यक्तियाँ अनुकूलित करें",
-    "priorityStrategy": "मीडिया प्राथमिकता रणनीति",
-    "priorityStrategyDesc": "गेमिंग और मीडिया सत्रों के बीच रिज़ॉल्यूशन तर्क",
-    "pausedOptions": "सक्रिय प्लेबैक रुकने पर विकल्प",
-    "priorityHelpText": "जब मीडिया सक्रिय रूप से चल रहा होता है, तो यह आपके द्वारा उपयोग किए जा रहे ऐप पर पूर्वता लेता है और वर्तमान ट्रैक या वीडियो को प्रोजेक्ट करता है।",
-    "switchHelpText": "मीडिया केवल तभी प्रोजेक्ट करता है जब आप मीडिया प्लेयर के अंदर हों। किसी गेम या सक्षम ऐप पर स्विच करने से वह ऐप नियंत्रण ले लेता है।",
-    "showPausedHelp": "रुके रहने के दौरान मीडिया उपस्थिति को सक्रिय रखता है और रुके हुए संकेतक दिखाता है।",
-    "fallbackHelp": "मीडिया रुके होने के दौरान पहले या वर्तमान में पता लगाए गए ऐप या कस्टम फ़ॉलबैक का उपयोग करता है।",
-    "hidePausedHelp": "मीडिया रुके होने के दौरान उपस्थिति छिपाता है, जिसमें कोई भी पता लगाया गया ऐप शामिल है।"
+  "service": {
+    "imgbb": {
+      "chooseImage": "एक छवि फ़ाइल चुनें।",
+      "iconUploadFailed": "आइकन अपलोड विफल रहा।",
+      "imageTooLarge": "32 MB से छोटी छवि चुनें।",
+      "imageUploadFailed": "छवि अपलोड विफल रहा।"
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "बड़ी छवि",
+      "bigText": "बड़ा टेक्स्ट",
+      "line1": "गतिविधि विवरण",
+      "smallImage": "छोटी छवि",
+      "smallText": "छोटा टेक्स्ट",
+      "line2": "गतिविधि की स्थिति",
+      "title": "गतिविधि शीर्षक/शीर्षक"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "खाते लॉग इन हैं।",
+          "desc": "Rich Presence को प्रोजेक्ट करने के लिए अपना Discord खाता कनेक्ट करें",
+          "title": "Discord लॉगिन"
+        },
+        "languageTitle": "भाषा",
+        "themeTitle": "थीम",
+        "desc": "अनुकूलन और खाता",
+        "title": "उपयोगकर्ता नियंत्रण"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "पृष्ठभूमि सेवा को सोने से रोकने के लिए ऐप को छूट दें",
+          "title": "बैटरी अनुकूलन",
+          "modal": {
+            "desc": "आधुनिक Android सिस्टम कुछ मिनटों के बाद पृष्ठभूमि प्रक्रियाओं को सुला देते हैं। Kruzty Dynamics को बैटरी अनुकूलन से छूट देने से निरंतर, निर्बाध Discord Rich Presence अपडेट सुनिश्चित होते हैं।",
+            "subtitle": "पृष्ठभूमि सेवा श्वेतसूची",
+            "requestExemption": "छूट का अनुरोध करें"
+          }
+        },
+        "notificationAccess": {
+          "desc": "मीडिया और प्लेबैक का पता लगाने के लिए विशेष ऐप एक्सेस आवश्यक है",
+          "title": "अधिसूचना पहुँच",
+          "modal": {
+            "methodA": {
+              "title": "विधि A: विशेष ऐप एक्सेस (Pixel, Motorola, Infinix, Stock)",
+              "step1": "नीचे Android सेटिंग्स खोलें पर टैप करें।",
+              "step2": "विशेष ऐप एक्सेस > अधिसूचना पहुँच पर जाएँ।",
+              "step3": "Kruzty Dynamics खोजें और अधिसूचना पहुँच की अनुमति दें चालू करें।"
+            },
+            "methodB": {
+              "title": "विधि B: ऐप जानकारी > इलिप्सिस (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "डिवाइस सेटिंग्स > ऐप्स > ऐप्स प्रबंधित करें / ऐप सूची खोलें।",
+              "step2": "Kruzty Dynamics खोजें और टैप करें।",
+              "step4": "प्रतिबंधित सेटिंग्स की अनुमति दें / विशेष ऐप एक्सेस > अनुदान दें पर टैप करें।",
+              "step5": "वापस लौटें और अधिसूचना पहुँच सक्षम करें।"
+            },
+            "desc": "अधिसूचना पहुँच Kruzty Dynamics को Spotify, YouTube Music और मीडिया प्लेयर से लाइव मीडिया सत्र प्लेबैक ईवेंट (गाने का शीर्षक, कलाकार, एल्बम और प्लेबैक स्थिति) कैप्चर करने में सक्षम बनाती है।",
+            "oemNotice": {
+              "desc": "Android विशेष अनुमति परतों के पीछे अधिसूचना श्रोता पहुँच की रक्षा करता है। अपने फ़ोन ब्रांड के आधार पर, नीचे दी गई विधियों में से एक का पालन करें।",
+              "title": "OEM और Android 13+ उपकरणों के लिए सूचना"
+            },
+            "subtitle": "विशेष ऐप एक्सेस कॉन्फ़िगरेशन",
+            "openAndroidSettings": "Android सेटिंग्स खोलें"
+          }
+        },
+        "desc": "पहचान के लिए आवश्यक",
+        "title": "अनुमति नियंत्रण",
+        "foregroundNotification": {
+          "desc": "लगातार सेवा अधिसूचना के लिए Android 13+ अनुमति",
+          "title": "फोरग्राउंड अधिसूचना",
+          "modal": {
+            "allowNotification": "अधिसूचना की अनुमति दें",
+            "desc": "आपकी स्थिति पट्टी में चल रही फोरग्राउंड सेवा अधिसूचना प्रदर्शित करने के लिए Android 13+ द्वारा आवश्यक, यह पुष्टि करते हुए कि Discord उपस्थिति इंजन चल रहा है।",
+            "subtitle": "Android 13+ अधिसूचना अनुमति",
+            "title": "फोरग्राउंड सेवा अधिसूचना"
+          }
+        },
+        "usageAccess": {
+          "desc": "वर्तमान में चल रहे फोरग्राउंड एप्लिकेशन या गेम का पता लगाने के लिए आवश्यक",
+          "title": "उपयोग पहुँच",
+          "modal": {
+            "openUsageAccess": "उपयोग पहुँच खोलें",
+            "desc": "यह पहचानने के लिए उपयोग पहुँच आवश्यक है कि आप वर्तमान में कौन सा ऐप या गेम फोरग्राउंड में चला रहे हैं, ताकि Kruzty Dynamics इसे आपके कॉन्फ़िगर किए गए एप्लिकेशन कैटलॉग से मिला सके।",
+            "step1": "उपयोग पहुँच खोलें पर टैप करें।",
+            "step2": "Kruzty Dynamics का पता लगाएं।",
+            "step3": "उपयोग पहुँच की अनुमति दें चालू करें।",
+            "subtitle": "फोरग्राउंड ऐप पहचान"
+          }
+        }
+      },
+      "privacyNotice": "यह ऐप उपयोगकर्ता डेटा एकत्र या प्रसारित नहीं करता है।",
+      "subtitle": "डायनामिक Discord Rich Presence को सक्षम करने के लिए आवश्यक अनुमतियाँ और खाते कॉन्फ़िगर करें।",
+      "title": "पहली बार सेटअप"
+    },
+    "footer": {
+      "allSet": "सब तैयार! प्रोजेक्ट करने के लिए तैयार",
+      "buttons": {
+        "continueForNow": "अभी के लिए जारी रखें",
+        "finishSetup": "सेटअप समाप्त करें",
+        "skipForNow": "अभी के लिए छोड़ें"
+      },
+      "readyWhenYouAre": "जब आप तैयार हों तब तैयार"
+    }
+  },
+  "tags": {
+    "granted": "अनुदान दिया गया",
+    "notificationCrucial": "महत्वपूर्ण",
+    "allGranted": "सभी अनुदान दिए गए",
+    "cached": "कैश्ड",
+    "check": "जाँचें",
+    "checkingUpdates": "अपडेट्स की जाँच",
+    "default": "डिफ़ॉल्ट",
+    "view": "देखें"
   }
 }

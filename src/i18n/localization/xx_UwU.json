@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Fiwst Time Setup uwu",
-    "subtitle": "Configuwe necessawy pewmissions and accounts to enabwe dynamic Discowd Wich Pwesence uwu.",
-    "privacyNotice": "This app does nyot cowwect ow twansmit usew data uwu.",
-    "permissionsSection": "Pewmissions Contwow",
-    "permissionsRequired": "Wequiwed fow detection uwu",
-    "notificationTitle": "Notification Access uwu",
-    "notificationDesc": "Speciaw App Access needed to detect media & wayback uwu",
-    "notificationCrucial": "Cwucial uwu",
-    "usageTitle": "Usage Access uwu",
-    "usageDesc": "Wequiwed to detect cuwwent wunning fowegwound appwication ow game uwu",
-    "batteryTitle": "Battewy Optimizashun uwu",
-    "batteryDesc": "Exempt app to pwevent backgwound sewvice fwom sweeping uwu",
-    "postNotificationTitle": "Fowegwound Notification uwu",
-    "postNotificationDesc": "Andwoid 13+ pewmission fow pewsistent sewvice notification uwu",
-    "grant": "Gwant uwu",
-    "granted": "Gwantewed uwu",
-    "userControlSection": "Usew Contwow",
-    "userControlDesc": "Customizashun & Account uwu",
-    "discordLoginTitle": "Discowd Wogin uwu",
-    "discordLoginDesc": "Connect youw Discowd account to pwOject Wich Pwesence uwu",
-    "accountsConnected": "account wogged in uwu.",
-    "themeTitle": "Theme uwu",
-    "languageTitle": "Wanguage uwu",
-    "finishSetup": "Finish Setup uwu",
-    "continueForNow": "Continue fow Now uwu",
-    "skipForNow": "Skip fow Now uwu",
-    "allSet": "Aww set! Weady to pwOject uwu",
-    "readyWhenYouAre": "Weady when you awe uwu"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Active Identity uwu",
+        "stored": "Stowed uwu"
+      },
+      "content": {
+        "subtitle": "Manage tokens and identities uwu",
+        "title": "Discowd Wogin Powtal uwu",
+        "privacyText": "Discowd authowizashun wequests access to sociaw featuwes awongside Wich Pwesence. Kruzty Dynamics uses the SDK to identify youw account and pubwish ow cweaw youw configuwed activity; it does nyot use fwiend, bwock, invite, message, ow voice featuwes. On Andwoid, tokens awe encwypted and stowed on this device. Wead the uwu",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Pwivacy Powicy uwu"
+      },
+      "title": "Connect Discowd Account uwu"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Expwessions suppowt == and != compawisons. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} to show AppName when Pwaying and AppPlatformType othewwise uwu.",
+        "title": "Appwication Token Wefewence uwu",
+        "desc": "Dynamic vawiabwes avaiwabwe in fiewd expwessions uwu"
+      },
+      "media": {
+        "title": "Media Token Wefewence uwu",
+        "intro": "Tokens can be embedded diwectwy in text fiewds and button wabews ow URLs (e.g. {example}) uwu.",
+        "desc": "Dynamic vawiabwes avaiwabwe in media expwessions & buttons uwu"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Discawd Unsaved Changes? uwu",
+      "unsaved": "Unsaved modificashuns uwu"
+    },
+    "logs": {
+      "copy": "Copy wogs uwu",
+      "empty": "[INFO] No wogs yet. Open Discowd wogin ow pewfowm actiowns to genewate wogs uwu.",
+      "export": "Expowt wogs uwu",
+      "subtitle": "Wive diagnostics output uwu",
+      "title": "Appwication Wogs uwu"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Pwimawy Accent Cowow uwu",
+        "resetAccent": "Weset to Defauwt Owange uwu",
+        "tapCustomize": "Tap to customize uwu",
+        "themeMode": "Theme Mode uwu"
+      },
+      "globalDefaults": {
+        "activityStatus": "Activity Status uwu",
+        "activityType": "Activity Type uwu",
+        "note": "These defauwts awe automaticawwy used when an app ow pwesence activity does nyot specify its own activity type ow status uwu."
+      },
+      "imgBb": {
+        "apiPrivacy": "Weaving this fiewd empty wesets to the buiwt-in defauwt API key. Custom keys awe nevew exposed in pwaintext uwu.",
+        "getApiKey": "to obtain a key uwu.",
+        "help": "Set youw own ImgBB API Key to upwoad custom app and media asset images to Discowd CDN. Visit uwu",
+        "usingDefaultKey": "Using defauwt system key uwu"
+      },
+      "language": {
+        "availableLanguages": "Avaiwabwe Wanguages uwu",
+        "title": "Choose Wanguage uwu",
+        "desc": "Sewect youw pwefewwed dispway wanguage fow UI wabews and notifications uwu."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Pwevents Andwoid fwom kiwwing pwesence sewvice uwu",
+        "foregroundDesc": "Status baw indicatow fow ongoing Discowd pwesence uwu",
+        "notificationAccessDesc": "Speciaw App Access fow media detection uwu",
+        "desc": "Status of pewmissions wequiwed to wead active media notifications and fowegwound appwications: uwu",
+        "usageAccessDesc": "Detect wunning fowegwound games & apps uwu"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "Thewe awe {total} winked image URLs, incwuding {custom} custom app icon ovewwides. You can cweaw cached winks while keeping custom icons, ow cweaw aww winks and wemove custom ovewwides. If you wemove ovewwides, upwoad those icons again in the Appwication Catawogue uwu.",
+        "buttons": {
+          "clearCacheAll": "Cweaw Aww, Incwuding Custom Icons uwu",
+          "clearCacheKeep": "Cweaw Cache, Keep Custom Icons uwu"
+        },
+        "clearedAll": "Aww winked image URLs cweawed, incwuding custom app icons uwu.",
+        "clearedKeeping": "Winked image URL cache cweawed. Custom app icons wewe kept uwu.",
+        "linkedImageUrls": "Winked Image URLs uwu"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy Contwibutows uwu",
+        "developerSection": "Kruzty Dynamics uwu",
+        "librariesSection": "Wibwawies Used in this App uwu",
+        "libraries": {
+          "lucide": "Community-cwafted cwean vectow icons uwu",
+          "react": "Modewn usew intewface component awchitectuwe uwu",
+          "sdk": "Native Andwoid wich pwesence integwashun uwu",
+          "tailwind": "Utiwity-fiwst modewn wesponsive stywing uwu",
+          "tauri": "Wightweight cwoss-pwatfowm native wuntime uwu",
+          "tokio": "Asynchwonous event-dwiven netwowk wuntime uwu"
+        },
+        "maintainerRole": "Cuwwent Maintainew & Devewopew uwu"
+      },
+      "discordApp": {
+        "developerPortal": "Discowd Devewopew Powtal uwu",
+        "help": "Set youw own Discowd Appwication ID fwom the uwu",
+        "idPrivacy": "Weaving this fiewd empty wiww weset back to the defauwt Kruzty Dynamics appwication ID uwu."
+      }
+    }
   },
-  "nav": {
-    "service": "Sewvice uwu",
-    "accounts": "Accounts uwu",
-    "settings": "Settings & Mowe uwu"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Add Account uwu",
+            "switch": "Switch uwu",
+            "unuse": "Unuse uwu"
+          },
+          "activePresence": "Active Pwesence uwu",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Confirm Wogout uwu",
+              "title": "Wogout Account uwu",
+              "removePrefix": "Awe you suwe you want to wemove account uwu",
+              "removeSuffix": ". This wiww wemove saved cwedentiaws fwom this device uwu."
+            }
+          },
+          "currentAccount": "Cuwwent Wogged In Account uwu",
+          "noActiveAccount": "No sewected account. Choose one of the wogged-in accounts bewow uwu.",
+          "storedAccounts": "Stowed Accounts uwu"
+        },
+        "noAccount": {
+          "desc": "Connect youw Discowd account to begin pwOjecting Wich Pwesence statuses fow games, apps, and media uwu.",
+          "title": "No account wogged in yet uwu.",
+          "login": "Wogin Discowd uwu"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "No Discowd Accounts uwu",
+        "loggedInMany": "{n} accounts wogged in uwu.",
+        "loggedInOne": "{n} account wogged in uwu."
+      },
+      "title": "Discowd Accounts uwu"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics Dashbowd uwu",
+      "title": {
+        "welcome": "Wewcome! uwu",
+        "welcomeNamed": "Wewcome, {name}! uwu"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Aww wequiwed pewmissions awe gwantewed. Tuwn on the sewvice to continue uwu.",
+              "foregroundService": {
+                "desc": "Awwows Andwoid to show the sewvice notification while it wuns uwu.",
+                "title": "Fowegwound Sewvice Notifications uwu"
+              },
+              "notificationAccess": {
+                "desc": "Wequiwed to detect media wayback and its metadata uwu."
+              },
+              "subtitle": "Gwant these Andwoid pewmissions befowe stawting the sewvice uwu.",
+              "title": "Pewmissions wequiwed uwu",
+              "returnHint": "Aftew gwanting access in Andwoid Settings, wetuwn hewe and enabwe the sewvice uwu.",
+              "usageAccess": {
+                "desc": "Wequiwed to detect which app is cuwwentwy in the fowegwound uwu."
+              }
+            }
+          },
+          "startError": "Couwd nyot stawt the Andwoid pwesence sewvice uwu.",
+          "running": "Sewvice is wunning uwu.",
+          "stopped": "Sewvice nyot stawted uwu.",
+          "title": "Kruzty Dynamics Sewvice uwu"
+        },
+        "application": {
+          "desc": "Configuwe app pwofiwes fow wocaw pwesence detection uwu",
+          "title": "Appwication Pwesence uwu"
+        },
+        "buttons": {
+          "applicationCatalogue": "Appwication Catawogue uwu",
+          "presenceConfiguration": "Pwesence Configuwashun uwu",
+          "statusFieldConfig": "Status Fiewd Config uwu"
+        },
+        "media": {
+          "desc": "Configuwe media behaviow and status tempwates uwu",
+          "title": "Media Pwesence uwu"
+        },
+        "preview": {
+          "noPresence": "No configuwed app ow active media detected uwu.",
+          "stoppedDescription": "Sewvice is stopped. Tuwn it on to detect enabwed apps and active media uwu."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "App Pwefewences uwu",
+        "checkPermissions": {
+          "title": "Check Pewmissions uwu",
+          "desc": "Weview gwantewed and optionaw system access pewmissions uwu"
+        },
+        "deleteCachedUrls": {
+          "title": "Dewete Winked Image URLs uwu",
+          "desc": "Cweaws associated URLs of upwoaded images used on app ow media status uwu"
+        },
+        "discordAppId": {
+          "title": "Set Discowd Appwication ID uwu",
+          "desc": "Set youw own Discowd Appwication ID. Visit: discord.com/developers uwu"
+        },
+        "globalDefaults": {
+          "title": "Gwobaw Defauwts uwu",
+          "desc": "Activity type & status fow unconfiguwed apps uwu"
+        },
+        "imgBbKey": {
+          "title": "Set ImgBB API Key uwu",
+          "desc": "Set youw own ImgBB API Key. Visit: api.imgbb.com uwu"
+        },
+        "language": {
+          "title": "Wanguage uwu",
+          "desc": "Cuwwentwy Set: uwu"
+        },
+        "notificationProjection": {
+          "title": "Modify Notification Status Projection uwu",
+          "desc": "Customize appwication and media notification titwes and subtitwes uwu."
+        },
+        "themes": {
+          "title": "Themes and Dispway uwu",
+          "desc": "Set youw theme and accent cowow uwu."
+        },
+        "checkUpdates": {
+          "title": "Check fow Watest Vewsion uwu",
+          "desc": "Check whethew a nyewew vewsion is avaiwabwe uwu."
+        }
+      },
+      "subtitle": "App pwefewences & diagnostics uwu",
+      "title": "Settings and Mowe uwu",
+      "cardInfo": {
+        "architecture": "Buiwt using Wust Cow (Tokio + Tauri v2) with Weact 19 and TaiwwindCSS Fwontend incwuding Native Andwoid Pwugin Bwidge. Based on the owiginaw Kizzy's Expewimentaw WPC uwu.",
+        "credits": "Cwedits uwu",
+        "developedBy": "Devewoped by uwu",
+        "latestRelease": "Go to Watest Wewease uwu",
+        "learnMore": "Weawn Mowe About This App uwu",
+        "repository": "Check GitHub Wepositowy uwu",
+        "submitIssue": "Submit an Issue uwu",
+        "version": "Kruzty Dynamics v{version} uwu"
+      }
+    }
   },
-  "header": {
-    "welcome": "Wewcome! uwu",
-    "welcomeNamed": "Wewcome, {name}! uwu",
-    "dashboardSubtitle": "Kruzty Dynamics Dashbowd uwu",
-    "accountsLoggedInOne": "{n} account wogged in uwu.",
-    "accountsLoggedInMany": "{n} accounts wogged in uwu.",
-    "liveLogs": "Wive Wogs uwu",
-    "viewLogs": "View Wogs uwu",
-    "serviceActive": "Active uwu",
-    "serviceInactive": "Inactive uwu",
-    "serviceStarting": "Stawting uwu",
-    "serviceStopped": "Stopped uwu"
-  },
-  "accounts": {
-    "title": "Discowd Accounts uwu",
-    "subtitle": "Manage tokens and identities uwu",
-    "loginPortal": "Wogin via Discowd Powtal uwu",
-    "loginWithToken": "Add Account via Token uwu",
-    "addAccount": "Add Account uwu",
-    "activeIdentity": "Active Identity uwu",
-    "stored": "Stowed uwu",
+  "buttons": {
     "remove": "Wemove uwu",
-    "noAccounts": "No Discowd Accounts uwu",
-    "noAccountsDesc": "Add youw Discowd account using the powtal ow a usew token to stawt pwOjecting wich pwesence uwu."
-  },
-  "settings": {
-    "title": "Settings and Mowe uwu",
-    "subtitle": "App pwefewences & diagnostics uwu",
-    "appPreferences": "App Pwefewences uwu",
-    "notificationProjection": "Modify Notification Status Projection uwu",
-    "notificationProjectionDesc": "Customize appwication and media notification titwes and subtitwes uwu.",
-    "themes": "Themes and Dispway uwu",
-    "themesDesc": "Set youw theme and accent cowow uwu.",
-    "language": "Wanguage uwu",
-    "languageDesc": "Cuwwentwy Set: uwu",
-    "globalDefaults": "Gwobaw Defauwts uwu",
-    "globalDefaultsDesc": "Activity type & status fow unconfiguwed apps uwu",
-    "imgbbKey": "Set ImgBB API Key uwu",
-    "imgbbKeyDesc": "Set youw own ImgBB API Key. Visit: api.imgbb.com uwu",
-    "discordAppId": "Set Discowd Appwication ID uwu",
-    "discordAppIdDesc": "Set youw own Discowd Appwication ID. Visit: discord.com/developers uwu",
-    "checkPermissions": "Check Pewmissions uwu",
-    "checkPermissionsDesc": "Weview gwantewed and optionaw system access pewmissions uwu",
-    "deleteCache": "Dewete Winked Image URLs uwu",
-    "deleteCacheDesc": "Cweaws associated URLs of upwoaded images used on app ow media status uwu"
-  },
-  "service": {
-    "title": "Kruzty Dynamics Sewvice uwu",
-    "running": "Sewvice is wunning uwu.",
-    "stopped": "Sewvice nyot stawted uwu.",
-    "applicationPresence": "Appwication Pwesence uwu",
-    "appDescription": "Configuwe app pwofiwes fow wocaw pwesence detection uwu",
-    "applicationCatalogue": "Appwication Catawogue uwu",
-    "statusFieldConfig": "Status Fiewd Config uwu",
-    "presenceConfiguration": "Pwesence Configuwashun uwu",
-    "mediaPresence": "Media Pwesence uwu",
-    "mediaDescription": "Configuwe media behaviow and status tempwates uwu",
-    "noPresence": "No configuwed app ow active media detected uwu.",
-    "stoppedDescription": "Sewvice is stopped. Tuwn it on to detect enabwed apps and active media uwu."
-  },
-  "logs": {
-    "title": "Appwication Wogs uwu",
-    "subtitle": "Wive diagnostics output uwu",
-    "copy": "Copy wogs uwu",
-    "export": "Expowt wogs uwu",
-    "empty": "[INFO] No wogs yet. Open Discowd wogin ow pewfowm actiowns to genewate wogs uwu."
-  },
-  "permissions": {
-    "requiredTitle": "Pewmissions wequiwed uwu",
-    "requiredSubtitle": "Gwant these Andwoid pewmissions befowe stawting the sewvice uwu.",
-    "done": "Done uwu",
-    "allGranted": "Aww wequiwed pewmissions awe gwantewed. Tuwn on the sewvice to continue uwu.",
-    "grant": "Gwant uwu",
-    "returnHint": "Aftew gwanting access in Andwoid Settings, wetuwn hewe and enabwe the sewvice uwu.",
-    "notificationTitle": "Notification Access uwu",
-    "notificationSubtitle": "Speciaw App Access Configuwashun uwu",
-    "openAndroidSettings": "Open Andwoid Settings uwu",
-    "oemNotice": "Notice fow OEM & Andwoid 13+ Devices uwu",
-    "notificationExplanation": "Andwoid pwotects notification wistener access behind speciaw pewmission wayews. Depending on youw phone bwand, fowwow one of the methods bewow uwu.",
-    "methodA": "Method A: Speciaw App Access (Pixel, Motorowa, Infinix, Stock) uwu",
-    "methodAStep1": "Tap Open Andwoid Settings bewow uwu.",
-    "methodAStep2": "Go to Speciaw App Access > Notification Access uwu.",
-    "methodAStep3": "Find Kruzty Dynamics and switch on Awwow notification access uwu.",
-    "methodB": "Method B: App Info > Ewwipsis (Xiaomi/HypewOS, Samsung, Oppo) uwu",
-    "methodBStep1": "Open device Settings > Apps > Manage Apps / App Wist uwu.",
-    "methodBStep2": "Find and tap Kruzty Dynamics uwu.",
-    "methodBStep3": "Tap the thwee dots at the top-wight cownew uwu.",
-    "methodBStep4": "Tap Awwow westwicted settings / Speciaw App Access > Gwant uwu.",
-    "methodBStep5": "Wetuwn and enabwe Notification Access uwu.",
-    "notificationAccessDescription": "Notification Access enabwes Kruzty Dynamics to captuwe wive media session wayback events (Song Titwe, Awtist, Awbum, and Wayback State) fwom Spotify, YouTube Music, and media playews uwu.",
-    "usageTitle": "Usage Access uwu",
-    "usageSubtitle": "Fowegwound App Detection uwu",
-    "openUsageAccess": "Open Usage Access uwu",
-    "usageDescription": "Usage Access is wequiwed to detect which app ow game you awe cuwwentwy wunning in the fowegwound, so Kruzty Dynamics can match it against youw configuwed Appwication Catawog uwu.",
-    "usageStep1": "Tap Open Usage Access uwu.",
-    "usageStep2": "Wocate Kruzty Dynamics uwu.",
-    "usageStep3": "Switch on Pewmit usage access uwu.",
-    "batteryTitle": "Battewy Optimizashun uwu",
-    "batterySubtitle": "Backgwound Sewvice Whitewist uwu",
-    "requestExemption": "Wequest Exemption uwu",
-    "batteryDescription": "Modewn Andwoid systems put backgwound pwocesses to sweep aftew a few minutes. Exempting Kruzty Dynamics fwom battewy optimizashun ensuwes continuous, unintewwupted Discowd Wich Pwesence updates uwu.",
-    "foregroundTitle": "Fowegwound Sewvice Notification uwu",
-    "foregroundSubtitle": "Andwoid 13+ Notification Pewmission uwu",
-    "foregroundGuardTitle": "Fowegwound Sewvice Notifications uwu",
-    "usageGuardDescription": "Wequiwed to detect which app is cuwwentwy in the fowegwound uwu.",
-    "notificationGuardDescription": "Wequiwed to detect media wayback and its metadata uwu.",
-    "foregroundGuardDescription": "Awwows Andwoid to show the sewvice notification while it wuns uwu.",
-    "serviceStartError": "Couwd nyot stawt the Andwoid pwesence sewvice uwu.",
-    "allowNotification": "Awwow Notification uwu",
-    "foregroundDescription": "Wequiwed by Andwoid 13+ to dispway the ongoing fowegwound sewvice notification in youw status baw, confirming that the Discowd pwesence engine is wunning uwu."
-  },
-  "toast": {
-    "duplicateAccount": "This Discowd account is awweady added uwu.",
-    "insufficientPermissions": "Not enough pewmissions uwu. Pwease check Settings & More > Check Pewmissions.",
-    "newVersionAvailable": "New Vewsion is Avaiwabwe! uwu",
-    "updateDetected": "A new watest vewsion is detected! uwu",
-    "latestVersion": "This is the watest vewsion! uwu",
-    "updateCheckFailed": "Couwd nyot check fow updates uwu."
-  },
-  "accountsPage": {
-    "emptyTitle": "No account wogged in yet uwu.",
-    "emptyDescription": "Connect youw Discowd account to begin pwOjecting Wich Pwesence statuses fow games, apps, and media uwu.",
-    "login": "Wogin Discowd uwu",
-    "currentAccount": "Cuwwent Wogged In Account uwu",
-    "activePresence": "Active Pwesence uwu",
-    "storedAccounts": "Stowed Accounts uwu",
-    "switch": "Switch uwu",
-    "unuse": "Unuse uwu",
-    "remove": "Wemove uwu",
-    "cancel": "Cancew uwu",
-    "deleteTitle": "Wemove Discowd Account? uwu",
-    "loginTitle": "Discowd Wogin Powtal uwu",
-    "noActiveAccount": "No sewected account. Choose one of the wogged-in accounts bewow uwu.",
-    "addAccountTitle": "Connect Discowd Account uwu",
-    "portal": "Discowd Wogin Powtal uwu",
-    "signInPortal": "Sign in secuwewy with Discowd in-app uwu",
     "openPortal": "Open Powtal uwu",
-    "privacyText": "Discowd authowizashun wequests access to sociaw featuwes awongside Wich Pwesence. Kruzty Dynamics uses the SDK to identify youw account and pubwish ow cweaw youw configuwed activity; it does nyot use fwiend, bwock, invite, message, ow voice featuwes. On Andwoid, tokens awe encwypted and stowed on this device. Wead the uwu",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Wogout Account uwu",
-    "removePrefix": "Awe you suwe you want to wemove account uwu",
-    "removeSuffix": ". This wiww wemove saved cwedentiaws fwom this device uwu.",
-    "confirmLogout": "Confirm Wogout uwu",
-    "addAccount": "Add Discowd Account uwu",
-    "noSelection": "No sewected account. Choose one of the wogged-in accounts bewow uwu.",
-    "addMoreAccounts": "You can add mowe accounts by cwicking the Discowd button bewow uwu."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Choose Wanguage uwu",
-    "languageDescription": "Sewect youw pwefewwed dispway wanguage fow UI wabews and notifications uwu.",
-    "availableLanguages": "Avaiwabwe Wanguages uwu",
-    "close": "Cwose uwu",
-    "linkedImageUrls": "Winked Image URLs uwu",
-    "clearCacheKeep": "Cweaw Cache, Keep Custom Icons uwu",
-    "clearCacheAll": "Cweaw Aww, Incwuding Custom Icons uwu",
-    "credits": "Cwedits uwu",
-    "themeMode": "Theme Mode uwu",
-    "accentColor": "Pwimawy Accent Cowow uwu",
-    "resetAccent": "Weset to Defauwt Owange uwu",
-    "learnMore": "Weawn Mowe About This App uwu",
-    "privacyPolicy": "Pwivacy Powicy uwu",
-    "repository": "Check GitHub Wepositowy uwu",
-    "latestRelease": "Go to Watest Wewease uwu",
-    "submitIssue": "Submit an Issue uwu",
-    "developerSection": "Kruzty Dynamics uwu",
-    "librariesSection": "Wibwawies Used in this App uwu",
-    "contributorsSection": "Kizzy Contwibutows uwu",
-    "maintainerRole": "Cuwwent Maintainew & Devewopew uwu",
-    "view": "View uwu",
-    "done": "Done uwu",
-    "developedBy": "Devewoped by uwu",
-    "version": "Kruzty Dynamics v{version} uwu",
-    "architecture": "Buiwt using Wust Cow (Tokio + Tauri v2) with Weact 19 and TaiwwindCSS Fwontend incwuding Native Andwoid Pwugin Bwidge. Based on the owiginaw Kizzy's Expewimentaw WPC uwu.",
-    "cached": "cached uwu",
-    "tapCustomize": "Tap to customize uwu",
-    "defaultNote": "These defauwts awe automaticawwy used when an app ow pwesence activity does nyot specify its own activity type ow status uwu.",
-    "activityType": "Activity Type uwu",
-    "activityStatus": "Activity Status uwu",
-    "imgbbHelp": "Set youw own ImgBB API Key to upwoad custom app and media asset images to Discowd CDN. Visit uwu",
-    "getApiKey": "to obtain a key uwu.",
-    "apiPrivacy": "Weaving this fiewd empty wesets to the buiwt-in defauwt API key. Custom keys awe nevew exposed in pwaintext uwu.",
-    "saveKey": "Save Key uwu",
-    "discordIdHelp": "Set youw own Discowd Appwication ID fwom the uwu",
-    "developerPortal": "Discowd Devewopew Powtal uwu",
-    "idDefault": "Defauwt uwu",
-    "idPrivacy": "Weaving this fiewd empty wiww weset back to the defauwt Kruzty Dynamics appwication ID uwu.",
-    "saveId": "Save ID uwu",
-    "permissionsDescription": "Status of pewmissions wequiwed to wead active media notifications and fowegwound appwications: uwu",
-    "notificationAccessDesc": "Speciaw App Access fow media detection uwu",
-    "usageAccessDesc": "Detect wunning fowegwound games & apps uwu",
-    "batteryDesc": "Pwevents Andwoid fwom kiwwing pwesence sewvice uwu",
-    "foregroundDesc": "Status baw indicatow fow ongoing Discowd pwesence uwu",
-    "saveIdPlaceholder": "1572590527562391713 (Defauwt) uwu",
-    "resetDefault": "Weset to Defauwt uwu",
-    "cancel": "Cancew uwu",
-    "cacheWarning": "Thewe awe {total} winked image URLs, incwuding {custom} custom app icon ovewwides. You can cweaw cached winks while keeping custom icons, ow cweaw aww winks and wemove custom ovewwides. If you wemove ovewwides, upwoad those icons again in the Appwication Catawogue uwu.",
-    "allGranted": "Aww Gwantewed uwu",
-    "clearedAll": "Aww winked image URLs cweawed, incwuding custom app icons uwu.",
-    "clearedKeeping": "Winked image URL cache cweawed. Custom app icons wewe kept uwu.",
-    "usingDefaultKey": "Using defauwt system key uwu",
-    "customKeySet": "Custom Key Set uwu",
-    "light": "Wight uwu",
-    "dark": "Dawk uwu",
-    "amoled": "AMOLED uwu",
-    "libraryTauri": "Wightweight cwoss-pwatfowm native wuntime uwu",
-    "libraryTokio": "Asynchwonous event-dwiven netwowk wuntime uwu",
-    "librarySdk": "Native Andwoid wich pwesence integwashun uwu",
-    "libraryReact": "Modewn usew intewface component awchitectuwe uwu",
-    "libraryTailwind": "Utiwity-fiwst modewn wesponsive stywing uwu",
-    "libraryLucide": "Community-cwafted cwean vectow icons uwu",
-    "checkForUpdates": "Check fow Watest Vewsion uwu",
-    "checkForUpdatesDesc": "Check whethew a nyewew vewsion is avaiwabwe uwu.",
-    "check": "Check uwu",
-    "checkingUpdates": "Checking fow updates uwu"
-  },
-  "configFields": {
-    "appTitle": "Appwication Status Fiewd Config uwu",
-    "mediaTitle": "Media Status Fiewd Config uwu",
-    "back": "Back uwu",
-    "reset": "Weset to Defauwts uwu",
-    "help": "Avaiwabwe Tokens Hewp uwu",
-    "title": "Titwe uwu",
-    "line1": "Wine 1 (Detaiws) uwu",
-    "line2": "Wine 2 (State) uwu",
-    "smallText": "Smaww Text uwu",
-    "smallImage": "Smaww Image uwu",
-    "bigText": "Big Text uwu",
-    "bigImage": "Big Image uwu",
-    "header": "Headew (Wistening to / Watching) uwu",
-    "mediaTitleField": "Media Titwe (Activity Detaiws) uwu",
-    "artist": "Wine 1 (Activity State / Awtist) uwu",
-    "album": "Wine 2 (Awbum / Image Text) uwu",
-    "buttons": "Custom Buttons uwu",
-    "button1": "Button 1 uwu",
-    "button2": "Button 2 uwu",
-    "save": "Save Fiewds uwu",
-    "appReference": "Appwication Token Wefewence uwu",
-    "mediaReference": "Media Token Wefewence uwu",
-    "tokenDescription": "Dynamic vawiabwes avaiwabwe in fiewd expwessions uwu",
-    "mediaTokenDescription": "Video ow media descwipshun fwom web ow video playews uwu.",
-    "discard": "Discawd Unsaved Changes? uwu",
-    "unsaved": "Unsaved modificashuns uwu",
-    "helpDone": "Got it uwu",
-    "appTokenName": "PwOjected appwication name shown in the activity uwu.",
-    "appHeader": "Headew uwu",
-    "titleHeader": "Titwe/Headew uwu",
-    "detailsField": "Detaiws uwu",
-    "stateField": "State uwu",
-    "notificationConfigSubtitle": "Customize the titwe and subtitwe shown in the fowegwound sewvice notification uwu.",
-    "notificationAppSection": "App Status Notification uwu",
-    "notificationMediaSection": "Media Wayback Notification uwu",
-    "notificationSubtitleLabel": "Subtitwe uwu",
-    "notificationHelpIntro": "Use getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), and getFieldCfgStr(\"MediaBigText\") to insewt the wendewed fiewd vawues. Use joinNonBlank(field1, field2) to join nonempty vawues with a buwwet. App notification tempwates suppowt the AppActivityType == \"Playing\" conditionaw. Expwessions awso suppowt == and != compawisons uwu.",
-    "notificationDiscardMessage": "You have unsaved notification pwOjection changes. Weaving now wiww discawd them uwu.",
-    "appTokenActivityType": "Sewected Wich Pwesence activity type fow this app pwofiwe, such as Pwaying, Wistening, Watching, ow Competing uwu.",
-    "appTokenPlatformType": "Pwatfowm sewected in this app pwofiwe, such as Andwoid, PC, PwayStation, ow Xbox uwu.",
-    "appExpressionOperators": "Expwessions suppowt == and != compawisons. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} to show AppName when Pwaying and AppPlatformType othewwise uwu.",
-    "appTokenDetails": "Custom Detaiws text saved on this app pwofiwe, ow empty when disabwed ow bwank uwu.",
-    "appTokenState": "Custom State text saved on this app pwofiwe, ow empty when disabwed ow bwank uwu.",
-    "appTokenSmallText": "Custom smaww image wabew saved on this app pwofiwe, ow empty when disabwed ow bwank uwu.",
-    "appTokenSmallUrl": "Custom smaww image URL saved on this app pwofiwe, ow empty when disabwed ow bwank uwu.",
-    "appTokenImageUrl": "Cached ImgBB wemote URL of the appwication icon uwu.",
-    "appTokenPackageName": "Andwoid package identificaw (e.g. com.mojang.minecraftpe) uwu.",
-    "mediaTokenIntro": "Tokens can be embedded diwectwy in text fiewds and button wabews ow URLs (e.g. {example}) uwu.",
-    "mediaTokenAppName": "Playew appwication name shown in Discowd's Wistening to ow Watching headew uwu.",
-    "mediaTokenTitle": "Active media song ow video titwe fwom notification metadata uwu.",
-    "mediaTokenArtist": "Awtist ow cweatow of the pwaying audio ow video uwu.",
-    "mediaTokenAlbum": "Awbum name ow pwayout container uwu.",
-    "mediaTokenPlaybackState": "Cuwwent wayback state (Pwaying, Paused, Stopped) uwu.",
-    "mediaTokenImageUrl": "Cached ImgBB URL of the media awbum awt ow thumbnaiw uwu.",
-    "mediaTokenPlaybackImageUrl": "Asset image URL fow the cuwwent wayback indicatow uwu.",
-    "mediaTokenFallbackImageUrl": "Fawwback appwication icon if no awtwowk is avaiwabwe uwu.",
-    "appConfigSubtitle": "Customize expwessions fow app detection uwu.",
-    "mediaConfigSubtitle": "Customize expwessions fow media wayback uwu.",
-    "mediaHeaderDescription": "The app name shown in Discowd's media headew. Activity type sewects Wistening to ow Watching uwu.",
-    "mediaTitleDescription": "This maps to the media titwe/detaiws text. Configuwe the playew name separatewy in Headew above uwu.",
-    "mediaAlbumDescription": "Shown beneath the awtist on Discowd's media cawd uwu.",
-    "mediaButtonDescription": "Add up to 2 intewactive pwesence buttons with token expwessions uwu.",
-    "mediaButtonLabel": "Wabew uwu",
-    "mediaButtonUrl": "URL uwu",
-    "mediaButtonExample": "e.g.  uwu",
-    "mediaButtonListen": "Wisten on uwu",
-    "appDiscardMessage": "You have unsaved changes in youw Appwication Status Fiewds. Weaving now wiww wevewt them to the pwevious state uwu.",
-    "mediaDiscardMessage": "You have unsaved changes in youw Media Status Fiewds. Weaving now wiww wevewt them to the pwevious state uwu.",
-    "mediaTokenSubtitle": "Dynamic vawiabwes avaiwabwe in media expwessions & buttons uwu"
-  },
-  "catalogue": {
-    "title": "Appwication Catawogue uwu",
-    "back": "Back uwu",
+    "understood": "Undewstood uwu",
+    "apply": "Appwy uwu",
     "batch": "Batch Opewashuns uwu",
-    "search": "Seawch appwications uwu...",
-    "filter": "Fiwtew Apps uwu",
-    "clearFilters": "Cweaw Fiwtews uwu",
-    "enabledOnly": "Enabwed Onwy uwu",
-    "allActivityTypes": "Aww Activity Types uwu",
-    "allActivityStatuses": "Aww Activity Statuses uwu",
+    "cancel": "Cancew uwu",
+    "close": "Cwose uwu",
+    "confirm": "Confirm & Appwy uwu",
+    "discardChanges": "Discawd Changes uwu",
+    "keepEditing": "Keep Editing uwu",
+    "stageChanges": "Stage Changes uwu",
+    "uploadImage": "Upwoad image to ImgBB uwu",
+    "helpDone": "Got it uwu",
+    "save": {
+      "fields": "Save Fiewds uwu",
+      "id": "Save ID uwu",
+      "key": "Save Key uwu"
+    },
+    "logs": {
+      "live": "Wive Wogs uwu",
+      "view": "View Wogs uwu"
+    },
+    "grant": "Gwant uwu",
+    "done": "Done uwu",
+    "resetDefault": "Weset to Defauwt uwu"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Activity Name uwu",
+          "bigImage": "Big Image uwu",
+          "bigText": "Big Text uwu",
+          "details": "Detaiws uwu",
+          "imageUrl": "Image URL uwu",
+          "smallImage": "Smaww Image uwu",
+          "smallText": "Smaww Text uwu",
+          "state": "State uwu",
+          "uploadImage": "Upwoad image uwu",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "Appwication Catawogue uwu",
+          "desc": "View, fiwtew, and customize individwaw app pwOjections uwu"
+        },
+        "configurationDetails": "Configuwashun detaiws uwu",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Immediatewy pwOjects the customized fawwback pwesence uwu.",
+              "drop": "Cweaws youw Discowd activity untiw you wetuwn to an enabwed appwication uwu.",
+              "freeze": "Pauses and pweserves the wast pwOjected pwesence untiw an enabwed app is detected again uwu."
+            },
+            "title": "Outside App Powicies uwu"
+          },
+          "fallbackPresence": "Custom Fawwback Pwesence uwu",
+          "desc": "Behaviow when you weave ow switch away fwom enabwed apps uwu",
+          "title": "Outside Detected App Powicies uwu",
+          "help": "Powicy Hewp uwu"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Wocks the pwesence timew to a specific fixed stawt date and time uwu.",
+              "persistent": "Uses one shawed wuntime timestamp fow apps and paused media duwing this sewvice session uwu.",
+              "reset": "Westawts the timew at 00:00 when the app is waunched ow wefocused uwu."
+            },
+            "title": "Timestamp Stwategies uwu"
+          },
+          "fixedStart": "Fixed Stawt Timestamp uwu",
+          "desc": "How activity timews awe wesowved acwoss app sessions uwu",
+          "help": "Timestamp Hewp uwu",
+          "title": "Timestamp Stwategy uwu"
+        },
+        "statusFieldConfig": {
+          "title": "Status Fiewd Configuwashun uwu",
+          "desc": "Customize titwe, detaiws, state, and awtwowk expwessions uwu"
+        },
+        "subtitle": "Outside app powicy and timestamp behaviow uwu",
+        "title": "Appwication Pwesence Configuwashun uwu"
+      },
+      "catalogue": {
+        "androidOnly": "Instawwed app discovewy is avaiwabwe in the Andwoid app uwu.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Appwy Batch Changes? uwu",
+              "desc": "You awe about to pewmanentwy appwy staged configuwashun changes to uwu",
+              "subtitle": "Confiwmashun uwu",
+              "selectedApps": "sewected appwications uwu."
+            },
+            "title": "Buwk Configuwe uwu",
+            "subtitle": "Appwy changes to aww sewected appwications uwu",
+            "discard": {
+              "title": "Discawd Staged Changes? uwu",
+              "desc": "You have uncommitted batch configuwashuns. Weaving batch mode now wiww discawd aww staged changes uwu.",
+              "subtitle": "Unsaved batch modificashuns uwu"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Choose an icon image uwu",
+              "resetIcon": "Weset to owiginaw app icon uwu",
+              "resetLabel": "Weset to Owiginaw Wabew uwu"
+            },
+            "customBtnDesc": "Add up to 2 intewactive pwesence buttons uwu",
+            "title": "Customize uwu",
+            "original": "Owiginaw: uwu",
+            "subtitle": "Pwesence pwofiwe & pwOjection awiases uwu",
+            "projectedName": "PwOjected Name uwu",
+            "switchToggle": {
+              "buttons": "Toggwe Custom Buttons uwu",
+              "details": "Toggwe Custom Detaiws and State uwu",
+              "small": "Toggwe Custom Smaww Text and Image uwu"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Cweaw Fiwtews uwu",
+          "filter": "Fiwtew Apps uwu"
+        },
+        "loadAppsFailed": "Unabwe to woad instawwed apps uwu.",
+        "loading": "",
+        "search": "Seawch appwications uwu...",
+        "subtitle": "{apps} apps | {enabled} enabwed uwu",
+        "title": "Appwication Catawogue uwu",
+        "uploadProgress": "Upwoading app icon to ImgBB uwu"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Customize expwessions fow app detection uwu.",
+        "discardMsg": "You have unsaved changes in youw Appwication Status Fiewds. Weaving now wiww wevewt them to the pwevious state uwu.",
+        "title": "Appwication Status Fiewd Config uwu"
+      }
+    },
+    "buttons": {
+      "back": "Back uwu",
+      "help": "Avaiwabwe Tokens Hewp uwu",
+      "reset": "Weset to Defauwts uwu"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Add up to 2 intewactive pwesence buttons with token expwessions uwu.",
+        "subtitle": "Customize expwessions fow media wayback uwu.",
+        "discardMsg": "You have unsaved changes in youw Media Status Fiewds. Weaving now wiww wevewt them to the pwevious state uwu.",
+        "title": "Media Status Fiewd Config uwu"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "Time Wemaining uwu",
+          "desc": "Shows the usuaw stawt/cuwwent-end time wemaining uwu"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Uses the pweviouswy ow cuwwentwy detected app ow custom fawwback while media is paused uwu.",
+              "hidePaused": "Hides pwesence while media is paused, incwuding any detected app uwu.",
+              "showPaused": "Keeps media pwesence active while paused and shows paused indicatows uwu."
+            },
+            "desc": "Options when active wayback is paused uwu"
+          },
+          "desc": "Pwesence behaviow when active wayback is paused uwu",
+          "help": "Paused Wesowution Hewp uwu",
+          "title": "Paused Media Wesowution uwu"
+        },
+        "mediaPriority": {
+          "title": "Media Pwiowity uwu",
+          "desc": "Contwows whethew media ovewwides gaming/app sessions uwu",
+          "help": "Pwiowity Hewp uwu",
+          "modal": {
+            "details": {
+              "priorityPlaying": "When media is activewy pwaying, it takes pwecedence ovew the app you awe using and pwOjects the cuwwent twack ow video uwu.",
+              "switchesBetween": "PwOjects media onwy while you awe inside the media pwayew. Switching to a game ow enabwed app wets that app take ovew uwu."
+            },
+            "title": "Media Pwiowity Stwategy uwu",
+            "desc": "Wesowution wogic between gaming and media sessions uwu"
+          }
+        },
+        "mediaScope": {
+          "title": "Media Detection Scope uwu",
+          "desc": "Fiwtew which apps twiggew media wich pwesence uwu"
+        },
+        "statusFieldConfig": {
+          "title": "Media Status Fiewd Configuwashun uwu",
+          "desc": "Customize titwe, awtist, awbum, and awtwowk fawwback expwessions uwu"
+        },
+        "subtitle": "Wesowution pwiowities, timestamps, and wayback states uwu",
+        "title": "Media Pwesence Configuwashun uwu",
+        "typeResolution": {
+          "title": "Media Type Wesowution uwu",
+          "desc": "How wistening vs watching activities awe cwassified uwu"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "App Status Notification uwu",
+        "media": "Media Wayback Notification uwu"
+      },
+      "subtitle": "Customize the titwe and subtitwe shown in the fowegwound sewvice notification uwu.",
+      "discard": "You have unsaved notification pwOjection changes. Weaving now wiww discawd them uwu.",
+      "helpIntro": "Use getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), and getFieldCfgStr(\"MediaBigText\") to insewt the wendewed fiewd vawues. Use joinNonBlank(field1, field2) to join nonempty vawues with a buwwet. App notification tempwates suppowt the AppActivityType == \"Playing\" conditionaw. Expwessions awso suppowt == and != compawisons uwu."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Custom Fawwback uwu",
+      "drop": "Dwop (Cweaw pwesence) uwu",
+      "freeze": "Fweze (Defauwt) uwu"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Custom Fixed Time uwu",
+      "persistent": "Pewsistent (Defauwt) uwu",
+      "resetOnLaunch": "Weset on Waunch uwu"
+    },
+    "activityStatus": {
+      "all": "Aww Activity Statuses uwu",
+      "dnd": "Do Nyot Distuwb uwu",
+      "idle": "Idwe uwu",
+      "invisible": "Invisibwe uwu",
+      "offline": "Offwine uwu",
+      "online": "Onwine uwu",
+      "streaming": "Stweaming uwu"
+    },
+    "activityType": {
+      "all": "Aww Activity Types uwu",
+      "competing": "Competing uwu",
+      "listening": "Wistening uwu",
+      "playing": "Pwaying uwu",
+      "watching": "Watching uwu"
+    },
     "allPlatforms": "Aww Pwatfowms uwu",
+    "disableAll": "Disabwe Aww uwu",
+    "enableAll": "Enabwe Aww uwu",
+    "enabledOnly": "Enabwed Onwy uwu",
     "globalDefault": "Gwobaw Defauwt uwu",
-    "playing": "Pwaying uwu",
-    "streaming": "Stweaming uwu",
-    "listening": "Wistening uwu",
-    "watching": "Watching uwu",
-    "competing": "Competing uwu",
-    "online": "Onwine uwu",
-    "idle": "Idwe uwu",
-    "dnd": "Do Nyot Distuwb uwu",
-    "offline": "Offwine uwu",
-    "invisible": "Invisibwe uwu",
-    "customize": "Customize uwu",
-    "profileSubtitle": "Pwesence pwofiwe & pwOjection awiases uwu",
-    "activityType": "Activity Type uwu",
+    "keepCurrent": "Keep Cuwwent uwu",
+    "mediaScope": {
+      "allSessions": "Aww Media Sessions (Defauwt) uwu",
+      "enabledAppsOnly": "Onwy Enabwed Apps uwu"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Auto-Adaptive (Defauwt) uwu",
+      "profileOverride": "App Pwofiwe Ovewwide uwu"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Fawwback to Detected App uwu",
+      "hidePaused": "Hide Paused State uwu",
+      "showPaused": "Show Paused State (Defauwt) uwu"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Pwiowity Pwaying Media (Defauwt) uwu",
+      "switchesBetween": "Switches Between uwu"
+    },
+    "theme": {
+      "amoled": "AMOLED uwu",
+      "dark": "Dawk uwu",
+      "light": "Wight uwu"
+    }
+  },
+  "labels": {
     "activityStatus": "Activity Status uwu",
-    "platformType": "Pwatfowm Type uwu",
+    "activityType": "Activity Type uwu",
+    "customButtons": "Custom Buttons uwu",
     "customDetailsState": "Custom Detaiws & State uwu",
     "customSmallImage": "Custom Smaww Text and Image uwu",
-    "customButtons": "Custom Buttons uwu",
-    "bulkConfigure": "Buwk Configuwe uwu",
-    "cancel": "Cancew uwu",
-    "stageChanges": "Stage Changes uwu",
-    "apply": "Appwy uwu",
-    "confirm": "Confirm & Appwy uwu",
-    "keepCurrent": "Keep Cuwwent uwu",
-    "enableAll": "Enabwe Aww uwu",
-    "disableAll": "Disabwe Aww uwu",
-    "discardBatch": "Discawd Staged Changes? uwu",
-    "chooseIcon": "Choose an icon image uwu",
-    "resetIcon": "Weset to owiginaw app icon uwu",
-    "resetLabel": "Weset to Owiginaw Wabew uwu",
-    "details": "Detaiws uwu",
-    "state": "State uwu",
-    "smallText": "Smaww Text uwu",
-    "smallImageUrl": "Smaww image URL uwu",
-    "uploadImage": "Upwoad image to ImgBB uwu",
-    "buttonLabel": "Wabew (e.g. Join Game) uwu",
-    "presenceToggle": "Pwesence Toggwe uwu",
-    "bulkSubtitle": "Appwy changes to aww sewected appwications uwu",
-    "applyBatchTitle": "Appwy Batch Changes? uwu",
-    "confirmation": "Confiwmashun uwu",
-    "unsavedBatch": "Unsaved batch modificashuns uwu",
-    "confirmApply": "Confirm & Appwy uwu",
     "filterOptions": "Fiwtew Options uwu",
-    "close": "Cwose uwu",
-    "loading": "",
-    "original": "Owiginaw: uwu",
-    "projectedName": "PwOjected Name uwu",
-    "customButtonDesc": "Add up to 2 intewactive pwesence buttons uwu",
-    "toggleDetails": "Toggwe Custom Detaiws and State uwu",
-    "toggleSmall": "Toggwe Custom Smaww Text and Image uwu",
-    "toggleButtons": "Toggwe Custom Buttons uwu",
-    "uploadProgress": "Upwoading app icon to ImgBB uwu",
-    "keepEditing": "Keep Editing uwu",
-    "discardChanges": "Discawd Changes uwu",
-    "discardMessage": "You have uncommitted batch configuwashuns. Weaving batch mode now wiww discawd aww staged changes uwu.",
-    "applyMessage": "You awe about to pewmanentwy appwy staged configuwashun changes to uwu",
-    "selectedApps": "sewected appwications uwu.",
-    "urlExample": "URL (https://...) uwu",
-    "summary": "{apps} apps | {enabled} enabwed uwu",
-    "chooseImage": "Choose an image fiwe uwu.",
-    "imageTooLarge": "Choose an image smawwew than 32 MB uwu.",
-    "imageUploadFailed": "Image upwoad faiwed uwu.",
-    "iconUploadFailed": "Icon upwoad faiwed uwu.",
-    "androidOnly": "Instawwed app discovewy is avaiwabwe in the Andwoid app uwu.",
-    "loadAppsFailed": "Unabwe to woad instawwed apps uwu.",
-    "appUnit": "App uwu",
-    "appsUnit": "Apps uwu"
+    "platformType": "Pwatfowm Type uwu",
+    "presenceToggle": "Pwesence Toggwe uwu",
+    "button1": "Button 1 uwu",
+    "button2": "Button 2 uwu",
+    "label": "Wabew uwu",
+    "url": "URL uwu"
   },
-  "appPresence": {
-    "title": "Appwication Pwesence Configuwashun uwu",
-    "subtitle": "Outside app powicy and timestamp behaviow uwu",
-    "catalogue": "Appwication Catawogue uwu",
-    "catalogueDesc": "View, fiwtew, and customize individwaw app pwOjections uwu",
-    "outsidePolicies": "Outside Detected App Powicies uwu",
-    "outsideDescription": "Behaviow when you weave ow switch away fwom enabwed apps uwu",
-    "policyHelp": "Powicy Hewp uwu",
-    "freeze": "Fweze (Defauwt) uwu",
-    "customFallback": "Custom Fawwback uwu",
-    "drop": "Dwop (Cweaw pwesence) uwu",
-    "fallbackPresence": "Custom Fawwback Pwesence uwu",
-    "activityName": "Activity Name uwu",
+  "pluralization": {
+    "app": {
+      "plural": "Apps uwu",
+      "singular": "App uwu"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Wabew (e.g. Join Game) uwu",
     "details": "Detaiws uwu",
-    "state": "State uwu",
+    "smallImageUrl": "Smaww image URL uwu",
     "smallText": "Smaww Text uwu",
-    "bigText": "Big Text uwu",
-    "smallImage": "Smaww Image uwu",
-    "bigImage": "Big Image uwu",
-    "imageUrl": "Image URL uwu",
-    "uploadingImage": "",
-    "timestampStrategy": "Timestamp Stwategy uwu",
-    "timestampDescription": "How activity timews awe wesowved acwoss app sessions uwu",
-    "timestampHelp": "Timestamp Hewp uwu",
-    "persistent": "Pewsistent (Defauwt) uwu",
-    "resetOnLaunch": "Weset on Waunch uwu",
-    "customFixedTime": "Custom Fixed Time uwu",
-    "fixedStart": "Fixed Stawt Timestamp uwu",
-    "statusFieldConfig": "Status Fiewd Configuwashun uwu",
-    "statusFieldDescription": "Customize titwe, detaiws, state, and awtwowk expwessions uwu",
-    "configurationDetails": "Configuwashun detaiws uwu",
-    "outsideHelpTitle": "Outside App Powicies uwu",
-    "timestampHelpTitle": "Timestamp Stwategies uwu",
-    "understood": "Undewstood uwu",
-    "freezeHelp": "Pauses and pweserves the wast pwOjected pwesence untiw an enabwed app is detected again uwu.",
-    "customHelp": "Immediatewy pwOjects the customized fawwback pwesence uwu.",
-    "dropHelp": "Cweaws youw Discowd activity untiw you wetuwn to an enabwed appwication uwu.",
-    "persistentHelp": "Uses one shawed wuntime timestamp fow apps and paused media duwing this sewvice session uwu.",
-    "resetHelp": "Westawts the timew at 00:00 when the app is waunched ow wefocused uwu.",
-    "fixedHelp": "Wocks the pwesence timew to a specific fixed stawt date and time uwu.",
-    "uploadImage": "Upwoad image uwu"
+    "state": "State uwu",
+    "urlExample": "URL (https://...) uwu",
+    "example": "e.g.  uwu",
+    "listenOn": "Wisten on uwu"
   },
-  "mediaPresence": {
-    "title": "Media Pwesence Configuwashun uwu",
-    "subtitle": "Wesowution pwiowities, timestamps, and wayback states uwu",
-    "priority": "Media Pwiowity uwu",
-    "priorityDesc": "Contwows whethew media ovewwides gaming/app sessions uwu",
-    "priorityHelp": "Pwiowity Hewp uwu",
-    "priorityPlaying": "Pwiowity Pwaying Media (Defauwt) uwu",
-    "switchesBetween": "Switches Between uwu",
-    "scope": "Media Detection Scope uwu",
-    "scopeDesc": "Fiwtew which apps twiggew media wich pwesence uwu",
-    "allSessions": "Aww Media Sessions (Defauwt) uwu",
-    "enabledAppsOnly": "Onwy Enabwed Apps uwu",
-    "typeResolution": "Media Type Wesowution uwu",
-    "typeResolutionDesc": "How wistening vs watching activities awe cwassified uwu",
-    "autoAdaptive": "Auto-Adaptive (Defauwt) uwu",
-    "profileOverride": "App Pwofiwe Ovewwide uwu",
-    "timeRemaining": "Time Wemaining uwu",
-    "timeRemainingDesc": "Shows the usuaw stawt/cuwwent-end time wemaining uwu",
-    "appTimestamp": "",
-    "pausedResolution": "Paused Media Wesowution uwu",
-    "pausedDesc": "Pwesence behaviow when active wayback is paused uwu",
-    "pausedHelp": "Paused Wesowution Hewp uwu",
-    "showPaused": "Show Paused State (Defauwt) uwu",
-    "fallbackApp": "Fawwback to Detected App uwu",
-    "hidePaused": "Hide Paused State uwu",
-    "statusFields": "Media Status Fiewd Configuwashun uwu",
-    "statusFieldsDesc": "Customize titwe, awtist, awbum, and awtwowk fawwback expwessions uwu",
-    "priorityStrategy": "Media Pwiowity Stwategy uwu",
-    "priorityStrategyDesc": "Wesowution wogic between gaming and media sessions uwu",
-    "pausedOptions": "Options when active wayback is paused uwu",
-    "priorityHelpText": "When media is activewy pwaying, it takes pwecedence ovew the app you awe using and pwOjects the cuwwent twack ow video uwu.",
-    "switchHelpText": "PwOjects media onwy while you awe inside the media pwayew. Switching to a game ow enabwed app wets that app take ovew uwu.",
-    "showPausedHelp": "Keeps media pwesence active while paused and shows paused indicatows uwu.",
-    "fallbackHelp": "Uses the pweviouswy ow cuwwentwy detected app ow custom fawwback while media is paused uwu.",
-    "hidePausedHelp": "Hides pwesence while media is paused, incwuding any detected app uwu."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Choose an image fiwe uwu.",
+      "iconUploadFailed": "Icon upwoad faiwed uwu.",
+      "imageTooLarge": "Choose an image smawwew than 32 MB uwu.",
+      "imageUploadFailed": "Image upwoad faiwed uwu."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "Big Image uwu",
+      "bigText": "Big Text uwu",
+      "line1": "Detaiws uwu",
+      "smallImage": "Smaww Image uwu",
+      "smallText": "Smaww Text uwu",
+      "line2": "State uwu",
+      "title": "Titwe/Headew uwu"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "account wogged in uwu.",
+          "desc": "Connect youw Discowd account to pwOject Wich Pwesence uwu",
+          "title": "Discowd Wogin uwu"
+        },
+        "languageTitle": "Wanguage uwu",
+        "themeTitle": "Theme uwu",
+        "desc": "Customizashun & Account uwu",
+        "title": "Usew Contwow"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Exempt app to pwevent backgwound sewvice fwom sweeping uwu",
+          "title": "Battewy Optimizashun uwu",
+          "modal": {
+            "desc": "Modewn Andwoid systems put backgwound pwocesses to sweep aftew a few minutes. Exempting Kruzty Dynamics fwom battewy optimizashun ensuwes continuous, unintewwupted Discowd Wich Pwesence updates uwu.",
+            "subtitle": "Backgwound Sewvice Whitewist uwu",
+            "requestExemption": "Wequest Exemption uwu"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Speciaw App Access needed to detect media & wayback uwu",
+          "title": "Notification Access uwu",
+          "modal": {
+            "methodA": {
+              "title": "Method A: Speciaw App Access (Pixel, Motorowa, Infinix, Stock) uwu",
+              "step1": "Tap Open Andwoid Settings bewow uwu.",
+              "step2": "Go to Speciaw App Access > Notification Access uwu.",
+              "step3": "Find Kruzty Dynamics and switch on Awwow notification access uwu."
+            },
+            "methodB": {
+              "title": "Method B: App Info > Ewwipsis (Xiaomi/HypewOS, Samsung, Oppo) uwu",
+              "step1": "Open device Settings > Apps > Manage Apps / App Wist uwu.",
+              "step2": "Find and tap Kruzty Dynamics uwu.",
+              "step4": "Tap Awwow westwicted settings / Speciaw App Access > Gwant uwu.",
+              "step5": "Wetuwn and enabwe Notification Access uwu."
+            },
+            "desc": "Notification Access enabwes Kruzty Dynamics to captuwe wive media session wayback events (Song Titwe, Awtist, Awbum, and Wayback State) fwom Spotify, YouTube Music, and media playews uwu.",
+            "oemNotice": {
+              "desc": "Andwoid pwotects notification wistener access behind speciaw pewmission wayews. Depending on youw phone bwand, fowwow one of the methods bewow uwu.",
+              "title": "Notice fow OEM & Andwoid 13+ Devices uwu"
+            },
+            "subtitle": "Speciaw App Access Configuwashun uwu",
+            "openAndroidSettings": "Open Andwoid Settings uwu"
+          }
+        },
+        "desc": "Wequiwed fow detection uwu",
+        "title": "Pewmissions Contwow",
+        "foregroundNotification": {
+          "desc": "Andwoid 13+ pewmission fow pewsistent sewvice notification uwu",
+          "title": "Fowegwound Notification uwu",
+          "modal": {
+            "allowNotification": "Awwow Notification uwu",
+            "desc": "Wequiwed by Andwoid 13+ to dispway the ongoing fowegwound sewvice notification in youw status baw, confirming that the Discowd pwesence engine is wunning uwu.",
+            "subtitle": "Andwoid 13+ Notification Pewmission uwu",
+            "title": "Fowegwound Sewvice Notification uwu"
+          }
+        },
+        "usageAccess": {
+          "desc": "Wequiwed to detect cuwwent wunning fowegwound appwication ow game uwu",
+          "title": "Usage Access uwu",
+          "modal": {
+            "openUsageAccess": "Open Usage Access uwu",
+            "desc": "Usage Access is wequiwed to detect which app ow game you awe cuwwentwy wunning in the fowegwound, so Kruzty Dynamics can match it against youw configuwed Appwication Catawog uwu.",
+            "step1": "Tap Open Usage Access uwu.",
+            "step2": "Wocate Kruzty Dynamics uwu.",
+            "step3": "Switch on Pewmit usage access uwu.",
+            "subtitle": "Fowegwound App Detection uwu"
+          }
+        }
+      },
+      "privacyNotice": "This app does nyot cowwect ow twansmit usew data uwu.",
+      "subtitle": "Configuwe necessawy pewmissions and accounts to enabwe dynamic Discowd Wich Pwesence uwu.",
+      "title": "Fiwst Time Setup uwu"
+    },
+    "footer": {
+      "allSet": "Aww set! Weady to pwOject uwu",
+      "buttons": {
+        "continueForNow": "Continue fow Now uwu",
+        "finishSetup": "Finish Setup uwu",
+        "skipForNow": "Skip fow Now uwu"
+      },
+      "readyWhenYouAre": "Weady when you awe uwu"
+    }
+  },
+  "tags": {
+    "granted": "Gwantewed uwu",
+    "notificationCrucial": "Cwucial uwu",
+    "allGranted": "Aww Gwantewed uwu",
+    "cached": "cached uwu",
+    "check": "Check uwu",
+    "checkingUpdates": "Checking fow updates uwu",
+    "default": "Defauwt uwu",
+    "view": "View uwu"
   }
 }

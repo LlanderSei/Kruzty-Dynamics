@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "初期設定",
-    "subtitle": "Discord Rich Presenceを有効にするため、必要な権限とアカウントを設定します。",
-    "privacyNotice": "このアプリはユーザーデータを収集・送信しません。",
-    "permissionsSection": "権限コントロール",
-    "permissionsRequired": "検知に必要です",
-    "notificationTitle": "通知へのアクセス",
-    "notificationDesc": "メディアや再生中の楽曲を検知するために必要です",
-    "notificationCrucial": "必須",
-    "usageTitle": "使用状況へのアクセス",
-    "usageDesc": "実行中のゲームやアプリを検知するために必要です",
-    "batteryTitle": "バッテリー最適化の解除",
-    "batteryDesc": "バックグラウンドでサービスが停止するのを防ぎます",
-    "postNotificationTitle": "通知の許可",
-    "postNotificationDesc": "常駐フォアグラウンドサービス通知のためのAndroid 13+権限です",
-    "grant": "許可する",
-    "granted": "許可済み",
-    "userControlSection": "ユーザー設定",
-    "userControlDesc": "カスタマイズとアカウント",
-    "discordLoginTitle": "Discord ログイン",
-    "discordLoginDesc": "Rich Presenceを表示するためDiscordアカウントを接続します",
-    "accountsConnected": "件のアカウントがログイン中",
-    "themeTitle": "テーマ",
-    "languageTitle": "言語",
-    "finishSetup": "設定を完了",
-    "continueForNow": "今は続行する",
-    "skipForNow": "スキップする",
-    "allSet": "準備完了！Rich Presenceを開始できます",
-    "readyWhenYouAre": "いつでも開始可能"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "有効なアイデンティティ",
+        "stored": "保存済み"
+      },
+      "content": {
+        "subtitle": "トークンとアイデンティティの管理",
+        "title": "Discordログインポータル",
+        "privacyText": "Discordの認証では、Rich Presenceと併せてソーシャル機能へのアクセスが要求されます。Kruzty DynamicsはSDKを使用してアカウントを識別し、設定されたアクティビティを公開またはクリアします。フレンド・ブロック・招待・メッセージ・ボイス機能は使用しません。Androidでは、トークンは暗号化されてこのデバイスに保存されます。次をお読みください:",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "プライバシーポリシー"
+      },
+      "title": "Discordアカウントを接続"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "式では、== および != による比較がサポートされています。{{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} を使用すると、アクティビティの種類が「Playing」の場合は AppName を、それ以外の場合は AppPlatformType を選択できます。",
+        "title": "アプリケーショントークンリファレンス",
+        "desc": "フィールド式で使用できる動的変数"
+      },
+      "media": {
+        "title": "メディアトークンリファレンス",
+        "intro": "テキスト欄やボタンのラベル・URLにトークンを直接埋め込めます（例: {example}）。",
+        "desc": "メディア式およびボタンで使用可能な動的変数"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "未保存の変更を破棄しますか？",
+      "unsaved": "未保存の変更"
+    },
+    "logs": {
+      "copy": "ログのコピー",
+      "empty": "[INFO] まだログがありません。Discordにログインするか、何らかの操作を行ってログを生成してください。",
+      "export": "ログのエクスポート",
+      "subtitle": "リアルタイム診断出力",
+      "title": "アプリケーションログ"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "メインのアクセントカラー",
+        "resetAccent": "デフォルトのオレンジに戻す",
+        "tapCustomize": "タップしてカスタマイズ",
+        "themeMode": "テーマモード"
+      },
+      "globalDefaults": {
+        "activityStatus": "アクティビティステータス",
+        "activityType": "アクティビティタイプ",
+        "note": "これらのデフォルトは、アプリやプレゼンスアクティビティが独自のアクティビティタイプやステータスを指定しない場合に自動的に使用されます。"
+      },
+      "imgBb": {
+        "apiPrivacy": "このフィールドを空にすると、組み込みのデフォルトAPIキーにリセットされます。カスタムキーが平文で公開されることはありません。",
+        "getApiKey": "でキーを取得できます。",
+        "help": "独自のImgBB APIキーを設定して、カスタムアプリやメディアの画像をDiscord CDNにアップロードします。アクセス:",
+        "usingDefaultKey": "デフォルトのシステムキーを使用中"
+      },
+      "language": {
+        "availableLanguages": "利用可能な言語",
+        "title": "言語を選択",
+        "desc": "UIラベルと通知に表示する優先言語を選択してください。"
+      },
+      "checkPermissions": {
+        "batteryDesc": "Androidがプレゼンスサービスを終了させるのを防ぎます",
+        "foregroundDesc": "Discordプレゼンス継続中のステータスバー表示",
+        "notificationAccessDesc": "メディア検知のための特別アプリアクセス",
+        "desc": "アクティブなメディア通知とフォアグラウンドアプリを読み取るために必要な権限の状態:",
+        "usageAccessDesc": "実行中のフォアグラウンドゲーム・アプリを検知"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "{total}件のリンクされた画像URLがあり、そのうち{custom}件はカスタムアプリアイコンの上書きです。カスタムアイコンを保持したままキャッシュリンクを削除するか、すべてのリンクを削除してカスタム上書きも削除できます。上書きを削除した場合、アプリケーションカタログでそれらのアイコンを再アップロードしてください。",
+        "buttons": {
+          "clearCacheAll": "すべて削除、カスタムアイコンも含む",
+          "clearCacheKeep": "キャッシュを削除、カスタムアイコンは保持"
+        },
+        "clearedAll": "カスタムアプリアイコンを含む、すべてのリンクされた画像URLを削除しました。",
+        "clearedKeeping": "リンクされた画像URLのキャッシュを削除しました。カスタムアプリアイコンは保持されました。",
+        "linkedImageUrls": "リンクされた画像URL"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy コントリビューター",
+        "developerSection": "クルズティ・ダイナミクス",
+        "librariesSection": "このアプリで使用されているライブラリ",
+        "libraries": {
+          "lucide": "コミュニティ製のクリーンなベクターアイコン",
+          "react": "モダンなUIコンポーネントアーキテクチャ",
+          "sdk": "ネイティブAndroid Rich Presence統合",
+          "tailwind": "ユーティリティファーストのモダンでレスポンシブなスタイリング",
+          "tauri": "軽量なクロスプラットフォームネイティブランタイム",
+          "tokio": "非同期イベント駆動型ネットワークランタイム"
+        },
+        "maintainerRole": "現メンテナー兼開発者"
+      },
+      "discordApp": {
+        "developerPortal": "Discord 開発者ポータル",
+        "help": "独自のDiscord Application IDを設定します。取得元:",
+        "idPrivacy": "このフィールドを空にすると、デフォルトのKruzty DynamicsアプリケーションIDに戻ります。"
+      }
+    }
   },
-  "nav": {
-    "service": "サービス",
-    "accounts": "アカウント",
-    "settings": "設定・その他"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "アカウントを追加",
+            "switch": "切り替え",
+            "unuse": "使用解除"
+          },
+          "activePresence": "アクティブなプレゼンス",
+          "modal": {
+            "logout": {
+              "confirmLogout": "ログアウトを確認",
+              "title": "アカウントからログアウト",
+              "removePrefix": "アカウントを削除してもよろしいですか",
+              "removeSuffix": "。このデバイスに保存された認証情報が削除されます。"
+            }
+          },
+          "currentAccount": "現在ログイン中のアカウント",
+          "noActiveAccount": "選択されたアカウントがありません。以下のログイン済みアカウントから選択してください。",
+          "storedAccounts": "保存済みアカウント"
+        },
+        "noAccount": {
+          "desc": "Discordアカウントを接続して、ゲーム・アプリ・メディアのRich Presenceステータスを表示しましょう。",
+          "title": "まだアカウントがログインしていません。",
+          "login": "Discordにログイン"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Discordアカウントがありません",
+        "loggedInMany": "{n} 件のアカウントがログインしています。",
+        "loggedInOne": "{n}アカウントでログインしました。"
+      },
+      "title": "Discord アカウント"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics ダッシュボード",
+      "title": {
+        "welcome": "ようこそ！",
+        "welcomeNamed": "{name}さん、ようこそ！"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "必要な権限はすべて付与されています。続行するには、サービスを有効にしてください。",
+              "foregroundService": {
+                "desc": "Androidが実行中にサービス通知を表示できるようにします。",
+                "title": "フォアグラウンド・サービスの通知"
+              },
+              "notificationAccess": {
+                "desc": "メディアの再生およびそのメタデータを検出するために必要です。"
+              },
+              "subtitle": "サービスを開始する前に、Androidの以下の権限を付与してください。",
+              "title": "必要な権限",
+              "returnHint": "Androidの設定でアクセス許可を付与したら、ここに戻ってサービスを有効にしてください。",
+              "usageAccess": {
+                "desc": "現在どのアプリがフォアグラウンドにあるかを検出するために必要です。"
+              }
+            }
+          },
+          "startError": "Android プレゼンス サービスを起動できませんでした。",
+          "running": "サービスは稼働中です。",
+          "stopped": "サービスは開始されていません。",
+          "title": "Kruzty Dynamics サービス"
+        },
+        "application": {
+          "desc": "ローカルプレゼンス検知のためのアプリプロファイルを設定します",
+          "title": "アプリケーションのプレゼンス"
+        },
+        "buttons": {
+          "applicationCatalogue": "アプリケーションカタログ",
+          "presenceConfiguration": "プレゼンス設定",
+          "statusFieldConfig": "ステータスフィールド設定"
+        },
+        "media": {
+          "desc": "メディアの動作とステータステンプレートを設定します",
+          "title": "メディアプレゼンス"
+        },
+        "preview": {
+          "noPresence": "設定済みアプリまたはアクティブなメディアが検知されていません。",
+          "stoppedDescription": "サービスが停止しています。有効なアプリやアクティブなメディアを検出するには、サービスを有効にしてください。"
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "アプリ設定",
+        "checkPermissions": {
+          "title": "権限を確認",
+          "desc": "システムアクセス権限の付与状況を確認します"
+        },
+        "deleteCachedUrls": {
+          "title": "画像URLキャッシュを削除",
+          "desc": "キャッシュされたアップロード済み画像URLをクリアします"
+        },
+        "discordAppId": {
+          "title": "Discord アプリケーションID",
+          "desc": "独自のDiscord App IDを設定します。"
+        },
+        "globalDefaults": {
+          "title": "グローバルデフォルト",
+          "desc": "未設定アプリのアクティビティタイプとステータス"
+        },
+        "imgBbKey": {
+          "title": "ImgBB APIキー設定",
+          "desc": "独自のImgBB APIキーを設定します。"
+        },
+        "language": {
+          "title": "言語",
+          "desc": "現在の設定:"
+        },
+        "notificationProjection": {
+          "title": "通知ステータスの表示をカスタマイズする",
+          "desc": "アプリやメディアの通知のタイトルとサブタイトルをカスタマイズします。"
+        },
+        "themes": {
+          "title": "テーマと表示",
+          "desc": "テーマとアクセントカラーを設定します。"
+        },
+        "checkUpdates": {
+          "title": "最新バージョンを確認する",
+          "desc": "新しいバージョンがリリースされていないか確認してください。"
+        }
+      },
+      "subtitle": "アプリの設定と診断",
+      "title": "設定・その他",
+      "cardInfo": {
+        "architecture": "Rustコア（Tokio + Tauri v2）とReact 19、TailwindCSSフロントエンド、ネイティブAndroidプラグインブリッジで構築。オリジナルのKizzy's Experimental RPCをベースにしています。",
+        "credits": "クレジット",
+        "developedBy": "開発者:",
+        "latestRelease": "最新リリースへ",
+        "learnMore": "このアプリについて詳しく",
+        "repository": "GitHubリポジトリを見る",
+        "submitIssue": "問題を報告",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "serviceActive": "稼働中",
-    "serviceInactive": "停止中",
-    "serviceStarting": "開始中",
-    "serviceStopped": "停止中",
-    "welcome": "ようこそ！",
-    "welcomeNamed": "{name}さん、ようこそ！",
-    "dashboardSubtitle": "Kruzty Dynamics ダッシュボード",
-    "liveLogs": "ライブログ",
-    "viewLogs": "ログを表示",
-    "accountsLoggedInOne": "{n}アカウントでログインしました。",
-    "accountsLoggedInMany": "{n} 件のアカウントがログインしています。"
-  },
-  "accounts": {
-    "title": "Discord アカウント",
-    "subtitle": "トークンとアイデンティティの管理",
-    "loginPortal": "Discordポータルでログイン",
-    "loginWithToken": "トークンで追加",
-    "addAccount": "アカウントを追加",
-    "activeIdentity": "有効なアイデンティティ",
-    "stored": "保存済み",
+  "buttons": {
     "remove": "削除",
-    "noAccounts": "Discordアカウントがありません",
-    "noAccountsDesc": "ポータルまたはトークンを使用してアカウントを追加し、Rich Presenceを開始します。"
-  },
-  "settings": {
-    "title": "設定・その他",
-    "subtitle": "アプリの設定と診断",
-    "appPreferences": "アプリ設定",
-    "notificationProjection": "通知ステータスの表示をカスタマイズする",
-    "notificationProjectionDesc": "アプリやメディアの通知のタイトルとサブタイトルをカスタマイズします。",
-    "themes": "テーマと表示",
-    "themesDesc": "テーマとアクセントカラーを設定します。",
-    "language": "言語",
-    "languageDesc": "現在の設定:",
-    "globalDefaults": "グローバルデフォルト",
-    "globalDefaultsDesc": "未設定アプリのアクティビティタイプとステータス",
-    "imgbbKey": "ImgBB APIキー設定",
-    "imgbbKeyDesc": "独自のImgBB APIキーを設定します。",
-    "discordAppId": "Discord アプリケーションID",
-    "discordAppIdDesc": "独自のDiscord App IDを設定します。",
-    "checkPermissions": "権限を確認",
-    "checkPermissionsDesc": "システムアクセス権限の付与状況を確認します",
-    "deleteCache": "画像URLキャッシュを削除",
-    "deleteCacheDesc": "キャッシュされたアップロード済み画像URLをクリアします"
-  },
-  "service": {
-    "title": "Kruzty Dynamics サービス",
-    "running": "サービスは稼働中です。",
-    "stopped": "サービスは開始されていません。",
-    "applicationPresence": "アプリケーションのプレゼンス",
-    "appDescription": "ローカルプレゼンス検知のためのアプリプロファイルを設定します",
-    "applicationCatalogue": "アプリケーションカタログ",
-    "statusFieldConfig": "ステータスフィールド設定",
-    "presenceConfiguration": "プレゼンス設定",
-    "mediaPresence": "メディアプレゼンス",
-    "mediaDescription": "メディアの動作とステータステンプレートを設定します",
-    "noPresence": "設定済みアプリまたはアクティブなメディアが検知されていません。",
-    "stoppedDescription": "サービスが停止しています。有効なアプリやアクティブなメディアを検出するには、サービスを有効にしてください。"
-  },
-  "accountsPage": {
-    "emptyTitle": "まだアカウントがログインしていません。",
-    "emptyDescription": "Discordアカウントを接続して、ゲーム・アプリ・メディアのRich Presenceステータスを表示しましょう。",
-    "login": "Discordにログイン",
-    "currentAccount": "現在ログイン中のアカウント",
-    "activePresence": "アクティブなプレゼンス",
-    "storedAccounts": "保存済みアカウント",
-    "switch": "切り替え",
-    "unuse": "使用解除",
-    "remove": "削除",
-    "cancel": "キャンセル",
-    "deleteTitle": "Discordアカウントを削除しますか？",
-    "loginTitle": "Discordログインポータル",
-    "noActiveAccount": "選択されたアカウントがありません。以下のログイン済みアカウントから選択してください。",
-    "addAccountTitle": "Discordアカウントを接続",
-    "portal": "Discordログインポータル",
-    "signInPortal": "Discordのアプリ内機能を使って安全にログインする",
     "openPortal": "ポータルを開く",
-    "privacyText": "Discordの認証では、Rich Presenceと併せてソーシャル機能へのアクセスが要求されます。Kruzty DynamicsはSDKを使用してアカウントを識別し、設定されたアクティビティを公開またはクリアします。フレンド・ブロック・招待・メッセージ・ボイス機能は使用しません。Androidでは、トークンは暗号化されてこのデバイスに保存されます。次をお読みください:",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "アカウントからログアウト",
-    "removePrefix": "アカウントを削除してもよろしいですか",
-    "removeSuffix": "。このデバイスに保存された認証情報が削除されます。",
-    "confirmLogout": "ログアウトを確認",
-    "addAccount": "Discordアカウントを追加",
-    "noSelection": "選択されたアカウントがありません。以下のログイン済みアカウントから選択してください。",
-    "addMoreAccounts": "下のDiscordボタンをクリックすると、さらにアカウントを追加できます。"
-  },
-  "settingsUi": {
-    "chooseLanguage": "言語を選択",
-    "languageDescription": "UIラベルと通知に表示する優先言語を選択してください。",
-    "availableLanguages": "利用可能な言語",
-    "close": "閉じる",
-    "linkedImageUrls": "リンクされた画像URL",
-    "clearCacheKeep": "キャッシュを削除、カスタムアイコンは保持",
-    "clearCacheAll": "すべて削除、カスタムアイコンも含む",
-    "credits": "クレジット",
-    "themeMode": "テーマモード",
-    "accentColor": "メインのアクセントカラー",
-    "resetAccent": "デフォルトのオレンジに戻す",
-    "learnMore": "このアプリについて詳しく",
-    "privacyPolicy": "プライバシーポリシー",
-    "repository": "GitHubリポジトリを見る",
-    "latestRelease": "最新リリースへ",
-    "submitIssue": "問題を報告",
-    "developerSection": "クルズティ・ダイナミクス",
-    "librariesSection": "このアプリで使用されているライブラリ",
-    "contributorsSection": "Kizzy コントリビューター",
-    "maintainerRole": "現メンテナー兼開発者",
-    "view": "表示",
-    "done": "完了",
-    "developedBy": "開発者:",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Rustコア（Tokio + Tauri v2）とReact 19、TailwindCSSフロントエンド、ネイティブAndroidプラグインブリッジで構築。オリジナルのKizzy's Experimental RPCをベースにしています。",
-    "cached": "キャッシュ済み",
-    "tapCustomize": "タップしてカスタマイズ",
-    "defaultNote": "これらのデフォルトは、アプリやプレゼンスアクティビティが独自のアクティビティタイプやステータスを指定しない場合に自動的に使用されます。",
-    "activityType": "アクティビティタイプ",
-    "activityStatus": "アクティビティステータス",
-    "imgbbHelp": "独自のImgBB APIキーを設定して、カスタムアプリやメディアの画像をDiscord CDNにアップロードします。アクセス:",
-    "getApiKey": "でキーを取得できます。",
-    "apiPrivacy": "このフィールドを空にすると、組み込みのデフォルトAPIキーにリセットされます。カスタムキーが平文で公開されることはありません。",
-    "saveKey": "キーを保存",
-    "discordIdHelp": "独自のDiscord Application IDを設定します。取得元:",
-    "developerPortal": "Discord 開発者ポータル",
-    "idDefault": "デフォルト",
-    "idPrivacy": "このフィールドを空にすると、デフォルトのKruzty DynamicsアプリケーションIDに戻ります。",
-    "saveId": "IDを保存",
-    "permissionsDescription": "アクティブなメディア通知とフォアグラウンドアプリを読み取るために必要な権限の状態:",
-    "notificationAccessDesc": "メディア検知のための特別アプリアクセス",
-    "usageAccessDesc": "実行中のフォアグラウンドゲーム・アプリを検知",
-    "batteryDesc": "Androidがプレゼンスサービスを終了させるのを防ぎます",
-    "foregroundDesc": "Discordプレゼンス継続中のステータスバー表示",
-    "saveIdPlaceholder": "1572590527562391713 (デフォルト)",
-    "resetDefault": "デフォルトに戻す",
-    "cancel": "キャンセル",
-    "cacheWarning": "{total}件のリンクされた画像URLがあり、そのうち{custom}件はカスタムアプリアイコンの上書きです。カスタムアイコンを保持したままキャッシュリンクを削除するか、すべてのリンクを削除してカスタム上書きも削除できます。上書きを削除した場合、アプリケーションカタログでそれらのアイコンを再アップロードしてください。",
-    "allGranted": "すべて許可済み",
-    "clearedAll": "カスタムアプリアイコンを含む、すべてのリンクされた画像URLを削除しました。",
-    "clearedKeeping": "リンクされた画像URLのキャッシュを削除しました。カスタムアプリアイコンは保持されました。",
-    "usingDefaultKey": "デフォルトのシステムキーを使用中",
-    "customKeySet": "カスタムキー設定済み",
-    "light": "ライト",
-    "dark": "ダーク",
-    "amoled": "AMOLED",
-    "libraryTauri": "軽量なクロスプラットフォームネイティブランタイム",
-    "libraryTokio": "非同期イベント駆動型ネットワークランタイム",
-    "librarySdk": "ネイティブAndroid Rich Presence統合",
-    "libraryReact": "モダンなUIコンポーネントアーキテクチャ",
-    "libraryTailwind": "ユーティリティファーストのモダンでレスポンシブなスタイリング",
-    "libraryLucide": "コミュニティ製のクリーンなベクターアイコン",
-    "checkForUpdates": "最新バージョンを確認する",
-    "checkForUpdatesDesc": "新しいバージョンがリリースされていないか確認してください。",
-    "check": "確認",
-    "checkingUpdates": "アップデートの確認"
-  },
-  "configFields": {
-    "appTitle": "アプリケーションステータスフィールド設定",
-    "mediaTitle": "メディアステータスフィールド設定",
-    "back": "戻る",
-    "reset": "デフォルトに戻す",
-    "help": "利用可能なトークンのヘルプ",
-    "title": "タイトル",
-    "line1": "1行目 (詳細)",
-    "line2": "2行目 (状態)",
-    "smallText": "小さいテキスト",
-    "smallImage": "小さい画像",
-    "bigText": "大きいテキスト",
-    "bigImage": "大きい画像",
-    "header": "ヘッダー (再生中 / 視聴中)",
-    "mediaTitleField": "メディアタイトル (アクティビティ詳細)",
-    "artist": "1行目 (アクティビティ状態 / アーティスト)",
-    "album": "2行目 (アルバム / 画像テキスト)",
-    "buttons": "カスタムボタン",
-    "button1": "ボタン1",
-    "button2": "ボタン2",
-    "save": "フィールドを保存",
-    "appReference": "アプリケーショントークンリファレンス",
-    "mediaReference": "メディアトークンリファレンス",
-    "tokenDescription": "フィールド式で使用できる動的変数",
-    "mediaTokenDescription": "ウェブまたは動画プレーヤーの動画・メディア説明。",
-    "discard": "未保存の変更を破棄しますか？",
-    "unsaved": "未保存の変更",
-    "helpDone": "了解",
-    "appTokenName": "アクティビティに表示される投影アプリ名。",
-    "appHeader": "ヘッダー",
-    "titleHeader": "アクティビティのタイトル／見出し",
-    "detailsField": "アクティビティの詳細",
-    "stateField": "アクティビティの状態",
-    "notificationConfigSubtitle": "フォアグラウンドのサービス通知に表示されるタイトルとサブタイトルをカスタマイズします。",
-    "notificationAppSection": "アプリのステータス通知",
-    "notificationMediaSection": "メディア再生通知",
-    "notificationSubtitleLabel": "通知のサブタイトル",
-    "notificationHelpIntro": "getFieldCfgStr(\"AppTitle\")、getFieldCfgStr(\"AppDetails\")、getFieldCfgStr(\"AppState\")、 getFieldCfgStr(\"AppBigText\")、getFieldCfgStr(\"MediaDetails\")、getFieldCfgStr(\"MediaState\")、および getFieldCfgStr(\"MediaBigText\") を使用して、レンダリングされたフィールド値を挿入します。joinNonBlank(field1, field2) を使用して、空でない値を箇条書き記号で連結します。アプリ通知テンプレートでは、AppActivityType == \"Playing\" という条件式がサポートされています。式では、== および != による比較もサポートされています。",
-    "notificationDiscardMessage": "通知の投影設定に変更が保存されていません。このまま終了すると、変更内容は破棄されます。",
-    "appTokenActivityType": "このアプリプロファイルに対して、「再生中」、「聴取中」、「視聴中」、「対戦中」などの「リッチプレゼンス」アクティビティタイプが選択されています。",
-    "appTokenPlatformType": "このアプリプロファイルのプラットフォームトークン（Android、PC、Xboxなど）。",
-    "appExpressionOperators": "式では、== および != による比較がサポートされています。{{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} を使用すると、アクティビティの種類が「Playing」の場合は AppName を、それ以外の場合は AppPlatformType を選択できます。",
-    "appTokenDetails": "このアプリのプロフィールに保存されたカスタム詳細テキスト。無効または空欄の場合は空になります。",
-    "appTokenState": "このアプリのプロフィールに保存されたカスタム状態テキスト。無効または空欄の場合は空になります。",
-    "appTokenSmallText": "このアプリのプロフィールに保存された小さい画像のカスタムラベル。無効または空欄の場合は空になります。",
-    "appTokenSmallUrl": "このアプリのプロフィールに保存された小さい画像のカスタムURL。無効または空欄の場合は空になります。",
-    "appTokenImageUrl": "アプリケーションアイコンのキャッシュ済みImgBBリモートURL。",
-    "appTokenPackageName": "Androidのパッケージ識別子（例: com.mojang.minecraftpe）。",
-    "mediaTokenIntro": "テキスト欄やボタンのラベル・URLにトークンを直接埋め込めます（例: {example}）。",
-    "mediaTokenAppName": "DiscordのListening toまたはWatchingヘッダーに表示されるプレーヤーアプリ名。",
-    "mediaTokenTitle": "通知メタデータにある再生中の曲または動画のタイトル。",
-    "mediaTokenArtist": "再生中の音声または動画のアーティスト・制作者。",
-    "mediaTokenAlbum": "アルバム名またはプレイリスト名。",
-    "mediaTokenPlaybackState": "現在の再生状態（Playing、Paused、Stopped）。",
-    "mediaTokenImageUrl": "アルバムアートまたはサムネイルのキャッシュ済みImgBB URL。",
-    "mediaTokenPlaybackImageUrl": "現在の再生インジケーター用アセット画像URL。",
-    "mediaTokenFallbackImageUrl": "アートワークがない場合に使う代替アプリアイコン。",
-    "appConfigSubtitle": "アプリ検出用の式をカスタマイズします。",
-    "mediaConfigSubtitle": "メディア再生用の式をカスタマイズします。",
-    "mediaHeaderDescription": "Discordのメディアヘッダーに表示するアプリ名です。アクティビティの種類によってListening toまたはWatchingが選択されます。",
-    "mediaTitleDescription": "メディアのタイトル/詳細に対応します。プレーヤー名は上のヘッダーで別途設定してください。",
-    "mediaAlbumDescription": "Discordのメディアカードでアーティストの下に表示されます。",
-    "mediaButtonDescription": "トークン式を使ったインタラクティブなプレゼンスボタンを最大2つ追加できます。",
-    "mediaButtonLabel": "ラベル",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "例: ",
-    "mediaButtonListen": "で聴く",
-    "appDiscardMessage": "???????????????????????????????????????????????????????????",
-    "mediaDiscardMessage": "???????????????????????????????????????????????????????",
-    "mediaTokenSubtitle": "メディア式およびボタンで使用可能な動的変数"
-  },
-  "catalogue": {
-    "title": "アプリケーションカタログ",
-    "back": "戻る",
+    "understood": "了解",
+    "apply": "適用",
     "batch": "一括操作",
-    "search": "アプリを検索...",
-    "filter": "アプリを絞り込む",
-    "clearFilters": "フィルターをクリア",
-    "enabledOnly": "有効のみ",
-    "allActivityTypes": "すべてのアクティビティタイプ",
-    "allActivityStatuses": "すべてのアクティビティステータス",
+    "cancel": "キャンセル",
+    "close": "閉じる",
+    "confirm": "確認して適用",
+    "discardChanges": "変更を破棄",
+    "keepEditing": "編集を続ける",
+    "stageChanges": "変更をステージ",
+    "uploadImage": "画像をImgBBにアップロード",
+    "helpDone": "了解",
+    "save": {
+      "fields": "フィールドを保存",
+      "id": "IDを保存",
+      "key": "キーを保存"
+    },
+    "logs": {
+      "live": "ライブログ",
+      "view": "ログを表示"
+    },
+    "grant": "許可する",
+    "done": "完了",
+    "resetDefault": "デフォルトに戻す"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "アクティビティ名",
+          "bigImage": "大きい画像",
+          "bigText": "大きいテキスト",
+          "details": "詳細",
+          "imageUrl": "画像URL",
+          "smallImage": "小さい画像",
+          "smallText": "小さいテキスト",
+          "state": "状態",
+          "uploadImage": "画像をアップロード",
+          "uploadingImage": "画像をアップロード中..."
+        },
+        "catalogue": {
+          "title": "アプリケーションカタログ",
+          "desc": "個々のアプリ投影を表示・絞り込み・カスタマイズ"
+        },
+        "configurationDetails": "設定の詳細",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "カスタマイズされたフォールバックプレゼンスを即座に投影します。",
+              "drop": "有効なアプリケーションに戻るまで、Discordアクティビティをクリアします。",
+              "freeze": "有効なアプリが再び検知されるまで、最後に投影されたプレゼンスを一時停止して保持します。"
+            },
+            "title": "アプリ外ポリシー"
+          },
+          "fallbackPresence": "カスタムフォールバックプレゼンス",
+          "desc": "有効なアプリから離れたり切り替えたときの動作",
+          "title": "検知アプリ外のポリシー",
+          "help": "ポリシーのヘルプ"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "プレゼンスタイマーを特定の固定開始日時にロックします。",
+              "persistent": "このサービスセッション中、アプリと一時停止中のメディアで1つの共有ランタイムタイムスタンプを使用します。",
+              "reset": "アプリが起動または再フォーカスされたときに、タイマーを00:00で再開します。"
+            },
+            "title": "タイムスタンプ戦略"
+          },
+          "fixedStart": "固定開始タイムスタンプ",
+          "desc": "アプリセッション間でアクティビティタイマーをどのように解決するか",
+          "help": "タイムスタンプのヘルプ",
+          "title": "タイムスタンプ戦略"
+        },
+        "statusFieldConfig": {
+          "title": "ステータスフィールド設定",
+          "desc": "タイトル・詳細・状態・アートワーク式をカスタマイズ"
+        },
+        "subtitle": "アプリ外ポリシーとタイムスタンプの動作",
+        "title": "アプリケーションプレゼンス設定"
+      },
+      "catalogue": {
+        "androidOnly": "インストール済みアプリの検出はAndroidアプリで利用可能です。",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "一括変更を適用しますか？",
+              "desc": "ステージされた設定変更を完全に適用しようとしています:",
+              "subtitle": "確認",
+              "selectedApps": "件の選択されたアプリケーション。"
+            },
+            "title": "一括設定",
+            "subtitle": "選択したすべてのアプリケーションに変更を適用",
+            "discard": {
+              "title": "ステージされた変更を破棄しますか？",
+              "desc": "未コミットの一括設定があります。今バッチモードを離れると、ステージされた変更はすべて破棄されます。",
+              "subtitle": "未保存の一括変更"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "アイコン画像を選択",
+              "resetIcon": "元のアプリアイコンに戻す",
+              "resetLabel": "元のラベルに戻す"
+            },
+            "customBtnDesc": "最大2つのインタラクティブなプレゼンスボタンを追加",
+            "title": "カスタマイズ",
+            "original": "元:",
+            "subtitle": "プレゼンスプロファイルと投影エイリアス",
+            "projectedName": "投影名",
+            "switchToggle": {
+              "buttons": "カスタムボタンを切り替え",
+              "details": "カスタム詳細と状態を切り替え",
+              "small": "カスタム小テキストと画像を切り替え"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "フィルターをクリア",
+          "filter": "アプリを絞り込む"
+        },
+        "loadAppsFailed": "インストール済みアプリを読み込めませんでした。",
+        "loading": "読み込み中...",
+        "search": "アプリを検索...",
+        "subtitle": "{apps} 件のアプリ | {enabled} 件有効",
+        "title": "アプリケーションカタログ",
+        "uploadProgress": "アプリアイコンをImgBBにアップロード中"
+      },
+      "statusFieldConfig": {
+        "subtitle": "アプリ検出用の式をカスタマイズします。",
+        "discardMsg": "???????????????????????????????????????????????????????????",
+        "title": "アプリケーションステータスフィールド設定"
+      }
+    },
+    "buttons": {
+      "back": "戻る",
+      "help": "利用可能なトークンのヘルプ",
+      "reset": "デフォルトに戻す"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "トークン式を使ったインタラクティブなプレゼンスボタンを最大2つ追加できます。",
+        "subtitle": "メディア再生用の式をカスタマイズします。",
+        "discardMsg": "???????????????????????????????????????????????????????",
+        "title": "メディアステータスフィールド設定"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "アプリのタイムスタンプ",
+          "title": "残り時間",
+          "desc": "通常の開始/現在-終了の残り時間を表示"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "メディアが一時停止中は、以前または現在検知されたアプリ、あるいはカスタムフォールバックを使用します。",
+              "hidePaused": "メディアが一時停止中は、検知されたアプリを含めプレゼンスを非表示にします。",
+              "showPaused": "一時停止中もメディアプレゼンスをアクティブに保ち、一時停止インジケーターを表示します。"
+            },
+            "desc": "アクティブな再生が一時停止したときのオプション"
+          },
+          "desc": "アクティブな再生が一時停止したときのプレゼンス動作",
+          "help": "一時停止解決のヘルプ",
+          "title": "一時停止メディアの解決"
+        },
+        "mediaPriority": {
+          "title": "メディア優先度",
+          "desc": "メディアがゲーム/アプリセッションを上書きするかどうかを制御",
+          "help": "優先度のヘルプ",
+          "modal": {
+            "details": {
+              "priorityPlaying": "メディアがアクティブに再生されている場合、使用中のアプリより優先され、現在のトラックや動画を投影します。",
+              "switchesBetween": "メディアプレーヤー内にいるときのみメディアを投影します。ゲームや有効なアプリに切り替えると、そのアプリが引き継ぎます。"
+            },
+            "title": "メディア優先戦略",
+            "desc": "ゲームとメディアセッション間の解決ロジック"
+          }
+        },
+        "mediaScope": {
+          "title": "メディア検知スコープ",
+          "desc": "メディアRich Presenceをトリガーするアプリを絞り込む"
+        },
+        "statusFieldConfig": {
+          "title": "メディアステータスフィールド設定",
+          "desc": "タイトル・アーティスト・アルバム・アートワークのフォールバック式をカスタマイズ"
+        },
+        "subtitle": "解決優先度、タイムスタンプ、再生状態",
+        "title": "メディアプレゼンス設定",
+        "typeResolution": {
+          "title": "メディアタイプの解決",
+          "desc": "再生中と視聴中のアクティビティをどのように分類するか"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "アプリのステータス通知",
+        "media": "メディア再生通知"
+      },
+      "subtitle": "フォアグラウンドのサービス通知に表示されるタイトルとサブタイトルをカスタマイズします。",
+      "discard": "通知の投影設定に変更が保存されていません。このまま終了すると、変更内容は破棄されます。",
+      "helpIntro": "getFieldCfgStr(\"AppTitle\")、getFieldCfgStr(\"AppDetails\")、getFieldCfgStr(\"AppState\")、 getFieldCfgStr(\"AppBigText\")、getFieldCfgStr(\"MediaDetails\")、getFieldCfgStr(\"MediaState\")、および getFieldCfgStr(\"MediaBigText\") を使用して、レンダリングされたフィールド値を挿入します。joinNonBlank(field1, field2) を使用して、空でない値を箇条書き記号で連結します。アプリ通知テンプレートでは、AppActivityType == \"Playing\" という条件式がサポートされています。式では、== および != による比較もサポートされています。"
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "カスタムフォールバック",
+      "drop": "ドロップ (プレゼンスをクリア)",
+      "freeze": "フリーズ (デフォルト)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "カスタム固定時刻",
+      "persistent": "永続 (デフォルト)",
+      "resetOnLaunch": "起動時にリセット"
+    },
+    "activityStatus": {
+      "all": "すべてのアクティビティステータス",
+      "dnd": "取り込み中",
+      "idle": "アイドル",
+      "invisible": "オフライン表示",
+      "offline": "オフライン",
+      "online": "オンライン",
+      "streaming": "配信中"
+    },
+    "activityType": {
+      "all": "すべてのアクティビティタイプ",
+      "competing": "競技中",
+      "listening": "再生中",
+      "playing": "プレイ中",
+      "watching": "視聴中"
+    },
     "allPlatforms": "すべてのプラットフォーム",
+    "disableAll": "すべて無効化",
+    "enableAll": "すべて有効化",
+    "enabledOnly": "有効のみ",
     "globalDefault": "グローバルデフォルト",
-    "playing": "プレイ中",
-    "streaming": "配信中",
-    "listening": "再生中",
-    "watching": "視聴中",
-    "competing": "競技中",
-    "online": "オンライン",
-    "idle": "アイドル",
-    "dnd": "取り込み中",
-    "offline": "オフライン",
-    "invisible": "オフライン表示",
-    "customize": "カスタマイズ",
-    "profileSubtitle": "プレゼンスプロファイルと投影エイリアス",
-    "activityType": "アクティビティタイプ",
+    "keepCurrent": "現在のまま",
+    "mediaScope": {
+      "allSessions": "すべてのメディアセッション (デフォルト)",
+      "enabledAppsOnly": "有効なアプリのみ"
+    },
+    "typeResolution": {
+      "autoAdaptive": "自動適応 (デフォルト)",
+      "profileOverride": "アプリプロファイルの上書き"
+    },
+    "pausedResolution": {
+      "fallbackApp": "検知アプリにフォールバック",
+      "hidePaused": "一時停止状態を非表示",
+      "showPaused": "一時停止状態を表示 (デフォルト)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "再生中メディアを優先 (デフォルト)",
+      "switchesBetween": "切り替え"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "ダーク",
+      "light": "ライト"
+    }
+  },
+  "labels": {
     "activityStatus": "アクティビティステータス",
-    "platformType": "プラットフォームタイプ",
+    "activityType": "アクティビティタイプ",
+    "customButtons": "カスタムボタン",
     "customDetailsState": "カスタム詳細と状態",
     "customSmallImage": "カスタム小テキストと画像",
-    "customButtons": "カスタムボタン",
-    "bulkConfigure": "一括設定",
-    "cancel": "キャンセル",
-    "stageChanges": "変更をステージ",
-    "apply": "適用",
-    "confirm": "確認して適用",
-    "keepCurrent": "現在のまま",
-    "enableAll": "すべて有効化",
-    "disableAll": "すべて無効化",
-    "discardBatch": "ステージされた変更を破棄しますか？",
-    "chooseIcon": "アイコン画像を選択",
-    "resetIcon": "元のアプリアイコンに戻す",
-    "resetLabel": "元のラベルに戻す",
-    "details": "詳細",
-    "state": "状態",
-    "smallText": "小さいテキスト",
-    "smallImageUrl": "小さい画像のURL",
-    "uploadImage": "画像をImgBBにアップロード",
-    "buttonLabel": "ラベル (例: ゲームに参加)",
-    "presenceToggle": "プレゼンスの切り替え",
-    "bulkSubtitle": "選択したすべてのアプリケーションに変更を適用",
-    "applyBatchTitle": "一括変更を適用しますか？",
-    "confirmation": "確認",
-    "unsavedBatch": "未保存の一括変更",
-    "confirmApply": "確認して適用",
     "filterOptions": "フィルターオプション",
-    "close": "閉じる",
-    "loading": "読み込み中...",
-    "original": "元:",
-    "projectedName": "投影名",
-    "customButtonDesc": "最大2つのインタラクティブなプレゼンスボタンを追加",
-    "toggleDetails": "カスタム詳細と状態を切り替え",
-    "toggleSmall": "カスタム小テキストと画像を切り替え",
-    "toggleButtons": "カスタムボタンを切り替え",
-    "uploadProgress": "アプリアイコンをImgBBにアップロード中",
-    "keepEditing": "編集を続ける",
-    "discardChanges": "変更を破棄",
-    "discardMessage": "未コミットの一括設定があります。今バッチモードを離れると、ステージされた変更はすべて破棄されます。",
-    "applyMessage": "ステージされた設定変更を完全に適用しようとしています:",
-    "selectedApps": "件の選択されたアプリケーション。",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} 件のアプリ | {enabled} 件有効",
-    "chooseImage": "画像ファイルを選択してください。",
-    "imageTooLarge": "32 MB未満の画像を選択してください。",
-    "imageUploadFailed": "画像のアップロードに失敗しました。",
-    "iconUploadFailed": "アイコンのアップロードに失敗しました。",
-    "androidOnly": "インストール済みアプリの検出はAndroidアプリで利用可能です。",
-    "loadAppsFailed": "インストール済みアプリを読み込めませんでした。",
-    "appUnit": "アプリ",
-    "appsUnit": "アプリ"
+    "platformType": "プラットフォームタイプ",
+    "presenceToggle": "プレゼンスの切り替え",
+    "button1": "ボタン1",
+    "button2": "ボタン2",
+    "label": "ラベル",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "アプリケーションプレゼンス設定",
-    "subtitle": "アプリ外ポリシーとタイムスタンプの動作",
-    "catalogue": "アプリケーションカタログ",
-    "catalogueDesc": "個々のアプリ投影を表示・絞り込み・カスタマイズ",
-    "outsidePolicies": "検知アプリ外のポリシー",
-    "outsideDescription": "有効なアプリから離れたり切り替えたときの動作",
-    "policyHelp": "ポリシーのヘルプ",
-    "freeze": "フリーズ (デフォルト)",
-    "customFallback": "カスタムフォールバック",
-    "drop": "ドロップ (プレゼンスをクリア)",
-    "fallbackPresence": "カスタムフォールバックプレゼンス",
-    "activityName": "アクティビティ名",
+  "pluralization": {
+    "app": {
+      "plural": "アプリ",
+      "singular": "アプリ"
+    }
+  },
+  "placeholders": {
+    "labelExample": "ラベル (例: ゲームに参加)",
     "details": "詳細",
-    "state": "状態",
+    "smallImageUrl": "小さい画像のURL",
     "smallText": "小さいテキスト",
-    "bigText": "大きいテキスト",
-    "smallImage": "小さい画像",
-    "bigImage": "大きい画像",
-    "imageUrl": "画像URL",
-    "uploadingImage": "画像をアップロード中...",
-    "timestampStrategy": "タイムスタンプ戦略",
-    "timestampDescription": "アプリセッション間でアクティビティタイマーをどのように解決するか",
-    "timestampHelp": "タイムスタンプのヘルプ",
-    "persistent": "永続 (デフォルト)",
-    "resetOnLaunch": "起動時にリセット",
-    "customFixedTime": "カスタム固定時刻",
-    "fixedStart": "固定開始タイムスタンプ",
-    "statusFieldConfig": "ステータスフィールド設定",
-    "statusFieldDescription": "タイトル・詳細・状態・アートワーク式をカスタマイズ",
-    "configurationDetails": "設定の詳細",
-    "outsideHelpTitle": "アプリ外ポリシー",
-    "timestampHelpTitle": "タイムスタンプ戦略",
-    "understood": "了解",
-    "freezeHelp": "有効なアプリが再び検知されるまで、最後に投影されたプレゼンスを一時停止して保持します。",
-    "customHelp": "カスタマイズされたフォールバックプレゼンスを即座に投影します。",
-    "dropHelp": "有効なアプリケーションに戻るまで、Discordアクティビティをクリアします。",
-    "persistentHelp": "このサービスセッション中、アプリと一時停止中のメディアで1つの共有ランタイムタイムスタンプを使用します。",
-    "resetHelp": "アプリが起動または再フォーカスされたときに、タイマーを00:00で再開します。",
-    "fixedHelp": "プレゼンスタイマーを特定の固定開始日時にロックします。",
-    "uploadImage": "画像をアップロード"
+    "state": "状態",
+    "urlExample": "URL (https://...)",
+    "example": "例: ",
+    "listenOn": "で聴く"
   },
-  "mediaPresence": {
-    "title": "メディアプレゼンス設定",
-    "subtitle": "解決優先度、タイムスタンプ、再生状態",
-    "priority": "メディア優先度",
-    "priorityDesc": "メディアがゲーム/アプリセッションを上書きするかどうかを制御",
-    "priorityHelp": "優先度のヘルプ",
-    "priorityPlaying": "再生中メディアを優先 (デフォルト)",
-    "switchesBetween": "切り替え",
-    "scope": "メディア検知スコープ",
-    "scopeDesc": "メディアRich Presenceをトリガーするアプリを絞り込む",
-    "allSessions": "すべてのメディアセッション (デフォルト)",
-    "enabledAppsOnly": "有効なアプリのみ",
-    "typeResolution": "メディアタイプの解決",
-    "typeResolutionDesc": "再生中と視聴中のアクティビティをどのように分類するか",
-    "autoAdaptive": "自動適応 (デフォルト)",
-    "profileOverride": "アプリプロファイルの上書き",
-    "timeRemaining": "残り時間",
-    "timeRemainingDesc": "通常の開始/現在-終了の残り時間を表示",
-    "appTimestamp": "アプリのタイムスタンプ",
-    "pausedResolution": "一時停止メディアの解決",
-    "pausedDesc": "アクティブな再生が一時停止したときのプレゼンス動作",
-    "pausedHelp": "一時停止解決のヘルプ",
-    "showPaused": "一時停止状態を表示 (デフォルト)",
-    "fallbackApp": "検知アプリにフォールバック",
-    "hidePaused": "一時停止状態を非表示",
-    "statusFields": "メディアステータスフィールド設定",
-    "statusFieldsDesc": "タイトル・アーティスト・アルバム・アートワークのフォールバック式をカスタマイズ",
-    "priorityStrategy": "メディア優先戦略",
-    "priorityStrategyDesc": "ゲームとメディアセッション間の解決ロジック",
-    "pausedOptions": "アクティブな再生が一時停止したときのオプション",
-    "priorityHelpText": "メディアがアクティブに再生されている場合、使用中のアプリより優先され、現在のトラックや動画を投影します。",
-    "switchHelpText": "メディアプレーヤー内にいるときのみメディアを投影します。ゲームや有効なアプリに切り替えると、そのアプリが引き継ぎます。",
-    "showPausedHelp": "一時停止中もメディアプレゼンスをアクティブに保ち、一時停止インジケーターを表示します。",
-    "fallbackHelp": "メディアが一時停止中は、以前または現在検知されたアプリ、あるいはカスタムフォールバックを使用します。",
-    "hidePausedHelp": "メディアが一時停止中は、検知されたアプリを含めプレゼンスを非表示にします。"
+  "service": {
+    "imgbb": {
+      "chooseImage": "画像ファイルを選択してください。",
+      "iconUploadFailed": "アイコンのアップロードに失敗しました。",
+      "imageTooLarge": "32 MB未満の画像を選択してください。",
+      "imageUploadFailed": "画像のアップロードに失敗しました。"
+    }
   },
-  "permissions": {
-    "notificationSubtitle": "アプリへの特別アクセス設定",
-    "openAndroidSettings": "Androidの設定を開く",
-    "oemNotice": "OEMおよびAndroid 13以降の端末に関するお知らせ",
-    "notificationExplanation": "Androidでは、通知リスナーへのアクセスは特別な権限レイヤーによって保護されています。お使いのスマートフォンのメーカーに応じて、以下のいずれかの方法に従ってください。",
-    "methodA": "方法A：専用アプリによるアクセス（Pixel、Motorola、Infinix、純正）",
-    "methodAStep1": "下の「Androidの設定を開く」をタップしてください。",
-    "methodAStep2": "「アプリへの特別なアクセス」＞「通知へのアクセス」に移動します。",
-    "methodAStep3": "「Kruzty Dynamics」を見つけて、「通知へのアクセスを許可」をオンにしてください。",
-    "methodB": "方法 B：「アプリ情報」＞「省略記号」（Xiaomi/HyperOS、Samsung、Oppo）",
-    "methodBStep1": "端末の「設定」＞「アプリ」＞「アプリの管理」または「アプリ一覧」を開きます。",
-    "methodBStep2": "「Kruzty Dynamics」を見つけてタップしてください。",
-    "methodBStep3": "右上の3つの点をタップしてください。",
-    "methodBStep4": "「制限付き設定／アプリの特別アクセス」をタップし、「許可」を選択します。",
-    "methodBStep5": "「通知へのアクセス」に戻り、有効にしてください。",
-    "notificationAccessDescription": "「Notification Access」により、Kruzty DynamicsはSpotify、YouTube Music、およびメディアプレーヤーから、メディアセッションの再生イベント（曲名、アーティスト、アルバム、再生状態）をリアルタイムで取得することができます。",
-    "usageDescription": "利用方法：現在フォアグラウンドで実行中のアプリやゲームを検出するにはアクセス権が必要です。これにより、Kruzty Dynamics はそれをユーザーが設定したアプリケーションカタログと照合することができます。",
-    "usageStep1": "「使用状況へのアクセスを開く」をタップします。",
-    "usageStep2": "「Kruzty Dynamics」を検索してください。",
-    "usageStep3": "「使用許可」のアクセスを有効にします。",
-    "batteryDescription": "最新のAndroidシステムでは、バックグラウンドプロセスは数分後にスリープ状態になります。Kruzty Dynamicsをバッテリー最適化の対象から除外することで、Discord Rich Presenceの更新が途切れることなく継続されます。",
-    "foregroundDescription": "Android 13 以降では、ステータスバーに「フォアグラウンドサービスが実行中」という通知を表示し、Discord のプレゼンスエンジンが動作していることを確認するために、これが必要です。",
-    "requiredTitle": "必要な権限",
-    "requiredSubtitle": "サービスを開始する前に、Androidの以下の権限を付与してください。",
-    "done": "完了",
-    "allGranted": "必要な権限はすべて付与されています。続行するには、サービスを有効にしてください。",
-    "grant": "助成金",
-    "returnHint": "Androidの設定でアクセス許可を付与したら、ここに戻ってサービスを有効にしてください。",
-    "notificationTitle": "通知へのアクセス",
-    "usageTitle": "利用方法・アクセス方法",
-    "usageSubtitle": "フォアグラウンドアプリの検出",
-    "openUsageAccess": "利用アクセス権の開放",
-    "batteryTitle": "バッテリーの最適化",
-    "batterySubtitle": "バックグラウンドサービスのホワイトリスト",
-    "requestExemption": "免除の申請",
-    "foregroundTitle": "フォアグラウンド・サービスに関する通知",
-    "foregroundSubtitle": "Android 13 以降の通知権限",
-    "allowNotification": "通知を許可する",
-    "foregroundGuardTitle": "フォアグラウンド・サービスの通知",
-    "usageGuardDescription": "現在どのアプリがフォアグラウンドにあるかを検出するために必要です。",
-    "notificationGuardDescription": "メディアの再生およびそのメタデータを検出するために必要です。",
-    "foregroundGuardDescription": "Androidが実行中にサービス通知を表示できるようにします。",
-    "serviceStartError": "Android プレゼンス サービスを起動できませんでした。"
+  "configFields": {
+    "status": {
+      "bigImage": "大きい画像",
+      "bigText": "大きいテキスト",
+      "line1": "アクティビティの詳細",
+      "smallImage": "小さい画像",
+      "smallText": "小さいテキスト",
+      "line2": "アクティビティの状態",
+      "title": "アクティビティのタイトル／見出し"
+    }
   },
-  "logs": {
-    "title": "アプリケーションログ",
-    "subtitle": "リアルタイム診断出力",
-    "copy": "ログのコピー",
-    "export": "ログのエクスポート",
-    "empty": "[INFO] まだログがありません。Discordにログインするか、何らかの操作を行ってログを生成してください。"
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "件のアカウントがログイン中",
+          "desc": "Rich Presenceを表示するためDiscordアカウントを接続します",
+          "title": "Discord ログイン"
+        },
+        "languageTitle": "言語",
+        "themeTitle": "テーマ",
+        "desc": "カスタマイズとアカウント",
+        "title": "ユーザー設定"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "バックグラウンドでサービスが停止するのを防ぎます",
+          "title": "バッテリー最適化の解除",
+          "modal": {
+            "desc": "最新のAndroidシステムでは、バックグラウンドプロセスは数分後にスリープ状態になります。Kruzty Dynamicsをバッテリー最適化の対象から除外することで、Discord Rich Presenceの更新が途切れることなく継続されます。",
+            "subtitle": "バックグラウンドサービスのホワイトリスト",
+            "requestExemption": "免除の申請"
+          }
+        },
+        "notificationAccess": {
+          "desc": "メディアや再生中の楽曲を検知するために必要です",
+          "title": "通知へのアクセス",
+          "modal": {
+            "methodA": {
+              "title": "方法A：専用アプリによるアクセス（Pixel、Motorola、Infinix、純正）",
+              "step1": "下の「Androidの設定を開く」をタップしてください。",
+              "step2": "「アプリへの特別なアクセス」＞「通知へのアクセス」に移動します。",
+              "step3": "「Kruzty Dynamics」を見つけて、「通知へのアクセスを許可」をオンにしてください。"
+            },
+            "methodB": {
+              "title": "方法 B：「アプリ情報」＞「省略記号」（Xiaomi/HyperOS、Samsung、Oppo）",
+              "step1": "端末の「設定」＞「アプリ」＞「アプリの管理」または「アプリ一覧」を開きます。",
+              "step2": "「Kruzty Dynamics」を見つけてタップしてください。",
+              "step4": "「制限付き設定／アプリの特別アクセス」をタップし、「許可」を選択します。",
+              "step5": "「通知へのアクセス」に戻り、有効にしてください。"
+            },
+            "desc": "「Notification Access」により、Kruzty DynamicsはSpotify、YouTube Music、およびメディアプレーヤーから、メディアセッションの再生イベント（曲名、アーティスト、アルバム、再生状態）をリアルタイムで取得することができます。",
+            "oemNotice": {
+              "desc": "Androidでは、通知リスナーへのアクセスは特別な権限レイヤーによって保護されています。お使いのスマートフォンのメーカーに応じて、以下のいずれかの方法に従ってください。",
+              "title": "OEMおよびAndroid 13以降の端末に関するお知らせ"
+            },
+            "subtitle": "アプリへの特別アクセス設定",
+            "openAndroidSettings": "Androidの設定を開く"
+          }
+        },
+        "desc": "検知に必要です",
+        "title": "権限コントロール",
+        "foregroundNotification": {
+          "desc": "常駐フォアグラウンドサービス通知のためのAndroid 13+権限です",
+          "title": "通知の許可",
+          "modal": {
+            "allowNotification": "通知を許可する",
+            "desc": "Android 13 以降では、ステータスバーに「フォアグラウンドサービスが実行中」という通知を表示し、Discord のプレゼンスエンジンが動作していることを確認するために、これが必要です。",
+            "subtitle": "Android 13 以降の通知権限",
+            "title": "フォアグラウンド・サービスに関する通知"
+          }
+        },
+        "usageAccess": {
+          "desc": "実行中のゲームやアプリを検知するために必要です",
+          "title": "使用状況へのアクセス",
+          "modal": {
+            "openUsageAccess": "利用アクセス権の開放",
+            "desc": "利用方法：現在フォアグラウンドで実行中のアプリやゲームを検出するにはアクセス権が必要です。これにより、Kruzty Dynamics はそれをユーザーが設定したアプリケーションカタログと照合することができます。",
+            "step1": "「使用状況へのアクセスを開く」をタップします。",
+            "step2": "「Kruzty Dynamics」を検索してください。",
+            "step3": "「使用許可」のアクセスを有効にします。",
+            "subtitle": "フォアグラウンドアプリの検出"
+          }
+        }
+      },
+      "privacyNotice": "このアプリはユーザーデータを収集・送信しません。",
+      "subtitle": "Discord Rich Presenceを有効にするため、必要な権限とアカウントを設定します。",
+      "title": "初期設定"
+    },
+    "footer": {
+      "allSet": "準備完了！Rich Presenceを開始できます",
+      "buttons": {
+        "continueForNow": "今は続行する",
+        "finishSetup": "設定を完了",
+        "skipForNow": "スキップする"
+      },
+      "readyWhenYouAre": "いつでも開始可能"
+    }
   },
-  "toast": {
-    "duplicateAccount": "このDiscordアカウントはすでに追加されています。",
-    "insufficientPermissions": "権限が不十分です。「設定とその他」＞「権限の確認」をご確認ください。",
-    "newVersionAvailable": "新バージョンがリリースされました！",
-    "updateDetected": "新しい最新バージョンが検出されました！",
-    "latestVersion": "これが最新バージョンです！",
-    "updateCheckFailed": "更新の確認ができませんでした。"
+  "tags": {
+    "granted": "許可済み",
+    "notificationCrucial": "必須",
+    "allGranted": "すべて許可済み",
+    "cached": "キャッシュ済み",
+    "check": "確認",
+    "checkingUpdates": "アップデートの確認",
+    "default": "デフォルト",
+    "view": "表示"
   }
 }

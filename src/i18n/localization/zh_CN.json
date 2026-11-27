@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "首次设置",
-    "subtitle": "配置必要权限与账号，启用动态 Discord Rich Presence。",
-    "privacyNotice": "本应用绝不收集或上传任何个人数据。",
-    "permissionsSection": "权限控制",
-    "permissionsRequired": "状态检测所需",
-    "notificationTitle": "通知使用权",
-    "notificationDesc": "用于检测正在播放的音乐与视频会话",
-    "notificationCrucial": "关键",
-    "usageTitle": "应用使用情况访问权",
-    "usageDesc": "用于检测当前正在运行的前台应用或游戏",
-    "batteryTitle": "电池优化白名单",
-    "batteryDesc": "将应用加入白名单，防止后台被系统杀死",
-    "postNotificationTitle": "前台服务通知",
-    "postNotificationDesc": "Android 13+ 常驻服务通知权限",
-    "grant": "授权",
-    "granted": "已授权",
-    "userControlSection": "偏好与账号",
-    "userControlDesc": "个性化外观与登录",
-    "discordLoginTitle": "Discord 登录",
-    "discordLoginDesc": "连接您的 Discord 账号以展示富状态",
-    "accountsConnected": "个账号已登录。",
-    "themeTitle": "主题",
-    "languageTitle": "语言",
-    "finishSetup": "完成设置",
-    "continueForNow": "暂且继续",
-    "skipForNow": "先跳过",
-    "allSet": "一切就绪！随时可以展示状态",
-    "readyWhenYouAre": "随时准备启动"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "当前活动身份",
+        "stored": "已保存"
+      },
+      "content": {
+        "subtitle": "管理令牌与身份",
+        "title": "Discord 登录门户",
+        "privacyText": "Discord 授权会请求访问社交功能以及 Rich Presence。Kruzty Dynamics 使用 SDK 识别您的账号并发布或清除您配置的活动；不会使用好友、屏蔽、邀请、消息或语音功能。在 Android 上，令牌会加密并存储在本设备上。请阅读",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "隐私政策"
+      },
+      "title": "连接 Discord 账号"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "表达式支持 == 和 != 比较运算。使用 {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}}，当活动类型为 Playing 时选择 AppName，否则选择 AppPlatformType。",
+        "title": "应用令牌参考",
+        "desc": "字段表达式中可用的动态变量"
+      },
+      "media": {
+        "title": "媒体令牌参考",
+        "intro": "可以直接在文本字段以及按钮标签或 URL 中使用变量（例如 {example}）。",
+        "desc": "媒体表达式和按钮中可用的动态变量"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "放弃未保存的更改？",
+      "unsaved": "未保存的修改"
+    },
+    "logs": {
+      "copy": "复制日志",
+      "empty": "[信息] 目前尚无日志。请打开 Discord 登录或执行相关操作以生成日志。",
+      "export": "导出日志",
+      "subtitle": "实时诊断输出",
+      "title": "应用程序日志"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "主强调色",
+        "resetAccent": "恢复默认橙色",
+        "tapCustomize": "点击自定义",
+        "themeMode": "主题模式"
+      },
+      "globalDefaults": {
+        "activityStatus": "活动状态",
+        "activityType": "活动类型",
+        "note": "当应用或状态活动未指定自己的活动类型或状态时，将自动使用这些默认值。"
+      },
+      "imgBb": {
+        "apiPrivacy": "将此字段留空将重置为内置默认 API 密钥。自定义密钥绝不会以明文形式暴露。",
+        "getApiKey": "获取密钥。",
+        "help": "设置您自己的 ImgBB API Key，以将自定义应用和媒体资源图片上传至 Discord CDN。访问",
+        "usingDefaultKey": "正在使用默认系统密钥"
+      },
+      "language": {
+        "availableLanguages": "可用语言",
+        "title": "选择语言",
+        "desc": "选择您希望在 UI 标签和通知中显示的语言。"
+      },
+      "checkPermissions": {
+        "batteryDesc": "防止 Android 终止状态服务",
+        "foregroundDesc": "持续 Discord 状态的状态栏指示器",
+        "notificationAccessDesc": "用于媒体检测的特殊应用访问权限",
+        "desc": "读取活跃媒体通知和前台应用所需权限的状态：",
+        "usageAccessDesc": "检测正在运行的前台游戏与应用"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "共有 {total} 个关联的图片 URL，其中 {custom} 个为自定义应用图标覆盖。您可以清理缓存链接但保留自定义图标，或清理所有链接并移除自定义覆盖。如果移除覆盖，请在应用目录中重新上传这些图标。",
+        "buttons": {
+          "clearCacheAll": "全部清理，包括自定义图标",
+          "clearCacheKeep": "清理缓存，保留自定义图标"
+        },
+        "clearedAll": "已清理所有关联的图片 URL，包括自定义应用图标。",
+        "clearedKeeping": "已清理关联的图片 URL 缓存。自定义应用图标已保留。",
+        "linkedImageUrls": "关联的图片 URL"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy 贡献者",
+        "developerSection": "克鲁兹蒂动力",
+        "librariesSection": "此应用使用的库",
+        "libraries": {
+          "lucide": "社区打造的简洁矢量图标",
+          "react": "现代用户界面组件架构",
+          "sdk": "原生 Android 富状态集成",
+          "tailwind": "实用优先的现代响应式样式",
+          "tauri": "轻量级跨平台原生运行时",
+          "tokio": "异步事件驱动网络运行时"
+        },
+        "maintainerRole": "现任维护者与开发者"
+      },
+      "discordApp": {
+        "developerPortal": "Discord 开发者门户",
+        "help": "设置您自己的 Discord Application ID，来源：",
+        "idPrivacy": "将此字段留空将重置为默认的 Kruzty Dynamics 应用 ID。"
+      }
+    }
   },
-  "nav": {
-    "service": "服务",
-    "accounts": "账号",
-    "settings": "设置与更多"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "添加账号",
+            "switch": "切换",
+            "unuse": "取消使用"
+          },
+          "activePresence": "活跃状态",
+          "modal": {
+            "logout": {
+              "confirmLogout": "确认退出",
+              "title": "退出账号",
+              "removePrefix": "您确定要移除账号",
+              "removeSuffix": "吗？这将删除此设备上保存的凭据。"
+            }
+          },
+          "currentAccount": "当前登录账号",
+          "noActiveAccount": "未选择账号。请从下方已登录账号中选择一个。",
+          "storedAccounts": "已保存账号"
+        },
+        "noAccount": {
+          "desc": "连接您的 Discord 账号，开始为游戏、应用和媒体展示 Rich Presence 状态。",
+          "title": "尚未登录任何账号。",
+          "login": "登录 Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "暂无 Discord 账号",
+        "loggedInMany": "已有 {n} 个账户登录。",
+        "loggedInOne": "{n} 账户已登录。"
+      },
+      "title": "Discord 账号"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics 仪表盘",
+      "title": {
+        "welcome": "欢迎！",
+        "welcomeNamed": "欢迎，{name}！"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "已授予所有必需的权限。请启用该服务以继续。",
+              "foregroundService": {
+                "desc": "允许 Android 在该服务运行时显示服务通知。",
+                "title": "前台服务通知"
+              },
+              "notificationAccess": {
+                "desc": "用于检测媒体播放及其元数据。"
+              },
+              "subtitle": "在启动该服务之前，请授予这些 Android 权限。",
+              "title": "所需权限",
+              "returnHint": "在 Android 设置中授予权限后，请返回此处并启用该服务。",
+              "usageAccess": {
+                "desc": "用于检测当前处于前台的应用程序。"
+              }
+            }
+          },
+          "startError": "无法启动 Android 在线服务。",
+          "running": "服务正在运行。",
+          "stopped": "服务未启动。",
+          "title": "Kruzty Dynamics 服务"
+        },
+        "application": {
+          "desc": "为本地状态检测配置应用档案",
+          "title": "应用状态"
+        },
+        "buttons": {
+          "applicationCatalogue": "应用目录",
+          "presenceConfiguration": "状态配置",
+          "statusFieldConfig": "状态字段配置"
+        },
+        "media": {
+          "desc": "配置媒体行为与状态模板",
+          "title": "媒体状态"
+        },
+        "preview": {
+          "noPresence": "未检测到已配置的应用或活跃媒体。",
+          "stoppedDescription": "服务已停止。请将其开启，以检测已启用的应用和正在运行的媒体。"
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "应用偏好",
+        "checkPermissions": {
+          "title": "检查系统权限",
+          "desc": "查看已授予和可选的系统访问权限"
+        },
+        "deleteCachedUrls": {
+          "title": "清理关联图片 URL",
+          "desc": "清理已缓存的上传图片 URL"
+        },
+        "discordAppId": {
+          "title": "设置 Discord Application ID",
+          "desc": "配置您自己的 Discord 应用 ID。"
+        },
+        "globalDefaults": {
+          "title": "全局默认值",
+          "desc": "未单独配置应用的活动类型与在线状态"
+        },
+        "imgBbKey": {
+          "title": "设置 ImgBB API 密钥",
+          "desc": "配置您自己的 ImgBB API Key。"
+        },
+        "language": {
+          "title": "语言",
+          "desc": "当前设置："
+        },
+        "notificationProjection": {
+          "title": "自定义通知状态显示",
+          "desc": "自定义应用和媒体通知的标题及副标题。"
+        },
+        "themes": {
+          "title": "主题与显示",
+          "desc": "设置主题模式与强调色。"
+        },
+        "checkUpdates": {
+          "title": "检查最新版本",
+          "desc": "请检查是否有更新版本。"
+        }
+      },
+      "subtitle": "应用偏好与诊断",
+      "title": "设置与更多",
+      "cardInfo": {
+        "architecture": "基于 Rust 核心（Tokio + Tauri v2）构建，前端使用 React 19 与 TailwindCSS，并包含原生 Android 插件桥接。基于原版 Kizzy's Experimental RPC。",
+        "credits": "致谢",
+        "developedBy": "开发者：",
+        "latestRelease": "前往最新版本",
+        "learnMore": "了解关于此应用的更多信息",
+        "repository": "查看 GitHub 仓库",
+        "submitIssue": "提交问题",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "serviceActive": "运行中",
-    "serviceInactive": "未运行",
-    "serviceStarting": "启动中",
-    "serviceStopped": "已停止",
-    "welcome": "欢迎！",
-    "welcomeNamed": "欢迎，{name}！",
-    "dashboardSubtitle": "Kruzty Dynamics 仪表盘",
-    "liveLogs": "实时日志",
-    "viewLogs": "查看日志",
-    "accountsLoggedInOne": "{n} 账户已登录。",
-    "accountsLoggedInMany": "已有 {n} 个账户登录。"
-  },
-  "accounts": {
-    "title": "Discord 账号",
-    "subtitle": "管理令牌与身份",
-    "loginPortal": "通过 Discord 门户登录",
-    "loginWithToken": "通过 Token 添加",
-    "addAccount": "添加账号",
-    "activeIdentity": "当前活动身份",
-    "stored": "已保存",
+  "buttons": {
     "remove": "移除",
-    "noAccounts": "暂无 Discord 账号",
-    "noAccountsDesc": "通过门户或 Token 添加您的 Discord 账号以开始展示状态。"
-  },
-  "settings": {
-    "title": "设置与更多",
-    "subtitle": "应用偏好与诊断",
-    "appPreferences": "应用偏好",
-    "notificationProjection": "自定义通知状态显示",
-    "notificationProjectionDesc": "自定义应用和媒体通知的标题及副标题。",
-    "themes": "主题与显示",
-    "themesDesc": "设置主题模式与强调色。",
-    "language": "语言",
-    "languageDesc": "当前设置：",
-    "globalDefaults": "全局默认值",
-    "globalDefaultsDesc": "未单独配置应用的活动类型与在线状态",
-    "imgbbKey": "设置 ImgBB API 密钥",
-    "imgbbKeyDesc": "配置您自己的 ImgBB API Key。",
-    "discordAppId": "设置 Discord Application ID",
-    "discordAppIdDesc": "配置您自己的 Discord 应用 ID。",
-    "checkPermissions": "检查系统权限",
-    "checkPermissionsDesc": "查看已授予和可选的系统访问权限",
-    "deleteCache": "清理关联图片 URL",
-    "deleteCacheDesc": "清理已缓存的上传图片 URL"
-  },
-  "service": {
-    "title": "Kruzty Dynamics 服务",
-    "running": "服务正在运行。",
-    "stopped": "服务未启动。",
-    "applicationPresence": "应用状态",
-    "appDescription": "为本地状态检测配置应用档案",
-    "applicationCatalogue": "应用目录",
-    "statusFieldConfig": "状态字段配置",
-    "presenceConfiguration": "状态配置",
-    "mediaPresence": "媒体状态",
-    "mediaDescription": "配置媒体行为与状态模板",
-    "noPresence": "未检测到已配置的应用或活跃媒体。",
-    "stoppedDescription": "服务已停止。请将其开启，以检测已启用的应用和正在运行的媒体。"
-  },
-  "accountsPage": {
-    "emptyTitle": "尚未登录任何账号。",
-    "emptyDescription": "连接您的 Discord 账号，开始为游戏、应用和媒体展示 Rich Presence 状态。",
-    "login": "登录 Discord",
-    "currentAccount": "当前登录账号",
-    "activePresence": "活跃状态",
-    "storedAccounts": "已保存账号",
-    "switch": "切换",
-    "unuse": "取消使用",
-    "remove": "移除",
-    "cancel": "取消",
-    "deleteTitle": "移除 Discord 账号？",
-    "loginTitle": "Discord 登录门户",
-    "noActiveAccount": "未选择账号。请从下方已登录账号中选择一个。",
-    "addAccountTitle": "连接 Discord 账号",
-    "portal": "Discord 登录门户",
-    "signInPortal": "通过 Discord 应用内功能安全登录",
     "openPortal": "打开门户",
-    "privacyText": "Discord 授权会请求访问社交功能以及 Rich Presence。Kruzty Dynamics 使用 SDK 识别您的账号并发布或清除您配置的活动；不会使用好友、屏蔽、邀请、消息或语音功能。在 Android 上，令牌会加密并存储在本设备上。请阅读",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "退出账号",
-    "removePrefix": "您确定要移除账号",
-    "removeSuffix": "吗？这将删除此设备上保存的凭据。",
-    "confirmLogout": "确认退出",
-    "addAccount": "添加 Discord 账号",
-    "noSelection": "未选择账号。请从下方已登录账号中选择一个。",
-    "addMoreAccounts": "您可以点击下方的 Discord 按钮添加更多账号。"
-  },
-  "settingsUi": {
-    "chooseLanguage": "选择语言",
-    "languageDescription": "选择您希望在 UI 标签和通知中显示的语言。",
-    "availableLanguages": "可用语言",
-    "close": "关闭",
-    "linkedImageUrls": "关联的图片 URL",
-    "clearCacheKeep": "清理缓存，保留自定义图标",
-    "clearCacheAll": "全部清理，包括自定义图标",
-    "credits": "致谢",
-    "themeMode": "主题模式",
-    "accentColor": "主强调色",
-    "resetAccent": "恢复默认橙色",
-    "learnMore": "了解关于此应用的更多信息",
-    "privacyPolicy": "隐私政策",
-    "repository": "查看 GitHub 仓库",
-    "latestRelease": "前往最新版本",
-    "submitIssue": "提交问题",
-    "developerSection": "克鲁兹蒂动力",
-    "librariesSection": "此应用使用的库",
-    "contributorsSection": "Kizzy 贡献者",
-    "maintainerRole": "现任维护者与开发者",
-    "view": "查看",
-    "done": "完成",
-    "developedBy": "开发者：",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "基于 Rust 核心（Tokio + Tauri v2）构建，前端使用 React 19 与 TailwindCSS，并包含原生 Android 插件桥接。基于原版 Kizzy's Experimental RPC。",
-    "cached": "已缓存",
-    "tapCustomize": "点击自定义",
-    "defaultNote": "当应用或状态活动未指定自己的活动类型或状态时，将自动使用这些默认值。",
-    "activityType": "活动类型",
-    "activityStatus": "活动状态",
-    "imgbbHelp": "设置您自己的 ImgBB API Key，以将自定义应用和媒体资源图片上传至 Discord CDN。访问",
-    "getApiKey": "获取密钥。",
-    "apiPrivacy": "将此字段留空将重置为内置默认 API 密钥。自定义密钥绝不会以明文形式暴露。",
-    "saveKey": "保存密钥",
-    "discordIdHelp": "设置您自己的 Discord Application ID，来源：",
-    "developerPortal": "Discord 开发者门户",
-    "idDefault": "默认",
-    "idPrivacy": "将此字段留空将重置为默认的 Kruzty Dynamics 应用 ID。",
-    "saveId": "保存 ID",
-    "permissionsDescription": "读取活跃媒体通知和前台应用所需权限的状态：",
-    "notificationAccessDesc": "用于媒体检测的特殊应用访问权限",
-    "usageAccessDesc": "检测正在运行的前台游戏与应用",
-    "batteryDesc": "防止 Android 终止状态服务",
-    "foregroundDesc": "持续 Discord 状态的状态栏指示器",
-    "saveIdPlaceholder": "1572590527562391713（默认）",
-    "resetDefault": "恢复默认",
-    "cancel": "取消",
-    "cacheWarning": "共有 {total} 个关联的图片 URL，其中 {custom} 个为自定义应用图标覆盖。您可以清理缓存链接但保留自定义图标，或清理所有链接并移除自定义覆盖。如果移除覆盖，请在应用目录中重新上传这些图标。",
-    "allGranted": "全部已授权",
-    "clearedAll": "已清理所有关联的图片 URL，包括自定义应用图标。",
-    "clearedKeeping": "已清理关联的图片 URL 缓存。自定义应用图标已保留。",
-    "usingDefaultKey": "正在使用默认系统密钥",
-    "customKeySet": "已设置自定义密钥",
-    "light": "浅色",
-    "dark": "深色",
-    "amoled": "AMOLED",
-    "libraryTauri": "轻量级跨平台原生运行时",
-    "libraryTokio": "异步事件驱动网络运行时",
-    "librarySdk": "原生 Android 富状态集成",
-    "libraryReact": "现代用户界面组件架构",
-    "libraryTailwind": "实用优先的现代响应式样式",
-    "libraryLucide": "社区打造的简洁矢量图标",
-    "checkForUpdates": "检查最新版本",
-    "checkForUpdatesDesc": "请检查是否有更新版本。",
-    "check": "检查",
-    "checkingUpdates": "检查更新"
-  },
-  "configFields": {
-    "appTitle": "应用状态字段配置",
-    "mediaTitle": "媒体状态字段配置",
-    "back": "返回",
-    "reset": "恢复默认",
-    "help": "可用令牌帮助",
-    "title": "标题",
-    "line1": "第 1 行（详情）",
-    "line2": "第 2 行（状态）",
-    "smallText": "小文本",
-    "smallImage": "小图片",
-    "bigText": "大文本",
-    "bigImage": "大图片",
-    "header": "头部（正在收听 / 观看）",
-    "mediaTitleField": "媒体标题（活动详情）",
-    "artist": "第 1 行（活动状态 / 艺术家）",
-    "album": "第 2 行（专辑 / 图片文本）",
-    "buttons": "自定义按钮",
-    "button1": "按钮 1",
-    "button2": "按钮 2",
-    "save": "保存字段",
-    "appReference": "应用令牌参考",
-    "mediaReference": "媒体令牌参考",
-    "tokenDescription": "字段表达式中可用的动态变量",
-    "mediaTokenDescription": "来自网页或视频播放器的视频或媒体描述。",
-    "discard": "放弃未保存的更改？",
-    "unsaved": "未保存的修改",
-    "helpDone": "知道了",
-    "appTokenName": "显示在动态中的应用投影名称。",
-    "appHeader": "页眉",
-    "titleHeader": "活动标题/标题栏",
-    "detailsField": "活动详情",
-    "stateField": "活动状态",
-    "notificationConfigSubtitle": "自定义前台服务通知中显示的标题和副标题。",
-    "notificationAppSection": "应用状态通知",
-    "notificationMediaSection": "媒体播放通知",
-    "notificationSubtitleLabel": "通知副标题",
-    "notificationHelpIntro": "使用 getFieldCfgStr(\"AppTitle\")、getFieldCfgStr(\"AppDetails\")、getFieldCfgStr(\"AppState\")、 getFieldCfgStr(\"AppBigText\")、getFieldCfgStr(\"MediaDetails\")、getFieldCfgStr(\"MediaState\") 以及 getFieldCfgStr(\"MediaBigText\") 来插入渲染后的字段值。使用 joinNonBlank(field1, field2) 将非空值用项目符号连接起来。应用通知模板支持 AppActivityType == \"Playing\" 条件。表达式还支持 == 和 != 比较运算符。",
-    "notificationDiscardMessage": "您有未保存的通知投影更改。如果现在退出，这些更改将被丢弃。",
-    "appTokenActivityType": "为该应用配置文件选择了“丰富状态”活动类型，例如“正在播放”、“正在收听”、“正在观看”或“正在比赛”。",
-    "appTokenPlatformType": "该应用资料中的平台令牌，例如 Android、PC 或 Xbox。",
-    "appExpressionOperators": "表达式支持 == 和 != 比较运算。使用 {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}}，当活动类型为 Playing 时选择 AppName，否则选择 AppPlatformType。",
-    "appTokenDetails": "保存在此应用配置中的自定义详情文本；禁用或为空时不显示。",
-    "appTokenState": "保存在此应用配置中的自定义状态文本；禁用或为空时不显示。",
-    "appTokenSmallText": "保存在此应用配置中的自定义小图标签；禁用或为空时不显示。",
-    "appTokenSmallUrl": "保存在此应用配置中的自定义小图 URL；禁用或为空时不显示。",
-    "appTokenImageUrl": "应用图标的 ImgBB 缓存远程 URL。",
-    "appTokenPackageName": "Android 软件包标识符（例如 com.mojang.minecraftpe）。",
-    "mediaTokenIntro": "可以直接在文本字段以及按钮标签或 URL 中使用变量（例如 {example}）。",
-    "mediaTokenAppName": "Discord 的 Listening to 或 Watching 标题中显示的播放器应用名称。",
-    "mediaTokenTitle": "来自通知元数据的当前歌曲或视频标题。",
-    "mediaTokenArtist": "正在播放的音频或视频的艺术家或创作者。",
-    "mediaTokenAlbum": "专辑名称或播放列表名称。",
-    "mediaTokenPlaybackState": "当前播放状态（Playing、Paused、Stopped）。",
-    "mediaTokenImageUrl": "专辑封面或缩略图的 ImgBB 缓存 URL。",
-    "mediaTokenPlaybackImageUrl": "当前播放指示器的资源图片 URL。",
-    "mediaTokenFallbackImageUrl": "没有媒体图片时使用的备用应用图标。",
-    "appConfigSubtitle": "自定义应用检测表达式。",
-    "mediaConfigSubtitle": "自定义媒体播放表达式。",
-    "mediaHeaderDescription": "显示在 Discord 媒体标题中的应用名称。活动类型决定显示 Listening to 还是 Watching。",
-    "mediaTitleDescription": "对应媒体标题/详情文本。请在上方的标题选项中单独配置播放器名称。",
-    "mediaAlbumDescription": "显示在 Discord 媒体卡片的艺术家名称下方。",
-    "mediaButtonDescription": "最多可添加 2 个使用变量表达式的交互式状态按钮。",
-    "mediaButtonLabel": "标签",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "例如：",
-    "mediaButtonListen": "在此收听",
-    "appDiscardMessage": "??????????????????????????????????????????",
-    "mediaDiscardMessage": "????????????????????????????????????????",
-    "mediaTokenSubtitle": "媒体表达式和按钮中可用的动态变量"
-  },
-  "catalogue": {
-    "title": "应用目录",
-    "back": "返回",
+    "understood": "明白了",
+    "apply": "应用",
     "batch": "批量操作",
-    "search": "搜索应用...",
-    "filter": "筛选应用",
-    "clearFilters": "清除筛选",
-    "enabledOnly": "仅已启用",
-    "allActivityTypes": "所有活动类型",
-    "allActivityStatuses": "所有活动状态",
+    "cancel": "取消",
+    "close": "关闭",
+    "confirm": "确认并应用",
+    "discardChanges": "放弃更改",
+    "keepEditing": "继续编辑",
+    "stageChanges": "暂存更改",
+    "uploadImage": "上传图片至 ImgBB",
+    "helpDone": "知道了",
+    "save": {
+      "fields": "保存字段",
+      "id": "保存 ID",
+      "key": "保存密钥"
+    },
+    "logs": {
+      "live": "实时日志",
+      "view": "查看日志"
+    },
+    "grant": "授权",
+    "done": "完成",
+    "resetDefault": "恢复默认"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "活动名称",
+          "bigImage": "大图片",
+          "bigText": "大文本",
+          "details": "详情",
+          "imageUrl": "图片 URL",
+          "smallImage": "小图片",
+          "smallText": "小文本",
+          "state": "状态",
+          "uploadImage": "上传图片",
+          "uploadingImage": "正在上传图片..."
+        },
+        "catalogue": {
+          "title": "应用目录",
+          "desc": "查看、筛选并自定义单个应用投影"
+        },
+        "configurationDetails": "配置详情",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "立即投影自定义的回退状态。",
+              "drop": "清除您的 Discord 活动，直到您返回已启用的应用。",
+              "freeze": "暂停并保留最后投影的状态，直到再次检测到已启用的应用。"
+            },
+            "title": "应用外策略"
+          },
+          "fallbackPresence": "自定义回退状态",
+          "desc": "离开或切换到其他应用时的行为",
+          "title": "检测应用外策略",
+          "help": "策略帮助"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "将状态计时器锁定到特定的固定开始日期和时间。",
+              "persistent": "在此服务会话期间，为应用和暂停的媒体使用一个共享的运行时时间戳。",
+              "reset": "当应用启动或重新获得焦点时，将计时器重置为 00:00。"
+            },
+            "title": "时间戳策略"
+          },
+          "fixedStart": "固定开始时间戳",
+          "desc": "跨应用会话如何解析活动计时器",
+          "help": "时间戳帮助",
+          "title": "时间戳策略"
+        },
+        "statusFieldConfig": {
+          "title": "状态字段配置",
+          "desc": "自定义标题、详情、状态和封面表达式"
+        },
+        "subtitle": "应用外策略与时间戳行为",
+        "title": "应用状态配置"
+      },
+      "catalogue": {
+        "androidOnly": "已安装应用发现功能仅在 Android 应用中可用。",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "应用批量更改？",
+              "desc": "您即将永久应用暂存的配置更改至",
+              "subtitle": "确认",
+              "selectedApps": "个选中的应用。"
+            },
+            "title": "批量配置",
+            "subtitle": "将更改应用于所有选中的应用",
+            "discard": {
+              "title": "放弃暂存的更改？",
+              "desc": "您有未提交的批量配置。现在离开批量模式将丢弃所有暂存的更改。",
+              "subtitle": "未保存的批量修改"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "选择图标图片",
+              "resetIcon": "恢复原始应用图标",
+              "resetLabel": "恢复原始标签"
+            },
+            "customBtnDesc": "最多添加 2 个交互式状态按钮",
+            "title": "自定义",
+            "original": "原始：",
+            "subtitle": "状态档案与投影别名",
+            "projectedName": "投影名称",
+            "switchToggle": {
+              "buttons": "切换自定义按钮",
+              "details": "切换自定义详情与状态",
+              "small": "切换自定义小文本与图片"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "清除筛选",
+          "filter": "筛选应用"
+        },
+        "loadAppsFailed": "无法加载已安装应用。",
+        "loading": "加载中...",
+        "search": "搜索应用...",
+        "subtitle": "{apps} 个应用 | {enabled} 个已启用",
+        "title": "应用目录",
+        "uploadProgress": "正在上传应用图标至 ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "自定义应用检测表达式。",
+        "discardMsg": "??????????????????????????????????????????",
+        "title": "应用状态字段配置"
+      }
+    },
+    "buttons": {
+      "back": "返回",
+      "help": "可用令牌帮助",
+      "reset": "恢复默认"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "最多可添加 2 个使用变量表达式的交互式状态按钮。",
+        "subtitle": "自定义媒体播放表达式。",
+        "discardMsg": "????????????????????????????????????????",
+        "title": "媒体状态字段配置"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "应用时间戳",
+          "title": "剩余时间",
+          "desc": "显示通常的开始/当前-结束剩余时间"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "媒体暂停时，使用之前或当前检测到的应用，或自定义回退。",
+              "hidePaused": "媒体暂停时隐藏状态，包括任何检测到的应用。",
+              "showPaused": "暂停时保持媒体状态活跃并显示暂停指示。"
+            },
+            "desc": "活跃播放暂停时的选项"
+          },
+          "desc": "活跃播放暂停时的状态行为",
+          "help": "暂停解析帮助",
+          "title": "暂停媒体解析"
+        },
+        "mediaPriority": {
+          "title": "媒体优先级",
+          "desc": "控制媒体是否覆盖游戏/应用会话",
+          "help": "优先级帮助",
+          "modal": {
+            "details": {
+              "priorityPlaying": "当媒体正在活跃播放时，它优先于您正在使用的应用，并投影当前曲目或视频。",
+              "switchesBetween": "仅在媒体播放器内时投影媒体。切换到游戏或已启用的应用时，由该应用接管。"
+            },
+            "title": "媒体优先级策略",
+            "desc": "游戏与媒体会话之间的解析逻辑"
+          }
+        },
+        "mediaScope": {
+          "title": "媒体检测范围",
+          "desc": "筛选触发媒体富状态的应用"
+        },
+        "statusFieldConfig": {
+          "title": "媒体状态字段配置",
+          "desc": "自定义标题、艺术家、专辑和封面回退表达式"
+        },
+        "subtitle": "解析优先级、时间戳和播放状态",
+        "title": "媒体状态配置",
+        "typeResolution": {
+          "title": "媒体类型解析",
+          "desc": "如何区分收听与观看活动"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "应用状态通知",
+        "media": "媒体播放通知"
+      },
+      "subtitle": "自定义前台服务通知中显示的标题和副标题。",
+      "discard": "您有未保存的通知投影更改。如果现在退出，这些更改将被丢弃。",
+      "helpIntro": "使用 getFieldCfgStr(\"AppTitle\")、getFieldCfgStr(\"AppDetails\")、getFieldCfgStr(\"AppState\")、 getFieldCfgStr(\"AppBigText\")、getFieldCfgStr(\"MediaDetails\")、getFieldCfgStr(\"MediaState\") 以及 getFieldCfgStr(\"MediaBigText\") 来插入渲染后的字段值。使用 joinNonBlank(field1, field2) 将非空值用项目符号连接起来。应用通知模板支持 AppActivityType == \"Playing\" 条件。表达式还支持 == 和 != 比较运算符。"
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "自定义回退",
+      "drop": "丢弃（清除状态）",
+      "freeze": "冻结（默认）"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "自定义固定时间",
+      "persistent": "持久（默认）",
+      "resetOnLaunch": "启动时重置"
+    },
+    "activityStatus": {
+      "all": "所有活动状态",
+      "dnd": "请勿打扰",
+      "idle": "空闲",
+      "invisible": "隐身",
+      "offline": "离线",
+      "online": "在线",
+      "streaming": "正在直播"
+    },
+    "activityType": {
+      "all": "所有活动类型",
+      "competing": "正在竞赛",
+      "listening": "正在收听",
+      "playing": "正在游玩",
+      "watching": "正在观看"
+    },
     "allPlatforms": "所有平台",
+    "disableAll": "全部禁用",
+    "enableAll": "全部启用",
+    "enabledOnly": "仅已启用",
     "globalDefault": "全局默认",
-    "playing": "正在游玩",
-    "streaming": "正在直播",
-    "listening": "正在收听",
-    "watching": "正在观看",
-    "competing": "正在竞赛",
-    "online": "在线",
-    "idle": "空闲",
-    "dnd": "请勿打扰",
-    "offline": "离线",
-    "invisible": "隐身",
-    "customize": "自定义",
-    "profileSubtitle": "状态档案与投影别名",
-    "activityType": "活动类型",
+    "keepCurrent": "保持当前",
+    "mediaScope": {
+      "allSessions": "所有媒体会话（默认）",
+      "enabledAppsOnly": "仅已启用的应用"
+    },
+    "typeResolution": {
+      "autoAdaptive": "自动适应（默认）",
+      "profileOverride": "应用档案覆盖"
+    },
+    "pausedResolution": {
+      "fallbackApp": "回退到检测到的应用",
+      "hidePaused": "隐藏暂停状态",
+      "showPaused": "显示暂停状态（默认）"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "优先播放中的媒体（默认）",
+      "switchesBetween": "之间切换"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "深色",
+      "light": "浅色"
+    }
+  },
+  "labels": {
     "activityStatus": "活动状态",
-    "platformType": "平台类型",
+    "activityType": "活动类型",
+    "customButtons": "自定义按钮",
     "customDetailsState": "自定义详情与状态",
     "customSmallImage": "自定义小文本与图片",
-    "customButtons": "自定义按钮",
-    "bulkConfigure": "批量配置",
-    "cancel": "取消",
-    "stageChanges": "暂存更改",
-    "apply": "应用",
-    "confirm": "确认并应用",
-    "keepCurrent": "保持当前",
-    "enableAll": "全部启用",
-    "disableAll": "全部禁用",
-    "discardBatch": "放弃暂存的更改？",
-    "chooseIcon": "选择图标图片",
-    "resetIcon": "恢复原始应用图标",
-    "resetLabel": "恢复原始标签",
-    "details": "详情",
-    "state": "状态",
-    "smallText": "小文本",
-    "smallImageUrl": "小图片 URL",
-    "uploadImage": "上传图片至 ImgBB",
-    "buttonLabel": "标签（例如：加入游戏）",
-    "presenceToggle": "状态开关",
-    "bulkSubtitle": "将更改应用于所有选中的应用",
-    "applyBatchTitle": "应用批量更改？",
-    "confirmation": "确认",
-    "unsavedBatch": "未保存的批量修改",
-    "confirmApply": "确认并应用",
     "filterOptions": "筛选选项",
-    "close": "关闭",
-    "loading": "加载中...",
-    "original": "原始：",
-    "projectedName": "投影名称",
-    "customButtonDesc": "最多添加 2 个交互式状态按钮",
-    "toggleDetails": "切换自定义详情与状态",
-    "toggleSmall": "切换自定义小文本与图片",
-    "toggleButtons": "切换自定义按钮",
-    "uploadProgress": "正在上传应用图标至 ImgBB",
-    "keepEditing": "继续编辑",
-    "discardChanges": "放弃更改",
-    "discardMessage": "您有未提交的批量配置。现在离开批量模式将丢弃所有暂存的更改。",
-    "applyMessage": "您即将永久应用暂存的配置更改至",
-    "selectedApps": "个选中的应用。",
-    "urlExample": "URL（https://...）",
-    "summary": "{apps} 个应用 | {enabled} 个已启用",
-    "chooseImage": "请选择图片文件。",
-    "imageTooLarge": "请选择小于 32 MB 的图片。",
-    "imageUploadFailed": "图片上传失败。",
-    "iconUploadFailed": "图标上传失败。",
-    "androidOnly": "已安装应用发现功能仅在 Android 应用中可用。",
-    "loadAppsFailed": "无法加载已安装应用。",
-    "appUnit": "应用",
-    "appsUnit": "应用"
+    "platformType": "平台类型",
+    "presenceToggle": "状态开关",
+    "button1": "按钮 1",
+    "button2": "按钮 2",
+    "label": "标签",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "应用状态配置",
-    "subtitle": "应用外策略与时间戳行为",
-    "catalogue": "应用目录",
-    "catalogueDesc": "查看、筛选并自定义单个应用投影",
-    "outsidePolicies": "检测应用外策略",
-    "outsideDescription": "离开或切换到其他应用时的行为",
-    "policyHelp": "策略帮助",
-    "freeze": "冻结（默认）",
-    "customFallback": "自定义回退",
-    "drop": "丢弃（清除状态）",
-    "fallbackPresence": "自定义回退状态",
-    "activityName": "活动名称",
+  "pluralization": {
+    "app": {
+      "plural": "应用",
+      "singular": "应用"
+    }
+  },
+  "placeholders": {
+    "labelExample": "标签（例如：加入游戏）",
     "details": "详情",
-    "state": "状态",
+    "smallImageUrl": "小图片 URL",
     "smallText": "小文本",
-    "bigText": "大文本",
-    "smallImage": "小图片",
-    "bigImage": "大图片",
-    "imageUrl": "图片 URL",
-    "uploadingImage": "正在上传图片...",
-    "timestampStrategy": "时间戳策略",
-    "timestampDescription": "跨应用会话如何解析活动计时器",
-    "timestampHelp": "时间戳帮助",
-    "persistent": "持久（默认）",
-    "resetOnLaunch": "启动时重置",
-    "customFixedTime": "自定义固定时间",
-    "fixedStart": "固定开始时间戳",
-    "statusFieldConfig": "状态字段配置",
-    "statusFieldDescription": "自定义标题、详情、状态和封面表达式",
-    "configurationDetails": "配置详情",
-    "outsideHelpTitle": "应用外策略",
-    "timestampHelpTitle": "时间戳策略",
-    "understood": "明白了",
-    "freezeHelp": "暂停并保留最后投影的状态，直到再次检测到已启用的应用。",
-    "customHelp": "立即投影自定义的回退状态。",
-    "dropHelp": "清除您的 Discord 活动，直到您返回已启用的应用。",
-    "persistentHelp": "在此服务会话期间，为应用和暂停的媒体使用一个共享的运行时时间戳。",
-    "resetHelp": "当应用启动或重新获得焦点时，将计时器重置为 00:00。",
-    "fixedHelp": "将状态计时器锁定到特定的固定开始日期和时间。",
-    "uploadImage": "上传图片"
+    "state": "状态",
+    "urlExample": "URL（https://...）",
+    "example": "例如：",
+    "listenOn": "在此收听"
   },
-  "mediaPresence": {
-    "title": "媒体状态配置",
-    "subtitle": "解析优先级、时间戳和播放状态",
-    "priority": "媒体优先级",
-    "priorityDesc": "控制媒体是否覆盖游戏/应用会话",
-    "priorityHelp": "优先级帮助",
-    "priorityPlaying": "优先播放中的媒体（默认）",
-    "switchesBetween": "之间切换",
-    "scope": "媒体检测范围",
-    "scopeDesc": "筛选触发媒体富状态的应用",
-    "allSessions": "所有媒体会话（默认）",
-    "enabledAppsOnly": "仅已启用的应用",
-    "typeResolution": "媒体类型解析",
-    "typeResolutionDesc": "如何区分收听与观看活动",
-    "autoAdaptive": "自动适应（默认）",
-    "profileOverride": "应用档案覆盖",
-    "timeRemaining": "剩余时间",
-    "timeRemainingDesc": "显示通常的开始/当前-结束剩余时间",
-    "appTimestamp": "应用时间戳",
-    "pausedResolution": "暂停媒体解析",
-    "pausedDesc": "活跃播放暂停时的状态行为",
-    "pausedHelp": "暂停解析帮助",
-    "showPaused": "显示暂停状态（默认）",
-    "fallbackApp": "回退到检测到的应用",
-    "hidePaused": "隐藏暂停状态",
-    "statusFields": "媒体状态字段配置",
-    "statusFieldsDesc": "自定义标题、艺术家、专辑和封面回退表达式",
-    "priorityStrategy": "媒体优先级策略",
-    "priorityStrategyDesc": "游戏与媒体会话之间的解析逻辑",
-    "pausedOptions": "活跃播放暂停时的选项",
-    "priorityHelpText": "当媒体正在活跃播放时，它优先于您正在使用的应用，并投影当前曲目或视频。",
-    "switchHelpText": "仅在媒体播放器内时投影媒体。切换到游戏或已启用的应用时，由该应用接管。",
-    "showPausedHelp": "暂停时保持媒体状态活跃并显示暂停指示。",
-    "fallbackHelp": "媒体暂停时，使用之前或当前检测到的应用，或自定义回退。",
-    "hidePausedHelp": "媒体暂停时隐藏状态，包括任何检测到的应用。"
+  "service": {
+    "imgbb": {
+      "chooseImage": "请选择图片文件。",
+      "iconUploadFailed": "图标上传失败。",
+      "imageTooLarge": "请选择小于 32 MB 的图片。",
+      "imageUploadFailed": "图片上传失败。"
+    }
   },
-  "permissions": {
-    "notificationSubtitle": "特殊应用访问配置",
-    "openAndroidSettings": "打开 Android 设置",
-    "oemNotice": "针对 OEM 及 Android 13 及以上版本设备的通知",
-    "notificationExplanation": "Android 通过特殊的权限层来保护对通知监听器的访问。请根据您的手机品牌，选择以下其中一种方法操作。",
-    "methodA": "方法 A：特殊应用访问权限（Pixel、摩托罗拉、Infinix、原生系统）",
-    "methodAStep1": "点击下方的“打开 Android 设置”。",
-    "methodAStep2": "转到“特殊应用访问权限”>“通知访问权限”。",
-    "methodAStep3": "找到“Kruzty Dynamics”，然后开启“允许通知访问”选项。",
-    "methodB": "方法 B：应用信息 > 省略号（小米/HyperOS、三星、OPPO）",
-    "methodBStep1": "打开设备“设置” > “应用” > “管理应用”/“应用列表”。",
-    "methodBStep2": "找到并点击“Kruzty Dynamics”。",
-    "methodBStep3": "点击右上角的三个点。",
-    "methodBStep4": "点击“允许受限设置”/“特殊应用访问权限” > “授予”。",
-    "methodBStep5": "返回并启用“通知访问”功能。",
-    "notificationAccessDescription": "“通知访问”功能使 Kruzty Dynamics 能够从 Spotify、YouTube Music 和媒体播放器中捕获实时媒体会话播放事件（歌曲名称、艺人、专辑和播放状态）。",
-    "usageDescription": "“使用权限”是检测您当前在前台运行的应用程序或游戏所必需的，这样 Kruzty Dynamics 才能将其与您配置的应用程序目录进行匹配。",
-    "usageStep1": "点击“打开使用权限”。",
-    "usageStep2": "查找 Kruzty Dynamics。",
-    "usageStep3": "开启“允许使用”权限。",
-    "batteryDescription": "现代安卓系统会在几分钟后将后台进程置于休眠状态。将 Kruzty Dynamics 排除在电池优化之外，可确保 Discord Rich Presence 更新持续进行且不会中断。",
-    "foregroundDescription": "Android 13 及以上版本要求在状态栏中显示正在运行的前台服务通知，以确认 Discord 在线状态引擎正在运行。",
-    "requiredTitle": "所需权限",
-    "requiredSubtitle": "在启动该服务之前，请授予这些 Android 权限。",
-    "done": "完成",
-    "allGranted": "已授予所有必需的权限。请启用该服务以继续。",
-    "grant": "格兰特",
-    "returnHint": "在 Android 设置中授予权限后，请返回此处并启用该服务。",
-    "notificationTitle": "通知访问",
-    "usageTitle": "使用权限",
-    "usageSubtitle": "前台应用检测",
-    "openUsageAccess": "开放使用权限",
-    "batteryTitle": "电池优化",
-    "batterySubtitle": "后台服务白名单",
-    "requestExemption": "申请豁免",
-    "foregroundTitle": "前台服务通知",
-    "foregroundSubtitle": "Android 13 及以上版本的通知权限",
-    "allowNotification": "允许通知",
-    "foregroundGuardTitle": "前台服务通知",
-    "usageGuardDescription": "用于检测当前处于前台的应用程序。",
-    "notificationGuardDescription": "用于检测媒体播放及其元数据。",
-    "foregroundGuardDescription": "允许 Android 在该服务运行时显示服务通知。",
-    "serviceStartError": "无法启动 Android 在线服务。"
+  "configFields": {
+    "status": {
+      "bigImage": "大图片",
+      "bigText": "大文本",
+      "line1": "活动详情",
+      "smallImage": "小图片",
+      "smallText": "小文本",
+      "line2": "活动状态",
+      "title": "活动标题/标题栏"
+    }
   },
-  "logs": {
-    "title": "应用程序日志",
-    "subtitle": "实时诊断输出",
-    "copy": "复制日志",
-    "export": "导出日志",
-    "empty": "[信息] 目前尚无日志。请打开 Discord 登录或执行相关操作以生成日志。"
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "个账号已登录。",
+          "desc": "连接您的 Discord 账号以展示富状态",
+          "title": "Discord 登录"
+        },
+        "languageTitle": "语言",
+        "themeTitle": "主题",
+        "desc": "个性化外观与登录",
+        "title": "偏好与账号"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "将应用加入白名单，防止后台被系统杀死",
+          "title": "电池优化白名单",
+          "modal": {
+            "desc": "现代安卓系统会在几分钟后将后台进程置于休眠状态。将 Kruzty Dynamics 排除在电池优化之外，可确保 Discord Rich Presence 更新持续进行且不会中断。",
+            "subtitle": "后台服务白名单",
+            "requestExemption": "申请豁免"
+          }
+        },
+        "notificationAccess": {
+          "desc": "用于检测正在播放的音乐与视频会话",
+          "title": "通知使用权",
+          "modal": {
+            "methodA": {
+              "title": "方法 A：特殊应用访问权限（Pixel、摩托罗拉、Infinix、原生系统）",
+              "step1": "点击下方的“打开 Android 设置”。",
+              "step2": "转到“特殊应用访问权限”>“通知访问权限”。",
+              "step3": "找到“Kruzty Dynamics”，然后开启“允许通知访问”选项。"
+            },
+            "methodB": {
+              "title": "方法 B：应用信息 > 省略号（小米/HyperOS、三星、OPPO）",
+              "step1": "打开设备“设置” > “应用” > “管理应用”/“应用列表”。",
+              "step2": "找到并点击“Kruzty Dynamics”。",
+              "step4": "点击“允许受限设置”/“特殊应用访问权限” > “授予”。",
+              "step5": "返回并启用“通知访问”功能。"
+            },
+            "desc": "“通知访问”功能使 Kruzty Dynamics 能够从 Spotify、YouTube Music 和媒体播放器中捕获实时媒体会话播放事件（歌曲名称、艺人、专辑和播放状态）。",
+            "oemNotice": {
+              "desc": "Android 通过特殊的权限层来保护对通知监听器的访问。请根据您的手机品牌，选择以下其中一种方法操作。",
+              "title": "针对 OEM 及 Android 13 及以上版本设备的通知"
+            },
+            "subtitle": "特殊应用访问配置",
+            "openAndroidSettings": "打开 Android 设置"
+          }
+        },
+        "desc": "状态检测所需",
+        "title": "权限控制",
+        "foregroundNotification": {
+          "desc": "Android 13+ 常驻服务通知权限",
+          "title": "前台服务通知",
+          "modal": {
+            "allowNotification": "允许通知",
+            "desc": "Android 13 及以上版本要求在状态栏中显示正在运行的前台服务通知，以确认 Discord 在线状态引擎正在运行。",
+            "subtitle": "Android 13 及以上版本的通知权限",
+            "title": "前台服务通知"
+          }
+        },
+        "usageAccess": {
+          "desc": "用于检测当前正在运行的前台应用或游戏",
+          "title": "应用使用情况访问权",
+          "modal": {
+            "openUsageAccess": "开放使用权限",
+            "desc": "“使用权限”是检测您当前在前台运行的应用程序或游戏所必需的，这样 Kruzty Dynamics 才能将其与您配置的应用程序目录进行匹配。",
+            "step1": "点击“打开使用权限”。",
+            "step2": "查找 Kruzty Dynamics。",
+            "step3": "开启“允许使用”权限。",
+            "subtitle": "前台应用检测"
+          }
+        }
+      },
+      "privacyNotice": "本应用绝不收集或上传任何个人数据。",
+      "subtitle": "配置必要权限与账号，启用动态 Discord Rich Presence。",
+      "title": "首次设置"
+    },
+    "footer": {
+      "allSet": "一切就绪！随时可以展示状态",
+      "buttons": {
+        "continueForNow": "暂且继续",
+        "finishSetup": "完成设置",
+        "skipForNow": "先跳过"
+      },
+      "readyWhenYouAre": "随时准备启动"
+    }
   },
-  "toast": {
-    "duplicateAccount": "该 Discord 账号已添加。",
-    "insufficientPermissions": "权限不足。请前往“设置与更多”>“检查权限”。",
-    "newVersionAvailable": "新版本已发布！",
-    "updateDetected": "检测到最新版本！",
-    "latestVersion": "这是最新版本！",
-    "updateCheckFailed": "无法检查更新。"
+  "tags": {
+    "granted": "已授权",
+    "notificationCrucial": "关键",
+    "allGranted": "全部已授权",
+    "cached": "已缓存",
+    "check": "检查",
+    "checkingUpdates": "检查更新",
+    "default": "默认",
+    "view": "查看"
   }
 }

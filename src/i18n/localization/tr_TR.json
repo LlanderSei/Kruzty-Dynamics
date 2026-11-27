@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "İlk Kurulum",
-    "subtitle": "Dinamik Discord Rich Presence'i etkinleştirmek için gerekli izinleri ve hesapları yapılandırın.",
-    "privacyNotice": "Bu uygulama kullanıcı verilerini toplamaz veya iletmez.",
-    "permissionsSection": "İzin Kontrolü",
-    "permissionsRequired": "Algılama için gerekli",
-    "notificationTitle": "Bildirim Erişimi",
-    "notificationDesc": "Medya ve oynatmayı algılamak için gereken Özel Uygulama Erişimi",
-    "notificationCrucial": "Kritik",
-    "usageTitle": "Kullanım Erişimi",
-    "usageDesc": "Şu anda çalışan ön plan uygulamasını veya oyunu algılamak için gerekli",
-    "batteryTitle": "Pil Optimizasyonu",
-    "batteryDesc": "Arka plan hizmetinin uyumasını önlemek için uygulamayı muaf tutun",
-    "postNotificationTitle": "Ön Plan Bildirimi",
-    "postNotificationDesc": "Kalıcı hizmet bildirimi için Android 13+ izni",
-    "grant": "İzin Ver",
-    "granted": "İzin Verildi",
-    "userControlSection": "Kullanıcı Kontrolü",
-    "userControlDesc": "Özelleştirme ve Hesap",
-    "discordLoginTitle": "Discord Girişi",
-    "discordLoginDesc": "Rich Presence'ı yansıtmak için Discord hesabınızı bağlayın",
-    "accountsConnected": "hesap giriş yaptı.",
-    "themeTitle": "Tema",
-    "languageTitle": "Dil",
-    "finishSetup": "Kurulumu Bitir",
-    "continueForNow": "Şimdilik Devam Et",
-    "skipForNow": "Şimdilik Atla",
-    "allSet": "Her şey hazır! Yansıtmaya hazır",
-    "readyWhenYouAre": "Siz hazır olduğunuzda hazır"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Etkin Kimlik",
+        "stored": "Kayıtlı"
+      },
+      "content": {
+        "subtitle": "Belirteçleri ve kimlikleri yönetin",
+        "title": "Discord Giriş Portalı",
+        "privacyText": "Discord yetkilendirmesi, Rich Presence ile birlikte sosyal özelliklere erişim talep eder. Kruzty Dynamics, hesabınızı tanımlamak ve yapılandırılmış etkinliğinizi yayınlamak veya temizlemek için SDK'yı kullanır; arkadaş, engelleme, davet, mesaj veya ses özelliklerini kullanmaz. Android'de belirteçler şifrelenir ve bu cihazda saklanır. Okuyun",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Gizlilik Politikası"
+      },
+      "title": "Discord Hesabı Bağla"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "İfadeler == ve != karşılaştırmalarını destekler. Etkinlik türü “Playing” olduğunda AppName’i, aksi takdirde AppPlatformType’ı seçmek için {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} ifadesini kullanın.",
+        "title": "Uygulama Belirteci Referansı",
+        "desc": "Alan ifadelerinde kullanılabilen dinamik değişkenler"
+      },
+      "media": {
+        "title": "Medya Belirteci Referansı",
+        "intro": "Token'lar metin alanlarına ve düğme etiketlerine veya URL'lerine doğrudan eklenebilir (örn. {example}).",
+        "desc": "Medya ifadeleri ve düğmelerde kullanılabilen dinamik değişkenler"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Kaydedilmemiş Değişiklikler Atılsın mı?",
+      "unsaved": "Kaydedilmemiş değişiklikler"
+    },
+    "logs": {
+      "copy": "Günlükleri kopyala",
+      "empty": "[BİLGİ] Henüz günlük yok. Discord girişini açın veya günlük oluşturmak için işlem yapın.",
+      "export": "Günlükleri dışa aktar",
+      "subtitle": "Canlı tanılama çıktısı",
+      "title": "Uygulama Günlükleri"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Birincil Vurgu Rengi",
+        "resetAccent": "Varsayılan Turuncuya Sıfırla",
+        "tapCustomize": "Özelleştirmek için dokunun",
+        "themeMode": "Tema Modu"
+      },
+      "globalDefaults": {
+        "activityStatus": "Etkinlik Durumu",
+        "activityType": "Etkinlik Türü",
+        "note": "Bu varsayılanlar, bir uygulama veya durum etkinliği kendi etkinlik türünü veya durumunu belirtmediğinde otomatik olarak kullanılır."
+      },
+      "imgBb": {
+        "apiPrivacy": "Bu alanı boş bırakmak, yerleşik varsayılan API anahtarına sıfırlar. Özel anahtarlar hiçbir zaman düz metin olarak açığa çıkarılmaz.",
+        "getApiKey": "anahtar almak için.",
+        "help": "Özel uygulama ve medya varlık görsellerini Discord CDN'ye yüklemek için kendi ImgBB API Anahtarınızı ayarlayın. Ziyaret edin",
+        "usingDefaultKey": "Varsayılan sistem anahtarı kullanılıyor"
+      },
+      "language": {
+        "availableLanguages": "Mevcut Diller",
+        "title": "Dil Seç",
+        "desc": "Arayüz etiketleri ve bildirimler için tercih ettiğiniz görüntüleme dilini seçin."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Android'in durum hizmetini sonlandırmasını önler",
+        "foregroundDesc": "Devam eden Discord durumu için durum çubuğu göstergesi",
+        "notificationAccessDesc": "Medya algılama için Özel Uygulama Erişimi",
+        "desc": "Etkin medya bildirimlerini ve ön plan uygulamalarını okumak için gereken izinlerin durumu:",
+        "usageAccessDesc": "Çalışan ön plan oyunlarını ve uygulamalarını algıla"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "{total} bağlantılı görsel URL'si var, bunların {custom} tanesi özel uygulama simgesi geçersiz kılmasıdır. Özel simgeleri koruyarak önbelleğe alınmış bağlantıları temizleyebilir veya tüm bağlantıları temizleyip özel geçersiz kılmaları kaldırabilirsiniz. Geçersiz kılmaları kaldırırsanız, bu simgeleri Uygulama Kataloğu'nda yeniden yükleyin.",
+        "buttons": {
+          "clearCacheAll": "Tümünü Temizle, Özel Simgeler Dahil",
+          "clearCacheKeep": "Önbelleği Temizle, Özel Simgeleri Koru"
+        },
+        "clearedAll": "Özel uygulama simgeleri dahil tüm bağlantılı görsel URL'leri temizlendi.",
+        "clearedKeeping": "Bağlantılı görsel URL önbelleği temizlendi. Özel uygulama simgeleri korundu.",
+        "linkedImageUrls": "Bağlantılı Görsel URL'leri"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy Katkıda Bulunanlar",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Bu Uygulamada Kullanılan Kütüphaneler",
+        "libraries": {
+          "lucide": "Topluluk tarafından hazırlanmış temiz vektör simgeler",
+          "react": "Modern kullanıcı arayüzü bileşen mimarisi",
+          "sdk": "Yerel Android rich presence entegrasyonu",
+          "tailwind": "Yardımcı program öncelikli modern duyarlı stil",
+          "tauri": "Hafif çapraz platform yerel çalışma zamanı",
+          "tokio": "Asenkron olay güdümlü ağ çalışma zamanı"
+        },
+        "maintainerRole": "Mevcut Bakımcı ve Geliştirici"
+      },
+      "discordApp": {
+        "developerPortal": "Discord Geliştirici Portalı",
+        "help": "Kendi Discord Uygulama Kimliğinizi şuradan ayarlayın:",
+        "idPrivacy": "Bu alanı boş bırakmak, varsayılan Kruzty Dynamics uygulama kimliğine sıfırlar."
+      }
+    }
   },
-  "nav": {
-    "service": "Hizmet",
-    "accounts": "Hesaplar",
-    "settings": "Ayarlar ve Daha Fazlası"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Hesap Ekle",
+            "switch": "Değiştir",
+            "unuse": "Kullanma"
+          },
+          "activePresence": "Etkin Durum",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Çıkışı Onayla",
+              "title": "Hesaptan Çıkış Yap",
+              "removePrefix": "Hesabı kaldırmak istediğinizden emin misiniz",
+              "removeSuffix": ". Bu, kayıtlı kimlik bilgilerini bu cihazdan kaldıracaktır."
+            }
+          },
+          "currentAccount": "Şu Anda Giriş Yapmış Hesap",
+          "noActiveAccount": "Seçili hesap yok. Aşağıdaki giriş yapmış hesaplardan birini seçin.",
+          "storedAccounts": "Kayıtlı Hesaplar"
+        },
+        "noAccount": {
+          "desc": "Oyunlar, uygulamalar ve medya için Rich Presence durumlarını yansıtmaya başlamak için Discord hesabınızı bağlayın.",
+          "title": "Henüz giriş yapmış hesap yok.",
+          "login": "Discord'a Giriş Yap"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Discord Hesabı Yok",
+        "loggedInMany": "{n} hesap giriş yaptı.",
+        "loggedInOne": "{n} hesap giriş yaptı."
+      },
+      "title": "Discord Hesapları"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics Panosu",
+      "title": {
+        "welcome": "Hoş geldiniz!",
+        "welcomeNamed": "Hoş geldiniz, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Tüm gerekli izinler verildi. Devam etmek için hizmeti açın.",
+              "foregroundService": {
+                "desc": "Android'in hizmet çalışırken hizmet bildirimini göstermesine izin verir.",
+                "title": "Ön Plan Hizmet Bildirimleri"
+              },
+              "notificationAccess": {
+                "desc": "Medya oynatmayı ve meta verilerini algılamak için gereklidir."
+              },
+              "subtitle": "Hizmeti başlatmadan önce bu Android izinlerini verin.",
+              "title": "Gerekli izinler",
+              "returnHint": "Android Ayarları'nda erişim verdikten sonra buraya dönün ve hizmeti etkinleştirin.",
+              "usageAccess": {
+                "desc": "Şu anda hangi uygulamanın ön planda olduğunu algılamak için gereklidir."
+              }
+            }
+          },
+          "startError": "Android durum hizmeti başlatılamadı.",
+          "running": "Hizmet çalışıyor.",
+          "stopped": "Hizmet başlatılmadı.",
+          "title": "Kruzty Dynamics Hizmeti"
+        },
+        "application": {
+          "desc": "Yerel durum algılama için uygulama profillerini yapılandırın",
+          "title": "Uygulama Durumu"
+        },
+        "buttons": {
+          "applicationCatalogue": "Uygulama Kataloğu",
+          "presenceConfiguration": "Durum Yapılandırması",
+          "statusFieldConfig": "Durum Alanı Yapılandırması"
+        },
+        "media": {
+          "desc": "Medya davranışını ve durum şablonlarını yapılandırın",
+          "title": "Medya Durumu"
+        },
+        "preview": {
+          "noPresence": "Yapılandırılmış uygulama veya etkin medya algılanmadı.",
+          "stoppedDescription": "Hizmet durduruldu. Etkinleştirilmiş uygulamaları ve etkin medyayı algılamak için açın."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "Uygulama Tercihleri",
+        "checkPermissions": {
+          "title": "İzinleri Kontrol Et",
+          "desc": "Verilen ve isteğe bağlı sistem erişim izinlerini inceleyin"
+        },
+        "deleteCachedUrls": {
+          "title": "Bağlantılı Görsel URL'lerini Sil",
+          "desc": "Uygulama veya medya durumunda kullanılan yüklenmiş görsellerin ilişkili URL'lerini temizler"
+        },
+        "discordAppId": {
+          "title": "Discord Uygulama Kimliği Ayarla",
+          "desc": "Kendi Discord Uygulama Kimliğinizi ayarlayın. Ziyaret edin: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "Genel Varsayılanlar",
+          "desc": "Yapılandırılmamış uygulamalar için etkinlik türü ve durumu"
+        },
+        "imgBbKey": {
+          "title": "ImgBB API Anahtarı Ayarla",
+          "desc": "Kendi ImgBB API Anahtarınızı ayarlayın. Ziyaret edin: api.imgbb.com"
+        },
+        "language": {
+          "title": "Dil",
+          "desc": "Şu Anki Ayar:"
+        },
+        "notificationProjection": {
+          "title": "Bildirim Durumu Görüntülemesini Özelleştirme",
+          "desc": "Uygulama ve medya bildirimlerinin başlıklarını ve alt başlıklarını özelleştirin."
+        },
+        "themes": {
+          "title": "Temalar ve Görünüm",
+          "desc": "Temanızı ve vurgu renginizi ayarlayın."
+        },
+        "checkUpdates": {
+          "title": "En Son Sürümü Kontrol Edin",
+          "desc": "Daha yeni bir sürümün mevcut olup olmadığını kontrol edin."
+        }
+      },
+      "subtitle": "Uygulama tercihleri ve tanılama",
+      "title": "Ayarlar ve Daha Fazlası",
+      "cardInfo": {
+        "architecture": "Rust Çekirdeği (Tokio + Tauri v2), React 19 ve TailwindCSS Ön Yüzü ile Native Android Eklenti Köprüsü kullanılarak oluşturulmuştur. Orijinal Kizzy's Experimental RPC'ye dayanmaktadır.",
+        "credits": "Katkıda Bulunanlar",
+        "developedBy": "Geliştiren",
+        "latestRelease": "En Son Sürüme Git",
+        "learnMore": "Bu Uygulama Hakkında Daha Fazla Bilgi",
+        "repository": "GitHub Deposunu Kontrol Et",
+        "submitIssue": "Sorun Bildir",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "Hoş geldiniz!",
-    "welcomeNamed": "Hoş geldiniz, {name}!",
-    "dashboardSubtitle": "Kruzty Dynamics Panosu",
-    "accountsLoggedInOne": "{n} hesap giriş yaptı.",
-    "accountsLoggedInMany": "{n} hesap giriş yaptı.",
-    "liveLogs": "Canlı Günlükler",
-    "viewLogs": "Günlükleri Görüntüle",
-    "serviceActive": "Etkin",
-    "serviceInactive": "Etkin Değil",
-    "serviceStarting": "Başlatılıyor",
-    "serviceStopped": "Durduruldu"
-  },
-  "accounts": {
-    "title": "Discord Hesapları",
-    "subtitle": "Belirteçleri ve kimlikleri yönetin",
-    "loginPortal": "Discord Portalı ile Giriş",
-    "loginWithToken": "Belirteç ile Hesap Ekle",
-    "addAccount": "Hesap Ekle",
-    "activeIdentity": "Etkin Kimlik",
-    "stored": "Kayıtlı",
+  "buttons": {
     "remove": "Kaldır",
-    "noAccounts": "Discord Hesabı Yok",
-    "noAccountsDesc": "Rich Presence'ı yansıtmaya başlamak için portal veya kullanıcı belirteci ile Discord hesabınızı ekleyin."
-  },
-  "settings": {
-    "title": "Ayarlar ve Daha Fazlası",
-    "subtitle": "Uygulama tercihleri ve tanılama",
-    "appPreferences": "Uygulama Tercihleri",
-    "notificationProjection": "Bildirim Durumu Görüntülemesini Özelleştirme",
-    "notificationProjectionDesc": "Uygulama ve medya bildirimlerinin başlıklarını ve alt başlıklarını özelleştirin.",
-    "themes": "Temalar ve Görünüm",
-    "themesDesc": "Temanızı ve vurgu renginizi ayarlayın.",
-    "language": "Dil",
-    "languageDesc": "Şu Anki Ayar:",
-    "globalDefaults": "Genel Varsayılanlar",
-    "globalDefaultsDesc": "Yapılandırılmamış uygulamalar için etkinlik türü ve durumu",
-    "imgbbKey": "ImgBB API Anahtarı Ayarla",
-    "imgbbKeyDesc": "Kendi ImgBB API Anahtarınızı ayarlayın. Ziyaret edin: api.imgbb.com",
-    "discordAppId": "Discord Uygulama Kimliği Ayarla",
-    "discordAppIdDesc": "Kendi Discord Uygulama Kimliğinizi ayarlayın. Ziyaret edin: discord.com/developers",
-    "checkPermissions": "İzinleri Kontrol Et",
-    "checkPermissionsDesc": "Verilen ve isteğe bağlı sistem erişim izinlerini inceleyin",
-    "deleteCache": "Bağlantılı Görsel URL'lerini Sil",
-    "deleteCacheDesc": "Uygulama veya medya durumunda kullanılan yüklenmiş görsellerin ilişkili URL'lerini temizler"
-  },
-  "service": {
-    "title": "Kruzty Dynamics Hizmeti",
-    "running": "Hizmet çalışıyor.",
-    "stopped": "Hizmet başlatılmadı.",
-    "applicationPresence": "Uygulama Durumu",
-    "appDescription": "Yerel durum algılama için uygulama profillerini yapılandırın",
-    "applicationCatalogue": "Uygulama Kataloğu",
-    "statusFieldConfig": "Durum Alanı Yapılandırması",
-    "presenceConfiguration": "Durum Yapılandırması",
-    "mediaPresence": "Medya Durumu",
-    "mediaDescription": "Medya davranışını ve durum şablonlarını yapılandırın",
-    "noPresence": "Yapılandırılmış uygulama veya etkin medya algılanmadı.",
-    "stoppedDescription": "Hizmet durduruldu. Etkinleştirilmiş uygulamaları ve etkin medyayı algılamak için açın."
-  },
-  "logs": {
-    "title": "Uygulama Günlükleri",
-    "subtitle": "Canlı tanılama çıktısı",
-    "copy": "Günlükleri kopyala",
-    "export": "Günlükleri dışa aktar",
-    "empty": "[BİLGİ] Henüz günlük yok. Discord girişini açın veya günlük oluşturmak için işlem yapın."
-  },
-  "permissions": {
-    "requiredTitle": "Gerekli izinler",
-    "requiredSubtitle": "Hizmeti başlatmadan önce bu Android izinlerini verin.",
-    "done": "Tamam",
-    "allGranted": "Tüm gerekli izinler verildi. Devam etmek için hizmeti açın.",
-    "grant": "İzin Ver",
-    "returnHint": "Android Ayarları'nda erişim verdikten sonra buraya dönün ve hizmeti etkinleştirin.",
-    "notificationTitle": "Bildirim Erişimi",
-    "notificationSubtitle": "Özel Uygulama Erişimi Yapılandırması",
-    "openAndroidSettings": "Android Ayarlarını Aç",
-    "oemNotice": "OEM ve Android 13+ Cihazlar için Uyarı",
-    "notificationExplanation": "Android, bildirim dinleyici erişimini özel izin katmanlarının arkasında korur. Telefon markanıza bağlı olarak aşağıdaki yöntemlerden birini izleyin.",
-    "methodA": "Yöntem A: Özel Uygulama Erişimi (Pixel, Motorola, Infinix, Stok)",
-    "methodAStep1": "Aşağıdaki Android Ayarlarını Aç'a dokunun.",
-    "methodAStep2": "Özel Uygulama Erişimi > Bildirim Erişimi'ne gidin.",
-    "methodAStep3": "Kruzty Dynamics'i bulun ve Bildirim erişimine izin ver seçeneğini açın.",
-    "methodB": "Yöntem B: Uygulama Bilgisi > Üç Nokta (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Cihaz Ayarları > Uygulamalar > Uygulamaları Yönet / Uygulama Listesi'ni açın.",
-    "methodBStep2": "Kruzty Dynamics'i bulun ve dokunun.",
-    "methodBStep3": "Sağ üst köşedeki üç noktaya dokunun.",
-    "methodBStep4": "Kısıtlı ayarlara izin ver / Özel Uygulama Erişimi > İzin Ver'e dokunun.",
-    "methodBStep5": "Geri dönün ve Bildirim Erişimini etkinleştirin.",
-    "notificationAccessDescription": "Bildirim Erişimi, Kruzty Dynamics'in Spotify, YouTube Music ve medya oynatıcılardan canlı medya oturumu oynatma olaylarını (Şarkı Adı, Sanatçı, Albüm ve Oynatma Durumu) yakalamasını sağlar.",
-    "usageTitle": "Kullanım Erişimi",
-    "usageSubtitle": "Ön Plan Uygulama Algılama",
-    "openUsageAccess": "Kullanım Erişimini Aç",
-    "usageDescription": "Kruzty Dynamics'in yapılandırılmış Uygulama Kataloğunuzla eşleştirebilmesi için şu anda ön planda hangi uygulama veya oyunu çalıştırdığınızı algılamak için Kullanım Erişimi gereklidir.",
-    "usageStep1": "Kullanım Erişimini Aç'a dokunun.",
-    "usageStep2": "Kruzty Dynamics'i bulun.",
-    "usageStep3": "Kullanım erişimine izin ver seçeneğini açın.",
-    "batteryTitle": "Pil Optimizasyonu",
-    "batterySubtitle": "Arka Plan Hizmeti Beyaz Listesi",
-    "requestExemption": "Muafiyet İste",
-    "batteryDescription": "Modern Android sistemleri arka plan süreçlerini birkaç dakika sonra uyutur. Kruzty Dynamics'i pil optimizasyonundan muaf tutmak, kesintisiz Discord Rich Presence güncellemelerini sağlar.",
-    "foregroundTitle": "Ön Plan Hizmet Bildirimi",
-    "foregroundSubtitle": "Android 13+ Bildirim İzni",
-    "foregroundGuardTitle": "Ön Plan Hizmet Bildirimleri",
-    "usageGuardDescription": "Şu anda hangi uygulamanın ön planda olduğunu algılamak için gereklidir.",
-    "notificationGuardDescription": "Medya oynatmayı ve meta verilerini algılamak için gereklidir.",
-    "foregroundGuardDescription": "Android'in hizmet çalışırken hizmet bildirimini göstermesine izin verir.",
-    "serviceStartError": "Android durum hizmeti başlatılamadı.",
-    "allowNotification": "Bildirime İzin Ver",
-    "foregroundDescription": "Discord durum motorunun çalıştığını doğrulayan, durum çubuğunda devam eden ön plan hizmet bildirimini göstermek için Android 13+ tarafından gereklidir."
-  },
-  "toast": {
-    "duplicateAccount": "Bu Discord hesabı zaten eklendi.",
-    "insufficientPermissions": "Yeterli izin yok. Lütfen Ayarlar ve Diğer > İzinleri Kontrol Et seçeneğine göz atın.",
-    "newVersionAvailable": "Yeni Sürüm Çıktı!",
-    "updateDetected": "Yeni bir sürüm tespit edildi!",
-    "latestVersion": "Bu en son sürümdür!",
-    "updateCheckFailed": "Güncellemeleri kontrol edilemedi."
-  },
-  "accountsPage": {
-    "emptyTitle": "Henüz giriş yapmış hesap yok.",
-    "emptyDescription": "Oyunlar, uygulamalar ve medya için Rich Presence durumlarını yansıtmaya başlamak için Discord hesabınızı bağlayın.",
-    "login": "Discord'a Giriş Yap",
-    "currentAccount": "Şu Anda Giriş Yapmış Hesap",
-    "activePresence": "Etkin Durum",
-    "storedAccounts": "Kayıtlı Hesaplar",
-    "switch": "Değiştir",
-    "unuse": "Kullanma",
-    "remove": "Kaldır",
-    "cancel": "İptal",
-    "deleteTitle": "Discord Hesabı Kaldırılsın mı?",
-    "loginTitle": "Discord Giriş Portalı",
-    "noActiveAccount": "Seçili hesap yok. Aşağıdaki giriş yapmış hesaplardan birini seçin.",
-    "addAccountTitle": "Discord Hesabı Bağla",
-    "portal": "Discord Giriş Portalı",
-    "signInPortal": "Uygulama içinde Discord ile güvenli şekilde oturum açın",
     "openPortal": "Portalı Aç",
-    "privacyText": "Discord yetkilendirmesi, Rich Presence ile birlikte sosyal özelliklere erişim talep eder. Kruzty Dynamics, hesabınızı tanımlamak ve yapılandırılmış etkinliğinizi yayınlamak veya temizlemek için SDK'yı kullanır; arkadaş, engelleme, davet, mesaj veya ses özelliklerini kullanmaz. Android'de belirteçler şifrelenir ve bu cihazda saklanır. Okuyun",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Hesaptan Çıkış Yap",
-    "removePrefix": "Hesabı kaldırmak istediğinizden emin misiniz",
-    "removeSuffix": ". Bu, kayıtlı kimlik bilgilerini bu cihazdan kaldıracaktır.",
-    "confirmLogout": "Çıkışı Onayla",
-    "addAccount": "Discord Hesabı Ekle",
-    "noSelection": "Seçili hesap yok. Aşağıdaki giriş yapmış hesaplardan birini seçin.",
-    "addMoreAccounts": "Aşağıdaki Discord düğmesine tıklayarak daha fazla hesap ekleyebilirsiniz."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Dil Seç",
-    "languageDescription": "Arayüz etiketleri ve bildirimler için tercih ettiğiniz görüntüleme dilini seçin.",
-    "availableLanguages": "Mevcut Diller",
-    "close": "Kapat",
-    "linkedImageUrls": "Bağlantılı Görsel URL'leri",
-    "clearCacheKeep": "Önbelleği Temizle, Özel Simgeleri Koru",
-    "clearCacheAll": "Tümünü Temizle, Özel Simgeler Dahil",
-    "credits": "Katkıda Bulunanlar",
-    "themeMode": "Tema Modu",
-    "accentColor": "Birincil Vurgu Rengi",
-    "resetAccent": "Varsayılan Turuncuya Sıfırla",
-    "learnMore": "Bu Uygulama Hakkında Daha Fazla Bilgi",
-    "privacyPolicy": "Gizlilik Politikası",
-    "repository": "GitHub Deposunu Kontrol Et",
-    "latestRelease": "En Son Sürüme Git",
-    "submitIssue": "Sorun Bildir",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Bu Uygulamada Kullanılan Kütüphaneler",
-    "contributorsSection": "Kizzy Katkıda Bulunanlar",
-    "maintainerRole": "Mevcut Bakımcı ve Geliştirici",
-    "view": "Görüntüle",
-    "done": "Tamam",
-    "developedBy": "Geliştiren",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Rust Çekirdeği (Tokio + Tauri v2), React 19 ve TailwindCSS Ön Yüzü ile Native Android Eklenti Köprüsü kullanılarak oluşturulmuştur. Orijinal Kizzy's Experimental RPC'ye dayanmaktadır.",
-    "cached": "önbelleğe alındı",
-    "tapCustomize": "Özelleştirmek için dokunun",
-    "defaultNote": "Bu varsayılanlar, bir uygulama veya durum etkinliği kendi etkinlik türünü veya durumunu belirtmediğinde otomatik olarak kullanılır.",
-    "activityType": "Etkinlik Türü",
-    "activityStatus": "Etkinlik Durumu",
-    "imgbbHelp": "Özel uygulama ve medya varlık görsellerini Discord CDN'ye yüklemek için kendi ImgBB API Anahtarınızı ayarlayın. Ziyaret edin",
-    "getApiKey": "anahtar almak için.",
-    "apiPrivacy": "Bu alanı boş bırakmak, yerleşik varsayılan API anahtarına sıfırlar. Özel anahtarlar hiçbir zaman düz metin olarak açığa çıkarılmaz.",
-    "saveKey": "Anahtarı Kaydet",
-    "discordIdHelp": "Kendi Discord Uygulama Kimliğinizi şuradan ayarlayın:",
-    "developerPortal": "Discord Geliştirici Portalı",
-    "idDefault": "Varsayılan",
-    "idPrivacy": "Bu alanı boş bırakmak, varsayılan Kruzty Dynamics uygulama kimliğine sıfırlar.",
-    "saveId": "Kimliği Kaydet",
-    "permissionsDescription": "Etkin medya bildirimlerini ve ön plan uygulamalarını okumak için gereken izinlerin durumu:",
-    "notificationAccessDesc": "Medya algılama için Özel Uygulama Erişimi",
-    "usageAccessDesc": "Çalışan ön plan oyunlarını ve uygulamalarını algıla",
-    "batteryDesc": "Android'in durum hizmetini sonlandırmasını önler",
-    "foregroundDesc": "Devam eden Discord durumu için durum çubuğu göstergesi",
-    "saveIdPlaceholder": "1572590527562391713 (Varsayılan)",
-    "resetDefault": "Varsayılana Sıfırla",
-    "cancel": "İptal",
-    "cacheWarning": "{total} bağlantılı görsel URL'si var, bunların {custom} tanesi özel uygulama simgesi geçersiz kılmasıdır. Özel simgeleri koruyarak önbelleğe alınmış bağlantıları temizleyebilir veya tüm bağlantıları temizleyip özel geçersiz kılmaları kaldırabilirsiniz. Geçersiz kılmaları kaldırırsanız, bu simgeleri Uygulama Kataloğu'nda yeniden yükleyin.",
-    "allGranted": "Tümü Verildi",
-    "clearedAll": "Özel uygulama simgeleri dahil tüm bağlantılı görsel URL'leri temizlendi.",
-    "clearedKeeping": "Bağlantılı görsel URL önbelleği temizlendi. Özel uygulama simgeleri korundu.",
-    "usingDefaultKey": "Varsayılan sistem anahtarı kullanılıyor",
-    "customKeySet": "Özel Anahtar Ayarlandı",
-    "light": "Açık",
-    "dark": "Koyu",
-    "amoled": "AMOLED",
-    "libraryTauri": "Hafif çapraz platform yerel çalışma zamanı",
-    "libraryTokio": "Asenkron olay güdümlü ağ çalışma zamanı",
-    "librarySdk": "Yerel Android rich presence entegrasyonu",
-    "libraryReact": "Modern kullanıcı arayüzü bileşen mimarisi",
-    "libraryTailwind": "Yardımcı program öncelikli modern duyarlı stil",
-    "libraryLucide": "Topluluk tarafından hazırlanmış temiz vektör simgeler",
-    "checkForUpdates": "En Son Sürümü Kontrol Edin",
-    "checkForUpdatesDesc": "Daha yeni bir sürümün mevcut olup olmadığını kontrol edin.",
-    "check": "Kontrol et",
-    "checkingUpdates": "Güncellemeleri kontrol etme"
-  },
-  "configFields": {
-    "appTitle": "Uygulama Durum Alanı Yapılandırması",
-    "mediaTitle": "Medya Durum Alanı Yapılandırması",
-    "back": "Geri",
-    "reset": "Varsayılanlara Sıfırla",
-    "help": "Kullanılabilir Belirteçler Yardımı",
-    "title": "Başlık",
-    "line1": "Satır 1 (Ayrıntılar)",
-    "line2": "Satır 2 (Durum)",
-    "smallText": "Küçük Metin",
-    "smallImage": "Küçük Görsel",
-    "bigText": "Büyük Metin",
-    "bigImage": "Büyük Görsel",
-    "header": "Başlık (Dinliyor / İzliyor)",
-    "mediaTitleField": "Medya Başlığı (Etkinlik Ayrıntıları)",
-    "artist": "Satır 1 (Etkinlik Durumu / Sanatçı)",
-    "album": "Satır 2 (Albüm / Görsel Metni)",
-    "buttons": "Özel Düğmeler",
-    "button1": "Düğme 1",
-    "button2": "Düğme 2",
-    "save": "Alanları Kaydet",
-    "appReference": "Uygulama Belirteci Referansı",
-    "mediaReference": "Medya Belirteci Referansı",
-    "tokenDescription": "Alan ifadelerinde kullanılabilen dinamik değişkenler",
-    "mediaTokenDescription": "Web ya da video oynatıcılardaki video/medya açıklaması.",
-    "discard": "Kaydedilmemiş Değişiklikler Atılsın mı?",
-    "unsaved": "Kaydedilmemiş değişiklikler",
-    "helpDone": "Anladım",
-    "appTokenName": "Etkinlikte gösterilen uygulama adı.",
-    "appHeader": "Başlık",
-    "titleHeader": "Etkinlik Başlığı/Üst Başlık",
-    "detailsField": "Etkinlik Ayrıntıları",
-    "stateField": "Etkinlik Durumu",
-    "notificationConfigSubtitle": "Ön plandaki hizmet bildiriminde gösterilen başlığı ve alt başlığı özelleştirin.",
-    "notificationAppSection": "Uygulama Durumu Bildirimi",
-    "notificationMediaSection": "Medya Oynatma Bildirimi",
-    "notificationSubtitleLabel": "Bildirim Alt Başlığı",
-    "notificationHelpIntro": "getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") ve getFieldCfgStr(\"MediaBigText\") işlevlerini kullanarak işlenmiş alan değerlerini ekleyin. Boş olmayan değerleri madde işareti ile birleştirmek için joinNonBlank(field1, field2) işlevini kullanın. Uygulama bildirim şablonları, AppActivityType == \"Playing\" koşulunu destekler. İfadeler ayrıca == ve != karşılaştırmalarını da destekler.",
-    "notificationDiscardMessage": "Kaydedilmemiş bildirim projeksiyon değişiklikleriniz var. Şimdi çıkarsanız bu değişiklikler silinecektir.",
-    "appTokenActivityType": "Bu uygulama profili için “Oynama”, “Dinleme”, “İzleme” veya “Yarışma” gibi belirli bir Zengin Varlık etkinlik türü seçildi.",
-    "appTokenPlatformType": "Bu uygulama profiline ait platform belirteci (örneğin, Android, PC veya Xbox).",
-    "appExpressionOperators": "İfadeler == ve != karşılaştırmalarını destekler. Etkinlik türü “Playing” olduğunda AppName’i, aksi takdirde AppPlatformType’ı seçmek için {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} ifadesini kullanın.",
-    "appTokenDetails": "Bu uygulama profilinde kayıtlı özel ayrıntı metni; devre dışıysa veya boşsa boş kalır.",
-    "appTokenState": "Bu uygulama profilinde kayıtlı özel durum metni; devre dışıysa veya boşsa boş kalır.",
-    "appTokenSmallText": "Bu uygulama profilinde kayıtlı özel küçük görsel etiketi; devre dışıysa veya boşsa boş kalır.",
-    "appTokenSmallUrl": "Bu uygulama profilinde kayıtlı özel küçük görsel URL'si; devre dışıysa veya boşsa boş kalır.",
-    "appTokenImageUrl": "Uygulama simgesinin önbelleğe alınmış ImgBB URL'si.",
-    "appTokenPackageName": "Android paket tanımlayıcısı (örn. com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Token'lar metin alanlarına ve düğme etiketlerine veya URL'lerine doğrudan eklenebilir (örn. {example}).",
-    "mediaTokenAppName": "Discord'un Listening to veya Watching başlığında görünen oynatıcı uygulama adı.",
-    "mediaTokenTitle": "Bildirim meta verilerindeki etkin şarkı veya video başlığı.",
-    "mediaTokenArtist": "Çalan ses veya videonun sanatçısı ya da oluşturucusu.",
-    "mediaTokenAlbum": "Albüm adı veya çalma listesi.",
-    "mediaTokenPlaybackState": "Geçerli oynatma durumu (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "Albüm kapağı veya küçük resmin önbelleğe alınmış ImgBB URL'si.",
-    "mediaTokenPlaybackImageUrl": "Geçerli oynatma göstergesi için görsel öğe URL'si.",
-    "mediaTokenFallbackImageUrl": "Görsel yoksa kullanılacak yedek uygulama simgesi.",
-    "appConfigSubtitle": "Uygulama algılama ifadelerini özelleştirin.",
-    "mediaConfigSubtitle": "Medya oynatma ifadelerini özelleştirin.",
-    "mediaHeaderDescription": "Discord medya başlığında gösterilen uygulama adı. Etkinlik türü Listening to veya Watching ifadesini belirler.",
-    "mediaTitleDescription": "Medya başlığı/ayrıntı metnine karşılık gelir. Oynatıcı adını yukarıdaki Header bölümünden ayrıca ayarlayın.",
-    "mediaAlbumDescription": "Discord medya kartında sanatçının altında gösterilir.",
-    "mediaButtonDescription": "Token ifadeleriyle en fazla 2 etkileşimli presence düğmesi ekleyin.",
-    "mediaButtonLabel": "Etiket",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "örn. ",
-    "mediaButtonListen": "Şurada dinle",
-    "appDiscardMessage": "Uygulama Durumu Alanlar?n?zda kaydedilmemi? de?i?iklikleriniz var. ?imdi ??karsan?z, bu de?i?iklikler ?nceki durumuna geri d?nd?r?lecektir.",
-    "mediaDiscardMessage": "Medya Durum Alanlar?n?zda kaydedilmemi? de?i?iklikleriniz var. ?imdi ??karsan?z, bu de?i?iklikler ?nceki durumuna geri d?nd?r?lecektir.",
-    "mediaTokenSubtitle": "Medya ifadeleri ve düğmelerde kullanılabilen dinamik değişkenler"
-  },
-  "catalogue": {
-    "title": "Uygulama Kataloğu",
-    "back": "Geri",
+    "understood": "Anlaşıldı",
+    "apply": "Uygula",
     "batch": "Toplu İşlemler",
-    "search": "Uygulama ara...",
-    "filter": "Uygulamaları Filtrele",
-    "clearFilters": "Filtreleri Temizle",
-    "enabledOnly": "Yalnızca Etkin",
-    "allActivityTypes": "Tüm Etkinlik Türleri",
-    "allActivityStatuses": "Tüm Etkinlik Durumları",
+    "cancel": "İptal",
+    "close": "Kapat",
+    "confirm": "Onayla ve Uygula",
+    "discardChanges": "Değişiklikleri At",
+    "keepEditing": "Düzenlemeye Devam Et",
+    "stageChanges": "Değişiklikleri Hazırla",
+    "uploadImage": "Görseli ImgBB'ye yükle",
+    "helpDone": "Anladım",
+    "save": {
+      "fields": "Alanları Kaydet",
+      "id": "Kimliği Kaydet",
+      "key": "Anahtarı Kaydet"
+    },
+    "logs": {
+      "live": "Canlı Günlükler",
+      "view": "Günlükleri Görüntüle"
+    },
+    "grant": "İzin Ver",
+    "done": "Tamam",
+    "resetDefault": "Varsayılana Sıfırla"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Etkinlik Adı",
+          "bigImage": "Büyük Görsel",
+          "bigText": "Büyük Metin",
+          "details": "Ayrıntılar",
+          "imageUrl": "Görsel URL'si",
+          "smallImage": "Küçük Görsel",
+          "smallText": "Küçük Metin",
+          "state": "Durum",
+          "uploadImage": "Görsel yükle",
+          "uploadingImage": "Görsel yükleniyor..."
+        },
+        "catalogue": {
+          "title": "Uygulama Kataloğu",
+          "desc": "Bireysel uygulama yansıtmalarını görüntüleyin, filtreleyin ve özelleştirin"
+        },
+        "configurationDetails": "Yapılandırma ayrıntıları",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Özelleştirilmiş yedek durumu hemen yansıtır.",
+              "drop": "Etkin bir uygulamaya dönene kadar Discord etkinliğinizi temizler.",
+              "freeze": "Etkin bir uygulama tekrar algılanana kadar son yansıtılan durumu duraklatır ve korur."
+            },
+            "title": "Uygulama Dışı Politikalar"
+          },
+          "fallbackPresence": "Özel Yedek Durum",
+          "desc": "Etkin uygulamalardan ayrıldığınızda veya başka bir uygulamaya geçtiğinizde davranış",
+          "title": "Algılanan Uygulama Dışı Politikalar",
+          "help": "Politika Yardımı"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Durum zamanlayıcısını belirli bir sabit başlangıç tarih ve saatine kilitler.",
+              "persistent": "Bu hizmet oturumu sırasında uygulamalar ve duraklatılmış medya için tek bir paylaşılan çalışma zamanı zaman damgası kullanır.",
+              "reset": "Uygulama başlatıldığında veya yeniden odaklandığında zamanlayıcıyı 00:00'da yeniden başlatır."
+            },
+            "title": "Zaman Damgası Stratejileri"
+          },
+          "fixedStart": "Sabit Başlangıç Zaman Damgası",
+          "desc": "Etkinlik zamanlayıcılarının uygulama oturumları arasında nasıl çözümlendiği",
+          "help": "Zaman Damgası Yardımı",
+          "title": "Zaman Damgası Stratejisi"
+        },
+        "statusFieldConfig": {
+          "title": "Durum Alanı Yapılandırması",
+          "desc": "Başlık, ayrıntılar, durum ve görsel ifadelerini özelleştirin"
+        },
+        "subtitle": "Uygulama dışı politikası ve zaman damgası davranışı",
+        "title": "Uygulama Durumu Yapılandırması"
+      },
+      "catalogue": {
+        "androidOnly": "Yüklü uygulama keşfi Android uygulamasında kullanılabilir.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Toplu Değişiklikler Uygulansın mı?",
+              "desc": "Hazırlanan yapılandırma değişikliklerini kalıcı olarak uygulamak üzeresiniz:",
+              "subtitle": "Onay",
+              "selectedApps": "seçili uygulama."
+            },
+            "title": "Toplu Yapılandır",
+            "subtitle": "Değişiklikleri seçili tüm uygulamalara uygula",
+            "discard": {
+              "title": "Hazırlanan Değişiklikler Atılsın mı?",
+              "desc": "Kaydedilmemiş toplu yapılandırmalarınız var. Şimdi toplu moddan ayrılmak, hazırlanan tüm değişiklikleri atacaktır.",
+              "subtitle": "Kaydedilmemiş toplu değişiklikler"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Bir simge görseli seçin",
+              "resetIcon": "Orijinal uygulama simgesine sıfırla",
+              "resetLabel": "Orijinal Etikete Sıfırla"
+            },
+            "customBtnDesc": "En fazla 2 etkileşimli durum düğmesi ekleyin",
+            "title": "Özelleştir",
+            "original": "Orijinal:",
+            "subtitle": "Durum profili ve yansıtma takma adları",
+            "projectedName": "Yansıtılan Ad",
+            "switchToggle": {
+              "buttons": "Özel Düğmeleri Aç/Kapat",
+              "details": "Özel Ayrıntıları ve Durumu Aç/Kapat",
+              "small": "Özel Küçük Metni ve Görseli Aç/Kapat"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Filtreleri Temizle",
+          "filter": "Uygulamaları Filtrele"
+        },
+        "loadAppsFailed": "Yüklü uygulamalar yüklenemedi.",
+        "loading": "Yükleniyor...",
+        "search": "Uygulama ara...",
+        "subtitle": "{apps} uygulama | {enabled} etkin",
+        "title": "Uygulama Kataloğu",
+        "uploadProgress": "Uygulama simgesi ImgBB'ye yükleniyor"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Uygulama algılama ifadelerini özelleştirin.",
+        "discardMsg": "Uygulama Durumu Alanlar?n?zda kaydedilmemi? de?i?iklikleriniz var. ?imdi ??karsan?z, bu de?i?iklikler ?nceki durumuna geri d?nd?r?lecektir.",
+        "title": "Uygulama Durum Alanı Yapılandırması"
+      }
+    },
+    "buttons": {
+      "back": "Geri",
+      "help": "Kullanılabilir Belirteçler Yardımı",
+      "reset": "Varsayılanlara Sıfırla"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Token ifadeleriyle en fazla 2 etkileşimli presence düğmesi ekleyin.",
+        "subtitle": "Medya oynatma ifadelerini özelleştirin.",
+        "discardMsg": "Medya Durum Alanlar?n?zda kaydedilmemi? de?i?iklikleriniz var. ?imdi ??karsan?z, bu de?i?iklikler ?nceki durumuna geri d?nd?r?lecektir.",
+        "title": "Medya Durum Alanı Yapılandırması"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "Uygulama zaman damgası",
+          "title": "Kalan Süre",
+          "desc": "Olağan başlangıç/geçerli-bitiş kalan süresini gösterir"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Medya duraklatıldığında önceki veya şu anda algılanan uygulamayı ya da özel yedeği kullanır.",
+              "hidePaused": "Medya duraklatıldığında, algılanan herhangi bir uygulama dahil durumu gizler.",
+              "showPaused": "Duraklatıldığında medya durumunu etkin tutar ve duraklatılmış göstergelerini gösterir."
+            },
+            "desc": "Etkin oynatma duraklatıldığında seçenekler"
+          },
+          "desc": "Etkin oynatma duraklatıldığında durum davranışı",
+          "help": "Duraklatılmış Çözümleme Yardımı",
+          "title": "Duraklatılmış Medya Çözümlemesi"
+        },
+        "mediaPriority": {
+          "title": "Medya Önceliği",
+          "desc": "Medyanın oyun/uygulama oturumlarını geçersiz kılıp kılmayacağını kontrol eder",
+          "help": "Öncelik Yardımı",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Medya etkin şekilde oynatılırken, kullandığınız uygulamaya göre öncelik alır ve geçerli parçayı veya videoyu yansıtır.",
+              "switchesBetween": "Medyayı yalnızca medya oynatıcısının içindeyken yansıtır. Bir oyuna veya etkin uygulamaya geçmek, o uygulamanın devralmasını sağlar."
+            },
+            "title": "Medya Öncelik Stratejisi",
+            "desc": "Oyun ve medya oturumları arasındaki çözümleme mantığı"
+          }
+        },
+        "mediaScope": {
+          "title": "Medya Algılama Kapsamı",
+          "desc": "Hangi uygulamaların medya rich presence'ını tetikleyeceğini filtrele"
+        },
+        "statusFieldConfig": {
+          "title": "Medya Durum Alanı Yapılandırması",
+          "desc": "Başlık, sanatçı, albüm ve görsel yedek ifadelerini özelleştirin"
+        },
+        "subtitle": "Çözümleme öncelikleri, zaman damgaları ve oynatma durumları",
+        "title": "Medya Durumu Yapılandırması",
+        "typeResolution": {
+          "title": "Medya Türü Çözümlemesi",
+          "desc": "Dinleme ve izleme etkinliklerinin nasıl sınıflandırıldığı"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "Uygulama Durumu Bildirimi",
+        "media": "Medya Oynatma Bildirimi"
+      },
+      "subtitle": "Ön plandaki hizmet bildiriminde gösterilen başlığı ve alt başlığı özelleştirin.",
+      "discard": "Kaydedilmemiş bildirim projeksiyon değişiklikleriniz var. Şimdi çıkarsanız bu değişiklikler silinecektir.",
+      "helpIntro": "getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") ve getFieldCfgStr(\"MediaBigText\") işlevlerini kullanarak işlenmiş alan değerlerini ekleyin. Boş olmayan değerleri madde işareti ile birleştirmek için joinNonBlank(field1, field2) işlevini kullanın. Uygulama bildirim şablonları, AppActivityType == \"Playing\" koşulunu destekler. İfadeler ayrıca == ve != karşılaştırmalarını da destekler."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Özel Yedek",
+      "drop": "Bırak (Durumu temizle)",
+      "freeze": "Dondur (Varsayılan)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Özel Sabit Zaman",
+      "persistent": "Kalıcı (Varsayılan)",
+      "resetOnLaunch": "Başlatmada Sıfırla"
+    },
+    "activityStatus": {
+      "all": "Tüm Etkinlik Durumları",
+      "dnd": "Rahatsız Etmeyin",
+      "idle": "Boşta",
+      "invisible": "Görünmez",
+      "offline": "Çevrimdışı",
+      "online": "Çevrimiçi",
+      "streaming": "Yayınlıyor"
+    },
+    "activityType": {
+      "all": "Tüm Etkinlik Türleri",
+      "competing": "Yarışıyor",
+      "listening": "Dinliyor",
+      "playing": "Oynuyor",
+      "watching": "İzliyor"
+    },
     "allPlatforms": "Tüm Platformlar",
+    "disableAll": "Tümünü Devre Dışı Bırak",
+    "enableAll": "Tümünü Etkinleştir",
+    "enabledOnly": "Yalnızca Etkin",
     "globalDefault": "Genel Varsayılan",
-    "playing": "Oynuyor",
-    "streaming": "Yayınlıyor",
-    "listening": "Dinliyor",
-    "watching": "İzliyor",
-    "competing": "Yarışıyor",
-    "online": "Çevrimiçi",
-    "idle": "Boşta",
-    "dnd": "Rahatsız Etmeyin",
-    "offline": "Çevrimdışı",
-    "invisible": "Görünmez",
-    "customize": "Özelleştir",
-    "profileSubtitle": "Durum profili ve yansıtma takma adları",
-    "activityType": "Etkinlik Türü",
+    "keepCurrent": "Mevcutu Koru",
+    "mediaScope": {
+      "allSessions": "Tüm Medya Oturumları (Varsayılan)",
+      "enabledAppsOnly": "Yalnızca Etkin Uygulamalar"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Otomatik Uyarlanabilir (Varsayılan)",
+      "profileOverride": "Uygulama Profili Geçersiz Kılma"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Algılanan Uygulamaya Geri Dön",
+      "hidePaused": "Duraklatılmış Durumu Gizle",
+      "showPaused": "Duraklatılmış Durumu Göster (Varsayılan)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Oynatılan Medyaya Öncelik Ver (Varsayılan)",
+      "switchesBetween": "Arasında Geçiş Yapar"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Koyu",
+      "light": "Açık"
+    }
+  },
+  "labels": {
     "activityStatus": "Etkinlik Durumu",
-    "platformType": "Platform Türü",
+    "activityType": "Etkinlik Türü",
+    "customButtons": "Özel Düğmeler",
     "customDetailsState": "Özel Ayrıntılar ve Durum",
     "customSmallImage": "Özel Küçük Metin ve Görsel",
-    "customButtons": "Özel Düğmeler",
-    "bulkConfigure": "Toplu Yapılandır",
-    "cancel": "İptal",
-    "stageChanges": "Değişiklikleri Hazırla",
-    "apply": "Uygula",
-    "confirm": "Onayla ve Uygula",
-    "keepCurrent": "Mevcutu Koru",
-    "enableAll": "Tümünü Etkinleştir",
-    "disableAll": "Tümünü Devre Dışı Bırak",
-    "discardBatch": "Hazırlanan Değişiklikler Atılsın mı?",
-    "chooseIcon": "Bir simge görseli seçin",
-    "resetIcon": "Orijinal uygulama simgesine sıfırla",
-    "resetLabel": "Orijinal Etikete Sıfırla",
-    "details": "Ayrıntılar",
-    "state": "Durum",
-    "smallText": "Küçük Metin",
-    "smallImageUrl": "Küçük görsel URL'si",
-    "uploadImage": "Görseli ImgBB'ye yükle",
-    "buttonLabel": "Etiket (ör. Oyuna Katıl)",
-    "presenceToggle": "Durum Anahtarı",
-    "bulkSubtitle": "Değişiklikleri seçili tüm uygulamalara uygula",
-    "applyBatchTitle": "Toplu Değişiklikler Uygulansın mı?",
-    "confirmation": "Onay",
-    "unsavedBatch": "Kaydedilmemiş toplu değişiklikler",
-    "confirmApply": "Onayla ve Uygula",
     "filterOptions": "Filtre Seçenekleri",
-    "close": "Kapat",
-    "loading": "Yükleniyor...",
-    "original": "Orijinal:",
-    "projectedName": "Yansıtılan Ad",
-    "customButtonDesc": "En fazla 2 etkileşimli durum düğmesi ekleyin",
-    "toggleDetails": "Özel Ayrıntıları ve Durumu Aç/Kapat",
-    "toggleSmall": "Özel Küçük Metni ve Görseli Aç/Kapat",
-    "toggleButtons": "Özel Düğmeleri Aç/Kapat",
-    "uploadProgress": "Uygulama simgesi ImgBB'ye yükleniyor",
-    "keepEditing": "Düzenlemeye Devam Et",
-    "discardChanges": "Değişiklikleri At",
-    "discardMessage": "Kaydedilmemiş toplu yapılandırmalarınız var. Şimdi toplu moddan ayrılmak, hazırlanan tüm değişiklikleri atacaktır.",
-    "applyMessage": "Hazırlanan yapılandırma değişikliklerini kalıcı olarak uygulamak üzeresiniz:",
-    "selectedApps": "seçili uygulama.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} uygulama | {enabled} etkin",
-    "chooseImage": "Bir görsel dosyası seçin.",
-    "imageTooLarge": "32 MB'tan küçük bir görsel seçin.",
-    "imageUploadFailed": "Görsel yükleme başarısız.",
-    "iconUploadFailed": "Simge yükleme başarısız.",
-    "androidOnly": "Yüklü uygulama keşfi Android uygulamasında kullanılabilir.",
-    "loadAppsFailed": "Yüklü uygulamalar yüklenemedi.",
-    "appUnit": "Uygulama",
-    "appsUnit": "Uygulama"
+    "platformType": "Platform Türü",
+    "presenceToggle": "Durum Anahtarı",
+    "button1": "Düğme 1",
+    "button2": "Düğme 2",
+    "label": "Etiket",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Uygulama Durumu Yapılandırması",
-    "subtitle": "Uygulama dışı politikası ve zaman damgası davranışı",
-    "catalogue": "Uygulama Kataloğu",
-    "catalogueDesc": "Bireysel uygulama yansıtmalarını görüntüleyin, filtreleyin ve özelleştirin",
-    "outsidePolicies": "Algılanan Uygulama Dışı Politikalar",
-    "outsideDescription": "Etkin uygulamalardan ayrıldığınızda veya başka bir uygulamaya geçtiğinizde davranış",
-    "policyHelp": "Politika Yardımı",
-    "freeze": "Dondur (Varsayılan)",
-    "customFallback": "Özel Yedek",
-    "drop": "Bırak (Durumu temizle)",
-    "fallbackPresence": "Özel Yedek Durum",
-    "activityName": "Etkinlik Adı",
+  "pluralization": {
+    "app": {
+      "plural": "Uygulama",
+      "singular": "Uygulama"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Etiket (ör. Oyuna Katıl)",
     "details": "Ayrıntılar",
-    "state": "Durum",
+    "smallImageUrl": "Küçük görsel URL'si",
     "smallText": "Küçük Metin",
-    "bigText": "Büyük Metin",
-    "smallImage": "Küçük Görsel",
-    "bigImage": "Büyük Görsel",
-    "imageUrl": "Görsel URL'si",
-    "uploadingImage": "Görsel yükleniyor...",
-    "timestampStrategy": "Zaman Damgası Stratejisi",
-    "timestampDescription": "Etkinlik zamanlayıcılarının uygulama oturumları arasında nasıl çözümlendiği",
-    "timestampHelp": "Zaman Damgası Yardımı",
-    "persistent": "Kalıcı (Varsayılan)",
-    "resetOnLaunch": "Başlatmada Sıfırla",
-    "customFixedTime": "Özel Sabit Zaman",
-    "fixedStart": "Sabit Başlangıç Zaman Damgası",
-    "statusFieldConfig": "Durum Alanı Yapılandırması",
-    "statusFieldDescription": "Başlık, ayrıntılar, durum ve görsel ifadelerini özelleştirin",
-    "configurationDetails": "Yapılandırma ayrıntıları",
-    "outsideHelpTitle": "Uygulama Dışı Politikalar",
-    "timestampHelpTitle": "Zaman Damgası Stratejileri",
-    "understood": "Anlaşıldı",
-    "freezeHelp": "Etkin bir uygulama tekrar algılanana kadar son yansıtılan durumu duraklatır ve korur.",
-    "customHelp": "Özelleştirilmiş yedek durumu hemen yansıtır.",
-    "dropHelp": "Etkin bir uygulamaya dönene kadar Discord etkinliğinizi temizler.",
-    "persistentHelp": "Bu hizmet oturumu sırasında uygulamalar ve duraklatılmış medya için tek bir paylaşılan çalışma zamanı zaman damgası kullanır.",
-    "resetHelp": "Uygulama başlatıldığında veya yeniden odaklandığında zamanlayıcıyı 00:00'da yeniden başlatır.",
-    "fixedHelp": "Durum zamanlayıcısını belirli bir sabit başlangıç tarih ve saatine kilitler.",
-    "uploadImage": "Görsel yükle"
+    "state": "Durum",
+    "urlExample": "URL (https://...)",
+    "example": "örn. ",
+    "listenOn": "Şurada dinle"
   },
-  "mediaPresence": {
-    "title": "Medya Durumu Yapılandırması",
-    "subtitle": "Çözümleme öncelikleri, zaman damgaları ve oynatma durumları",
-    "priority": "Medya Önceliği",
-    "priorityDesc": "Medyanın oyun/uygulama oturumlarını geçersiz kılıp kılmayacağını kontrol eder",
-    "priorityHelp": "Öncelik Yardımı",
-    "priorityPlaying": "Oynatılan Medyaya Öncelik Ver (Varsayılan)",
-    "switchesBetween": "Arasında Geçiş Yapar",
-    "scope": "Medya Algılama Kapsamı",
-    "scopeDesc": "Hangi uygulamaların medya rich presence'ını tetikleyeceğini filtrele",
-    "allSessions": "Tüm Medya Oturumları (Varsayılan)",
-    "enabledAppsOnly": "Yalnızca Etkin Uygulamalar",
-    "typeResolution": "Medya Türü Çözümlemesi",
-    "typeResolutionDesc": "Dinleme ve izleme etkinliklerinin nasıl sınıflandırıldığı",
-    "autoAdaptive": "Otomatik Uyarlanabilir (Varsayılan)",
-    "profileOverride": "Uygulama Profili Geçersiz Kılma",
-    "timeRemaining": "Kalan Süre",
-    "timeRemainingDesc": "Olağan başlangıç/geçerli-bitiş kalan süresini gösterir",
-    "appTimestamp": "Uygulama zaman damgası",
-    "pausedResolution": "Duraklatılmış Medya Çözümlemesi",
-    "pausedDesc": "Etkin oynatma duraklatıldığında durum davranışı",
-    "pausedHelp": "Duraklatılmış Çözümleme Yardımı",
-    "showPaused": "Duraklatılmış Durumu Göster (Varsayılan)",
-    "fallbackApp": "Algılanan Uygulamaya Geri Dön",
-    "hidePaused": "Duraklatılmış Durumu Gizle",
-    "statusFields": "Medya Durum Alanı Yapılandırması",
-    "statusFieldsDesc": "Başlık, sanatçı, albüm ve görsel yedek ifadelerini özelleştirin",
-    "priorityStrategy": "Medya Öncelik Stratejisi",
-    "priorityStrategyDesc": "Oyun ve medya oturumları arasındaki çözümleme mantığı",
-    "pausedOptions": "Etkin oynatma duraklatıldığında seçenekler",
-    "priorityHelpText": "Medya etkin şekilde oynatılırken, kullandığınız uygulamaya göre öncelik alır ve geçerli parçayı veya videoyu yansıtır.",
-    "switchHelpText": "Medyayı yalnızca medya oynatıcısının içindeyken yansıtır. Bir oyuna veya etkin uygulamaya geçmek, o uygulamanın devralmasını sağlar.",
-    "showPausedHelp": "Duraklatıldığında medya durumunu etkin tutar ve duraklatılmış göstergelerini gösterir.",
-    "fallbackHelp": "Medya duraklatıldığında önceki veya şu anda algılanan uygulamayı ya da özel yedeği kullanır.",
-    "hidePausedHelp": "Medya duraklatıldığında, algılanan herhangi bir uygulama dahil durumu gizler."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Bir görsel dosyası seçin.",
+      "iconUploadFailed": "Simge yükleme başarısız.",
+      "imageTooLarge": "32 MB'tan küçük bir görsel seçin.",
+      "imageUploadFailed": "Görsel yükleme başarısız."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "Büyük Görsel",
+      "bigText": "Büyük Metin",
+      "line1": "Etkinlik Ayrıntıları",
+      "smallImage": "Küçük Görsel",
+      "smallText": "Küçük Metin",
+      "line2": "Etkinlik Durumu",
+      "title": "Etkinlik Başlığı/Üst Başlık"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "hesap giriş yaptı.",
+          "desc": "Rich Presence'ı yansıtmak için Discord hesabınızı bağlayın",
+          "title": "Discord Girişi"
+        },
+        "languageTitle": "Dil",
+        "themeTitle": "Tema",
+        "desc": "Özelleştirme ve Hesap",
+        "title": "Kullanıcı Kontrolü"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Arka plan hizmetinin uyumasını önlemek için uygulamayı muaf tutun",
+          "title": "Pil Optimizasyonu",
+          "modal": {
+            "desc": "Modern Android sistemleri arka plan süreçlerini birkaç dakika sonra uyutur. Kruzty Dynamics'i pil optimizasyonundan muaf tutmak, kesintisiz Discord Rich Presence güncellemelerini sağlar.",
+            "subtitle": "Arka Plan Hizmeti Beyaz Listesi",
+            "requestExemption": "Muafiyet İste"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Medya ve oynatmayı algılamak için gereken Özel Uygulama Erişimi",
+          "title": "Bildirim Erişimi",
+          "modal": {
+            "methodA": {
+              "title": "Yöntem A: Özel Uygulama Erişimi (Pixel, Motorola, Infinix, Stok)",
+              "step1": "Aşağıdaki Android Ayarlarını Aç'a dokunun.",
+              "step2": "Özel Uygulama Erişimi > Bildirim Erişimi'ne gidin.",
+              "step3": "Kruzty Dynamics'i bulun ve Bildirim erişimine izin ver seçeneğini açın."
+            },
+            "methodB": {
+              "title": "Yöntem B: Uygulama Bilgisi > Üç Nokta (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Cihaz Ayarları > Uygulamalar > Uygulamaları Yönet / Uygulama Listesi'ni açın.",
+              "step2": "Kruzty Dynamics'i bulun ve dokunun.",
+              "step4": "Kısıtlı ayarlara izin ver / Özel Uygulama Erişimi > İzin Ver'e dokunun.",
+              "step5": "Geri dönün ve Bildirim Erişimini etkinleştirin."
+            },
+            "desc": "Bildirim Erişimi, Kruzty Dynamics'in Spotify, YouTube Music ve medya oynatıcılardan canlı medya oturumu oynatma olaylarını (Şarkı Adı, Sanatçı, Albüm ve Oynatma Durumu) yakalamasını sağlar.",
+            "oemNotice": {
+              "desc": "Android, bildirim dinleyici erişimini özel izin katmanlarının arkasında korur. Telefon markanıza bağlı olarak aşağıdaki yöntemlerden birini izleyin.",
+              "title": "OEM ve Android 13+ Cihazlar için Uyarı"
+            },
+            "subtitle": "Özel Uygulama Erişimi Yapılandırması",
+            "openAndroidSettings": "Android Ayarlarını Aç"
+          }
+        },
+        "desc": "Algılama için gerekli",
+        "title": "İzin Kontrolü",
+        "foregroundNotification": {
+          "desc": "Kalıcı hizmet bildirimi için Android 13+ izni",
+          "title": "Ön Plan Bildirimi",
+          "modal": {
+            "allowNotification": "Bildirime İzin Ver",
+            "desc": "Discord durum motorunun çalıştığını doğrulayan, durum çubuğunda devam eden ön plan hizmet bildirimini göstermek için Android 13+ tarafından gereklidir.",
+            "subtitle": "Android 13+ Bildirim İzni",
+            "title": "Ön Plan Hizmet Bildirimi"
+          }
+        },
+        "usageAccess": {
+          "desc": "Şu anda çalışan ön plan uygulamasını veya oyunu algılamak için gerekli",
+          "title": "Kullanım Erişimi",
+          "modal": {
+            "openUsageAccess": "Kullanım Erişimini Aç",
+            "desc": "Kruzty Dynamics'in yapılandırılmış Uygulama Kataloğunuzla eşleştirebilmesi için şu anda ön planda hangi uygulama veya oyunu çalıştırdığınızı algılamak için Kullanım Erişimi gereklidir.",
+            "step1": "Kullanım Erişimini Aç'a dokunun.",
+            "step2": "Kruzty Dynamics'i bulun.",
+            "step3": "Kullanım erişimine izin ver seçeneğini açın.",
+            "subtitle": "Ön Plan Uygulama Algılama"
+          }
+        }
+      },
+      "privacyNotice": "Bu uygulama kullanıcı verilerini toplamaz veya iletmez.",
+      "subtitle": "Dinamik Discord Rich Presence'i etkinleştirmek için gerekli izinleri ve hesapları yapılandırın.",
+      "title": "İlk Kurulum"
+    },
+    "footer": {
+      "allSet": "Her şey hazır! Yansıtmaya hazır",
+      "buttons": {
+        "continueForNow": "Şimdilik Devam Et",
+        "finishSetup": "Kurulumu Bitir",
+        "skipForNow": "Şimdilik Atla"
+      },
+      "readyWhenYouAre": "Siz hazır olduğunuzda hazır"
+    }
+  },
+  "tags": {
+    "granted": "İzin Verildi",
+    "notificationCrucial": "Kritik",
+    "allGranted": "Tümü Verildi",
+    "cached": "önbelleğe alındı",
+    "check": "Kontrol et",
+    "checkingUpdates": "Güncellemeleri kontrol etme",
+    "default": "Varsayılan",
+    "view": "Görüntüle"
   }
 }

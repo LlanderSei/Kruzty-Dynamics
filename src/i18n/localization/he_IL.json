@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "הגדרה ראשונית",
-    "subtitle": "הגדר הרשאות וחשבונות נדרשים כדי לאפשר Discord Rich Presence דינמי.",
-    "privacyNotice": "אפליקציה זו אינה אוספת או משדרת נתוני משתמש.",
-    "permissionsSection": "בקרת הרשאות",
-    "permissionsRequired": "נדרש לזיהוי",
-    "notificationTitle": "גישה להתראות",
-    "notificationDesc": "נדרשת גישה מיוחדת לאפליקציה כדי לזהות מדיה וניגון",
-    "notificationCrucial": "קריטי",
-    "usageTitle": "גישה לשימוש",
-    "usageDesc": "נדרש כדי לזהות את האפליקציה או המשחק הפעילים כרגע בחזית",
-    "batteryTitle": "אופטימיזציית סוללה",
-    "batteryDesc": "פטור את האפליקציה כדי למנוע משירות הרקע להירדם",
-    "postNotificationTitle": "התראת חזית",
-    "postNotificationDesc": "הרשאת Android 13+ עבור התראת שירות מתמשכת",
-    "grant": "הענק",
-    "granted": "הוענק",
-    "userControlSection": "בקרת משתמש",
-    "userControlDesc": "התאמה אישית וחשבון",
-    "discordLoginTitle": "התחברות ל-Discord",
-    "discordLoginDesc": "חבר את חשבון ה-Discord שלך כדי להקרין Rich Presence",
-    "accountsConnected": "חשבונות מחוברים.",
-    "themeTitle": "ערכת נושא",
-    "languageTitle": "שפה",
-    "finishSetup": "סיים הגדרה",
-    "continueForNow": "המשך לעכשיו",
-    "skipForNow": "דלג לעכשיו",
-    "allSet": "הכל מוכן! מוכן להקרנה",
-    "readyWhenYouAre": "מוכן כשאתה מוכן"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "זהות פעילה",
+        "stored": "מאוחסן"
+      },
+      "content": {
+        "subtitle": "נהל אסימונים וזהויות",
+        "title": "פורטל התחברות ל-Discord",
+        "privacyText": "הרשאת Discord מבקשת גישה לתכונות חברתיות לצד Rich Presence. Kruzty Dynamics משתמש ב-SDK כדי לזהות את חשבונך ולפרסם או לנקות את הפעילות המוגדרת שלך; הוא אינו משתמש בתכונות חברים, חסימה, הזמנה, הודעה או קול. ב-Android, אסימונים מוצפנים ומאוחסנים במכשיר זה. קרא את",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "מדיניות פרטיות"
+      },
+      "title": "חבר חשבון Discord"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "ביטויים תומכים בהשוואות == ו-!=. השתמש ב-{{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} כדי לבחור ב-AppName כאשר סוג הפעילות הוא Playing, וב-AppPlatformType בכל מקרה אחר.",
+        "title": "הפניה לאסימון אפליקציה",
+        "desc": "משתנים דינמיים הזמינים בביטויי שדה"
+      },
+      "media": {
+        "title": "הפניה לאסימון מדיה",
+        "intro": "ניתן להטמיע אסימונים ישירות בשדות טקסט ובתוויות לחצנים או בכתובות URL (למשל {example}).",
+        "desc": "משתנים דינמיים הזמינים בביטויי מדיה ובלחצנים"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "לבטל שינויים שלא נשמרו?",
+      "unsaved": "שינויים שלא נשמרו"
+    },
+    "logs": {
+      "copy": "העתק יומנים",
+      "empty": "[INFO] אין יומנים עדיין. פתח התחברות ל-Discord או בצע פעולות כדי ליצור יומנים.",
+      "export": "ייצא יומנים",
+      "subtitle": "פלט אבחון חי",
+      "title": "יומני אפליקציה"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "צבע הדגשה ראשי",
+        "resetAccent": "אפס לכתום ברירת מחדל",
+        "tapCustomize": "הקש להתאמה אישית",
+        "themeMode": "מצב ערכת נושא"
+      },
+      "globalDefaults": {
+        "activityStatus": "סטטוס פעילות",
+        "activityType": "סוג פעילות",
+        "note": "ברירות מחדל אלה משמשות באופן אוטומטי כאשר אפליקציה או פעילות נוכחות אינן מציינות את סוג הפעילות או הסטטוס שלהן."
+      },
+      "imgBb": {
+        "apiPrivacy": "השארת שדה זה ריק מאפסת למפתח ה-API המובנה המוגדר כברירת מחדל. מפתחות מותאמים אישית לעולם אינם נחשפים בטקסט פשוט.",
+        "getApiKey": "כדי לקבל מפתח.",
+        "help": "הגדר מפתח API משלך של ImgBB כדי להעלות תמונות נכסים של אפליקציות ומדיה מותאמות אישית ל-Discord CDN. בקר ב",
+        "usingDefaultKey": "משתמש במפתח מערכת ברירת מחדל"
+      },
+      "language": {
+        "availableLanguages": "שפות זמינות",
+        "title": "בחר שפה",
+        "desc": "בחר את שפת התצוגה המועדפת עליך עבור תוויות ממשק משתמש והתראות."
+      },
+      "checkPermissions": {
+        "batteryDesc": "מונע מ-Android להרוג את שירות הנוכחות",
+        "foregroundDesc": "מחוון שורת מצב עבור נוכחות Discord מתמשכת",
+        "notificationAccessDesc": "גישה מיוחדת לאפליקציה לזיהוי מדיה",
+        "desc": "סטטוס ההרשאות הנדרשות לקריאת התראות מדיה פעילות ואפליקציות חזית:",
+        "usageAccessDesc": "זהה משחקים ואפליקציות חזית פועלות"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "ישנן {total} כתובות URL של תמונות מקושרות, כולל {custom} עקיפות סמלי אפליקציה מותאמות אישית. תוכל לנקות קישורים במטמון תוך שמירה על סמלים מותאמים אישית, או לנקות את כל הקישורים ולהסיר עקיפות מותאמות אישית. אם תסיר עקיפות, העלה סמלים אלה שוב בקטלוג האפליקציות.",
+        "buttons": {
+          "clearCacheAll": "נקה הכל, כולל סמלים מותאמים אישית",
+          "clearCacheKeep": "נקה מטמון, שמור סמלים מותאמים אישית"
+        },
+        "clearedAll": "כל כתובות URL של תמונות מקושרות נוקו, כולל סמלי אפליקציה מותאמים אישית.",
+        "clearedKeeping": "מטמון כתובות URL של תמונות מקושרות נוקה. סמלי אפליקציה מותאמים אישית נשמרו.",
+        "linkedImageUrls": "כתובות URL של תמונות מקושרות"
+      },
+      "credits": {
+        "contributorsSection": "תורמי Kizzy",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "ספריות המשמשות באפליקציה זו",
+        "libraries": {
+          "lucide": "סמלי וקטור נקיים בעבודת יד של הקהילה",
+          "react": "ארכיטקטורת רכיבי ממשק משתמש מודרנית",
+          "sdk": "שילוב rich presence מקורי של Android",
+          "tailwind": "עיצוב רספונסיבי מודרני מבוסס כלי עזר",
+          "tauri": "זמן ריצה מקורי קל משקל חוצה פלטפורמות",
+          "tokio": "זמן ריצה רשת אסינכרוני מונע אירועים"
+        },
+        "maintainerRole": "מתחזק ומפתח נוכחי"
+      },
+      "discordApp": {
+        "developerPortal": "פורטל מפתחי Discord",
+        "help": "הגדר Discord Application ID משלך מתוך",
+        "idPrivacy": "השארת שדה זה ריק תאפס בחזרה למזהה אפליקציית Kruzty Dynamics המוגדר כברירת מחדל."
+      }
+    }
   },
-  "nav": {
-    "service": "שירות",
-    "accounts": "חשבונות",
-    "settings": "הגדרות ועוד"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "הוסף חשבון",
+            "switch": "החלף",
+            "unuse": "בטל שימוש"
+          },
+          "activePresence": "נוכחות פעילה",
+          "modal": {
+            "logout": {
+              "confirmLogout": "אשר התנתקות",
+              "title": "התנתק מחשבון",
+              "removePrefix": "האם אתה בטוח שברצונך להסיר את החשבון",
+              "removeSuffix": ". פעולה זו תסיר את פרטי הכניסה השמורים ממכשיר זה."
+            }
+          },
+          "currentAccount": "חשבון מחובר נוכחי",
+          "noActiveAccount": "לא נבחר חשבון. בחר אחד מהחשבונות המחוברים למטה.",
+          "storedAccounts": "חשבונות מאוחסנים"
+        },
+        "noAccount": {
+          "desc": "חבר את חשבון ה-Discord שלך כדי להתחיל להקרין סטטוסים של Rich Presence עבור משחקים, אפליקציות ומדיה.",
+          "title": "אין חשבון מחובר עדיין.",
+          "login": "התחבר ל-Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "אין חשבונות Discord",
+        "loggedInMany": "{n} חשבונות מחוברים.",
+        "loggedInOne": "{n} חשבון מחובר."
+      },
+      "title": "חשבונות Discord"
+    },
+    "service": {
+      "subtitle": "לוח מחוונים Kruzty Dynamics",
+      "title": {
+        "welcome": "ברוך הבא!",
+        "welcomeNamed": "ברוך הבא, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "כל ההרשאות הנדרשות הוענקו. הפעל את השירות כדי להמשיך.",
+              "foregroundService": {
+                "desc": "מאפשר ל-Android להציג את התראת השירות בזמן שהוא פועל.",
+                "title": "התראות שירות חזית"
+              },
+              "notificationAccess": {
+                "desc": "נדרש כדי לזהות ניגון מדיה והמטא-נתונים שלה."
+              },
+              "subtitle": "הענק הרשאות Android אלה לפני הפעלת השירות.",
+              "title": "נדרשות הרשאות",
+              "returnHint": "לאחר הענקת גישה בהגדרות Android, חזור לכאן והפעל את השירות.",
+              "usageAccess": {
+                "desc": "נדרש כדי לזהות איזו אפליקציה נמצאת כעת בחזית."
+              }
+            }
+          },
+          "startError": "לא ניתן היה להפעיל את שירות הנוכחות של Android.",
+          "running": "השירות פועל.",
+          "stopped": "השירות לא הופעל.",
+          "title": "שירות Kruzty Dynamics"
+        },
+        "application": {
+          "desc": "הגדר פרופילי אפליקציה לזיהוי נוכחות מקומי",
+          "title": "נוכחות אפליקציה"
+        },
+        "buttons": {
+          "applicationCatalogue": "קטלוג אפליקציות",
+          "presenceConfiguration": "תצורת נוכחות",
+          "statusFieldConfig": "תצורת שדה סטטוס"
+        },
+        "media": {
+          "desc": "הגדר התנהגות מדיה ותבניות סטטוס",
+          "title": "נוכחות מדיה"
+        },
+        "preview": {
+          "noPresence": "לא זוהתה אפליקציה מוגדרת או מדיה פעילה.",
+          "stoppedDescription": "השירות מופסק. הפעל אותו כדי לזהות אפליקציות מופעלות ומדיה פעילה."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "העדפות אפליקציה",
+        "checkPermissions": {
+          "title": "בדוק הרשאות",
+          "desc": "סקור הרשאות גישה למערכת שהוענקו ואופציונליות"
+        },
+        "deleteCachedUrls": {
+          "title": "מחק כתובות URL של תמונות מקושרות",
+          "desc": "מנקה כתובות URL משויכות של תמונות שהועלו המשמשות בסטטוס אפליקציה או מדיה"
+        },
+        "discordAppId": {
+          "title": "הגדר Discord Application ID",
+          "desc": "הגדר Discord Application ID משלך. בקר ב: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "ברירות מחדל גלובליות",
+          "desc": "סוג פעילות וסטטוס עבור אפליקציות לא מוגדרות"
+        },
+        "imgBbKey": {
+          "title": "הגדר מפתח API של ImgBB",
+          "desc": "הגדר מפתח API משלך של ImgBB. בקר ב: api.imgbb.com"
+        },
+        "language": {
+          "title": "שפה",
+          "desc": "מוגדר כעת:"
+        },
+        "notificationProjection": {
+          "title": "התאמה אישית של תצוגת מצב ההתראות",
+          "desc": "התאם אישית כותרות וכותרות משנה של התראות מיישומים ומדיה."
+        },
+        "themes": {
+          "title": "ערכות נושא ותצוגה",
+          "desc": "הגדר את ערכת הנושא וצבע ההדגשה שלך."
+        },
+        "checkUpdates": {
+          "title": "בדוק אם קיימת גרסה עדכנית",
+          "desc": "בדוק אם קיימת גרסה חדשה יותר."
+        }
+      },
+      "subtitle": "העדפות אפליקציה ואבחון",
+      "title": "הגדרות ועוד",
+      "cardInfo": {
+        "architecture": "נבנה באמצעות Rust Core (Tokio + Tauri v2) עם React 19 ו-Frontend של TailwindCSS כולל Native Android Plugin Bridge. מבוסס על Kizzy's Experimental RPC המקורי.",
+        "credits": "קרדיטים",
+        "developedBy": "פותח על ידי",
+        "latestRelease": "עבור לגרסה האחרונה",
+        "learnMore": "למד עוד על אפליקציה זו",
+        "repository": "בדוק מאגר GitHub",
+        "submitIssue": "שלח בעיה",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "ברוך הבא!",
-    "welcomeNamed": "ברוך הבא, {name}!",
-    "dashboardSubtitle": "לוח מחוונים Kruzty Dynamics",
-    "accountsLoggedInOne": "{n} חשבון מחובר.",
-    "accountsLoggedInMany": "{n} חשבונות מחוברים.",
-    "liveLogs": "יומנים חיים",
-    "viewLogs": "הצג יומנים",
-    "serviceActive": "פעיל",
-    "serviceInactive": "לא פעיל",
-    "serviceStarting": "מתחיל",
-    "serviceStopped": "מופסק"
-  },
-  "accounts": {
-    "title": "חשבונות Discord",
-    "subtitle": "נהל אסימונים וזהויות",
-    "loginPortal": "התחבר דרך פורטל Discord",
-    "loginWithToken": "הוסף חשבון באמצעות אסימון",
-    "addAccount": "הוסף חשבון",
-    "activeIdentity": "זהות פעילה",
-    "stored": "מאוחסן",
+  "buttons": {
     "remove": "הסר",
-    "noAccounts": "אין חשבונות Discord",
-    "noAccountsDesc": "הוסף את חשבון ה-Discord שלך באמצעות הפורטל או אסימון משתמש כדי להתחיל להקרין rich presence."
-  },
-  "settings": {
-    "title": "הגדרות ועוד",
-    "subtitle": "העדפות אפליקציה ואבחון",
-    "appPreferences": "העדפות אפליקציה",
-    "notificationProjection": "התאמה אישית של תצוגת מצב ההתראות",
-    "notificationProjectionDesc": "התאם אישית כותרות וכותרות משנה של התראות מיישומים ומדיה.",
-    "themes": "ערכות נושא ותצוגה",
-    "themesDesc": "הגדר את ערכת הנושא וצבע ההדגשה שלך.",
-    "language": "שפה",
-    "languageDesc": "מוגדר כעת:",
-    "globalDefaults": "ברירות מחדל גלובליות",
-    "globalDefaultsDesc": "סוג פעילות וסטטוס עבור אפליקציות לא מוגדרות",
-    "imgbbKey": "הגדר מפתח API של ImgBB",
-    "imgbbKeyDesc": "הגדר מפתח API משלך של ImgBB. בקר ב: api.imgbb.com",
-    "discordAppId": "הגדר Discord Application ID",
-    "discordAppIdDesc": "הגדר Discord Application ID משלך. בקר ב: discord.com/developers",
-    "checkPermissions": "בדוק הרשאות",
-    "checkPermissionsDesc": "סקור הרשאות גישה למערכת שהוענקו ואופציונליות",
-    "deleteCache": "מחק כתובות URL של תמונות מקושרות",
-    "deleteCacheDesc": "מנקה כתובות URL משויכות של תמונות שהועלו המשמשות בסטטוס אפליקציה או מדיה"
-  },
-  "service": {
-    "title": "שירות Kruzty Dynamics",
-    "running": "השירות פועל.",
-    "stopped": "השירות לא הופעל.",
-    "applicationPresence": "נוכחות אפליקציה",
-    "appDescription": "הגדר פרופילי אפליקציה לזיהוי נוכחות מקומי",
-    "applicationCatalogue": "קטלוג אפליקציות",
-    "statusFieldConfig": "תצורת שדה סטטוס",
-    "presenceConfiguration": "תצורת נוכחות",
-    "mediaPresence": "נוכחות מדיה",
-    "mediaDescription": "הגדר התנהגות מדיה ותבניות סטטוס",
-    "noPresence": "לא זוהתה אפליקציה מוגדרת או מדיה פעילה.",
-    "stoppedDescription": "השירות מופסק. הפעל אותו כדי לזהות אפליקציות מופעלות ומדיה פעילה."
-  },
-  "logs": {
-    "title": "יומני אפליקציה",
-    "subtitle": "פלט אבחון חי",
-    "copy": "העתק יומנים",
-    "export": "ייצא יומנים",
-    "empty": "[INFO] אין יומנים עדיין. פתח התחברות ל-Discord או בצע פעולות כדי ליצור יומנים."
-  },
-  "permissions": {
-    "requiredTitle": "נדרשות הרשאות",
-    "requiredSubtitle": "הענק הרשאות Android אלה לפני הפעלת השירות.",
-    "done": "בוצע",
-    "allGranted": "כל ההרשאות הנדרשות הוענקו. הפעל את השירות כדי להמשיך.",
-    "grant": "הענק",
-    "returnHint": "לאחר הענקת גישה בהגדרות Android, חזור לכאן והפעל את השירות.",
-    "notificationTitle": "גישה להתראות",
-    "notificationSubtitle": "תצורת גישה מיוחדת לאפליקציה",
-    "openAndroidSettings": "פתח הגדרות Android",
-    "oemNotice": "הודעה עבור מכשירי OEM ו-Android 13+",
-    "notificationExplanation": "Android מגן על גישת מאזין ההתראות מאחורי שכבות הרשאה מיוחדות. בהתאם למותג הטלפון שלך, בצע אחת מהשיטות שלהלן.",
-    "methodA": "שיטה A: גישה מיוחדת לאפליקציה (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "הקש על פתח הגדרות Android למטה.",
-    "methodAStep2": "עבור אל גישה מיוחדת לאפליקציה > גישה להתראות.",
-    "methodAStep3": "מצא את Kruzty Dynamics והפעל אפשר גישה להתראות.",
-    "methodB": "שיטה B: מידע אפליקציה > שלוש נקודות (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "פתח הגדרות מכשיר > אפליקציות > נהל אפליקציות / רשימת אפליקציות.",
-    "methodBStep2": "מצא והקש על Kruzty Dynamics.",
-    "methodBStep3": "הקש על שלוש הנקודות בפינה הימנית העליונה.",
-    "methodBStep4": "הקש על אפשר הגדרות מוגבלות / גישה מיוחדת לאפליקציה > הענק.",
-    "methodBStep5": "חזור והפעל גישה להתראות.",
-    "notificationAccessDescription": "גישה להתראות מאפשרת ל-Kruzty Dynamics ללכוד אירועי ניגון של הפעלת מדיה חיה (כותרת שיר, אמן, אלבום ומצב ניגון) מ-Spotify, YouTube Music ונגני מדיה.",
-    "usageTitle": "גישה לשימוש",
-    "usageSubtitle": "זיהוי אפליקציית חזית",
-    "openUsageAccess": "פתח גישה לשימוש",
-    "usageDescription": "נדרשת גישה לשימוש כדי לזהות איזו אפליקציה או משחק אתה מפעיל כעת בחזית, כך ש-Kruzty Dynamics יוכל להתאים אותה לקטלוג האפליקציות המוגדר שלך.",
-    "usageStep1": "הקש על פתח גישה לשימוש.",
-    "usageStep2": "אתר את Kruzty Dynamics.",
-    "usageStep3": "הפעל אפשר גישה לשימוש.",
-    "batteryTitle": "אופטימיזציית סוללה",
-    "batterySubtitle": "רשימת היתרים לשירות רקע",
-    "requestExemption": "בקש פטור",
-    "batteryDescription": "מערכות Android מודרניות מרדימות תהליכי רקע לאחר מספר דקות. פטור Kruzty Dynamics מאופטימיזציית סוללה מבטיח עדכוני Discord Rich Presence רציפים וללא הפרעה.",
-    "foregroundTitle": "התראת שירות חזית",
-    "foregroundSubtitle": "הרשאת התראות Android 13+",
-    "foregroundGuardTitle": "התראות שירות חזית",
-    "usageGuardDescription": "נדרש כדי לזהות איזו אפליקציה נמצאת כעת בחזית.",
-    "notificationGuardDescription": "נדרש כדי לזהות ניגון מדיה והמטא-נתונים שלה.",
-    "foregroundGuardDescription": "מאפשר ל-Android להציג את התראת השירות בזמן שהוא פועל.",
-    "serviceStartError": "לא ניתן היה להפעיל את שירות הנוכחות של Android.",
-    "allowNotification": "אפשר התראה",
-    "foregroundDescription": "נדרש על ידי Android 13+ כדי להציג את התראת שירות החזית המתמשכת בשורת המצב שלך, ולאשר שמנוע הנוכחות של Discord פועל."
-  },
-  "toast": {
-    "duplicateAccount": "חשבון Discord זה כבר נוסף.",
-    "insufficientPermissions": "הרשאות לא מספיקות. אנא בדוק את 'הגדרות ועוד' > 'בדוק הרשאות'.",
-    "newVersionAvailable": "גרסה חדשה זמינה!",
-    "updateDetected": "זוהתה גרסה חדשה ועדכנית!",
-    "latestVersion": "זוהי הגרסה העדכנית ביותר!",
-    "updateCheckFailed": "לא ניתן היה לבדוק אם יש עדכונים."
-  },
-  "accountsPage": {
-    "emptyTitle": "אין חשבון מחובר עדיין.",
-    "emptyDescription": "חבר את חשבון ה-Discord שלך כדי להתחיל להקרין סטטוסים של Rich Presence עבור משחקים, אפליקציות ומדיה.",
-    "login": "התחבר ל-Discord",
-    "currentAccount": "חשבון מחובר נוכחי",
-    "activePresence": "נוכחות פעילה",
-    "storedAccounts": "חשבונות מאוחסנים",
-    "switch": "החלף",
-    "unuse": "בטל שימוש",
-    "remove": "הסר",
-    "cancel": "בטל",
-    "deleteTitle": "להסיר את חשבון Discord?",
-    "loginTitle": "פורטל התחברות ל-Discord",
-    "noActiveAccount": "לא נבחר חשבון. בחר אחד מהחשבונות המחוברים למטה.",
-    "addAccountTitle": "חבר חשבון Discord",
-    "portal": "פורטל התחברות ל-Discord",
-    "signInPortal": "התחבר בצורה מאובטחת עם Discord בתוך האפליקציה",
     "openPortal": "פתח פורטל",
-    "privacyText": "הרשאת Discord מבקשת גישה לתכונות חברתיות לצד Rich Presence. Kruzty Dynamics משתמש ב-SDK כדי לזהות את חשבונך ולפרסם או לנקות את הפעילות המוגדרת שלך; הוא אינו משתמש בתכונות חברים, חסימה, הזמנה, הודעה או קול. ב-Android, אסימונים מוצפנים ומאוחסנים במכשיר זה. קרא את",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "התנתק מחשבון",
-    "removePrefix": "האם אתה בטוח שברצונך להסיר את החשבון",
-    "removeSuffix": ". פעולה זו תסיר את פרטי הכניסה השמורים ממכשיר זה.",
-    "confirmLogout": "אשר התנתקות",
-    "addAccount": "הוסף חשבון Discord",
-    "noSelection": "לא נבחר חשבון. בחר אחד מהחשבונות המחוברים למטה.",
-    "addMoreAccounts": "תוכל להוסיף חשבונות נוספים על ידי לחיצה על כפתור Discord למטה."
-  },
-  "settingsUi": {
-    "chooseLanguage": "בחר שפה",
-    "languageDescription": "בחר את שפת התצוגה המועדפת עליך עבור תוויות ממשק משתמש והתראות.",
-    "availableLanguages": "שפות זמינות",
-    "close": "סגור",
-    "linkedImageUrls": "כתובות URL של תמונות מקושרות",
-    "clearCacheKeep": "נקה מטמון, שמור סמלים מותאמים אישית",
-    "clearCacheAll": "נקה הכל, כולל סמלים מותאמים אישית",
-    "credits": "קרדיטים",
-    "themeMode": "מצב ערכת נושא",
-    "accentColor": "צבע הדגשה ראשי",
-    "resetAccent": "אפס לכתום ברירת מחדל",
-    "learnMore": "למד עוד על אפליקציה זו",
-    "privacyPolicy": "מדיניות פרטיות",
-    "repository": "בדוק מאגר GitHub",
-    "latestRelease": "עבור לגרסה האחרונה",
-    "submitIssue": "שלח בעיה",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "ספריות המשמשות באפליקציה זו",
-    "contributorsSection": "תורמי Kizzy",
-    "maintainerRole": "מתחזק ומפתח נוכחי",
-    "view": "הצג",
-    "done": "בוצע",
-    "developedBy": "פותח על ידי",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "נבנה באמצעות Rust Core (Tokio + Tauri v2) עם React 19 ו-Frontend של TailwindCSS כולל Native Android Plugin Bridge. מבוסס על Kizzy's Experimental RPC המקורי.",
-    "cached": "במטמון",
-    "tapCustomize": "הקש להתאמה אישית",
-    "defaultNote": "ברירות מחדל אלה משמשות באופן אוטומטי כאשר אפליקציה או פעילות נוכחות אינן מציינות את סוג הפעילות או הסטטוס שלהן.",
-    "activityType": "סוג פעילות",
-    "activityStatus": "סטטוס פעילות",
-    "imgbbHelp": "הגדר מפתח API משלך של ImgBB כדי להעלות תמונות נכסים של אפליקציות ומדיה מותאמות אישית ל-Discord CDN. בקר ב",
-    "getApiKey": "כדי לקבל מפתח.",
-    "apiPrivacy": "השארת שדה זה ריק מאפסת למפתח ה-API המובנה המוגדר כברירת מחדל. מפתחות מותאמים אישית לעולם אינם נחשפים בטקסט פשוט.",
-    "saveKey": "שמור מפתח",
-    "discordIdHelp": "הגדר Discord Application ID משלך מתוך",
-    "developerPortal": "פורטל מפתחי Discord",
-    "idDefault": "ברירת מחדל",
-    "idPrivacy": "השארת שדה זה ריק תאפס בחזרה למזהה אפליקציית Kruzty Dynamics המוגדר כברירת מחדל.",
-    "saveId": "שמור ID",
-    "permissionsDescription": "סטטוס ההרשאות הנדרשות לקריאת התראות מדיה פעילות ואפליקציות חזית:",
-    "notificationAccessDesc": "גישה מיוחדת לאפליקציה לזיהוי מדיה",
-    "usageAccessDesc": "זהה משחקים ואפליקציות חזית פועלות",
-    "batteryDesc": "מונע מ-Android להרוג את שירות הנוכחות",
-    "foregroundDesc": "מחוון שורת מצב עבור נוכחות Discord מתמשכת",
-    "saveIdPlaceholder": "1572590527562391713 (ברירת מחדל)",
-    "resetDefault": "אפס לברירת מחדל",
-    "cancel": "בטל",
-    "cacheWarning": "ישנן {total} כתובות URL של תמונות מקושרות, כולל {custom} עקיפות סמלי אפליקציה מותאמות אישית. תוכל לנקות קישורים במטמון תוך שמירה על סמלים מותאמים אישית, או לנקות את כל הקישורים ולהסיר עקיפות מותאמות אישית. אם תסיר עקיפות, העלה סמלים אלה שוב בקטלוג האפליקציות.",
-    "allGranted": "הכל הוענק",
-    "clearedAll": "כל כתובות URL של תמונות מקושרות נוקו, כולל סמלי אפליקציה מותאמים אישית.",
-    "clearedKeeping": "מטמון כתובות URL של תמונות מקושרות נוקה. סמלי אפליקציה מותאמים אישית נשמרו.",
-    "usingDefaultKey": "משתמש במפתח מערכת ברירת מחדל",
-    "customKeySet": "מפתח מותאם אישית הוגדר",
-    "light": "בהיר",
-    "dark": "כהה",
-    "amoled": "AMOLED",
-    "libraryTauri": "זמן ריצה מקורי קל משקל חוצה פלטפורמות",
-    "libraryTokio": "זמן ריצה רשת אסינכרוני מונע אירועים",
-    "librarySdk": "שילוב rich presence מקורי של Android",
-    "libraryReact": "ארכיטקטורת רכיבי ממשק משתמש מודרנית",
-    "libraryTailwind": "עיצוב רספונסיבי מודרני מבוסס כלי עזר",
-    "libraryLucide": "סמלי וקטור נקיים בעבודת יד של הקהילה",
-    "checkForUpdates": "בדוק אם קיימת גרסה עדכנית",
-    "checkForUpdatesDesc": "בדוק אם קיימת גרסה חדשה יותר.",
-    "check": "בדוק",
-    "checkingUpdates": "בדיקת עדכונים"
-  },
-  "configFields": {
-    "appTitle": "תצורת שדה סטטוס אפליקציה",
-    "mediaTitle": "תצורת שדה סטטוס מדיה",
-    "back": "חזור",
-    "reset": "אפס לברירות מחדל",
-    "help": "עזרה באסימונים זמינים",
-    "title": "כותרת",
-    "line1": "שורה 1 (פרטים)",
-    "line2": "שורה 2 (מצב)",
-    "smallText": "טקסט קטן",
-    "smallImage": "תמונה קטנה",
-    "bigText": "טקסט גדול",
-    "bigImage": "תמונה גדולה",
-    "header": "כותרת עליונה (מקשיב ל / צופה ב)",
-    "mediaTitleField": "כותרת מדיה (פרטי פעילות)",
-    "artist": "שורה 1 (מצב פעילות / אמן)",
-    "album": "שורה 2 (אלבום / טקסט תמונה)",
-    "buttons": "לחצנים מותאמים אישית",
-    "button1": "לחצן 1",
-    "button2": "לחצן 2",
-    "save": "שמור שדות",
-    "appReference": "הפניה לאסימון אפליקציה",
-    "mediaReference": "הפניה לאסימון מדיה",
-    "tokenDescription": "משתנים דינמיים הזמינים בביטויי שדה",
-    "mediaTokenDescription": "תיאור וידאו או מדיה מנגני וידאו או אינטרנט.",
-    "discard": "לבטל שינויים שלא נשמרו?",
-    "unsaved": "שינויים שלא נשמרו",
-    "helpDone": "הבנתי",
-    "appTokenName": "שם האפליקציה המוקרן המוצג בפעילות.",
-    "appHeader": "כותרת",
-    "titleHeader": "כותרת/כותרת משנה של הפעילות",
-    "detailsField": "פרטי הפעילות",
-    "stateField": "מצב הפעילות",
-    "notificationConfigSubtitle": "התאם אישית את הכותרת והכותרת המשנית המוצגות בהודעת השירות המופיעה בחזית.",
-    "notificationAppSection": "התראה על מצב האפליקציה",
-    "notificationMediaSection": "התראה על השמעת מדיה",
-    "notificationSubtitleLabel": "כותרת משנה של ההודעה",
-    "notificationHelpIntro": "השתמש ב-getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") ו-getFieldCfgStr(\"MediaBigText\") כדי להוסיף את ערכי השדות המוצגים. השתמש ב-joinNonBlank(field1, field2) כדי לחבר ערכים שאינם ריקים באמצעות תו נקודה. תבניות ההתראות של האפליקציה תומכות בתנאי AppActivityType == \"Playing\". ביטויים תומכים גם בהשוואות == ו-!=.",
-    "notificationDiscardMessage": "יש לך שינויים בהגדרות התצוגה של ההתראות שלא נשמרו. אם תצא כעת, השינויים יבוטלו.",
-    "appTokenActivityType": "סוג פעילות \"נוכחות עשירה\" שנבחר עבור פרופיל האפליקציה הזה, כגון \"משחק\", \"האזנה\", \"צפייה\" או \"תחרות\".",
-    "appTokenPlatformType": "אסימון הפלטפורמה מפרופיל האפליקציה הזה, כגון Android, מחשב או Xbox.",
-    "appExpressionOperators": "ביטויים תומכים בהשוואות == ו-!=. השתמש ב-{{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} כדי לבחור ב-AppName כאשר סוג הפעילות הוא Playing, וב-AppPlatformType בכל מקרה אחר.",
-    "appTokenDetails": "טקסט פרטים מותאם אישית שנשמר בפרופיל אפליקציה זה, או ריק כאשר מושבת או ריק.",
-    "appTokenState": "טקסט מצב מותאם אישית שנשמר בפרופיל אפליקציה זה, או ריק כאשר מושבת או ריק.",
-    "appTokenSmallText": "תווית תמונה קטנה מותאמת אישית שנשמרה בפרופיל אפליקציה זה, או ריקה כאשר מושבתת או ריקה.",
-    "appTokenSmallUrl": "כתובת URL של תמונה קטנה מותאמת אישית שנשמרה בפרופיל אפליקציה זה, או ריקה כאשר מושבתת או ריקה.",
-    "appTokenImageUrl": "כתובת URL מרוחקת של ImgBB במטמון של סמל האפליקציה.",
-    "appTokenPackageName": "מזהה חבילת Android (למשל com.mojang.minecraftpe).",
-    "mediaTokenIntro": "ניתן להטמיע אסימונים ישירות בשדות טקסט ובתוויות לחצנים או בכתובות URL (למשל {example}).",
-    "mediaTokenAppName": "שם אפליקציית הנגן המוצג בכותרת העליונה של Discord 'מקשיב ל' או 'צופה ב'.",
-    "mediaTokenTitle": "כותרת השיר או הווידאו הפעילים של המדיה ממטא-נתוני ההתראה.",
-    "mediaTokenArtist": "אמן או יוצר האודיו או הווידאו המושמע.",
-    "mediaTokenAlbum": "שם האלבום או מיכל רשימת ההשמעה.",
-    "mediaTokenPlaybackState": "מצב הניגון הנוכחי (מנגן, מושהה, מופסק).",
-    "mediaTokenImageUrl": "כתובת URL של ImgBB במטמון של עטיפת אלבום המדיה או תמונה ממוזערת.",
-    "mediaTokenPlaybackImageUrl": "כתובת URL של תמונת נכס עבור מחוון הניגון הנוכחי.",
-    "mediaTokenFallbackImageUrl": "סמל אפליקציה חלופי אם אין יצירת אמנות זמינה.",
-    "appConfigSubtitle": "התאם אישית ביטויים לזיהוי אפליקציות.",
-    "mediaConfigSubtitle": "התאם אישית ביטויים לניגון מדיה.",
-    "mediaHeaderDescription": "שם האפליקציה המוצג בכותרת המדיה של Discord. סוג הפעילות בוחר 'מקשיב ל' או 'צופה ב'.",
-    "mediaTitleDescription": "זה ממופה לטקסט הכותרת/פרטים של המדיה. הגדר את שם הנגן בנפרד בכותרת העליונה למעלה.",
-    "mediaAlbumDescription": "מוצג מתחת לאמן בכרטיס המדיה של Discord.",
-    "mediaButtonDescription": "הוסף עד 2 לחצני נוכחות אינטראקטיביים עם ביטויי אסימון.",
-    "mediaButtonLabel": "תווית",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "למשל ",
-    "mediaButtonListen": "הקשב ב",
-    "appDiscardMessage": "יש לך שינויים שלא נשמרו בשדות סטטוס האפליקציה שלך. יציאה כעת תחזיר אותם למצב הקודם.",
-    "mediaDiscardMessage": "יש לך שינויים שלא נשמרו בשדות סטטוס המדיה שלך. יציאה כעת תחזיר אותם למצב הקודם.",
-    "mediaTokenSubtitle": "משתנים דינמיים הזמינים בביטויי מדיה ובלחצנים"
-  },
-  "catalogue": {
-    "title": "קטלוג אפליקציות",
-    "back": "חזור",
+    "understood": "מובן",
+    "apply": "החל",
     "batch": "פעולות אצווה",
-    "search": "חפש אפליקציות...",
-    "filter": "סנן אפליקציות",
-    "clearFilters": "נקה מסננים",
-    "enabledOnly": "מופעלים בלבד",
-    "allActivityTypes": "כל סוגי הפעילות",
-    "allActivityStatuses": "כל סטטוסי הפעילות",
+    "cancel": "בטל",
+    "close": "סגור",
+    "confirm": "אשר והחל",
+    "discardChanges": "בטל שינויים",
+    "keepEditing": "המשך לערוך",
+    "stageChanges": "שלב שינויים",
+    "uploadImage": "העלה תמונה ל-ImgBB",
+    "helpDone": "הבנתי",
+    "save": {
+      "fields": "שמור שדות",
+      "id": "שמור ID",
+      "key": "שמור מפתח"
+    },
+    "logs": {
+      "live": "יומנים חיים",
+      "view": "הצג יומנים"
+    },
+    "grant": "הענק",
+    "done": "בוצע",
+    "resetDefault": "אפס לברירת מחדל"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "שם פעילות",
+          "bigImage": "תמונה גדולה",
+          "bigText": "טקסט גדול",
+          "details": "פרטים",
+          "imageUrl": "כתובת URL של תמונה",
+          "smallImage": "תמונה קטנה",
+          "smallText": "טקסט קטן",
+          "state": "מצב",
+          "uploadImage": "העלה תמונה",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "קטלוג אפליקציות",
+          "desc": "הצג, סנן והתאם אישית תחזיות אפליקציה בודדות"
+        },
+        "configurationDetails": "פרטי תצורה",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "מקרין מיד את הנוכחות החלופית המותאמת אישית.",
+              "drop": "מנקה את פעילות ה-Discord שלך עד שתחזור לאפליקציה מופעלת.",
+              "freeze": "משהה ומשמר את הנוכחות המוקרנת האחרונה עד לזיהוי אפליקציה מופעלת שוב."
+            },
+            "title": "מדיניות מחוץ לאפליקציה"
+          },
+          "fallbackPresence": "נוכחות חלופית מותאמת אישית",
+          "desc": "התנהגות כאשר אתה עוזב או עובר מאפליקציות מופעלות",
+          "title": "מדיניות מחוץ לאפליקציה שזוהתה",
+          "help": "עזרה במדיניות"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "נועל את טיימר הנוכחות לתאריך ושעת התחלה קבועים ספציפיים.",
+              "persistent": "משתמש בחותמת זמן אחת משותפת של זמן ריצה עבור אפליקציות ומדיה מושהית במהלך הפעלת שירות זו.",
+              "reset": "מפעיל מחדש את הטיימר ב-00:00 כאשר האפליקציה מופעלת או ממוקדת מחדש."
+            },
+            "title": "אסטרטגיות חותמת זמן"
+          },
+          "fixedStart": "חותמת זמן התחלה קבועה",
+          "desc": "כיצד נפתרים טיימרים של פעילות בין הפעלות אפליקציה",
+          "help": "עזרה בחותמת זמן",
+          "title": "אסטרטגיית חותמת זמן"
+        },
+        "statusFieldConfig": {
+          "title": "תצורת שדה סטטוס",
+          "desc": "התאם אישית כותרת, פרטים, מצב וביטויי יצירת אמנות"
+        },
+        "subtitle": "מדיניות מחוץ לאפליקציה והתנהגות חותמת זמן",
+        "title": "תצורת נוכחות אפליקציה"
+      },
+      "catalogue": {
+        "androidOnly": "גילוי אפליקציות מותקנות זמין באפליקציית Android.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "להחיל שינויי אצווה?",
+              "desc": "אתה עומד להחיל לצמיתות שינויי תצורה בשלב על",
+              "subtitle": "אישור",
+              "selectedApps": "אפליקציות נבחרות."
+            },
+            "title": "תצורה גורפת",
+            "subtitle": "החל שינויים על כל האפליקציות שנבחרו",
+            "discard": {
+              "title": "לבטל שינויים בשלב?",
+              "desc": "יש לך תצורות אצווה שלא הושלמו. יציאה ממצב אצווה כעת תבטל את כל השינויים בשלב.",
+              "subtitle": "שינויי אצווה שלא נשמרו"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "בחר תמונת סמל",
+              "resetIcon": "אפס לסמל האפליקציה המקורי",
+              "resetLabel": "אפס לתווית המקורית"
+            },
+            "customBtnDesc": "הוסף עד 2 לחצני נוכחות אינטראקטיביים",
+            "title": "התאם אישית",
+            "original": "מקורי:",
+            "subtitle": "פרופיל נוכחות וכינויי הקרנה",
+            "projectedName": "שם מוקרן",
+            "switchToggle": {
+              "buttons": "החלף לחצנים מותאמים אישית",
+              "details": "החלף פרטים ומצב מותאמים אישית",
+              "small": "החלף טקסט ותמונה קטנים מותאמים אישית"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "נקה מסננים",
+          "filter": "סנן אפליקציות"
+        },
+        "loadAppsFailed": "לא ניתן לטעון אפליקציות מותקנות.",
+        "loading": "",
+        "search": "חפש אפליקציות...",
+        "subtitle": "{apps} אפליקציות | {enabled} מופעלות",
+        "title": "קטלוג אפליקציות",
+        "uploadProgress": "מעלה סמל אפליקציה ל-ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "התאם אישית ביטויים לזיהוי אפליקציות.",
+        "discardMsg": "יש לך שינויים שלא נשמרו בשדות סטטוס האפליקציה שלך. יציאה כעת תחזיר אותם למצב הקודם.",
+        "title": "תצורת שדה סטטוס אפליקציה"
+      }
+    },
+    "buttons": {
+      "back": "חזור",
+      "help": "עזרה באסימונים זמינים",
+      "reset": "אפס לברירות מחדל"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "הוסף עד 2 לחצני נוכחות אינטראקטיביים עם ביטויי אסימון.",
+        "subtitle": "התאם אישית ביטויים לניגון מדיה.",
+        "discardMsg": "יש לך שינויים שלא נשמרו בשדות סטטוס המדיה שלך. יציאה כעת תחזיר אותם למצב הקודם.",
+        "title": "תצורת שדה סטטוס מדיה"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "זמן שנותר",
+          "desc": "מציג את הזמן שנותר הרגיל של התחלה/סיום נוכחי"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "משתמש באפליקציה שזוהתה בעבר או כעת או בחלופה מותאמת אישית בזמן שהמדיה מושהית.",
+              "hidePaused": "מסתיר נוכחות בזמן שהמדיה מושהית, כולל כל אפליקציה שזוהתה.",
+              "showPaused": "שומר על נוכחות מדיה פעילה בזמן השהיה ומציג מחווני השהיה."
+            },
+            "desc": "אפשרויות כאשר ניגון פעיל מושהה"
+          },
+          "desc": "התנהגות נוכחות כאשר ניגון פעיל מושהה",
+          "help": "עזרה ברזולוציית השהיה",
+          "title": "רזולוציית מדיה מושהית"
+        },
+        "mediaPriority": {
+          "title": "עדיפות מדיה",
+          "desc": "שולט אם מדיה עוקפת הפעלות משחק/אפליקציה",
+          "help": "עזרה בעדיפות",
+          "modal": {
+            "details": {
+              "priorityPlaying": "כאשר מדיה מנגנת באופן פעיל, היא מקבלת עדיפות על פני האפליקציה שבה אתה משתמש ומקרינה את הרצועה או הווידאו הנוכחיים.",
+              "switchesBetween": "מקרין מדיה רק בזמן שאתה נמצא בנגן המדיה. מעבר למשחק או אפליקציה מופעלת מאפשר לאותה אפליקציה להשתלט."
+            },
+            "title": "אסטרטגיית עדיפות מדיה",
+            "desc": "היגיון רזולוציה בין הפעלות משחק ומדיה"
+          }
+        },
+        "mediaScope": {
+          "title": "היקף זיהוי מדיה",
+          "desc": "סנן אילו אפליקציות מפעילות rich presence של מדיה"
+        },
+        "statusFieldConfig": {
+          "title": "תצורת שדה סטטוס מדיה",
+          "desc": "התאם אישית ביטויי חלופה לכותרת, אמן, אלבום ויצירת אמנות"
+        },
+        "subtitle": "עדיפויות רזולוציה, חותמות זמן ומצבי ניגון",
+        "title": "תצורת נוכחות מדיה",
+        "typeResolution": {
+          "title": "רזולוציית סוג מדיה",
+          "desc": "כיצד מסווגות פעילויות האזנה מול צפייה"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "התראה על מצב האפליקציה",
+        "media": "התראה על השמעת מדיה"
+      },
+      "subtitle": "התאם אישית את הכותרת והכותרת המשנית המוצגות בהודעת השירות המופיעה בחזית.",
+      "discard": "יש לך שינויים בהגדרות התצוגה של ההתראות שלא נשמרו. אם תצא כעת, השינויים יבוטלו.",
+      "helpIntro": "השתמש ב-getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") ו-getFieldCfgStr(\"MediaBigText\") כדי להוסיף את ערכי השדות המוצגים. השתמש ב-joinNonBlank(field1, field2) כדי לחבר ערכים שאינם ריקים באמצעות תו נקודה. תבניות ההתראות של האפליקציה תומכות בתנאי AppActivityType == \"Playing\". ביטויים תומכים גם בהשוואות == ו-!=."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "חלופי מותאם אישית",
+      "drop": "שחרר (נקה נוכחות)",
+      "freeze": "הקפא (ברירת מחדל)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "זמן קבוע מותאם אישית",
+      "persistent": "מתמשך (ברירת מחדל)",
+      "resetOnLaunch": "אפס בהפעלה"
+    },
+    "activityStatus": {
+      "all": "כל סטטוסי הפעילות",
+      "dnd": "נא לא להפריע",
+      "idle": "לא פעיל",
+      "invisible": "בלתי נראה",
+      "offline": "לא מקוון",
+      "online": "מקוון",
+      "streaming": "משדר"
+    },
+    "activityType": {
+      "all": "כל סוגי הפעילות",
+      "competing": "מתחרה",
+      "listening": "מקשיב",
+      "playing": "משחק",
+      "watching": "צופה"
+    },
     "allPlatforms": "כל הפלטפורמות",
+    "disableAll": "השבת הכל",
+    "enableAll": "הפעל הכל",
+    "enabledOnly": "מופעלים בלבד",
     "globalDefault": "ברירת מחדל גלובלית",
-    "playing": "משחק",
-    "streaming": "משדר",
-    "listening": "מקשיב",
-    "watching": "צופה",
-    "competing": "מתחרה",
-    "online": "מקוון",
-    "idle": "לא פעיל",
-    "dnd": "נא לא להפריע",
-    "offline": "לא מקוון",
-    "invisible": "בלתי נראה",
-    "customize": "התאם אישית",
-    "profileSubtitle": "פרופיל נוכחות וכינויי הקרנה",
-    "activityType": "סוג פעילות",
+    "keepCurrent": "שמור על הנוכחי",
+    "mediaScope": {
+      "allSessions": "כל הפעלות המדיה (ברירת מחדל)",
+      "enabledAppsOnly": "אפליקציות מופעלות בלבד"
+    },
+    "typeResolution": {
+      "autoAdaptive": "הסתגלות אוטומטית (ברירת מחדל)",
+      "profileOverride": "עקיפת פרופיל אפליקציה"
+    },
+    "pausedResolution": {
+      "fallbackApp": "חזור לאפליקציה שזוהתה",
+      "hidePaused": "הסתר מצב מושהה",
+      "showPaused": "הצג מצב מושהה (ברירת מחדל)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "עדיפות למדיה מנגנת (ברירת מחדל)",
+      "switchesBetween": "עובר בין"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "כהה",
+      "light": "בהיר"
+    }
+  },
+  "labels": {
     "activityStatus": "סטטוס פעילות",
-    "platformType": "סוג פלטפורמה",
+    "activityType": "סוג פעילות",
+    "customButtons": "לחצנים מותאמים אישית",
     "customDetailsState": "פרטים ומצב מותאמים אישית",
     "customSmallImage": "טקסט ותמונה קטנים מותאמים אישית",
-    "customButtons": "לחצנים מותאמים אישית",
-    "bulkConfigure": "תצורה גורפת",
-    "cancel": "בטל",
-    "stageChanges": "שלב שינויים",
-    "apply": "החל",
-    "confirm": "אשר והחל",
-    "keepCurrent": "שמור על הנוכחי",
-    "enableAll": "הפעל הכל",
-    "disableAll": "השבת הכל",
-    "discardBatch": "לבטל שינויים בשלב?",
-    "chooseIcon": "בחר תמונת סמל",
-    "resetIcon": "אפס לסמל האפליקציה המקורי",
-    "resetLabel": "אפס לתווית המקורית",
-    "details": "פרטים",
-    "state": "מצב",
-    "smallText": "טקסט קטן",
-    "smallImageUrl": "כתובת URL של תמונה קטנה",
-    "uploadImage": "העלה תמונה ל-ImgBB",
-    "buttonLabel": "תווית (למשל הצטרף למשחק)",
-    "presenceToggle": "החלף נוכחות",
-    "bulkSubtitle": "החל שינויים על כל האפליקציות שנבחרו",
-    "applyBatchTitle": "להחיל שינויי אצווה?",
-    "confirmation": "אישור",
-    "unsavedBatch": "שינויי אצווה שלא נשמרו",
-    "confirmApply": "אשר והחל",
     "filterOptions": "אפשרויות סינון",
-    "close": "סגור",
-    "loading": "",
-    "original": "מקורי:",
-    "projectedName": "שם מוקרן",
-    "customButtonDesc": "הוסף עד 2 לחצני נוכחות אינטראקטיביים",
-    "toggleDetails": "החלף פרטים ומצב מותאמים אישית",
-    "toggleSmall": "החלף טקסט ותמונה קטנים מותאמים אישית",
-    "toggleButtons": "החלף לחצנים מותאמים אישית",
-    "uploadProgress": "מעלה סמל אפליקציה ל-ImgBB",
-    "keepEditing": "המשך לערוך",
-    "discardChanges": "בטל שינויים",
-    "discardMessage": "יש לך תצורות אצווה שלא הושלמו. יציאה ממצב אצווה כעת תבטל את כל השינויים בשלב.",
-    "applyMessage": "אתה עומד להחיל לצמיתות שינויי תצורה בשלב על",
-    "selectedApps": "אפליקציות נבחרות.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} אפליקציות | {enabled} מופעלות",
-    "chooseImage": "בחר קובץ תמונה.",
-    "imageTooLarge": "בחר תמונה קטנה מ-32 MB.",
-    "imageUploadFailed": "העלאת תמונה נכשלה.",
-    "iconUploadFailed": "העלאת סמל נכשלה.",
-    "androidOnly": "גילוי אפליקציות מותקנות זמין באפליקציית Android.",
-    "loadAppsFailed": "לא ניתן לטעון אפליקציות מותקנות.",
-    "appUnit": "אפליקציה",
-    "appsUnit": "אפליקציות"
+    "platformType": "סוג פלטפורמה",
+    "presenceToggle": "החלף נוכחות",
+    "button1": "לחצן 1",
+    "button2": "לחצן 2",
+    "label": "תווית",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "תצורת נוכחות אפליקציה",
-    "subtitle": "מדיניות מחוץ לאפליקציה והתנהגות חותמת זמן",
-    "catalogue": "קטלוג אפליקציות",
-    "catalogueDesc": "הצג, סנן והתאם אישית תחזיות אפליקציה בודדות",
-    "outsidePolicies": "מדיניות מחוץ לאפליקציה שזוהתה",
-    "outsideDescription": "התנהגות כאשר אתה עוזב או עובר מאפליקציות מופעלות",
-    "policyHelp": "עזרה במדיניות",
-    "freeze": "הקפא (ברירת מחדל)",
-    "customFallback": "חלופי מותאם אישית",
-    "drop": "שחרר (נקה נוכחות)",
-    "fallbackPresence": "נוכחות חלופית מותאמת אישית",
-    "activityName": "שם פעילות",
+  "pluralization": {
+    "app": {
+      "plural": "אפליקציות",
+      "singular": "אפליקציה"
+    }
+  },
+  "placeholders": {
+    "labelExample": "תווית (למשל הצטרף למשחק)",
     "details": "פרטים",
-    "state": "מצב",
+    "smallImageUrl": "כתובת URL של תמונה קטנה",
     "smallText": "טקסט קטן",
-    "bigText": "טקסט גדול",
-    "smallImage": "תמונה קטנה",
-    "bigImage": "תמונה גדולה",
-    "imageUrl": "כתובת URL של תמונה",
-    "uploadingImage": "",
-    "timestampStrategy": "אסטרטגיית חותמת זמן",
-    "timestampDescription": "כיצד נפתרים טיימרים של פעילות בין הפעלות אפליקציה",
-    "timestampHelp": "עזרה בחותמת זמן",
-    "persistent": "מתמשך (ברירת מחדל)",
-    "resetOnLaunch": "אפס בהפעלה",
-    "customFixedTime": "זמן קבוע מותאם אישית",
-    "fixedStart": "חותמת זמן התחלה קבועה",
-    "statusFieldConfig": "תצורת שדה סטטוס",
-    "statusFieldDescription": "התאם אישית כותרת, פרטים, מצב וביטויי יצירת אמנות",
-    "configurationDetails": "פרטי תצורה",
-    "outsideHelpTitle": "מדיניות מחוץ לאפליקציה",
-    "timestampHelpTitle": "אסטרטגיות חותמת זמן",
-    "understood": "מובן",
-    "freezeHelp": "משהה ומשמר את הנוכחות המוקרנת האחרונה עד לזיהוי אפליקציה מופעלת שוב.",
-    "customHelp": "מקרין מיד את הנוכחות החלופית המותאמת אישית.",
-    "dropHelp": "מנקה את פעילות ה-Discord שלך עד שתחזור לאפליקציה מופעלת.",
-    "persistentHelp": "משתמש בחותמת זמן אחת משותפת של זמן ריצה עבור אפליקציות ומדיה מושהית במהלך הפעלת שירות זו.",
-    "resetHelp": "מפעיל מחדש את הטיימר ב-00:00 כאשר האפליקציה מופעלת או ממוקדת מחדש.",
-    "fixedHelp": "נועל את טיימר הנוכחות לתאריך ושעת התחלה קבועים ספציפיים.",
-    "uploadImage": "העלה תמונה"
+    "state": "מצב",
+    "urlExample": "URL (https://...)",
+    "example": "למשל ",
+    "listenOn": "הקשב ב"
   },
-  "mediaPresence": {
-    "title": "תצורת נוכחות מדיה",
-    "subtitle": "עדיפויות רזולוציה, חותמות זמן ומצבי ניגון",
-    "priority": "עדיפות מדיה",
-    "priorityDesc": "שולט אם מדיה עוקפת הפעלות משחק/אפליקציה",
-    "priorityHelp": "עזרה בעדיפות",
-    "priorityPlaying": "עדיפות למדיה מנגנת (ברירת מחדל)",
-    "switchesBetween": "עובר בין",
-    "scope": "היקף זיהוי מדיה",
-    "scopeDesc": "סנן אילו אפליקציות מפעילות rich presence של מדיה",
-    "allSessions": "כל הפעלות המדיה (ברירת מחדל)",
-    "enabledAppsOnly": "אפליקציות מופעלות בלבד",
-    "typeResolution": "רזולוציית סוג מדיה",
-    "typeResolutionDesc": "כיצד מסווגות פעילויות האזנה מול צפייה",
-    "autoAdaptive": "הסתגלות אוטומטית (ברירת מחדל)",
-    "profileOverride": "עקיפת פרופיל אפליקציה",
-    "timeRemaining": "זמן שנותר",
-    "timeRemainingDesc": "מציג את הזמן שנותר הרגיל של התחלה/סיום נוכחי",
-    "appTimestamp": "",
-    "pausedResolution": "רזולוציית מדיה מושהית",
-    "pausedDesc": "התנהגות נוכחות כאשר ניגון פעיל מושהה",
-    "pausedHelp": "עזרה ברזולוציית השהיה",
-    "showPaused": "הצג מצב מושהה (ברירת מחדל)",
-    "fallbackApp": "חזור לאפליקציה שזוהתה",
-    "hidePaused": "הסתר מצב מושהה",
-    "statusFields": "תצורת שדה סטטוס מדיה",
-    "statusFieldsDesc": "התאם אישית ביטויי חלופה לכותרת, אמן, אלבום ויצירת אמנות",
-    "priorityStrategy": "אסטרטגיית עדיפות מדיה",
-    "priorityStrategyDesc": "היגיון רזולוציה בין הפעלות משחק ומדיה",
-    "pausedOptions": "אפשרויות כאשר ניגון פעיל מושהה",
-    "priorityHelpText": "כאשר מדיה מנגנת באופן פעיל, היא מקבלת עדיפות על פני האפליקציה שבה אתה משתמש ומקרינה את הרצועה או הווידאו הנוכחיים.",
-    "switchHelpText": "מקרין מדיה רק בזמן שאתה נמצא בנגן המדיה. מעבר למשחק או אפליקציה מופעלת מאפשר לאותה אפליקציה להשתלט.",
-    "showPausedHelp": "שומר על נוכחות מדיה פעילה בזמן השהיה ומציג מחווני השהיה.",
-    "fallbackHelp": "משתמש באפליקציה שזוהתה בעבר או כעת או בחלופה מותאמת אישית בזמן שהמדיה מושהית.",
-    "hidePausedHelp": "מסתיר נוכחות בזמן שהמדיה מושהית, כולל כל אפליקציה שזוהתה."
+  "service": {
+    "imgbb": {
+      "chooseImage": "בחר קובץ תמונה.",
+      "iconUploadFailed": "העלאת סמל נכשלה.",
+      "imageTooLarge": "בחר תמונה קטנה מ-32 MB.",
+      "imageUploadFailed": "העלאת תמונה נכשלה."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "תמונה גדולה",
+      "bigText": "טקסט גדול",
+      "line1": "פרטי הפעילות",
+      "smallImage": "תמונה קטנה",
+      "smallText": "טקסט קטן",
+      "line2": "מצב הפעילות",
+      "title": "כותרת/כותרת משנה של הפעילות"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "חשבונות מחוברים.",
+          "desc": "חבר את חשבון ה-Discord שלך כדי להקרין Rich Presence",
+          "title": "התחברות ל-Discord"
+        },
+        "languageTitle": "שפה",
+        "themeTitle": "ערכת נושא",
+        "desc": "התאמה אישית וחשבון",
+        "title": "בקרת משתמש"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "פטור את האפליקציה כדי למנוע משירות הרקע להירדם",
+          "title": "אופטימיזציית סוללה",
+          "modal": {
+            "desc": "מערכות Android מודרניות מרדימות תהליכי רקע לאחר מספר דקות. פטור Kruzty Dynamics מאופטימיזציית סוללה מבטיח עדכוני Discord Rich Presence רציפים וללא הפרעה.",
+            "subtitle": "רשימת היתרים לשירות רקע",
+            "requestExemption": "בקש פטור"
+          }
+        },
+        "notificationAccess": {
+          "desc": "נדרשת גישה מיוחדת לאפליקציה כדי לזהות מדיה וניגון",
+          "title": "גישה להתראות",
+          "modal": {
+            "methodA": {
+              "title": "שיטה A: גישה מיוחדת לאפליקציה (Pixel, Motorola, Infinix, Stock)",
+              "step1": "הקש על פתח הגדרות Android למטה.",
+              "step2": "עבור אל גישה מיוחדת לאפליקציה > גישה להתראות.",
+              "step3": "מצא את Kruzty Dynamics והפעל אפשר גישה להתראות."
+            },
+            "methodB": {
+              "title": "שיטה B: מידע אפליקציה > שלוש נקודות (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "פתח הגדרות מכשיר > אפליקציות > נהל אפליקציות / רשימת אפליקציות.",
+              "step2": "מצא והקש על Kruzty Dynamics.",
+              "step4": "הקש על אפשר הגדרות מוגבלות / גישה מיוחדת לאפליקציה > הענק.",
+              "step5": "חזור והפעל גישה להתראות."
+            },
+            "desc": "גישה להתראות מאפשרת ל-Kruzty Dynamics ללכוד אירועי ניגון של הפעלת מדיה חיה (כותרת שיר, אמן, אלבום ומצב ניגון) מ-Spotify, YouTube Music ונגני מדיה.",
+            "oemNotice": {
+              "desc": "Android מגן על גישת מאזין ההתראות מאחורי שכבות הרשאה מיוחדות. בהתאם למותג הטלפון שלך, בצע אחת מהשיטות שלהלן.",
+              "title": "הודעה עבור מכשירי OEM ו-Android 13+"
+            },
+            "subtitle": "תצורת גישה מיוחדת לאפליקציה",
+            "openAndroidSettings": "פתח הגדרות Android"
+          }
+        },
+        "desc": "נדרש לזיהוי",
+        "title": "בקרת הרשאות",
+        "foregroundNotification": {
+          "desc": "הרשאת Android 13+ עבור התראת שירות מתמשכת",
+          "title": "התראת חזית",
+          "modal": {
+            "allowNotification": "אפשר התראה",
+            "desc": "נדרש על ידי Android 13+ כדי להציג את התראת שירות החזית המתמשכת בשורת המצב שלך, ולאשר שמנוע הנוכחות של Discord פועל.",
+            "subtitle": "הרשאת התראות Android 13+",
+            "title": "התראת שירות חזית"
+          }
+        },
+        "usageAccess": {
+          "desc": "נדרש כדי לזהות את האפליקציה או המשחק הפעילים כרגע בחזית",
+          "title": "גישה לשימוש",
+          "modal": {
+            "openUsageAccess": "פתח גישה לשימוש",
+            "desc": "נדרשת גישה לשימוש כדי לזהות איזו אפליקציה או משחק אתה מפעיל כעת בחזית, כך ש-Kruzty Dynamics יוכל להתאים אותה לקטלוג האפליקציות המוגדר שלך.",
+            "step1": "הקש על פתח גישה לשימוש.",
+            "step2": "אתר את Kruzty Dynamics.",
+            "step3": "הפעל אפשר גישה לשימוש.",
+            "subtitle": "זיהוי אפליקציית חזית"
+          }
+        }
+      },
+      "privacyNotice": "אפליקציה זו אינה אוספת או משדרת נתוני משתמש.",
+      "subtitle": "הגדר הרשאות וחשבונות נדרשים כדי לאפשר Discord Rich Presence דינמי.",
+      "title": "הגדרה ראשונית"
+    },
+    "footer": {
+      "allSet": "הכל מוכן! מוכן להקרנה",
+      "buttons": {
+        "continueForNow": "המשך לעכשיו",
+        "finishSetup": "סיים הגדרה",
+        "skipForNow": "דלג לעכשיו"
+      },
+      "readyWhenYouAre": "מוכן כשאתה מוכן"
+    }
+  },
+  "tags": {
+    "granted": "הוענק",
+    "notificationCrucial": "קריטי",
+    "allGranted": "הכל הוענק",
+    "cached": "במטמון",
+    "check": "בדוק",
+    "checkingUpdates": "בדיקת עדכונים",
+    "default": "ברירת מחדל",
+    "view": "הצג"
   }
 }

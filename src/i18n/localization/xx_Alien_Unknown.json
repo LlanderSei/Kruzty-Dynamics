@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "ƓⱠØⱤ₱ ⱫⱠɆɆ฿ ₳₦₮Ɇ₦₦₳",
-    "subtitle": "Ɇ₦₲ØⱤ₲ ฿ⱠØØ₲ ₳₦Đ ₮ⱤØ₦ ₳ⱠⱠØ₩ ₥₳₲₦Ɇ₮ⱤØ₦ ₦Ɇ₥ØĐł ₲ⱠØɆ฿ ₴Ø₵ł₳Ⱡ ł₦ĐɆ₦₮ł₮Ɏ.",
-    "privacyNotice": "ⱠɆ ₦Ø₦-ƓⱠØⱤ₱Ɇ Đ₳₮₳ Ⱡł₦Ɇ₥ Ø₦₦Ɇ₦₮Ɇ₦.",
-    "permissionsSection": "Ɽł₲Ⱨ₮₴ ₮ⱤØ₦Ɇ ₵Ø₦₮ⱤØⱠ",
-    "permissionsRequired": "₦Ɇ₵Ɇ₴₴₳Ɽł ₴₱Ø₮ ₮Ɽ₳₵Ɇ",
-    "notificationTitle": "Ø₦₦Ɇ₦₮Ɇ₦ ₲ⱠØⱤ₱ ₳₵₵Ɇ₴",
-    "notificationDesc": "₱ɆⱤł₴ ₦Ɇ₥ØĐł ₳₦Đ ₱Ⱡ₳Ɏ ₦ɆɆĐⱠ ₮ⱤØ₦",
-    "notificationCrucial": "₵ⱤɄ₵ł₳Ⱡ ł₥₱ØⱤ₮₳₦Ɇ",
-    "usageTitle": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴",
-    "usageDesc": "₦Ɇ₵Ɇ₴₴₳Ɽł Ø₦₦Ɇ₦₮Ɇ₦ ₳₵₵ØⱤĐ ł₦ ₦Ø₦₮₳₮Ⱡ ₦Ɇ₥ØĐł",
-    "batteryTitle": "฿₳₮ɆɆⱤł ₮ⱤØ₦₲Ɇ",
-    "batteryDesc": "Ɇ₥₱ⱠɆⱠ ₦Ɇ₥ØĐł ₳₦Đ ₦Ø₦ ₲ⱠØⱤ₱ ₦ɆɆĐ ₮ⱤØ₦",
-    "postNotificationTitle": "₦ØØⱤĐ ₦Ɇ₥ØĐł ₳₦Đ₮ⱤØ",
-    "postNotificationDesc": "Android 13+ Ɽł₲Ⱨ₮₴ ₦ØØⱤĐ ₮ⱤØ₦ ₳₵₵ØⱤĐ",
-    "grant": "ⱠɆ ₮ⱤØ₦",
-    "granted": "₮ⱤØ₦ ₳₵₵ØⱤĐ",
-    "userControlSection": "₦Ɇ₥ØĐł ₮ⱤØ₦ ₵Ø₦₮ⱤØⱠ",
-    "userControlDesc": "Ɇ₦₲ØⱤ₲ ₳₦Đ ₮ⱤØ₦",
-    "discordLoginTitle": "Discord ₦Ɇ₥ØĐł",
-    "discordLoginDesc": "Discord ₮ⱤØ₦ ₦ɆɆĐⱠ Ɽł₵Ⱨ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₵ØⱤĐ",
-    "accountsConnected": "₮ⱤØ₦ ₳₵₵ØⱤĐ.",
-    "themeTitle": "₮ⱤØ₦Ɇ",
-    "languageTitle": "₦Ɇ₥ØĐł",
-    "finishSetup": "₮ⱤØ₦ ₳₵₵ØⱤĐ ₵Ø₥₱ⱠɆ₮Ɇ",
-    "continueForNow": "ⱠɆ ₦Ɇ₥ØĐł ₦ØØⱤĐ",
-    "skipForNow": "₴₭ł₱ ₦ØØⱤĐ",
-    "allSet": "₳₵₵ØⱤĐ! Ɽł₵Ⱨ ₦ɆɆĐⱠ",
-    "readyWhenYouAre": "₦Ɇ₥ØĐł ₦ØØⱤĐ ₳₵₵ØⱤĐ"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "₳₵₵ØⱤĐ łĐɆ₦₮ł₮Ɏ",
+        "stored": "₴₮ØⱤɆĐ"
+      },
+      "content": {
+        "subtitle": "₮Ø₭Ɇ₦₴ ₳₦Đ łĐɆ₦₮ł₮Ɏ ₦Ɇ₥ØĐł",
+        "title": "Discord ₦Ɇ₥ØĐł ₱ØⱤ₮₳Ⱡ",
+        "privacyText": "Discord ₳Ʉ₮ⱧØⱤł₮Ɏ ₴Ø₵ł₳Ⱡ ₮ⱤØ₦ Rich Presence ₦ɆɆĐⱠ. Kruzty Dynamics SDK ₳₵₵ØⱤĐ łĐɆ₦₮ł₮Ɏ ₳₦Đ ₳₵₵ØⱤĐ ₳₵₮łVł₮Ɏ ₦ØØⱤĐ; Ⱡł₴₮, ฿ⱠØ₵₭, ł₦Vł₮Ɇ, ₥Ɇ₴₴₳₲Ɇ, VØł₵Ɇ ₦Ø₦-₦ɆɆĐⱠ. Android ₮Ø₭Ɇ₦ ₦ɆɆĐⱤ₱₮ ₦ØØⱤĐ ₦Ɇ₥ØĐł. Read the",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "₱ⱤłV₳₵Ɏ ₱ØⱠł₵Ɏ"
+      },
+      "title": "Discord ₳₵₵ØⱤĐ ₦ɆɆĐⱠ"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "ɆӾ₱ⱤɆ₴₴łØ₦₴ ₴Ʉ₱₱ØⱤ₮ == ₳₦Đ != ₵Ø₥₱₳Ɽł₴Ø₦₴. Ʉ₴Ɇ {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} ₮Ø ₴ⱧØ₩ AppName ₩ⱧɆ₦ Playing ₳₦Đ AppPlatformType Ø₮ⱧɆⱤ₩ł₴Ɇ.",
+        "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ",
+        "desc": "₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ ₦ɆɆĐⱠ"
+      },
+      "media": {
+        "title": "₥ɆĐł₳ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ",
+        "intro": "₮Ø₭Ɇ₦ ₮Ɇ₦₮ ₣łɆⱠĐ ₳₦Đ ฿Ʉ₮₮Ø₦ ₦ØØⱤĐ ₦ØØⱤĐ (e.g. {example}).",
+        "desc": "₦ØØⱤĐ ₥ɆĐł₳ ₦ØØⱤĐ ₳₦Đ ฿Ʉ₮₮Ø₦₴ ₦ØØⱤĐ"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ?",
+      "unsaved": "₦ØØⱤĐ ₦ɆɆĐⱠ"
+    },
+    "logs": {
+      "copy": "₱ⱤØ₲ⱤɆ₴₴ ₵Ø₱Ɏ",
+      "empty": "[INFO] ₦Ø ₱ⱤØ₲ⱤɆ₴₴. Discord ₦Ɇ₥ØĐł ₳₵₵ØⱤĐ ₳₦Đ ₦ØØⱤĐ ₱ⱤØ₲ⱤɆ₴₴.",
+      "export": "₱ⱤØ₲ⱤɆ₴₴ Ɇ₦₲ØⱤ₲",
+      "subtitle": "ⱠłVɆ ₦ØØⱤĐ ₱ⱤØ₲ⱤɆ₴₴",
+      "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₱ⱤØ₲ⱤɆ₴₴"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "₱Ɽł₥₳ⱤɎ ₳₵₵ØⱤĐ ₵ØⱠØⱤ",
+        "resetAccent": "ĐɆ₣₳ɄⱠ₮ ØⱤ₳₦₲Ɇ ₦ØØⱤĐ",
+        "tapCustomize": "₦ØØⱤĐ ₮ⱤØ₦",
+        "themeMode": "₮ⱤØ₦Ɇ ₥ØĐɆ"
+      },
+      "globalDefaults": {
+        "activityStatus": "₳₵₮łVł₮Ɏ ₴₮₳₮Ʉ₴",
+        "activityType": "₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ",
+        "note": "₦ØØⱤĐ ₳₵₵ØⱤĐ ₳₱₱ ₳₦Đ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₮łVł₮Ɏ ₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ ₳₦Đ ₴₮₳₮Ʉ₴ ₦ØØⱤĐ."
+      },
+      "imgBb": {
+        "apiPrivacy": "₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ ₮ⱤØ₦ ₦ɆɆĐⱠ. ₵Ʉ₴₮Ø₥ ₮Ø₭Ɇ₦ ₦ØØⱤĐ ₦ØØⱤĐ.",
+        "getApiKey": "₮ⱤØ₦ ₦ØØⱤĐ.",
+        "help": "ImgBB ₦Ɇ₥ØĐł ₮ⱤØ₦ ₳₱₱ ₳₦Đ ₥ɆĐł₳ ł₥₳₲Ɇ₴ Discord CDN ₦ØØⱤĐ. Visit",
+        "usingDefaultKey": "ĐɆ₣₳ɄⱠ₮ ₦Ɇ₥ØĐł ₮Ø₭Ɇ₦ ₦ØØⱤĐ"
+      },
+      "language": {
+        "availableLanguages": "₦Ɇ₥ØĐł ₳₵₵ØⱤĐ",
+        "title": "₦Ɇ₥ØĐł ₦ØØⱤĐ",
+        "desc": "₦Ɇ₥ØĐł ₦ØØⱤĐ ₳₦Đ Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Android ₱ⱤØ₴Ɇ₦₵Ɇ ₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ",
+        "foregroundDesc": "₴₮₳₮Ʉ₴ ฿₳Ɽ Discord ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ",
+        "notificationAccessDesc": "₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ ₥ɆĐł₳ ₦ØØⱤĐ",
+        "desc": "₮ⱤØ₦ ₦ɆɆĐⱠ ₥ɆĐł₳ Ø₦₦Ɇ₦₮Ɇ₦ ₳₦Đ ₦ØØⱤĐ ₳₱₱₴ ₦ØØⱤĐ:",
+        "usageAccessDesc": "₦ØØⱤĐ ₲₳₥Ɇ₴ ₳₦Đ ₳₱₱₴ ₮Ɽ₳₵Ɇ"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "{total} ₦ØØⱤĐ ł₥₳₲Ɇ ₦ØØⱤĐ, {custom} ₵Ʉ₴₮Ø₥ ₳₱₱ ł₵Ø₦ ₦ØØⱤĐ. ₵₳₵ⱧɆ ₦ØØⱤĐ ₵Ʉ₴₮Ø₥ ł₵Ø₦₴ ₮ⱤØ₦, ₳ⱠⱠ ₦ØØⱤĐ ₵Ʉ₴₮Ø₥ ₦ØØⱤĐ ₦ØØⱤĐ. ₵Ʉ₴₮Ø₥ ₦ØØⱤĐ ₦ØØⱤĐ ₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ ₦ØØⱤĐ.",
+        "buttons": {
+          "clearCacheAll": "₳ⱠⱠ ₦ØØⱤĐ, ₵Ʉ₴₮Ø₥ ł₵Ø₦₴ ₦ØØⱤĐ",
+          "clearCacheKeep": "₵₳₵ⱧɆ ₦ØØⱤĐ, ₵Ʉ₴₮Ø₥ ł₵Ø₦₴ ₮ⱤØ₦"
+        },
+        "clearedAll": "₳ⱠⱠ ł₥₳₲Ɇ ₦ØØⱤĐ ₦ØØⱤĐ, ₵Ʉ₴₮Ø₥ ₳₱₱ ł₵Ø₦₴ ₦ØØⱤĐ.",
+        "clearedKeeping": "ł₥₳₲Ɇ ₦ØØⱤĐ ₦ØØⱤĐ. ₵Ʉ₴₮Ø₥ ₳₱₱ ł₵Ø₦₴ ₮ⱤØ₦.",
+        "linkedImageUrls": "ł₥₳₲Ɇ ₦ØØⱤĐ"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy ₵Ø₦₮Ɽł฿Ʉ₮ØⱤ₴",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Ⱡł฿Ɽ₳ⱤłɆ₴ ₳₱₱ ₦ØØⱤĐ",
+        "libraries": {
+          "lucide": "₵Ø₥₥Ʉ₦ł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ł₵Ø₦₴",
+          "react": "₥ØĐɆⱤ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ ₳Ɽ₵Ⱨł₮Ɇ₵₮ɄⱤɆ",
+          "sdk": "Native Android ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
+          "tailwind": "Ʉ₮łⱠł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ",
+          "tauri": "Ⱡł₲Ⱨ₮₩Ɇł₲Ⱨ₮ ₦Ɇ₥ØĐł ₦ØØⱤĐ ₦ɆɆĐⱠ",
+          "tokio": "₳₴Ɏ₦₵ⱧⱤØ₦ØɄ₴ ₦ɆɆĐⱠ ₦ØØⱤĐ ₦ɆɆĐⱠ"
+        },
+        "maintainerRole": "₥₳ł₦₮₳ł₦ɆⱤ ₳₦Đ ĐɆVɆⱠØ₱ɆⱤ"
+      },
+      "discordApp": {
+        "developerPortal": "Discord ĐɆVɆⱠØ₱ɆⱤ ₱ØⱤ₮₳Ⱡ",
+        "help": "Discord ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₦ØØⱤĐ ₦ØØⱤĐ",
+        "idPrivacy": "₦ØØⱤĐ ₦ØØⱤĐ ĐɆ₣₳ɄⱠ₮ Kruzty Dynamics ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₦ØØⱤĐ."
+      }
+    }
   },
-  "nav": {
-    "service": "₴ɆⱤ₮ØⱤ₦",
-    "accounts": "₳₵₵ØⱤĐ",
-    "settings": "₮ⱤØ₦Ɇ ₳₦Đ ₥ØⱤɆ"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "₳₵₵ØⱤĐ ₦ɆɆĐⱠ",
+            "switch": "₴₩ł₮₵Ⱨ",
+            "unuse": "₦Ø₦Ɇ"
+          },
+          "activePresence": "₳₵₵ØⱤĐ ₱ⱤØ₴Ɇ₦₵Ɇ",
+          "modal": {
+            "logout": {
+              "confirmLogout": "ⱠØ₲ØɄ₮ ₦ØØⱤĐ",
+              "title": "₳₵₵ØⱤĐ ⱠØ₲ØɄ₮",
+              "removePrefix": "₳₵₵ØⱤĐ ⱤɆ₥ØVɆ ₦ØØⱤĐ",
+              "removeSuffix": ". ₦ØØⱤĐ ₮ⱤØ₦ ₦Ɇ₥ØĐł ₦ɆɆĐⱠ ₦ØØⱤĐ."
+            }
+          },
+          "currentAccount": "₦ØØⱤĐ ₳₵₵ØⱤĐ",
+          "noActiveAccount": "₦Ø ₳₵₵ØⱤĐ. ₦Ɇ₥ØĐł ₳₵₵ØⱤĐ ₦ØØⱤĐ.",
+          "storedAccounts": "₴₮ØⱤɆĐ ₳₵₵ØⱤĐ"
+        },
+        "noAccount": {
+          "desc": "Discord ₳₵₵ØⱤĐ ₦ɆɆĐⱠ Rich Presence ₴₮₳₮Ʉ₴ ₲₳₥Ɇ₴, ₳₱₱₴, ₥ɆĐł₳ ₦ØØⱤĐ.",
+          "title": "₦Ø ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł.",
+          "login": "Discord ₦Ɇ₥ØĐł"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "₦Ø Discord ₳₵₵ØⱤĐ",
+        "loggedInMany": "{n} ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł.",
+        "loggedInOne": "{n} ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł."
+      },
+      "title": "Discord ₳₵₵ØⱤĐ"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics Đ₳₴Ⱨ฿Ø₳ⱤĐ",
+      "title": {
+        "welcome": "₩ɆⱠ₵Ø₥Ɇ ₦Ɇ₥ØĐł!",
+        "welcomeNamed": "₩ɆⱠ₵Ø₥Ɇ, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "₮ⱤØ₦ ₳₵₵ØⱤĐ. ₴ɆⱤ₮ØⱤ₦ ₮ⱤØ₦ ₦ØØⱤĐ.",
+              "foregroundService": {
+                "desc": "Android ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₦ØØⱤĐ ₳₵₵ØⱤĐ.",
+                "title": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦"
+              },
+              "notificationAccess": {
+                "desc": "₦ɆɆĐⱠ ₥ɆĐł₳ ₱Ⱡ₳Ɏ ₳₦Đ ₥Ɇ₮₳Đ₳₮₳ ₦ØØⱤĐ."
+              },
+              "subtitle": "Android ₮ⱤØ₦ ₦ɆɆĐⱠ ₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ.",
+              "title": "₮ⱤØ₦ ₦ɆɆĐⱠ ₦Ɇ₥ØĐł",
+              "returnHint": "Android ₮ⱤØ₦ ₳₵₵ØⱤĐ ₦ØØⱤĐ ₳₦Đ ₴ɆⱤ₮ØⱤ₦ ₦ɆɆĐⱠ.",
+              "usageAccess": {
+                "desc": "₦ɆɆĐⱠ ₳₱₱ ₦ØØⱤĐ ₮Ɽ₳₵Ɇ."
+              }
+            }
+          },
+          "startError": "Android ₱ⱤØ₴Ɇ₦₵Ɇ ₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
+          "running": "₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ ₳₵₵ØⱤĐ.",
+          "stopped": "₴ɆⱤ₮ØⱤ₦ ₦Ø₦ ₮ⱤØ₦.",
+          "title": "Kruzty Dynamics ₴ɆⱤ₮ØⱤ₦"
+        },
+        "application": {
+          "desc": "₳₵₵ØⱤĐ ₦ɆɆĐⱠ ₮ⱤØ₦ ₦Ɇ₥ØĐł ₴₱Ø₮",
+          "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₱ⱤØ₴Ɇ₦₵Ɇ"
+        },
+        "buttons": {
+          "applicationCatalogue": "₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ",
+          "presenceConfiguration": "₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
+          "statusFieldConfig": "₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ"
+        },
+        "media": {
+          "desc": "₥ɆĐł₳ ₳₵₵ØⱤĐ ₳₦Đ ₴₮₳₮Ʉ₴ ₦ɆɆĐⱠ",
+          "title": "₥ɆĐł₳ ₱ⱤØ₴Ɇ₦₵Ɇ"
+        },
+        "preview": {
+          "noPresence": "₦Ø ₳₵₵ØⱤĐ ₳₱₱ ₳₦Đ ₥ɆĐł₳ ₦ØØⱤĐ.",
+          "stoppedDescription": "₴ɆⱤ₮ØⱤ₦ ₴₮Ø₱₱ɆĐ. ₮ⱤØ₦ ₳₵₵ØⱤĐ ₳₱₱ ₳₦Đ ₥ɆĐł₳ ₦ØØⱤĐ."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "₳₵₵ØⱤĐ ₦ɆɆĐⱠ",
+        "checkPermissions": {
+          "title": "₮ⱤØ₦ ₦ɆɆĐⱠ ₵ⱧɆ₵₭",
+          "desc": "₮ⱤØ₦ ₳₦Đ ₦ØØⱤĐ ₦ɆɆĐⱠ ₦Ɇ₥ØĐł"
+        },
+        "deleteCachedUrls": {
+          "title": "ł₥₳₲Ɇ ₮ⱤØ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ",
+          "desc": "₳₵₵ØⱤĐ ł₥₳₲Ɇ ₦ØØⱤĐ ₦ɆɆĐⱠ ₳₦Đ ₦Ɇ₥ØĐł ₮ⱤØ₦"
+        },
+        "discordAppId": {
+          "title": "Discord ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₮ⱤØ₦",
+          "desc": "Discord ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₮ⱤØ₦. Visit: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "₲ⱠØ฿₳Ⱡ ₦ØØⱤĐ",
+          "desc": "₳₵₵ØⱤĐ ₮ⱤØ₦Ɇ ₳₦Đ ₴₮₳₮Ʉ₴ ₦ØØⱤĐ"
+        },
+        "imgBbKey": {
+          "title": "ImgBB ₦Ɇ₥ØĐł ₮ⱤØ₦",
+          "desc": "ImgBB ₦Ɇ₥ØĐł ₮ⱤØ₦. Visit: api.imgbb.com"
+        },
+        "language": {
+          "title": "₦Ɇ₥ØĐł",
+          "desc": "₦ØØⱤĐ ₮ⱤØ₦₦ɆĐ:"
+        },
+        "notificationProjection": {
+          "title": "Ø₦₦Ɇ₦₮Ɇ₦ ₴₮₳₮Ʉ₴ ₱ⱤØJɆ₵₮łØ₦ ₦ØØⱤĐ",
+          "desc": "₳₱₱ ₳₦Đ ₥ɆĐł₳ ₦ØØⱤĐ ₮ł₮ⱠɆ₴ ₳₦Đ ₴Ʉ฿₮ł₮ⱠɆ₴ ₵Ʉ₴₮Ø₥łⱫɆ."
+        },
+        "themes": {
+          "title": "₮ⱤØ₦Ɇ ₳₦Đ ₦ØØⱤĐ",
+          "desc": "₮ⱤØ₦Ɇ ₳₦Đ ₵ØⱠØⱤ ₦ɆɆĐⱠ."
+        },
+        "checkUpdates": {
+          "title": "₦ØØⱤĐ ₦ɆɆĐⱠ ₵ⱧɆ₵₭",
+          "desc": "₦Ɇ₩ VɆⱤ₴łØ₦ ₦ØØⱤĐ ₵ⱧɆ₵₭."
+        }
+      },
+      "subtitle": "Ɇ₦₲ØⱤ₲ ₦ɆɆĐⱠ ₳₦Đ ₦ØØⱤĐ",
+      "title": "₮ⱤØ₦Ɇ ₳₦Đ ₥ØⱤɆ",
+      "cardInfo": {
+        "architecture": "Rust Core (Tokio + Tauri v2) ₳₦Đ React 19 ₳₦Đ TailwindCSS ₦ØØⱤĐ ₳₦Đ Native Android Plugin Bridge ₦ØØⱤĐ. Kizzy's Experimental RPC ₦ØØⱤĐ.",
+        "credits": "₵ⱤɆĐł₮₴",
+        "developedBy": "ĐɆVɆⱠØ₱ɆĐ ฿Ɏ",
+        "latestRelease": "Ⱡ₳₮Ɇ₴₮ ₦ØØⱤĐ ₲Ø",
+        "learnMore": "₳₱₱ ₦ØØⱤĐ ₥ØⱤɆ",
+        "repository": "GitHub ₱ⱤØ₲ⱤɆ₴₴ ₦ØØⱤĐ",
+        "submitIssue": "ł₴₴ɄɆ ₦ØØⱤĐ",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "₩ɆⱠ₵Ø₥Ɇ ₦Ɇ₥ØĐł!",
-    "welcomeNamed": "₩ɆⱠ₵Ø₥Ɇ, {name}!",
-    "dashboardSubtitle": "Kruzty Dynamics Đ₳₴Ⱨ฿Ø₳ⱤĐ",
-    "accountsLoggedInOne": "{n} ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł.",
-    "accountsLoggedInMany": "{n} ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł.",
-    "liveLogs": "ⱠłVɆ ₱ⱤØ₲ⱤɆ₴₴",
-    "viewLogs": "VłɆ₩ ₱ⱤØ₲ⱤɆ₴₴",
-    "serviceActive": "₳₵₵ØⱤĐ",
-    "serviceInactive": "₦Ø₦ ₳₵₵ØⱤĐ",
-    "serviceStarting": "₦ɆɆĐ ₮ⱤØ₦",
-    "serviceStopped": "₴₮Ø₱₱ɆĐ"
-  },
-  "accounts": {
-    "title": "Discord ₳₵₵ØⱤĐ",
-    "subtitle": "₮Ø₭Ɇ₦₴ ₳₦Đ łĐɆ₦₮ł₮Ɏ ₦Ɇ₥ØĐł",
-    "loginPortal": "Discord ₱ØⱤ₮₳Ⱡ ₦Ɇ₥ØĐł",
-    "loginWithToken": "₳₵₵ØⱤĐ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ",
-    "addAccount": "₳₵₵ØⱤĐ ₦ɆɆĐⱠ",
-    "activeIdentity": "₳₵₵ØⱤĐ łĐɆ₦₮ł₮Ɏ",
-    "stored": "₴₮ØⱤɆĐ",
+  "buttons": {
     "remove": "ⱤɆ₥ØVɆ",
-    "noAccounts": "₦Ø Discord ₳₵₵ØⱤĐ",
-    "noAccountsDesc": "₳₵₵ØⱤĐ ₮ⱤØ₦Ɇ ₦ɆɆĐⱠ ₱ØⱤ₮₳Ⱡ ₳₦Đ ₮Ø₭Ɇ₦ ₦Ɇ₥ØĐł ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₵ØⱤĐ."
-  },
-  "settings": {
-    "title": "₮ⱤØ₦Ɇ ₳₦Đ ₥ØⱤɆ",
-    "subtitle": "Ɇ₦₲ØⱤ₲ ₦ɆɆĐⱠ ₳₦Đ ₦ØØⱤĐ",
-    "appPreferences": "₳₵₵ØⱤĐ ₦ɆɆĐⱠ",
-    "notificationProjection": "Ø₦₦Ɇ₦₮Ɇ₦ ₴₮₳₮Ʉ₴ ₱ⱤØJɆ₵₮łØ₦ ₦ØØⱤĐ",
-    "notificationProjectionDesc": "₳₱₱ ₳₦Đ ₥ɆĐł₳ ₦ØØⱤĐ ₮ł₮ⱠɆ₴ ₳₦Đ ₴Ʉ฿₮ł₮ⱠɆ₴ ₵Ʉ₴₮Ø₥łⱫɆ.",
-    "themes": "₮ⱤØ₦Ɇ ₳₦Đ ₦ØØⱤĐ",
-    "themesDesc": "₮ⱤØ₦Ɇ ₳₦Đ ₵ØⱠØⱤ ₦ɆɆĐⱠ.",
-    "language": "₦Ɇ₥ØĐł",
-    "languageDesc": "₦ØØⱤĐ ₮ⱤØ₦₦ɆĐ:",
-    "globalDefaults": "₲ⱠØ฿₳Ⱡ ₦ØØⱤĐ",
-    "globalDefaultsDesc": "₳₵₵ØⱤĐ ₮ⱤØ₦Ɇ ₳₦Đ ₴₮₳₮Ʉ₴ ₦ØØⱤĐ",
-    "imgbbKey": "ImgBB ₦Ɇ₥ØĐł ₮ⱤØ₦",
-    "imgbbKeyDesc": "ImgBB ₦Ɇ₥ØĐł ₮ⱤØ₦. Visit: api.imgbb.com",
-    "discordAppId": "Discord ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₮ⱤØ₦",
-    "discordAppIdDesc": "Discord ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₮ⱤØ₦. Visit: discord.com/developers",
-    "checkPermissions": "₮ⱤØ₦ ₦ɆɆĐⱠ ₵ⱧɆ₵₭",
-    "checkPermissionsDesc": "₮ⱤØ₦ ₳₦Đ ₦ØØⱤĐ ₦ɆɆĐⱠ ₦Ɇ₥ØĐł",
-    "deleteCache": "ł₥₳₲Ɇ ₮ⱤØ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ",
-    "deleteCacheDesc": "₳₵₵ØⱤĐ ł₥₳₲Ɇ ₦ØØⱤĐ ₦ɆɆĐⱠ ₳₦Đ ₦Ɇ₥ØĐł ₮ⱤØ₦"
-  },
-  "service": {
-    "title": "Kruzty Dynamics ₴ɆⱤ₮ØⱤ₦",
-    "running": "₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ ₳₵₵ØⱤĐ.",
-    "stopped": "₴ɆⱤ₮ØⱤ₦ ₦Ø₦ ₮ⱤØ₦.",
-    "applicationPresence": "₳₱₱Ⱡł₵₳₮łØ₦ ₱ⱤØ₴Ɇ₦₵Ɇ",
-    "appDescription": "₳₵₵ØⱤĐ ₦ɆɆĐⱠ ₮ⱤØ₦ ₦Ɇ₥ØĐł ₴₱Ø₮",
-    "applicationCatalogue": "₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ",
-    "statusFieldConfig": "₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
-    "presenceConfiguration": "₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
-    "mediaPresence": "₥ɆĐł₳ ₱ⱤØ₴Ɇ₦₵Ɇ",
-    "mediaDescription": "₥ɆĐł₳ ₳₵₵ØⱤĐ ₳₦Đ ₴₮₳₮Ʉ₴ ₦ɆɆĐⱠ",
-    "noPresence": "₦Ø ₳₵₵ØⱤĐ ₳₱₱ ₳₦Đ ₥ɆĐł₳ ₦ØØⱤĐ.",
-    "stoppedDescription": "₴ɆⱤ₮ØⱤ₦ ₴₮Ø₱₱ɆĐ. ₮ⱤØ₦ ₳₵₵ØⱤĐ ₳₱₱ ₳₦Đ ₥ɆĐł₳ ₦ØØⱤĐ."
-  },
-  "logs": {
-    "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₱ⱤØ₲ⱤɆ₴₴",
-    "subtitle": "ⱠłVɆ ₦ØØⱤĐ ₱ⱤØ₲ⱤɆ₴₴",
-    "copy": "₱ⱤØ₲ⱤɆ₴₴ ₵Ø₱Ɏ",
-    "export": "₱ⱤØ₲ⱤɆ₴₴ Ɇ₦₲ØⱤ₲",
-    "empty": "[INFO] ₦Ø ₱ⱤØ₲ⱤɆ₴₴. Discord ₦Ɇ₥ØĐł ₳₵₵ØⱤĐ ₳₦Đ ₦ØØⱤĐ ₱ⱤØ₲ⱤɆ₴₴."
-  },
-  "permissions": {
-    "requiredTitle": "₮ⱤØ₦ ₦ɆɆĐⱠ ₦Ɇ₥ØĐł",
-    "requiredSubtitle": "Android ₮ⱤØ₦ ₦ɆɆĐⱠ ₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ.",
-    "done": "₳₵₵ØⱤĐ",
-    "allGranted": "₮ⱤØ₦ ₳₵₵ØⱤĐ. ₴ɆⱤ₮ØⱤ₦ ₮ⱤØ₦ ₦ØØⱤĐ.",
-    "grant": "₮ⱤØ₦",
-    "returnHint": "Android ₮ⱤØ₦ ₳₵₵ØⱤĐ ₦ØØⱤĐ ₳₦Đ ₴ɆⱤ₮ØⱤ₦ ₦ɆɆĐⱠ.",
-    "notificationTitle": "Ø₦₦Ɇ₦₮Ɇ₦ ₲ⱠØⱤ₱ ₳₵₵Ɇ₴",
-    "notificationSubtitle": "₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ ₦ɆɆĐⱠ",
-    "openAndroidSettings": "Android ₮ⱤØ₦Ɇ ₦ɆɆĐⱠ",
-    "oemNotice": "ØɆ₥ ₳₦Đ Android 13+ ₦ØØⱤĐ",
-    "notificationExplanation": "Android ₦ØØⱤĐ ₮ⱤØ₦ ₦ɆɆĐⱠ ₴₱Ɇ₵ł₳Ⱡ ₱ɆⱤ₥ł₴. ₦Ɇ₥ØĐł ฿Ɽ₳₦Đ ₦ɆɆĐⱠ ₥Ɇ₮ⱧØĐ ₦ØØⱤĐ.",
-    "methodA": "₥Ɇ₮ⱧØĐ ₳: ₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "Android ₮ⱤØ₦Ɇ ₦ɆɆĐⱠ ₦ØØⱤĐ.",
-    "methodAStep2": "₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ > Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦ ₦ØØⱤĐ.",
-    "methodAStep3": "Kruzty Dynamics ₦ØØⱤĐ ₳₦Đ ₮ⱤØ₦ ₳₵₵ØⱤĐ.",
-    "methodB": "₥Ɇ₮ⱧØĐ ฿: ₳₱₱ ł₦₣Ø > ɆⱠⱠł₱₴ł₴ (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "₮ⱤØ₦Ɇ ₦ɆɆĐⱠ > ₳₱₱₴ > ₥₳₦₳₲Ɇ ₳₱₱₴ / ₳₱₱ Ⱡł₴₮.",
-    "methodBStep2": "Kruzty Dynamics ₦ØØⱤĐ ₳₦Đ ₦ɆɆĐⱠ.",
-    "methodBStep3": "₮ⱧⱤɆɆ ĐØ₮₴ ₮Ø₱-Ɽł₲Ⱨ₮ ₦ØØⱤĐ.",
-    "methodBStep4": "₳₱₱ ⱤɆ₴₮Ɽł₵₮ɆĐ / ₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ > ₮ⱤØ₦.",
-    "methodBStep5": "₦ØØⱤĐ ₳₦Đ Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦ ₳₵₵ØⱤĐ.",
-    "notificationAccessDescription": "Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦ ₦ɆɆĐⱠ Kruzty Dynamics ₥ɆĐł₳ ₴Ɇ₴₴łØ₦ ₦ØØⱤĐ (₴Ø₦₲ ₮ł₮ⱠɆ, ₳Ɽ₮ł₴₮, ₳Ⱡ฿Ʉ₥, ₱Ⱡ₳Ɏ฿₳₵₭ ₴₮₳₮Ɇ) Spotify, YouTube Music, ₥ɆĐł₳ ₱Ⱡ₳ɎɆⱤ₴ ₦ØØⱤĐ.",
-    "usageTitle": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴",
-    "usageSubtitle": "₦ØØⱤĐ ₳₱₱ ₮Ɽ₳₵Ɇ",
-    "openUsageAccess": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₦ɆɆĐⱠ",
-    "usageDescription": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₦ɆɆĐⱠ ₳₱₱ ₳₦Đ ₲₳₥Ɇ ₮Ɽ₳₵Ɇ Kruzty Dynamics ₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ ₦ØØⱤĐ.",
-    "usageStep1": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₦ɆɆĐⱠ ₦ØØⱤĐ.",
-    "usageStep2": "Kruzty Dynamics ₦ØØⱤĐ.",
-    "usageStep3": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₮ⱤØ₦ ₳₵₵ØⱤĐ.",
-    "batteryTitle": "฿₳₮ɆɆⱤł ₮ⱤØ₦₲Ɇ",
-    "batterySubtitle": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ ₩Ⱨł₮ɆⱠł₴₮",
-    "requestExemption": "Ɇ₥₱ⱠɆⱠ ₦ɆɆĐⱠ",
-    "batteryDescription": "Android ₦ØØⱤĐ ₱ⱤØ₵Ɇ₴₴ ₦ɆɆĐⱠ ₴ⱠɆɆ₱. Kruzty Dynamics ฿₳₮ɆɆⱤł ₮ⱤØ₦₲Ɇ ₦ØØⱤĐ ₳₵₵ØⱤĐ Discord Rich Presence ₦ØØⱤĐ.",
-    "foregroundTitle": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦",
-    "foregroundSubtitle": "Android 13+ Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦",
-    "foregroundGuardTitle": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦",
-    "usageGuardDescription": "₦ɆɆĐⱠ ₳₱₱ ₦ØØⱤĐ ₮Ɽ₳₵Ɇ.",
-    "notificationGuardDescription": "₦ɆɆĐⱠ ₥ɆĐł₳ ₱Ⱡ₳Ɏ ₳₦Đ ₥Ɇ₮₳Đ₳₮₳ ₦ØØⱤĐ.",
-    "foregroundGuardDescription": "Android ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₦ØØⱤĐ ₳₵₵ØⱤĐ.",
-    "serviceStartError": "Android ₱ⱤØ₴Ɇ₦₵Ɇ ₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
-    "allowNotification": "Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦",
-    "foregroundDescription": "Android 13+ ₦ɆɆĐⱠ ₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₴₮₳₮Ʉ₴ ฿₳Ɽ ₦ØØⱤĐ Discord ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ."
-  },
-  "toast": {
-    "duplicateAccount": "Discord ₳₵₵ØⱤĐ ₳₵₵ØⱤĐ ₦ØØⱤĐ.",
-    "insufficientPermissions": "₦ØØⱤĐ ₦ɆɆĐⱠ ₶₥₦ØØⱤĐ. ₴Ɇ₮₮ł₦₲₴ & ₥ØⱤɆ > ₵ⱧɆ₵₭ ₱ɆⱤ₥ł₴₴łØ₦₴ ₦ØØⱤĐ.",
-    "newVersionAvailable": "₦Ɇ₩ VɆⱤ₴łØ₦ ₳₵₵ØⱤĐ!",
-    "updateDetected": "₦Ɇ₩ Ⱡ₳₮Ɇ₴₮ VɆⱤ₴łØ₦ ₦ØØⱤĐ!",
-    "latestVersion": "Ⱡ₳₮Ɇ₴₮ VɆⱤ₴łØ₦ ₦ØØⱤĐ!",
-    "updateCheckFailed": "Ʉ₱Đ₳₮Ɇ ₵ⱧɆ₵₭ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ."
-  },
-  "accountsPage": {
-    "emptyTitle": "₦Ø ₳₵₵ØⱤĐ ₦Ɇ₥ØĐł.",
-    "emptyDescription": "Discord ₳₵₵ØⱤĐ ₦ɆɆĐⱠ Rich Presence ₴₮₳₮Ʉ₴ ₲₳₥Ɇ₴, ₳₱₱₴, ₥ɆĐł₳ ₦ØØⱤĐ.",
-    "login": "Discord ₦Ɇ₥ØĐł",
-    "currentAccount": "₦ØØⱤĐ ₳₵₵ØⱤĐ",
-    "activePresence": "₳₵₵ØⱤĐ ₱ⱤØ₴Ɇ₦₵Ɇ",
-    "storedAccounts": "₴₮ØⱤɆĐ ₳₵₵ØⱤĐ",
-    "switch": "₴₩ł₮₵Ⱨ",
-    "unuse": "₦Ø₦Ɇ",
-    "remove": "ⱤɆ₥ØVɆ",
-    "cancel": "₵₳₦₵ɆⱠ",
-    "deleteTitle": "Discord ₳₵₵ØⱤĐ ⱤɆ₥ØVɆ?",
-    "loginTitle": "Discord ₦Ɇ₥ØĐł ₱ØⱤ₮₳Ⱡ",
-    "noActiveAccount": "₦Ø ₳₵₵ØⱤĐ. ₦Ɇ₥ØĐł ₳₵₵ØⱤĐ ₦ØØⱤĐ.",
-    "addAccountTitle": "Discord ₳₵₵ØⱤĐ ₦ɆɆĐⱠ",
-    "portal": "Discord ₦Ɇ₥ØĐł ₱ØⱤ₮₳Ⱡ",
-    "signInPortal": "Discord ł₦-₳₱₱ ₦Ɇ₥ØĐł ₳₵₵ØⱤĐ",
     "openPortal": "₱ØⱤ₮₳Ⱡ ₦ɆɆĐⱠ",
-    "privacyText": "Discord ₳Ʉ₮ⱧØⱤł₮Ɏ ₴Ø₵ł₳Ⱡ ₮ⱤØ₦ Rich Presence ₦ɆɆĐⱠ. Kruzty Dynamics SDK ₳₵₵ØⱤĐ łĐɆ₦₮ł₮Ɏ ₳₦Đ ₳₵₵ØⱤĐ ₳₵₮łVł₮Ɏ ₦ØØⱤĐ; Ⱡł₴₮, ฿ⱠØ₵₭, ł₦Vł₮Ɇ, ₥Ɇ₴₴₳₲Ɇ, VØł₵Ɇ ₦Ø₦-₦ɆɆĐⱠ. Android ₮Ø₭Ɇ₦ ₦ɆɆĐⱤ₱₮ ₦ØØⱤĐ ₦Ɇ₥ØĐł. Read the",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "₳₵₵ØⱤĐ ⱠØ₲ØɄ₮",
-    "removePrefix": "₳₵₵ØⱤĐ ⱤɆ₥ØVɆ ₦ØØⱤĐ",
-    "removeSuffix": ". ₦ØØⱤĐ ₮ⱤØ₦ ₦Ɇ₥ØĐł ₦ɆɆĐⱠ ₦ØØⱤĐ.",
-    "confirmLogout": "ⱠØ₲ØɄ₮ ₦ØØⱤĐ",
-    "addAccount": "Discord ₳₵₵ØⱤĐ ₦ɆɆĐⱠ",
-    "noSelection": "₦Ø ₳₵₵ØⱤĐ. ₦Ɇ₥ØĐł ₳₵₵ØⱤĐ ₦ØØⱤĐ.",
-    "addMoreAccounts": "Discord ฿Ʉ₮₮Ø₦ ₦ØØⱤĐ ₳₵₵ØⱤĐ ₦ɆɆĐⱠ."
-  },
-  "settingsUi": {
-    "chooseLanguage": "₦Ɇ₥ØĐł ₦ØØⱤĐ",
-    "languageDescription": "₦Ɇ₥ØĐł ₦ØØⱤĐ ₳₦Đ Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦.",
-    "availableLanguages": "₦Ɇ₥ØĐł ₳₵₵ØⱤĐ",
-    "close": "₵ⱠØ₴Ɇ",
-    "linkedImageUrls": "ł₥₳₲Ɇ ₦ØØⱤĐ",
-    "clearCacheKeep": "₵₳₵ⱧɆ ₦ØØⱤĐ, ₵Ʉ₴₮Ø₥ ł₵Ø₦₴ ₮ⱤØ₦",
-    "clearCacheAll": "₳ⱠⱠ ₦ØØⱤĐ, ₵Ʉ₴₮Ø₥ ł₵Ø₦₴ ₦ØØⱤĐ",
-    "credits": "₵ⱤɆĐł₮₴",
-    "themeMode": "₮ⱤØ₦Ɇ ₥ØĐɆ",
-    "accentColor": "₱Ɽł₥₳ⱤɎ ₳₵₵ØⱤĐ ₵ØⱠØⱤ",
-    "resetAccent": "ĐɆ₣₳ɄⱠ₮ ØⱤ₳₦₲Ɇ ₦ØØⱤĐ",
-    "learnMore": "₳₱₱ ₦ØØⱤĐ ₥ØⱤɆ",
-    "privacyPolicy": "₱ⱤłV₳₵Ɏ ₱ØⱠł₵Ɏ",
-    "repository": "GitHub ₱ⱤØ₲ⱤɆ₴₴ ₦ØØⱤĐ",
-    "latestRelease": "Ⱡ₳₮Ɇ₴₮ ₦ØØⱤĐ ₲Ø",
-    "submitIssue": "ł₴₴ɄɆ ₦ØØⱤĐ",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Ⱡł฿Ɽ₳ⱤłɆ₴ ₳₱₱ ₦ØØⱤĐ",
-    "contributorsSection": "Kizzy ₵Ø₦₮Ɽł฿Ʉ₮ØⱤ₴",
-    "maintainerRole": "₥₳ł₦₮₳ł₦ɆⱤ ₳₦Đ ĐɆVɆⱠØ₱ɆⱤ",
-    "view": "VłɆ₩",
-    "done": "ĐØ₦Ɇ",
-    "developedBy": "ĐɆVɆⱠØ₱ɆĐ ฿Ɏ",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Rust Core (Tokio + Tauri v2) ₳₦Đ React 19 ₳₦Đ TailwindCSS ₦ØØⱤĐ ₳₦Đ Native Android Plugin Bridge ₦ØØⱤĐ. Kizzy's Experimental RPC ₦ØØⱤĐ.",
-    "cached": "₵₳₵ⱧɆĐ",
-    "tapCustomize": "₦ØØⱤĐ ₮ⱤØ₦",
-    "defaultNote": "₦ØØⱤĐ ₳₵₵ØⱤĐ ₳₱₱ ₳₦Đ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₮łVł₮Ɏ ₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ ₳₦Đ ₴₮₳₮Ʉ₴ ₦ØØⱤĐ.",
-    "activityType": "₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ",
-    "activityStatus": "₳₵₮łVł₮Ɏ ₴₮₳₮Ʉ₴",
-    "imgbbHelp": "ImgBB ₦Ɇ₥ØĐł ₮ⱤØ₦ ₳₱₱ ₳₦Đ ₥ɆĐł₳ ł₥₳₲Ɇ₴ Discord CDN ₦ØØⱤĐ. Visit",
-    "getApiKey": "₮ⱤØ₦ ₦ØØⱤĐ.",
-    "apiPrivacy": "₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ ₮ⱤØ₦ ₦ɆɆĐⱠ. ₵Ʉ₴₮Ø₥ ₮Ø₭Ɇ₦ ₦ØØⱤĐ ₦ØØⱤĐ.",
-    "saveKey": "₮Ø₭Ɇ₦ ₦ØØⱤĐ",
-    "discordIdHelp": "Discord ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₦ØØⱤĐ ₦ØØⱤĐ",
-    "developerPortal": "Discord ĐɆVɆⱠØ₱ɆⱤ ₱ØⱤ₮₳Ⱡ",
-    "idDefault": "ĐɆ₣₳ɄⱠ₮",
-    "idPrivacy": "₦ØØⱤĐ ₦ØØⱤĐ ĐɆ₣₳ɄⱠ₮ Kruzty Dynamics ₳₱₱Ⱡł₵₳₮łØ₦ łĐ ₦ØØⱤĐ.",
-    "saveId": "łĐ ₦ØØⱤĐ",
-    "permissionsDescription": "₮ⱤØ₦ ₦ɆɆĐⱠ ₥ɆĐł₳ Ø₦₦Ɇ₦₮Ɇ₦ ₳₦Đ ₦ØØⱤĐ ₳₱₱₴ ₦ØØⱤĐ:",
-    "notificationAccessDesc": "₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ ₥ɆĐł₳ ₦ØØⱤĐ",
-    "usageAccessDesc": "₦ØØⱤĐ ₲₳₥Ɇ₴ ₳₦Đ ₳₱₱₴ ₮Ɽ₳₵Ɇ",
-    "batteryDesc": "Android ₱ⱤØ₴Ɇ₦₵Ɇ ₴ɆⱤ₮ØⱤ₦ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ",
-    "foregroundDesc": "₴₮₳₮Ʉ₴ ฿₳Ɽ Discord ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ",
-    "saveIdPlaceholder": "1572590527562391713 (ĐɆ₣₳ɄⱠ₮)",
-    "resetDefault": "ĐɆ₣₳ɄⱠ₮ ₦ØØⱤĐ",
-    "cancel": "₵₳₦₵ɆⱠ",
-    "cacheWarning": "{total} ₦ØØⱤĐ ł₥₳₲Ɇ ₦ØØⱤĐ, {custom} ₵Ʉ₴₮Ø₥ ₳₱₱ ł₵Ø₦ ₦ØØⱤĐ. ₵₳₵ⱧɆ ₦ØØⱤĐ ₵Ʉ₴₮Ø₥ ł₵Ø₦₴ ₮ⱤØ₦, ₳ⱠⱠ ₦ØØⱤĐ ₵Ʉ₴₮Ø₥ ₦ØØⱤĐ ₦ØØⱤĐ. ₵Ʉ₴₮Ø₥ ₦ØØⱤĐ ₦ØØⱤĐ ₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ ₦ØØⱤĐ.",
-    "allGranted": "₮ⱤØ₦ ₳₵₵ØⱤĐ",
-    "clearedAll": "₳ⱠⱠ ł₥₳₲Ɇ ₦ØØⱤĐ ₦ØØⱤĐ, ₵Ʉ₴₮Ø₥ ₳₱₱ ł₵Ø₦₴ ₦ØØⱤĐ.",
-    "clearedKeeping": "ł₥₳₲Ɇ ₦ØØⱤĐ ₦ØØⱤĐ. ₵Ʉ₴₮Ø₥ ₳₱₱ ł₵Ø₦₴ ₮ⱤØ₦.",
-    "usingDefaultKey": "ĐɆ₣₳ɄⱠ₮ ₦Ɇ₥ØĐł ₮Ø₭Ɇ₦ ₦ØØⱤĐ",
-    "customKeySet": "₵Ʉ₴₮Ø₥ ₮Ø₭Ɇ₦ ₳₵₵ØⱤĐ",
-    "light": "Ⱡł₲Ⱨ₮",
-    "dark": "Đ₳Ɽ₭",
-    "amoled": "AMOLED",
-    "libraryTauri": "Ⱡł₲Ⱨ₮₩Ɇł₲Ⱨ₮ ₦Ɇ₥ØĐł ₦ØØⱤĐ ₦ɆɆĐⱠ",
-    "libraryTokio": "₳₴Ɏ₦₵ⱧⱤØ₦ØɄ₴ ₦ɆɆĐⱠ ₦ØØⱤĐ ₦ɆɆĐⱠ",
-    "librarySdk": "Native Android ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
-    "libraryReact": "₥ØĐɆⱤ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ ₳Ɽ₵Ⱨł₮Ɇ₵₮ɄⱤɆ",
-    "libraryTailwind": "Ʉ₮łⱠł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ",
-    "libraryLucide": "₵Ø₥₥Ʉ₦ł₮Ɏ ₦ØØⱤĐ ₦ɆɆĐⱠ ł₵Ø₦₴",
-    "checkForUpdates": "₦ØØⱤĐ ₦ɆɆĐⱠ ₵ⱧɆ₵₭",
-    "checkForUpdatesDesc": "₦Ɇ₩ VɆⱤ₴łØ₦ ₦ØØⱤĐ ₵ⱧɆ₵₭.",
-    "check": "₵ⱧɆ₵₭",
-    "checkingUpdates": "₵ⱧɆ₵₭ł₦₲ ₦ØØⱤĐ"
-  },
-  "configFields": {
-    "appTitle": "₳₱₱Ⱡł₵₳₮łØ₦ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
-    "mediaTitle": "₥ɆĐł₳ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
-    "back": "฿₳₵₭",
-    "reset": "ĐɆ₣₳ɄⱠ₮ ₦ØØⱤĐ",
-    "help": "₮Ø₭Ɇ₦ ₦ɆɆĐⱠ ₦ØØⱤĐ",
-    "title": "₮ł₮ⱠɆ",
-    "line1": "Ⱡł₦Ɇ 1 (ĐɆ₮₳łⱠ₴)",
-    "line2": "Ⱡł₦Ɇ 2 (₴₮₳₮Ʉ₴)",
-    "smallText": "₴₥₳ⱠⱠ ₮Ɇ₦₮",
-    "smallImage": "₴₥₳ⱠⱠ ł₥₳₲Ɇ",
-    "bigText": "฿ł₲ ₮Ɇ₦₮",
-    "bigImage": "฿ł₲ ł₥₳₲Ɇ",
-    "header": "ⱧɆ₳ĐɆⱤ (Ⱡł₴₮Ɇ₦ł₦₲ / ₩₳₮₵Ⱨł₦₲)",
-    "mediaTitleField": "₥ɆĐł₳ ₮ł₮ⱠɆ (₳₵₮łVł₮Ɏ ĐɆ₮₳łⱠ₴)",
-    "artist": "Ⱡł₦Ɇ 1 (₳₵₮łVł₮Ɏ ₴₮₳₮Ʉ₴ / ₳Ɽ₮ł₴₮)",
-    "album": "Ⱡł₦Ɇ 2 (₳Ⱡ฿Ʉ₥ / ł₥₳₲Ɇ ₮Ɇ₦₮)",
-    "buttons": "₵Ʉ₴₮Ø₥ ฿Ʉ₮₮Ø₦₴",
-    "button1": "฿Ʉ₮₮Ø₦ 1",
-    "button2": "฿Ʉ₮₮Ø₦ 2",
-    "save": "₮ⱤØ₦ ₦ØØⱤĐ",
-    "appReference": "₳₱₱Ⱡł₵₳₮łØ₦ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ",
-    "mediaReference": "₥ɆĐł₳ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ",
-    "tokenDescription": "₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ ₦ɆɆĐⱠ",
-    "mediaTokenDescription": "₥ɆĐł₳ ₦ØØⱤĐ ₩Ɇ฿ ₳₦Đ ₦ØØⱤĐ ₱Ⱡ₳ɎɆⱤ₴ ₦ØØⱤĐ.",
-    "discard": "₦ØØⱤĐ ₦ɆɆĐⱠ ₦ØØⱤĐ?",
-    "unsaved": "₦ØØⱤĐ ₦ɆɆĐⱠ",
-    "helpDone": "₳₵₵ØⱤĐ",
-    "appTokenName": "₳₱₱Ⱡł₵₳₮łØ₦ ₦ØØⱤĐ ₦ØØⱤĐ ₳₵₮łVł₮Ɏ ₦ØØⱤĐ.",
-    "appHeader": "ⱧɆ₳ĐɆⱤ",
-    "titleHeader": "₮ł₮ⱠɆ/ⱧɆ₳ĐɆⱤ",
-    "detailsField": "ĐɆ₮₳łⱠ₴",
-    "stateField": "₴₮₳₮Ʉ₴",
-    "notificationConfigSubtitle": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₮ł₮ⱠɆ ₳₦Đ ₴Ʉ฿₮ł₮ⱠɆ ₵Ʉ₴₮Ø₥łⱫɆ.",
-    "notificationAppSection": "₳₱₱ ₴₮₳₮Ʉ₴ Ø₦₦Ɇ₦₮Ɇ₦",
-    "notificationMediaSection": "₥ɆĐł₳ ₱Ⱡ₳Ɏ฿₳₵₭ Ø₦₦Ɇ₦₮Ɇ₦",
-    "notificationSubtitleLabel": "₴Ʉ฿₮ł₮ⱠɆ",
-    "notificationHelpIntro": "Ʉ₴Ɇ getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), ₳₦Đ getFieldCfgStr(\"MediaBigText\") ₮Ø ł₦₴ɆⱤ₮ ⱤɆ₦ĐɆⱤɆĐ ₣łɆⱠĐ V₳ⱠɄɆ₴. Ʉ₴Ɇ joinNonBlank(field1, field2) ₮Ø JØł₦ ₦Ø₦Ɇ₥₱₮Ɏ V₳ⱠɄɆ₴ ₩ł₮Ⱨ ₳ ฿ɄⱠⱠɆ₮. ₳₱₱ Ø₦₦Ɇ₦₮Ɇ₦ ₮Ɇ₥₱Ⱡ₳₮Ɇ₴ ₴Ʉ₱₱ØⱤ₮ ₮ⱧɆ AppActivityType == \"Playing\" ₵Ø₦Đł₮łØ₦₳Ⱡ. ɆӾ₱ⱤɆ₴₴łØ₦₴ ₳Ⱡ₴Ø ₴Ʉ₱₱ØⱤ₮ == ₳₦Đ != ₵Ø₥₱₳Ɽł₴Ø₦₴.",
-    "notificationDiscardMessage": "Ʉ₦₴₳VɆĐ Ø₦₦Ɇ₦₮Ɇ₦ ₱ⱤØJɆ₵₮łØ₦ ₵Ⱨ₳₦₲Ɇ₴. ⱠɆ₳VɆ ₦ØØⱤĐ ₦ØØⱤĐ ₦ØØⱤĐ.",
-    "appTokenActivityType": "Ɽł₵Ⱨ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ ₳₱₱ ₱ⱤØ₣łⱠɆ ₦ØØⱤĐ, ₴Ʉ₵Ⱨ ₳₴ Playing, Listening, Watching, ₳₦Đ Competing.",
-    "appTokenPlatformType": "₱Ⱡ₳₮₣ØⱤ₥ ₳₱₱ ₱ⱤØ₣łⱠɆ ₦ØØⱤĐ, ₴Ʉ₵Ⱨ ₳₴ Android, PC, PlayStation, ₳₦Đ Xbox.",
-    "appExpressionOperators": "ɆӾ₱ⱤɆ₴₴łØ₦₴ ₴Ʉ₱₱ØⱤ₮ == ₳₦Đ != ₵Ø₥₱₳Ɽł₴Ø₦₴. Ʉ₴Ɇ {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} ₮Ø ₴ⱧØ₩ AppName ₩ⱧɆ₦ Playing ₳₦Đ AppPlatformType Ø₮ⱧɆⱤ₩ł₴Ɇ.",
-    "appTokenDetails": "₵Ʉ₴₮Ø₥ ₮Ɇ₦₮ ₳₱₱ ₱ⱤØ₣łⱠɆ ₦ØØⱤĐ, ₦ØØⱤĐ ₳₦Đ ฿Ⱡ₳₦₭ ₦ØØⱤĐ.",
-    "appTokenState": "₵Ʉ₴₮Ø₥ ₴₮₳₮Ɇ ₮Ɇ₦₮ ₳₱₱ ₱ⱤØ₣łⱠɆ ₦ØØⱤĐ, ₦ØØⱤĐ ₳₦Đ ฿Ⱡ₳₦₭ ₦ØØⱤĐ.",
-    "appTokenSmallText": "₵Ʉ₴₮Ø₥ ₴₥₳ⱠⱠ ł₥₳₲Ɇ Ⱡ₳฿ɆⱠ ₳₱₱ ₱ⱤØ₣łⱠɆ ₦ØØⱤĐ, ₦ØØⱤĐ ₳₦Đ ฿Ⱡ₳₦₭ ₦ØØⱤĐ.",
-    "appTokenSmallUrl": "₵Ʉ₴₮Ø₥ ₴₥₳ⱠⱠ ł₥₳₲Ɇ ₦ØØⱤĐ ₳₱₱ ₱ⱤØ₣łⱠɆ ₦ØØⱤĐ, ₦ØØⱤĐ ₳₦Đ ฿Ⱡ₳₦₭ ₦ØØⱤĐ.",
-    "appTokenImageUrl": "ł₥₳₲Ɇ ImgBB ₦ØØⱤĐ ₳₱₱Ⱡł₵₳₮łØ₦ ł₵Ø₦ ₦ØØⱤĐ.",
-    "appTokenPackageName": "Android ₱₳₵₭₳₲Ɇ łĐɆ₦₮ł₣łɆⱤ (e.g. com.mojang.minecraftpe).",
-    "mediaTokenIntro": "₮Ø₭Ɇ₦ ₮Ɇ₦₮ ₣łɆⱠĐ ₳₦Đ ฿Ʉ₮₮Ø₦ ₦ØØⱤĐ ₦ØØⱤĐ (e.g. {example}).",
-    "mediaTokenAppName": "₱Ⱡ₳ɎɆⱤ ₳₱₱Ⱡł₵₳₮łØ₦ ₦ØØⱤĐ Discord Ⱡł₴₮Ɇ₦ł₦₲ ₳₦Đ ₩₳₮₵Ⱨł₦₲ ⱧɆ₳ĐɆⱤ ₦ØØⱤĐ.",
-    "mediaTokenTitle": "₥ɆĐł₳ ₴Ø₦₲ ₳₦Đ VłĐɆØ ₮ł₮ⱠɆ Ø₦₦Ɇ₦₮Ɇ₦ ₥Ɇ₮₳Đ₳₮₳ ₦ØØⱤĐ.",
-    "mediaTokenArtist": "₳Ɽ₮ł₴₮ ₳₦Đ ₵ⱤɆ₳₮ØⱤ ₱Ⱡ₳Ɏł₦₲ ₦ØØⱤĐ.",
-    "mediaTokenAlbum": "₳Ⱡ฿Ʉ₥ ₦ØØⱤĐ ₳₦Đ ₱Ⱡ₳ɎⱠł₴₮ ₦ØØⱤĐ.",
-    "mediaTokenPlaybackState": "₱Ⱡ₳Ɏ฿₳₵₭ ₴₮₳₮Ɇ (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "ł₥₳₲Ɇ ImgBB ₦ØØⱤĐ ₥ɆĐł₳ ₳Ⱡ฿Ʉ₥ ₳Ɽ₮ ₳₦Đ ₮ⱧɄ₥฿₦₳łⱠ ₦ØØⱤĐ.",
-    "mediaTokenPlaybackImageUrl": "ł₥₳₲Ɇ ₦ØØⱤĐ ₱Ⱡ₳Ɏ฿₳₵₭ ł₦Đł₵₳₮ØⱤ ₦ØØⱤĐ.",
-    "mediaTokenFallbackImageUrl": "₳₱₱Ⱡł₵₳₮łØ₦ ł₵Ø₦ ₦ØØⱤĐ ₳Ɽ₮₩ØⱤ₭ ₦ØØⱤĐ.",
-    "appConfigSubtitle": "₦ØØⱤĐ ₳₱₱ ₮Ɽ₳₵Ɇ ₦ɆɆĐⱠ.",
-    "mediaConfigSubtitle": "₦ØØⱤĐ ₥ɆĐł₳ ₱Ⱡ₳Ɏ฿₳₵₭ ₦ɆɆĐⱠ.",
-    "mediaHeaderDescription": "₳₱₱ ₦ØØⱤĐ Discord ₥ɆĐł₳ ⱧɆ₳ĐɆⱤ ₦ØØⱤĐ. ₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ Ⱡł₴₮Ɇ₦ł₦₲ ₳₦Đ ₩₳₮₵Ⱨł₦₲ ₦ØØⱤĐ.",
-    "mediaTitleDescription": "₥ɆĐł₳ ₮ł₮ⱠɆ ₳₦Đ ĐɆ₮₳łⱠ₴ ₦ØØⱤĐ. ₱Ⱡ₳ɎɆⱤ ₦ØØⱤĐ ⱧɆ₳ĐɆⱤ ₳฿ØVɆ ₦ØØⱤĐ.",
-    "mediaAlbumDescription": "₳Ɽ₮ł₴₮ ฿Ɇ₦Ɇ₳₮Ⱨ Discord ₥ɆĐł₳ ₵₳ⱤĐ ₦ØØⱤĐ.",
-    "mediaButtonDescription": "2 ł₦₮ɆⱤ₳₵₮łVɆ ₱ⱤØ₴Ɇ₦₵Ɇ ฿Ʉ₮₮Ø₦₴ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ.",
-    "mediaButtonLabel": "Ⱡ₳฿ɆⱠ",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "e.g. ",
-    "mediaButtonListen": "Ⱡł₴₮Ɇ₦ Ø₦",
-    "appDiscardMessage": "₳₱₱Ⱡł₵₳₮łØ₦ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ. ⱠɆ₳VɆ ₦ØØⱤĐ ₦ØØⱤĐ ₴₮₳₮Ɇ ₦ØØⱤĐ.",
-    "mediaDiscardMessage": "₥ɆĐł₳ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ. ⱠɆ₳VɆ ₦ØØⱤĐ ₦ØØⱤĐ ₴₮₳₮Ɇ ₦ØØⱤĐ.",
-    "mediaTokenSubtitle": "₦ØØⱤĐ ₥ɆĐł₳ ₦ØØⱤĐ ₳₦Đ ฿Ʉ₮₮Ø₦₴ ₦ØØⱤĐ"
-  },
-  "catalogue": {
-    "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ",
-    "back": "฿₳₵₭",
+    "understood": "Ʉ₦ĐɆⱤ₴₮ØØĐ",
+    "apply": "₳₱₱ⱠɎ",
     "batch": "฿₳₮₵Ⱨ Ø₱ɆⱤ₳₮łØ₦₴",
-    "search": "₳₱₱Ⱡł₵₳₮łØ₦ ₴Ɇ₳Ɽ₵Ⱨ...",
-    "filter": "₳₱₱₴ ₣łⱠ₮ɆⱤ",
-    "clearFilters": "₣łⱠ₮ɆⱤ₴ ₵ⱠɆ₳Ɽ",
-    "enabledOnly": "₳₵₵ØⱤĐ Ø₦ⱠɎ",
-    "allActivityTypes": "₳ⱠⱠ ₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ₴",
-    "allActivityStatuses": "₳ⱠⱠ ₳₵₮łVł₮Ɏ ₴₮₳₮Ʉ₴Ɇ₴",
+    "cancel": "₵₳₦₵ɆⱠ",
+    "close": "₵ⱠØ₴Ɇ",
+    "confirm": "₵Ø₦₣łⱤ₥ ₳₦Đ ₳₱₱ⱠɎ",
+    "discardChanges": "₵Ⱨ₳₦₲Ɇ₴ ₦ØØⱤĐ",
+    "keepEditing": "₭ɆɆ₱ ɆĐł₮ł₦₲",
+    "stageChanges": "₴₮₳₲Ɇ ₵Ⱨ₳₦₲Ɇ₴",
+    "uploadImage": "ł₥₳₲Ɇ ImgBB ₦ØØⱤĐ",
+    "helpDone": "₳₵₵ØⱤĐ",
+    "save": {
+      "fields": "₮ⱤØ₦ ₦ØØⱤĐ",
+      "id": "łĐ ₦ØØⱤĐ",
+      "key": "₮Ø₭Ɇ₦ ₦ØØⱤĐ"
+    },
+    "logs": {
+      "live": "ⱠłVɆ ₱ⱤØ₲ⱤɆ₴₴",
+      "view": "VłɆ₩ ₱ⱤØ₲ⱤɆ₴₴"
+    },
+    "grant": "ⱠɆ ₮ⱤØ₦",
+    "done": "₳₵₵ØⱤĐ",
+    "resetDefault": "ĐɆ₣₳ɄⱠ₮ ₦ØØⱤĐ"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "₳₵₮łVł₮Ɏ ₦₳₥Ɇ",
+          "bigImage": "฿ł₲ ł₥₳₲Ɇ",
+          "bigText": "฿ł₲ ₮Ɇ₦₮",
+          "details": "ĐɆ₮₳łⱠ₴",
+          "imageUrl": "ł₥₳₲Ɇ URL",
+          "smallImage": "₴₥₳ⱠⱠ ł₥₳₲Ɇ",
+          "smallText": "₴₥₳ⱠⱠ ₮Ɇ₦₮",
+          "state": "₴₮₳₮Ʉ₴",
+          "uploadImage": "ł₥₳₲Ɇ ₦ØØⱤĐ",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ",
+          "desc": "ł₦ĐłVłĐɄ₳Ⱡ ₳₱₱ ₱ⱤØJɆ₵₮łØ₦₴ VłɆ₩, ₣łⱠ₮ɆⱤ, ₵Ʉ₴₮Ø₥łⱫɆ"
+        },
+        "configurationDetails": "₵Ø₦₣ł₲ɄⱤ₳₮łØ₦ ĐɆ₮₳łⱠ₴",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "₵Ʉ₴₮Ø₥łⱫɆĐ ₣₳ⱠⱠ฿₳₵₭ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ ₱ⱤØJɆ₵₮₴.",
+              "drop": "Discord ₳₵₮łVł₮Ɏ ₵ⱠɆ₳Ɽ₴ Ɇ₦₳฿ⱠɆĐ ₳₱₱Ⱡł₵₳₮łØ₦ ₦ØØⱤĐ.",
+              "freeze": "Ⱡ₳₴₮ ₱ⱤØJɆ₵₮ɆĐ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ ₳₦Đ ₱ⱤɆ₴ɆⱤVɆ₴ Ɇ₦₳฿ⱠɆĐ ₳₱₱ ₦ØØⱤĐ ₦ØØⱤĐ."
+            },
+            "title": "ØɄ₮₴łĐɆ ₳₱₱ ₱ØⱠł₵łɆ₴"
+          },
+          "fallbackPresence": "₵Ʉ₴₮Ø₥ ₣₳ⱠⱠ฿₳₵₭ ₱ⱤØ₴Ɇ₦₵Ɇ",
+          "desc": "฿ɆⱧ₳VłØⱤ Ɇ₦₳฿ⱠɆĐ ₳₱₱₴ ⱠɆ₳VɆ ₳₦Đ ₴₩ł₮₵Ⱨ ₳₩₳Ɏ",
+          "title": "ØɄ₮₴łĐɆ ₦ØØⱤĐ ₳₱₱ ₱ØⱠł₵łɆ₴",
+          "help": "₱ØⱠł₵Ɏ ⱧɆⱠ₱"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "₱ⱤØ₴Ɇ₦₵Ɇ ₮ł₥ɆⱤ ₴₱Ɇ₵ł₣ł₵ ₣łӾɆĐ ₴₮₳Ɽ₮ Đ₳₮Ɇ ₳₦Đ ₮ł₥Ɇ ₦ØØⱤĐ.",
+              "persistent": "Ø₦Ɇ ₴Ⱨ₳ⱤɆĐ ⱤɄ₦₮ł₥Ɇ ₮ł₥Ɇ₴₮₳₥₱ ₳₱₱₴ ₳₦Đ ₱₳Ʉ₴ɆĐ ₥ɆĐł₳ ₴ɆⱤ₮ØⱤ₦ ₴Ɇ₴₴łØ₦ ₦ØØⱤĐ.",
+              "reset": "₮ł₥ɆⱤ 00:00 ₦ØØⱤĐ ₳₱₱ Ⱡ₳Ʉ₦₵ⱧɆĐ ₳₦Đ ⱤɆ₣Ø₵Ʉ₴ɆĐ ₦ØØⱤĐ."
+            },
+            "title": "₮ł₥Ɇ₴₮₳₥₱ ₴₮Ɽ₳₮Ɇ₲łɆ₴"
+          },
+          "fixedStart": "₣łӾɆĐ ₴₮₳Ɽ₮ ₮ł₥Ɇ₴₮₳₥₱",
+          "desc": "₳₵₮łVł₮Ɏ ₮ł₥ɆⱤ₴ ₳₱₱ ₴Ɇ₴₴łØ₦₴ ₳₵ⱤØ₴₴ ₦ØØⱤĐ",
+          "help": "₮ł₥Ɇ₴₮₳₥₱ ⱧɆⱠ₱",
+          "title": "₮ł₥Ɇ₴₮₳₥₱ ₴₮Ɽ₳₮Ɇ₲Ɏ"
+        },
+        "statusFieldConfig": {
+          "title": "₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
+          "desc": "₮ł₮ⱠɆ, ĐɆ₮₳łⱠ₴, ₴₮₳₮Ʉ₴, ₳Ɽ₮₩ØⱤ₭ ₦ɆɆĐⱠ ₵Ʉ₴₮Ø₥łⱫɆ"
+        },
+        "subtitle": "ØɄ₮₴łĐɆ ₳₱₱ ₱ØⱠł₵Ɏ ₳₦Đ ₮ł₥Ɇ₴₮₳₥₱ ฿ɆⱧ₳VłØⱤ",
+        "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ"
+      },
+      "catalogue": {
+        "androidOnly": "ł₦₴₮₳ⱠⱠɆĐ ₳₱₱ ₦ØØⱤĐ Android ₳₱₱ ₦ØØⱤĐ.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "฿₳₮₵Ⱨ ₵Ⱨ₳₦₲Ɇ₴ ₳₱₱ⱠɎ?",
+              "desc": "₴₮₳₲ɆĐ ₵Ø₦₣ł₲ɄⱤɆ ₵Ⱨ₳₦₲Ɇ₴ ₱ɆⱤ₥₳₦Ɇ₦₮ⱠɎ ₳₱₱ⱠɎ ₦ØØⱤĐ",
+              "subtitle": "₵Ø₦₣łⱤ₥₳₮łØ₦",
+              "selectedApps": "₴ɆⱠɆ₵₮ɆĐ ₳₱₱Ⱡł₵₳₮łØ₦₴."
+            },
+            "title": "฿ɄⱠ₭ ₵Ø₦₣ł₲ɄⱤɆ",
+            "subtitle": "₵Ⱨ₳₦₲Ɇ₴ ₳ⱠⱠ ₴ɆⱠɆ₵₮ɆĐ ₳₱₱Ⱡł₵₳₮łØ₦₴ ₳₱₱ⱠɎ",
+            "discard": {
+              "title": "₴₮₳₲ɆĐ ₵Ⱨ₳₦₲Ɇ₴ ₦ØØⱤĐ?",
+              "desc": "฿₳₮₵Ⱨ ₵Ø₦₣ł₲ɄⱤɆ ₦ØØⱤĐ. ฿₳₮₵Ⱨ ₥ØĐɆ ⱠɆ₳VɆ ₴₮₳₲ɆĐ ₵Ⱨ₳₦₲Ɇ₴ ₦ØØⱤĐ.",
+              "subtitle": "₦ØØⱤĐ ฿₳₮₵Ⱨ ₥ØĐł₣ł₵₳₮łØ₦₴"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "ł₵Ø₦ ł₥₳₲Ɇ ₦ØØⱤĐ",
+              "resetIcon": "ØⱤł₲ł₦₳Ⱡ ₳₱₱ ł₵Ø₦ ₦ØØⱤĐ",
+              "resetLabel": "ØⱤł₲ł₦₳Ⱡ Ⱡ₳฿ɆⱠ ₦ØØⱤĐ"
+            },
+            "customBtnDesc": "2 ł₦₮ɆⱤ₳₵₮łVɆ ₱ⱤØ₴Ɇ₦₵Ɇ ฿Ʉ₮₮Ø₦₴ ₦ɆɆĐⱠ",
+            "title": "₵Ʉ₴₮Ø₥łⱫɆ",
+            "original": "ØⱤł₲ł₦₳Ⱡ:",
+            "subtitle": "₱ⱤØ₴Ɇ₦₵Ɇ ₱ⱤØ₣łⱠɆ ₳₦Đ ₱ⱤØJɆ₵₮łØ₦ ₳Ⱡł₳₴Ɇ₴",
+            "projectedName": "₱ⱤØJɆ₵₮ɆĐ ₦₳₥Ɇ",
+            "switchToggle": {
+              "buttons": "₵Ʉ₴₮Ø₥ ฿Ʉ₮₮Ø₦₴ ₮Ø₲₲ⱠɆ",
+              "details": "₵Ʉ₴₮Ø₥ ĐɆ₮₳łⱠ₴ ₳₦Đ ₴₮₳₮Ʉ₴ ₮Ø₲₲ⱠɆ",
+              "small": "₵Ʉ₴₮Ø₥ ₴₥₳ⱠⱠ ₮Ɇ₦₮ ₳₦Đ ł₥₳₲Ɇ ₮Ø₲₲ⱠɆ"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "₣łⱠ₮ɆⱤ₴ ₵ⱠɆ₳Ɽ",
+          "filter": "₳₱₱₴ ₣łⱠ₮ɆⱤ"
+        },
+        "loadAppsFailed": "ł₦₴₮₳ⱠⱠɆĐ ₳₱₱₴ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
+        "loading": "",
+        "search": "₳₱₱Ⱡł₵₳₮łØ₦ ₴Ɇ₳Ɽ₵Ⱨ...",
+        "subtitle": "{apps} apps | {enabled} enabled",
+        "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ",
+        "uploadProgress": "₳₱₱ ł₵Ø₦ ImgBB ₦ØØⱤĐ"
+      },
+      "statusFieldConfig": {
+        "subtitle": "₦ØØⱤĐ ₳₱₱ ₮Ɽ₳₵Ɇ ₦ɆɆĐⱠ.",
+        "discardMsg": "₳₱₱Ⱡł₵₳₮łØ₦ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ. ⱠɆ₳VɆ ₦ØØⱤĐ ₦ØØⱤĐ ₴₮₳₮Ɇ ₦ØØⱤĐ.",
+        "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ"
+      }
+    },
+    "buttons": {
+      "back": "฿₳₵₭",
+      "help": "₮Ø₭Ɇ₦ ₦ɆɆĐⱠ ₦ØØⱤĐ",
+      "reset": "ĐɆ₣₳ɄⱠ₮ ₦ØØⱤĐ"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "2 ł₦₮ɆⱤ₳₵₮łVɆ ₱ⱤØ₴Ɇ₦₵Ɇ ฿Ʉ₮₮Ø₦₴ ₮Ø₭Ɇ₦ ₦ɆɆĐⱠ.",
+        "subtitle": "₦ØØⱤĐ ₥ɆĐł₳ ₱Ⱡ₳Ɏ฿₳₵₭ ₦ɆɆĐⱠ.",
+        "discardMsg": "₥ɆĐł₳ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ØØⱤĐ ₦ɆɆĐⱠ. ⱠɆ₳VɆ ₦ØØⱤĐ ₦ØØⱤĐ ₴₮₳₮Ɇ ₦ØØⱤĐ.",
+        "title": "₥ɆĐł₳ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "₮ł₥Ɇ ⱤɆ₥₳ł₦ł₦₲",
+          "desc": "₴₮₳Ɽ₮/₵ɄⱤⱤɆ₦₮-Ɇ₦Đ ₮ł₥Ɇ ⱤɆ₥₳ł₦ł₦₲ ₦ØØⱤĐ"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "₱ⱤɆVłØɄ₴₠₦Đ ₵ɄⱤⱤɆ₦₮₠₦Đ ₳₱₱ ₳₦Đ ₵Ʉ₴₮Ø₥ ₣₳ⱠⱠ฿₳₵₭ ₥ɆĐł₳ ₱₳Ʉ₴ɆĐ.",
+              "hidePaused": "₱ⱤØ₴Ɇ₦₵Ɇ ⱧłĐɆ₴ ₥ɆĐł₳ ₱₳Ʉ₴ɆĐ, ₳₱₱ ₦ØØⱤĐ ł₦₵ⱠɄĐł₦₲.",
+              "showPaused": "₥ɆĐł₳ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₮łVɆ ₱₳Ʉ₴ɆĐ ₳₦Đ ₱₳Ʉ₴ɆĐ ł₦Đł₵₳₮ØⱤ₴ ₴ⱧØ₩₴."
+            },
+            "desc": "Ø₱₮łØ₦₴ ₳₵₮łVɆ ₱Ⱡ₳Ɏ฿₳₵₭ ₱₳Ʉ₴ɆĐ"
+          },
+          "desc": "₱ⱤØ₴Ɇ₦₵Ɇ ฿ɆⱧ₳VłØⱤ ₳₵₮łVɆ ₱Ⱡ₳Ɏ฿₳₵₭ ₱₳Ʉ₴ɆĐ",
+          "help": "₱₳Ʉ₴ɆĐ ₦ØØⱤĐ ⱧɆⱠ₱",
+          "title": "₱₳Ʉ₴ɆĐ ₥ɆĐł₳ ₦ØØⱤĐ"
+        },
+        "mediaPriority": {
+          "title": "₥ɆĐł₳ ₱ⱤłØⱤł₮Ɏ",
+          "desc": "₥ɆĐł₳ ₲₳₥ł₦₲/₳₱₱ ₴Ɇ₴₴łØ₦₴ ØVɆⱤⱤłĐɆ₴ ₦ØØⱤĐ",
+          "help": "₱ⱤłØⱤł₮Ɏ ⱧɆⱠ₱",
+          "modal": {
+            "details": {
+              "priorityPlaying": "₥ɆĐł₳ ₳₵₮łVɆⱠɎ ₱Ⱡ₳Ɏł₦₲ ₳₱₱ ₦ØØⱤĐ ₱ⱤɆ₵ɆĐɆ₦₵Ɇ ₮₳₭Ɇ₴ ₵ɄⱤⱤɆ₦₮ ₮Ɽ₳₵₭ ₳₦Đ VłĐɆØ ₱ⱤØJɆ₵₮₴.",
+              "switchesBetween": "₥ɆĐł₳ ₱ⱤØJɆ₵₮₴ ₥ɆĐł₳ ₱Ⱡ₳ɎɆⱤ ł₦₴łĐɆ. ₲₳₥Ɇ ₳₦Đ Ɇ₦₳฿ⱠɆĐ ₳₱₱ ₴₩ł₮₵Ⱨł₦₲ ₳₱₱ ₮₳₭Ɇ ØVɆⱤ."
+            },
+            "title": "₥ɆĐł₳ ₱ⱤłØⱤł₮Ɏ ₴₮Ɽ₳₮Ɇ₲Ɏ",
+            "desc": "₦ØØⱤĐ ⱠØ₲ł₵ ₲₳₥ł₦₲ ₳₦Đ ₥ɆĐł₳ ₴Ɇ₴₴łØ₦₴"
+          }
+        },
+        "mediaScope": {
+          "title": "₥ɆĐł₳ ₦ØØⱤĐ ₴₵Ø₱Ɇ",
+          "desc": "₳₱₱₴ ₣łⱠ₮ɆⱤ ₥ɆĐł₳ Ɽł₵Ⱨ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ"
+        },
+        "statusFieldConfig": {
+          "title": "₥ɆĐł₳ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
+          "desc": "₮ł₮ⱠɆ, ₳Ɽ₮ł₴₮, ₳Ⱡ฿Ʉ₥, ₳Ɽ₮₩ØⱤ₭ ₣₳ⱠⱠ฿₳₵₭ ₦ɆɆĐⱠ ₵Ʉ₴₮Ø₥łⱫɆ"
+        },
+        "subtitle": "₦ØØⱤĐ ₱ⱤłØⱤł₮łɆ₴, ₮ł₥Ɇ₴₮₳₥₱₴, ₱Ⱡ₳Ɏ฿₳₵₭ ₴₮₳₮Ʉ₴Ɇ₴",
+        "title": "₥ɆĐł₳ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
+        "typeResolution": {
+          "title": "₥ɆĐł₳ ₮Ɏ₱Ɇ ₦ØØⱤĐ",
+          "desc": "Ⱡł₴₮Ɇ₦ł₦₲ VɆⱤ₴Ʉ₴ ₩₳₮₵Ⱨł₦₲ ₳₵₮łVł₮łɆ₴ ₵Ⱡ₳₴₴ł₣łɆĐ"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "₳₱₱ ₴₮₳₮Ʉ₴ Ø₦₦Ɇ₦₮Ɇ₦",
+        "media": "₥ɆĐł₳ ₱Ⱡ₳Ɏ฿₳₵₭ Ø₦₦Ɇ₦₮Ɇ₦"
+      },
+      "subtitle": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₮ł₮ⱠɆ ₳₦Đ ₴Ʉ฿₮ł₮ⱠɆ ₵Ʉ₴₮Ø₥łⱫɆ.",
+      "discard": "Ʉ₦₴₳VɆĐ Ø₦₦Ɇ₦₮Ɇ₦ ₱ⱤØJɆ₵₮łØ₦ ₵Ⱨ₳₦₲Ɇ₴. ⱠɆ₳VɆ ₦ØØⱤĐ ₦ØØⱤĐ ₦ØØⱤĐ.",
+      "helpIntro": "Ʉ₴Ɇ getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), ₳₦Đ getFieldCfgStr(\"MediaBigText\") ₮Ø ł₦₴ɆⱤ₮ ⱤɆ₦ĐɆⱤɆĐ ₣łɆⱠĐ V₳ⱠɄɆ₴. Ʉ₴Ɇ joinNonBlank(field1, field2) ₮Ø JØł₦ ₦Ø₦Ɇ₥₱₮Ɏ V₳ⱠɄɆ₴ ₩ł₮Ⱨ ₳ ฿ɄⱠⱠɆ₮. ₳₱₱ Ø₦₦Ɇ₦₮Ɇ₦ ₮Ɇ₥₱Ⱡ₳₮Ɇ₴ ₴Ʉ₱₱ØⱤ₮ ₮ⱧɆ AppActivityType == \"Playing\" ₵Ø₦Đł₮łØ₦₳Ⱡ. ɆӾ₱ⱤɆ₴₴łØ₦₴ ₳Ⱡ₴Ø ₴Ʉ₱₱ØⱤ₮ == ₳₦Đ != ₵Ø₥₱₳Ɽł₴Ø₦₴."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "₵Ʉ₴₮Ø₥ ₣₳ⱠⱠ฿₳₵₭",
+      "drop": "ĐⱤØ₱ (₵ⱠɆ₳Ɽ ₱ⱤØ₴Ɇ₦₵Ɇ)",
+      "freeze": "₣ⱤɆɆⱫɆ (ĐɆ₣₳ɄⱠ₮)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "₵Ʉ₴₮Ø₥ ₣łӾɆĐ ₮ł₥Ɇ",
+      "persistent": "₱ɆⱤ₴ł₴₮Ɇ₦₮ (ĐɆ₣₳ɄⱠ₮)",
+      "resetOnLaunch": "ⱤɆ₴Ɇ₮ Ø₦ Ⱡ₳Ʉ₦₵Ⱨ"
+    },
+    "activityStatus": {
+      "all": "₳ⱠⱠ ₳₵₮łVł₮Ɏ ₴₮₳₮Ʉ₴Ɇ₴",
+      "dnd": "ĐØ ₦Ø₮ Đł₴₮ɄⱤ฿",
+      "idle": "łĐⱠɆ",
+      "invisible": "ł₦Vł₴ł฿ⱠɆ",
+      "offline": "Ø₣₣Ⱡł₦Ɇ",
+      "online": "Ø₦Ⱡł₦Ɇ",
+      "streaming": "₴₮ⱤɆ₳₥ł₦₲"
+    },
+    "activityType": {
+      "all": "₳ⱠⱠ ₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ₴",
+      "competing": "₵Ø₥₱Ɇ₮ł₦₲",
+      "listening": "Ⱡł₴₮Ɇ₦ł₦₲",
+      "playing": "₱Ⱡ₳Ɏł₦₲",
+      "watching": "₩₳₮₵Ⱨł₦₲"
+    },
     "allPlatforms": "₳ⱠⱠ ₱Ⱡ₳₮₣ØⱤ₥₴",
+    "disableAll": "Đł₴₳฿ⱠɆ ₳ⱠⱠ",
+    "enableAll": "Ɇ₦₳฿ⱠɆ ₳ⱠⱠ",
+    "enabledOnly": "₳₵₵ØⱤĐ Ø₦ⱠɎ",
     "globalDefault": "₲ⱠØ฿₳Ⱡ ĐɆ₣₳ɄⱠ₮",
-    "playing": "₱Ⱡ₳Ɏł₦₲",
-    "streaming": "₴₮ⱤɆ₳₥ł₦₲",
-    "listening": "Ⱡł₴₮Ɇ₦ł₦₲",
-    "watching": "₩₳₮₵Ⱨł₦₲",
-    "competing": "₵Ø₥₱Ɇ₮ł₦₲",
-    "online": "Ø₦Ⱡł₦Ɇ",
-    "idle": "łĐⱠɆ",
-    "dnd": "ĐØ ₦Ø₮ Đł₴₮ɄⱤ฿",
-    "offline": "Ø₣₣Ⱡł₦Ɇ",
-    "invisible": "ł₦Vł₴ł฿ⱠɆ",
-    "customize": "₵Ʉ₴₮Ø₥łⱫɆ",
-    "profileSubtitle": "₱ⱤØ₴Ɇ₦₵Ɇ ₱ⱤØ₣łⱠɆ ₳₦Đ ₱ⱤØJɆ₵₮łØ₦ ₳Ⱡł₳₴Ɇ₴",
-    "activityType": "₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ",
+    "keepCurrent": "₭ɆɆ₱ ₵ɄⱤⱤɆ₦₮",
+    "mediaScope": {
+      "allSessions": "₳ⱠⱠ ₥ɆĐł₳ ₴Ɇ₴₴łØ₦₴ (ĐɆ₣₳ɄⱠ₮)",
+      "enabledAppsOnly": "Ɇ₦₳฿ⱠɆĐ ₳₱₱₴ Ø₦ⱠɎ"
+    },
+    "typeResolution": {
+      "autoAdaptive": "₳Ʉ₮Ø-₳Đ₳₱₮łVɆ (ĐɆ₣₳ɄⱠ₮)",
+      "profileOverride": "₳₱₱ ₱ⱤØ₣łⱠɆ ØVɆⱤⱤłĐɆ"
+    },
+    "pausedResolution": {
+      "fallbackApp": "₣₳ⱠⱠ฿₳₵₭ ₮Ø ₦ØØⱤĐ ₳₱₱",
+      "hidePaused": "ⱧłĐɆ ₱₳Ʉ₴ɆĐ ₴₮₳₮Ʉ₴",
+      "showPaused": "₴ⱧØ₩ ₱₳Ʉ₴ɆĐ ₴₮₳₮Ʉ₴ (ĐɆ₣₳ɄⱠ₮)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "₱ⱤłØⱤł₮Ɏ ₱Ⱡ₳Ɏł₦₲ ₥ɆĐł₳ (ĐɆ₣₳ɄⱠ₮)",
+      "switchesBetween": "₴₩ł₮₵ⱧɆ₴ ฿Ɇ₮₩ɆɆ₦"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Đ₳Ɽ₭",
+      "light": "Ⱡł₲Ⱨ₮"
+    }
+  },
+  "labels": {
     "activityStatus": "₳₵₮łVł₮Ɏ ₴₮₳₮Ʉ₴",
-    "platformType": "₱Ⱡ₳₮₣ØⱤ₥ ₮Ɏ₱Ɇ",
+    "activityType": "₳₵₮łVł₮Ɏ ₮Ɏ₱Ɇ",
+    "customButtons": "₵Ʉ₴₮Ø₥ ฿Ʉ₮₮Ø₦₴",
     "customDetailsState": "₵Ʉ₴₮Ø₥ ĐɆ₮₳łⱠ₴ ₳₦Đ ₴₮₳₮Ʉ₴",
     "customSmallImage": "₵Ʉ₴₮Ø₥ ₴₥₳ⱠⱠ ₮Ɇ₦₮ ₳₦Đ ł₥₳₲Ɇ",
-    "customButtons": "₵Ʉ₴₮Ø₥ ฿Ʉ₮₮Ø₦₴",
-    "bulkConfigure": "฿ɄⱠ₭ ₵Ø₦₣ł₲ɄⱤɆ",
-    "cancel": "₵₳₦₵ɆⱠ",
-    "stageChanges": "₴₮₳₲Ɇ ₵Ⱨ₳₦₲Ɇ₴",
-    "apply": "₳₱₱ⱠɎ",
-    "confirm": "₵Ø₦₣łⱤ₥ ₳₦Đ ₳₱₱ⱠɎ",
-    "keepCurrent": "₭ɆɆ₱ ₵ɄⱤⱤɆ₦₮",
-    "enableAll": "Ɇ₦₳฿ⱠɆ ₳ⱠⱠ",
-    "disableAll": "Đł₴₳฿ⱠɆ ₳ⱠⱠ",
-    "discardBatch": "₴₮₳₲ɆĐ ₵Ⱨ₳₦₲Ɇ₴ ₦ØØⱤĐ?",
-    "chooseIcon": "ł₵Ø₦ ł₥₳₲Ɇ ₦ØØⱤĐ",
-    "resetIcon": "ØⱤł₲ł₦₳Ⱡ ₳₱₱ ł₵Ø₦ ₦ØØⱤĐ",
-    "resetLabel": "ØⱤł₲ł₦₳Ⱡ Ⱡ₳฿ɆⱠ ₦ØØⱤĐ",
-    "details": "ĐɆ₮₳łⱠ₴",
-    "state": "₴₮₳₮Ʉ₴",
-    "smallText": "₴₥₳ⱠⱠ ₮Ɇ₦₮",
-    "smallImageUrl": "₴₥₳ⱠⱠ ł₥₳₲Ɇ URL",
-    "uploadImage": "ł₥₳₲Ɇ ImgBB ₦ØØⱤĐ",
-    "buttonLabel": "Ⱡ₳฿ɆⱠ (e.g. Join Game)",
-    "presenceToggle": "₱ⱤØ₴Ɇ₦₵Ɇ ₮Ø₲₲ⱠɆ",
-    "bulkSubtitle": "₵Ⱨ₳₦₲Ɇ₴ ₳ⱠⱠ ₴ɆⱠɆ₵₮ɆĐ ₳₱₱Ⱡł₵₳₮łØ₦₴ ₳₱₱ⱠɎ",
-    "applyBatchTitle": "฿₳₮₵Ⱨ ₵Ⱨ₳₦₲Ɇ₴ ₳₱₱ⱠɎ?",
-    "confirmation": "₵Ø₦₣łⱤ₥₳₮łØ₦",
-    "unsavedBatch": "₦ØØⱤĐ ฿₳₮₵Ⱨ ₥ØĐł₣ł₵₳₮łØ₦₴",
-    "confirmApply": "₵Ø₦₣łⱤ₥ ₳₦Đ ₳₱₱ⱠɎ",
     "filterOptions": "₣łⱠ₮ɆⱤ Ø₱₮łØ₦₴",
-    "close": "₵ⱠØ₴Ɇ",
-    "loading": "",
-    "original": "ØⱤł₲ł₦₳Ⱡ:",
-    "projectedName": "₱ⱤØJɆ₵₮ɆĐ ₦₳₥Ɇ",
-    "customButtonDesc": "2 ł₦₮ɆⱤ₳₵₮łVɆ ₱ⱤØ₴Ɇ₦₵Ɇ ฿Ʉ₮₮Ø₦₴ ₦ɆɆĐⱠ",
-    "toggleDetails": "₵Ʉ₴₮Ø₥ ĐɆ₮₳łⱠ₴ ₳₦Đ ₴₮₳₮Ʉ₴ ₮Ø₲₲ⱠɆ",
-    "toggleSmall": "₵Ʉ₴₮Ø₥ ₴₥₳ⱠⱠ ₮Ɇ₦₮ ₳₦Đ ł₥₳₲Ɇ ₮Ø₲₲ⱠɆ",
-    "toggleButtons": "₵Ʉ₴₮Ø₥ ฿Ʉ₮₮Ø₦₴ ₮Ø₲₲ⱠɆ",
-    "uploadProgress": "₳₱₱ ł₵Ø₦ ImgBB ₦ØØⱤĐ",
-    "keepEditing": "₭ɆɆ₱ ɆĐł₮ł₦₲",
-    "discardChanges": "₵Ⱨ₳₦₲Ɇ₴ ₦ØØⱤĐ",
-    "discardMessage": "฿₳₮₵Ⱨ ₵Ø₦₣ł₲ɄⱤɆ ₦ØØⱤĐ. ฿₳₮₵Ⱨ ₥ØĐɆ ⱠɆ₳VɆ ₴₮₳₲ɆĐ ₵Ⱨ₳₦₲Ɇ₴ ₦ØØⱤĐ.",
-    "applyMessage": "₴₮₳₲ɆĐ ₵Ø₦₣ł₲ɄⱤɆ ₵Ⱨ₳₦₲Ɇ₴ ₱ɆⱤ₥₳₦Ɇ₦₮ⱠɎ ₳₱₱ⱠɎ ₦ØØⱤĐ",
-    "selectedApps": "₴ɆⱠɆ₵₮ɆĐ ₳₱₱Ⱡł₵₳₮łØ₦₴.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} apps | {enabled} enabled",
-    "chooseImage": "ł₥₳₲Ɇ ₣łⱠɆ ₦ØØⱤĐ.",
-    "imageTooLarge": "32 MB ₦ØØⱤĐ ₴₥₳ⱠⱠɆⱤ ł₥₳₲Ɇ ₦ØØⱤĐ.",
-    "imageUploadFailed": "ł₥₳₲Ɇ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
-    "iconUploadFailed": "ł₵Ø₦ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
-    "androidOnly": "ł₦₴₮₳ⱠⱠɆĐ ₳₱₱ ₦ØØⱤĐ Android ₳₱₱ ₦ØØⱤĐ.",
-    "loadAppsFailed": "ł₦₴₮₳ⱠⱠɆĐ ₳₱₱₴ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
-    "appUnit": "₳₱₱",
-    "appsUnit": "₳₱₱₴"
+    "platformType": "₱Ⱡ₳₮₣ØⱤ₥ ₮Ɏ₱Ɇ",
+    "presenceToggle": "₱ⱤØ₴Ɇ₦₵Ɇ ₮Ø₲₲ⱠɆ",
+    "button1": "฿Ʉ₮₮Ø₦ 1",
+    "button2": "฿Ʉ₮₮Ø₦ 2",
+    "label": "Ⱡ₳฿ɆⱠ",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "₳₱₱Ⱡł₵₳₮łØ₦ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
-    "subtitle": "ØɄ₮₴łĐɆ ₳₱₱ ₱ØⱠł₵Ɏ ₳₦Đ ₮ł₥Ɇ₴₮₳₥₱ ฿ɆⱧ₳VłØⱤ",
-    "catalogue": "₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ",
-    "catalogueDesc": "ł₦ĐłVłĐɄ₳Ⱡ ₳₱₱ ₱ⱤØJɆ₵₮łØ₦₴ VłɆ₩, ₣łⱠ₮ɆⱤ, ₵Ʉ₴₮Ø₥łⱫɆ",
-    "outsidePolicies": "ØɄ₮₴łĐɆ ₦ØØⱤĐ ₳₱₱ ₱ØⱠł₵łɆ₴",
-    "outsideDescription": "฿ɆⱧ₳VłØⱤ Ɇ₦₳฿ⱠɆĐ ₳₱₱₴ ⱠɆ₳VɆ ₳₦Đ ₴₩ł₮₵Ⱨ ₳₩₳Ɏ",
-    "policyHelp": "₱ØⱠł₵Ɏ ⱧɆⱠ₱",
-    "freeze": "₣ⱤɆɆⱫɆ (ĐɆ₣₳ɄⱠ₮)",
-    "customFallback": "₵Ʉ₴₮Ø₥ ₣₳ⱠⱠ฿₳₵₭",
-    "drop": "ĐⱤØ₱ (₵ⱠɆ₳Ɽ ₱ⱤØ₴Ɇ₦₵Ɇ)",
-    "fallbackPresence": "₵Ʉ₴₮Ø₥ ₣₳ⱠⱠ฿₳₵₭ ₱ⱤØ₴Ɇ₦₵Ɇ",
-    "activityName": "₳₵₮łVł₮Ɏ ₦₳₥Ɇ",
+  "pluralization": {
+    "app": {
+      "plural": "₳₱₱₴",
+      "singular": "₳₱₱"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Ⱡ₳฿ɆⱠ (e.g. Join Game)",
     "details": "ĐɆ₮₳łⱠ₴",
-    "state": "₴₮₳₮Ʉ₴",
+    "smallImageUrl": "₴₥₳ⱠⱠ ł₥₳₲Ɇ URL",
     "smallText": "₴₥₳ⱠⱠ ₮Ɇ₦₮",
-    "bigText": "฿ł₲ ₮Ɇ₦₮",
-    "smallImage": "₴₥₳ⱠⱠ ł₥₳₲Ɇ",
-    "bigImage": "฿ł₲ ł₥₳₲Ɇ",
-    "imageUrl": "ł₥₳₲Ɇ URL",
-    "uploadingImage": "",
-    "timestampStrategy": "₮ł₥Ɇ₴₮₳₥₱ ₴₮Ɽ₳₮Ɇ₲Ɏ",
-    "timestampDescription": "₳₵₮łVł₮Ɏ ₮ł₥ɆⱤ₴ ₳₱₱ ₴Ɇ₴₴łØ₦₴ ₳₵ⱤØ₴₴ ₦ØØⱤĐ",
-    "timestampHelp": "₮ł₥Ɇ₴₮₳₥₱ ⱧɆⱠ₱",
-    "persistent": "₱ɆⱤ₴ł₴₮Ɇ₦₮ (ĐɆ₣₳ɄⱠ₮)",
-    "resetOnLaunch": "ⱤɆ₴Ɇ₮ Ø₦ Ⱡ₳Ʉ₦₵Ⱨ",
-    "customFixedTime": "₵Ʉ₴₮Ø₥ ₣łӾɆĐ ₮ł₥Ɇ",
-    "fixedStart": "₣łӾɆĐ ₴₮₳Ɽ₮ ₮ł₥Ɇ₴₮₳₥₱",
-    "statusFieldConfig": "₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
-    "statusFieldDescription": "₮ł₮ⱠɆ, ĐɆ₮₳łⱠ₴, ₴₮₳₮Ʉ₴, ₳Ɽ₮₩ØⱤ₭ ₦ɆɆĐⱠ ₵Ʉ₴₮Ø₥łⱫɆ",
-    "configurationDetails": "₵Ø₦₣ł₲ɄⱤ₳₮łØ₦ ĐɆ₮₳łⱠ₴",
-    "outsideHelpTitle": "ØɄ₮₴łĐɆ ₳₱₱ ₱ØⱠł₵łɆ₴",
-    "timestampHelpTitle": "₮ł₥Ɇ₴₮₳₥₱ ₴₮Ɽ₳₮Ɇ₲łɆ₴",
-    "understood": "Ʉ₦ĐɆⱤ₴₮ØØĐ",
-    "freezeHelp": "Ⱡ₳₴₮ ₱ⱤØJɆ₵₮ɆĐ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ ₳₦Đ ₱ⱤɆ₴ɆⱤVɆ₴ Ɇ₦₳฿ⱠɆĐ ₳₱₱ ₦ØØⱤĐ ₦ØØⱤĐ.",
-    "customHelp": "₵Ʉ₴₮Ø₥łⱫɆĐ ₣₳ⱠⱠ฿₳₵₭ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ ₱ⱤØJɆ₵₮₴.",
-    "dropHelp": "Discord ₳₵₮łVł₮Ɏ ₵ⱠɆ₳Ɽ₴ Ɇ₦₳฿ⱠɆĐ ₳₱₱Ⱡł₵₳₮łØ₦ ₦ØØⱤĐ.",
-    "persistentHelp": "Ø₦Ɇ ₴Ⱨ₳ⱤɆĐ ⱤɄ₦₮ł₥Ɇ ₮ł₥Ɇ₴₮₳₥₱ ₳₱₱₴ ₳₦Đ ₱₳Ʉ₴ɆĐ ₥ɆĐł₳ ₴ɆⱤ₮ØⱤ₦ ₴Ɇ₴₴łØ₦ ₦ØØⱤĐ.",
-    "resetHelp": "₮ł₥ɆⱤ 00:00 ₦ØØⱤĐ ₳₱₱ Ⱡ₳Ʉ₦₵ⱧɆĐ ₳₦Đ ⱤɆ₣Ø₵Ʉ₴ɆĐ ₦ØØⱤĐ.",
-    "fixedHelp": "₱ⱤØ₴Ɇ₦₵Ɇ ₮ł₥ɆⱤ ₴₱Ɇ₵ł₣ł₵ ₣łӾɆĐ ₴₮₳Ɽ₮ Đ₳₮Ɇ ₳₦Đ ₮ł₥Ɇ ₦ØØⱤĐ.",
-    "uploadImage": "ł₥₳₲Ɇ ₦ØØⱤĐ"
+    "state": "₴₮₳₮Ʉ₴",
+    "urlExample": "URL (https://...)",
+    "example": "e.g. ",
+    "listenOn": "Ⱡł₴₮Ɇ₦ Ø₦"
   },
-  "mediaPresence": {
-    "title": "₥ɆĐł₳ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ɆɆĐⱠ",
-    "subtitle": "₦ØØⱤĐ ₱ⱤłØⱤł₮łɆ₴, ₮ł₥Ɇ₴₮₳₥₱₴, ₱Ⱡ₳Ɏ฿₳₵₭ ₴₮₳₮Ʉ₴Ɇ₴",
-    "priority": "₥ɆĐł₳ ₱ⱤłØⱤł₮Ɏ",
-    "priorityDesc": "₥ɆĐł₳ ₲₳₥ł₦₲/₳₱₱ ₴Ɇ₴₴łØ₦₴ ØVɆⱤⱤłĐɆ₴ ₦ØØⱤĐ",
-    "priorityHelp": "₱ⱤłØⱤł₮Ɏ ⱧɆⱠ₱",
-    "priorityPlaying": "₱ⱤłØⱤł₮Ɏ ₱Ⱡ₳Ɏł₦₲ ₥ɆĐł₳ (ĐɆ₣₳ɄⱠ₮)",
-    "switchesBetween": "₴₩ł₮₵ⱧɆ₴ ฿Ɇ₮₩ɆɆ₦",
-    "scope": "₥ɆĐł₳ ₦ØØⱤĐ ₴₵Ø₱Ɇ",
-    "scopeDesc": "₳₱₱₴ ₣łⱠ₮ɆⱤ ₥ɆĐł₳ Ɽł₵Ⱨ ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ",
-    "allSessions": "₳ⱠⱠ ₥ɆĐł₳ ₴Ɇ₴₴łØ₦₴ (ĐɆ₣₳ɄⱠ₮)",
-    "enabledAppsOnly": "Ɇ₦₳฿ⱠɆĐ ₳₱₱₴ Ø₦ⱠɎ",
-    "typeResolution": "₥ɆĐł₳ ₮Ɏ₱Ɇ ₦ØØⱤĐ",
-    "typeResolutionDesc": "Ⱡł₴₮Ɇ₦ł₦₲ VɆⱤ₴Ʉ₴ ₩₳₮₵Ⱨł₦₲ ₳₵₮łVł₮łɆ₴ ₵Ⱡ₳₴₴ł₣łɆĐ",
-    "autoAdaptive": "₳Ʉ₮Ø-₳Đ₳₱₮łVɆ (ĐɆ₣₳ɄⱠ₮)",
-    "profileOverride": "₳₱₱ ₱ⱤØ₣łⱠɆ ØVɆⱤⱤłĐɆ",
-    "timeRemaining": "₮ł₥Ɇ ⱤɆ₥₳ł₦ł₦₲",
-    "timeRemainingDesc": "₴₮₳Ɽ₮/₵ɄⱤⱤɆ₦₮-Ɇ₦Đ ₮ł₥Ɇ ⱤɆ₥₳ł₦ł₦₲ ₦ØØⱤĐ",
-    "appTimestamp": "",
-    "pausedResolution": "₱₳Ʉ₴ɆĐ ₥ɆĐł₳ ₦ØØⱤĐ",
-    "pausedDesc": "₱ⱤØ₴Ɇ₦₵Ɇ ฿ɆⱧ₳VłØⱤ ₳₵₮łVɆ ₱Ⱡ₳Ɏ฿₳₵₭ ₱₳Ʉ₴ɆĐ",
-    "pausedHelp": "₱₳Ʉ₴ɆĐ ₦ØØⱤĐ ⱧɆⱠ₱",
-    "showPaused": "₴ⱧØ₩ ₱₳Ʉ₴ɆĐ ₴₮₳₮Ʉ₴ (ĐɆ₣₳ɄⱠ₮)",
-    "fallbackApp": "₣₳ⱠⱠ฿₳₵₭ ₮Ø ₦ØØⱤĐ ₳₱₱",
-    "hidePaused": "ⱧłĐɆ ₱₳Ʉ₴ɆĐ ₴₮₳₮Ʉ₴",
-    "statusFields": "₥ɆĐł₳ ₴₮₳₮Ʉ₴ ₮ⱤØ₦ ₦ɆɆĐⱠ",
-    "statusFieldsDesc": "₮ł₮ⱠɆ, ₳Ɽ₮ł₴₮, ₳Ⱡ฿Ʉ₥, ₳Ɽ₮₩ØⱤ₭ ₣₳ⱠⱠ฿₳₵₭ ₦ɆɆĐⱠ ₵Ʉ₴₮Ø₥łⱫɆ",
-    "priorityStrategy": "₥ɆĐł₳ ₱ⱤłØⱤł₮Ɏ ₴₮Ɽ₳₮Ɇ₲Ɏ",
-    "priorityStrategyDesc": "₦ØØⱤĐ ⱠØ₲ł₵ ₲₳₥ł₦₲ ₳₦Đ ₥ɆĐł₳ ₴Ɇ₴₴łØ₦₴",
-    "pausedOptions": "Ø₱₮łØ₦₴ ₳₵₮łVɆ ₱Ⱡ₳Ɏ฿₳₵₭ ₱₳Ʉ₴ɆĐ",
-    "priorityHelpText": "₥ɆĐł₳ ₳₵₮łVɆⱠɎ ₱Ⱡ₳Ɏł₦₲ ₳₱₱ ₦ØØⱤĐ ₱ⱤɆ₵ɆĐɆ₦₵Ɇ ₮₳₭Ɇ₴ ₵ɄⱤⱤɆ₦₮ ₮Ɽ₳₵₭ ₳₦Đ VłĐɆØ ₱ⱤØJɆ₵₮₴.",
-    "switchHelpText": "₥ɆĐł₳ ₱ⱤØJɆ₵₮₴ ₥ɆĐł₳ ₱Ⱡ₳ɎɆⱤ ł₦₴łĐɆ. ₲₳₥Ɇ ₳₦Đ Ɇ₦₳฿ⱠɆĐ ₳₱₱ ₴₩ł₮₵Ⱨł₦₲ ₳₱₱ ₮₳₭Ɇ ØVɆⱤ.",
-    "showPausedHelp": "₥ɆĐł₳ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₮łVɆ ₱₳Ʉ₴ɆĐ ₳₦Đ ₱₳Ʉ₴ɆĐ ł₦Đł₵₳₮ØⱤ₴ ₴ⱧØ₩₴.",
-    "fallbackHelp": "₱ⱤɆVłØɄ₴₠₦Đ ₵ɄⱤⱤɆ₦₮₠₦Đ ₳₱₱ ₳₦Đ ₵Ʉ₴₮Ø₥ ₣₳ⱠⱠ฿₳₵₭ ₥ɆĐł₳ ₱₳Ʉ₴ɆĐ.",
-    "hidePausedHelp": "₱ⱤØ₴Ɇ₦₵Ɇ ⱧłĐɆ₴ ₥ɆĐł₳ ₱₳Ʉ₴ɆĐ, ₳₱₱ ₦ØØⱤĐ ł₦₵ⱠɄĐł₦₲."
+  "service": {
+    "imgbb": {
+      "chooseImage": "ł₥₳₲Ɇ ₣łⱠɆ ₦ØØⱤĐ.",
+      "iconUploadFailed": "ł₵Ø₦ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ.",
+      "imageTooLarge": "32 MB ₦ØØⱤĐ ₴₥₳ⱠⱠɆⱤ ł₥₳₲Ɇ ₦ØØⱤĐ.",
+      "imageUploadFailed": "ł₥₳₲Ɇ ₦ØØⱤĐ ₦Ø₦-₳₵₵ØⱤĐ."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "฿ł₲ ł₥₳₲Ɇ",
+      "bigText": "฿ł₲ ₮Ɇ₦₮",
+      "line1": "ĐɆ₮₳łⱠ₴",
+      "smallImage": "₴₥₳ⱠⱠ ł₥₳₲Ɇ",
+      "smallText": "₴₥₳ⱠⱠ ₮Ɇ₦₮",
+      "line2": "₴₮₳₮Ʉ₴",
+      "title": "₮ł₮ⱠɆ/ⱧɆ₳ĐɆⱤ"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "₮ⱤØ₦ ₳₵₵ØⱤĐ.",
+          "desc": "Discord ₮ⱤØ₦ ₦ɆɆĐⱠ Ɽł₵Ⱨ ₱ⱤØ₴Ɇ₦₵Ɇ ₳₵₵ØⱤĐ",
+          "title": "Discord ₦Ɇ₥ØĐł"
+        },
+        "languageTitle": "₦Ɇ₥ØĐł",
+        "themeTitle": "₮ⱤØ₦Ɇ",
+        "desc": "Ɇ₦₲ØⱤ₲ ₳₦Đ ₮ⱤØ₦",
+        "title": "₦Ɇ₥ØĐł ₮ⱤØ₦ ₵Ø₦₮ⱤØⱠ"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Ɇ₥₱ⱠɆⱠ ₦Ɇ₥ØĐł ₳₦Đ ₦Ø₦ ₲ⱠØⱤ₱ ₦ɆɆĐ ₮ⱤØ₦",
+          "title": "฿₳₮ɆɆⱤł ₮ⱤØ₦₲Ɇ",
+          "modal": {
+            "desc": "Android ₦ØØⱤĐ ₱ⱤØ₵Ɇ₴₴ ₦ɆɆĐⱠ ₴ⱠɆɆ₱. Kruzty Dynamics ฿₳₮ɆɆⱤł ₮ⱤØ₦₲Ɇ ₦ØØⱤĐ ₳₵₵ØⱤĐ Discord Rich Presence ₦ØØⱤĐ.",
+            "subtitle": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ ₩Ⱨł₮ɆⱠł₴₮",
+            "requestExemption": "Ɇ₥₱ⱠɆⱠ ₦ɆɆĐⱠ"
+          }
+        },
+        "notificationAccess": {
+          "desc": "₱ɆⱤł₴ ₦Ɇ₥ØĐł ₳₦Đ ₱Ⱡ₳Ɏ ₦ɆɆĐⱠ ₮ⱤØ₦",
+          "title": "Ø₦₦Ɇ₦₮Ɇ₦ ₲ⱠØⱤ₱ ₳₵₵Ɇ₴",
+          "modal": {
+            "methodA": {
+              "title": "₥Ɇ₮ⱧØĐ ₳: ₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ (Pixel, Motorola, Infinix, Stock)",
+              "step1": "Android ₮ⱤØ₦Ɇ ₦ɆɆĐⱠ ₦ØØⱤĐ.",
+              "step2": "₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ > Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦ ₦ØØⱤĐ.",
+              "step3": "Kruzty Dynamics ₦ØØⱤĐ ₳₦Đ ₮ⱤØ₦ ₳₵₵ØⱤĐ."
+            },
+            "methodB": {
+              "title": "₥Ɇ₮ⱧØĐ ฿: ₳₱₱ ł₦₣Ø > ɆⱠⱠł₱₴ł₴ (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "₮ⱤØ₦Ɇ ₦ɆɆĐⱠ > ₳₱₱₴ > ₥₳₦₳₲Ɇ ₳₱₱₴ / ₳₱₱ Ⱡł₴₮.",
+              "step2": "Kruzty Dynamics ₦ØØⱤĐ ₳₦Đ ₦ɆɆĐⱠ.",
+              "step4": "₳₱₱ ⱤɆ₴₮Ɽł₵₮ɆĐ / ₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ > ₮ⱤØ₦.",
+              "step5": "₦ØØⱤĐ ₳₦Đ Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦ ₳₵₵ØⱤĐ."
+            },
+            "desc": "Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦ ₦ɆɆĐⱠ Kruzty Dynamics ₥ɆĐł₳ ₴Ɇ₴₴łØ₦ ₦ØØⱤĐ (₴Ø₦₲ ₮ł₮ⱠɆ, ₳Ɽ₮ł₴₮, ₳Ⱡ฿Ʉ₥, ₱Ⱡ₳Ɏ฿₳₵₭ ₴₮₳₮Ɇ) Spotify, YouTube Music, ₥ɆĐł₳ ₱Ⱡ₳ɎɆⱤ₴ ₦ØØⱤĐ.",
+            "oemNotice": {
+              "desc": "Android ₦ØØⱤĐ ₮ⱤØ₦ ₦ɆɆĐⱠ ₴₱Ɇ₵ł₳Ⱡ ₱ɆⱤ₥ł₴. ₦Ɇ₥ØĐł ฿Ɽ₳₦Đ ₦ɆɆĐⱠ ₥Ɇ₮ⱧØĐ ₦ØØⱤĐ.",
+              "title": "ØɆ₥ ₳₦Đ Android 13+ ₦ØØⱤĐ"
+            },
+            "subtitle": "₴₱Ɇ₵ł₳Ⱡ ₳₱₱ ₮ⱤØ₦ ₦ɆɆĐⱠ",
+            "openAndroidSettings": "Android ₮ⱤØ₦Ɇ ₦ɆɆĐⱠ"
+          }
+        },
+        "desc": "₦Ɇ₵Ɇ₴₴₳Ɽł ₴₱Ø₮ ₮Ɽ₳₵Ɇ",
+        "title": "Ɽł₲Ⱨ₮₴ ₮ⱤØ₦Ɇ ₵Ø₦₮ⱤØⱠ",
+        "foregroundNotification": {
+          "desc": "Android 13+ Ɽł₲Ⱨ₮₴ ₦ØØⱤĐ ₮ⱤØ₦ ₳₵₵ØⱤĐ",
+          "title": "₦ØØⱤĐ ₦Ɇ₥ØĐł ₳₦Đ₮ⱤØ",
+          "modal": {
+            "allowNotification": "Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦",
+            "desc": "Android 13+ ₦ɆɆĐⱠ ₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦ ₴₮₳₮Ʉ₴ ฿₳Ɽ ₦ØØⱤĐ Discord ₱ⱤØ₴Ɇ₦₵Ɇ ₦ØØⱤĐ.",
+            "subtitle": "Android 13+ Ø₦₦Ɇ₦₮Ɇ₦ ₮ⱤØ₦",
+            "title": "₦ØØⱤĐ ₴ɆⱤ₮ØⱤ₦ Ø₦₦Ɇ₦₮Ɇ₦"
+          }
+        },
+        "usageAccess": {
+          "desc": "₦Ɇ₵Ɇ₴₴₳Ɽł Ø₦₦Ɇ₦₮Ɇ₦ ₳₵₵ØⱤĐ ł₦ ₦Ø₦₮₳₮Ⱡ ₦Ɇ₥ØĐł",
+          "title": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴",
+          "modal": {
+            "openUsageAccess": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₦ɆɆĐⱠ",
+            "desc": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₦ɆɆĐⱠ ₳₱₱ ₳₦Đ ₲₳₥Ɇ ₮Ɽ₳₵Ɇ Kruzty Dynamics ₳₱₱Ⱡł₵₳₮łØ₦ ₵₳₮₳ⱠØ₲ɄɆ ₦ØØⱤĐ.",
+            "step1": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₦ɆɆĐⱠ ₦ØØⱤĐ.",
+            "step2": "Kruzty Dynamics ₦ØØⱤĐ.",
+            "step3": "ɆⱠɆ₥Ɇ₦₮ ₳₵₵Ɇ₴ ₮ⱤØ₦ ₳₵₵ØⱤĐ.",
+            "subtitle": "₦ØØⱤĐ ₳₱₱ ₮Ɽ₳₵Ɇ"
+          }
+        }
+      },
+      "privacyNotice": "ⱠɆ ₦Ø₦-ƓⱠØⱤ₱Ɇ Đ₳₮₳ Ⱡł₦Ɇ₥ Ø₦₦Ɇ₦₮Ɇ₦.",
+      "subtitle": "Ɇ₦₲ØⱤ₲ ฿ⱠØØ₲ ₳₦Đ ₮ⱤØ₦ ₳ⱠⱠØ₩ ₥₳₲₦Ɇ₮ⱤØ₦ ₦Ɇ₥ØĐł ₲ⱠØɆ฿ ₴Ø₵ł₳Ⱡ ł₦ĐɆ₦₮ł₮Ɏ.",
+      "title": "ƓⱠØⱤ₱ ⱫⱠɆɆ฿ ₳₦₮Ɇ₦₦₳"
+    },
+    "footer": {
+      "allSet": "₳₵₵ØⱤĐ! Ɽł₵Ⱨ ₦ɆɆĐⱠ",
+      "buttons": {
+        "continueForNow": "ⱠɆ ₦Ɇ₥ØĐł ₦ØØⱤĐ",
+        "finishSetup": "₮ⱤØ₦ ₳₵₵ØⱤĐ ₵Ø₥₱ⱠɆ₮Ɇ",
+        "skipForNow": "₴₭ł₱ ₦ØØⱤĐ"
+      },
+      "readyWhenYouAre": "₦Ɇ₥ØĐł ₦ØØⱤĐ ₳₵₵ØⱤĐ"
+    }
+  },
+  "tags": {
+    "granted": "₮ⱤØ₦ ₳₵₵ØⱤĐ",
+    "notificationCrucial": "₵ⱤɄ₵ł₳Ⱡ ł₥₱ØⱤ₮₳₦Ɇ",
+    "allGranted": "₮ⱤØ₦ ₳₵₵ØⱤĐ",
+    "cached": "₵₳₵ⱧɆĐ",
+    "check": "₵ⱧɆ₵₭",
+    "checkingUpdates": "₵ⱧɆ₵₭ł₦₲ ₦ØØⱤĐ",
+    "default": "ĐɆ₣₳ɄⱠ₮",
+    "view": "VłɆ₩"
   }
 }

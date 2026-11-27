@@ -16,7 +16,7 @@
             "desc": "Notification Access enables Kruzty Dynamics to capture live media session playback events (Song Title, Artist, Album, and Playback State) from Spotify, YouTube Music, and media players.",
             "oemNotice": {
               "title": "Notice for OEM & Android 13+ Devices",
-              "desc": "Android protects notification listener access behind special permission layers. Depending on your phone brand, follow one of the methods below.",
+              "desc": "Android protects notification listener access behind special permission layers. Depending on your phone brand, follow one of the methods below."
             },
             "methodA": {
               "title": "Method A: Special App Access (Pixel, Motorola, Infinix, Stock)",
@@ -32,7 +32,7 @@
               "step4": "Tap Allow restricted settings / Special App Access > Grant.",
               "step5": "Return and enable Notification Access."
             },
-            "openAndroidSettings": "Open Android Settings",
+            "openAndroidSettings": "Open Android Settings"
           }
         },
         "usageAccess": {
@@ -45,7 +45,7 @@
             "step1": "Tap Open Usage Access.",
             "step2": "Switch on Permit usage access.",
             "step3": "Locate Kruzty Dynamics.",
-            "openUsageAccess": "Open Usage Access",
+            "openUsageAccess": "Open Usage Access"
           }
         },
         "batteryOptimization": {
@@ -55,8 +55,8 @@
             "title": "Battery Optimization",
             "subtitle": "Background Service Whitelist",
             "desc": "Modern Android systems put background processes to sleep after a few minutes. Exempting Kruzty Dynamics from battery optimization ensures continuous, uninterrupted Discord Rich Presence updates.",
-            "requestExemption": "Request Exemption",
-          },
+            "requestExemption": "Request Exemption"
+          }
         },
         "foregroundNotification": {
           "title": "Foreground Notification",
@@ -69,7 +69,7 @@
           }
         }
       },
-      "userSection":{
+      "userSection": {
         "title": "User Control",
         "desc": "Customization & Account",
         "discordLogin": {
@@ -95,7 +95,7 @@
     "service": {
       "title": {
         "welcome": "Welcome!",
-        "welcomeNamed": "Welcome, {name}!",
+        "welcomeNamed": "Welcome, {name}!"
       },
       "subtitle": "Kruzty Dynamics Dashboard",
       "states": {
@@ -118,7 +118,7 @@
               "returnHint": "After granting access in Android Settings, return here and enable the service.",
               "usageAccess": {
                 "title": "Usage Access",
-                "desc":  "Required to detect which app is currently in the foreground."
+                "desc": "Required to detect which app is currently in the foreground."
               },
               "notificationAccess": {
                 "title": "Notification Access",
@@ -133,19 +133,16 @@
         },
         "application": {
           "title": "Application Presence",
-          "desc": "Configure app profiles for local presence detection",
-          "buttons": {
-            
-          }
+          "desc": "Configure app profiles for local presence detection"
         },
         "media": {
           "title": "Media Presence",
-          "desc": "Configure media behavior and status templates",
+          "desc": "Configure media behavior and status templates"
         },
         "buttons": {
           "applicationCatalogue": "Application Catalogue",
           "statusFieldConfig": "Status Field Config",
-          "presenceConfiguration": "Presence Configuration",
+          "presenceConfiguration": "Presence Configuration"
         },
         "preview": {
           "noPresence": "No configured app or active media detected.",
@@ -175,9 +172,9 @@
           "buttons": {
             "unuse": "Unuse",
             "switch": "Switch",
-            "addAccount": "Add Account",
+            "addAccount": "Add Account"
           },
-          "modal":{
+          "modal": {
             "logout": {
               "title": "Logout Account",
               "removePrefix": "Are you sure you want to remove account",
@@ -199,47 +196,47 @@
         "repository": "Check GitHub Repository",
         "latestRelease": "Go to Latest Release",
         "submitIssue": "Submit an Issue",
-        "credits": "Credits",
+        "credits": "Credits"
       },
       "appPreferences": {
         "title": "App Preferences",
         "checkUpdates": {
           "title": "Check for Latest Version",
-          "desc": "Check whether a newer version is available.",
+          "desc": "Check whether a newer version is available."
         },
         "notificationProjection": {
           "title": "Modify Notification Status Projection",
-          "desc": "Customize application and media notification titles and subtitles.",
+          "desc": "Customize application and media notification titles and subtitles."
         },
         "themes": {
           "title": "Themes and Display",
-          "desc": "Set your theme and accent color.",
+          "desc": "Set your theme and accent color."
         },
         "language": {
           "title": "Language",
-          "desc": "Currently Set:",
+          "desc": "Currently Set:"
         },
         "globalDefaults": {
           "title": "Global Defaults",
-          "desc": "Activity type & status for unconfigured apps",
+          "desc": "Activity type & status for unconfigured apps"
         },
         "imgBbKey": {
           "title": "Set ImgBB API Key",
-          "desc": "Set your own ImgBB API Key. Visit: api.imgbb.com",
+          "desc": "Set your own ImgBB API Key. Visit: api.imgbb.com"
         },
         "discordAppId": {
           "title": "Set Discord Application ID",
-          "desc": "Set your own Discord Application ID. Visit: discord.com/developers",
+          "desc": "Set your own Discord Application ID. Visit: discord.com/developers"
         },
         "checkPermissions": {
           "title": "Check Permissions",
-          "desc": "Review granted and optional system access permissions",
+          "desc": "Review granted and optional system access permissions"
         },
         "deleteCachedUrls": {
           "title": "Delete Linked Image URLs",
           "desc": "Clears associated URLs of uploaded images used on app or media status"
         }
-      } 
+      }
     }
   },
   "nav": {
@@ -255,6 +252,8 @@
         "subtitle": "Sign in securely with Discord in-app",
         "privacyText": "Discord authorization requests access to social features alongside Rich Presence. Kruzty Dynamics uses the SDK to identify your account and publish or clear your configured activity; it does not use friend, block, invite, message, or voice features. On Android, tokens are encrypted and stored on this device. Read the",
         "privacyPolicy": "Privacy Policy",
+        "revokeText": "",
+        "verifying": ""
       },
       "onboarding": {
         "activeIdentity": "Active Identity",
@@ -273,7 +272,7 @@
         "developerSection": "Kruzty Dynamics",
         "maintainerRole": "Current Maintainer & Developer",
         "librariesSection": "Libraries Used in this App",
-        "libaries": {
+        "libraries": {
           "tauri": "Lightweight cross-platform native runtime",
           "tokio": "Asynchronous event-driven network runtime",
           "sdk": "Native Android rich presence integration",
@@ -281,36 +280,36 @@
           "tailwind": "Utility-first modern responsive styling",
           "lucide": "Community-crafted clean vector icons"
         },
-        "contributorsSection": "Kizzy Contributors",
+        "contributorsSection": "Kizzy Contributors"
       },
       "themes": {
         "accentColor": "Primary Accent Color",
         "themeMode": "Theme Mode",
         "resetAccent": "Reset to Default Orange",
-        "tapCustomize": "Tap to customize",
+        "tapCustomize": "Tap to customize"
       },
       "language": {
         "title": "Choose Language",
         "desc": "Select your preferred display language for UI labels and notifications.",
-        "availableLanguages": "Available Languages",
+        "availableLanguages": "Available Languages"
       },
       "globalDefaults": {
         "note": "These defaults are automatically used when an app or presence activity does not specify its own activity type or status.",
         "activityType": "Activity Type",
-        "activityStatus": "Activity Status",
+        "activityStatus": "Activity Status"
       },
       "imgBb": {
         "help": "Set your own ImgBB API Key to upload custom app and media asset images to Discord CDN. Visit",
         "getApiKey": "to obtain a key.",
         "apiPrivacy": "Leaving this field empty resets to the built-in default API key. Custom keys are never exposed in plaintext.",
         "usingDefaultKey": "Using default system key",
-        "customKeySet": "Custom Key Set",
+        "customKeySet": "Custom Key Set"
       },
       "discordApp": {
         "help": "Set your own Discord Application ID from the",
         "developerPortal": "Discord Developer Portal",
         "saveIdPlaceholder": "1572590527562391713 (Default)",
-        "idPrivacy": "Leaving this field empty will reset back to the default Kruzty Dynamics application ID.",
+        "idPrivacy": "Leaving this field empty will reset back to the default Kruzty Dynamics application ID."
       },
       "checkPermissions": {
         "desc": "Status of permissions required to read active media notifications and foreground applications:",
@@ -334,19 +333,18 @@
       "application": {
         "title": "Application Token Reference",
         "desc": "Dynamic variables available in field expressions",
-        "expressionOps": "Expressions support == and != comparisons. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} to show AppName when Playing and AppPlatformType otherwise.",
+        "expressionOps": "Expressions support == and != comparisons. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} to show AppName when Playing and AppPlatformType otherwise."
       },
       "media": {
         "title": "Media Token Reference",
         "desc": "Dynamic variables available in media expressions & buttons",
-        "intro": "Tokens can be embedded directly in text fields and button labels or URLs (e.g. {example}).",
-      } 
+        "intro": "Tokens can be embedded directly in text fields and button labels or URLs (e.g. {example})."
+      }
     },
     "unsavedChanges": {
       "discard": "Discard Unsaved Changes?",
-      "unsaved": "Unsaved modifications",
-    },
-    
+      "unsaved": "Unsaved modifications"
+    }
   },
   "subPages": {
     "application": {
@@ -356,9 +354,8 @@
         "search": "Search applications...",
         "buttons": {
           "filter": "Filter Apps",
-          "clearFilters": "Clear Filters",
+          "clearFilters": "Clear Filters"
         },
-
         "modal": {
           "appProfileCustomization": {
             "title": "Customize",
@@ -369,12 +366,12 @@
             "buttons": {
               "chooseIcon": "Choose an icon image",
               "resetIcon": "Reset to original app icon",
-              "resetLabel": "Reset to Original Label",
+              "resetLabel": "Reset to Original Label"
             },
             "switchToggle": {
               "details": "Toggle Custom Details and State",
               "small": "Toggle Custom Small Text and Image",
-              "buttons": "Toggle Custom Buttons",
+              "buttons": "Toggle Custom Buttons"
             }
           },
           "bulkConfigure": {
@@ -383,31 +380,32 @@
             "discard": {
               "title": "Discard Staged Changes?",
               "subtitle": "Unsaved batch modifications",
-              "desc": "You have uncommitted batch configurations. Leaving batch mode now will discard all staged changes.",
+              "desc": "You have uncommitted batch configurations. Leaving batch mode now will discard all staged changes."
             },
             "apply": {
               "title": "Apply Batch Changes?",
               "subtitle": "Confirmation",
               "desc": "You are about to permanently apply staged configuration changes to",
-              "selectedApps": "selected applications.",
+              "selectedApps": "selected applications."
             }
           }
         },
         "uploadProgress": "Uploading app icon to ImgBB",
         "androidOnly": "Installed app discovery is available in the Android app.",
-        "loadAppsFailed": "Unable to load installed apps."
+        "loadAppsFailed": "Unable to load installed apps.",
+        "loading": ""
       },
       "statusFieldConfig": {
         "title": "Application Status Field Config",
         "subtitle": "Customize expressions for app detection.",
-        "discardMsg": "You have unsaved changes in your Application Status Fields. Leaving now will revert them to the previous state.",
+        "discardMsg": "You have unsaved changes in your Application Status Fields. Leaving now will revert them to the previous state."
       },
       "presenceConfig": {
         "title": "Application Presence Configuration",
         "subtitle": "Outside app policy and timestamp behavior",
         "catalogue": {
           "title": "Application Catalogue",
-          "desc": "View, filter, and customize individual app projections",
+          "desc": "View, filter, and customize individual app projections"
         },
         "outsidePolicies": {
           "title": "Outside Detected App Policies",
@@ -419,7 +417,7 @@
             "details": {
               "freeze": "Pauses and preserves the last projected presence until an enabled app is detected again.",
               "custom": "Immediately projects the customized fallback presence.",
-              "drop": "Clears your Discord activity until you return to an enabled application.",
+              "drop": "Clears your Discord activity until you return to an enabled application."
             }
           }
         },
@@ -433,13 +431,25 @@
             "details": {
               "persistent": "Uses one shared runtime timestamp for apps and paused media during this service session.",
               "reset": "Restarts the timer at 00:00 when the app is launched or refocused.",
-              "fixed": "Locks the presence timer to a specific fixed start date and time.",
+              "fixed": "Locks the presence timer to a specific fixed start date and time."
             }
           }
         },
+        "fallbackFields": {
+          "activityName": "Activity Name",
+          "details": "Details",
+          "state": "State",
+          "smallText": "Small Text",
+          "bigText": "Big Text",
+          "smallImage": "Small Image",
+          "bigImage": "Big Image",
+          "imageUrl": "Image URL",
+          "uploadImage": "Upload image",
+          "uploadingImage": ""
+        },
         "statusFieldConfig": {
           "title": "Status Field Configuration",
-          "desc": "Customize title, details, state, and artwork expressions",
+          "desc": "Customize title, details, state, and artwork expressions"
         },
         "configurationDetails": "Configuration details"
       }
@@ -449,7 +459,7 @@
         "title": "Media Status Field Config",
         "subtitle": "Customize expressions for media playback.",
         "discardMsg": "You have unsaved changes in your Media Status Fields. Leaving now will revert them to the previous state.",
-        "customBtnDesc": "Add up to 2 interactive presence buttons with token expressions.",
+        "customBtnDesc": "Add up to 2 interactive presence buttons with token expressions."
       },
       "presenceConfig": {
         "title": "Media Presence Configuration",
@@ -465,19 +475,20 @@
               "priorityPlaying": "When media is actively playing, it takes precedence over the app you are using and projects the current track or video.",
               "switchesBetween": "Projects media only while you are inside the media player. Switching to a game or enabled app lets that app take over."
             }
-          },
+          }
+        },
         "mediaScope": {
           "title": "Media Detection Scope",
-          "desc": "Filter which apps trigger media rich presence",
-        }
+          "desc": "Filter which apps trigger media rich presence"
         },
         "typeResolution": {
           "title": "Media Type Resolution",
-          "desc": "How listening vs watching activities are classified",
+          "desc": "How listening vs watching activities are classified"
         },
         "timeRemaining": {
           "title": "Time Remaining",
           "desc": "Shows the usual start/current-end time remaining",
+          "appTimestamp": ""
         },
         "pausedResolution": {
           "title": "Paused Media Resolution",
@@ -494,7 +505,7 @@
         },
         "statusFieldConfig": {
           "title": "Media Status Field Configuration",
-          "desc": "Customize title, artist, album, and artwork fallback expressions",
+          "desc": "Customize title, artist, album, and artwork fallback expressions"
         }
       }
     },
@@ -505,12 +516,12 @@
         "application": "App Status Notification",
         "media": "Media Playback Notification"
       },
-      "discard": "You have unsaved notification projection changes. Leaving now will discard them.",
+      "discard": "You have unsaved notification projection changes. Leaving now will discard them."
     },
     "buttons": {
       "back": "Back",
       "reset": "Reset to Defaults",
-      "help": "Available Tokens Help",
+      "help": "Available Tokens Help"
     }
   },
   "labels": {
@@ -525,7 +536,7 @@
     "label": "Label",
     "url": "URL",
     "presenceToggle": "Presence Toggle",
-    "filterOptions": "Filter Options",
+    "filterOptions": "Filter Options"
   },
   "placeholders": {
     "example": "e.g. ",
@@ -535,7 +546,7 @@
     "smallText": "Small Text",
     "smallImageUrl": "Small Image URL",
     "labelExample": "Label (e.g. Join Game)",
-    "urlExample": "URL (https://...)",
+    "urlExample": "URL (https://...)"
   },
   "configFields": {
     "status": {
@@ -545,7 +556,7 @@
       "smallText": "Small Text",
       "smallImage": "Small Image",
       "bigText": "Big Text",
-      "bigImage": "Big Image",  
+      "bigImage": "Big Image"
     },
     "notification": {
       "title": "Title",
@@ -565,7 +576,7 @@
       "watching": "Watching",
       "competing": "Competing"
     },
-    "activtyStatus": {
+    "activityStatus": {
       "all": "All Activity Statuses",
       "online": "Online",
       "idle": "Idle",
@@ -622,10 +633,11 @@
     "mediaTitle": "Active media song or video title from notification metadata.",
     "mediaArtist": "Artist or creator of the playing audio or video.",
     "mediaAlbum": "Album name or playlist container.",
+    "mediaDescription": "Video or media description from web or video players.",
     "mediaPlaybackState": "Current playback state (Playing, Paused, Stopped).",
     "mediaImageUrl": "Cached ImgBB URL of the media album art or thumbnail.",
     "mediaPlaybackImageUrl": "Asset image URL for the current playback indicator.",
-    "mediaFallbackImageUrl": "Fallback application icon if no artwork is available.",
+    "mediaFallbackImageUrl": "Fallback application icon if no artwork is available."
   },
   "toast": {
     "duplicateAccount": "This Discord account is already added.",
@@ -670,13 +682,13 @@
     "resetDefault": "Reset to Default",
     "logs": {
       "live": "Live Logs",
-      "view": "View Logs",
+      "view": "View Logs"
     },
-    "openPortal": "Open Portal",
+    "openPortal": "Open Portal"
   },
   "inAppWeb": {
     "discordLoginPortal": {
-      "title": "Discord Login Portal",
+      "title": "Discord Login Portal"
     }
   },
   "service": {
@@ -694,30 +706,3 @@
     }
   }
 }
-
-// Probably unused:
-// "subtitle": "Manage tokens and identities",
-// "loginWithToken": "Add Account via Token",
-// "loginPortal": "Login via Discord Portal",
-// "noAccountsDesc": "Add your Discord account using the portal or a user token to start projecting rich presence."
-// "deleteTitle": "Remove Discord Account?",
-// "revokeText": "",
-// "verifying": "",
-// "addAccount": "Add Discord Account",
-// "noSelection": "No selected account. Choose one of the logged-in accounts below.",
-// "header": "Header (Listening to / Watching)",
-// "appHeader": "Header",
-// "titleHeader": "Title/Header",
-// "detailsField": "Details",
-// "stateField": "State",
-// "buttons": "Custom Buttons",
-// "mediaTitleField": "Media Title (Activity Details)",
-// "artist": "Line 1 (Activity State / Artist)",
-// "album": "Line 2 (Album / Image Text)",
-// "mediaTokenDescription": "Video or media description from web or video players.",
-// "mediaHeaderDescription": "The app name shown in Discord's media header. Activity type selects Listening to or Watching.",
-// "mediaTitleDescription": "This maps to the media title/details text. Configure the player name separately in Header above.",
-// "mediaAlbumDescription": "Shown beneath the artist on Discord's media card.",
-// "loading": "",
-// "uploadingImage": "",
-// "appTimestamp": "",

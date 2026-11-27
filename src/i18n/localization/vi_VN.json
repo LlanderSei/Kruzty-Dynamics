@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Thiết lập lần đầu",
-    "subtitle": "Định cấu hình các quyền và tài khoản cần thiết để bật Discord Rich Presence động.",
-    "privacyNotice": "Ứng dụng này không thu thập hoặc truyền dữ liệu người dùng.",
-    "permissionsSection": "Kiểm soát quyền",
-    "permissionsRequired": "Cần thiết để phát hiện",
-    "notificationTitle": "Quyền truy cập thông báo",
-    "notificationDesc": "Cần Quyền truy cập ứng dụng đặc biệt để phát hiện phương tiện và phát lại",
-    "notificationCrucial": "Quan trọng",
-    "usageTitle": "Quyền truy cập sử dụng",
-    "usageDesc": "Cần thiết để phát hiện ứng dụng hoặc trò chơi đang chạy ở nền trước",
-    "batteryTitle": "Tối ưu hóa pin",
-    "batteryDesc": "Miễn trừ ứng dụng để ngăn dịch vụ nền ngủ",
-    "postNotificationTitle": "Thông báo nền trước",
-    "postNotificationDesc": "Quyền Android 13+ cho thông báo dịch vụ liên tục",
-    "grant": "Cấp",
-    "granted": "Đã cấp",
-    "userControlSection": "Kiểm soát người dùng",
-    "userControlDesc": "Tùy chỉnh và Tài khoản",
-    "discordLoginTitle": "Đăng nhập Discord",
-    "discordLoginDesc": "Kết nối tài khoản Discord của bạn để chiếu Rich Presence",
-    "accountsConnected": "tài khoản đã đăng nhập.",
-    "themeTitle": "Giao diện",
-    "languageTitle": "Ngôn ngữ",
-    "finishSetup": "Hoàn tất thiết lập",
-    "continueForNow": "Tiếp tục ngay bây giờ",
-    "skipForNow": "Bỏ qua ngay bây giờ",
-    "allSet": "Đã sẵn sàng! Sẵn sàng chiếu",
-    "readyWhenYouAre": "Sẵn sàng khi bạn sẵn sàng"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Danh tính hoạt động",
+        "stored": "Đã lưu"
+      },
+      "content": {
+        "subtitle": "Quản lý mã thông báo và danh tính",
+        "title": "Cổng đăng nhập Discord",
+        "privacyText": "Ủy quyền Discord yêu cầu quyền truy cập vào các tính năng xã hội cùng với Rich Presence. Kruzty Dynamics sử dụng SDK để xác định tài khoản của bạn và xuất bản hoặc xóa hoạt động đã định cấu hình của bạn; nó không sử dụng các tính năng bạn bè, chặn, mời, tin nhắn hoặc thoại. Trên Android, mã thông báo được mã hóa và lưu trữ trên thiết bị này. Đọc",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Chính sách bảo mật"
+      },
+      "title": "Kết nối tài khoản Discord"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Các biểu thức hỗ trợ các phép so sánh == và !=. Sử dụng {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} để chọn AppName khi loại hoạt động là Playing và chọn AppPlatformType trong các trường hợp khác.",
+        "title": "Tham chiếu mã thông báo ứng dụng",
+        "desc": "Các biến động có sẵn trong biểu thức trường"
+      },
+      "media": {
+        "title": "Tham chiếu mã thông báo phương tiện",
+        "intro": "Mã thông báo có thể được nhúng trực tiếp vào trường văn bản và nhãn nút hoặc URL (ví dụ: {example}).",
+        "desc": "Các biến động có sẵn trong biểu thức phương tiện và nút"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Hủy bỏ các thay đổi chưa lưu?",
+      "unsaved": "Sửa đổi chưa lưu"
+    },
+    "logs": {
+      "copy": "Sao chép nhật ký",
+      "empty": "[INFO] Chưa có nhật ký. Mở đăng nhập Discord hoặc thực hiện các hành động để tạo nhật ký.",
+      "export": "Xuất nhật ký",
+      "subtitle": "Đầu ra chẩn đoán trực tiếp",
+      "title": "Nhật ký ứng dụng"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Màu nhấn chính",
+        "resetAccent": "Đặt lại về màu cam mặc định",
+        "tapCustomize": "Nhấn để tùy chỉnh",
+        "themeMode": "Chế độ giao diện"
+      },
+      "globalDefaults": {
+        "activityStatus": "Trạng thái hoạt động",
+        "activityType": "Loại hoạt động",
+        "note": "Các mặc định này được tự động sử dụng khi một ứng dụng hoặc hoạt động hiện diện không chỉ định loại hoạt động hoặc trạng thái của riêng nó."
+      },
+      "imgBb": {
+        "apiPrivacy": "Để trống trường này sẽ đặt lại thành khóa API mặc định tích hợp. Khóa tùy chỉnh không bao giờ được hiển thị dưới dạng văn bản thuần túy.",
+        "getApiKey": "để lấy khóa.",
+        "help": "Đặt Khóa API ImgBB của riêng bạn để tải hình ảnh nội dung ứng dụng và phương tiện tùy chỉnh lên Discord CDN. Truy cập",
+        "usingDefaultKey": "Đang sử dụng khóa hệ thống mặc định"
+      },
+      "language": {
+        "availableLanguages": "Ngôn ngữ có sẵn",
+        "title": "Chọn ngôn ngữ",
+        "desc": "Chọn ngôn ngữ hiển thị ưa thích của bạn cho nhãn giao diện người dùng và thông báo."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Ngăn Android tắt dịch vụ hiện diện",
+        "foregroundDesc": "Chỉ báo thanh trạng thái cho sự hiện diện Discord đang diễn ra",
+        "notificationAccessDesc": "Quyền truy cập ứng dụng đặc biệt để phát hiện phương tiện",
+        "desc": "Trạng thái của các quyền cần thiết để đọc thông báo phương tiện đang hoạt động và ứng dụng nền trước:",
+        "usageAccessDesc": "Phát hiện trò chơi và ứng dụng nền trước đang chạy"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "Có {total} URL hình ảnh được liên kết, bao gồm {custom} ghi đè biểu tượng ứng dụng tùy chỉnh. Bạn có thể xóa các liên kết đã lưu trong bộ nhớ đệm trong khi vẫn giữ biểu tượng tùy chỉnh hoặc xóa tất cả các liên kết và xóa ghi đè tùy chỉnh. Nếu bạn xóa ghi đè, hãy tải lại các biểu tượng đó trong Danh mục ứng dụng.",
+        "buttons": {
+          "clearCacheAll": "Xóa tất cả, bao gồm cả biểu tượng tùy chỉnh",
+          "clearCacheKeep": "Xóa bộ nhớ đệm, giữ biểu tượng tùy chỉnh"
+        },
+        "clearedAll": "Tất cả URL hình ảnh được liên kết đã bị xóa, bao gồm cả biểu tượng ứng dụng tùy chỉnh.",
+        "clearedKeeping": "Đã xóa bộ nhớ đệm URL hình ảnh được liên kết. Biểu tượng ứng dụng tùy chỉnh đã được giữ lại.",
+        "linkedImageUrls": "URL hình ảnh được liên kết"
+      },
+      "credits": {
+        "contributorsSection": "Những người đóng góp cho Kizzy",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Thư viện được sử dụng trong ứng dụng này",
+        "libraries": {
+          "lucide": "Biểu tượng vector sạch do cộng đồng tạo",
+          "react": "Kiến trúc thành phần giao diện người dùng hiện đại",
+          "sdk": "Tích hợp rich presence Android gốc",
+          "tailwind": "Tạo kiểu đáp ứng hiện đại ưu tiên tiện ích",
+          "tauri": "Thời gian chạy gốc đa nền tảng nhẹ",
+          "tokio": "Thời gian chạy mạng hướng sự kiện không đồng bộ"
+        },
+        "maintainerRole": "Người bảo trì và Nhà phát triển hiện tại"
+      },
+      "discordApp": {
+        "developerPortal": "Cổng nhà phát triển Discord",
+        "help": "Đặt ID ứng dụng Discord của riêng bạn từ",
+        "idPrivacy": "Để trống trường này sẽ đặt lại thành ID ứng dụng Kruzty Dynamics mặc định."
+      }
+    }
   },
-  "nav": {
-    "service": "Dịch vụ",
-    "accounts": "Tài khoản",
-    "settings": "Cài đặt và Thêm"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Thêm tài khoản",
+            "switch": "Chuyển đổi",
+            "unuse": "Bỏ sử dụng"
+          },
+          "activePresence": "Hiện diện hoạt động",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Xác nhận đăng xuất",
+              "title": "Đăng xuất tài khoản",
+              "removePrefix": "Bạn có chắc chắn muốn xóa tài khoản",
+              "removeSuffix": "? Thao tác này sẽ xóa thông tin đăng nhập đã lưu khỏi thiết bị này."
+            }
+          },
+          "currentAccount": "Tài khoản đã đăng nhập hiện tại",
+          "noActiveAccount": "Không có tài khoản nào được chọn. Chọn một trong các tài khoản đã đăng nhập bên dưới.",
+          "storedAccounts": "Tài khoản đã lưu"
+        },
+        "noAccount": {
+          "desc": "Kết nối tài khoản Discord của bạn để bắt đầu chiếu trạng thái Rich Presence cho trò chơi, ứng dụng và phương tiện.",
+          "title": "Chưa có tài khoản nào đăng nhập.",
+          "login": "Đăng nhập Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Không có tài khoản Discord",
+        "loggedInMany": "Đã đăng nhập {n} tài khoản.",
+        "loggedInOne": "Đã đăng nhập {n} tài khoản."
+      },
+      "title": "Tài khoản Discord"
+    },
+    "service": {
+      "subtitle": "Bảng điều khiển Kruzty Dynamics",
+      "title": {
+        "welcome": "Chào mừng!",
+        "welcomeNamed": "Chào mừng, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Tất cả các quyền bắt buộc đã được cấp. Bật dịch vụ để tiếp tục.",
+              "foregroundService": {
+                "desc": "Cho phép Android hiển thị thông báo dịch vụ trong khi nó chạy.",
+                "title": "Thông báo dịch vụ nền trước"
+              },
+              "notificationAccess": {
+                "desc": "Cần thiết để phát hiện phát lại phương tiện và siêu dữ liệu của nó."
+              },
+              "subtitle": "Cấp các quyền Android này trước khi bắt đầu dịch vụ.",
+              "title": "Quyền bắt buộc",
+              "returnHint": "Sau khi cấp quyền truy cập trong Cài đặt Android, hãy quay lại đây và bật dịch vụ.",
+              "usageAccess": {
+                "desc": "Cần thiết để phát hiện ứng dụng nào hiện đang ở nền trước."
+              }
+            }
+          },
+          "startError": "Không thể khởi động dịch vụ hiện diện Android.",
+          "running": "Dịch vụ đang chạy.",
+          "stopped": "Dịch vụ chưa khởi động.",
+          "title": "Dịch vụ Kruzty Dynamics"
+        },
+        "application": {
+          "desc": "Định cấu hình hồ sơ ứng dụng để phát hiện hiện diện cục bộ",
+          "title": "Hiện diện ứng dụng"
+        },
+        "buttons": {
+          "applicationCatalogue": "Danh mục ứng dụng",
+          "presenceConfiguration": "Cấu hình hiện diện",
+          "statusFieldConfig": "Cấu hình trường trạng thái"
+        },
+        "media": {
+          "desc": "Định cấu hình hành vi phương tiện và mẫu trạng thái",
+          "title": "Hiện diện phương tiện"
+        },
+        "preview": {
+          "noPresence": "Không phát hiện ứng dụng đã định cấu hình hoặc phương tiện đang hoạt động.",
+          "stoppedDescription": "Dịch vụ đã dừng. Bật nó để phát hiện các ứng dụng đã bật và phương tiện đang hoạt động."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "Tùy chọn ứng dụng",
+        "checkPermissions": {
+          "title": "Kiểm tra quyền",
+          "desc": "Xem lại các quyền truy cập hệ thống đã cấp và tùy chọn"
+        },
+        "deleteCachedUrls": {
+          "title": "Xóa URL hình ảnh được liên kết",
+          "desc": "Xóa các URL liên kết của hình ảnh đã tải lên được sử dụng trên trạng thái ứng dụng hoặc phương tiện"
+        },
+        "discordAppId": {
+          "title": "Đặt ID ứng dụng Discord",
+          "desc": "Đặt ID ứng dụng Discord của riêng bạn. Truy cập: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "Mặc định toàn cầu",
+          "desc": "Loại hoạt động và trạng thái cho các ứng dụng chưa được định cấu hình"
+        },
+        "imgBbKey": {
+          "title": "Đặt khóa API ImgBB",
+          "desc": "Đặt Khóa API ImgBB của riêng bạn. Truy cập: api.imgbb.com"
+        },
+        "language": {
+          "title": "Ngôn ngữ",
+          "desc": "Hiện được đặt:"
+        },
+        "notificationProjection": {
+          "title": "Tùy chỉnh cách hiển thị trạng thái thông báo",
+          "desc": "Tùy chỉnh tiêu đề và phụ đề của thông báo ứng dụng và phương tiện truyền thông."
+        },
+        "themes": {
+          "title": "Giao diện và Hiển thị",
+          "desc": "Đặt giao diện và màu nhấn của bạn."
+        },
+        "checkUpdates": {
+          "title": "Kiểm tra phiên bản mới nhất",
+          "desc": "Kiểm tra xem có phiên bản mới hơn không."
+        }
+      },
+      "subtitle": "Tùy chọn ứng dụng và chẩn đoán",
+      "title": "Cài đặt và Thêm",
+      "cardInfo": {
+        "architecture": "Được xây dựng bằng Rust Core (Tokio + Tauri v2) với React 19 và Giao diện TailwindCSS bao gồm Cầu nối plugin Android gốc. Dựa trên RPC thử nghiệm ban đầu của Kizzy.",
+        "credits": "Tín dụng",
+        "developedBy": "Phát triển bởi",
+        "latestRelease": "Chuyển đến bản phát hành mới nhất",
+        "learnMore": "Tìm hiểu thêm về ứng dụng này",
+        "repository": "Kiểm tra kho lưu trữ GitHub",
+        "submitIssue": "Gửi một vấn đề",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "Chào mừng!",
-    "welcomeNamed": "Chào mừng, {name}!",
-    "dashboardSubtitle": "Bảng điều khiển Kruzty Dynamics",
-    "accountsLoggedInOne": "Đã đăng nhập {n} tài khoản.",
-    "accountsLoggedInMany": "Đã đăng nhập {n} tài khoản.",
-    "liveLogs": "Nhật ký trực tiếp",
-    "viewLogs": "Xem nhật ký",
-    "serviceActive": "Hoạt động",
-    "serviceInactive": "Không hoạt động",
-    "serviceStarting": "Đang khởi động",
-    "serviceStopped": "Đã dừng"
-  },
-  "accounts": {
-    "title": "Tài khoản Discord",
-    "subtitle": "Quản lý mã thông báo và danh tính",
-    "loginPortal": "Đăng nhập qua Cổng Discord",
-    "loginWithToken": "Thêm tài khoản qua Token",
-    "addAccount": "Thêm tài khoản",
-    "activeIdentity": "Danh tính hoạt động",
-    "stored": "Đã lưu",
+  "buttons": {
     "remove": "Xóa",
-    "noAccounts": "Không có tài khoản Discord",
-    "noAccountsDesc": "Thêm tài khoản Discord của bạn bằng cổng hoặc mã thông báo người dùng để bắt đầu chiếu rich presence."
-  },
-  "settings": {
-    "title": "Cài đặt và Thêm",
-    "subtitle": "Tùy chọn ứng dụng và chẩn đoán",
-    "appPreferences": "Tùy chọn ứng dụng",
-    "notificationProjection": "Tùy chỉnh cách hiển thị trạng thái thông báo",
-    "notificationProjectionDesc": "Tùy chỉnh tiêu đề và phụ đề của thông báo ứng dụng và phương tiện truyền thông.",
-    "themes": "Giao diện và Hiển thị",
-    "themesDesc": "Đặt giao diện và màu nhấn của bạn.",
-    "language": "Ngôn ngữ",
-    "languageDesc": "Hiện được đặt:",
-    "globalDefaults": "Mặc định toàn cầu",
-    "globalDefaultsDesc": "Loại hoạt động và trạng thái cho các ứng dụng chưa được định cấu hình",
-    "imgbbKey": "Đặt khóa API ImgBB",
-    "imgbbKeyDesc": "Đặt Khóa API ImgBB của riêng bạn. Truy cập: api.imgbb.com",
-    "discordAppId": "Đặt ID ứng dụng Discord",
-    "discordAppIdDesc": "Đặt ID ứng dụng Discord của riêng bạn. Truy cập: discord.com/developers",
-    "checkPermissions": "Kiểm tra quyền",
-    "checkPermissionsDesc": "Xem lại các quyền truy cập hệ thống đã cấp và tùy chọn",
-    "deleteCache": "Xóa URL hình ảnh được liên kết",
-    "deleteCacheDesc": "Xóa các URL liên kết của hình ảnh đã tải lên được sử dụng trên trạng thái ứng dụng hoặc phương tiện"
-  },
-  "service": {
-    "title": "Dịch vụ Kruzty Dynamics",
-    "running": "Dịch vụ đang chạy.",
-    "stopped": "Dịch vụ chưa khởi động.",
-    "applicationPresence": "Hiện diện ứng dụng",
-    "appDescription": "Định cấu hình hồ sơ ứng dụng để phát hiện hiện diện cục bộ",
-    "applicationCatalogue": "Danh mục ứng dụng",
-    "statusFieldConfig": "Cấu hình trường trạng thái",
-    "presenceConfiguration": "Cấu hình hiện diện",
-    "mediaPresence": "Hiện diện phương tiện",
-    "mediaDescription": "Định cấu hình hành vi phương tiện và mẫu trạng thái",
-    "noPresence": "Không phát hiện ứng dụng đã định cấu hình hoặc phương tiện đang hoạt động.",
-    "stoppedDescription": "Dịch vụ đã dừng. Bật nó để phát hiện các ứng dụng đã bật và phương tiện đang hoạt động."
-  },
-  "logs": {
-    "title": "Nhật ký ứng dụng",
-    "subtitle": "Đầu ra chẩn đoán trực tiếp",
-    "copy": "Sao chép nhật ký",
-    "export": "Xuất nhật ký",
-    "empty": "[INFO] Chưa có nhật ký. Mở đăng nhập Discord hoặc thực hiện các hành động để tạo nhật ký."
-  },
-  "permissions": {
-    "requiredTitle": "Quyền bắt buộc",
-    "requiredSubtitle": "Cấp các quyền Android này trước khi bắt đầu dịch vụ.",
-    "done": "Xong",
-    "allGranted": "Tất cả các quyền bắt buộc đã được cấp. Bật dịch vụ để tiếp tục.",
-    "grant": "Cấp",
-    "returnHint": "Sau khi cấp quyền truy cập trong Cài đặt Android, hãy quay lại đây và bật dịch vụ.",
-    "notificationTitle": "Quyền truy cập thông báo",
-    "notificationSubtitle": "Cấu hình quyền truy cập ứng dụng đặc biệt",
-    "openAndroidSettings": "Mở cài đặt Android",
-    "oemNotice": "Thông báo cho thiết bị OEM và Android 13+",
-    "notificationExplanation": "Android bảo vệ quyền truy cập trình nghe thông báo đằng sau các lớp quyền đặc biệt. Tùy thuộc vào thương hiệu điện thoại của bạn, hãy làm theo một trong các phương pháp dưới đây.",
-    "methodA": "Phương pháp A: Quyền truy cập ứng dụng đặc biệt (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "Nhấn vào Mở cài đặt Android bên dưới.",
-    "methodAStep2": "Đi tới Quyền truy cập ứng dụng đặc biệt > Quyền truy cập thông báo.",
-    "methodAStep3": "Tìm Kruzty Dynamics và bật Cho phép truy cập thông báo.",
-    "methodB": "Phương pháp B: Thông tin ứng dụng > Dấu ba chấm (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Mở Cài đặt thiết bị > Ứng dụng > Quản lý ứng dụng / Danh sách ứng dụng.",
-    "methodBStep2": "Tìm và nhấn vào Kruzty Dynamics.",
-    "methodBStep3": "Nhấn vào ba dấu chấm ở góc trên cùng bên phải.",
-    "methodBStep4": "Nhấn Cho phép cài đặt bị hạn chế / Quyền truy cập ứng dụng đặc biệt > Cấp.",
-    "methodBStep5": "Quay lại và bật Quyền truy cập thông báo.",
-    "notificationAccessDescription": "Quyền truy cập thông báo cho phép Kruzty Dynamics ghi lại các sự kiện phát lại phiên phương tiện trực tiếp (Tiêu đề bài hát, Nghệ sĩ, Album và Trạng thái phát lại) từ Spotify, YouTube Music và các trình phát phương tiện.",
-    "usageTitle": "Quyền truy cập sử dụng",
-    "usageSubtitle": "Phát hiện ứng dụng nền trước",
-    "openUsageAccess": "Mở quyền truy cập sử dụng",
-    "usageDescription": "Quyền truy cập sử dụng là cần thiết để phát hiện ứng dụng hoặc trò chơi nào bạn đang chạy ở nền trước, để Kruzty Dynamics có thể đối chiếu nó với Danh mục ứng dụng đã định cấu hình của bạn.",
-    "usageStep1": "Nhấn Mở quyền truy cập sử dụng.",
-    "usageStep2": "Định vị Kruzty Dynamics.",
-    "usageStep3": "Bật Cho phép truy cập sử dụng.",
-    "batteryTitle": "Tối ưu hóa pin",
-    "batterySubtitle": "Danh sách trắng dịch vụ nền",
-    "requestExemption": "Yêu cầu miễn trừ",
-    "batteryDescription": "Hệ thống Android hiện đại đưa các tiến trình nền vào chế độ ngủ sau vài phút. Miễn trừ Kruzty Dynamics khỏi tối ưu hóa pin đảm bảo cập nhật Discord Rich Presence liên tục, không bị gián đoạn.",
-    "foregroundTitle": "Thông báo dịch vụ nền trước",
-    "foregroundSubtitle": "Quyền thông báo Android 13+",
-    "foregroundGuardTitle": "Thông báo dịch vụ nền trước",
-    "usageGuardDescription": "Cần thiết để phát hiện ứng dụng nào hiện đang ở nền trước.",
-    "notificationGuardDescription": "Cần thiết để phát hiện phát lại phương tiện và siêu dữ liệu của nó.",
-    "foregroundGuardDescription": "Cho phép Android hiển thị thông báo dịch vụ trong khi nó chạy.",
-    "serviceStartError": "Không thể khởi động dịch vụ hiện diện Android.",
-    "allowNotification": "Cho phép thông báo",
-    "foregroundDescription": "Được yêu cầu bởi Android 13+ để hiển thị thông báo dịch vụ nền trước đang diễn ra trong thanh trạng thái của bạn, xác nhận rằng công cụ hiện diện Discord đang chạy."
-  },
-  "toast": {
-    "duplicateAccount": "Tài khoản Discord này đã được thêm.",
-    "insufficientPermissions": "Không đủ quyền. Vui lòng kiểm tra Cài đặt & Thêm > Kiểm tra quyền.",
-    "newVersionAvailable": "Phiên bản mới đã ra mắt!",
-    "updateDetected": "Đã phát hiện phiên bản mới nhất!",
-    "latestVersion": "Đây là phiên bản mới nhất!",
-    "updateCheckFailed": "Không thể kiểm tra các bản cập nhật."
-  },
-  "accountsPage": {
-    "emptyTitle": "Chưa có tài khoản nào đăng nhập.",
-    "emptyDescription": "Kết nối tài khoản Discord của bạn để bắt đầu chiếu trạng thái Rich Presence cho trò chơi, ứng dụng và phương tiện.",
-    "login": "Đăng nhập Discord",
-    "currentAccount": "Tài khoản đã đăng nhập hiện tại",
-    "activePresence": "Hiện diện hoạt động",
-    "storedAccounts": "Tài khoản đã lưu",
-    "switch": "Chuyển đổi",
-    "unuse": "Bỏ sử dụng",
-    "remove": "Xóa",
-    "cancel": "Hủy",
-    "deleteTitle": "Xóa tài khoản Discord?",
-    "loginTitle": "Cổng đăng nhập Discord",
-    "noActiveAccount": "Không có tài khoản nào được chọn. Chọn một trong các tài khoản đã đăng nhập bên dưới.",
-    "addAccountTitle": "Kết nối tài khoản Discord",
-    "portal": "Cổng đăng nhập Discord",
-    "signInPortal": "Đăng nhập an toàn với Discord trong ứng dụng",
     "openPortal": "Mở cổng",
-    "privacyText": "Ủy quyền Discord yêu cầu quyền truy cập vào các tính năng xã hội cùng với Rich Presence. Kruzty Dynamics sử dụng SDK để xác định tài khoản của bạn và xuất bản hoặc xóa hoạt động đã định cấu hình của bạn; nó không sử dụng các tính năng bạn bè, chặn, mời, tin nhắn hoặc thoại. Trên Android, mã thông báo được mã hóa và lưu trữ trên thiết bị này. Đọc",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Đăng xuất tài khoản",
-    "removePrefix": "Bạn có chắc chắn muốn xóa tài khoản",
-    "removeSuffix": "? Thao tác này sẽ xóa thông tin đăng nhập đã lưu khỏi thiết bị này.",
-    "confirmLogout": "Xác nhận đăng xuất",
-    "addAccount": "Thêm tài khoản Discord",
-    "noSelection": "Không có tài khoản nào được chọn. Chọn một trong các tài khoản đã đăng nhập bên dưới.",
-    "addMoreAccounts": "Bạn có thể thêm nhiều tài khoản hơn bằng cách nhấp vào nút Discord bên dưới."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Chọn ngôn ngữ",
-    "languageDescription": "Chọn ngôn ngữ hiển thị ưa thích của bạn cho nhãn giao diện người dùng và thông báo.",
-    "availableLanguages": "Ngôn ngữ có sẵn",
-    "close": "Đóng",
-    "linkedImageUrls": "URL hình ảnh được liên kết",
-    "clearCacheKeep": "Xóa bộ nhớ đệm, giữ biểu tượng tùy chỉnh",
-    "clearCacheAll": "Xóa tất cả, bao gồm cả biểu tượng tùy chỉnh",
-    "credits": "Tín dụng",
-    "themeMode": "Chế độ giao diện",
-    "accentColor": "Màu nhấn chính",
-    "resetAccent": "Đặt lại về màu cam mặc định",
-    "learnMore": "Tìm hiểu thêm về ứng dụng này",
-    "privacyPolicy": "Chính sách bảo mật",
-    "repository": "Kiểm tra kho lưu trữ GitHub",
-    "latestRelease": "Chuyển đến bản phát hành mới nhất",
-    "submitIssue": "Gửi một vấn đề",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Thư viện được sử dụng trong ứng dụng này",
-    "contributorsSection": "Những người đóng góp cho Kizzy",
-    "maintainerRole": "Người bảo trì và Nhà phát triển hiện tại",
-    "view": "Xem",
-    "done": "Xong",
-    "developedBy": "Phát triển bởi",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Được xây dựng bằng Rust Core (Tokio + Tauri v2) với React 19 và Giao diện TailwindCSS bao gồm Cầu nối plugin Android gốc. Dựa trên RPC thử nghiệm ban đầu của Kizzy.",
-    "cached": "đã lưu vào bộ nhớ đệm",
-    "tapCustomize": "Nhấn để tùy chỉnh",
-    "defaultNote": "Các mặc định này được tự động sử dụng khi một ứng dụng hoặc hoạt động hiện diện không chỉ định loại hoạt động hoặc trạng thái của riêng nó.",
-    "activityType": "Loại hoạt động",
-    "activityStatus": "Trạng thái hoạt động",
-    "imgbbHelp": "Đặt Khóa API ImgBB của riêng bạn để tải hình ảnh nội dung ứng dụng và phương tiện tùy chỉnh lên Discord CDN. Truy cập",
-    "getApiKey": "để lấy khóa.",
-    "apiPrivacy": "Để trống trường này sẽ đặt lại thành khóa API mặc định tích hợp. Khóa tùy chỉnh không bao giờ được hiển thị dưới dạng văn bản thuần túy.",
-    "saveKey": "Lưu khóa",
-    "discordIdHelp": "Đặt ID ứng dụng Discord của riêng bạn từ",
-    "developerPortal": "Cổng nhà phát triển Discord",
-    "idDefault": "Mặc định",
-    "idPrivacy": "Để trống trường này sẽ đặt lại thành ID ứng dụng Kruzty Dynamics mặc định.",
-    "saveId": "Lưu ID",
-    "permissionsDescription": "Trạng thái của các quyền cần thiết để đọc thông báo phương tiện đang hoạt động và ứng dụng nền trước:",
-    "notificationAccessDesc": "Quyền truy cập ứng dụng đặc biệt để phát hiện phương tiện",
-    "usageAccessDesc": "Phát hiện trò chơi và ứng dụng nền trước đang chạy",
-    "batteryDesc": "Ngăn Android tắt dịch vụ hiện diện",
-    "foregroundDesc": "Chỉ báo thanh trạng thái cho sự hiện diện Discord đang diễn ra",
-    "saveIdPlaceholder": "1572590527562391713 (Mặc định)",
-    "resetDefault": "Đặt lại về mặc định",
-    "cancel": "Hủy",
-    "cacheWarning": "Có {total} URL hình ảnh được liên kết, bao gồm {custom} ghi đè biểu tượng ứng dụng tùy chỉnh. Bạn có thể xóa các liên kết đã lưu trong bộ nhớ đệm trong khi vẫn giữ biểu tượng tùy chỉnh hoặc xóa tất cả các liên kết và xóa ghi đè tùy chỉnh. Nếu bạn xóa ghi đè, hãy tải lại các biểu tượng đó trong Danh mục ứng dụng.",
-    "allGranted": "Tất cả đã được cấp",
-    "clearedAll": "Tất cả URL hình ảnh được liên kết đã bị xóa, bao gồm cả biểu tượng ứng dụng tùy chỉnh.",
-    "clearedKeeping": "Đã xóa bộ nhớ đệm URL hình ảnh được liên kết. Biểu tượng ứng dụng tùy chỉnh đã được giữ lại.",
-    "usingDefaultKey": "Đang sử dụng khóa hệ thống mặc định",
-    "customKeySet": "Đã đặt khóa tùy chỉnh",
-    "light": "Sáng",
-    "dark": "Tối",
-    "amoled": "AMOLED",
-    "libraryTauri": "Thời gian chạy gốc đa nền tảng nhẹ",
-    "libraryTokio": "Thời gian chạy mạng hướng sự kiện không đồng bộ",
-    "librarySdk": "Tích hợp rich presence Android gốc",
-    "libraryReact": "Kiến trúc thành phần giao diện người dùng hiện đại",
-    "libraryTailwind": "Tạo kiểu đáp ứng hiện đại ưu tiên tiện ích",
-    "libraryLucide": "Biểu tượng vector sạch do cộng đồng tạo",
-    "checkForUpdates": "Kiểm tra phiên bản mới nhất",
-    "checkForUpdatesDesc": "Kiểm tra xem có phiên bản mới hơn không.",
-    "check": "Kiểm tra",
-    "checkingUpdates": "Kiểm tra các bản cập nhật"
-  },
-  "configFields": {
-    "appTitle": "Cấu hình trường trạng thái ứng dụng",
-    "mediaTitle": "Cấu hình trường trạng thái phương tiện",
-    "back": "Quay lại",
-    "reset": "Đặt lại về mặc định",
-    "help": "Trợ giúp mã thông báo có sẵn",
-    "title": "Tiêu đề",
-    "line1": "Dòng 1 (Chi tiết)",
-    "line2": "Dòng 2 (Trạng thái)",
-    "smallText": "Văn bản nhỏ",
-    "smallImage": "Hình ảnh nhỏ",
-    "bigText": "Văn bản lớn",
-    "bigImage": "Hình ảnh lớn",
-    "header": "Tiêu đề (Đang nghe / Đang xem)",
-    "mediaTitleField": "Tiêu đề phương tiện (Chi tiết hoạt động)",
-    "artist": "Dòng 1 (Trạng thái hoạt động / Nghệ sĩ)",
-    "album": "Dòng 2 (Album / Văn bản hình ảnh)",
-    "buttons": "Nút tùy chỉnh",
-    "button1": "Nút 1",
-    "button2": "Nút 2",
-    "save": "Lưu trường",
-    "appReference": "Tham chiếu mã thông báo ứng dụng",
-    "mediaReference": "Tham chiếu mã thông báo phương tiện",
-    "tokenDescription": "Các biến động có sẵn trong biểu thức trường",
-    "mediaTokenDescription": "Mô tả video hoặc phương tiện từ trình phát web hoặc video.",
-    "discard": "Hủy bỏ các thay đổi chưa lưu?",
-    "unsaved": "Sửa đổi chưa lưu",
-    "helpDone": "Đã hiểu",
-    "appTokenName": "Tên ứng dụng được chiếu hiển thị trong hoạt động.",
-    "appHeader": "Tiêu đề",
-    "titleHeader": "Tiêu đề/Tiêu đề hoạt động",
-    "detailsField": "Chi tiết hoạt động",
-    "stateField": "Trạng thái hoạt động",
-    "notificationConfigSubtitle": "Tùy chỉnh tiêu đề và phụ đề hiển thị trong thông báo dịch vụ nền trước.",
-    "notificationAppSection": "Thông báo trạng thái ứng dụng",
-    "notificationMediaSection": "Thông báo phát lại phương tiện",
-    "notificationSubtitleLabel": "Tiêu đề phụ của thông báo",
-    "notificationHelpIntro": "Sử dụng getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") và getFieldCfgStr(\"MediaBigText\") để chèn các giá trị trường đã hiển thị. Sử dụng joinNonBlank(field1, field2) để nối các giá trị không trống bằng dấu chấm tròn. Các mẫu thông báo ứng dụng hỗ trợ điều kiện AppActivityType == \"Playing\". Các biểu thức cũng hỗ trợ so sánh == và !=.",
-    "notificationDiscardMessage": "Bạn có những thay đổi về cách hiển thị thông báo chưa được lưu. Nếu thoát khỏi trang này ngay bây giờ, những thay đổi đó sẽ bị hủy bỏ.",
-    "appTokenActivityType": "Đã chọn loại hoạt động Rich Presence cho hồ sơ ứng dụng này, chẳng hạn như Đang phát, Đang nghe, Đang xem hoặc Đang thi đấu.",
-    "appTokenPlatformType": "Token nền tảng từ hồ sơ ứng dụng này, chẳng hạn như Android, PC hoặc Xbox.",
-    "appExpressionOperators": "Các biểu thức hỗ trợ các phép so sánh == và !=. Sử dụng {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} để chọn AppName khi loại hoạt động là Playing và chọn AppPlatformType trong các trường hợp khác.",
-    "appTokenDetails": "Văn bản Chi tiết tùy chỉnh được lưu trên hồ sơ ứng dụng này hoặc trống khi bị tắt hoặc để trống.",
-    "appTokenState": "Văn bản Trạng thái tùy chỉnh được lưu trên hồ sơ ứng dụng này hoặc trống khi bị tắt hoặc để trống.",
-    "appTokenSmallText": "Nhãn hình ảnh nhỏ tùy chỉnh được lưu trên hồ sơ ứng dụng này hoặc trống khi bị tắt hoặc để trống.",
-    "appTokenSmallUrl": "URL hình ảnh nhỏ tùy chỉnh được lưu trên hồ sơ ứng dụng này hoặc trống khi bị tắt hoặc để trống.",
-    "appTokenImageUrl": "URL từ xa ImgBB được lưu trong bộ nhớ đệm của biểu tượng ứng dụng.",
-    "appTokenPackageName": "Mã định danh gói Android (ví dụ: com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Mã thông báo có thể được nhúng trực tiếp vào trường văn bản và nhãn nút hoặc URL (ví dụ: {example}).",
-    "mediaTokenAppName": "Tên ứng dụng trình phát được hiển thị trong tiêu đề Đang nghe hoặc Đang xem của Discord.",
-    "mediaTokenTitle": "Tiêu đề bài hát hoặc video phương tiện đang hoạt động từ siêu dữ liệu thông báo.",
-    "mediaTokenArtist": "Nghệ sĩ hoặc người tạo âm thanh hoặc video đang phát.",
-    "mediaTokenAlbum": "Tên album hoặc vùng chứa danh sách phát.",
-    "mediaTokenPlaybackState": "Trạng thái phát lại hiện tại (Đang phát, Tạm dừng, Đã dừng).",
-    "mediaTokenImageUrl": "URL ImgBB được lưu trong bộ nhớ đệm của ảnh bìa album phương tiện hoặc hình thu nhỏ.",
-    "mediaTokenPlaybackImageUrl": "URL hình ảnh nội dung cho chỉ báo phát lại hiện tại.",
-    "mediaTokenFallbackImageUrl": "Biểu tượng ứng dụng dự phòng nếu không có tác phẩm nghệ thuật.",
-    "appConfigSubtitle": "Tùy chỉnh biểu thức để phát hiện ứng dụng.",
-    "mediaConfigSubtitle": "Tùy chỉnh biểu thức để phát lại phương tiện.",
-    "mediaHeaderDescription": "Tên ứng dụng được hiển thị trong tiêu đề phương tiện của Discord. Loại hoạt động chọn Đang nghe hoặc Đang xem.",
-    "mediaTitleDescription": "Điều này ánh xạ tới văn bản tiêu đề/chi tiết phương tiện. Định cấu hình tên trình phát riêng trong Tiêu đề ở trên.",
-    "mediaAlbumDescription": "Được hiển thị bên dưới nghệ sĩ trên thẻ phương tiện của Discord.",
-    "mediaButtonDescription": "Thêm tối đa 2 nút hiện diện tương tác với biểu thức mã thông báo.",
-    "mediaButtonLabel": "Nhãn",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "ví dụ: ",
-    "mediaButtonListen": "Nghe trên",
-    "appDiscardMessage": "Bạn có các thay đổi chưa lưu trong Trường trạng thái ứng dụng của mình. Rời đi ngay bây giờ sẽ hoàn nguyên chúng về trạng thái trước đó.",
-    "mediaDiscardMessage": "Bạn có các thay đổi chưa lưu trong Trường trạng thái phương tiện của mình. Rời đi ngay bây giờ sẽ hoàn nguyên chúng về trạng thái trước đó.",
-    "mediaTokenSubtitle": "Các biến động có sẵn trong biểu thức phương tiện và nút"
-  },
-  "catalogue": {
-    "title": "Danh mục ứng dụng",
-    "back": "Quay lại",
+    "understood": "Đã hiểu",
+    "apply": "Áp dụng",
     "batch": "Thao tác hàng loạt",
-    "search": "Tìm kiếm ứng dụng...",
-    "filter": "Lọc ứng dụng",
-    "clearFilters": "Xóa bộ lọc",
-    "enabledOnly": "Chỉ những ứng dụng đã bật",
-    "allActivityTypes": "Tất cả loại hoạt động",
-    "allActivityStatuses": "Tất cả trạng thái hoạt động",
+    "cancel": "Hủy",
+    "close": "Đóng",
+    "confirm": "Xác nhận và Áp dụng",
+    "discardChanges": "Hủy bỏ thay đổi",
+    "keepEditing": "Tiếp tục chỉnh sửa",
+    "stageChanges": "Lưu trữ thay đổi",
+    "uploadImage": "Tải hình ảnh lên ImgBB",
+    "helpDone": "Đã hiểu",
+    "save": {
+      "fields": "Lưu trường",
+      "id": "Lưu ID",
+      "key": "Lưu khóa"
+    },
+    "logs": {
+      "live": "Nhật ký trực tiếp",
+      "view": "Xem nhật ký"
+    },
+    "grant": "Cấp",
+    "done": "Xong",
+    "resetDefault": "Đặt lại về mặc định"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Tên hoạt động",
+          "bigImage": "Hình ảnh lớn",
+          "bigText": "Văn bản lớn",
+          "details": "Chi tiết",
+          "imageUrl": "URL hình ảnh",
+          "smallImage": "Hình ảnh nhỏ",
+          "smallText": "Văn bản nhỏ",
+          "state": "Trạng thái",
+          "uploadImage": "Tải hình ảnh lên",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "Danh mục ứng dụng",
+          "desc": "Xem, lọc và tùy chỉnh các chiếu ứng dụng riêng lẻ"
+        },
+        "configurationDetails": "Chi tiết cấu hình",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Ngay lập tức chiếu hiện diện dự phòng đã tùy chỉnh.",
+              "drop": "Xóa hoạt động Discord của bạn cho đến khi bạn quay lại một ứng dụng đã bật.",
+              "freeze": "Tạm dừng và bảo toàn hiện diện được chiếu cuối cùng cho đến khi một ứng dụng đã bật được phát hiện lại."
+            },
+            "title": "Chính sách bên ngoài ứng dụng"
+          },
+          "fallbackPresence": "Hiện diện dự phòng tùy chỉnh",
+          "desc": "Hành vi khi bạn rời khỏi hoặc chuyển khỏi các ứng dụng đã bật",
+          "title": "Chính sách bên ngoài ứng dụng được phát hiện",
+          "help": "Trợ giúp chính sách"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Khóa bộ đếm thời gian hiện diện vào một ngày và giờ bắt đầu cố định cụ thể.",
+              "persistent": "Sử dụng một dấu thời gian thời gian chạy được chia sẻ cho các ứng dụng và phương tiện bị tạm dừng trong phiên dịch vụ này.",
+              "reset": "Khởi động lại bộ đếm thời gian lúc 00:00 khi ứng dụng được khởi chạy hoặc lấy lại tiêu điểm."
+            },
+            "title": "Chiến lược dấu thời gian"
+          },
+          "fixedStart": "Dấu thời gian bắt đầu cố định",
+          "desc": "Cách bộ đếm thời gian hoạt động được giải quyết giữa các phiên ứng dụng",
+          "help": "Trợ giúp dấu thời gian",
+          "title": "Chiến lược dấu thời gian"
+        },
+        "statusFieldConfig": {
+          "title": "Cấu hình trường trạng thái",
+          "desc": "Tùy chỉnh biểu thức tiêu đề, chi tiết, trạng thái và tác phẩm nghệ thuật"
+        },
+        "subtitle": "Chính sách bên ngoài ứng dụng và hành vi dấu thời gian",
+        "title": "Cấu hình hiện diện ứng dụng"
+      },
+      "catalogue": {
+        "androidOnly": "Khám phá ứng dụng đã cài đặt có sẵn trong ứng dụng Android.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Áp dụng thay đổi hàng loạt?",
+              "desc": "Bạn sắp áp dụng vĩnh viễn các thay đổi cấu hình đã lưu trữ cho",
+              "subtitle": "Xác nhận",
+              "selectedApps": "các ứng dụng đã chọn."
+            },
+            "title": "Định cấu hình hàng loạt",
+            "subtitle": "Áp dụng thay đổi cho tất cả các ứng dụng đã chọn",
+            "discard": {
+              "title": "Hủy bỏ các thay đổi đã lưu trữ?",
+              "desc": "Bạn có các cấu hình hàng loạt chưa được cam kết. Rời khỏi chế độ hàng loạt ngay bây giờ sẽ hủy bỏ tất cả các thay đổi đã lưu trữ.",
+              "subtitle": "Sửa đổi hàng loạt chưa lưu"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Chọn một hình ảnh biểu tượng",
+              "resetIcon": "Đặt lại về biểu tượng ứng dụng gốc",
+              "resetLabel": "Đặt lại về nhãn gốc"
+            },
+            "customBtnDesc": "Thêm tối đa 2 nút hiện diện tương tác",
+            "title": "Tùy chỉnh",
+            "original": "Gốc:",
+            "subtitle": "Hồ sơ hiện diện và bí danh chiếu",
+            "projectedName": "Tên được chiếu",
+            "switchToggle": {
+              "buttons": "Chuyển đổi Nút tùy chỉnh",
+              "details": "Chuyển đổi Chi tiết và Trạng thái tùy chỉnh",
+              "small": "Chuyển đổi Văn bản nhỏ và Hình ảnh tùy chỉnh"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Xóa bộ lọc",
+          "filter": "Lọc ứng dụng"
+        },
+        "loadAppsFailed": "Không thể tải các ứng dụng đã cài đặt.",
+        "loading": "",
+        "search": "Tìm kiếm ứng dụng...",
+        "subtitle": "{apps} ứng dụng | {enabled} đã bật",
+        "title": "Danh mục ứng dụng",
+        "uploadProgress": "Đang tải biểu tượng ứng dụng lên ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Tùy chỉnh biểu thức để phát hiện ứng dụng.",
+        "discardMsg": "Bạn có các thay đổi chưa lưu trong Trường trạng thái ứng dụng của mình. Rời đi ngay bây giờ sẽ hoàn nguyên chúng về trạng thái trước đó.",
+        "title": "Cấu hình trường trạng thái ứng dụng"
+      }
+    },
+    "buttons": {
+      "back": "Quay lại",
+      "help": "Trợ giúp mã thông báo có sẵn",
+      "reset": "Đặt lại về mặc định"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Thêm tối đa 2 nút hiện diện tương tác với biểu thức mã thông báo.",
+        "subtitle": "Tùy chỉnh biểu thức để phát lại phương tiện.",
+        "discardMsg": "Bạn có các thay đổi chưa lưu trong Trường trạng thái phương tiện của mình. Rời đi ngay bây giờ sẽ hoàn nguyên chúng về trạng thái trước đó.",
+        "title": "Cấu hình trường trạng thái phương tiện"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "Thời gian còn lại",
+          "desc": "Hiển thị thời gian còn lại bắt đầu/kết thúc hiện tại thông thường"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Sử dụng ứng dụng được phát hiện trước đó hoặc hiện tại hoặc dự phòng tùy chỉnh trong khi phương tiện bị tạm dừng.",
+              "hidePaused": "Ẩn hiện diện trong khi phương tiện bị tạm dừng, bao gồm bất kỳ ứng dụng được phát hiện nào.",
+              "showPaused": "Giữ hiện diện phương tiện hoạt động trong khi tạm dừng và hiển thị các chỉ báo tạm dừng."
+            },
+            "desc": "Tùy chọn khi phát lại đang hoạt động bị tạm dừng"
+          },
+          "desc": "Hành vi hiện diện khi phát lại đang hoạt động bị tạm dừng",
+          "help": "Trợ giúp phân giải tạm dừng",
+          "title": "Phân giải phương tiện bị tạm dừng"
+        },
+        "mediaPriority": {
+          "title": "Ưu tiên phương tiện",
+          "desc": "Kiểm soát xem phương tiện có ghi đè các phiên chơi game/ứng dụng hay không",
+          "help": "Trợ giúp ưu tiên",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Khi phương tiện đang phát tích cực, nó được ưu tiên hơn ứng dụng bạn đang sử dụng và chiếu bản nhạc hoặc video hiện tại.",
+              "switchesBetween": "Chỉ chiếu phương tiện khi bạn ở trong trình phát phương tiện. Chuyển sang trò chơi hoặc ứng dụng đã bật sẽ cho phép ứng dụng đó tiếp quản."
+            },
+            "title": "Chiến lược ưu tiên phương tiện",
+            "desc": "Logic phân giải giữa các phiên chơi game và phương tiện"
+          }
+        },
+        "mediaScope": {
+          "title": "Phạm vi phát hiện phương tiện",
+          "desc": "Lọc ứng dụng nào kích hoạt rich presence phương tiện"
+        },
+        "statusFieldConfig": {
+          "title": "Cấu hình trường trạng thái phương tiện",
+          "desc": "Tùy chỉnh biểu thức dự phòng tiêu đề, nghệ sĩ, album và tác phẩm nghệ thuật"
+        },
+        "subtitle": "Ưu tiên phân giải, dấu thời gian và trạng thái phát lại",
+        "title": "Cấu hình hiện diện phương tiện",
+        "typeResolution": {
+          "title": "Phân giải loại phương tiện",
+          "desc": "Cách phân loại hoạt động nghe và xem"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "Thông báo trạng thái ứng dụng",
+        "media": "Thông báo phát lại phương tiện"
+      },
+      "subtitle": "Tùy chỉnh tiêu đề và phụ đề hiển thị trong thông báo dịch vụ nền trước.",
+      "discard": "Bạn có những thay đổi về cách hiển thị thông báo chưa được lưu. Nếu thoát khỏi trang này ngay bây giờ, những thay đổi đó sẽ bị hủy bỏ.",
+      "helpIntro": "Sử dụng getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") và getFieldCfgStr(\"MediaBigText\") để chèn các giá trị trường đã hiển thị. Sử dụng joinNonBlank(field1, field2) để nối các giá trị không trống bằng dấu chấm tròn. Các mẫu thông báo ứng dụng hỗ trợ điều kiện AppActivityType == \"Playing\". Các biểu thức cũng hỗ trợ so sánh == và !=."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Dự phòng tùy chỉnh",
+      "drop": "Thả (Xóa hiện diện)",
+      "freeze": "Đóng băng (Mặc định)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Thời gian cố định tùy chỉnh",
+      "persistent": "Liên tục (Mặc định)",
+      "resetOnLaunch": "Đặt lại khi khởi chạy"
+    },
+    "activityStatus": {
+      "all": "Tất cả trạng thái hoạt động",
+      "dnd": "Không làm phiền",
+      "idle": "Chờ",
+      "invisible": "Vô hình",
+      "offline": "Ngoại tuyến",
+      "online": "Trực tuyến",
+      "streaming": "Đang phát trực tiếp"
+    },
+    "activityType": {
+      "all": "Tất cả loại hoạt động",
+      "competing": "Đang thi đấu",
+      "listening": "Đang nghe",
+      "playing": "Đang chơi",
+      "watching": "Đang xem"
+    },
     "allPlatforms": "Tất cả nền tảng",
+    "disableAll": "Tắt tất cả",
+    "enableAll": "Bật tất cả",
+    "enabledOnly": "Chỉ những ứng dụng đã bật",
     "globalDefault": "Mặc định toàn cầu",
-    "playing": "Đang chơi",
-    "streaming": "Đang phát trực tiếp",
-    "listening": "Đang nghe",
-    "watching": "Đang xem",
-    "competing": "Đang thi đấu",
-    "online": "Trực tuyến",
-    "idle": "Chờ",
-    "dnd": "Không làm phiền",
-    "offline": "Ngoại tuyến",
-    "invisible": "Vô hình",
-    "customize": "Tùy chỉnh",
-    "profileSubtitle": "Hồ sơ hiện diện và bí danh chiếu",
-    "activityType": "Loại hoạt động",
+    "keepCurrent": "Giữ hiện tại",
+    "mediaScope": {
+      "allSessions": "Tất cả phiên phương tiện (Mặc định)",
+      "enabledAppsOnly": "Chỉ ứng dụng đã bật"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Tự động thích ứng (Mặc định)",
+      "profileOverride": "Ghi đè hồ sơ ứng dụng"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Dự phòng cho ứng dụng được phát hiện",
+      "hidePaused": "Ẩn trạng thái tạm dừng",
+      "showPaused": "Hiển thị trạng thái tạm dừng (Mặc định)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Ưu tiên phương tiện đang phát (Mặc định)",
+      "switchesBetween": "Chuyển đổi giữa"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Tối",
+      "light": "Sáng"
+    }
+  },
+  "labels": {
     "activityStatus": "Trạng thái hoạt động",
-    "platformType": "Loại nền tảng",
+    "activityType": "Loại hoạt động",
+    "customButtons": "Nút tùy chỉnh",
     "customDetailsState": "Chi tiết và Trạng thái tùy chỉnh",
     "customSmallImage": "Văn bản nhỏ và Hình ảnh tùy chỉnh",
-    "customButtons": "Nút tùy chỉnh",
-    "bulkConfigure": "Định cấu hình hàng loạt",
-    "cancel": "Hủy",
-    "stageChanges": "Lưu trữ thay đổi",
-    "apply": "Áp dụng",
-    "confirm": "Xác nhận và Áp dụng",
-    "keepCurrent": "Giữ hiện tại",
-    "enableAll": "Bật tất cả",
-    "disableAll": "Tắt tất cả",
-    "discardBatch": "Hủy bỏ các thay đổi đã lưu trữ?",
-    "chooseIcon": "Chọn một hình ảnh biểu tượng",
-    "resetIcon": "Đặt lại về biểu tượng ứng dụng gốc",
-    "resetLabel": "Đặt lại về nhãn gốc",
-    "details": "Chi tiết",
-    "state": "Trạng thái",
-    "smallText": "Văn bản nhỏ",
-    "smallImageUrl": "URL hình ảnh nhỏ",
-    "uploadImage": "Tải hình ảnh lên ImgBB",
-    "buttonLabel": "Nhãn (ví dụ: Tham gia trò chơi)",
-    "presenceToggle": "Chuyển đổi hiện diện",
-    "bulkSubtitle": "Áp dụng thay đổi cho tất cả các ứng dụng đã chọn",
-    "applyBatchTitle": "Áp dụng thay đổi hàng loạt?",
-    "confirmation": "Xác nhận",
-    "unsavedBatch": "Sửa đổi hàng loạt chưa lưu",
-    "confirmApply": "Xác nhận và Áp dụng",
     "filterOptions": "Tùy chọn bộ lọc",
-    "close": "Đóng",
-    "loading": "",
-    "original": "Gốc:",
-    "projectedName": "Tên được chiếu",
-    "customButtonDesc": "Thêm tối đa 2 nút hiện diện tương tác",
-    "toggleDetails": "Chuyển đổi Chi tiết và Trạng thái tùy chỉnh",
-    "toggleSmall": "Chuyển đổi Văn bản nhỏ và Hình ảnh tùy chỉnh",
-    "toggleButtons": "Chuyển đổi Nút tùy chỉnh",
-    "uploadProgress": "Đang tải biểu tượng ứng dụng lên ImgBB",
-    "keepEditing": "Tiếp tục chỉnh sửa",
-    "discardChanges": "Hủy bỏ thay đổi",
-    "discardMessage": "Bạn có các cấu hình hàng loạt chưa được cam kết. Rời khỏi chế độ hàng loạt ngay bây giờ sẽ hủy bỏ tất cả các thay đổi đã lưu trữ.",
-    "applyMessage": "Bạn sắp áp dụng vĩnh viễn các thay đổi cấu hình đã lưu trữ cho",
-    "selectedApps": "các ứng dụng đã chọn.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} ứng dụng | {enabled} đã bật",
-    "chooseImage": "Chọn một tệp hình ảnh.",
-    "imageTooLarge": "Chọn một hình ảnh nhỏ hơn 32 MB.",
-    "imageUploadFailed": "Tải hình ảnh lên không thành công.",
-    "iconUploadFailed": "Tải biểu tượng lên không thành công.",
-    "androidOnly": "Khám phá ứng dụng đã cài đặt có sẵn trong ứng dụng Android.",
-    "loadAppsFailed": "Không thể tải các ứng dụng đã cài đặt.",
-    "appUnit": "Ứng dụng",
-    "appsUnit": "Ứng dụng"
+    "platformType": "Loại nền tảng",
+    "presenceToggle": "Chuyển đổi hiện diện",
+    "button1": "Nút 1",
+    "button2": "Nút 2",
+    "label": "Nhãn",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Cấu hình hiện diện ứng dụng",
-    "subtitle": "Chính sách bên ngoài ứng dụng và hành vi dấu thời gian",
-    "catalogue": "Danh mục ứng dụng",
-    "catalogueDesc": "Xem, lọc và tùy chỉnh các chiếu ứng dụng riêng lẻ",
-    "outsidePolicies": "Chính sách bên ngoài ứng dụng được phát hiện",
-    "outsideDescription": "Hành vi khi bạn rời khỏi hoặc chuyển khỏi các ứng dụng đã bật",
-    "policyHelp": "Trợ giúp chính sách",
-    "freeze": "Đóng băng (Mặc định)",
-    "customFallback": "Dự phòng tùy chỉnh",
-    "drop": "Thả (Xóa hiện diện)",
-    "fallbackPresence": "Hiện diện dự phòng tùy chỉnh",
-    "activityName": "Tên hoạt động",
+  "pluralization": {
+    "app": {
+      "plural": "Ứng dụng",
+      "singular": "Ứng dụng"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Nhãn (ví dụ: Tham gia trò chơi)",
     "details": "Chi tiết",
-    "state": "Trạng thái",
+    "smallImageUrl": "URL hình ảnh nhỏ",
     "smallText": "Văn bản nhỏ",
-    "bigText": "Văn bản lớn",
-    "smallImage": "Hình ảnh nhỏ",
-    "bigImage": "Hình ảnh lớn",
-    "imageUrl": "URL hình ảnh",
-    "uploadingImage": "",
-    "timestampStrategy": "Chiến lược dấu thời gian",
-    "timestampDescription": "Cách bộ đếm thời gian hoạt động được giải quyết giữa các phiên ứng dụng",
-    "timestampHelp": "Trợ giúp dấu thời gian",
-    "persistent": "Liên tục (Mặc định)",
-    "resetOnLaunch": "Đặt lại khi khởi chạy",
-    "customFixedTime": "Thời gian cố định tùy chỉnh",
-    "fixedStart": "Dấu thời gian bắt đầu cố định",
-    "statusFieldConfig": "Cấu hình trường trạng thái",
-    "statusFieldDescription": "Tùy chỉnh biểu thức tiêu đề, chi tiết, trạng thái và tác phẩm nghệ thuật",
-    "configurationDetails": "Chi tiết cấu hình",
-    "outsideHelpTitle": "Chính sách bên ngoài ứng dụng",
-    "timestampHelpTitle": "Chiến lược dấu thời gian",
-    "understood": "Đã hiểu",
-    "freezeHelp": "Tạm dừng và bảo toàn hiện diện được chiếu cuối cùng cho đến khi một ứng dụng đã bật được phát hiện lại.",
-    "customHelp": "Ngay lập tức chiếu hiện diện dự phòng đã tùy chỉnh.",
-    "dropHelp": "Xóa hoạt động Discord của bạn cho đến khi bạn quay lại một ứng dụng đã bật.",
-    "persistentHelp": "Sử dụng một dấu thời gian thời gian chạy được chia sẻ cho các ứng dụng và phương tiện bị tạm dừng trong phiên dịch vụ này.",
-    "resetHelp": "Khởi động lại bộ đếm thời gian lúc 00:00 khi ứng dụng được khởi chạy hoặc lấy lại tiêu điểm.",
-    "fixedHelp": "Khóa bộ đếm thời gian hiện diện vào một ngày và giờ bắt đầu cố định cụ thể.",
-    "uploadImage": "Tải hình ảnh lên"
+    "state": "Trạng thái",
+    "urlExample": "URL (https://...)",
+    "example": "ví dụ: ",
+    "listenOn": "Nghe trên"
   },
-  "mediaPresence": {
-    "title": "Cấu hình hiện diện phương tiện",
-    "subtitle": "Ưu tiên phân giải, dấu thời gian và trạng thái phát lại",
-    "priority": "Ưu tiên phương tiện",
-    "priorityDesc": "Kiểm soát xem phương tiện có ghi đè các phiên chơi game/ứng dụng hay không",
-    "priorityHelp": "Trợ giúp ưu tiên",
-    "priorityPlaying": "Ưu tiên phương tiện đang phát (Mặc định)",
-    "switchesBetween": "Chuyển đổi giữa",
-    "scope": "Phạm vi phát hiện phương tiện",
-    "scopeDesc": "Lọc ứng dụng nào kích hoạt rich presence phương tiện",
-    "allSessions": "Tất cả phiên phương tiện (Mặc định)",
-    "enabledAppsOnly": "Chỉ ứng dụng đã bật",
-    "typeResolution": "Phân giải loại phương tiện",
-    "typeResolutionDesc": "Cách phân loại hoạt động nghe và xem",
-    "autoAdaptive": "Tự động thích ứng (Mặc định)",
-    "profileOverride": "Ghi đè hồ sơ ứng dụng",
-    "timeRemaining": "Thời gian còn lại",
-    "timeRemainingDesc": "Hiển thị thời gian còn lại bắt đầu/kết thúc hiện tại thông thường",
-    "appTimestamp": "",
-    "pausedResolution": "Phân giải phương tiện bị tạm dừng",
-    "pausedDesc": "Hành vi hiện diện khi phát lại đang hoạt động bị tạm dừng",
-    "pausedHelp": "Trợ giúp phân giải tạm dừng",
-    "showPaused": "Hiển thị trạng thái tạm dừng (Mặc định)",
-    "fallbackApp": "Dự phòng cho ứng dụng được phát hiện",
-    "hidePaused": "Ẩn trạng thái tạm dừng",
-    "statusFields": "Cấu hình trường trạng thái phương tiện",
-    "statusFieldsDesc": "Tùy chỉnh biểu thức dự phòng tiêu đề, nghệ sĩ, album và tác phẩm nghệ thuật",
-    "priorityStrategy": "Chiến lược ưu tiên phương tiện",
-    "priorityStrategyDesc": "Logic phân giải giữa các phiên chơi game và phương tiện",
-    "pausedOptions": "Tùy chọn khi phát lại đang hoạt động bị tạm dừng",
-    "priorityHelpText": "Khi phương tiện đang phát tích cực, nó được ưu tiên hơn ứng dụng bạn đang sử dụng và chiếu bản nhạc hoặc video hiện tại.",
-    "switchHelpText": "Chỉ chiếu phương tiện khi bạn ở trong trình phát phương tiện. Chuyển sang trò chơi hoặc ứng dụng đã bật sẽ cho phép ứng dụng đó tiếp quản.",
-    "showPausedHelp": "Giữ hiện diện phương tiện hoạt động trong khi tạm dừng và hiển thị các chỉ báo tạm dừng.",
-    "fallbackHelp": "Sử dụng ứng dụng được phát hiện trước đó hoặc hiện tại hoặc dự phòng tùy chỉnh trong khi phương tiện bị tạm dừng.",
-    "hidePausedHelp": "Ẩn hiện diện trong khi phương tiện bị tạm dừng, bao gồm bất kỳ ứng dụng được phát hiện nào."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Chọn một tệp hình ảnh.",
+      "iconUploadFailed": "Tải biểu tượng lên không thành công.",
+      "imageTooLarge": "Chọn một hình ảnh nhỏ hơn 32 MB.",
+      "imageUploadFailed": "Tải hình ảnh lên không thành công."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "Hình ảnh lớn",
+      "bigText": "Văn bản lớn",
+      "line1": "Chi tiết hoạt động",
+      "smallImage": "Hình ảnh nhỏ",
+      "smallText": "Văn bản nhỏ",
+      "line2": "Trạng thái hoạt động",
+      "title": "Tiêu đề/Tiêu đề hoạt động"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "tài khoản đã đăng nhập.",
+          "desc": "Kết nối tài khoản Discord của bạn để chiếu Rich Presence",
+          "title": "Đăng nhập Discord"
+        },
+        "languageTitle": "Ngôn ngữ",
+        "themeTitle": "Giao diện",
+        "desc": "Tùy chỉnh và Tài khoản",
+        "title": "Kiểm soát người dùng"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Miễn trừ ứng dụng để ngăn dịch vụ nền ngủ",
+          "title": "Tối ưu hóa pin",
+          "modal": {
+            "desc": "Hệ thống Android hiện đại đưa các tiến trình nền vào chế độ ngủ sau vài phút. Miễn trừ Kruzty Dynamics khỏi tối ưu hóa pin đảm bảo cập nhật Discord Rich Presence liên tục, không bị gián đoạn.",
+            "subtitle": "Danh sách trắng dịch vụ nền",
+            "requestExemption": "Yêu cầu miễn trừ"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Cần Quyền truy cập ứng dụng đặc biệt để phát hiện phương tiện và phát lại",
+          "title": "Quyền truy cập thông báo",
+          "modal": {
+            "methodA": {
+              "title": "Phương pháp A: Quyền truy cập ứng dụng đặc biệt (Pixel, Motorola, Infinix, Stock)",
+              "step1": "Nhấn vào Mở cài đặt Android bên dưới.",
+              "step2": "Đi tới Quyền truy cập ứng dụng đặc biệt > Quyền truy cập thông báo.",
+              "step3": "Tìm Kruzty Dynamics và bật Cho phép truy cập thông báo."
+            },
+            "methodB": {
+              "title": "Phương pháp B: Thông tin ứng dụng > Dấu ba chấm (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Mở Cài đặt thiết bị > Ứng dụng > Quản lý ứng dụng / Danh sách ứng dụng.",
+              "step2": "Tìm và nhấn vào Kruzty Dynamics.",
+              "step4": "Nhấn Cho phép cài đặt bị hạn chế / Quyền truy cập ứng dụng đặc biệt > Cấp.",
+              "step5": "Quay lại và bật Quyền truy cập thông báo."
+            },
+            "desc": "Quyền truy cập thông báo cho phép Kruzty Dynamics ghi lại các sự kiện phát lại phiên phương tiện trực tiếp (Tiêu đề bài hát, Nghệ sĩ, Album và Trạng thái phát lại) từ Spotify, YouTube Music và các trình phát phương tiện.",
+            "oemNotice": {
+              "desc": "Android bảo vệ quyền truy cập trình nghe thông báo đằng sau các lớp quyền đặc biệt. Tùy thuộc vào thương hiệu điện thoại của bạn, hãy làm theo một trong các phương pháp dưới đây.",
+              "title": "Thông báo cho thiết bị OEM và Android 13+"
+            },
+            "subtitle": "Cấu hình quyền truy cập ứng dụng đặc biệt",
+            "openAndroidSettings": "Mở cài đặt Android"
+          }
+        },
+        "desc": "Cần thiết để phát hiện",
+        "title": "Kiểm soát quyền",
+        "foregroundNotification": {
+          "desc": "Quyền Android 13+ cho thông báo dịch vụ liên tục",
+          "title": "Thông báo nền trước",
+          "modal": {
+            "allowNotification": "Cho phép thông báo",
+            "desc": "Được yêu cầu bởi Android 13+ để hiển thị thông báo dịch vụ nền trước đang diễn ra trong thanh trạng thái của bạn, xác nhận rằng công cụ hiện diện Discord đang chạy.",
+            "subtitle": "Quyền thông báo Android 13+",
+            "title": "Thông báo dịch vụ nền trước"
+          }
+        },
+        "usageAccess": {
+          "desc": "Cần thiết để phát hiện ứng dụng hoặc trò chơi đang chạy ở nền trước",
+          "title": "Quyền truy cập sử dụng",
+          "modal": {
+            "openUsageAccess": "Mở quyền truy cập sử dụng",
+            "desc": "Quyền truy cập sử dụng là cần thiết để phát hiện ứng dụng hoặc trò chơi nào bạn đang chạy ở nền trước, để Kruzty Dynamics có thể đối chiếu nó với Danh mục ứng dụng đã định cấu hình của bạn.",
+            "step1": "Nhấn Mở quyền truy cập sử dụng.",
+            "step2": "Định vị Kruzty Dynamics.",
+            "step3": "Bật Cho phép truy cập sử dụng.",
+            "subtitle": "Phát hiện ứng dụng nền trước"
+          }
+        }
+      },
+      "privacyNotice": "Ứng dụng này không thu thập hoặc truyền dữ liệu người dùng.",
+      "subtitle": "Định cấu hình các quyền và tài khoản cần thiết để bật Discord Rich Presence động.",
+      "title": "Thiết lập lần đầu"
+    },
+    "footer": {
+      "allSet": "Đã sẵn sàng! Sẵn sàng chiếu",
+      "buttons": {
+        "continueForNow": "Tiếp tục ngay bây giờ",
+        "finishSetup": "Hoàn tất thiết lập",
+        "skipForNow": "Bỏ qua ngay bây giờ"
+      },
+      "readyWhenYouAre": "Sẵn sàng khi bạn sẵn sàng"
+    }
+  },
+  "tags": {
+    "granted": "Đã cấp",
+    "notificationCrucial": "Quan trọng",
+    "allGranted": "Tất cả đã được cấp",
+    "cached": "đã lưu vào bộ nhớ đệm",
+    "check": "Kiểm tra",
+    "checkingUpdates": "Kiểm tra các bản cập nhật",
+    "default": "Mặc định",
+    "view": "Xem"
   }
 }

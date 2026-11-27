@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Pengaturan Awal",
-    "subtitle": "Konfigurasikan izin dan akun yang diperlukan untuk mengaktifkan Discord Rich Presence dinamis.",
-    "privacyNotice": "Aplikasi ini tidak mengumpulkan atau mengirimkan data pengguna.",
-    "permissionsSection": "Kontrol Izin",
-    "permissionsRequired": "Diperlukan untuk deteksi",
-    "notificationTitle": "Akses Notifikasi",
-    "notificationDesc": "Akses Aplikasi Khusus yang diperlukan untuk mendeteksi media & pemutaran",
-    "notificationCrucial": "Krusial",
-    "usageTitle": "Akses Penggunaan",
-    "usageDesc": "Diperlukan untuk mendeteksi aplikasi atau game latar depan yang sedang berjalan",
-    "batteryTitle": "Optimasi Baterai",
-    "batteryDesc": "Kecualikan aplikasi agar layanan latar belakang tidak tidur",
-    "postNotificationTitle": "Notifikasi Latar Depan",
-    "postNotificationDesc": "Izin Android 13+ untuk notifikasi layanan persisten",
-    "grant": "Izinkan",
-    "granted": "Diizinkan",
-    "userControlSection": "Kontrol Pengguna",
-    "userControlDesc": "Kustomisasi & Akun",
-    "discordLoginTitle": "Login Discord",
-    "discordLoginDesc": "Hubungkan akun Discord Anda untuk menampilkan Rich Presence",
-    "accountsConnected": "akun masuk.",
-    "themeTitle": "Tema",
-    "languageTitle": "Bahasa",
-    "finishSetup": "Selesaikan Pengaturan",
-    "continueForNow": "Lanjutkan Sementara",
-    "skipForNow": "Lewati Sementara",
-    "allSet": "Semua siap! Siap untuk menampilkan",
-    "readyWhenYouAre": "Siap saat Anda siap"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Identitas Aktif",
+        "stored": "Tersimpan"
+      },
+      "content": {
+        "subtitle": "Kelola token dan identitas",
+        "title": "Portal Login Discord",
+        "privacyText": "Otorisasi Discord meminta akses ke fitur sosial bersama dengan Rich Presence. Kruzty Dynamics menggunakan SDK untuk mengidentifikasi akun Anda dan memublikasikan atau menghapus aktivitas yang Anda konfigurasi; tidak menggunakan fitur teman, blokir, undang, pesan, atau suara. Di Android, token dienkripsi dan disimpan di perangkat ini. Baca",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Kebijakan Privasi"
+      },
+      "title": "Hubungkan Akun Discord"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Ekspresi mendukung perbandingan == dan !=. Gunakan {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} untuk memilih AppName jika jenis aktivitasnya adalah \"Playing\", dan AppPlatformType jika tidak.",
+        "title": "Referensi Token Aplikasi",
+        "desc": "Variabel dinamis yang tersedia dalam ekspresi bidang"
+      },
+      "media": {
+        "title": "Referensi Token Media",
+        "intro": "Token dapat disisipkan langsung ke kolom teks serta label atau URL tombol (mis. {example}).",
+        "desc": "Variabel dinamis yang tersedia dalam ekspresi media & tombol"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Buang Perubahan yang Belum Disimpan?",
+      "unsaved": "Modifikasi yang belum disimpan"
+    },
+    "logs": {
+      "copy": "Salin log",
+      "empty": "[INFO] Belum ada log. Buka login Discord atau lakukan tindakan untuk menghasilkan log.",
+      "export": "Ekspor log",
+      "subtitle": "Output diagnostik langsung",
+      "title": "Log Aplikasi"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Warna Aksen Utama",
+        "resetAccent": "Reset ke Oranye Default",
+        "tapCustomize": "Ketuk untuk menyesuaikan",
+        "themeMode": "Mode Tema"
+      },
+      "globalDefaults": {
+        "activityStatus": "Status Aktivitas",
+        "activityType": "Jenis Aktivitas",
+        "note": "Default ini secara otomatis digunakan ketika aplikasi atau aktivitas presence tidak menentukan jenis aktivitas atau statusnya sendiri."
+      },
+      "imgBb": {
+        "apiPrivacy": "Membiarkan bidang ini kosong akan mengatur ulang ke kunci API default bawaan. Kunci kustom tidak pernah ditampilkan dalam teks biasa.",
+        "getApiKey": "untuk mendapatkan kunci.",
+        "help": "Atur Kunci API ImgBB Anda sendiri untuk mengunggah gambar aset aplikasi dan media kustom ke Discord CDN. Kunjungi",
+        "usingDefaultKey": "Menggunakan kunci sistem default"
+      },
+      "language": {
+        "availableLanguages": "Bahasa yang Tersedia",
+        "title": "Pilih Bahasa",
+        "desc": "Pilih bahasa tampilan pilihan Anda untuk label UI dan notifikasi."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Mencegah Android menghentikan layanan presence",
+        "foregroundDesc": "Indikator bilah status untuk presence Discord yang berlangsung",
+        "notificationAccessDesc": "Akses Aplikasi Khusus untuk deteksi media",
+        "desc": "Status izin yang diperlukan untuk membaca notifikasi media aktif dan aplikasi latar depan:",
+        "usageAccessDesc": "Deteksi game & aplikasi latar depan yang berjalan"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "Ada {total} URL gambar tertaut, termasuk {custom} penimpaan ikon aplikasi kustom. Anda dapat membersihkan tautan yang di-cache sambil mempertahankan ikon kustom, atau membersihkan semua tautan dan menghapus penimpaan kustom. Jika Anda menghapus penimpaan, unggah ikon tersebut lagi di Katalog Aplikasi.",
+        "buttons": {
+          "clearCacheAll": "Hapus Semua, Termasuk Ikon Kustom",
+          "clearCacheKeep": "Hapus Cache, Pertahankan Ikon Kustom"
+        },
+        "clearedAll": "Semua URL gambar tertaut dibersihkan, termasuk ikon aplikasi kustom.",
+        "clearedKeeping": "Cache URL gambar tertaut dibersihkan. Ikon aplikasi kustom dipertahankan.",
+        "linkedImageUrls": "URL Gambar Tertaut"
+      },
+      "credits": {
+        "contributorsSection": "Kontributor Kizzy",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Pustaka yang Digunakan dalam Aplikasi Ini",
+        "libraries": {
+          "lucide": "Ikon vektor bersih buatan komunitas",
+          "react": "Arsitektur komponen antarmuka pengguna modern",
+          "sdk": "Integrasi rich presence Android native",
+          "tailwind": "Penataan responsif modern berbasis utility-first",
+          "tauri": "Runtime native lintas platform yang ringan",
+          "tokio": "Runtime jaringan asinkron berbasis peristiwa"
+        },
+        "maintainerRole": "Pemelihara & Pengembang Saat Ini"
+      },
+      "discordApp": {
+        "developerPortal": "Discord Developer Portal",
+        "help": "Atur Discord Application ID Anda sendiri dari",
+        "idPrivacy": "Membiarkan bidang ini kosong akan mengatur ulang ke ID aplikasi Kruzty Dynamics default."
+      }
+    }
   },
-  "nav": {
-    "service": "Layanan",
-    "accounts": "Akun",
-    "settings": "Pengaturan & Lainnya"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Tambah Akun",
+            "switch": "Ganti",
+            "unuse": "Jangan Gunakan"
+          },
+          "activePresence": "Presence Aktif",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Konfirmasi Logout",
+              "title": "Logout Akun",
+              "removePrefix": "Apakah Anda yakin ingin menghapus akun",
+              "removeSuffix": "? Ini akan menghapus kredensial tersimpan dari perangkat ini."
+            }
+          },
+          "currentAccount": "Akun yang Sedang Masuk",
+          "noActiveAccount": "Tidak ada akun yang dipilih. Pilih salah satu akun yang masuk di bawah.",
+          "storedAccounts": "Akun Tersimpan"
+        },
+        "noAccount": {
+          "desc": "Hubungkan akun Discord Anda untuk mulai menampilkan status Rich Presence untuk game, aplikasi, dan media.",
+          "title": "Belum ada akun yang masuk.",
+          "login": "Login Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Tidak Ada Akun Discord",
+        "loggedInMany": "{n} akun masuk.",
+        "loggedInOne": "{n} akun masuk."
+      },
+      "title": "Akun Discord"
+    },
+    "service": {
+      "subtitle": "Dasbor Kruzty Dynamics",
+      "title": {
+        "welcome": "Selamat datang!",
+        "welcomeNamed": "Selamat datang, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Semua izin yang diperlukan telah diberikan. Nyalakan layanan untuk melanjutkan.",
+              "foregroundService": {
+                "desc": "Memungkinkan Android menampilkan notifikasi layanan saat berjalan.",
+                "title": "Notifikasi Layanan Latar Depan"
+              },
+              "notificationAccess": {
+                "desc": "Diperlukan untuk mendeteksi pemutaran media dan metadatanya."
+              },
+              "subtitle": "Berikan izin Android ini sebelum memulai layanan.",
+              "title": "Izin yang diperlukan",
+              "returnHint": "Setelah memberikan akses di Pengaturan Android, kembali ke sini dan aktifkan layanan.",
+              "usageAccess": {
+                "desc": "Diperlukan untuk mendeteksi aplikasi mana yang saat ini berada di latar depan."
+              }
+            }
+          },
+          "startError": "Tidak dapat memulai layanan presence Android.",
+          "running": "Layanan berjalan.",
+          "stopped": "Layanan belum dimulai.",
+          "title": "Layanan Kruzty Dynamics"
+        },
+        "application": {
+          "desc": "Konfigurasikan profil aplikasi untuk deteksi presence lokal",
+          "title": "Presence Aplikasi"
+        },
+        "buttons": {
+          "applicationCatalogue": "Katalog Aplikasi",
+          "presenceConfiguration": "Konfigurasi Presence",
+          "statusFieldConfig": "Konfigurasi Bidang Status"
+        },
+        "media": {
+          "desc": "Konfigurasikan perilaku media dan templat status",
+          "title": "Presence Media"
+        },
+        "preview": {
+          "noPresence": "Tidak ada aplikasi yang dikonfigurasi atau media aktif yang terdeteksi.",
+          "stoppedDescription": "Layanan berhenti. Nyalakan untuk mendeteksi aplikasi yang diaktifkan dan media aktif."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "Preferensi Aplikasi",
+        "checkPermissions": {
+          "title": "Periksa Izin",
+          "desc": "Tinjau izin akses sistem yang diberikan dan opsional"
+        },
+        "deleteCachedUrls": {
+          "title": "Hapus URL Gambar Tertaut",
+          "desc": "Membersihkan URL terkait gambar yang diunggah yang digunakan pada status aplikasi atau media"
+        },
+        "discordAppId": {
+          "title": "Atur Discord Application ID",
+          "desc": "Atur Discord Application ID Anda sendiri. Kunjungi: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "Default Global",
+          "desc": "Jenis aktivitas & status untuk aplikasi yang belum dikonfigurasi"
+        },
+        "imgBbKey": {
+          "title": "Atur Kunci API ImgBB",
+          "desc": "Atur Kunci API ImgBB Anda sendiri. Kunjungi: api.imgbb.com"
+        },
+        "language": {
+          "title": "Bahasa",
+          "desc": "Saat Ini Diatur:"
+        },
+        "notificationProjection": {
+          "title": "Menyesuaikan Tampilan Status Pemberitahuan",
+          "desc": "Sesuaikan judul dan subjudul pemberitahuan aplikasi dan media."
+        },
+        "themes": {
+          "title": "Tema dan Tampilan",
+          "desc": "Atur tema dan warna aksen Anda."
+        },
+        "checkUpdates": {
+          "title": "Periksa Versi Terbaru",
+          "desc": "Periksa apakah ada versi yang lebih baru."
+        }
+      },
+      "subtitle": "Preferensi aplikasi & diagnostik",
+      "title": "Pengaturan dan Lainnya",
+      "cardInfo": {
+        "architecture": "Dibangun menggunakan Rust Core (Tokio + Tauri v2) dengan React 19 dan Frontend TailwindCSS termasuk Native Android Plugin Bridge. Berdasarkan Kizzy's Experimental RPC asli.",
+        "credits": "Kredit",
+        "developedBy": "Dikembangkan oleh",
+        "latestRelease": "Buka Rilis Terbaru",
+        "learnMore": "Pelajari Lebih Lanjut Tentang Aplikasi Ini",
+        "repository": "Periksa Repositori GitHub",
+        "submitIssue": "Kirim Masalah",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "Selamat datang!",
-    "welcomeNamed": "Selamat datang, {name}!",
-    "dashboardSubtitle": "Dasbor Kruzty Dynamics",
-    "accountsLoggedInOne": "{n} akun masuk.",
-    "accountsLoggedInMany": "{n} akun masuk.",
-    "liveLogs": "Log Langsung",
-    "viewLogs": "Lihat Log",
-    "serviceActive": "Aktif",
-    "serviceInactive": "Tidak Aktif",
-    "serviceStarting": "Memulai",
-    "serviceStopped": "Berhenti"
-  },
-  "accounts": {
-    "title": "Akun Discord",
-    "subtitle": "Kelola token dan identitas",
-    "loginPortal": "Login via Portal Discord",
-    "loginWithToken": "Tambah Akun via Token",
-    "addAccount": "Tambah Akun",
-    "activeIdentity": "Identitas Aktif",
-    "stored": "Tersimpan",
+  "buttons": {
     "remove": "Hapus",
-    "noAccounts": "Tidak Ada Akun Discord",
-    "noAccountsDesc": "Tambahkan akun Discord Anda menggunakan portal atau token pengguna untuk mulai menampilkan rich presence."
-  },
-  "settings": {
-    "title": "Pengaturan dan Lainnya",
-    "subtitle": "Preferensi aplikasi & diagnostik",
-    "appPreferences": "Preferensi Aplikasi",
-    "notificationProjection": "Menyesuaikan Tampilan Status Pemberitahuan",
-    "notificationProjectionDesc": "Sesuaikan judul dan subjudul pemberitahuan aplikasi dan media.",
-    "themes": "Tema dan Tampilan",
-    "themesDesc": "Atur tema dan warna aksen Anda.",
-    "language": "Bahasa",
-    "languageDesc": "Saat Ini Diatur:",
-    "globalDefaults": "Default Global",
-    "globalDefaultsDesc": "Jenis aktivitas & status untuk aplikasi yang belum dikonfigurasi",
-    "imgbbKey": "Atur Kunci API ImgBB",
-    "imgbbKeyDesc": "Atur Kunci API ImgBB Anda sendiri. Kunjungi: api.imgbb.com",
-    "discordAppId": "Atur Discord Application ID",
-    "discordAppIdDesc": "Atur Discord Application ID Anda sendiri. Kunjungi: discord.com/developers",
-    "checkPermissions": "Periksa Izin",
-    "checkPermissionsDesc": "Tinjau izin akses sistem yang diberikan dan opsional",
-    "deleteCache": "Hapus URL Gambar Tertaut",
-    "deleteCacheDesc": "Membersihkan URL terkait gambar yang diunggah yang digunakan pada status aplikasi atau media"
-  },
-  "service": {
-    "title": "Layanan Kruzty Dynamics",
-    "running": "Layanan berjalan.",
-    "stopped": "Layanan belum dimulai.",
-    "applicationPresence": "Presence Aplikasi",
-    "appDescription": "Konfigurasikan profil aplikasi untuk deteksi presence lokal",
-    "applicationCatalogue": "Katalog Aplikasi",
-    "statusFieldConfig": "Konfigurasi Bidang Status",
-    "presenceConfiguration": "Konfigurasi Presence",
-    "mediaPresence": "Presence Media",
-    "mediaDescription": "Konfigurasikan perilaku media dan templat status",
-    "noPresence": "Tidak ada aplikasi yang dikonfigurasi atau media aktif yang terdeteksi.",
-    "stoppedDescription": "Layanan berhenti. Nyalakan untuk mendeteksi aplikasi yang diaktifkan dan media aktif."
-  },
-  "logs": {
-    "title": "Log Aplikasi",
-    "subtitle": "Output diagnostik langsung",
-    "copy": "Salin log",
-    "export": "Ekspor log",
-    "empty": "[INFO] Belum ada log. Buka login Discord atau lakukan tindakan untuk menghasilkan log."
-  },
-  "permissions": {
-    "requiredTitle": "Izin yang diperlukan",
-    "requiredSubtitle": "Berikan izin Android ini sebelum memulai layanan.",
-    "done": "Selesai",
-    "allGranted": "Semua izin yang diperlukan telah diberikan. Nyalakan layanan untuk melanjutkan.",
-    "grant": "Izinkan",
-    "returnHint": "Setelah memberikan akses di Pengaturan Android, kembali ke sini dan aktifkan layanan.",
-    "notificationTitle": "Akses Notifikasi",
-    "notificationSubtitle": "Konfigurasi Akses Aplikasi Khusus",
-    "openAndroidSettings": "Buka Pengaturan Android",
-    "oemNotice": "Pemberitahuan untuk Perangkat OEM & Android 13+",
-    "notificationExplanation": "Android melindungi akses pendengar notifikasi di balik lapisan izin khusus. Tergantung pada merek ponsel Anda, ikuti salah satu metode di bawah ini.",
-    "methodA": "Metode A: Akses Aplikasi Khusus (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "Ketuk Buka Pengaturan Android di bawah.",
-    "methodAStep2": "Buka Akses Aplikasi Khusus > Akses Notifikasi.",
-    "methodAStep3": "Temukan Kruzty Dynamics dan aktifkan Izinkan akses notifikasi.",
-    "methodB": "Metode B: Info Aplikasi > Elipsis (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Buka Pengaturan perangkat > Aplikasi > Kelola Aplikasi / Daftar Aplikasi.",
-    "methodBStep2": "Temukan dan ketuk Kruzty Dynamics.",
-    "methodBStep3": "Ketuk tiga titik di sudut kanan atas.",
-    "methodBStep4": "Ketuk Izinkan pengaturan terbatas / Akses Aplikasi Khusus > Izinkan.",
-    "methodBStep5": "Kembali dan aktifkan Akses Notifikasi.",
-    "notificationAccessDescription": "Akses Notifikasi memungkinkan Kruzty Dynamics menangkap peristiwa pemutaran sesi media langsung (Judul Lagu, Artis, Album, dan Status Pemutaran) dari Spotify, YouTube Music, dan pemutar media.",
-    "usageTitle": "Akses Penggunaan",
-    "usageSubtitle": "Deteksi Aplikasi Latar Depan",
-    "openUsageAccess": "Buka Akses Penggunaan",
-    "usageDescription": "Akses Penggunaan diperlukan untuk mendeteksi aplikasi atau game mana yang sedang Anda jalankan di latar depan, sehingga Kruzty Dynamics dapat mencocokkannya dengan Katalog Aplikasi yang Anda konfigurasi.",
-    "usageStep1": "Ketuk Buka Akses Penggunaan.",
-    "usageStep2": "Temukan Kruzty Dynamics.",
-    "usageStep3": "Aktifkan Izinkan akses penggunaan.",
-    "batteryTitle": "Optimasi Baterai",
-    "batterySubtitle": "Whitelist Layanan Latar Belakang",
-    "requestExemption": "Minta Pengecualian",
-    "batteryDescription": "Sistem Android modern menidurkan proses latar belakang setelah beberapa menit. Mengecualikan Kruzty Dynamics dari optimasi baterai memastikan pembaruan Discord Rich Presence yang berkelanjutan dan tanpa gangguan.",
-    "foregroundTitle": "Notifikasi Layanan Latar Depan",
-    "foregroundSubtitle": "Izin Notifikasi Android 13+",
-    "foregroundGuardTitle": "Notifikasi Layanan Latar Depan",
-    "usageGuardDescription": "Diperlukan untuk mendeteksi aplikasi mana yang saat ini berada di latar depan.",
-    "notificationGuardDescription": "Diperlukan untuk mendeteksi pemutaran media dan metadatanya.",
-    "foregroundGuardDescription": "Memungkinkan Android menampilkan notifikasi layanan saat berjalan.",
-    "serviceStartError": "Tidak dapat memulai layanan presence Android.",
-    "allowNotification": "Izinkan Notifikasi",
-    "foregroundDescription": "Diperlukan oleh Android 13+ untuk menampilkan notifikasi layanan latar depan yang sedang berlangsung di bilah status Anda, mengonfirmasi bahwa mesin presence Discord berjalan."
-  },
-  "toast": {
-    "duplicateAccount": "Akun Discord ini sudah ditambahkan.",
-    "insufficientPermissions": "Izin tidak mencukupi. Silakan periksa Pengaturan & Lainnya > Periksa Izin.",
-    "newVersionAvailable": "Versi Baru Sudah Tersedia!",
-    "updateDetected": "Telah terdeteksi versi terbaru!",
-    "latestVersion": "Ini adalah versi terbarunya!",
-    "updateCheckFailed": "Tidak dapat memeriksa pembaruan."
-  },
-  "accountsPage": {
-    "emptyTitle": "Belum ada akun yang masuk.",
-    "emptyDescription": "Hubungkan akun Discord Anda untuk mulai menampilkan status Rich Presence untuk game, aplikasi, dan media.",
-    "login": "Login Discord",
-    "currentAccount": "Akun yang Sedang Masuk",
-    "activePresence": "Presence Aktif",
-    "storedAccounts": "Akun Tersimpan",
-    "switch": "Ganti",
-    "unuse": "Jangan Gunakan",
-    "remove": "Hapus",
-    "cancel": "Batal",
-    "deleteTitle": "Hapus Akun Discord?",
-    "loginTitle": "Portal Login Discord",
-    "noActiveAccount": "Tidak ada akun yang dipilih. Pilih salah satu akun yang masuk di bawah.",
-    "addAccountTitle": "Hubungkan Akun Discord",
-    "portal": "Portal Login Discord",
-    "signInPortal": "Masuk dengan aman dengan Discord di dalam aplikasi",
     "openPortal": "Buka Portal",
-    "privacyText": "Otorisasi Discord meminta akses ke fitur sosial bersama dengan Rich Presence. Kruzty Dynamics menggunakan SDK untuk mengidentifikasi akun Anda dan memublikasikan atau menghapus aktivitas yang Anda konfigurasi; tidak menggunakan fitur teman, blokir, undang, pesan, atau suara. Di Android, token dienkripsi dan disimpan di perangkat ini. Baca",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Logout Akun",
-    "removePrefix": "Apakah Anda yakin ingin menghapus akun",
-    "removeSuffix": "? Ini akan menghapus kredensial tersimpan dari perangkat ini.",
-    "confirmLogout": "Konfirmasi Logout",
-    "addAccount": "Tambah Akun Discord",
-    "noSelection": "Tidak ada akun yang dipilih. Pilih salah satu akun yang masuk di bawah.",
-    "addMoreAccounts": "Anda dapat menambahkan lebih banyak akun dengan mengklik tombol Discord di bawah."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Pilih Bahasa",
-    "languageDescription": "Pilih bahasa tampilan pilihan Anda untuk label UI dan notifikasi.",
-    "availableLanguages": "Bahasa yang Tersedia",
-    "close": "Tutup",
-    "linkedImageUrls": "URL Gambar Tertaut",
-    "clearCacheKeep": "Hapus Cache, Pertahankan Ikon Kustom",
-    "clearCacheAll": "Hapus Semua, Termasuk Ikon Kustom",
-    "credits": "Kredit",
-    "themeMode": "Mode Tema",
-    "accentColor": "Warna Aksen Utama",
-    "resetAccent": "Reset ke Oranye Default",
-    "learnMore": "Pelajari Lebih Lanjut Tentang Aplikasi Ini",
-    "privacyPolicy": "Kebijakan Privasi",
-    "repository": "Periksa Repositori GitHub",
-    "latestRelease": "Buka Rilis Terbaru",
-    "submitIssue": "Kirim Masalah",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Pustaka yang Digunakan dalam Aplikasi Ini",
-    "contributorsSection": "Kontributor Kizzy",
-    "maintainerRole": "Pemelihara & Pengembang Saat Ini",
-    "view": "Lihat",
-    "done": "Selesai",
-    "developedBy": "Dikembangkan oleh",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Dibangun menggunakan Rust Core (Tokio + Tauri v2) dengan React 19 dan Frontend TailwindCSS termasuk Native Android Plugin Bridge. Berdasarkan Kizzy's Experimental RPC asli.",
-    "cached": "di-cache",
-    "tapCustomize": "Ketuk untuk menyesuaikan",
-    "defaultNote": "Default ini secara otomatis digunakan ketika aplikasi atau aktivitas presence tidak menentukan jenis aktivitas atau statusnya sendiri.",
-    "activityType": "Jenis Aktivitas",
-    "activityStatus": "Status Aktivitas",
-    "imgbbHelp": "Atur Kunci API ImgBB Anda sendiri untuk mengunggah gambar aset aplikasi dan media kustom ke Discord CDN. Kunjungi",
-    "getApiKey": "untuk mendapatkan kunci.",
-    "apiPrivacy": "Membiarkan bidang ini kosong akan mengatur ulang ke kunci API default bawaan. Kunci kustom tidak pernah ditampilkan dalam teks biasa.",
-    "saveKey": "Simpan Kunci",
-    "discordIdHelp": "Atur Discord Application ID Anda sendiri dari",
-    "developerPortal": "Discord Developer Portal",
-    "idDefault": "Default",
-    "idPrivacy": "Membiarkan bidang ini kosong akan mengatur ulang ke ID aplikasi Kruzty Dynamics default.",
-    "saveId": "Simpan ID",
-    "permissionsDescription": "Status izin yang diperlukan untuk membaca notifikasi media aktif dan aplikasi latar depan:",
-    "notificationAccessDesc": "Akses Aplikasi Khusus untuk deteksi media",
-    "usageAccessDesc": "Deteksi game & aplikasi latar depan yang berjalan",
-    "batteryDesc": "Mencegah Android menghentikan layanan presence",
-    "foregroundDesc": "Indikator bilah status untuk presence Discord yang berlangsung",
-    "saveIdPlaceholder": "1572590527562391713 (Default)",
-    "resetDefault": "Reset ke Default",
-    "cancel": "Batal",
-    "cacheWarning": "Ada {total} URL gambar tertaut, termasuk {custom} penimpaan ikon aplikasi kustom. Anda dapat membersihkan tautan yang di-cache sambil mempertahankan ikon kustom, atau membersihkan semua tautan dan menghapus penimpaan kustom. Jika Anda menghapus penimpaan, unggah ikon tersebut lagi di Katalog Aplikasi.",
-    "allGranted": "Semua Diizinkan",
-    "clearedAll": "Semua URL gambar tertaut dibersihkan, termasuk ikon aplikasi kustom.",
-    "clearedKeeping": "Cache URL gambar tertaut dibersihkan. Ikon aplikasi kustom dipertahankan.",
-    "usingDefaultKey": "Menggunakan kunci sistem default",
-    "customKeySet": "Kunci Kustom Diatur",
-    "light": "Terang",
-    "dark": "Gelap",
-    "amoled": "AMOLED",
-    "libraryTauri": "Runtime native lintas platform yang ringan",
-    "libraryTokio": "Runtime jaringan asinkron berbasis peristiwa",
-    "librarySdk": "Integrasi rich presence Android native",
-    "libraryReact": "Arsitektur komponen antarmuka pengguna modern",
-    "libraryTailwind": "Penataan responsif modern berbasis utility-first",
-    "libraryLucide": "Ikon vektor bersih buatan komunitas",
-    "checkForUpdates": "Periksa Versi Terbaru",
-    "checkForUpdatesDesc": "Periksa apakah ada versi yang lebih baru.",
-    "check": "Periksa",
-    "checkingUpdates": "Memeriksa pembaruan"
-  },
-  "configFields": {
-    "appTitle": "Konfigurasi Bidang Status Aplikasi",
-    "mediaTitle": "Konfigurasi Bidang Status Media",
-    "back": "Kembali",
-    "reset": "Reset ke Default",
-    "help": "Bantuan Token yang Tersedia",
-    "title": "Judul",
-    "line1": "Baris 1 (Detail)",
-    "line2": "Baris 2 (Status)",
-    "smallText": "Teks Kecil",
-    "smallImage": "Gambar Kecil",
-    "bigText": "Teks Besar",
-    "bigImage": "Gambar Besar",
-    "header": "Header (Mendengarkan / Menonton)",
-    "mediaTitleField": "Judul Media (Detail Aktivitas)",
-    "artist": "Baris 1 (Status Aktivitas / Artis)",
-    "album": "Baris 2 (Album / Teks Gambar)",
-    "buttons": "Tombol Kustom",
-    "button1": "Tombol 1",
-    "button2": "Tombol 2",
-    "save": "Simpan Bidang",
-    "appReference": "Referensi Token Aplikasi",
-    "mediaReference": "Referensi Token Media",
-    "tokenDescription": "Variabel dinamis yang tersedia dalam ekspresi bidang",
-    "mediaTokenDescription": "Deskripsi video atau media dari web atau pemutar video.",
-    "discard": "Buang Perubahan yang Belum Disimpan?",
-    "unsaved": "Modifikasi yang belum disimpan",
-    "helpDone": "Mengerti",
-    "appTokenName": "Nama aplikasi yang ditampilkan dalam aktivitas.",
-    "appHeader": "Judul",
-    "titleHeader": "Judul/Header Kegiatan",
-    "detailsField": "Rincian Kegiatan",
-    "stateField": "Status Aktivitas",
-    "notificationConfigSubtitle": "Sesuaikan judul dan subjudul yang ditampilkan pada pemberitahuan layanan di latar depan.",
-    "notificationAppSection": "Pemberitahuan Status Aplikasi",
-    "notificationMediaSection": "Pemberitahuan Pemutaran Media",
-    "notificationSubtitleLabel": "Subjudul Pemberitahuan",
-    "notificationHelpIntro": "Gunakan getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), dan getFieldCfgStr(\"MediaBigText\") untuk menyisipkan nilai bidang yang telah dirender. Gunakan joinNonBlank(field1, field2) untuk menggabungkan nilai-nilai yang tidak kosong dengan tanda titik. Template pemberitahuan aplikasi mendukung kondisi AppActivityType == \"Playing\". Ekspresi juga mendukung perbandingan == dan !=.",
-    "notificationDiscardMessage": "Anda memiliki perubahan proyeksi notifikasi yang belum disimpan. Jika Anda keluar sekarang, perubahan tersebut akan dihapus.",
-    "appTokenActivityType": "Jenis aktivitas Rich Presence yang dipilih untuk profil aplikasi ini, seperti Bermain, Mendengarkan, Menonton, atau Berkompetisi.",
-    "appTokenPlatformType": "Platform token dari profil aplikasi ini, seperti Android, PC, atau Xbox.",
-    "appExpressionOperators": "Ekspresi mendukung perbandingan == dan !=. Gunakan {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} untuk memilih AppName jika jenis aktivitasnya adalah \"Playing\", dan AppPlatformType jika tidak.",
-    "appTokenDetails": "Teks detail khusus yang tersimpan di profil aplikasi ini; kosong jika dinonaktifkan atau tidak diisi.",
-    "appTokenState": "Teks status khusus yang tersimpan di profil aplikasi ini; kosong jika dinonaktifkan atau tidak diisi.",
-    "appTokenSmallText": "Label gambar kecil khusus yang tersimpan di profil aplikasi ini; kosong jika dinonaktifkan atau tidak diisi.",
-    "appTokenSmallUrl": "URL gambar kecil khusus yang tersimpan di profil aplikasi ini; kosong jika dinonaktifkan atau tidak diisi.",
-    "appTokenImageUrl": "URL jarak jauh ImgBB yang di-cache untuk ikon aplikasi.",
-    "appTokenPackageName": "Identifier paket Android (mis. com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Token dapat disisipkan langsung ke kolom teks serta label atau URL tombol (mis. {example}).",
-    "mediaTokenAppName": "Nama aplikasi pemutar yang tampil di header Listening to atau Watching Discord.",
-    "mediaTokenTitle": "Judul lagu atau video aktif dari metadata notifikasi.",
-    "mediaTokenArtist": "Artis atau kreator audio atau video yang sedang diputar.",
-    "mediaTokenAlbum": "Nama album atau daftar putar.",
-    "mediaTokenPlaybackState": "Status pemutaran saat ini (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "URL ImgBB yang di-cache untuk sampul album atau gambar mini.",
-    "mediaTokenPlaybackImageUrl": "URL aset gambar untuk indikator pemutaran saat ini.",
-    "mediaTokenFallbackImageUrl": "Ikon aplikasi pengganti jika tidak ada artwork.",
-    "appConfigSubtitle": "Sesuaikan ekspresi untuk deteksi aplikasi.",
-    "mediaConfigSubtitle": "Sesuaikan ekspresi untuk pemutaran media.",
-    "mediaHeaderDescription": "Nama aplikasi yang ditampilkan di header media Discord. Jenis aktivitas menentukan apakah Listening to atau Watching yang ditampilkan.",
-    "mediaTitleDescription": "Ini digunakan sebagai judul/detail media. Atur nama pemutar secara terpisah di Header di atas.",
-    "mediaAlbumDescription": "Ditampilkan di bawah nama artis pada kartu media Discord.",
-    "mediaButtonDescription": "Tambahkan hingga 2 tombol presence interaktif dengan ekspresi token.",
-    "mediaButtonLabel": "Label",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "mis. ",
-    "mediaButtonListen": "Dengarkan di",
-    "appDiscardMessage": "Anda memiliki perubahan yang belum disimpan di kolom Status Aplikasi. Jika Anda keluar sekarang, perubahan tersebut akan dikembalikan ke keadaan sebelumnya.",
-    "mediaDiscardMessage": "Anda memiliki perubahan yang belum disimpan di kolom Status Media. Jika Anda keluar sekarang, perubahan tersebut akan dikembalikan ke keadaan sebelumnya.",
-    "mediaTokenSubtitle": "Variabel dinamis yang tersedia dalam ekspresi media & tombol"
-  },
-  "catalogue": {
-    "title": "Katalog Aplikasi",
-    "back": "Kembali",
+    "understood": "Dipahami",
+    "apply": "Terapkan",
     "batch": "Operasi Batch",
-    "search": "Cari aplikasi...",
-    "filter": "Filter Aplikasi",
-    "clearFilters": "Hapus Filter",
-    "enabledOnly": "Hanya yang Diaktifkan",
-    "allActivityTypes": "Semua Jenis Aktivitas",
-    "allActivityStatuses": "Semua Status Aktivitas",
+    "cancel": "Batal",
+    "close": "Tutup",
+    "confirm": "Konfirmasi & Terapkan",
+    "discardChanges": "Buang Perubahan",
+    "keepEditing": "Lanjutkan Mengedit",
+    "stageChanges": "Siapkan Perubahan",
+    "uploadImage": "Unggah gambar ke ImgBB",
+    "helpDone": "Mengerti",
+    "save": {
+      "fields": "Simpan Bidang",
+      "id": "Simpan ID",
+      "key": "Simpan Kunci"
+    },
+    "logs": {
+      "live": "Log Langsung",
+      "view": "Lihat Log"
+    },
+    "grant": "Izinkan",
+    "done": "Selesai",
+    "resetDefault": "Reset ke Default"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Nama Aktivitas",
+          "bigImage": "Gambar Besar",
+          "bigText": "Teks Besar",
+          "details": "Detail",
+          "imageUrl": "URL Gambar",
+          "smallImage": "Gambar Kecil",
+          "smallText": "Teks Kecil",
+          "state": "Status",
+          "uploadImage": "Unggah gambar",
+          "uploadingImage": "Mengunggah gambar..."
+        },
+        "catalogue": {
+          "title": "Katalog Aplikasi",
+          "desc": "Lihat, filter, dan sesuaikan proyeksi aplikasi individual"
+        },
+        "configurationDetails": "Detail konfigurasi",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Segera memproyeksikan presence fallback yang disesuaikan.",
+              "drop": "Menghapus aktivitas Discord Anda hingga Anda kembali ke aplikasi yang diaktifkan.",
+              "freeze": "Menjeda dan mempertahankan presence terakhir yang diproyeksikan hingga aplikasi yang diaktifkan terdeteksi lagi."
+            },
+            "title": "Kebijakan di Luar Aplikasi"
+          },
+          "fallbackPresence": "Presence Fallback Kustom",
+          "desc": "Perilaku saat Anda meninggalkan atau beralih dari aplikasi yang diaktifkan",
+          "title": "Kebijakan di Luar Aplikasi Terdeteksi",
+          "help": "Bantuan Kebijakan"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Mengunci pengatur waktu presence ke tanggal dan waktu mulai tetap tertentu.",
+              "persistent": "Menggunakan satu stempel waktu runtime bersama untuk aplikasi dan media yang dijeda selama sesi layanan ini.",
+              "reset": "Memulai ulang pengatur waktu pada 00:00 saat aplikasi diluncurkan atau difokuskan kembali."
+            },
+            "title": "Strategi Stempel Waktu"
+          },
+          "fixedStart": "Stempel Waktu Mulai Tetap",
+          "desc": "Bagaimana pengatur waktu aktivitas diselesaikan di seluruh sesi aplikasi",
+          "help": "Bantuan Stempel Waktu",
+          "title": "Strategi Stempel Waktu"
+        },
+        "statusFieldConfig": {
+          "title": "Konfigurasi Bidang Status",
+          "desc": "Sesuaikan ekspresi judul, detail, status, dan artwork"
+        },
+        "subtitle": "Kebijakan di luar aplikasi dan perilaku stempel waktu",
+        "title": "Konfigurasi Presence Aplikasi"
+      },
+      "catalogue": {
+        "androidOnly": "Penemuan aplikasi terpasang tersedia di aplikasi Android.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Terapkan Perubahan Batch?",
+              "desc": "Anda akan menerapkan perubahan konfigurasi yang disiapkan secara permanen ke",
+              "subtitle": "Konfirmasi",
+              "selectedApps": "aplikasi yang dipilih."
+            },
+            "title": "Konfigurasi Batch",
+            "subtitle": "Terapkan perubahan ke semua aplikasi yang dipilih",
+            "discard": {
+              "title": "Buang Perubahan yang Disiapkan?",
+              "desc": "Anda memiliki konfigurasi batch yang belum dikomit. Meninggalkan mode batch sekarang akan membuang semua perubahan yang disiapkan.",
+              "subtitle": "Modifikasi batch yang belum disimpan"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Pilih gambar ikon",
+              "resetIcon": "Reset ke ikon aplikasi asli",
+              "resetLabel": "Reset ke Label Asli"
+            },
+            "customBtnDesc": "Tambahkan hingga 2 tombol presence interaktif",
+            "title": "Sesuaikan",
+            "original": "Asli:",
+            "subtitle": "Profil presence & alias proyeksi",
+            "projectedName": "Nama Proyeksi",
+            "switchToggle": {
+              "buttons": "Toggle Tombol Kustom",
+              "details": "Toggle Detail dan Status Kustom",
+              "small": "Toggle Teks Kecil dan Gambar Kustom"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Hapus Filter",
+          "filter": "Filter Aplikasi"
+        },
+        "loadAppsFailed": "Tidak dapat memuat aplikasi terpasang.",
+        "loading": "Memuat...",
+        "search": "Cari aplikasi...",
+        "subtitle": "{apps} aplikasi | {enabled} diaktifkan",
+        "title": "Katalog Aplikasi",
+        "uploadProgress": "Mengunggah ikon aplikasi ke ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Sesuaikan ekspresi untuk deteksi aplikasi.",
+        "discardMsg": "Anda memiliki perubahan yang belum disimpan di kolom Status Aplikasi. Jika Anda keluar sekarang, perubahan tersebut akan dikembalikan ke keadaan sebelumnya.",
+        "title": "Konfigurasi Bidang Status Aplikasi"
+      }
+    },
+    "buttons": {
+      "back": "Kembali",
+      "help": "Bantuan Token yang Tersedia",
+      "reset": "Reset ke Default"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Tambahkan hingga 2 tombol presence interaktif dengan ekspresi token.",
+        "subtitle": "Sesuaikan ekspresi untuk pemutaran media.",
+        "discardMsg": "Anda memiliki perubahan yang belum disimpan di kolom Status Media. Jika Anda keluar sekarang, perubahan tersebut akan dikembalikan ke keadaan sebelumnya.",
+        "title": "Konfigurasi Bidang Status Media"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "Stempel waktu aplikasi",
+          "title": "Waktu Tersisa",
+          "desc": "Menampilkan waktu tersisa mulai/saat ini-akhir yang biasa"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Menggunakan aplikasi yang sebelumnya atau saat ini terdeteksi atau fallback kustom saat media dijeda.",
+              "hidePaused": "Menyembunyikan presence saat media dijeda, termasuk aplikasi apa pun yang terdeteksi.",
+              "showPaused": "Menjaga presence media tetap aktif saat dijeda dan menampilkan indikator jeda."
+            },
+            "desc": "Opsi saat pemutaran aktif dijeda"
+          },
+          "desc": "Perilaku presence saat pemutaran aktif dijeda",
+          "help": "Bantuan Resolusi Jeda",
+          "title": "Resolusi Media yang Dijeda"
+        },
+        "mediaPriority": {
+          "title": "Prioritas Media",
+          "desc": "Mengontrol apakah media menimpa sesi game/aplikasi",
+          "help": "Bantuan Prioritas",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Saat media diputar secara aktif, media lebih diutamakan daripada aplikasi yang Anda gunakan dan memproyeksikan trek atau video saat ini.",
+              "switchesBetween": "Memproyeksikan media hanya saat Anda berada di dalam pemutar media. Beralih ke game atau aplikasi yang diaktifkan memungkinkan aplikasi tersebut mengambil alih."
+            },
+            "title": "Strategi Prioritas Media",
+            "desc": "Logika resolusi antara sesi game dan media"
+          }
+        },
+        "mediaScope": {
+          "title": "Cakupan Deteksi Media",
+          "desc": "Filter aplikasi mana yang memicu media rich presence"
+        },
+        "statusFieldConfig": {
+          "title": "Konfigurasi Bidang Status Media",
+          "desc": "Sesuaikan ekspresi fallback judul, artis, album, dan artwork"
+        },
+        "subtitle": "Prioritas resolusi, stempel waktu, dan status pemutaran",
+        "title": "Konfigurasi Presence Media",
+        "typeResolution": {
+          "title": "Resolusi Jenis Media",
+          "desc": "Bagaimana aktivitas mendengarkan vs menonton diklasifikasikan"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "Pemberitahuan Status Aplikasi",
+        "media": "Pemberitahuan Pemutaran Media"
+      },
+      "subtitle": "Sesuaikan judul dan subjudul yang ditampilkan pada pemberitahuan layanan di latar depan.",
+      "discard": "Anda memiliki perubahan proyeksi notifikasi yang belum disimpan. Jika Anda keluar sekarang, perubahan tersebut akan dihapus.",
+      "helpIntro": "Gunakan getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), dan getFieldCfgStr(\"MediaBigText\") untuk menyisipkan nilai bidang yang telah dirender. Gunakan joinNonBlank(field1, field2) untuk menggabungkan nilai-nilai yang tidak kosong dengan tanda titik. Template pemberitahuan aplikasi mendukung kondisi AppActivityType == \"Playing\". Ekspresi juga mendukung perbandingan == dan !=."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Fallback Kustom",
+      "drop": "Lepaskan (Hapus presence)",
+      "freeze": "Bekukan (Default)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Waktu Tetap Kustom",
+      "persistent": "Persisten (Default)",
+      "resetOnLaunch": "Reset saat Diluncurkan"
+    },
+    "activityStatus": {
+      "all": "Semua Status Aktivitas",
+      "dnd": "Jangan Ganggu",
+      "idle": "Idle",
+      "invisible": "Tak Terlihat",
+      "offline": "Offline",
+      "online": "Online",
+      "streaming": "Streaming"
+    },
+    "activityType": {
+      "all": "Semua Jenis Aktivitas",
+      "competing": "Berkompetisi",
+      "listening": "Mendengarkan",
+      "playing": "Bermain",
+      "watching": "Menonton"
+    },
     "allPlatforms": "Semua Platform",
+    "disableAll": "Nonaktifkan Semua",
+    "enableAll": "Aktifkan Semua",
+    "enabledOnly": "Hanya yang Diaktifkan",
     "globalDefault": "Default Global",
-    "playing": "Bermain",
-    "streaming": "Streaming",
-    "listening": "Mendengarkan",
-    "watching": "Menonton",
-    "competing": "Berkompetisi",
-    "online": "Online",
-    "idle": "Idle",
-    "dnd": "Jangan Ganggu",
-    "offline": "Offline",
-    "invisible": "Tak Terlihat",
-    "customize": "Sesuaikan",
-    "profileSubtitle": "Profil presence & alias proyeksi",
-    "activityType": "Jenis Aktivitas",
+    "keepCurrent": "Pertahankan Saat Ini",
+    "mediaScope": {
+      "allSessions": "Semua Sesi Media (Default)",
+      "enabledAppsOnly": "Hanya Aplikasi yang Diaktifkan"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Adaptif Otomatis (Default)",
+      "profileOverride": "Penimpaan Profil Aplikasi"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Fallback ke Aplikasi Terdeteksi",
+      "hidePaused": "Sembunyikan Status Jeda",
+      "showPaused": "Tampilkan Status Jeda (Default)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Prioritaskan Media yang Diputar (Default)",
+      "switchesBetween": "Beralih Antara"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Gelap",
+      "light": "Terang"
+    }
+  },
+  "labels": {
     "activityStatus": "Status Aktivitas",
-    "platformType": "Jenis Platform",
+    "activityType": "Jenis Aktivitas",
+    "customButtons": "Tombol Kustom",
     "customDetailsState": "Detail & Status Kustom",
     "customSmallImage": "Teks Kecil dan Gambar Kustom",
-    "customButtons": "Tombol Kustom",
-    "bulkConfigure": "Konfigurasi Batch",
-    "cancel": "Batal",
-    "stageChanges": "Siapkan Perubahan",
-    "apply": "Terapkan",
-    "confirm": "Konfirmasi & Terapkan",
-    "keepCurrent": "Pertahankan Saat Ini",
-    "enableAll": "Aktifkan Semua",
-    "disableAll": "Nonaktifkan Semua",
-    "discardBatch": "Buang Perubahan yang Disiapkan?",
-    "chooseIcon": "Pilih gambar ikon",
-    "resetIcon": "Reset ke ikon aplikasi asli",
-    "resetLabel": "Reset ke Label Asli",
-    "details": "Detail",
-    "state": "Status",
-    "smallText": "Teks Kecil",
-    "smallImageUrl": "URL gambar kecil",
-    "uploadImage": "Unggah gambar ke ImgBB",
-    "buttonLabel": "Label (mis. Gabung Game)",
-    "presenceToggle": "Toggle Presence",
-    "bulkSubtitle": "Terapkan perubahan ke semua aplikasi yang dipilih",
-    "applyBatchTitle": "Terapkan Perubahan Batch?",
-    "confirmation": "Konfirmasi",
-    "unsavedBatch": "Modifikasi batch yang belum disimpan",
-    "confirmApply": "Konfirmasi & Terapkan",
     "filterOptions": "Opsi Filter",
-    "close": "Tutup",
-    "loading": "Memuat...",
-    "original": "Asli:",
-    "projectedName": "Nama Proyeksi",
-    "customButtonDesc": "Tambahkan hingga 2 tombol presence interaktif",
-    "toggleDetails": "Toggle Detail dan Status Kustom",
-    "toggleSmall": "Toggle Teks Kecil dan Gambar Kustom",
-    "toggleButtons": "Toggle Tombol Kustom",
-    "uploadProgress": "Mengunggah ikon aplikasi ke ImgBB",
-    "keepEditing": "Lanjutkan Mengedit",
-    "discardChanges": "Buang Perubahan",
-    "discardMessage": "Anda memiliki konfigurasi batch yang belum dikomit. Meninggalkan mode batch sekarang akan membuang semua perubahan yang disiapkan.",
-    "applyMessage": "Anda akan menerapkan perubahan konfigurasi yang disiapkan secara permanen ke",
-    "selectedApps": "aplikasi yang dipilih.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} aplikasi | {enabled} diaktifkan",
-    "chooseImage": "Pilih file gambar.",
-    "imageTooLarge": "Pilih gambar lebih kecil dari 32 MB.",
-    "imageUploadFailed": "Unggah gambar gagal.",
-    "iconUploadFailed": "Unggah ikon gagal.",
-    "androidOnly": "Penemuan aplikasi terpasang tersedia di aplikasi Android.",
-    "loadAppsFailed": "Tidak dapat memuat aplikasi terpasang.",
-    "appUnit": "Aplikasi",
-    "appsUnit": "Aplikasi"
+    "platformType": "Jenis Platform",
+    "presenceToggle": "Toggle Presence",
+    "button1": "Tombol 1",
+    "button2": "Tombol 2",
+    "label": "Label",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Konfigurasi Presence Aplikasi",
-    "subtitle": "Kebijakan di luar aplikasi dan perilaku stempel waktu",
-    "catalogue": "Katalog Aplikasi",
-    "catalogueDesc": "Lihat, filter, dan sesuaikan proyeksi aplikasi individual",
-    "outsidePolicies": "Kebijakan di Luar Aplikasi Terdeteksi",
-    "outsideDescription": "Perilaku saat Anda meninggalkan atau beralih dari aplikasi yang diaktifkan",
-    "policyHelp": "Bantuan Kebijakan",
-    "freeze": "Bekukan (Default)",
-    "customFallback": "Fallback Kustom",
-    "drop": "Lepaskan (Hapus presence)",
-    "fallbackPresence": "Presence Fallback Kustom",
-    "activityName": "Nama Aktivitas",
+  "pluralization": {
+    "app": {
+      "plural": "Aplikasi",
+      "singular": "Aplikasi"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Label (mis. Gabung Game)",
     "details": "Detail",
-    "state": "Status",
+    "smallImageUrl": "URL gambar kecil",
     "smallText": "Teks Kecil",
-    "bigText": "Teks Besar",
-    "smallImage": "Gambar Kecil",
-    "bigImage": "Gambar Besar",
-    "imageUrl": "URL Gambar",
-    "uploadingImage": "Mengunggah gambar...",
-    "timestampStrategy": "Strategi Stempel Waktu",
-    "timestampDescription": "Bagaimana pengatur waktu aktivitas diselesaikan di seluruh sesi aplikasi",
-    "timestampHelp": "Bantuan Stempel Waktu",
-    "persistent": "Persisten (Default)",
-    "resetOnLaunch": "Reset saat Diluncurkan",
-    "customFixedTime": "Waktu Tetap Kustom",
-    "fixedStart": "Stempel Waktu Mulai Tetap",
-    "statusFieldConfig": "Konfigurasi Bidang Status",
-    "statusFieldDescription": "Sesuaikan ekspresi judul, detail, status, dan artwork",
-    "configurationDetails": "Detail konfigurasi",
-    "outsideHelpTitle": "Kebijakan di Luar Aplikasi",
-    "timestampHelpTitle": "Strategi Stempel Waktu",
-    "understood": "Dipahami",
-    "freezeHelp": "Menjeda dan mempertahankan presence terakhir yang diproyeksikan hingga aplikasi yang diaktifkan terdeteksi lagi.",
-    "customHelp": "Segera memproyeksikan presence fallback yang disesuaikan.",
-    "dropHelp": "Menghapus aktivitas Discord Anda hingga Anda kembali ke aplikasi yang diaktifkan.",
-    "persistentHelp": "Menggunakan satu stempel waktu runtime bersama untuk aplikasi dan media yang dijeda selama sesi layanan ini.",
-    "resetHelp": "Memulai ulang pengatur waktu pada 00:00 saat aplikasi diluncurkan atau difokuskan kembali.",
-    "fixedHelp": "Mengunci pengatur waktu presence ke tanggal dan waktu mulai tetap tertentu.",
-    "uploadImage": "Unggah gambar"
+    "state": "Status",
+    "urlExample": "URL (https://...)",
+    "example": "mis. ",
+    "listenOn": "Dengarkan di"
   },
-  "mediaPresence": {
-    "title": "Konfigurasi Presence Media",
-    "subtitle": "Prioritas resolusi, stempel waktu, dan status pemutaran",
-    "priority": "Prioritas Media",
-    "priorityDesc": "Mengontrol apakah media menimpa sesi game/aplikasi",
-    "priorityHelp": "Bantuan Prioritas",
-    "priorityPlaying": "Prioritaskan Media yang Diputar (Default)",
-    "switchesBetween": "Beralih Antara",
-    "scope": "Cakupan Deteksi Media",
-    "scopeDesc": "Filter aplikasi mana yang memicu media rich presence",
-    "allSessions": "Semua Sesi Media (Default)",
-    "enabledAppsOnly": "Hanya Aplikasi yang Diaktifkan",
-    "typeResolution": "Resolusi Jenis Media",
-    "typeResolutionDesc": "Bagaimana aktivitas mendengarkan vs menonton diklasifikasikan",
-    "autoAdaptive": "Adaptif Otomatis (Default)",
-    "profileOverride": "Penimpaan Profil Aplikasi",
-    "timeRemaining": "Waktu Tersisa",
-    "timeRemainingDesc": "Menampilkan waktu tersisa mulai/saat ini-akhir yang biasa",
-    "appTimestamp": "Stempel waktu aplikasi",
-    "pausedResolution": "Resolusi Media yang Dijeda",
-    "pausedDesc": "Perilaku presence saat pemutaran aktif dijeda",
-    "pausedHelp": "Bantuan Resolusi Jeda",
-    "showPaused": "Tampilkan Status Jeda (Default)",
-    "fallbackApp": "Fallback ke Aplikasi Terdeteksi",
-    "hidePaused": "Sembunyikan Status Jeda",
-    "statusFields": "Konfigurasi Bidang Status Media",
-    "statusFieldsDesc": "Sesuaikan ekspresi fallback judul, artis, album, dan artwork",
-    "priorityStrategy": "Strategi Prioritas Media",
-    "priorityStrategyDesc": "Logika resolusi antara sesi game dan media",
-    "pausedOptions": "Opsi saat pemutaran aktif dijeda",
-    "priorityHelpText": "Saat media diputar secara aktif, media lebih diutamakan daripada aplikasi yang Anda gunakan dan memproyeksikan trek atau video saat ini.",
-    "switchHelpText": "Memproyeksikan media hanya saat Anda berada di dalam pemutar media. Beralih ke game atau aplikasi yang diaktifkan memungkinkan aplikasi tersebut mengambil alih.",
-    "showPausedHelp": "Menjaga presence media tetap aktif saat dijeda dan menampilkan indikator jeda.",
-    "fallbackHelp": "Menggunakan aplikasi yang sebelumnya atau saat ini terdeteksi atau fallback kustom saat media dijeda.",
-    "hidePausedHelp": "Menyembunyikan presence saat media dijeda, termasuk aplikasi apa pun yang terdeteksi."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Pilih file gambar.",
+      "iconUploadFailed": "Unggah ikon gagal.",
+      "imageTooLarge": "Pilih gambar lebih kecil dari 32 MB.",
+      "imageUploadFailed": "Unggah gambar gagal."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "Gambar Besar",
+      "bigText": "Teks Besar",
+      "line1": "Rincian Kegiatan",
+      "smallImage": "Gambar Kecil",
+      "smallText": "Teks Kecil",
+      "line2": "Status Aktivitas",
+      "title": "Judul/Header Kegiatan"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "akun masuk.",
+          "desc": "Hubungkan akun Discord Anda untuk menampilkan Rich Presence",
+          "title": "Login Discord"
+        },
+        "languageTitle": "Bahasa",
+        "themeTitle": "Tema",
+        "desc": "Kustomisasi & Akun",
+        "title": "Kontrol Pengguna"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Kecualikan aplikasi agar layanan latar belakang tidak tidur",
+          "title": "Optimasi Baterai",
+          "modal": {
+            "desc": "Sistem Android modern menidurkan proses latar belakang setelah beberapa menit. Mengecualikan Kruzty Dynamics dari optimasi baterai memastikan pembaruan Discord Rich Presence yang berkelanjutan dan tanpa gangguan.",
+            "subtitle": "Whitelist Layanan Latar Belakang",
+            "requestExemption": "Minta Pengecualian"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Akses Aplikasi Khusus yang diperlukan untuk mendeteksi media & pemutaran",
+          "title": "Akses Notifikasi",
+          "modal": {
+            "methodA": {
+              "title": "Metode A: Akses Aplikasi Khusus (Pixel, Motorola, Infinix, Stock)",
+              "step1": "Ketuk Buka Pengaturan Android di bawah.",
+              "step2": "Buka Akses Aplikasi Khusus > Akses Notifikasi.",
+              "step3": "Temukan Kruzty Dynamics dan aktifkan Izinkan akses notifikasi."
+            },
+            "methodB": {
+              "title": "Metode B: Info Aplikasi > Elipsis (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Buka Pengaturan perangkat > Aplikasi > Kelola Aplikasi / Daftar Aplikasi.",
+              "step2": "Temukan dan ketuk Kruzty Dynamics.",
+              "step4": "Ketuk Izinkan pengaturan terbatas / Akses Aplikasi Khusus > Izinkan.",
+              "step5": "Kembali dan aktifkan Akses Notifikasi."
+            },
+            "desc": "Akses Notifikasi memungkinkan Kruzty Dynamics menangkap peristiwa pemutaran sesi media langsung (Judul Lagu, Artis, Album, dan Status Pemutaran) dari Spotify, YouTube Music, dan pemutar media.",
+            "oemNotice": {
+              "desc": "Android melindungi akses pendengar notifikasi di balik lapisan izin khusus. Tergantung pada merek ponsel Anda, ikuti salah satu metode di bawah ini.",
+              "title": "Pemberitahuan untuk Perangkat OEM & Android 13+"
+            },
+            "subtitle": "Konfigurasi Akses Aplikasi Khusus",
+            "openAndroidSettings": "Buka Pengaturan Android"
+          }
+        },
+        "desc": "Diperlukan untuk deteksi",
+        "title": "Kontrol Izin",
+        "foregroundNotification": {
+          "desc": "Izin Android 13+ untuk notifikasi layanan persisten",
+          "title": "Notifikasi Latar Depan",
+          "modal": {
+            "allowNotification": "Izinkan Notifikasi",
+            "desc": "Diperlukan oleh Android 13+ untuk menampilkan notifikasi layanan latar depan yang sedang berlangsung di bilah status Anda, mengonfirmasi bahwa mesin presence Discord berjalan.",
+            "subtitle": "Izin Notifikasi Android 13+",
+            "title": "Notifikasi Layanan Latar Depan"
+          }
+        },
+        "usageAccess": {
+          "desc": "Diperlukan untuk mendeteksi aplikasi atau game latar depan yang sedang berjalan",
+          "title": "Akses Penggunaan",
+          "modal": {
+            "openUsageAccess": "Buka Akses Penggunaan",
+            "desc": "Akses Penggunaan diperlukan untuk mendeteksi aplikasi atau game mana yang sedang Anda jalankan di latar depan, sehingga Kruzty Dynamics dapat mencocokkannya dengan Katalog Aplikasi yang Anda konfigurasi.",
+            "step1": "Ketuk Buka Akses Penggunaan.",
+            "step2": "Temukan Kruzty Dynamics.",
+            "step3": "Aktifkan Izinkan akses penggunaan.",
+            "subtitle": "Deteksi Aplikasi Latar Depan"
+          }
+        }
+      },
+      "privacyNotice": "Aplikasi ini tidak mengumpulkan atau mengirimkan data pengguna.",
+      "subtitle": "Konfigurasikan izin dan akun yang diperlukan untuk mengaktifkan Discord Rich Presence dinamis.",
+      "title": "Pengaturan Awal"
+    },
+    "footer": {
+      "allSet": "Semua siap! Siap untuk menampilkan",
+      "buttons": {
+        "continueForNow": "Lanjutkan Sementara",
+        "finishSetup": "Selesaikan Pengaturan",
+        "skipForNow": "Lewati Sementara"
+      },
+      "readyWhenYouAre": "Siap saat Anda siap"
+    }
+  },
+  "tags": {
+    "granted": "Diizinkan",
+    "notificationCrucial": "Krusial",
+    "allGranted": "Semua Diizinkan",
+    "cached": "di-cache",
+    "check": "Periksa",
+    "checkingUpdates": "Memeriksa pembaruan",
+    "default": "Default",
+    "view": "Lihat"
   }
 }

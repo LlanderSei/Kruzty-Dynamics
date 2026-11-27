@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Unang Setup",
-    "subtitle": "I-configure ang mga kinakailangang pahintulot at account para paganahin ang Discord Rich Presence.",
-    "privacyNotice": "Hindi kumukuha o nagpapadala ng impormasyon ang app na ito.",
-    "permissionsSection": "Pamamahala ng Pahintulot",
-    "permissionsRequired": "Kailangan para sa pagtukoy",
-    "notificationTitle": "Pahintulot sa Notipikasyon",
-    "notificationDesc": "Kailangan para matukoy ang tumutugtog na kanta o video",
-    "notificationCrucial": "Kritikal",
-    "usageTitle": "Paggamit ng Access (Usage)",
-    "usageDesc": "Kailangan para matukoy ang kasalukuyang binubuksang laro o app",
-    "batteryTitle": "Optimisasyon ng Baterya",
-    "batteryDesc": "I-exempt ang app upang hindi matulog sa background",
-    "postNotificationTitle": "Notipikasyon sa Foreground",
-    "postNotificationDesc": "Pahintulot ng Android 13+ para sa tuloy-tuloy na serbisyo",
-    "grant": "Ibigay",
-    "granted": "Naibigay na",
-    "userControlSection": "Kontrol ng Gumagamit",
-    "userControlDesc": "Pag-customize at Account",
-    "discordLoginTitle": "Pag-login sa Discord",
-    "discordLoginDesc": "Ikonekta ang iyong Discord account para sa Rich Presence",
-    "accountsConnected": "account ang naka-login.",
-    "themeTitle": "Tema",
-    "languageTitle": "Wika",
-    "finishSetup": "Tapusin ang Setup",
-    "continueForNow": "Magpatuloy muna",
-    "skipForNow": "Laktawan muna",
-    "allSet": "Handa na ang lahat!",
-    "readyWhenYouAre": "Handa na kahit kailan"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Aktibong Identity",
+        "stored": "Nakatago"
+      },
+      "content": {
+        "subtitle": "Pamahalaan ang mga token at pagkakakilanlan",
+        "title": "Portal ng Pag-login sa Discord",
+        "privacyText": "Humihingi ang pahintulot ng Discord ng access sa mga social feature kasama ng Rich Presence. Ginagamit ng Kruzty Dynamics ang SDK para kilalanin ang account at mag-publish o mag-clear ng naka-configure na aktibidad; hindi nito ginagamit ang mga feature para sa kaibigan, block, invite, mensahe, o voice. Sa Android, naka-encrypt at naka-save sa device ang mga token. Basahin ang",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Patakaran sa Privacy"
+      },
+      "title": "Ikonekta ang Discord Account"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Sinusuportahan ng mga expression ang paghahambing na == at !=. Gamitin ang {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} upang piliin ang AppName kapag ang uri ng aktibidad ay Playing, at AppPlatformType kung hindi.",
+        "title": "Sanggunian ng Token ng App",
+        "desc": "Mga dynamic na variable na magagamit sa mga field expression"
+      },
+      "media": {
+        "title": "Sanggunian ng Token ng Media",
+        "intro": "Maaaring ilagay ang mga token sa mga text field at label o URL ng button (hal. {example}).",
+        "desc": "Mga dinamikong baryabol na magagamit sa mga ekspresyon ng media at mga pindutan"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Itapon ang mga Hindi Naka-save na Pagbabago?",
+      "unsaved": "May mga pagbabagong hindi pa nase-save"
+    },
+    "logs": {
+      "copy": "Mga log ng kopya",
+      "empty": "[INFO] Walang mga log pa. Buksan ang Discord login o magsagawa ng mga aksyon upang makabuo ng mga log.",
+      "export": "Mga log ng pag-export",
+      "subtitle": "Output ng live diagnostics",
+      "title": "Mga Log ng Aplikasyon"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Pangunahing Kulay ng Accent",
+        "resetAccent": "Ibalik sa Default na Orange",
+        "tapCustomize": "I-tap para i-customize",
+        "themeMode": "Mode ng Tema"
+      },
+      "globalDefaults": {
+        "activityStatus": "Status ng Aktibidad",
+        "activityType": "Uri ng Aktibidad",
+        "note": "Awtomatikong ginagamit ang mga default kapag walang sariling uri o status ang app o aktibidad."
+      },
+      "imgBb": {
+        "apiPrivacy": "Kapag iniwang blangko, gagamitin ang built-in na default key. Hindi kailanman ipapakita nang plain text ang custom key.",
+        "getApiKey": "para kumuha ng key.",
+        "help": "Itakda ang iyong ImgBB API Key para mag-upload ng custom na larawan ng app at media sa Discord CDN. Bisitahin ang",
+        "usingDefaultKey": "Ginagamit ang default na system key"
+      },
+      "language": {
+        "availableLanguages": "Mga Available na Wika",
+        "title": "Pumili ng Wika",
+        "desc": "Piliin ang wika para sa mga label at notification."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Pinipigilan ang Android na ihinto ang serbisyo ng presence",
+        "foregroundDesc": "Indicator sa status bar para sa aktibong Discord presence",
+        "notificationAccessDesc": "Espesyal na Access ng App para makita ang media",
+        "desc": "Katayuan ng mga pahintulot para basahin ang mga media notification at foreground app:",
+        "usageAccessDesc": "Tukuyin ang mga larong at app na tumatakbo sa harapan"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "May {total} naka-link na URL ng larawan, kabilang ang {custom} custom na icon ng app. Maaari mong i-clear ang cache habang pinapanatili ang custom na icon, o alisin lahat pati ang mga override. Kung aalisin ang override, i-upload muli ang mga icon sa Katalogo ng App.",
+        "buttons": {
+          "clearCacheAll": "I-clear Lahat, Kasama ang Custom Icon",
+          "clearCacheKeep": "I-clear ang Cache, Panatilihin ang Custom Icon"
+        },
+        "clearedAll": "Na-clear ang lahat ng URL, kasama ang custom na icon ng app.",
+        "clearedKeeping": "Na-clear ang cache. Napanatili ang custom na icon ng app.",
+        "linkedImageUrls": "URL ng mga Naka-link na Larawan"
+      },
+      "credits": {
+        "contributorsSection": "Mga Contributor ng Kizzy",
+        "developerSection": "Kruzty na Dinamika",
+        "librariesSection": "Mga Library na Ginamit",
+        "libraries": {
+          "lucide": "Malinis na vector icon na ginawa ng komunidad",
+          "react": "Modernong arkitektura ng UI component",
+          "sdk": "Native Android integration para sa rich presence",
+          "tailwind": "Responsive styling gamit ang utility classes",
+          "tauri": "Magaan na katutubong runtime na tumatakbo sa iba't ibang platform",
+          "tokio": "Asynchronous na event-driven network runtime"
+        },
+        "maintainerRole": "Kasalukuyang Maintainer at Developer"
+      },
+      "discordApp": {
+        "developerPortal": "Portal ng mga Tagabuo ng Discord",
+        "help": "Itakda ang sarili mong Discord Application ID mula sa",
+        "idPrivacy": "Kapag iniwang blangko, babalik sa default na Kruzty Dynamics application ID."
+      }
+    }
   },
-  "nav": {
-    "service": "Serbisyo",
-    "accounts": "Mga Account",
-    "settings": "Mga Setting"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Magdagdag ng Account",
+            "switch": "Palitan",
+            "unuse": "Huwag Gamitin"
+          },
+          "activePresence": "Aktibong Presensya",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Kumpirmahin ang Logout",
+              "title": "Mag-logout sa Account",
+              "removePrefix": "Sigurado ka bang aalisin ang account",
+              "removeSuffix": ". Aalisin nito ang mga naka-save na credential sa device na ito."
+            }
+          },
+          "currentAccount": "Kasalukuyang Naka-login na Account",
+          "noActiveAccount": "Walang napiling account. Pumili sa mga account na naka-login sa ibaba.",
+          "storedAccounts": "Mga Naka-save na Account"
+        },
+        "noAccount": {
+          "desc": "Ikonekta ang iyong Discord account para magpakita ng Rich Presence para sa mga laro, app, at media.",
+          "title": "Wala pang naka-login na account.",
+          "login": "Mag-login sa Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Walang Discord Account",
+        "loggedInMany": "{n} na mga account ang naka-log in.",
+        "loggedInOne": "{n} account ay naka-log in."
+      },
+      "title": "Mga Discord Account"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics Dashboard",
+      "title": {
+        "welcome": "Maligayang pagdating!",
+        "welcomeNamed": "Maligayang pagdating, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Naibigay na ang lahat ng kinakailangang pahintulot. Buksan ang serbisyo upang magpatuloy.",
+              "foregroundService": {
+                "desc": "Pinapayagan ang Android na ipakita ang abiso ng serbisyo habang ito ay tumatakbo.",
+                "title": "Mga Paunawa ng Serbisyo sa Harap"
+              },
+              "notificationAccess": {
+                "desc": "Kinakailangan upang matukoy ang pag-playback ng media at ang metadata nito."
+              },
+              "subtitle": "Ibigay ang mga pahintulot sa Android bago simulan ang serbisyo.",
+              "title": "Kinakailangang pahintulot",
+              "returnHint": "Pagkatapos mong bigyan ng pahintulot sa Android Settings, bumalik dito at paganahin ang serbisyo.",
+              "usageAccess": {
+                "desc": "Kinakailangan upang matukoy kung aling app ang kasalukuyang nasa foreground."
+              }
+            }
+          },
+          "startError": "Hindi na-start ang serbisyo ng presensya ng Android.",
+          "running": "Tumatakbo ang serbisyo.",
+          "stopped": "Hindi pa nasisimulan ang serbisyo.",
+          "title": "Serbisyo ng Kruzty Dynamics"
+        },
+        "application": {
+          "desc": "I-configure ang mga profile ng app para sa pag-detect ng presensya",
+          "title": "Presensya ng App"
+        },
+        "buttons": {
+          "applicationCatalogue": "Katalogo ng App",
+          "presenceConfiguration": "Config ng Presensya",
+          "statusFieldConfig": "Config ng Status Field"
+        },
+        "media": {
+          "desc": "I-configure ang gawi ng media at mga status template",
+          "title": "Presensya ng Media"
+        },
+        "preview": {
+          "noPresence": "Walang naka-configure na app o aktibong media na nakita.",
+          "stoppedDescription": "Napatigil ang serbisyo. Buksan ito upang matukoy ang mga naka-enable na app at aktibong media."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "Mga Kagustuhan",
+        "checkPermissions": {
+          "title": "Suriin ang mga Pahintulot",
+          "desc": "Suriin ang mga ibinigay na pahintulot sa system"
+        },
+        "deleteCachedUrls": {
+          "title": "Burahin ang Nakakonektang URL ng Larawan",
+          "desc": "Nililinis ang mga nai-upload na larawan sa cache"
+        },
+        "discordAppId": {
+          "title": "I-set ang Discord App ID",
+          "desc": "I-set ang sariling Discord Application ID."
+        },
+        "globalDefaults": {
+          "title": "Mga Pangkalahatang Default",
+          "desc": "Uri ng aktibidad at estado para sa mga app"
+        },
+        "imgBbKey": {
+          "title": "I-set ang ImgBB API Key",
+          "desc": "I-set ang iyong sariling ImgBB API Key."
+        },
+        "language": {
+          "title": "Wika",
+          "desc": "Kasalukuyang Naka-set:"
+        },
+        "notificationProjection": {
+          "title": "I-customize ang pagpapakita ng status ng abiso",
+          "desc": "I-customize ang mga pamagat at subtitle ng mga abiso ng aplikasyon at media."
+        },
+        "themes": {
+          "title": "Tema at Display",
+          "desc": "I-set ang iyong tema at kulay ng accent."
+        },
+        "checkUpdates": {
+          "title": "Suriin ang pinakabagong bersyon",
+          "desc": "Suriin kung may mas bagong bersyon."
+        }
+      },
+      "subtitle": "Mga kagustuhan at diagnostic ng app",
+      "title": "Mga Setting at Iba Pa",
+      "cardInfo": {
+        "architecture": "Ginawa gamit ang Rust Core (Tokio + Tauri v2), React 19, TailwindCSS, at Native Android Plugin Bridge. Batay sa Experimental RPC ng Kizzy.",
+        "credits": "Mga Kredito",
+        "developedBy": "Binuo ni",
+        "latestRelease": "Pumunta sa Pinakabagong Release",
+        "learnMore": "Alamin Pa ang Tungkol sa App",
+        "repository": "Tingnan ang GitHub Repository",
+        "submitIssue": "Mag-ulat ng Isyu",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "serviceActive": "Aktibo",
-    "serviceInactive": "Hindi Aktibo",
-    "serviceStarting": "Nagsisimula",
-    "serviceStopped": "Nakahinto",
-    "welcome": "Maligayang pagdating!",
-    "welcomeNamed": "Maligayang pagdating, {name}!",
-    "dashboardSubtitle": "Kruzty Dynamics Dashboard",
-    "liveLogs": "Mga Live na Log",
-    "viewLogs": "Tingnan ang mga tala",
-    "accountsLoggedInOne": "{n} account ay naka-log in.",
-    "accountsLoggedInMany": "{n} na mga account ang naka-log in."
-  },
-  "accounts": {
-    "title": "Mga Discord Account",
-    "subtitle": "Pamahalaan ang mga token at pagkakakilanlan",
-    "loginPortal": "Mag-login gamit ang Discord Portal",
-    "loginWithToken": "Magdagdag gamit ang Token",
-    "addAccount": "Magdagdag ng Account",
-    "activeIdentity": "Aktibong Identity",
-    "stored": "Nakatago",
+  "buttons": {
     "remove": "Tanggalin",
-    "noAccounts": "Walang Discord Account",
-    "noAccountsDesc": "Magdagdag ng iyong Discord account gamit ang portal o token upang simulan ang rich presence."
-  },
-  "settings": {
-    "title": "Mga Setting at Iba Pa",
-    "subtitle": "Mga kagustuhan at diagnostic ng app",
-    "appPreferences": "Mga Kagustuhan",
-    "notificationProjection": "I-customize ang pagpapakita ng status ng abiso",
-    "notificationProjectionDesc": "I-customize ang mga pamagat at subtitle ng mga abiso ng aplikasyon at media.",
-    "themes": "Tema at Display",
-    "themesDesc": "I-set ang iyong tema at kulay ng accent.",
-    "language": "Wika",
-    "languageDesc": "Kasalukuyang Naka-set:",
-    "globalDefaults": "Mga Pangkalahatang Default",
-    "globalDefaultsDesc": "Uri ng aktibidad at estado para sa mga app",
-    "imgbbKey": "I-set ang ImgBB API Key",
-    "imgbbKeyDesc": "I-set ang iyong sariling ImgBB API Key.",
-    "discordAppId": "I-set ang Discord App ID",
-    "discordAppIdDesc": "I-set ang sariling Discord Application ID.",
-    "checkPermissions": "Suriin ang mga Pahintulot",
-    "checkPermissionsDesc": "Suriin ang mga ibinigay na pahintulot sa system",
-    "deleteCache": "Burahin ang Nakakonektang URL ng Larawan",
-    "deleteCacheDesc": "Nililinis ang mga nai-upload na larawan sa cache"
-  },
-  "service": {
-    "title": "Serbisyo ng Kruzty Dynamics",
-    "running": "Tumatakbo ang serbisyo.",
-    "stopped": "Hindi pa nasisimulan ang serbisyo.",
-    "applicationPresence": "Presensya ng App",
-    "appDescription": "I-configure ang mga profile ng app para sa pag-detect ng presensya",
-    "applicationCatalogue": "Katalogo ng App",
-    "statusFieldConfig": "Config ng Status Field",
-    "presenceConfiguration": "Config ng Presensya",
-    "mediaPresence": "Presensya ng Media",
-    "mediaDescription": "I-configure ang gawi ng media at mga status template",
-    "noPresence": "Walang naka-configure na app o aktibong media na nakita.",
-    "stoppedDescription": "Napatigil ang serbisyo. Buksan ito upang matukoy ang mga naka-enable na app at aktibong media."
-  },
-  "accountsPage": {
-    "emptyTitle": "Wala pang naka-login na account.",
-    "emptyDescription": "Ikonekta ang iyong Discord account para magpakita ng Rich Presence para sa mga laro, app, at media.",
-    "login": "Mag-login sa Discord",
-    "currentAccount": "Kasalukuyang Naka-login na Account",
-    "activePresence": "Aktibong Presensya",
-    "storedAccounts": "Mga Naka-save na Account",
-    "switch": "Palitan",
-    "unuse": "Huwag Gamitin",
-    "remove": "Alisin",
-    "cancel": "Kanselahin",
-    "deleteTitle": "Alisin ang account sa Discord?",
-    "loginTitle": "Portal ng Pag-login sa Discord",
-    "noActiveAccount": "Walang napiling account. Pumili sa mga account na naka-login sa ibaba.",
-    "addAccountTitle": "Ikonekta ang Discord Account",
-    "portal": "Portal ng Pag-login sa Discord",
-    "signInPortal": "Ligtas na mag-sign in gamit ang Discord sa app",
     "openPortal": "Buksan ang Portal",
-    "privacyText": "Humihingi ang pahintulot ng Discord ng access sa mga social feature kasama ng Rich Presence. Ginagamit ng Kruzty Dynamics ang SDK para kilalanin ang account at mag-publish o mag-clear ng naka-configure na aktibidad; hindi nito ginagamit ang mga feature para sa kaibigan, block, invite, mensahe, o voice. Sa Android, naka-encrypt at naka-save sa device ang mga token. Basahin ang",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Mag-logout sa Account",
-    "removePrefix": "Sigurado ka bang aalisin ang account",
-    "removeSuffix": ". Aalisin nito ang mga naka-save na credential sa device na ito.",
-    "confirmLogout": "Kumpirmahin ang Logout",
-    "addAccount": "Magdagdag ng Discord Account",
-    "noSelection": "Walang napiling account. Pumili ng naka-login na account sa ibaba.",
-    "addMoreAccounts": "Magdagdag pa ng account gamit ang Discord button sa ibaba."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Pumili ng Wika",
-    "languageDescription": "Piliin ang wika para sa mga label at notification.",
-    "availableLanguages": "Mga Available na Wika",
-    "close": "Isara",
-    "linkedImageUrls": "URL ng mga Naka-link na Larawan",
-    "clearCacheKeep": "I-clear ang Cache, Panatilihin ang Custom Icon",
-    "clearCacheAll": "I-clear Lahat, Kasama ang Custom Icon",
-    "credits": "Mga Kredito",
-    "themeMode": "Mode ng Tema",
-    "accentColor": "Pangunahing Kulay ng Accent",
-    "resetAccent": "Ibalik sa Default na Orange",
-    "learnMore": "Alamin Pa ang Tungkol sa App",
-    "privacyPolicy": "Patakaran sa Privacy",
-    "repository": "Tingnan ang GitHub Repository",
-    "latestRelease": "Pumunta sa Pinakabagong Release",
-    "submitIssue": "Mag-ulat ng Isyu",
-    "developerSection": "Kruzty na Dinamika",
-    "librariesSection": "Mga Library na Ginamit",
-    "contributorsSection": "Mga Contributor ng Kizzy",
-    "maintainerRole": "Kasalukuyang Maintainer at Developer",
-    "view": "Tingnan",
-    "done": "Tapos na",
-    "developedBy": "Binuo ni",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Ginawa gamit ang Rust Core (Tokio + Tauri v2), React 19, TailwindCSS, at Native Android Plugin Bridge. Batay sa Experimental RPC ng Kizzy.",
-    "cached": "naka-cache",
-    "tapCustomize": "I-tap para i-customize",
-    "defaultNote": "Awtomatikong ginagamit ang mga default kapag walang sariling uri o status ang app o aktibidad.",
-    "activityType": "Uri ng Aktibidad",
-    "activityStatus": "Status ng Aktibidad",
-    "imgbbHelp": "Itakda ang iyong ImgBB API Key para mag-upload ng custom na larawan ng app at media sa Discord CDN. Bisitahin ang",
-    "getApiKey": "para kumuha ng key.",
-    "apiPrivacy": "Kapag iniwang blangko, gagamitin ang built-in na default key. Hindi kailanman ipapakita nang plain text ang custom key.",
-    "saveKey": "I-save ang Key",
-    "discordIdHelp": "Itakda ang sarili mong Discord Application ID mula sa",
-    "developerPortal": "Portal ng mga Tagabuo ng Discord",
-    "idDefault": "Default",
-    "idPrivacy": "Kapag iniwang blangko, babalik sa default na Kruzty Dynamics application ID.",
-    "saveId": "I-save ang ID",
-    "permissionsDescription": "Katayuan ng mga pahintulot para basahin ang mga media notification at foreground app:",
-    "notificationAccessDesc": "Espesyal na Access ng App para makita ang media",
-    "usageAccessDesc": "Tukuyin ang mga larong at app na tumatakbo sa harapan",
-    "batteryDesc": "Pinipigilan ang Android na ihinto ang serbisyo ng presence",
-    "foregroundDesc": "Indicator sa status bar para sa aktibong Discord presence",
-    "saveIdPlaceholder": "1572590527562391713 (Default)",
-    "resetDefault": "Ibalik sa Default",
-    "cancel": "Kanselahin",
-    "cacheWarning": "May {total} naka-link na URL ng larawan, kabilang ang {custom} custom na icon ng app. Maaari mong i-clear ang cache habang pinapanatili ang custom na icon, o alisin lahat pati ang mga override. Kung aalisin ang override, i-upload muli ang mga icon sa Katalogo ng App.",
-    "allGranted": "Lahat ay Naibigay",
-    "clearedAll": "Na-clear ang lahat ng URL, kasama ang custom na icon ng app.",
-    "clearedKeeping": "Na-clear ang cache. Napanatili ang custom na icon ng app.",
-    "usingDefaultKey": "Ginagamit ang default na system key",
-    "customKeySet": "May Custom Key",
-    "light": "Maliwanag",
-    "dark": "Madilim",
-    "amoled": "AMOLED",
-    "libraryTauri": "Magaan na katutubong runtime na tumatakbo sa iba't ibang platform",
-    "libraryTokio": "Asynchronous na event-driven network runtime",
-    "librarySdk": "Native Android integration para sa rich presence",
-    "libraryReact": "Modernong arkitektura ng UI component",
-    "libraryTailwind": "Responsive styling gamit ang utility classes",
-    "libraryLucide": "Malinis na vector icon na ginawa ng komunidad",
-    "checkForUpdates": "Suriin ang pinakabagong bersyon",
-    "checkForUpdatesDesc": "Suriin kung may mas bagong bersyon.",
-    "check": "Suriin",
-    "checkingUpdates": "Sinusuri ang mga pag-update"
-  },
-  "configFields": {
-    "appTitle": "Config ng Status Field ng App",
-    "mediaTitle": "Config ng Status Field ng Media",
-    "back": "Bumalik",
-    "reset": "Ibalik sa Default",
-    "help": "Tulong sa mga Available na Token",
-    "title": "Pamagat",
-    "line1": "Linya 1 (Detalye)",
-    "line2": "Linya 2 (Estado)",
-    "smallText": "Maliit na Teksto",
-    "smallImage": "Maliit na Larawan",
-    "bigText": "Malaking Teksto",
-    "bigImage": "Malaking Larawan",
-    "header": "Header (Nakikinig sa / Nanonood ng)",
-    "mediaTitleField": "Pamagat ng Media (Detalye ng Aktibidad)",
-    "artist": "Linya 1 (Estado / Artist)",
-    "album": "Linya 2 (Album / Teksto ng Larawan)",
-    "buttons": "Mga Custom na Button",
-    "button1": "Pindutan 1",
-    "button2": "Pindutan 2",
-    "save": "I-save ang mga Field",
-    "appReference": "Sanggunian ng Token ng App",
-    "mediaReference": "Sanggunian ng Token ng Media",
-    "tokenDescription": "Mga dynamic na variable na magagamit sa mga field expression",
-    "mediaTokenDescription": "Paglalarawan ng video o media mula sa web o video player.",
-    "discard": "Itapon ang mga Hindi Naka-save na Pagbabago?",
-    "unsaved": "May mga pagbabagong hindi pa nase-save",
-    "helpDone": "Nakuha ko",
-    "appTokenName": "Pangalan ng app na ipinapakita sa activity.",
-    "appHeader": "Ulo",
-    "titleHeader": "Pamagat/Ulo ng Aktibidad",
-    "detailsField": "Mga Detalye ng Aktibidad",
-    "stateField": "Kalagayan ng Aktibidad",
-    "notificationConfigSubtitle": "I-customize ang pamagat at ang sub-pamagat na ipinapakita sa paunang abiso ng serbisyo.",
-    "notificationAppSection": "Paunawa sa Katayuan ng App",
-    "notificationMediaSection": "Pabatid ng Pagpapatugtog ng Midya",
-    "notificationSubtitleLabel": "Mga Paunawa: Pamagat",
-    "notificationHelpIntro": "Gamitin ang getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), at getFieldCfgStr(\"MediaBigText\") upang ipasok ang mga na-render na halaga ng field. Gamitin ang joinNonBlank(field1, field2) upang pagdugtungin ang mga hindi blangkong halaga gamit ang tuldik. Sinusuportahan ng mga template ng abiso ng app ang kundisyong AppActivityType == \"Playing\". Sinusuportahan din ng mga ekspresyon ang paghahambing na == at !=.",
-    "notificationDiscardMessage": "Mayroon kang mga hindi pa nai-save na pagbabago sa projection ng mga abiso. Kung lalabas ka ngayon, mawawala ang mga ito.",
-    "appTokenActivityType": "Piniling uri ng aktibidad ng Rich Presence para sa profile ng app na ito, gaya ng Nagpe-play, Nakikinig, Nanonood, o Nakikipagkumpitensya.",
-    "appTokenPlatformType": "Token ng platform mula sa profile ng app na ito, gaya ng Android, PC, o Xbox.",
-    "appExpressionOperators": "Sinusuportahan ng mga expression ang paghahambing na == at !=. Gamitin ang {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} upang piliin ang AppName kapag ang uri ng aktibidad ay Playing, at AppPlatformType kung hindi.",
-    "appTokenDetails": "Custom na Details text na naka-save sa profile ng app na ito; walang laman kung naka-disable o blanko.",
-    "appTokenState": "Custom na State text na naka-save sa profile ng app na ito; walang laman kung naka-disable o blanko.",
-    "appTokenSmallText": "Custom na label ng maliit na larawan na naka-save sa profile ng app na ito; walang laman kung naka-disable o blanko.",
-    "appTokenSmallUrl": "Custom na URL ng maliit na larawan na naka-save sa profile ng app na ito; walang laman kung naka-disable o blanko.",
-    "appTokenImageUrl": "Naka-cache na ImgBB URL ng icon ng app.",
-    "appTokenPackageName": "Android package identifier (hal. com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Maaaring ilagay ang mga token sa mga text field at label o URL ng button (hal. {example}).",
-    "mediaTokenAppName": "Pangalan ng media player app na ipinapakita sa header na Listening to o Watching ng Discord.",
-    "mediaTokenTitle": "Aktibong pamagat ng kanta o video mula sa metadata ng notification.",
-    "mediaTokenArtist": "Artist o creator ng kasalukuyang pinapatugtog na audio o video.",
-    "mediaTokenAlbum": "Pangalan ng album o playlist.",
-    "mediaTokenPlaybackState": "Kasalukuyang playback state (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "Naka-cache na ImgBB URL ng album art o thumbnail.",
-    "mediaTokenPlaybackImageUrl": "Asset image URL para sa kasalukuyang playback indicator.",
-    "mediaTokenFallbackImageUrl": "Fallback app icon kung walang artwork.",
-    "appConfigSubtitle": "I-customize ang mga expression para sa pagtukoy ng app.",
-    "mediaConfigSubtitle": "I-customize ang mga expression para sa media playback.",
-    "mediaHeaderDescription": "Pangalan ng app na ipinapakita sa media header ng Discord. Pinipili ng uri ng activity kung Listening to o Watching.",
-    "mediaTitleDescription": "Tumutukoy ito sa pamagat/detalye ng media. I-configure nang hiwalay ang pangalan ng player sa Header sa itaas.",
-    "mediaAlbumDescription": "Ipinapakita ito sa ilalim ng artist sa media card ng Discord.",
-    "mediaButtonDescription": "Magdagdag ng hanggang 2 interactive na presence button gamit ang mga token expression.",
-    "mediaButtonLabel": "Label",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "hal. ",
-    "mediaButtonListen": "Makinig sa",
-    "appDiscardMessage": "Mayroon kang hindi pa nai-save na mga pagbabago sa mga patlang ng katayuan ng iyong aplikasyon. Ang pag-alis ngayon ay magbabalik sa mga ito sa nakaraang estado.",
-    "mediaDiscardMessage": "Mayroon kang hindi pa nai-save na mga pagbabago sa iyong mga patlang ng katayuan ng media. Ang pag-alis ngayon ay magbabalik sa mga ito sa dating estado.",
-    "mediaTokenSubtitle": "Mga dinamikong baryabol na magagamit sa mga ekspresyon ng media at mga pindutan"
-  },
-  "catalogue": {
-    "title": "Katalogo ng App",
-    "back": "Bumalik",
+    "understood": "Nauunawaan",
+    "apply": "Ilapat",
     "batch": "Mga Batch Operation",
-    "search": "Maghanap ng mga app...",
-    "filter": "I-filter ang mga App",
-    "clearFilters": "I-clear ang mga Filter",
-    "enabledOnly": "Mga Naka-enable Lang",
-    "allActivityTypes": "Lahat ng Uri ng Aktibidad",
-    "allActivityStatuses": "Lahat ng Status ng Aktibidad",
+    "cancel": "Kanselahin",
+    "close": "Isara",
+    "confirm": "Kumpirmahin at Ilapat",
+    "discardChanges": "Itapon ang mga Pagbabago",
+    "keepEditing": "Ipagpatuloy ang Pag-edit",
+    "stageChanges": "Ihanda ang mga Pagbabago",
+    "uploadImage": "I-upload ang larawan sa ImgBB",
+    "helpDone": "Nakuha ko",
+    "save": {
+      "fields": "I-save ang mga Field",
+      "id": "I-save ang ID",
+      "key": "I-save ang Key"
+    },
+    "logs": {
+      "live": "Mga Live na Log",
+      "view": "Tingnan ang mga tala"
+    },
+    "grant": "Ibigay",
+    "done": "Tapos na",
+    "resetDefault": "Ibalik sa Default"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Pangalan ng Aktibidad",
+          "bigImage": "Malaking Larawan",
+          "bigText": "Malaking Teksto",
+          "details": "Detalye",
+          "imageUrl": "URL ng Larawan",
+          "smallImage": "Maliit na Larawan",
+          "smallText": "Maliit na Teksto",
+          "state": "Estado",
+          "uploadImage": "Mag-upload ng larawan",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "Katalogo ng App",
+          "desc": "Tingnan, salain, at i-customize ang projection ng bawat app"
+        },
+        "configurationDetails": "Mga detalye ng configuration",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Agad na ipapakita ang custom na fallback presence.",
+              "drop": "I-clear ang aktibidad sa Discord hanggang bumalik sa naka-enable na app.",
+              "freeze": "Ihihinto at pananatilihin ang huling presence hanggang may matukoy na naka-enable na app."
+            },
+            "title": "Mga Patakaran sa Labas ng App"
+          },
+          "fallbackPresence": "Custom na Fallback Presence",
+          "desc": "Gawi kapag umalis o lumipat mula sa naka-enable na app",
+          "title": "Mga Patakaran Kapag Wala sa Natukoy na App",
+          "help": "Tulong sa Patakaran"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Itinatakda ang timer sa takdang petsa at oras.",
+              "persistent": "Gumagamit ng iisang runtime timestamp para sa app at naka-pause na media sa session na ito.",
+              "reset": "Ibabalik sa 00:00 ang timer kapag inilunsad o binalikan ang app."
+            },
+            "title": "Mga Diskarte sa Timestamp"
+          },
+          "fixedStart": "Takdang Panimulang Timestamp",
+          "desc": "Paano naresolba ang mga timer ng aktibidad sa iba't ibang sesyon ng app",
+          "help": "Tulong sa Timestamp",
+          "title": "Diskarte sa Timestamp"
+        },
+        "statusFieldConfig": {
+          "title": "Config ng Status Field",
+          "desc": "I-customize ang pamagat, detalye, estado, at larawan"
+        },
+        "subtitle": "Patakaran kapag umalis sa app at gawi ng timestamp",
+        "title": "Config ng Presensya ng App"
+      },
+      "catalogue": {
+        "androidOnly": "Available ang paghanap ng naka-install na app sa Android app.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Ilapat ang mga Pagbabago?",
+              "desc": "Malapit mo nang permanenteng ilapat ang mga unti-unting pagbabago sa konfigurasyon sa",
+              "subtitle": "Kumpirmasyon",
+              "selectedApps": "mga napiling app."
+            },
+            "title": "I-configure nang Maramihan",
+            "subtitle": "Ilapat sa lahat ng napiling app",
+            "discard": {
+              "title": "Itapon ang mga Naka-stage na Pagbabago?",
+              "desc": "May mga batch configuration na hindi pa inilalapat. Kapag umalis ngayon, mawawala ang lahat ng naka-stage na pagbabago.",
+              "subtitle": "Mga batch na pagbabagong hindi nase-save"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Pumili ng icon na larawan",
+              "resetIcon": "Ibalik ang orihinal na icon ng app",
+              "resetLabel": "Ibalik ang Orihinal na Pangalan"
+            },
+            "customBtnDesc": "Magdagdag ng hanggang 2 interactive na button",
+            "title": "I-customize",
+            "original": "Orihinal:",
+            "subtitle": "Profile ng presensya at mga alias",
+            "projectedName": "Ipinapakitang Pangalan",
+            "switchToggle": {
+              "buttons": "I-toggle ang Custom na Button",
+              "details": "I-toggle ang Custom na Detalye at Estado",
+              "small": "I-toggle ang Custom na Maliit na Teksto at Larawan"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "I-clear ang mga Filter",
+          "filter": "I-filter ang mga App"
+        },
+        "loadAppsFailed": "Hindi ma-load ang mga naka-install na app.",
+        "loading": "",
+        "search": "Maghanap ng mga app...",
+        "subtitle": "{apps} app | {enabled} naka-enable",
+        "title": "Katalogo ng App",
+        "uploadProgress": "Nag-a-upload ng icon ng app sa ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "I-customize ang mga expression para sa pagtukoy ng app.",
+        "discardMsg": "Mayroon kang hindi pa nai-save na mga pagbabago sa mga patlang ng katayuan ng iyong aplikasyon. Ang pag-alis ngayon ay magbabalik sa mga ito sa nakaraang estado.",
+        "title": "Config ng Status Field ng App"
+      }
+    },
+    "buttons": {
+      "back": "Bumalik",
+      "help": "Tulong sa mga Available na Token",
+      "reset": "Ibalik sa Default"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Magdagdag ng hanggang 2 interactive na presence button gamit ang mga token expression.",
+        "subtitle": "I-customize ang mga expression para sa media playback.",
+        "discardMsg": "Mayroon kang hindi pa nai-save na mga pagbabago sa iyong mga patlang ng katayuan ng media. Ang pag-alis ngayon ay magbabalik sa mga ito sa dating estado.",
+        "title": "Config ng Status Field ng Media"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "Gagamitin ang timestamp ng app",
+          "title": "Natitirang Oras",
+          "desc": "Ipinapakita ang natitirang oras mula simula hanggang dulo"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Gagamitin ang dating o kasalukuyang app o custom fallback habang naka-pause ang media.",
+              "hidePaused": "Itatago ang presence habang naka-pause ang media, pati ang anumang natukoy na app.",
+              "showPaused": "Mananatiling aktibo ang media presence habang naka-pause at magpapakita ng pause indicator."
+            },
+            "desc": "Mga opsyon kapag naka-pause ang playback"
+          },
+          "desc": "Gawi ng presence kapag naka-pause ang playback",
+          "help": "Tulong sa Pagresolba ng Pause",
+          "title": "Pagresolba sa Naka-pause na Media"
+        },
+        "mediaPriority": {
+          "title": "Prayoridad ng Media",
+          "desc": "Itinatakda kung mananaig ang media sa laro o app",
+          "help": "Tulong sa Prayoridad",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Kapag nagpe-play ang media, ito ang uunahin at ipapakita ang kasalukuyang track o video.",
+              "switchesBetween": "Ipapakita lang ang media habang nasa media player. Kapag lumipat sa laro o app, iyon ang mananaig."
+            },
+            "title": "Diskarte sa Prayoridad ng Media",
+            "desc": "Pagresolba ng prayoridad sa laro at media"
+          }
+        },
+        "mediaScope": {
+          "title": "Saklaw ng Detection ng Media",
+          "desc": "Salain kung aling app ang magti-trigger ng media presence"
+        },
+        "statusFieldConfig": {
+          "title": "Config ng Status Field ng Media",
+          "desc": "I-customize ang pamagat, artist, album, at fallback na larawan"
+        },
+        "subtitle": "Mga prayoridad, timestamp, at estado ng playback",
+        "title": "Config ng Presensya ng Media",
+        "typeResolution": {
+          "title": "Pagkilala sa Uri ng Media",
+          "desc": "Paano inuuri ang pakikinig at panonood"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "Paunawa sa Katayuan ng App",
+        "media": "Pabatid ng Pagpapatugtog ng Midya"
+      },
+      "subtitle": "I-customize ang pamagat at ang sub-pamagat na ipinapakita sa paunang abiso ng serbisyo.",
+      "discard": "Mayroon kang mga hindi pa nai-save na pagbabago sa projection ng mga abiso. Kung lalabas ka ngayon, mawawala ang mga ito.",
+      "helpIntro": "Gamitin ang getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), at getFieldCfgStr(\"MediaBigText\") upang ipasok ang mga na-render na halaga ng field. Gamitin ang joinNonBlank(field1, field2) upang pagdugtungin ang mga hindi blangkong halaga gamit ang tuldik. Sinusuportahan ng mga template ng abiso ng app ang kundisyong AppActivityType == \"Playing\". Sinusuportahan din ng mga ekspresyon ang paghahambing na == at !=."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Custom na Fallback",
+      "drop": "I-drop (I-clear ang presensya)",
+      "freeze": "I-freeze (Default)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Custom na Takdang Oras",
+      "persistent": "Patuloy (Default)",
+      "resetOnLaunch": "I-reset sa Paglunsad"
+    },
+    "activityStatus": {
+      "all": "Lahat ng Status ng Aktibidad",
+      "dnd": "Huwag Istorbohin",
+      "idle": "Walang ginagawa",
+      "invisible": "Hindi Nakikita",
+      "offline": "Hindi konektado",
+      "online": "Online",
+      "streaming": "Nag-stream"
+    },
+    "activityType": {
+      "all": "Lahat ng Uri ng Aktibidad",
+      "competing": "Nakikipagkompetensya",
+      "listening": "Nakikinig",
+      "playing": "Naglalaro",
+      "watching": "Nanunuod"
+    },
     "allPlatforms": "Lahat ng Platform",
+    "disableAll": "Huwag Paganahin Lahat",
+    "enableAll": "Paganahin Lahat",
+    "enabledOnly": "Mga Naka-enable Lang",
     "globalDefault": "Pangkalahatang Default",
-    "playing": "Naglalaro",
-    "streaming": "Nag-stream",
-    "listening": "Nakikinig",
-    "watching": "Nanunuod",
-    "competing": "Nakikipagkompetensya",
-    "online": "Online",
-    "idle": "Walang ginagawa",
-    "dnd": "Huwag Istorbohin",
-    "offline": "Hindi konektado",
-    "invisible": "Hindi Nakikita",
-    "customize": "I-customize",
-    "profileSubtitle": "Profile ng presensya at mga alias",
-    "activityType": "Uri ng Aktibidad",
+    "keepCurrent": "Panatilihin ang Kasalukuyan",
+    "mediaScope": {
+      "allSessions": "Lahat ng Media Session (Default)",
+      "enabledAppsOnly": "Mga Naka-enable na App Lang"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Awtomatikong Umiaangkop (Kawani)",
+      "profileOverride": "Override ng Profile ng App"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Gamitin ang Natukoy na App",
+      "hidePaused": "Itago ang Naka-pause na Estado",
+      "showPaused": "Ipakita ang Naka-pause na Estado (Default)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Unahin ang Media na Nagpe-play (Default)",
+      "switchesBetween": "Salit-salit"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Madilim",
+      "light": "Maliwanag"
+    }
+  },
+  "labels": {
     "activityStatus": "Status ng Aktibidad",
-    "platformType": "Uri ng Platform",
+    "activityType": "Uri ng Aktibidad",
+    "customButtons": "Mga Custom na Button",
     "customDetailsState": "Custom na Detalye at Estado",
     "customSmallImage": "Custom na Maliit na Teksto at Larawan",
-    "customButtons": "Mga Custom na Button",
-    "bulkConfigure": "I-configure nang Maramihan",
-    "cancel": "Kanselahin",
-    "stageChanges": "Ihanda ang mga Pagbabago",
-    "apply": "Ilapat",
-    "confirm": "Kumpirmahin at Ilapat",
-    "keepCurrent": "Panatilihin ang Kasalukuyan",
-    "enableAll": "Paganahin Lahat",
-    "disableAll": "Huwag Paganahin Lahat",
-    "discardBatch": "Itapon ang mga Naka-stage na Pagbabago?",
-    "chooseIcon": "Pumili ng icon na larawan",
-    "resetIcon": "Ibalik ang orihinal na icon ng app",
-    "resetLabel": "Ibalik ang Orihinal na Pangalan",
-    "details": "Detalye",
-    "state": "Estado",
-    "smallText": "Maliit na Teksto",
-    "smallImageUrl": "URL ng maliit na larawan",
-    "uploadImage": "I-upload ang larawan sa ImgBB",
-    "buttonLabel": "Label (hal. Sumali sa Laro)",
-    "presenceToggle": "Toggle ng Presensya",
-    "bulkSubtitle": "Ilapat sa lahat ng napiling app",
-    "applyBatchTitle": "Ilapat ang mga Pagbabago?",
-    "confirmation": "Kumpirmasyon",
-    "unsavedBatch": "Mga batch na pagbabagong hindi nase-save",
-    "confirmApply": "Kumpirmahin at Ilapat",
     "filterOptions": "Mga Opsyon sa Filter",
-    "close": "Isara",
-    "loading": "",
-    "original": "Orihinal:",
-    "projectedName": "Ipinapakitang Pangalan",
-    "customButtonDesc": "Magdagdag ng hanggang 2 interactive na button",
-    "toggleDetails": "I-toggle ang Custom na Detalye at Estado",
-    "toggleSmall": "I-toggle ang Custom na Maliit na Teksto at Larawan",
-    "toggleButtons": "I-toggle ang Custom na Button",
-    "uploadProgress": "Nag-a-upload ng icon ng app sa ImgBB",
-    "keepEditing": "Ipagpatuloy ang Pag-edit",
-    "discardChanges": "Itapon ang mga Pagbabago",
-    "discardMessage": "May mga batch configuration na hindi pa inilalapat. Kapag umalis ngayon, mawawala ang lahat ng naka-stage na pagbabago.",
-    "applyMessage": "Malapit mo nang permanenteng ilapat ang mga unti-unting pagbabago sa konfigurasyon sa",
-    "selectedApps": "mga napiling app.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} app | {enabled} naka-enable",
-    "chooseImage": "Pumili ng image file.",
-    "imageTooLarge": "Pumili ng larawang mas maliit sa 32 MB.",
-    "imageUploadFailed": "Hindi na-upload ang larawan.",
-    "iconUploadFailed": "Hindi na-upload ang icon.",
-    "androidOnly": "Available ang paghanap ng naka-install na app sa Android app.",
-    "loadAppsFailed": "Hindi ma-load ang mga naka-install na app.",
-    "appUnit": "Aplikasyon",
-    "appsUnit": "mga App"
+    "platformType": "Uri ng Platform",
+    "presenceToggle": "Toggle ng Presensya",
+    "button1": "Pindutan 1",
+    "button2": "Pindutan 2",
+    "label": "Label",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Config ng Presensya ng App",
-    "subtitle": "Patakaran kapag umalis sa app at gawi ng timestamp",
-    "catalogue": "Katalogo ng App",
-    "catalogueDesc": "Tingnan, salain, at i-customize ang projection ng bawat app",
-    "outsidePolicies": "Mga Patakaran Kapag Wala sa Natukoy na App",
-    "outsideDescription": "Gawi kapag umalis o lumipat mula sa naka-enable na app",
-    "policyHelp": "Tulong sa Patakaran",
-    "freeze": "I-freeze (Default)",
-    "customFallback": "Custom na Fallback",
-    "drop": "I-drop (I-clear ang presensya)",
-    "fallbackPresence": "Custom na Fallback Presence",
-    "activityName": "Pangalan ng Aktibidad",
+  "pluralization": {
+    "app": {
+      "plural": "mga App",
+      "singular": "Aplikasyon"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Label (hal. Sumali sa Laro)",
     "details": "Detalye",
-    "state": "Estado",
+    "smallImageUrl": "URL ng maliit na larawan",
     "smallText": "Maliit na Teksto",
-    "bigText": "Malaking Teksto",
-    "smallImage": "Maliit na Larawan",
-    "bigImage": "Malaking Larawan",
-    "imageUrl": "URL ng Larawan",
-    "uploadingImage": "",
-    "timestampStrategy": "Diskarte sa Timestamp",
-    "timestampDescription": "Paano naresolba ang mga timer ng aktibidad sa iba't ibang sesyon ng app",
-    "timestampHelp": "Tulong sa Timestamp",
-    "persistent": "Patuloy (Default)",
-    "resetOnLaunch": "I-reset sa Paglunsad",
-    "customFixedTime": "Custom na Takdang Oras",
-    "fixedStart": "Takdang Panimulang Timestamp",
-    "statusFieldConfig": "Config ng Status Field",
-    "statusFieldDescription": "I-customize ang pamagat, detalye, estado, at larawan",
-    "configurationDetails": "Mga detalye ng configuration",
-    "outsideHelpTitle": "Mga Patakaran sa Labas ng App",
-    "timestampHelpTitle": "Mga Diskarte sa Timestamp",
-    "understood": "Nauunawaan",
-    "freezeHelp": "Ihihinto at pananatilihin ang huling presence hanggang may matukoy na naka-enable na app.",
-    "customHelp": "Agad na ipapakita ang custom na fallback presence.",
-    "dropHelp": "I-clear ang aktibidad sa Discord hanggang bumalik sa naka-enable na app.",
-    "persistentHelp": "Gumagamit ng iisang runtime timestamp para sa app at naka-pause na media sa session na ito.",
-    "resetHelp": "Ibabalik sa 00:00 ang timer kapag inilunsad o binalikan ang app.",
-    "fixedHelp": "Itinatakda ang timer sa takdang petsa at oras.",
-    "uploadImage": "Mag-upload ng larawan"
+    "state": "Estado",
+    "urlExample": "URL (https://...)",
+    "example": "hal. ",
+    "listenOn": "Makinig sa"
   },
-  "mediaPresence": {
-    "title": "Config ng Presensya ng Media",
-    "subtitle": "Mga prayoridad, timestamp, at estado ng playback",
-    "priority": "Prayoridad ng Media",
-    "priorityDesc": "Itinatakda kung mananaig ang media sa laro o app",
-    "priorityHelp": "Tulong sa Prayoridad",
-    "priorityPlaying": "Unahin ang Media na Nagpe-play (Default)",
-    "switchesBetween": "Salit-salit",
-    "scope": "Saklaw ng Detection ng Media",
-    "scopeDesc": "Salain kung aling app ang magti-trigger ng media presence",
-    "allSessions": "Lahat ng Media Session (Default)",
-    "enabledAppsOnly": "Mga Naka-enable na App Lang",
-    "typeResolution": "Pagkilala sa Uri ng Media",
-    "typeResolutionDesc": "Paano inuuri ang pakikinig at panonood",
-    "autoAdaptive": "Awtomatikong Umiaangkop (Kawani)",
-    "profileOverride": "Override ng Profile ng App",
-    "timeRemaining": "Natitirang Oras",
-    "timeRemainingDesc": "Ipinapakita ang natitirang oras mula simula hanggang dulo",
-    "appTimestamp": "Gagamitin ang timestamp ng app",
-    "pausedResolution": "Pagresolba sa Naka-pause na Media",
-    "pausedDesc": "Gawi ng presence kapag naka-pause ang playback",
-    "pausedHelp": "Tulong sa Pagresolba ng Pause",
-    "showPaused": "Ipakita ang Naka-pause na Estado (Default)",
-    "fallbackApp": "Gamitin ang Natukoy na App",
-    "hidePaused": "Itago ang Naka-pause na Estado",
-    "statusFields": "Config ng Status Field ng Media",
-    "statusFieldsDesc": "I-customize ang pamagat, artist, album, at fallback na larawan",
-    "priorityStrategy": "Diskarte sa Prayoridad ng Media",
-    "priorityStrategyDesc": "Pagresolba ng prayoridad sa laro at media",
-    "pausedOptions": "Mga opsyon kapag naka-pause ang playback",
-    "priorityHelpText": "Kapag nagpe-play ang media, ito ang uunahin at ipapakita ang kasalukuyang track o video.",
-    "switchHelpText": "Ipapakita lang ang media habang nasa media player. Kapag lumipat sa laro o app, iyon ang mananaig.",
-    "showPausedHelp": "Mananatiling aktibo ang media presence habang naka-pause at magpapakita ng pause indicator.",
-    "fallbackHelp": "Gagamitin ang dating o kasalukuyang app o custom fallback habang naka-pause ang media.",
-    "hidePausedHelp": "Itatago ang presence habang naka-pause ang media, pati ang anumang natukoy na app."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Pumili ng image file.",
+      "iconUploadFailed": "Hindi na-upload ang icon.",
+      "imageTooLarge": "Pumili ng larawang mas maliit sa 32 MB.",
+      "imageUploadFailed": "Hindi na-upload ang larawan."
+    }
   },
-  "permissions": {
-    "notificationSubtitle": "Configuration ng Special App Access",
-    "openAndroidSettings": "Buksan ang Android Settings",
-    "oemNotice": "Paalala para sa OEM at Android 13+ na Device",
-    "notificationExplanation": "Pinoprotektahan ng Android ang notification listener sa pamamagitan ng mga espesyal na pahintulot. Sundin ang paraang naaangkop sa brand ng iyong telepono.",
-    "methodA": "Paraan A: Special App Access (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "I-tap ang Buksan ang Android Settings sa ibaba.",
-    "methodAStep2": "Pumunta sa Special App Access > Notification Access.",
-    "methodAStep3": "Hanapin ang Kruzty Dynamics at i-on ang Allow notification access.",
-    "methodB": "Paraan B: App Info > Ellipsis (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Buksan ang Settings ng device > Apps > Manage Apps / App List.",
-    "methodBStep2": "Hanapin at i-tap ang Kruzty Dynamics.",
-    "methodBStep3": "I-tap ang tatlong tuldok sa kanang itaas.",
-    "methodBStep4": "I-tap ang Allow restricted settings / Special App Access > Grant.",
-    "methodBStep5": "Bumalik at paganahin ang Notification Access.",
-    "notificationAccessDescription": "Pinapahintulutan ng Notification Access ang Kruzty Dynamics na kumuha ng mga live media event (pamagat ng kanta, artist, album, at playback state) mula sa Spotify, YouTube Music, at mga media player.",
-    "usageDescription": "Kailangan ang Usage Access upang matukoy ang kasalukuyang app o larong nasa harapan at maitugma ito sa iyong Application Catalog.",
-    "usageStep1": "I-tap ang Open Usage Access.",
-    "usageStep2": "Hanapin ang Kruzty Dynamics.",
-    "usageStep3": "I-on ang Permit usage access.",
-    "batteryDescription": "Pinapatulog ng mga modernong Android system ang mga prosesong nasa background. I-exempt ang Kruzty Dynamics sa battery optimization upang tuloy-tuloy ang mga update ng Discord Rich Presence.",
-    "foregroundDescription": "Kailangan ito ng Android 13+ upang maipakita sa status bar ang patuloy na serbisyo at malaman mong tumatakbo ang Discord presence engine.",
-    "requiredTitle": "Kinakailangang pahintulot",
-    "requiredSubtitle": "Ibigay ang mga pahintulot sa Android bago simulan ang serbisyo.",
-    "done": "Tapos na",
-    "allGranted": "Naibigay na ang lahat ng kinakailangang pahintulot. Buksan ang serbisyo upang magpatuloy.",
-    "grant": "Bigyan ng kaloob",
-    "returnHint": "Pagkatapos mong bigyan ng pahintulot sa Android Settings, bumalik dito at paganahin ang serbisyo.",
-    "notificationTitle": "Pag-access sa Notipikasyon",
-    "usageTitle": "Paggamit ng Pag-access",
-    "usageSubtitle": "Deteksyon ng mga App sa Harap",
-    "openUsageAccess": "Buksan ang Pag-access sa Paggamit",
-    "batteryTitle": "Optimizasyon ng baterya",
-    "batterySubtitle": "Puting Listahan ng Serbisyo sa Likuran",
-    "requestExemption": "Humiling ng Eksepsyon",
-    "foregroundTitle": "Paunawa ng Serbisyo sa Harapan",
-    "foregroundSubtitle": "Pahintulot sa Abiso ng Android 13+",
-    "allowNotification": "Payagan ang abiso",
-    "foregroundGuardTitle": "Mga Paunawa ng Serbisyo sa Harap",
-    "usageGuardDescription": "Kinakailangan upang matukoy kung aling app ang kasalukuyang nasa foreground.",
-    "notificationGuardDescription": "Kinakailangan upang matukoy ang pag-playback ng media at ang metadata nito.",
-    "foregroundGuardDescription": "Pinapayagan ang Android na ipakita ang abiso ng serbisyo habang ito ay tumatakbo.",
-    "serviceStartError": "Hindi na-start ang serbisyo ng presensya ng Android."
+  "configFields": {
+    "status": {
+      "bigImage": "Malaking Larawan",
+      "bigText": "Malaking Teksto",
+      "line1": "Mga Detalye ng Aktibidad",
+      "smallImage": "Maliit na Larawan",
+      "smallText": "Maliit na Teksto",
+      "line2": "Kalagayan ng Aktibidad",
+      "title": "Pamagat/Ulo ng Aktibidad"
+    }
   },
-  "logs": {
-    "title": "Mga Log ng Aplikasyon",
-    "subtitle": "Output ng live diagnostics",
-    "copy": "Mga log ng kopya",
-    "export": "Mga log ng pag-export",
-    "empty": "[INFO] Walang mga log pa. Buksan ang Discord login o magsagawa ng mga aksyon upang makabuo ng mga log."
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "account ang naka-login.",
+          "desc": "Ikonekta ang iyong Discord account para sa Rich Presence",
+          "title": "Pag-login sa Discord"
+        },
+        "languageTitle": "Wika",
+        "themeTitle": "Tema",
+        "desc": "Pag-customize at Account",
+        "title": "Kontrol ng Gumagamit"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "I-exempt ang app upang hindi matulog sa background",
+          "title": "Optimisasyon ng Baterya",
+          "modal": {
+            "desc": "Pinapatulog ng mga modernong Android system ang mga prosesong nasa background. I-exempt ang Kruzty Dynamics sa battery optimization upang tuloy-tuloy ang mga update ng Discord Rich Presence.",
+            "subtitle": "Puting Listahan ng Serbisyo sa Likuran",
+            "requestExemption": "Humiling ng Eksepsyon"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Kailangan para matukoy ang tumutugtog na kanta o video",
+          "title": "Pahintulot sa Notipikasyon",
+          "modal": {
+            "methodA": {
+              "title": "Paraan A: Special App Access (Pixel, Motorola, Infinix, Stock)",
+              "step1": "I-tap ang Buksan ang Android Settings sa ibaba.",
+              "step2": "Pumunta sa Special App Access > Notification Access.",
+              "step3": "Hanapin ang Kruzty Dynamics at i-on ang Allow notification access."
+            },
+            "methodB": {
+              "title": "Paraan B: App Info > Ellipsis (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Buksan ang Settings ng device > Apps > Manage Apps / App List.",
+              "step2": "Hanapin at i-tap ang Kruzty Dynamics.",
+              "step4": "I-tap ang Allow restricted settings / Special App Access > Grant.",
+              "step5": "Bumalik at paganahin ang Notification Access."
+            },
+            "desc": "Pinapahintulutan ng Notification Access ang Kruzty Dynamics na kumuha ng mga live media event (pamagat ng kanta, artist, album, at playback state) mula sa Spotify, YouTube Music, at mga media player.",
+            "oemNotice": {
+              "desc": "Pinoprotektahan ng Android ang notification listener sa pamamagitan ng mga espesyal na pahintulot. Sundin ang paraang naaangkop sa brand ng iyong telepono.",
+              "title": "Paalala para sa OEM at Android 13+ na Device"
+            },
+            "subtitle": "Configuration ng Special App Access",
+            "openAndroidSettings": "Buksan ang Android Settings"
+          }
+        },
+        "desc": "Kailangan para sa pagtukoy",
+        "title": "Pamamahala ng Pahintulot",
+        "foregroundNotification": {
+          "desc": "Pahintulot ng Android 13+ para sa tuloy-tuloy na serbisyo",
+          "title": "Notipikasyon sa Foreground",
+          "modal": {
+            "allowNotification": "Payagan ang abiso",
+            "desc": "Kailangan ito ng Android 13+ upang maipakita sa status bar ang patuloy na serbisyo at malaman mong tumatakbo ang Discord presence engine.",
+            "subtitle": "Pahintulot sa Abiso ng Android 13+",
+            "title": "Paunawa ng Serbisyo sa Harapan"
+          }
+        },
+        "usageAccess": {
+          "desc": "Kailangan para matukoy ang kasalukuyang binubuksang laro o app",
+          "title": "Paggamit ng Access (Usage)",
+          "modal": {
+            "openUsageAccess": "Buksan ang Pag-access sa Paggamit",
+            "desc": "Kailangan ang Usage Access upang matukoy ang kasalukuyang app o larong nasa harapan at maitugma ito sa iyong Application Catalog.",
+            "step1": "I-tap ang Open Usage Access.",
+            "step2": "Hanapin ang Kruzty Dynamics.",
+            "step3": "I-on ang Permit usage access.",
+            "subtitle": "Deteksyon ng mga App sa Harap"
+          }
+        }
+      },
+      "privacyNotice": "Hindi kumukuha o nagpapadala ng impormasyon ang app na ito.",
+      "subtitle": "I-configure ang mga kinakailangang pahintulot at account para paganahin ang Discord Rich Presence.",
+      "title": "Unang Setup"
+    },
+    "footer": {
+      "allSet": "Handa na ang lahat!",
+      "buttons": {
+        "continueForNow": "Magpatuloy muna",
+        "finishSetup": "Tapusin ang Setup",
+        "skipForNow": "Laktawan muna"
+      },
+      "readyWhenYouAre": "Handa na kahit kailan"
+    }
   },
-  "toast": {
-    "duplicateAccount": "Naka-add na ang Discord account na ito.",
-    "insufficientPermissions": "Hindi sapat na pahintulot. Mangyaring suriin ang Mga Setting at iba pa > Suriin ang mga pahintulot.",
-    "newVersionAvailable": "May bagong bersyon na!",
-    "updateDetected": "Natukoy ang pinakabagong bersyon!",
-    "latestVersion": "Ito ang pinakabagong bersyon!",
-    "updateCheckFailed": "Hindi makapagsuri ng mga pag-update."
+  "tags": {
+    "granted": "Naibigay na",
+    "notificationCrucial": "Kritikal",
+    "allGranted": "Lahat ay Naibigay",
+    "cached": "naka-cache",
+    "check": "Suriin",
+    "checkingUpdates": "Sinusuri ang mga pag-update",
+    "default": "Default",
+    "view": "Tingnan"
   }
 }

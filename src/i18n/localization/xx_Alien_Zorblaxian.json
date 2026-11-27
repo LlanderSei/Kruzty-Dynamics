@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Vex'karn Zorblax",
-    "subtitle": "Klaatu vex Discord Rich Presence din'va — zorblax'k permissions un accounts.",
-    "privacyNotice": "Zorblax'in app no'k collect, no'k transmit user data. K'thun.",
-    "permissionsSection": "Permissions K'tara",
-    "permissionsRequired": "Zorblax'k detection'va",
-    "notificationTitle": "Notification Klaatu",
-    "notificationDesc": "Special App Klaatu zorblax'k media un playback detection",
-    "notificationCrucial": "K'thun'va",
-    "usageTitle": "Usage Klaatu",
-    "usageDesc": "Zorblax'k foreground application un game detection",
-    "batteryTitle": "Battery Zorblax",
-    "batteryDesc": "Exempt app — background service no'k sleep'va",
-    "postNotificationTitle": "Foreground Notification",
-    "postNotificationDesc": "Android 13+ permission — persistent service notification'va",
-    "grant": "Grant'va",
-    "granted": "Granted",
-    "userControlSection": "User K'tara",
-    "userControlDesc": "Customization un Account",
-    "discordLoginTitle": "Discord Login",
-    "discordLoginDesc": "Connect Discord account — Rich Presence projection'va",
-    "accountsConnected": "account logged in.",
-    "themeTitle": "Theme",
-    "languageTitle": "Tongue",
-    "finishSetup": "Zorblax Finish",
-    "continueForNow": "Continue Now'va",
-    "skipForNow": "Skip Now'va",
-    "allSet": "Vex'karn! Ready — projection'va",
-    "readyWhenYouAre": "Ready — zorblax'k thou'va"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Active Identity",
+        "stored": "Stored"
+      },
+      "content": {
+        "subtitle": "Tokens un identities k'tara",
+        "title": "Discord Login Portal",
+        "privacyText": "Discord authorization — social features access request — Rich Presence alongside. Kruzty Dynamics SDK use — account identify — configured activity publish un clear'va; friend, block, invite, message, voice features — no'k use. Android'va — tokens encrypted — this device'va stored. Read'va",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "title": "Connect Discord Account"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Expressions — == un != comparisons — support'va. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} — Playing'va AppName show'va — otherwise AppPlatformType show'va.",
+        "title": "Application Token Reference",
+        "desc": "Dynamic variables — field expressions'va available"
+      },
+      "media": {
+        "title": "Media Token Reference",
+        "intro": "Tokens — text fields un button labels un URLs'va directly embedded'va (e.g. {example}).",
+        "desc": "Dynamic variables — media expressions un buttons'va available"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "Unsaved Changes — Discard'va?",
+      "unsaved": "Unsaved modifications"
+    },
+    "logs": {
+      "copy": "Logs copy'va",
+      "empty": "[INFO] No logs yet. Discord login open — actions perform — logs generate'va.",
+      "export": "Logs export'va",
+      "subtitle": "Live diagnostics output",
+      "title": "Application Logs"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Primary Accent Color",
+        "resetAccent": "Default Orange'va Reset",
+        "tapCustomize": "Tap — customize'va",
+        "themeMode": "Theme Mode"
+      },
+      "globalDefaults": {
+        "activityStatus": "Activity Status",
+        "activityType": "Activity Type",
+        "note": "These defaults — automatically used — app un presence activity — own activity type un status — no'k specify'va."
+      },
+      "imgBb": {
+        "apiPrivacy": "This field empty leave — built-in default API key'va reset. Custom keys — plaintext'va never exposed. K'thun.",
+        "getApiKey": "— key obtain'va.",
+        "help": "Own ImgBB API Key set — custom app un media asset images — Discord CDN'va upload'va. Visit",
+        "usingDefaultKey": "Default system key — using"
+      },
+      "language": {
+        "availableLanguages": "Available Tongues",
+        "title": "Choose Tongue",
+        "desc": "Preferred display tongue — UI labels un notifications'va — select'va."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Android — presence service kill'va — prevent'va",
+        "foregroundDesc": "Status bar indicator — ongoing Discord presence'va",
+        "notificationAccessDesc": "Special App Klaatu — media detection'va",
+        "desc": "Permissions status — active media notifications un foreground applications read'va required:",
+        "usageAccessDesc": "Running foreground games un apps — detect'va"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "{total} linked image URLs — including {custom} custom app icon overrides. Cached links clear — custom icons keep'va — un all links clear — custom overrides remove'va — thou can'va. Overrides remove'va — those icons — Application Catalogue'va — again upload'va.",
+        "buttons": {
+          "clearCacheAll": "All Clear — Custom Icons Included",
+          "clearCacheKeep": "Cache Clear — Custom Icons Keep"
+        },
+        "clearedAll": "All linked image URLs cleared — custom app icons including.",
+        "clearedKeeping": "Linked image URL cache cleared. Custom app icons kept.",
+        "linkedImageUrls": "Linked Image URLs"
+      },
+      "credits": {
+        "contributorsSection": "Kizzy Contributors",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Libraries — this App'va Used",
+        "libraries": {
+          "lucide": "Community-crafted clean vector icons",
+          "react": "Modern user interface component architecture",
+          "sdk": "Native Android rich presence integration",
+          "tailwind": "Utility-first modern responsive styling",
+          "tauri": "Lightweight cross-platform native runtime",
+          "tokio": "Asynchronous event-driven network runtime"
+        },
+        "maintainerRole": "Current Maintainer un Developer"
+      },
+      "discordApp": {
+        "developerPortal": "Discord Developer Portal",
+        "help": "Own Discord Application ID set —",
+        "idPrivacy": "This field empty leave — default Kruzty Dynamics application ID'va reset."
+      }
+    }
   },
-  "nav": {
-    "service": "Service",
-    "accounts": "Accounts",
-    "settings": "Settings un More"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Add Account",
+            "switch": "Switch",
+            "unuse": "Unuse"
+          },
+          "activePresence": "Active Presence",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Confirm Logout",
+              "title": "Logout Account",
+              "removePrefix": "Account remove'va — zorblax'k thou sure",
+              "removeSuffix": ". Saved credentials — this device'va — remove'va."
+            }
+          },
+          "currentAccount": "Current Logged In Account",
+          "noActiveAccount": "No selected account. Logged-in accounts below'va — choose'va.",
+          "storedAccounts": "Stored Accounts"
+        },
+        "noAccount": {
+          "desc": "Discord account connect — Rich Presence statuses — games, apps, media'va — projection begin'va.",
+          "title": "No account logged in yet.",
+          "login": "Login Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "No Discord Accounts",
+        "loggedInMany": "{n} accounts logged in.",
+        "loggedInOne": "{n} account logged in."
+      },
+      "title": "Discord Accounts"
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics Dashboard",
+      "title": {
+        "welcome": "Vex'karn!",
+        "welcomeNamed": "Vex'karn, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "All required permissions granted. Service turn on — continue'va.",
+              "foregroundService": {
+                "desc": "Android — service notification — while runs — show'va allow'va.",
+                "title": "Foreground Service Notifications"
+              },
+              "notificationAccess": {
+                "desc": "Required — media playback un metadata — detect'va."
+              },
+              "subtitle": "Android permissions grant — service start'va.",
+              "title": "Permissions required",
+              "returnHint": "Android Settings'va access grant — hither return — service enable'va.",
+              "usageAccess": {
+                "desc": "Required — which app currently foreground'va — detect'va."
+              }
+            }
+          },
+          "startError": "Android presence service — start'va no'k.",
+          "running": "Service zorblax running.",
+          "stopped": "Service no'k started.",
+          "title": "Kruzty Dynamics Service"
+        },
+        "application": {
+          "desc": "App profiles — local presence detection'va — zorblax'k",
+          "title": "Application Presence"
+        },
+        "buttons": {
+          "applicationCatalogue": "Application Catalogue",
+          "presenceConfiguration": "Presence Configuration",
+          "statusFieldConfig": "Status Field Config"
+        },
+        "media": {
+          "desc": "Media behavior un status templates — zorblax'k",
+          "title": "Media Presence"
+        },
+        "preview": {
+          "noPresence": "No configured app un active media detected. K'thun.",
+          "stoppedDescription": "Service stopped. Turn on — enabled apps un active media detection'va."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "App Preferences",
+        "checkPermissions": {
+          "title": "Check Permissions",
+          "desc": "Granted un optional system access permissions — review'va"
+        },
+        "deleteCachedUrls": {
+          "title": "Delete Linked Image URLs",
+          "desc": "Uploaded images URLs — app un media status'va — clear'va"
+        },
+        "discordAppId": {
+          "title": "Set Discord Application ID",
+          "desc": "Set own Discord Application ID. Visit: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "Global Defaults",
+          "desc": "Activity type un status — unconfigured apps'va"
+        },
+        "imgBbKey": {
+          "title": "Set ImgBB API Key",
+          "desc": "Set own ImgBB API Key. Visit: api.imgbb.com"
+        },
+        "language": {
+          "title": "Tongue",
+          "desc": "Now Set:"
+        },
+        "notificationProjection": {
+          "title": "Modify Notification Status Projection",
+          "desc": "Customize application and media notification titles and subtitles."
+        },
+        "themes": {
+          "title": "Themes un Display",
+          "desc": "Set theme un accent color."
+        },
+        "checkUpdates": {
+          "title": "Zorblax'k Latest Version Check'va",
+          "desc": "Newer version available'va — check'va."
+        }
+      },
+      "subtitle": "App preferences un diagnostics",
+      "title": "Settings un More",
+      "cardInfo": {
+        "architecture": "Rust Core (Tokio + Tauri v2) — built — React 19 un TailwindCSS Frontend — Native Android Plugin Bridge — including. Original Kizzy's Experimental RPC — based.",
+        "credits": "Credits",
+        "developedBy": "Developed —",
+        "latestRelease": "Latest Release'va Go",
+        "learnMore": "This App — Learn More",
+        "repository": "GitHub Repository Check'va",
+        "submitIssue": "Issue Submit'va",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "Vex'karn!",
-    "welcomeNamed": "Vex'karn, {name}!",
-    "dashboardSubtitle": "Kruzty Dynamics Dashboard",
-    "accountsLoggedInOne": "{n} account logged in.",
-    "accountsLoggedInMany": "{n} accounts logged in.",
-    "liveLogs": "Live Logs",
-    "viewLogs": "View Logs",
-    "serviceActive": "Active",
-    "serviceInactive": "Inactive",
-    "serviceStarting": "Starting",
-    "serviceStopped": "Stopped"
-  },
-  "accounts": {
-    "title": "Discord Accounts",
-    "subtitle": "Tokens un identities k'tara",
-    "loginPortal": "Login — Discord Portal'va",
-    "loginWithToken": "Add Account — Token'va",
-    "addAccount": "Add Account",
-    "activeIdentity": "Active Identity",
-    "stored": "Stored",
+  "buttons": {
     "remove": "Remove'va",
-    "noAccounts": "No Discord Accounts",
-    "noAccountsDesc": "Add Discord account — portal un user token — rich presence projection'va."
-  },
-  "settings": {
-    "title": "Settings un More",
-    "subtitle": "App preferences un diagnostics",
-    "appPreferences": "App Preferences",
-    "notificationProjection": "Modify Notification Status Projection",
-    "notificationProjectionDesc": "Customize application and media notification titles and subtitles.",
-    "themes": "Themes un Display",
-    "themesDesc": "Set theme un accent color.",
-    "language": "Tongue",
-    "languageDesc": "Now Set:",
-    "globalDefaults": "Global Defaults",
-    "globalDefaultsDesc": "Activity type un status — unconfigured apps'va",
-    "imgbbKey": "Set ImgBB API Key",
-    "imgbbKeyDesc": "Set own ImgBB API Key. Visit: api.imgbb.com",
-    "discordAppId": "Set Discord Application ID",
-    "discordAppIdDesc": "Set own Discord Application ID. Visit: discord.com/developers",
-    "checkPermissions": "Check Permissions",
-    "checkPermissionsDesc": "Granted un optional system access permissions — review'va",
-    "deleteCache": "Delete Linked Image URLs",
-    "deleteCacheDesc": "Uploaded images URLs — app un media status'va — clear'va"
-  },
-  "service": {
-    "title": "Kruzty Dynamics Service",
-    "running": "Service zorblax running.",
-    "stopped": "Service no'k started.",
-    "applicationPresence": "Application Presence",
-    "appDescription": "App profiles — local presence detection'va — zorblax'k",
-    "applicationCatalogue": "Application Catalogue",
-    "statusFieldConfig": "Status Field Config",
-    "presenceConfiguration": "Presence Configuration",
-    "mediaPresence": "Media Presence",
-    "mediaDescription": "Media behavior un status templates — zorblax'k",
-    "noPresence": "No configured app un active media detected. K'thun.",
-    "stoppedDescription": "Service stopped. Turn on — enabled apps un active media detection'va."
-  },
-  "logs": {
-    "title": "Application Logs",
-    "subtitle": "Live diagnostics output",
-    "copy": "Logs copy'va",
-    "export": "Logs export'va",
-    "empty": "[INFO] No logs yet. Discord login open — actions perform — logs generate'va."
-  },
-  "permissions": {
-    "requiredTitle": "Permissions required",
-    "requiredSubtitle": "Android permissions grant — service start'va.",
-    "done": "Done",
-    "allGranted": "All required permissions granted. Service turn on — continue'va.",
-    "grant": "Grant'va",
-    "returnHint": "Android Settings'va access grant — hither return — service enable'va.",
-    "notificationTitle": "Notification Klaatu",
-    "notificationSubtitle": "Special App Klaatu Configuration",
-    "openAndroidSettings": "Open Android Settings",
-    "oemNotice": "Notice — OEM un Android 13+ Devices",
-    "notificationExplanation": "Android notification listener access — special permission layers'va — protect'va. Phone brand'k — methods below — follow'va.",
-    "methodA": "Method A: Special App Klaatu (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "Open Android Settings below — tap'va.",
-    "methodAStep2": "Special App Klaatu > Notification Klaatu — go'va.",
-    "methodAStep3": "Kruzty Dynamics find — Allow notification access switch on'va.",
-    "methodB": "Method B: App Info > Ellipsis (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Device Settings > Apps > Manage Apps / App List — open'va.",
-    "methodBStep2": "Kruzty Dynamics find — tap'va.",
-    "methodBStep3": "Three dots top-right corner — tap'va.",
-    "methodBStep4": "Allow restricted settings / Special App Klaatu > Grant — tap'va.",
-    "methodBStep5": "Return — Notification Klaatu enable'va.",
-    "notificationAccessDescription": "Notification Klaatu — Kruzty Dynamics — live media session playback events (Song Title, Artist, Album, Playback State) — Spotify, YouTube Music, media players'va — capture'va.",
-    "usageTitle": "Usage Klaatu",
-    "usageSubtitle": "Foreground App Detection",
-    "openUsageAccess": "Open Usage Klaatu",
-    "usageDescription": "Usage Klaatu required — current foreground app un game detect'va — Kruzty Dynamics — configured Application Catalog'va match'va.",
-    "usageStep1": "Open Usage Klaatu — tap'va.",
-    "usageStep2": "Kruzty Dynamics locate'va.",
-    "usageStep3": "Permit usage access switch on'va.",
-    "batteryTitle": "Battery Zorblax",
-    "batterySubtitle": "Background Service Whitelist",
-    "requestExemption": "Request Exemption",
-    "batteryDescription": "Modern Android systems — background processes — few minutes'va sleep'va. Kruzty Dynamics battery optimization'va exempt — continuous, uninterrupted Discord Rich Presence updates'va.",
-    "foregroundTitle": "Foreground Service Notification",
-    "foregroundSubtitle": "Android 13+ Notification Permission",
-    "foregroundGuardTitle": "Foreground Service Notifications",
-    "usageGuardDescription": "Required — which app currently foreground'va — detect'va.",
-    "notificationGuardDescription": "Required — media playback un metadata — detect'va.",
-    "foregroundGuardDescription": "Android — service notification — while runs — show'va allow'va.",
-    "serviceStartError": "Android presence service — start'va no'k.",
-    "allowNotification": "Allow Notification",
-    "foregroundDescription": "Android 13+ required — ongoing foreground service notification status bar'va display'va — Discord presence engine running'va confirm'va."
-  },
-  "toast": {
-    "duplicateAccount": "This Discord account already added. K'thun.",
-    "insufficientPermissions": "Insufficient permissions, K'thun. Check Settings un More > Check Permissions.",
-    "newVersionAvailable": "New Version is Available!",
-    "updateDetected": "A new latest version is detected!",
-    "latestVersion": "This is the latest version!",
-    "updateCheckFailed": "Could not check for updates."
-  },
-  "accountsPage": {
-    "emptyTitle": "No account logged in yet.",
-    "emptyDescription": "Discord account connect — Rich Presence statuses — games, apps, media'va — projection begin'va.",
-    "login": "Login Discord",
-    "currentAccount": "Current Logged In Account",
-    "activePresence": "Active Presence",
-    "storedAccounts": "Stored Accounts",
-    "switch": "Switch",
-    "unuse": "Unuse",
-    "remove": "Remove'va",
-    "cancel": "Cancel",
-    "deleteTitle": "Discord Account remove'va?",
-    "loginTitle": "Discord Login Portal",
-    "noActiveAccount": "No selected account. Logged-in accounts below'va — choose'va.",
-    "addAccountTitle": "Connect Discord Account",
-    "portal": "Discord Login Portal",
-    "signInPortal": "Discord in-app — securely sign in'va",
     "openPortal": "Open Portal",
-    "privacyText": "Discord authorization — social features access request — Rich Presence alongside. Kruzty Dynamics SDK use — account identify — configured activity publish un clear'va; friend, block, invite, message, voice features — no'k use. Android'va — tokens encrypted — this device'va stored. Read'va",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Logout Account",
-    "removePrefix": "Account remove'va — zorblax'k thou sure",
-    "removeSuffix": ". Saved credentials — this device'va — remove'va.",
-    "confirmLogout": "Confirm Logout",
-    "addAccount": "Add Discord Account",
-    "noSelection": "No selected account. Logged-in accounts below'va — choose'va.",
-    "addMoreAccounts": "More accounts — Discord button below click'va — add'va."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Choose Tongue",
-    "languageDescription": "Preferred display tongue — UI labels un notifications'va — select'va.",
-    "availableLanguages": "Available Tongues",
-    "close": "Close",
-    "linkedImageUrls": "Linked Image URLs",
-    "clearCacheKeep": "Cache Clear — Custom Icons Keep",
-    "clearCacheAll": "All Clear — Custom Icons Included",
-    "credits": "Credits",
-    "themeMode": "Theme Mode",
-    "accentColor": "Primary Accent Color",
-    "resetAccent": "Default Orange'va Reset",
-    "learnMore": "This App — Learn More",
-    "privacyPolicy": "Privacy Policy",
-    "repository": "GitHub Repository Check'va",
-    "latestRelease": "Latest Release'va Go",
-    "submitIssue": "Issue Submit'va",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Libraries — this App'va Used",
-    "contributorsSection": "Kizzy Contributors",
-    "maintainerRole": "Current Maintainer un Developer",
-    "view": "View",
-    "done": "Done",
-    "developedBy": "Developed —",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Rust Core (Tokio + Tauri v2) — built — React 19 un TailwindCSS Frontend — Native Android Plugin Bridge — including. Original Kizzy's Experimental RPC — based.",
-    "cached": "cached",
-    "tapCustomize": "Tap — customize'va",
-    "defaultNote": "These defaults — automatically used — app un presence activity — own activity type un status — no'k specify'va.",
-    "activityType": "Activity Type",
-    "activityStatus": "Activity Status",
-    "imgbbHelp": "Own ImgBB API Key set — custom app un media asset images — Discord CDN'va upload'va. Visit",
-    "getApiKey": "— key obtain'va.",
-    "apiPrivacy": "This field empty leave — built-in default API key'va reset. Custom keys — plaintext'va never exposed. K'thun.",
-    "saveKey": "Save Key",
-    "discordIdHelp": "Own Discord Application ID set —",
-    "developerPortal": "Discord Developer Portal",
-    "idDefault": "Default",
-    "idPrivacy": "This field empty leave — default Kruzty Dynamics application ID'va reset.",
-    "saveId": "Save ID",
-    "permissionsDescription": "Permissions status — active media notifications un foreground applications read'va required:",
-    "notificationAccessDesc": "Special App Klaatu — media detection'va",
-    "usageAccessDesc": "Running foreground games un apps — detect'va",
-    "batteryDesc": "Android — presence service kill'va — prevent'va",
-    "foregroundDesc": "Status bar indicator — ongoing Discord presence'va",
-    "saveIdPlaceholder": "1572590527562391713 (Default)",
-    "resetDefault": "Reset — Default'va",
-    "cancel": "Cancel",
-    "cacheWarning": "{total} linked image URLs — including {custom} custom app icon overrides. Cached links clear — custom icons keep'va — un all links clear — custom overrides remove'va — thou can'va. Overrides remove'va — those icons — Application Catalogue'va — again upload'va.",
-    "allGranted": "All Granted",
-    "clearedAll": "All linked image URLs cleared — custom app icons including.",
-    "clearedKeeping": "Linked image URL cache cleared. Custom app icons kept.",
-    "usingDefaultKey": "Default system key — using",
-    "customKeySet": "Custom Key Set",
-    "light": "Light",
-    "dark": "Dark",
-    "amoled": "AMOLED",
-    "libraryTauri": "Lightweight cross-platform native runtime",
-    "libraryTokio": "Asynchronous event-driven network runtime",
-    "librarySdk": "Native Android rich presence integration",
-    "libraryReact": "Modern user interface component architecture",
-    "libraryTailwind": "Utility-first modern responsive styling",
-    "libraryLucide": "Community-crafted clean vector icons",
-    "checkForUpdates": "Zorblax'k Latest Version Check'va",
-    "checkForUpdatesDesc": "Newer version available'va — check'va.",
-    "check": "Check'va",
-    "checkingUpdates": "Updates zorblax'k checking"
-  },
-  "configFields": {
-    "appTitle": "Application Status Field Config",
-    "mediaTitle": "Media Status Field Config",
-    "back": "Back",
-    "reset": "Reset — Defaults'va",
-    "help": "Available Tokens Help",
-    "title": "Title",
-    "line1": "Line 1 (Details)",
-    "line2": "Line 2 (State)",
-    "smallText": "Small Text",
-    "smallImage": "Small Image",
-    "bigText": "Big Text",
-    "bigImage": "Big Image",
-    "header": "Header (Listening to / Watching)",
-    "mediaTitleField": "Media Title (Activity Details)",
-    "artist": "Line 1 (Activity State / Artist)",
-    "album": "Line 2 (Album / Image Text)",
-    "buttons": "Custom Buttons",
-    "button1": "Button 1",
-    "button2": "Button 2",
-    "save": "Save Fields",
-    "appReference": "Application Token Reference",
-    "mediaReference": "Media Token Reference",
-    "tokenDescription": "Dynamic variables — field expressions'va available",
-    "mediaTokenDescription": "Video un media description — web un video players'va.",
-    "discard": "Unsaved Changes — Discard'va?",
-    "unsaved": "Unsaved modifications",
-    "helpDone": "Got it",
-    "appTokenName": "Projected application name — activity'va shown.",
-    "appHeader": "Header",
-    "titleHeader": "Title/Header",
-    "detailsField": "Details",
-    "stateField": "State",
-    "notificationConfigSubtitle": "Title un subtitle — foreground service notification'va — customize'va.",
-    "notificationAppSection": "App Status Notification",
-    "notificationMediaSection": "Media Playback Notification",
-    "notificationSubtitleLabel": "Subtitle",
-    "notificationHelpIntro": "Use getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), un getFieldCfgStr(\"MediaBigText\") — rendered field values insert'va. Use joinNonBlank(field1, field2) — nonempty values join'va — bullet'va. App notification templates — AppActivityType == \"Playing\" conditional — support'va. Expressions — == un != comparisons — also support'va.",
-    "notificationDiscardMessage": "Unsaved notification projection changes — thou hast. Leaving now — discard'va.",
-    "appTokenActivityType": "Rich Presence activity type — this app profile'va selected — Playing, Listening, Watching, un Competing — such as.",
-    "appTokenPlatformType": "Platform — this app profile'va selected — Android, PC, PlayStation, un Xbox — such as.",
-    "appExpressionOperators": "Expressions — == un != comparisons — support'va. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} — Playing'va AppName show'va — otherwise AppPlatformType show'va.",
-    "appTokenDetails": "Custom Details text — this app profile'va saved — disabled un blank'va empty.",
-    "appTokenState": "Custom State text — this app profile'va saved — disabled un blank'va empty.",
-    "appTokenSmallText": "Custom small image label — this app profile'va saved — disabled un blank'va empty.",
-    "appTokenSmallUrl": "Custom small image URL — this app profile'va saved — disabled un blank'va empty.",
-    "appTokenImageUrl": "Cached ImgBB remote URL — application icon'va.",
-    "appTokenPackageName": "Android package identifier (e.g. com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Tokens — text fields un button labels un URLs'va directly embedded'va (e.g. {example}).",
-    "mediaTokenAppName": "Player application name — Discord's Listening to un Watching header'va shown.",
-    "mediaTokenTitle": "Active media song un video title — notification metadata'va.",
-    "mediaTokenArtist": "Artist un creator — playing audio un video'va.",
-    "mediaTokenAlbum": "Album name un playlist container.",
-    "mediaTokenPlaybackState": "Current playback state (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "Cached ImgBB URL — media album art un thumbnail'va.",
-    "mediaTokenPlaybackImageUrl": "Asset image URL — current playback indicator'va.",
-    "mediaTokenFallbackImageUrl": "Fallback application icon — no artwork available'va.",
-    "appConfigSubtitle": "Expressions customize — app detection'va.",
-    "mediaConfigSubtitle": "Expressions customize — media playback'va.",
-    "mediaHeaderDescription": "App name — Discord's media header'va shown. Activity type — Listening to un Watching'va select'va.",
-    "mediaTitleDescription": "This — media title/details text'va maps. Player name — Header above'va separately configure'va.",
-    "mediaAlbumDescription": "Artist beneath — Discord's media card'va shown.",
-    "mediaButtonDescription": "Up to 2 interactive presence buttons — token expressions — add'va.",
-    "mediaButtonLabel": "Label",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "e.g. ",
-    "mediaButtonListen": "Listen on",
-    "appDiscardMessage": "Unsaved changes — Application Status Fields'va — thou hast. Leaving now — previous state'va revert'va.",
-    "mediaDiscardMessage": "Unsaved changes — Media Status Fields'va — thou hast. Leaving now — previous state'va revert'va.",
-    "mediaTokenSubtitle": "Dynamic variables — media expressions un buttons'va available"
-  },
-  "catalogue": {
-    "title": "Application Catalogue",
-    "back": "Back",
+    "understood": "Understood",
+    "apply": "Apply",
     "batch": "Batch Operations",
-    "search": "Search applications...",
-    "filter": "Filter Apps",
-    "clearFilters": "Clear Filters",
-    "enabledOnly": "Enabled Only",
-    "allActivityTypes": "All Activity Types",
-    "allActivityStatuses": "All Activity Statuses",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm un Apply",
+    "discardChanges": "Discard Changes",
+    "keepEditing": "Keep Editing",
+    "stageChanges": "Stage Changes",
+    "uploadImage": "Image — ImgBB'va upload",
+    "helpDone": "Got it",
+    "save": {
+      "fields": "Save Fields",
+      "id": "Save ID",
+      "key": "Save Key"
+    },
+    "logs": {
+      "live": "Live Logs",
+      "view": "View Logs"
+    },
+    "grant": "Grant'va",
+    "done": "Done",
+    "resetDefault": "Reset — Default'va"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Activity Name",
+          "bigImage": "Big Image",
+          "bigText": "Big Text",
+          "details": "Details",
+          "imageUrl": "Image URL",
+          "smallImage": "Small Image",
+          "smallText": "Small Text",
+          "state": "State",
+          "uploadImage": "Image upload'va",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "Application Catalogue",
+          "desc": "Individual app projections — view, filter, customize'va"
+        },
+        "configurationDetails": "Configuration details",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Customized fallback presence — immediately projects'va.",
+              "drop": "Discord activity clears — enabled application'va thou returnest — until.",
+              "freeze": "Last projected presence pauses un preserves — enabled app again detected'va — until."
+            },
+            "title": "Outside App Policies"
+          },
+          "fallbackPresence": "Custom Fallback Presence",
+          "desc": "Behavior — enabled apps leave un switch away'va",
+          "title": "Outside Detected App Policies",
+          "help": "Policy Help"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Presence timer — specific fixed start date un time'va locks.",
+              "persistent": "One shared runtime timestamp — apps un paused media'va — this service session'va — uses.",
+              "reset": "Timer 00:00'va restarts — app launched un refocused'va — when."
+            },
+            "title": "Timestamp Strategies"
+          },
+          "fixedStart": "Fixed Start Timestamp",
+          "desc": "Activity timers — app sessions across — how resolved'va",
+          "help": "Timestamp Help",
+          "title": "Timestamp Strategy"
+        },
+        "statusFieldConfig": {
+          "title": "Status Field Configuration",
+          "desc": "Title, details, state, artwork expressions — customize'va"
+        },
+        "subtitle": "Outside app policy un timestamp behavior",
+        "title": "Application Presence Configuration"
+      },
+      "catalogue": {
+        "androidOnly": "Installed app discovery — Android app'va available.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "Batch Changes — Apply'va?",
+              "desc": "Staged configuration changes permanently apply'va — thou art about'va",
+              "subtitle": "Confirmation",
+              "selectedApps": "selected applications."
+            },
+            "title": "Bulk Configure",
+            "subtitle": "Changes — all selected applications'va apply'va",
+            "discard": {
+              "title": "Staged Changes — Discard'va?",
+              "desc": "Uncommitted batch configurations — thou hast. Batch mode now leave — all staged changes discard'va.",
+              "subtitle": "Unsaved batch modifications"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Icon image choose'va",
+              "resetIcon": "Original app icon'va reset",
+              "resetLabel": "Original Label'va Reset"
+            },
+            "customBtnDesc": "Up to 2 interactive presence buttons — add'va",
+            "title": "Customize",
+            "original": "Original:",
+            "subtitle": "Presence profile un projection aliases",
+            "projectedName": "Projected Name",
+            "switchToggle": {
+              "buttons": "Custom Buttons — toggle",
+              "details": "Custom Details un State — toggle",
+              "small": "Custom Small Text un Image — toggle"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Clear Filters",
+          "filter": "Filter Apps"
+        },
+        "loadAppsFailed": "Installed apps load'va no'k.",
+        "loading": "",
+        "search": "Search applications...",
+        "subtitle": "{apps} apps | {enabled} enabled",
+        "title": "Application Catalogue",
+        "uploadProgress": "App icon — ImgBB'va uploading"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Expressions customize — app detection'va.",
+        "discardMsg": "Unsaved changes — Application Status Fields'va — thou hast. Leaving now — previous state'va revert'va.",
+        "title": "Application Status Field Config"
+      }
+    },
+    "buttons": {
+      "back": "Back",
+      "help": "Available Tokens Help",
+      "reset": "Reset — Defaults'va"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Up to 2 interactive presence buttons — token expressions — add'va.",
+        "subtitle": "Expressions customize — media playback'va.",
+        "discardMsg": "Unsaved changes — Media Status Fields'va — thou hast. Leaving now — previous state'va revert'va.",
+        "title": "Media Status Field Config"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "Time Remaining",
+          "desc": "Usual start/current-end time remaining — shows"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Previously un currently detected app un custom fallback uses — media paused'va.",
+              "hidePaused": "Presence hides — media paused'va — detected app including.",
+              "showPaused": "Media presence active keeps — paused'va — paused indicators shows'va."
+            },
+            "desc": "Options — active playback paused'va"
+          },
+          "desc": "Presence behavior — active playback paused'va",
+          "help": "Paused Resolution Help",
+          "title": "Paused Media Resolution"
+        },
+        "mediaPriority": {
+          "title": "Media Priority",
+          "desc": "Media — gaming/app sessions overrides'va — whether controls",
+          "help": "Priority Help",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Media actively playing'va — app thou art using'va precedence takes — current track un video projects'va.",
+              "switchesBetween": "Media projects — media player inside thou art — only while. Game un enabled app'va switching — that app take over'va allows."
+            },
+            "title": "Media Priority Strategy",
+            "desc": "Resolution logic — gaming un media sessions between"
+          }
+        },
+        "mediaScope": {
+          "title": "Media Detection Scope",
+          "desc": "Apps filter — media rich presence trigger'va"
+        },
+        "statusFieldConfig": {
+          "title": "Media Status Field Configuration",
+          "desc": "Title, artist, album, artwork fallback expressions — customize'va"
+        },
+        "subtitle": "Resolution priorities, timestamps, playback states",
+        "title": "Media Presence Configuration",
+        "typeResolution": {
+          "title": "Media Type Resolution",
+          "desc": "Listening un watching activities — how classified'va"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "App Status Notification",
+        "media": "Media Playback Notification"
+      },
+      "subtitle": "Title un subtitle — foreground service notification'va — customize'va.",
+      "discard": "Unsaved notification projection changes — thou hast. Leaving now — discard'va.",
+      "helpIntro": "Use getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), un getFieldCfgStr(\"MediaBigText\") — rendered field values insert'va. Use joinNonBlank(field1, field2) — nonempty values join'va — bullet'va. App notification templates — AppActivityType == \"Playing\" conditional — support'va. Expressions — == un != comparisons — also support'va."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Custom Fallback",
+      "drop": "Drop (Clear presence)",
+      "freeze": "Freeze (Default)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Custom Fixed Time",
+      "persistent": "Persistent (Default)",
+      "resetOnLaunch": "Reset on Launch"
+    },
+    "activityStatus": {
+      "all": "All Activity Statuses",
+      "dnd": "Do Not Disturb",
+      "idle": "Idle",
+      "invisible": "Invisible",
+      "offline": "Offline",
+      "online": "Online",
+      "streaming": "Streaming"
+    },
+    "activityType": {
+      "all": "All Activity Types",
+      "competing": "Competing",
+      "listening": "Listening",
+      "playing": "Playing",
+      "watching": "Watching"
+    },
     "allPlatforms": "All Platforms",
+    "disableAll": "Disable All",
+    "enableAll": "Enable All",
+    "enabledOnly": "Enabled Only",
     "globalDefault": "Global Default",
-    "playing": "Playing",
-    "streaming": "Streaming",
-    "listening": "Listening",
-    "watching": "Watching",
-    "competing": "Competing",
-    "online": "Online",
-    "idle": "Idle",
-    "dnd": "Do Not Disturb",
-    "offline": "Offline",
-    "invisible": "Invisible",
-    "customize": "Customize",
-    "profileSubtitle": "Presence profile un projection aliases",
-    "activityType": "Activity Type",
+    "keepCurrent": "Keep Current",
+    "mediaScope": {
+      "allSessions": "All Media Sessions (Default)",
+      "enabledAppsOnly": "Only Enabled Apps"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Auto-Adaptive (Default)",
+      "profileOverride": "App Profile Override"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Fallback to Detected App",
+      "hidePaused": "Hide Paused State",
+      "showPaused": "Show Paused State (Default)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Priority Playing Media (Default)",
+      "switchesBetween": "Switches Between"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Dark",
+      "light": "Light"
+    }
+  },
+  "labels": {
     "activityStatus": "Activity Status",
-    "platformType": "Platform Type",
+    "activityType": "Activity Type",
+    "customButtons": "Custom Buttons",
     "customDetailsState": "Custom Details un State",
     "customSmallImage": "Custom Small Text un Image",
-    "customButtons": "Custom Buttons",
-    "bulkConfigure": "Bulk Configure",
-    "cancel": "Cancel",
-    "stageChanges": "Stage Changes",
-    "apply": "Apply",
-    "confirm": "Confirm un Apply",
-    "keepCurrent": "Keep Current",
-    "enableAll": "Enable All",
-    "disableAll": "Disable All",
-    "discardBatch": "Staged Changes — Discard'va?",
-    "chooseIcon": "Icon image choose'va",
-    "resetIcon": "Original app icon'va reset",
-    "resetLabel": "Original Label'va Reset",
-    "details": "Details",
-    "state": "State",
-    "smallText": "Small Text",
-    "smallImageUrl": "Small image URL",
-    "uploadImage": "Image — ImgBB'va upload",
-    "buttonLabel": "Label (e.g. Join Game)",
-    "presenceToggle": "Presence Toggle",
-    "bulkSubtitle": "Changes — all selected applications'va apply'va",
-    "applyBatchTitle": "Batch Changes — Apply'va?",
-    "confirmation": "Confirmation",
-    "unsavedBatch": "Unsaved batch modifications",
-    "confirmApply": "Confirm un Apply",
     "filterOptions": "Filter Options",
-    "close": "Close",
-    "loading": "",
-    "original": "Original:",
-    "projectedName": "Projected Name",
-    "customButtonDesc": "Up to 2 interactive presence buttons — add'va",
-    "toggleDetails": "Custom Details un State — toggle",
-    "toggleSmall": "Custom Small Text un Image — toggle",
-    "toggleButtons": "Custom Buttons — toggle",
-    "uploadProgress": "App icon — ImgBB'va uploading",
-    "keepEditing": "Keep Editing",
-    "discardChanges": "Discard Changes",
-    "discardMessage": "Uncommitted batch configurations — thou hast. Batch mode now leave — all staged changes discard'va.",
-    "applyMessage": "Staged configuration changes permanently apply'va — thou art about'va",
-    "selectedApps": "selected applications.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} apps | {enabled} enabled",
-    "chooseImage": "Image file choose'va.",
-    "imageTooLarge": "32 MB'va smaller image choose'va.",
-    "imageUploadFailed": "Image upload failed.",
-    "iconUploadFailed": "Icon upload failed.",
-    "androidOnly": "Installed app discovery — Android app'va available.",
-    "loadAppsFailed": "Installed apps load'va no'k.",
-    "appUnit": "App",
-    "appsUnit": "Apps"
+    "platformType": "Platform Type",
+    "presenceToggle": "Presence Toggle",
+    "button1": "Button 1",
+    "button2": "Button 2",
+    "label": "Label",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Application Presence Configuration",
-    "subtitle": "Outside app policy un timestamp behavior",
-    "catalogue": "Application Catalogue",
-    "catalogueDesc": "Individual app projections — view, filter, customize'va",
-    "outsidePolicies": "Outside Detected App Policies",
-    "outsideDescription": "Behavior — enabled apps leave un switch away'va",
-    "policyHelp": "Policy Help",
-    "freeze": "Freeze (Default)",
-    "customFallback": "Custom Fallback",
-    "drop": "Drop (Clear presence)",
-    "fallbackPresence": "Custom Fallback Presence",
-    "activityName": "Activity Name",
+  "pluralization": {
+    "app": {
+      "plural": "Apps",
+      "singular": "App"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Label (e.g. Join Game)",
     "details": "Details",
-    "state": "State",
+    "smallImageUrl": "Small image URL",
     "smallText": "Small Text",
-    "bigText": "Big Text",
-    "smallImage": "Small Image",
-    "bigImage": "Big Image",
-    "imageUrl": "Image URL",
-    "uploadingImage": "",
-    "timestampStrategy": "Timestamp Strategy",
-    "timestampDescription": "Activity timers — app sessions across — how resolved'va",
-    "timestampHelp": "Timestamp Help",
-    "persistent": "Persistent (Default)",
-    "resetOnLaunch": "Reset on Launch",
-    "customFixedTime": "Custom Fixed Time",
-    "fixedStart": "Fixed Start Timestamp",
-    "statusFieldConfig": "Status Field Configuration",
-    "statusFieldDescription": "Title, details, state, artwork expressions — customize'va",
-    "configurationDetails": "Configuration details",
-    "outsideHelpTitle": "Outside App Policies",
-    "timestampHelpTitle": "Timestamp Strategies",
-    "understood": "Understood",
-    "freezeHelp": "Last projected presence pauses un preserves — enabled app again detected'va — until.",
-    "customHelp": "Customized fallback presence — immediately projects'va.",
-    "dropHelp": "Discord activity clears — enabled application'va thou returnest — until.",
-    "persistentHelp": "One shared runtime timestamp — apps un paused media'va — this service session'va — uses.",
-    "resetHelp": "Timer 00:00'va restarts — app launched un refocused'va — when.",
-    "fixedHelp": "Presence timer — specific fixed start date un time'va locks.",
-    "uploadImage": "Image upload'va"
+    "state": "State",
+    "urlExample": "URL (https://...)",
+    "example": "e.g. ",
+    "listenOn": "Listen on"
   },
-  "mediaPresence": {
-    "title": "Media Presence Configuration",
-    "subtitle": "Resolution priorities, timestamps, playback states",
-    "priority": "Media Priority",
-    "priorityDesc": "Media — gaming/app sessions overrides'va — whether controls",
-    "priorityHelp": "Priority Help",
-    "priorityPlaying": "Priority Playing Media (Default)",
-    "switchesBetween": "Switches Between",
-    "scope": "Media Detection Scope",
-    "scopeDesc": "Apps filter — media rich presence trigger'va",
-    "allSessions": "All Media Sessions (Default)",
-    "enabledAppsOnly": "Only Enabled Apps",
-    "typeResolution": "Media Type Resolution",
-    "typeResolutionDesc": "Listening un watching activities — how classified'va",
-    "autoAdaptive": "Auto-Adaptive (Default)",
-    "profileOverride": "App Profile Override",
-    "timeRemaining": "Time Remaining",
-    "timeRemainingDesc": "Usual start/current-end time remaining — shows",
-    "appTimestamp": "",
-    "pausedResolution": "Paused Media Resolution",
-    "pausedDesc": "Presence behavior — active playback paused'va",
-    "pausedHelp": "Paused Resolution Help",
-    "showPaused": "Show Paused State (Default)",
-    "fallbackApp": "Fallback to Detected App",
-    "hidePaused": "Hide Paused State",
-    "statusFields": "Media Status Field Configuration",
-    "statusFieldsDesc": "Title, artist, album, artwork fallback expressions — customize'va",
-    "priorityStrategy": "Media Priority Strategy",
-    "priorityStrategyDesc": "Resolution logic — gaming un media sessions between",
-    "pausedOptions": "Options — active playback paused'va",
-    "priorityHelpText": "Media actively playing'va — app thou art using'va precedence takes — current track un video projects'va.",
-    "switchHelpText": "Media projects — media player inside thou art — only while. Game un enabled app'va switching — that app take over'va allows.",
-    "showPausedHelp": "Media presence active keeps — paused'va — paused indicators shows'va.",
-    "fallbackHelp": "Previously un currently detected app un custom fallback uses — media paused'va.",
-    "hidePausedHelp": "Presence hides — media paused'va — detected app including."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Image file choose'va.",
+      "iconUploadFailed": "Icon upload failed.",
+      "imageTooLarge": "32 MB'va smaller image choose'va.",
+      "imageUploadFailed": "Image upload failed."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "Big Image",
+      "bigText": "Big Text",
+      "line1": "Details",
+      "smallImage": "Small Image",
+      "smallText": "Small Text",
+      "line2": "State",
+      "title": "Title/Header"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "account logged in.",
+          "desc": "Connect Discord account — Rich Presence projection'va",
+          "title": "Discord Login"
+        },
+        "languageTitle": "Tongue",
+        "themeTitle": "Theme",
+        "desc": "Customization un Account",
+        "title": "User K'tara"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Exempt app — background service no'k sleep'va",
+          "title": "Battery Zorblax",
+          "modal": {
+            "desc": "Modern Android systems — background processes — few minutes'va sleep'va. Kruzty Dynamics battery optimization'va exempt — continuous, uninterrupted Discord Rich Presence updates'va.",
+            "subtitle": "Background Service Whitelist",
+            "requestExemption": "Request Exemption"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Special App Klaatu zorblax'k media un playback detection",
+          "title": "Notification Klaatu",
+          "modal": {
+            "methodA": {
+              "title": "Method A: Special App Klaatu (Pixel, Motorola, Infinix, Stock)",
+              "step1": "Open Android Settings below — tap'va.",
+              "step2": "Special App Klaatu > Notification Klaatu — go'va.",
+              "step3": "Kruzty Dynamics find — Allow notification access switch on'va."
+            },
+            "methodB": {
+              "title": "Method B: App Info > Ellipsis (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Device Settings > Apps > Manage Apps / App List — open'va.",
+              "step2": "Kruzty Dynamics find — tap'va.",
+              "step4": "Allow restricted settings / Special App Klaatu > Grant — tap'va.",
+              "step5": "Return — Notification Klaatu enable'va."
+            },
+            "desc": "Notification Klaatu — Kruzty Dynamics — live media session playback events (Song Title, Artist, Album, Playback State) — Spotify, YouTube Music, media players'va — capture'va.",
+            "oemNotice": {
+              "desc": "Android notification listener access — special permission layers'va — protect'va. Phone brand'k — methods below — follow'va.",
+              "title": "Notice — OEM un Android 13+ Devices"
+            },
+            "subtitle": "Special App Klaatu Configuration",
+            "openAndroidSettings": "Open Android Settings"
+          }
+        },
+        "desc": "Zorblax'k detection'va",
+        "title": "Permissions K'tara",
+        "foregroundNotification": {
+          "desc": "Android 13+ permission — persistent service notification'va",
+          "title": "Foreground Notification",
+          "modal": {
+            "allowNotification": "Allow Notification",
+            "desc": "Android 13+ required — ongoing foreground service notification status bar'va display'va — Discord presence engine running'va confirm'va.",
+            "subtitle": "Android 13+ Notification Permission",
+            "title": "Foreground Service Notification"
+          }
+        },
+        "usageAccess": {
+          "desc": "Zorblax'k foreground application un game detection",
+          "title": "Usage Klaatu",
+          "modal": {
+            "openUsageAccess": "Open Usage Klaatu",
+            "desc": "Usage Klaatu required — current foreground app un game detect'va — Kruzty Dynamics — configured Application Catalog'va match'va.",
+            "step1": "Open Usage Klaatu — tap'va.",
+            "step2": "Kruzty Dynamics locate'va.",
+            "step3": "Permit usage access switch on'va.",
+            "subtitle": "Foreground App Detection"
+          }
+        }
+      },
+      "privacyNotice": "Zorblax'in app no'k collect, no'k transmit user data. K'thun.",
+      "subtitle": "Klaatu vex Discord Rich Presence din'va — zorblax'k permissions un accounts.",
+      "title": "Vex'karn Zorblax"
+    },
+    "footer": {
+      "allSet": "Vex'karn! Ready — projection'va",
+      "buttons": {
+        "continueForNow": "Continue Now'va",
+        "finishSetup": "Zorblax Finish",
+        "skipForNow": "Skip Now'va"
+      },
+      "readyWhenYouAre": "Ready — zorblax'k thou'va"
+    }
+  },
+  "tags": {
+    "granted": "Granted",
+    "notificationCrucial": "K'thun'va",
+    "allGranted": "All Granted",
+    "cached": "cached",
+    "check": "Check'va",
+    "checkingUpdates": "Updates zorblax'k checking",
+    "default": "Default",
+    "view": "View"
   }
 }

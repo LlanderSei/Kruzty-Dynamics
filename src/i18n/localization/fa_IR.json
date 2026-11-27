@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "راه‌اندازی اولیه",
-    "subtitle": "مجوزها و حساب‌های کاربری لازم را برای فعال‌سازی Discord Rich Presence پویا پیکربندی کنید.",
-    "privacyNotice": "این برنامه داده‌های کاربر را جمع‌آوری یا منتقل نمی‌کند.",
-    "permissionsSection": "کنترل مجوزها",
-    "permissionsRequired": "مورد نیاز برای تشخیص",
-    "notificationTitle": "دسترسی به اعلان‌ها",
-    "notificationDesc": "دسترسی ویژه به برنامه برای تشخیص رسانه و پخش مورد نیاز است",
-    "notificationCrucial": "حیاتی",
-    "usageTitle": "دسترسی به استفاده",
-    "usageDesc": "برای تشخیص برنامه یا بازی در حال اجرا در پیش‌زمینه مورد نیاز است",
-    "batteryTitle": "بهینه‌سازی باتری",
-    "batteryDesc": "برنامه را مستثنی کنید تا از خوابیدن سرویس پس‌زمینه جلوگیری شود",
-    "postNotificationTitle": "اعلان پیش‌زمینه",
-    "postNotificationDesc": "مجوز Android 13+ برای اعلان سرویس دائمی",
-    "grant": "اعطا",
-    "granted": "اعطا شد",
-    "userControlSection": "کنترل کاربر",
-    "userControlDesc": "سفارشی‌سازی و حساب",
-    "discordLoginTitle": "ورود به Discord",
-    "discordLoginDesc": "حساب Discord خود را برای نمایش Rich Presence متصل کنید",
-    "accountsConnected": "حساب وارد شده است.",
-    "themeTitle": "تم",
-    "languageTitle": "زبان",
-    "finishSetup": "پایان راه‌اندازی",
-    "continueForNow": "ادامه برای حالا",
-    "skipForNow": "رد کردن برای حالا",
-    "allSet": "همه چیز آماده است! آماده نمایش",
-    "readyWhenYouAre": "آماده وقتی شما آماده هستید"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "هویت فعال",
+        "stored": "ذخیره شده"
+      },
+      "content": {
+        "subtitle": "مدیریت توکن‌ها و هویت‌ها",
+        "title": "پورتال ورود Discord",
+        "privacyText": "مجوز Discord درخواست دسترسی به ویژگی‌های اجتماعی در کنار Rich Presence را دارد. Kruzty Dynamics از SDK برای شناسایی حساب شما و انتشار یا پاک کردن فعالیت پیکربندی شده شما استفاده می‌کند. از ویژگی‌های دوستان، مسدود کردن، دعوت، پیام یا صدا استفاده نمی‌کند. در Android، توکن‌ها رمزگذاری شده و در این دستگاه ذخیره می‌شوند. بخوانید",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "سیاست حفظ حریم خصوصی"
+      },
+      "title": "اتصال حساب Discord"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "ابرازها از مقایسه‌های == و != پشتیبانی می‌کنند. از {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} استفاده کنید تا در صورتی که نوع فعالیت برابر با Playing باشد AppName را انتخاب کند و در غیر این صورت AppPlatformType را.",
+        "title": "مرجع توکن برنامه",
+        "desc": "متغیرهای پویا موجود در عبارات فیلد"
+      },
+      "media": {
+        "title": "مرجع توکن رسانه",
+        "intro": "توکن‌ها را می‌توان به طور مستقیم در فیلدهای متنی و برچسب‌های دکمه یا URLها جاسازی کرد (به عنوان مثال {example}).",
+        "desc": "متغیرهای پویا موجود در عبارات رسانه و دکمه‌ها"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "لغو تغییرات ذخیره نشده؟",
+      "unsaved": "تغییرات ذخیره نشده"
+    },
+    "logs": {
+      "copy": "کپی گزارش‌ها",
+      "empty": "[INFO] هنوز گزارش‌هایی وجود ندارد. ورود Discord را باز کنید یا اقداماتی را برای تولید گزارش انجام دهید.",
+      "export": "خروجی گرفتن از گزارش‌ها",
+      "subtitle": "خروجی عیب‌یابی زنده",
+      "title": "گزارش‌های برنامه"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "رنگ تاکیدی اصلی",
+        "resetAccent": "بازنشانی به نارنجی پیش‌فرض",
+        "tapCustomize": "برای سفارشی‌سازی ضربه بزنید",
+        "themeMode": "حالت تم"
+      },
+      "globalDefaults": {
+        "activityStatus": "وضعیت فعالیت",
+        "activityType": "نوع فعالیت",
+        "note": "این پیش‌فرض‌ها به طور خودکار زمانی استفاده می‌شوند که یک برنامه یا فعالیت حضور نوع فعالیت یا وضعیت خود را مشخص نکند."
+      },
+      "imgBb": {
+        "apiPrivacy": "خالی گذاشتن این فیلد به کلید API پیش‌فرض داخلی بازنشانی می‌شود. کلیدهای سفارشی هرگز در متن ساده افشا نمی‌شوند.",
+        "getApiKey": "برای دریافت کلید.",
+        "help": "کلید API ImgBB خود را تنظیم کنید تا تصاویر سفارشی برنامه و دارایی‌های رسانه را به Discord CDN آپلود کنید. بازدید کنید",
+        "usingDefaultKey": "استفاده از کلید سیستم پیش‌فرض"
+      },
+      "language": {
+        "availableLanguages": "زبان‌های موجود",
+        "title": "انتخاب زبان",
+        "desc": "زبان نمایش ترجیحی خود را برای برچسب‌های رابط کاربری و اعلان‌ها انتخاب کنید."
+      },
+      "checkPermissions": {
+        "batteryDesc": "از کشتن سرویس حضور توسط Android جلوگیری می‌کند",
+        "foregroundDesc": "نشانگر نوار وضعیت برای حضور مداوم Discord",
+        "notificationAccessDesc": "دسترسی ویژه به برنامه برای تشخیص رسانه",
+        "desc": "وضعیت مجوزهای مورد نیاز برای خواندن اعلان‌های رسانه فعال و برنامه‌های پیش‌زمینه:",
+        "usageAccessDesc": "تشخیص بازی‌ها و برنامه‌های در حال اجرا در پیش‌زمینه"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "{total} URL تصویر مرتبط وجود دارد، از جمله {custom} بازنویسی نماد برنامه سفارشی. می‌توانید پیوندهای ذخیره شده در حافظه پنهان را پاک کنید در حالی که نمادهای سفارشی را نگه می‌دارید، یا همه پیوندها را پاک کنید و بازنویسی‌های سفارشی را حذف کنید. اگر بازنویسی‌ها را حذف کردید، آن نمادها را دوباره در فهرست برنامه‌ها آپلود کنید.",
+        "buttons": {
+          "clearCacheAll": "پاک کردن همه، از جمله نمادهای سفارشی",
+          "clearCacheKeep": "پاک کردن حافظه پنهان، حفظ نمادهای سفارشی"
+        },
+        "clearedAll": "همه URLهای تصویر مرتبط پاک شدند، از جمله نمادهای برنامه سفارشی.",
+        "clearedKeeping": "حافظه پنهان URL تصویر مرتبط پاک شد. نمادهای برنامه سفارشی حفظ شدند.",
+        "linkedImageUrls": "URLهای تصویر مرتبط"
+      },
+      "credits": {
+        "contributorsSection": "مشارکت‌کنندگان Kizzy",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "کتابخانه‌های استفاده شده در این برنامه",
+        "libraries": {
+          "lucide": "نمادهای برداری تمیز ساخته شده توسط جامعه",
+          "react": "معماری مدرن اجزای رابط کاربری",
+          "sdk": "ادغام بومی rich presence اندروید",
+          "tailwind": "استایل‌دهی واکنش‌گرای مدرن با اولویت ابزار",
+          "tauri": "زمان اجرای بومی چند پلتفرمی سبک",
+          "tokio": "زمان اجرای شبکه رویداد محور ناهمزمان"
+        },
+        "maintainerRole": "نگهدارنده و توسعه‌دهنده فعلی"
+      },
+      "discordApp": {
+        "developerPortal": "پورتال توسعه‌دهنده Discord",
+        "help": "Discord Application ID خود را تنظیم کنید از",
+        "idPrivacy": "خالی گذاشتن این فیلد به ID برنامه پیش‌فرض Kruzty Dynamics بازنشانی می‌شود."
+      }
+    }
   },
-  "nav": {
-    "service": "سرویس",
-    "accounts": "حساب‌ها",
-    "settings": "تنظیمات و بیشتر"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "افزودن حساب",
+            "switch": "تغییر",
+            "unuse": "عدم استفاده"
+          },
+          "activePresence": "حضور فعال",
+          "modal": {
+            "logout": {
+              "confirmLogout": "تأیید خروج",
+              "title": "خروج از حساب",
+              "removePrefix": "آیا مطمئن هستید که می‌خواهید حساب را حذف کنید",
+              "removeSuffix": ". با این کار اعتبارنامه‌های ذخیره شده از این دستگاه حذف می‌شوند."
+            }
+          },
+          "currentAccount": "حساب وارد شده فعلی",
+          "noActiveAccount": "هیچ حسابی انتخاب نشده است. یکی از حساب‌های وارد شده در زیر را انتخاب کنید.",
+          "storedAccounts": "حساب‌های ذخیره شده"
+        },
+        "noAccount": {
+          "desc": "حساب Discord خود را متصل کنید تا شروع به نمایش وضعیت‌های Rich Presence برای بازی‌ها، برنامه‌ها و رسانه‌ها کنید.",
+          "title": "هنوز هیچ حسابی وارد نشده است.",
+          "login": "ورود به Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "هیچ حساب Discord وجود ندارد",
+        "loggedInMany": "{n} حساب وارد شده‌اند.",
+        "loggedInOne": "{n} حساب وارد شده است."
+      },
+      "title": "حساب‌های Discord"
+    },
+    "service": {
+      "subtitle": "داشبورد Kruzty Dynamics",
+      "title": {
+        "welcome": "خوش آمدید!",
+        "welcomeNamed": "خوش آمدید، {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "تمام مجوزهای مورد نیاز اعطا شده‌اند. برای ادامه سرویس را روشن کنید.",
+              "foregroundService": {
+                "desc": "به Android اجازه می‌دهد اعلان سرویس را در حین اجرا نشان دهد.",
+                "title": "اعلان‌های سرویس پیش‌زمینه"
+              },
+              "notificationAccess": {
+                "desc": "برای تشخیص پخش رسانه و ابرداده‌های آن مورد نیاز است."
+              },
+              "subtitle": "قبل از شروع سرویس، این مجوزهای Android را اعطا کنید.",
+              "title": "مجوزهای مورد نیاز",
+              "returnHint": "پس از اعطای دسترسی در تنظیمات Android، به اینجا بازگردید و سرویس را فعال کنید.",
+              "usageAccess": {
+                "desc": "برای تشخیص اینکه کدام برنامه در حال حاضر در پیش‌زمینه است مورد نیاز است."
+              }
+            }
+          },
+          "startError": "امکان شروع سرویس حضور Android وجود ندارد.",
+          "running": "سرویس در حال اجرا است.",
+          "stopped": "سرویس شروع نشده است.",
+          "title": "سرویس Kruzty Dynamics"
+        },
+        "application": {
+          "desc": "پیکربندی نمایه‌های برنامه برای تشخیص حضور محلی",
+          "title": "حضور برنامه"
+        },
+        "buttons": {
+          "applicationCatalogue": "فهرست برنامه‌ها",
+          "presenceConfiguration": "پیکربندی حضور",
+          "statusFieldConfig": "پیکربندی فیلد وضعیت"
+        },
+        "media": {
+          "desc": "پیکربندی رفتار رسانه و قالب‌های وضعیت",
+          "title": "حضور رسانه"
+        },
+        "preview": {
+          "noPresence": "هیچ برنامه پیکربندی شده یا رسانه فعالی شناسایی نشد.",
+          "stoppedDescription": "سرویس متوقف شده است. آن را روشن کنید تا برنامه‌های فعال و رسانه‌های فعال شناسایی شوند."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "تنظیمات برگزیده برنامه",
+        "checkPermissions": {
+          "title": "بررسی مجوزها",
+          "desc": "مجوزهای دسترسی سیستمی اعطا شده و اختیاری را بررسی کنید"
+        },
+        "deleteCachedUrls": {
+          "title": "حذف URLهای تصویر مرتبط",
+          "desc": "URLهای مرتبط تصاویر آپلود شده مورد استفاده در وضعیت برنامه یا رسانه را پاک می‌کند"
+        },
+        "discordAppId": {
+          "title": "تنظیم Discord Application ID",
+          "desc": "Discord Application ID خود را تنظیم کنید. بازدید کنید: discord.com/developers"
+        },
+        "globalDefaults": {
+          "title": "پیش‌فرض‌های سراسری",
+          "desc": "نوع فعالیت و وضعیت برای برنامه‌های پیکربندی نشده"
+        },
+        "imgBbKey": {
+          "title": "تنظیم کلید API ImgBB",
+          "desc": "کلید API ImgBB خود را تنظیم کنید. بازدید کنید: api.imgbb.com"
+        },
+        "language": {
+          "title": "زبان",
+          "desc": "در حال حاضر تنظیم شده:"
+        },
+        "notificationProjection": {
+          "title": "سفارشی‌سازی نمایش وضعیت اعلان",
+          "desc": "عنوان‌ها و زیرنویس‌های اعلان‌های برنامه و رسانه را سفارشی کنید."
+        },
+        "themes": {
+          "title": "تم‌ها و نمایش",
+          "desc": "تم و رنگ تاکیدی خود را تنظیم کنید."
+        },
+        "checkUpdates": {
+          "title": "برای آخرین نسخه بررسی کنید",
+          "desc": "بررسی کنید که آیا نسخه جدیدتری در دسترس است."
+        }
+      },
+      "subtitle": "تنظیمات برگزیده برنامه و عیب‌یابی",
+      "title": "تنظیمات و بیشتر",
+      "cardInfo": {
+        "architecture": "ساخته شده با استفاده از Rust Core (Tokio + Tauri v2) با React 19 و Frontend TailwindCSS شامل Native Android Plugin Bridge. بر اساس Kizzy's Experimental RPC اصلی.",
+        "credits": "اعتبارها",
+        "developedBy": "توسعه یافته توسط",
+        "latestRelease": "رفتن به آخرین نسخه",
+        "learnMore": "درباره این برنامه بیشتر بدانید",
+        "repository": "بررسی مخزن GitHub",
+        "submitIssue": "ارسال مشکل",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "welcome": "خوش آمدید!",
-    "welcomeNamed": "خوش آمدید، {name}!",
-    "dashboardSubtitle": "داشبورد Kruzty Dynamics",
-    "accountsLoggedInOne": "{n} حساب وارد شده است.",
-    "accountsLoggedInMany": "{n} حساب وارد شده‌اند.",
-    "liveLogs": "گزارش‌های زنده",
-    "viewLogs": "مشاهده گزارش‌ها",
-    "serviceActive": "فعال",
-    "serviceInactive": "غیرفعال",
-    "serviceStarting": "در حال شروع",
-    "serviceStopped": "متوقف شده"
-  },
-  "accounts": {
-    "title": "حساب‌های Discord",
-    "subtitle": "مدیریت توکن‌ها و هویت‌ها",
-    "loginPortal": "ورود از طریق پورتال Discord",
-    "loginWithToken": "افزودن حساب از طریق توکن",
-    "addAccount": "افزودن حساب",
-    "activeIdentity": "هویت فعال",
-    "stored": "ذخیره شده",
+  "buttons": {
     "remove": "حذف",
-    "noAccounts": "هیچ حساب Discord وجود ندارد",
-    "noAccountsDesc": "حساب Discord خود را با استفاده از پورتال یا توکن کاربر اضافه کنید تا شروع به نمایش rich presence کنید."
-  },
-  "settings": {
-    "title": "تنظیمات و بیشتر",
-    "subtitle": "تنظیمات برگزیده برنامه و عیب‌یابی",
-    "appPreferences": "تنظیمات برگزیده برنامه",
-    "notificationProjection": "سفارشی‌سازی نمایش وضعیت اعلان",
-    "notificationProjectionDesc": "عنوان‌ها و زیرنویس‌های اعلان‌های برنامه و رسانه را سفارشی کنید.",
-    "themes": "تم‌ها و نمایش",
-    "themesDesc": "تم و رنگ تاکیدی خود را تنظیم کنید.",
-    "language": "زبان",
-    "languageDesc": "در حال حاضر تنظیم شده:",
-    "globalDefaults": "پیش‌فرض‌های سراسری",
-    "globalDefaultsDesc": "نوع فعالیت و وضعیت برای برنامه‌های پیکربندی نشده",
-    "imgbbKey": "تنظیم کلید API ImgBB",
-    "imgbbKeyDesc": "کلید API ImgBB خود را تنظیم کنید. بازدید کنید: api.imgbb.com",
-    "discordAppId": "تنظیم Discord Application ID",
-    "discordAppIdDesc": "Discord Application ID خود را تنظیم کنید. بازدید کنید: discord.com/developers",
-    "checkPermissions": "بررسی مجوزها",
-    "checkPermissionsDesc": "مجوزهای دسترسی سیستمی اعطا شده و اختیاری را بررسی کنید",
-    "deleteCache": "حذف URLهای تصویر مرتبط",
-    "deleteCacheDesc": "URLهای مرتبط تصاویر آپلود شده مورد استفاده در وضعیت برنامه یا رسانه را پاک می‌کند"
-  },
-  "service": {
-    "title": "سرویس Kruzty Dynamics",
-    "running": "سرویس در حال اجرا است.",
-    "stopped": "سرویس شروع نشده است.",
-    "applicationPresence": "حضور برنامه",
-    "appDescription": "پیکربندی نمایه‌های برنامه برای تشخیص حضور محلی",
-    "applicationCatalogue": "فهرست برنامه‌ها",
-    "statusFieldConfig": "پیکربندی فیلد وضعیت",
-    "presenceConfiguration": "پیکربندی حضور",
-    "mediaPresence": "حضور رسانه",
-    "mediaDescription": "پیکربندی رفتار رسانه و قالب‌های وضعیت",
-    "noPresence": "هیچ برنامه پیکربندی شده یا رسانه فعالی شناسایی نشد.",
-    "stoppedDescription": "سرویس متوقف شده است. آن را روشن کنید تا برنامه‌های فعال و رسانه‌های فعال شناسایی شوند."
-  },
-  "logs": {
-    "title": "گزارش‌های برنامه",
-    "subtitle": "خروجی عیب‌یابی زنده",
-    "copy": "کپی گزارش‌ها",
-    "export": "خروجی گرفتن از گزارش‌ها",
-    "empty": "[INFO] هنوز گزارش‌هایی وجود ندارد. ورود Discord را باز کنید یا اقداماتی را برای تولید گزارش انجام دهید."
-  },
-  "permissions": {
-    "requiredTitle": "مجوزهای مورد نیاز",
-    "requiredSubtitle": "قبل از شروع سرویس، این مجوزهای Android را اعطا کنید.",
-    "done": "انجام شد",
-    "allGranted": "تمام مجوزهای مورد نیاز اعطا شده‌اند. برای ادامه سرویس را روشن کنید.",
-    "grant": "اعطا",
-    "returnHint": "پس از اعطای دسترسی در تنظیمات Android، به اینجا بازگردید و سرویس را فعال کنید.",
-    "notificationTitle": "دسترسی به اعلان‌ها",
-    "notificationSubtitle": "پیکربندی دسترسی ویژه به برنامه",
-    "openAndroidSettings": "باز کردن تنظیمات Android",
-    "oemNotice": "اطلاعیه برای دستگاه‌های OEM و Android 13+",
-    "notificationExplanation": "Android از دسترسی شنونده اعلان‌ها در پشت لایه‌های مجوز ویژه محافظت می‌کند. بسته به برند گوشی خود، یکی از روش‌های زیر را دنبال کنید.",
-    "methodA": "روش A: دسترسی ویژه به برنامه (Pixel, Motorola, Infinix, Stock)",
-    "methodAStep1": "روی باز کردن تنظیمات Android در زیر ضربه بزنید.",
-    "methodAStep2": "به دسترسی ویژه به برنامه > دسترسی به اعلان‌ها بروید.",
-    "methodAStep3": "Kruzty Dynamics را پیدا کنید و اجازه دسترسی به اعلان‌ها را روشن کنید.",
-    "methodB": "روش B: اطلاعات برنامه > نقطه‌ها (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "تنظیمات دستگاه > برنامه‌ها > مدیریت برنامه‌ها / لیست برنامه‌ها را باز کنید.",
-    "methodBStep2": "Kruzty Dynamics را پیدا کرده و روی آن ضربه بزنید.",
-    "methodBStep3": "روی سه نقطه در گوشه بالا سمت راست ضربه بزنید.",
-    "methodBStep4": "روی اجازه تنظیمات محدود / دسترسی ویژه به برنامه > اعطا ضربه بزنید.",
-    "methodBStep5": "بازگردید و دسترسی به اعلان‌ها را فعال کنید.",
-    "notificationAccessDescription": "دسترسی به اعلان‌ها به Kruzty Dynamics اجازه می‌دهد رویدادهای پخش جلسه رسانه زنده (عنوان آهنگ، هنرمند، آلبوم و وضعیت پخش) را از Spotify، YouTube Music و پخش‌کننده‌های رسانه ضبط کند.",
-    "usageTitle": "دسترسی به استفاده",
-    "usageSubtitle": "تشخیص برنامه پیش‌زمینه",
-    "openUsageAccess": "باز کردن دسترسی به استفاده",
-    "usageDescription": "دسترسی به استفاده برای تشخیص اینکه کدام برنامه یا بازی در حال حاضر در پیش‌زمینه اجرا می‌شود مورد نیاز است، تا Kruzty Dynamics بتواند آن را با فهرست برنامه‌های پیکربندی شده شما مطابقت دهد.",
-    "usageStep1": "روی باز کردن دسترسی به استفاده ضربه بزنید.",
-    "usageStep2": "Kruzty Dynamics را پیدا کنید.",
-    "usageStep3": "اجازه دسترسی به استفاده را روشن کنید.",
-    "batteryTitle": "بهینه‌سازی باتری",
-    "batterySubtitle": "لیست سفید سرویس پس‌زمینه",
-    "requestExemption": "درخواست معافیت",
-    "batteryDescription": "سیستم‌های مدرن Android فرآیندهای پس‌زمینه را پس از چند دقیقه به خواب می‌برند. معاف کردن Kruzty Dynamics از بهینه‌سازی باتری، به‌روزرسانی‌های پیوسته و بدون وقفه Discord Rich Presence را تضمین می‌کند.",
-    "foregroundTitle": "اعلان سرویس پیش‌زمینه",
-    "foregroundSubtitle": "مجوز اعلان Android 13+",
-    "foregroundGuardTitle": "اعلان‌های سرویس پیش‌زمینه",
-    "usageGuardDescription": "برای تشخیص اینکه کدام برنامه در حال حاضر در پیش‌زمینه است مورد نیاز است.",
-    "notificationGuardDescription": "برای تشخیص پخش رسانه و ابرداده‌های آن مورد نیاز است.",
-    "foregroundGuardDescription": "به Android اجازه می‌دهد اعلان سرویس را در حین اجرا نشان دهد.",
-    "serviceStartError": "امکان شروع سرویس حضور Android وجود ندارد.",
-    "allowNotification": "اجازه اعلان",
-    "foregroundDescription": "توسط Android 13+ برای نمایش اعلان سرویس پیش‌زمینه در نوار وضعیت شما مورد نیاز است، که تأیید می‌کند موتور حضور Discord در حال اجرا است."
-  },
-  "toast": {
-    "duplicateAccount": "این حساب Discord قبلاً اضافه شده است.",
-    "insufficientPermissions": "مجوزها ناکافی هستند. لطفاً به تنظیمات و موارد دیگر > بررسی مجوزها بروید.",
-    "newVersionAvailable": "نسخه جدید موجود است!",
-    "updateDetected": "نسخهٔ جدیدترین شناسایی شد!",
-    "latestVersion": "این آخرین نسخه است!",
-    "updateCheckFailed": "نمی‌تواند به‌روزرسانی‌ها را بررسی کند."
-  },
-  "accountsPage": {
-    "emptyTitle": "هنوز هیچ حسابی وارد نشده است.",
-    "emptyDescription": "حساب Discord خود را متصل کنید تا شروع به نمایش وضعیت‌های Rich Presence برای بازی‌ها، برنامه‌ها و رسانه‌ها کنید.",
-    "login": "ورود به Discord",
-    "currentAccount": "حساب وارد شده فعلی",
-    "activePresence": "حضور فعال",
-    "storedAccounts": "حساب‌های ذخیره شده",
-    "switch": "تغییر",
-    "unuse": "عدم استفاده",
-    "remove": "حذف",
-    "cancel": "لغو",
-    "deleteTitle": "حذف حساب Discord؟",
-    "loginTitle": "پورتال ورود Discord",
-    "noActiveAccount": "هیچ حسابی انتخاب نشده است. یکی از حساب‌های وارد شده در زیر را انتخاب کنید.",
-    "addAccountTitle": "اتصال حساب Discord",
-    "portal": "پورتال ورود Discord",
-    "signInPortal": "با Discord در برنامه به طور ایمن وارد شوید",
     "openPortal": "باز کردن پورتال",
-    "privacyText": "مجوز Discord درخواست دسترسی به ویژگی‌های اجتماعی در کنار Rich Presence را دارد. Kruzty Dynamics از SDK برای شناسایی حساب شما و انتشار یا پاک کردن فعالیت پیکربندی شده شما استفاده می‌کند. از ویژگی‌های دوستان، مسدود کردن، دعوت، پیام یا صدا استفاده نمی‌کند. در Android، توکن‌ها رمزگذاری شده و در این دستگاه ذخیره می‌شوند. بخوانید",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "خروج از حساب",
-    "removePrefix": "آیا مطمئن هستید که می‌خواهید حساب را حذف کنید",
-    "removeSuffix": ". با این کار اعتبارنامه‌های ذخیره شده از این دستگاه حذف می‌شوند.",
-    "confirmLogout": "تأیید خروج",
-    "addAccount": "افزودن حساب Discord",
-    "noSelection": "هیچ حسابی انتخاب نشده است. یکی از حساب‌های وارد شده در زیر را انتخاب کنید.",
-    "addMoreAccounts": "می‌توانید با کلیک روی دکمه Discord در زیر، حساب‌های بیشتری اضافه کنید."
-  },
-  "settingsUi": {
-    "chooseLanguage": "انتخاب زبان",
-    "languageDescription": "زبان نمایش ترجیحی خود را برای برچسب‌های رابط کاربری و اعلان‌ها انتخاب کنید.",
-    "availableLanguages": "زبان‌های موجود",
-    "close": "بستن",
-    "linkedImageUrls": "URLهای تصویر مرتبط",
-    "clearCacheKeep": "پاک کردن حافظه پنهان، حفظ نمادهای سفارشی",
-    "clearCacheAll": "پاک کردن همه، از جمله نمادهای سفارشی",
-    "credits": "اعتبارها",
-    "themeMode": "حالت تم",
-    "accentColor": "رنگ تاکیدی اصلی",
-    "resetAccent": "بازنشانی به نارنجی پیش‌فرض",
-    "learnMore": "درباره این برنامه بیشتر بدانید",
-    "privacyPolicy": "سیاست حفظ حریم خصوصی",
-    "repository": "بررسی مخزن GitHub",
-    "latestRelease": "رفتن به آخرین نسخه",
-    "submitIssue": "ارسال مشکل",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "کتابخانه‌های استفاده شده در این برنامه",
-    "contributorsSection": "مشارکت‌کنندگان Kizzy",
-    "maintainerRole": "نگهدارنده و توسعه‌دهنده فعلی",
-    "view": "مشاهده",
-    "done": "انجام شد",
-    "developedBy": "توسعه یافته توسط",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "ساخته شده با استفاده از Rust Core (Tokio + Tauri v2) با React 19 و Frontend TailwindCSS شامل Native Android Plugin Bridge. بر اساس Kizzy's Experimental RPC اصلی.",
-    "cached": "ذخیره شده در حافظه پنهان",
-    "tapCustomize": "برای سفارشی‌سازی ضربه بزنید",
-    "defaultNote": "این پیش‌فرض‌ها به طور خودکار زمانی استفاده می‌شوند که یک برنامه یا فعالیت حضور نوع فعالیت یا وضعیت خود را مشخص نکند.",
-    "activityType": "نوع فعالیت",
-    "activityStatus": "وضعیت فعالیت",
-    "imgbbHelp": "کلید API ImgBB خود را تنظیم کنید تا تصاویر سفارشی برنامه و دارایی‌های رسانه را به Discord CDN آپلود کنید. بازدید کنید",
-    "getApiKey": "برای دریافت کلید.",
-    "apiPrivacy": "خالی گذاشتن این فیلد به کلید API پیش‌فرض داخلی بازنشانی می‌شود. کلیدهای سفارشی هرگز در متن ساده افشا نمی‌شوند.",
-    "saveKey": "ذخیره کلید",
-    "discordIdHelp": "Discord Application ID خود را تنظیم کنید از",
-    "developerPortal": "پورتال توسعه‌دهنده Discord",
-    "idDefault": "پیش‌فرض",
-    "idPrivacy": "خالی گذاشتن این فیلد به ID برنامه پیش‌فرض Kruzty Dynamics بازنشانی می‌شود.",
-    "saveId": "ذخیره ID",
-    "permissionsDescription": "وضعیت مجوزهای مورد نیاز برای خواندن اعلان‌های رسانه فعال و برنامه‌های پیش‌زمینه:",
-    "notificationAccessDesc": "دسترسی ویژه به برنامه برای تشخیص رسانه",
-    "usageAccessDesc": "تشخیص بازی‌ها و برنامه‌های در حال اجرا در پیش‌زمینه",
-    "batteryDesc": "از کشتن سرویس حضور توسط Android جلوگیری می‌کند",
-    "foregroundDesc": "نشانگر نوار وضعیت برای حضور مداوم Discord",
-    "saveIdPlaceholder": "1572590527562391713 (پیش‌فرض)",
-    "resetDefault": "بازنشانی به پیش‌فرض",
-    "cancel": "لغو",
-    "cacheWarning": "{total} URL تصویر مرتبط وجود دارد، از جمله {custom} بازنویسی نماد برنامه سفارشی. می‌توانید پیوندهای ذخیره شده در حافظه پنهان را پاک کنید در حالی که نمادهای سفارشی را نگه می‌دارید، یا همه پیوندها را پاک کنید و بازنویسی‌های سفارشی را حذف کنید. اگر بازنویسی‌ها را حذف کردید، آن نمادها را دوباره در فهرست برنامه‌ها آپلود کنید.",
-    "allGranted": "همه اعطا شدند",
-    "clearedAll": "همه URLهای تصویر مرتبط پاک شدند، از جمله نمادهای برنامه سفارشی.",
-    "clearedKeeping": "حافظه پنهان URL تصویر مرتبط پاک شد. نمادهای برنامه سفارشی حفظ شدند.",
-    "usingDefaultKey": "استفاده از کلید سیستم پیش‌فرض",
-    "customKeySet": "کلید سفارشی تنظیم شد",
-    "light": "روشن",
-    "dark": "تیره",
-    "amoled": "AMOLED",
-    "libraryTauri": "زمان اجرای بومی چند پلتفرمی سبک",
-    "libraryTokio": "زمان اجرای شبکه رویداد محور ناهمزمان",
-    "librarySdk": "ادغام بومی rich presence اندروید",
-    "libraryReact": "معماری مدرن اجزای رابط کاربری",
-    "libraryTailwind": "استایل‌دهی واکنش‌گرای مدرن با اولویت ابزار",
-    "libraryLucide": "نمادهای برداری تمیز ساخته شده توسط جامعه",
-    "checkForUpdates": "برای آخرین نسخه بررسی کنید",
-    "checkForUpdatesDesc": "بررسی کنید که آیا نسخه جدیدتری در دسترس است.",
-    "check": "بررسی",
-    "checkingUpdates": "بررسی به‌روزرسانی‌ها"
-  },
-  "configFields": {
-    "appTitle": "پیکربندی فیلد وضعیت برنامه",
-    "mediaTitle": "پیکربندی فیلد وضعیت رسانه",
-    "back": "بازگشت",
-    "reset": "بازنشانی به پیش‌فرض‌ها",
-    "help": "راهنمای توکن‌های موجود",
-    "title": "عنوان",
-    "line1": "خط 1 (جزئیات)",
-    "line2": "خط 2 (وضعیت)",
-    "smallText": "متن کوچک",
-    "smallImage": "تصویر کوچک",
-    "bigText": "متن بزرگ",
-    "bigImage": "تصویر بزرگ",
-    "header": "سرصفحه (در حال گوش دادن / تماشا کردن)",
-    "mediaTitleField": "عنوان رسانه (جزئیات فعالیت)",
-    "artist": "خط 1 (وضعیت فعالیت / هنرمند)",
-    "album": "خط 2 (آلبوم / متن تصویر)",
-    "buttons": "دکمه‌های سفارشی",
-    "button1": "دکمه 1",
-    "button2": "دکمه 2",
-    "save": "ذخیره فیلدها",
-    "appReference": "مرجع توکن برنامه",
-    "mediaReference": "مرجع توکن رسانه",
-    "tokenDescription": "متغیرهای پویا موجود در عبارات فیلد",
-    "mediaTokenDescription": "توضیحات ویدیو یا رسانه از وب یا پخش‌کننده‌های ویدیو.",
-    "discard": "لغو تغییرات ذخیره نشده؟",
-    "unsaved": "تغییرات ذخیره نشده",
-    "helpDone": "متوجه شدم",
-    "appTokenName": "نام برنامه پیش‌بینی شده که در فعالیت نمایش داده می‌شود.",
-    "appHeader": "سربرگ",
-    "titleHeader": "عنوان/سربرگ فعالیت",
-    "detailsField": "جزئیات فعالیت",
-    "stateField": "وضعیت فعالیت",
-    "notificationConfigSubtitle": "عنوان و زیرعنوان نمایش‌داده‌شده در اعلان سرویس پیش‌زمینه را سفارشی کنید.",
-    "notificationAppSection": "اطلاع‌رسانی وضعیت برنامه",
-    "notificationMediaSection": "اخطار پخش رسانه",
-    "notificationSubtitleLabel": "زیرنویس اعلان",
-    "notificationHelpIntro": "از getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), استفاده کنید. getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), و getFieldCfgStr(\"MediaBigText\") برای درج مقادیر فیلد رندر شده استفاده کنید. از joinNonBlank(field1, field2) برای الحاق مقادیر غیرخالی با یک نقطهٔ گلوله‌ای استفاده کنید. قالب‌های اعلان اپ از شرط AppActivityType == \"Playing\" پشتیبانی می‌کنند. همچنین عبارت‌ها از مقایسه‌های == و != پشتیبانی می‌کنند.",
-    "notificationDiscardMessage": "تغییرات اعمال‌نشده در پیش‌نمایش اعلان‌ها را دارید. خروج هم‌اکنون آن‌ها را حذف خواهد کرد.",
-    "appTokenActivityType": "نوع فعالیت حضور غنی منتخب برای این پروفایل برنامه، مانند در حال پخش، در حال گوش دادن، در حال تماشا یا در حال رقابت.",
-    "appTokenPlatformType": "توکن پلتفرم از این پروفایل برنامه، مانند اندروید، رایانه شخصی یا ایکس‌باکس.",
-    "appExpressionOperators": "ابرازها از مقایسه‌های == و != پشتیبانی می‌کنند. از {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} استفاده کنید تا در صورتی که نوع فعالیت برابر با Playing باشد AppName را انتخاب کند و در غیر این صورت AppPlatformType را.",
-    "appTokenDetails": "متن جزئیات سفارشی ذخیره شده در این نمایه برنامه، یا خالی وقتی غیرفعال است یا خالی است.",
-    "appTokenState": "متن وضعیت سفارشی ذخیره شده در این نمایه برنامه، یا خالی وقتی غیرفعال است یا خالی است.",
-    "appTokenSmallText": "برچسب تصویر کوچک سفارشی ذخیره شده در این نمایه برنامه، یا خالی وقتی غیرفعال است یا خالی است.",
-    "appTokenSmallUrl": "URL تصویر کوچک سفارشی ذخیره شده در این نمایه برنامه، یا خالی وقتی غیرفعال است یا خالی است.",
-    "appTokenImageUrl": "URL راه دور ImgBB ذخیره شده در حافظه پنهان نماد برنامه.",
-    "appTokenPackageName": "شناسه بسته Android (به عنوان مثال com.mojang.minecraftpe).",
-    "mediaTokenIntro": "توکن‌ها را می‌توان به طور مستقیم در فیلدهای متنی و برچسب‌های دکمه یا URLها جاسازی کرد (به عنوان مثال {example}).",
-    "mediaTokenAppName": "نام برنامه بازیکن که در سرصفحه در حال گوش دادن یا تماشا کردن Discord نشان داده می‌شود.",
-    "mediaTokenTitle": "عنوان آهنگ یا ویدیوی رسانه فعال از ابرداده اعلان.",
-    "mediaTokenArtist": "هنرمند یا سازنده صدای یا ویدیوی در حال پخش.",
-    "mediaTokenAlbum": "نام آلبوم یا ظرف لیست پخش.",
-    "mediaTokenPlaybackState": "وضعیت پخش فعلی (در حال پخش، متوقف شده، متوقف شده).",
-    "mediaTokenImageUrl": "URL ImgBB ذخیره شده در حافظه پنهان کاور آلبوم رسانه یا تصویر بندانگشتی.",
-    "mediaTokenPlaybackImageUrl": "URL تصویر دارایی برای نشانگر پخش فعلی.",
-    "mediaTokenFallbackImageUrl": "نماد برنامه جایگزین در صورت عدم وجود آثار هنری.",
-    "appConfigSubtitle": "عبارات را برای تشخیص برنامه سفارشی کنید.",
-    "mediaConfigSubtitle": "عبارات را برای پخش رسانه سفارشی کنید.",
-    "mediaHeaderDescription": "نام برنامه نشان داده شده در سرصفحه رسانه Discord. نوع فعالیت در حال گوش دادن یا تماشا کردن را انتخاب می‌کند.",
-    "mediaTitleDescription": "این به متن عنوان/جزئیات رسانه نگاشت می‌شود. نام پخش‌کننده را به طور جداگانه در سرصفحه بالا پیکربندی کنید.",
-    "mediaAlbumDescription": "در زیر هنرمند در کارت رسانه Discord نشان داده می‌شود.",
-    "mediaButtonDescription": "حداکثر 2 دکمه حضور تعاملی با عبارات توکن اضافه کنید.",
-    "mediaButtonLabel": "برچسب",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "به عنوان مثال ",
-    "mediaButtonListen": "گوش دادن در",
-    "appDiscardMessage": "شما تغییرات ذخیره نشده در فیلدهای وضعیت برنامه خود دارید. خروج در حال حاضر آن‌ها را به حالت قبلی بازمی‌گرداند.",
-    "mediaDiscardMessage": "شما تغییرات ذخیره نشده در فیلدهای وضعیت رسانه خود دارید. خروج در حال حاضر آن‌ها را به حالت قبلی بازمی‌گرداند.",
-    "mediaTokenSubtitle": "متغیرهای پویا موجود در عبارات رسانه و دکمه‌ها"
-  },
-  "catalogue": {
-    "title": "فهرست برنامه‌ها",
-    "back": "بازگشت",
+    "understood": "فهمیدم",
+    "apply": "اعمال",
     "batch": "عملیات دسته‌ای",
-    "search": "جستجوی برنامه‌ها...",
-    "filter": "فیلتر برنامه‌ها",
-    "clearFilters": "پاک کردن فیلترها",
-    "enabledOnly": "فقط فعال شده",
-    "allActivityTypes": "همه انواع فعالیت",
-    "allActivityStatuses": "همه وضعیت‌های فعالیت",
+    "cancel": "لغو",
+    "close": "بستن",
+    "confirm": "تأیید و اعمال",
+    "discardChanges": "لغو تغییرات",
+    "keepEditing": "ادامه ویرایش",
+    "stageChanges": "آماده‌سازی تغییرات",
+    "uploadImage": "آپلود تصویر به ImgBB",
+    "helpDone": "متوجه شدم",
+    "save": {
+      "fields": "ذخیره فیلدها",
+      "id": "ذخیره ID",
+      "key": "ذخیره کلید"
+    },
+    "logs": {
+      "live": "گزارش‌های زنده",
+      "view": "مشاهده گزارش‌ها"
+    },
+    "grant": "اعطا",
+    "done": "انجام شد",
+    "resetDefault": "بازنشانی به پیش‌فرض"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "نام فعالیت",
+          "bigImage": "تصویر بزرگ",
+          "bigText": "متن بزرگ",
+          "details": "جزئیات",
+          "imageUrl": "URL تصویر",
+          "smallImage": "تصویر کوچک",
+          "smallText": "متن کوچک",
+          "state": "وضعیت",
+          "uploadImage": "آپلود تصویر",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "فهرست برنامه‌ها",
+          "desc": "مشاهده، فیلتر و سفارشی‌سازی پیش‌بینی‌های برنامه فردی"
+        },
+        "configurationDetails": "جزئیات پیکربندی",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "بلافاصله حضور جایگزین سفارشی شده را پیش‌بینی می‌کند.",
+              "drop": "فعالیت Discord شما را پاک می‌کند تا زمانی که به یک برنامه فعال بازگردید.",
+              "freeze": "حضور پیش‌بینی شده آخرین را متوقف و حفظ می‌کند تا زمانی که یک برنامه فعال دوباره شناسایی شود."
+            },
+            "title": "سیاست‌های خارج از برنامه"
+          },
+          "fallbackPresence": "حضور جایگزین سفارشی",
+          "desc": "رفتار هنگام خروج یا تغییر از برنامه‌های فعال",
+          "title": "سیاست‌های خارج از برنامه شناسایی شده",
+          "help": "راهنمای سیاست"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "تایمر حضور را به یک تاریخ و زمان شروع ثابت خاص قفل می‌کند.",
+              "persistent": "از یک مهر زمانی زمان اجرا مشترک برای برنامه‌ها و رسانه‌های متوقف شده در طول این جلسه سرویس استفاده می‌کند.",
+              "reset": "تایمر را در 00:00 مجدداً راه‌اندازی می‌کند وقتی برنامه راه‌اندازی یا دوباره متمرکز می‌شود."
+            },
+            "title": "استراتژی‌های مهر زمانی"
+          },
+          "fixedStart": "مهر زمانی شروع ثابت",
+          "desc": "نحوه حل تایمرهای فعالیت در جلسات برنامه",
+          "help": "راهنمای مهر زمانی",
+          "title": "استراتژی مهر زمانی"
+        },
+        "statusFieldConfig": {
+          "title": "پیکربندی فیلد وضعیت",
+          "desc": "سفارشی‌سازی عنوان، جزئیات، وضعیت و عبارات آثار هنری"
+        },
+        "subtitle": "سیاست خارج از برنامه و رفتار مهر زمانی",
+        "title": "پیکربندی حضور برنامه"
+      },
+      "catalogue": {
+        "androidOnly": "کشف برنامه نصب شده در برنامه Android موجود است.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "اعمال تغییرات دسته‌ای؟",
+              "desc": "شما در حال اعمال دائمی تغییرات پیکربندی آماده شده به هستید",
+              "subtitle": "تأیید",
+              "selectedApps": "برنامه‌های انتخاب شده."
+            },
+            "title": "پیکربندی دسته‌ای",
+            "subtitle": "اعمال تغییرات به همه برنامه‌های انتخاب شده",
+            "discard": {
+              "title": "لغو تغییرات آماده شده؟",
+              "desc": "شما پیکربندی‌های دسته‌ای تایید نشده دارید. خروج از حالت دسته‌ای در حال حاضر تمام تغییرات آماده شده را لغو می‌کند.",
+              "subtitle": "تغییرات دسته‌ای ذخیره نشده"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "یک تصویر نماد انتخاب کنید",
+              "resetIcon": "بازنشانی به نماد اصلی برنامه",
+              "resetLabel": "بازنشانی به برچسب اصلی"
+            },
+            "customBtnDesc": "حداکثر 2 دکمه حضور تعاملی اضافه کنید",
+            "title": "سفارشی‌سازی",
+            "original": "اصلی:",
+            "subtitle": "نمایه حضور و نام‌های مستعار طرح",
+            "projectedName": "نام پیش‌بینی شده",
+            "switchToggle": {
+              "buttons": "تغییر دکمه‌های سفارشی",
+              "details": "تغییر جزئیات و وضعیت سفارشی",
+              "small": "تغییر متن کوچک و تصویر سفارشی"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "پاک کردن فیلترها",
+          "filter": "فیلتر برنامه‌ها"
+        },
+        "loadAppsFailed": "امکان بارگیری برنامه‌های نصب شده وجود ندارد.",
+        "loading": "",
+        "search": "جستجوی برنامه‌ها...",
+        "subtitle": "{apps} برنامه | {enabled} فعال",
+        "title": "فهرست برنامه‌ها",
+        "uploadProgress": "در حال آپلود نماد برنامه به ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "عبارات را برای تشخیص برنامه سفارشی کنید.",
+        "discardMsg": "شما تغییرات ذخیره نشده در فیلدهای وضعیت برنامه خود دارید. خروج در حال حاضر آن‌ها را به حالت قبلی بازمی‌گرداند.",
+        "title": "پیکربندی فیلد وضعیت برنامه"
+      }
+    },
+    "buttons": {
+      "back": "بازگشت",
+      "help": "راهنمای توکن‌های موجود",
+      "reset": "بازنشانی به پیش‌فرض‌ها"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "حداکثر 2 دکمه حضور تعاملی با عبارات توکن اضافه کنید.",
+        "subtitle": "عبارات را برای پخش رسانه سفارشی کنید.",
+        "discardMsg": "شما تغییرات ذخیره نشده در فیلدهای وضعیت رسانه خود دارید. خروج در حال حاضر آن‌ها را به حالت قبلی بازمی‌گرداند.",
+        "title": "پیکربندی فیلد وضعیت رسانه"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "زمان باقی مانده",
+          "desc": "زمان باقی مانده معمول شروع/پایان فعلی را نشان می‌دهد"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "از برنامه قبلی یا فعلی شناسایی شده یا جایگزین سفارشی در حین مکث رسانه استفاده می‌کند.",
+              "hidePaused": "حضور را در حین مکث رسانه پنهان می‌کند، از جمله هر برنامه شناسایی شده.",
+              "showPaused": "حضور رسانه را در حین مکث فعال نگه می‌دارد و نشانگرهای مکث را نشان می‌دهد."
+            },
+            "desc": "گزینه‌ها وقتی پخش فعال متوقف می‌شود"
+          },
+          "desc": "رفتار حضور وقتی پخش فعال متوقف می‌شود",
+          "help": "راهنمای حل مکث",
+          "title": "حل رسانه متوقف شده"
+        },
+        "mediaPriority": {
+          "title": "اولویت رسانه",
+          "desc": "کنترل می‌کند که آیا رسانه جلسات بازی/برنامه را نادیده می‌گیرد",
+          "help": "راهنمای اولویت",
+          "modal": {
+            "details": {
+              "priorityPlaying": "وقتی رسانه به طور فعال پخش می‌شود، بر برنامه‌ای که استفاده می‌کنید اولویت دارد و آهنگ یا ویدیوی فعلی را پیش‌بینی می‌کند.",
+              "switchesBetween": "رسانه را فقط زمانی پیش‌بینی می‌کند که در پخش‌کننده رسانه هستید. تغییر به یک بازی یا برنامه فعال به آن برنامه اجازه می‌دهد کنترل را به دست بگیرد."
+            },
+            "title": "استراتژی اولویت رسانه",
+            "desc": "منطق حل بین جلسات بازی و رسانه"
+          }
+        },
+        "mediaScope": {
+          "title": "دامنه تشخیص رسانه",
+          "desc": "فیلتر کنید کدام برنامه‌ها rich presence رسانه را فعال می‌کنند"
+        },
+        "statusFieldConfig": {
+          "title": "پیکربندی فیلد وضعیت رسانه",
+          "desc": "سفارشی‌سازی عبارات جایگزین عنوان، هنرمند، آلبوم و آثار هنری"
+        },
+        "subtitle": "اولویت‌های حل، مهرهای زمانی و وضعیت‌های پخش",
+        "title": "پیکربندی حضور رسانه",
+        "typeResolution": {
+          "title": "حل نوع رسانه",
+          "desc": "نحوه طبقه‌بندی فعالیت‌های گوش دادن و تماشا کردن"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "اطلاع‌رسانی وضعیت برنامه",
+        "media": "اخطار پخش رسانه"
+      },
+      "subtitle": "عنوان و زیرعنوان نمایش‌داده‌شده در اعلان سرویس پیش‌زمینه را سفارشی کنید.",
+      "discard": "تغییرات اعمال‌نشده در پیش‌نمایش اعلان‌ها را دارید. خروج هم‌اکنون آن‌ها را حذف خواهد کرد.",
+      "helpIntro": "از getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), استفاده کنید. getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), و getFieldCfgStr(\"MediaBigText\") برای درج مقادیر فیلد رندر شده استفاده کنید. از joinNonBlank(field1, field2) برای الحاق مقادیر غیرخالی با یک نقطهٔ گلوله‌ای استفاده کنید. قالب‌های اعلان اپ از شرط AppActivityType == \"Playing\" پشتیبانی می‌کنند. همچنین عبارت‌ها از مقایسه‌های == و != پشتیبانی می‌کنند."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "جایگزین سفارشی",
+      "drop": "رها کردن (پاک کردن حضور)",
+      "freeze": "انجماد (پیش‌فرض)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "زمان ثابت سفارشی",
+      "persistent": "دائمی (پیش‌فرض)",
+      "resetOnLaunch": "بازنشانی در راه‌اندازی"
+    },
+    "activityStatus": {
+      "all": "همه وضعیت‌های فعالیت",
+      "dnd": "مزاحم نشوید",
+      "idle": "بیکار",
+      "invisible": "نامرئی",
+      "offline": "آفلاین",
+      "online": "آنلاین",
+      "streaming": "در حال پخش زنده"
+    },
+    "activityType": {
+      "all": "همه انواع فعالیت",
+      "competing": "در حال رقابت",
+      "listening": "در حال گوش دادن",
+      "playing": "در حال بازی",
+      "watching": "در حال تماشا"
+    },
     "allPlatforms": "همه پلتفرم‌ها",
+    "disableAll": "غیرفعال کردن همه",
+    "enableAll": "فعال کردن همه",
+    "enabledOnly": "فقط فعال شده",
     "globalDefault": "پیش‌فرض سراسری",
-    "playing": "در حال بازی",
-    "streaming": "در حال پخش زنده",
-    "listening": "در حال گوش دادن",
-    "watching": "در حال تماشا",
-    "competing": "در حال رقابت",
-    "online": "آنلاین",
-    "idle": "بیکار",
-    "dnd": "مزاحم نشوید",
-    "offline": "آفلاین",
-    "invisible": "نامرئی",
-    "customize": "سفارشی‌سازی",
-    "profileSubtitle": "نمایه حضور و نام‌های مستعار طرح",
-    "activityType": "نوع فعالیت",
+    "keepCurrent": "حفظ فعلی",
+    "mediaScope": {
+      "allSessions": "همه جلسات رسانه (پیش‌فرض)",
+      "enabledAppsOnly": "فقط برنامه‌های فعال"
+    },
+    "typeResolution": {
+      "autoAdaptive": "سازگار خودکار (پیش‌فرض)",
+      "profileOverride": "بازنویسی نمایه برنامه"
+    },
+    "pausedResolution": {
+      "fallbackApp": "بازگشت به برنامه شناسایی شده",
+      "hidePaused": "پنهان کردن وضعیت متوقف شده",
+      "showPaused": "نمایش وضعیت متوقف شده (پیش‌فرض)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "اولویت به رسانه در حال پخش (پیش‌فرض)",
+      "switchesBetween": "بین تغییر می‌کند"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "تیره",
+      "light": "روشن"
+    }
+  },
+  "labels": {
     "activityStatus": "وضعیت فعالیت",
-    "platformType": "نوع پلتفرم",
+    "activityType": "نوع فعالیت",
+    "customButtons": "دکمه‌های سفارشی",
     "customDetailsState": "جزئیات و وضعیت سفارشی",
     "customSmallImage": "متن کوچک و تصویر سفارشی",
-    "customButtons": "دکمه‌های سفارشی",
-    "bulkConfigure": "پیکربندی دسته‌ای",
-    "cancel": "لغو",
-    "stageChanges": "آماده‌سازی تغییرات",
-    "apply": "اعمال",
-    "confirm": "تأیید و اعمال",
-    "keepCurrent": "حفظ فعلی",
-    "enableAll": "فعال کردن همه",
-    "disableAll": "غیرفعال کردن همه",
-    "discardBatch": "لغو تغییرات آماده شده؟",
-    "chooseIcon": "یک تصویر نماد انتخاب کنید",
-    "resetIcon": "بازنشانی به نماد اصلی برنامه",
-    "resetLabel": "بازنشانی به برچسب اصلی",
-    "details": "جزئیات",
-    "state": "وضعیت",
-    "smallText": "متن کوچک",
-    "smallImageUrl": "URL تصویر کوچک",
-    "uploadImage": "آپلود تصویر به ImgBB",
-    "buttonLabel": "برچسب (به عنوان مثال پیوستن به بازی)",
-    "presenceToggle": "کلید حضور",
-    "bulkSubtitle": "اعمال تغییرات به همه برنامه‌های انتخاب شده",
-    "applyBatchTitle": "اعمال تغییرات دسته‌ای؟",
-    "confirmation": "تأیید",
-    "unsavedBatch": "تغییرات دسته‌ای ذخیره نشده",
-    "confirmApply": "تأیید و اعمال",
     "filterOptions": "گزینه‌های فیلتر",
-    "close": "بستن",
-    "loading": "",
-    "original": "اصلی:",
-    "projectedName": "نام پیش‌بینی شده",
-    "customButtonDesc": "حداکثر 2 دکمه حضور تعاملی اضافه کنید",
-    "toggleDetails": "تغییر جزئیات و وضعیت سفارشی",
-    "toggleSmall": "تغییر متن کوچک و تصویر سفارشی",
-    "toggleButtons": "تغییر دکمه‌های سفارشی",
-    "uploadProgress": "در حال آپلود نماد برنامه به ImgBB",
-    "keepEditing": "ادامه ویرایش",
-    "discardChanges": "لغو تغییرات",
-    "discardMessage": "شما پیکربندی‌های دسته‌ای تایید نشده دارید. خروج از حالت دسته‌ای در حال حاضر تمام تغییرات آماده شده را لغو می‌کند.",
-    "applyMessage": "شما در حال اعمال دائمی تغییرات پیکربندی آماده شده به هستید",
-    "selectedApps": "برنامه‌های انتخاب شده.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} برنامه | {enabled} فعال",
-    "chooseImage": "یک فایل تصویر انتخاب کنید.",
-    "imageTooLarge": "تصویری کوچکتر از 32 مگابایت انتخاب کنید.",
-    "imageUploadFailed": "آپلود تصویر ناموفق بود.",
-    "iconUploadFailed": "آپلود نماد ناموفق بود.",
-    "androidOnly": "کشف برنامه نصب شده در برنامه Android موجود است.",
-    "loadAppsFailed": "امکان بارگیری برنامه‌های نصب شده وجود ندارد.",
-    "appUnit": "برنامه",
-    "appsUnit": "برنامه‌ها"
+    "platformType": "نوع پلتفرم",
+    "presenceToggle": "کلید حضور",
+    "button1": "دکمه 1",
+    "button2": "دکمه 2",
+    "label": "برچسب",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "پیکربندی حضور برنامه",
-    "subtitle": "سیاست خارج از برنامه و رفتار مهر زمانی",
-    "catalogue": "فهرست برنامه‌ها",
-    "catalogueDesc": "مشاهده، فیلتر و سفارشی‌سازی پیش‌بینی‌های برنامه فردی",
-    "outsidePolicies": "سیاست‌های خارج از برنامه شناسایی شده",
-    "outsideDescription": "رفتار هنگام خروج یا تغییر از برنامه‌های فعال",
-    "policyHelp": "راهنمای سیاست",
-    "freeze": "انجماد (پیش‌فرض)",
-    "customFallback": "جایگزین سفارشی",
-    "drop": "رها کردن (پاک کردن حضور)",
-    "fallbackPresence": "حضور جایگزین سفارشی",
-    "activityName": "نام فعالیت",
+  "pluralization": {
+    "app": {
+      "plural": "برنامه‌ها",
+      "singular": "برنامه"
+    }
+  },
+  "placeholders": {
+    "labelExample": "برچسب (به عنوان مثال پیوستن به بازی)",
     "details": "جزئیات",
-    "state": "وضعیت",
+    "smallImageUrl": "URL تصویر کوچک",
     "smallText": "متن کوچک",
-    "bigText": "متن بزرگ",
-    "smallImage": "تصویر کوچک",
-    "bigImage": "تصویر بزرگ",
-    "imageUrl": "URL تصویر",
-    "uploadingImage": "",
-    "timestampStrategy": "استراتژی مهر زمانی",
-    "timestampDescription": "نحوه حل تایمرهای فعالیت در جلسات برنامه",
-    "timestampHelp": "راهنمای مهر زمانی",
-    "persistent": "دائمی (پیش‌فرض)",
-    "resetOnLaunch": "بازنشانی در راه‌اندازی",
-    "customFixedTime": "زمان ثابت سفارشی",
-    "fixedStart": "مهر زمانی شروع ثابت",
-    "statusFieldConfig": "پیکربندی فیلد وضعیت",
-    "statusFieldDescription": "سفارشی‌سازی عنوان، جزئیات، وضعیت و عبارات آثار هنری",
-    "configurationDetails": "جزئیات پیکربندی",
-    "outsideHelpTitle": "سیاست‌های خارج از برنامه",
-    "timestampHelpTitle": "استراتژی‌های مهر زمانی",
-    "understood": "فهمیدم",
-    "freezeHelp": "حضور پیش‌بینی شده آخرین را متوقف و حفظ می‌کند تا زمانی که یک برنامه فعال دوباره شناسایی شود.",
-    "customHelp": "بلافاصله حضور جایگزین سفارشی شده را پیش‌بینی می‌کند.",
-    "dropHelp": "فعالیت Discord شما را پاک می‌کند تا زمانی که به یک برنامه فعال بازگردید.",
-    "persistentHelp": "از یک مهر زمانی زمان اجرا مشترک برای برنامه‌ها و رسانه‌های متوقف شده در طول این جلسه سرویس استفاده می‌کند.",
-    "resetHelp": "تایمر را در 00:00 مجدداً راه‌اندازی می‌کند وقتی برنامه راه‌اندازی یا دوباره متمرکز می‌شود.",
-    "fixedHelp": "تایمر حضور را به یک تاریخ و زمان شروع ثابت خاص قفل می‌کند.",
-    "uploadImage": "آپلود تصویر"
+    "state": "وضعیت",
+    "urlExample": "URL (https://...)",
+    "example": "به عنوان مثال ",
+    "listenOn": "گوش دادن در"
   },
-  "mediaPresence": {
-    "title": "پیکربندی حضور رسانه",
-    "subtitle": "اولویت‌های حل، مهرهای زمانی و وضعیت‌های پخش",
-    "priority": "اولویت رسانه",
-    "priorityDesc": "کنترل می‌کند که آیا رسانه جلسات بازی/برنامه را نادیده می‌گیرد",
-    "priorityHelp": "راهنمای اولویت",
-    "priorityPlaying": "اولویت به رسانه در حال پخش (پیش‌فرض)",
-    "switchesBetween": "بین تغییر می‌کند",
-    "scope": "دامنه تشخیص رسانه",
-    "scopeDesc": "فیلتر کنید کدام برنامه‌ها rich presence رسانه را فعال می‌کنند",
-    "allSessions": "همه جلسات رسانه (پیش‌فرض)",
-    "enabledAppsOnly": "فقط برنامه‌های فعال",
-    "typeResolution": "حل نوع رسانه",
-    "typeResolutionDesc": "نحوه طبقه‌بندی فعالیت‌های گوش دادن و تماشا کردن",
-    "autoAdaptive": "سازگار خودکار (پیش‌فرض)",
-    "profileOverride": "بازنویسی نمایه برنامه",
-    "timeRemaining": "زمان باقی مانده",
-    "timeRemainingDesc": "زمان باقی مانده معمول شروع/پایان فعلی را نشان می‌دهد",
-    "appTimestamp": "",
-    "pausedResolution": "حل رسانه متوقف شده",
-    "pausedDesc": "رفتار حضور وقتی پخش فعال متوقف می‌شود",
-    "pausedHelp": "راهنمای حل مکث",
-    "showPaused": "نمایش وضعیت متوقف شده (پیش‌فرض)",
-    "fallbackApp": "بازگشت به برنامه شناسایی شده",
-    "hidePaused": "پنهان کردن وضعیت متوقف شده",
-    "statusFields": "پیکربندی فیلد وضعیت رسانه",
-    "statusFieldsDesc": "سفارشی‌سازی عبارات جایگزین عنوان، هنرمند، آلبوم و آثار هنری",
-    "priorityStrategy": "استراتژی اولویت رسانه",
-    "priorityStrategyDesc": "منطق حل بین جلسات بازی و رسانه",
-    "pausedOptions": "گزینه‌ها وقتی پخش فعال متوقف می‌شود",
-    "priorityHelpText": "وقتی رسانه به طور فعال پخش می‌شود، بر برنامه‌ای که استفاده می‌کنید اولویت دارد و آهنگ یا ویدیوی فعلی را پیش‌بینی می‌کند.",
-    "switchHelpText": "رسانه را فقط زمانی پیش‌بینی می‌کند که در پخش‌کننده رسانه هستید. تغییر به یک بازی یا برنامه فعال به آن برنامه اجازه می‌دهد کنترل را به دست بگیرد.",
-    "showPausedHelp": "حضور رسانه را در حین مکث فعال نگه می‌دارد و نشانگرهای مکث را نشان می‌دهد.",
-    "fallbackHelp": "از برنامه قبلی یا فعلی شناسایی شده یا جایگزین سفارشی در حین مکث رسانه استفاده می‌کند.",
-    "hidePausedHelp": "حضور را در حین مکث رسانه پنهان می‌کند، از جمله هر برنامه شناسایی شده."
+  "service": {
+    "imgbb": {
+      "chooseImage": "یک فایل تصویر انتخاب کنید.",
+      "iconUploadFailed": "آپلود نماد ناموفق بود.",
+      "imageTooLarge": "تصویری کوچکتر از 32 مگابایت انتخاب کنید.",
+      "imageUploadFailed": "آپلود تصویر ناموفق بود."
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "تصویر بزرگ",
+      "bigText": "متن بزرگ",
+      "line1": "جزئیات فعالیت",
+      "smallImage": "تصویر کوچک",
+      "smallText": "متن کوچک",
+      "line2": "وضعیت فعالیت",
+      "title": "عنوان/سربرگ فعالیت"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "حساب وارد شده است.",
+          "desc": "حساب Discord خود را برای نمایش Rich Presence متصل کنید",
+          "title": "ورود به Discord"
+        },
+        "languageTitle": "زبان",
+        "themeTitle": "تم",
+        "desc": "سفارشی‌سازی و حساب",
+        "title": "کنترل کاربر"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "برنامه را مستثنی کنید تا از خوابیدن سرویس پس‌زمینه جلوگیری شود",
+          "title": "بهینه‌سازی باتری",
+          "modal": {
+            "desc": "سیستم‌های مدرن Android فرآیندهای پس‌زمینه را پس از چند دقیقه به خواب می‌برند. معاف کردن Kruzty Dynamics از بهینه‌سازی باتری، به‌روزرسانی‌های پیوسته و بدون وقفه Discord Rich Presence را تضمین می‌کند.",
+            "subtitle": "لیست سفید سرویس پس‌زمینه",
+            "requestExemption": "درخواست معافیت"
+          }
+        },
+        "notificationAccess": {
+          "desc": "دسترسی ویژه به برنامه برای تشخیص رسانه و پخش مورد نیاز است",
+          "title": "دسترسی به اعلان‌ها",
+          "modal": {
+            "methodA": {
+              "title": "روش A: دسترسی ویژه به برنامه (Pixel, Motorola, Infinix, Stock)",
+              "step1": "روی باز کردن تنظیمات Android در زیر ضربه بزنید.",
+              "step2": "به دسترسی ویژه به برنامه > دسترسی به اعلان‌ها بروید.",
+              "step3": "Kruzty Dynamics را پیدا کنید و اجازه دسترسی به اعلان‌ها را روشن کنید."
+            },
+            "methodB": {
+              "title": "روش B: اطلاعات برنامه > نقطه‌ها (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "تنظیمات دستگاه > برنامه‌ها > مدیریت برنامه‌ها / لیست برنامه‌ها را باز کنید.",
+              "step2": "Kruzty Dynamics را پیدا کرده و روی آن ضربه بزنید.",
+              "step4": "روی اجازه تنظیمات محدود / دسترسی ویژه به برنامه > اعطا ضربه بزنید.",
+              "step5": "بازگردید و دسترسی به اعلان‌ها را فعال کنید."
+            },
+            "desc": "دسترسی به اعلان‌ها به Kruzty Dynamics اجازه می‌دهد رویدادهای پخش جلسه رسانه زنده (عنوان آهنگ، هنرمند، آلبوم و وضعیت پخش) را از Spotify، YouTube Music و پخش‌کننده‌های رسانه ضبط کند.",
+            "oemNotice": {
+              "desc": "Android از دسترسی شنونده اعلان‌ها در پشت لایه‌های مجوز ویژه محافظت می‌کند. بسته به برند گوشی خود، یکی از روش‌های زیر را دنبال کنید.",
+              "title": "اطلاعیه برای دستگاه‌های OEM و Android 13+"
+            },
+            "subtitle": "پیکربندی دسترسی ویژه به برنامه",
+            "openAndroidSettings": "باز کردن تنظیمات Android"
+          }
+        },
+        "desc": "مورد نیاز برای تشخیص",
+        "title": "کنترل مجوزها",
+        "foregroundNotification": {
+          "desc": "مجوز Android 13+ برای اعلان سرویس دائمی",
+          "title": "اعلان پیش‌زمینه",
+          "modal": {
+            "allowNotification": "اجازه اعلان",
+            "desc": "توسط Android 13+ برای نمایش اعلان سرویس پیش‌زمینه در نوار وضعیت شما مورد نیاز است، که تأیید می‌کند موتور حضور Discord در حال اجرا است.",
+            "subtitle": "مجوز اعلان Android 13+",
+            "title": "اعلان سرویس پیش‌زمینه"
+          }
+        },
+        "usageAccess": {
+          "desc": "برای تشخیص برنامه یا بازی در حال اجرا در پیش‌زمینه مورد نیاز است",
+          "title": "دسترسی به استفاده",
+          "modal": {
+            "openUsageAccess": "باز کردن دسترسی به استفاده",
+            "desc": "دسترسی به استفاده برای تشخیص اینکه کدام برنامه یا بازی در حال حاضر در پیش‌زمینه اجرا می‌شود مورد نیاز است، تا Kruzty Dynamics بتواند آن را با فهرست برنامه‌های پیکربندی شده شما مطابقت دهد.",
+            "step1": "روی باز کردن دسترسی به استفاده ضربه بزنید.",
+            "step2": "Kruzty Dynamics را پیدا کنید.",
+            "step3": "اجازه دسترسی به استفاده را روشن کنید.",
+            "subtitle": "تشخیص برنامه پیش‌زمینه"
+          }
+        }
+      },
+      "privacyNotice": "این برنامه داده‌های کاربر را جمع‌آوری یا منتقل نمی‌کند.",
+      "subtitle": "مجوزها و حساب‌های کاربری لازم را برای فعال‌سازی Discord Rich Presence پویا پیکربندی کنید.",
+      "title": "راه‌اندازی اولیه"
+    },
+    "footer": {
+      "allSet": "همه چیز آماده است! آماده نمایش",
+      "buttons": {
+        "continueForNow": "ادامه برای حالا",
+        "finishSetup": "پایان راه‌اندازی",
+        "skipForNow": "رد کردن برای حالا"
+      },
+      "readyWhenYouAre": "آماده وقتی شما آماده هستید"
+    }
+  },
+  "tags": {
+    "granted": "اعطا شد",
+    "notificationCrucial": "حیاتی",
+    "allGranted": "همه اعطا شدند",
+    "cached": "ذخیره شده در حافظه پنهان",
+    "check": "بررسی",
+    "checkingUpdates": "بررسی به‌روزرسانی‌ها",
+    "default": "پیش‌فرض",
+    "view": "مشاهده"
   }
 }

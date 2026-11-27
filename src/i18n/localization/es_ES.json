@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "Configuración Inicial",
-    "subtitle": "Configura los permisos necesarios y cuentas para activar Discord Rich Presence.",
-    "privacyNotice": "Esta aplicación no recopila ni transmite datos del usuario.",
-    "permissionsSection": "Control de Permisos",
-    "permissionsRequired": "Requerido para la detección",
-    "notificationTitle": "Acceso a Notificaciones",
-    "notificationDesc": "Acceso especial necesario para detectar medios y reproducción",
-    "notificationCrucial": "Fundamental",
-    "usageTitle": "Acceso de Uso",
-    "usageDesc": "Requerido para detectar aplicaciones o juegos en primer plano",
-    "batteryTitle": "Optimización de Batería",
-    "batteryDesc": "Exime la app para evitar que se detenga en segundo plano",
-    "postNotificationTitle": "Notificación de Servicio",
-    "postNotificationDesc": "Permiso de Android 13+ para la notificación del servicio",
-    "grant": "Conceder",
-    "granted": "Concedido",
-    "userControlSection": "Control de Usuario",
-    "userControlDesc": "Personalización y Cuenta",
-    "discordLoginTitle": "Iniciar Sesión en Discord",
-    "discordLoginDesc": "Conecta tu cuenta de Discord para mostrar Rich Presence",
-    "accountsConnected": "cuenta conectada.",
-    "themeTitle": "Tema",
-    "languageTitle": "Idioma",
-    "finishSetup": "Terminar Configuración",
-    "continueForNow": "Continuar por Ahora",
-    "skipForNow": "Omitir por Ahora",
-    "allSet": "¡Todo listo para proyectar!",
-    "readyWhenYouAre": "Listo cuando quieras"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "Identidad Activa",
+        "stored": "Guardada"
+      },
+      "content": {
+        "subtitle": "Gestiona tokens e identidades",
+        "title": "Portal de inicio de sesión de Discord",
+        "privacyText": "La autorización de Discord solicita acceso a funciones sociales, además de a «Rich Presence». Kruzty Dynamics utiliza el SDK para identificar tu cuenta y publicar o borrar la actividad que hayas configurado; no utiliza funciones como añadir amigos, bloquear, invitar, enviar mensajes ni funciones de voz. En Android, los tokens se cifran y se almacenan en este dispositivo. Lee la",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "Política de privacidad"
+      },
+      "title": "Conectar cuenta de Discord"
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "Las expresiones admiten las comparaciones == y !=. Utiliza {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} para seleccionar AppName cuando el tipo de actividad sea «Playing» y, en caso contrario, AppPlatformType.",
+        "title": "Referencia de tokens de aplicación",
+        "desc": "Variables dinámicas disponibles en las expresiones de campo"
+      },
+      "media": {
+        "title": "Referencia de tokens multimedia",
+        "intro": "Puedes insertar tokens directamente en campos de texto y en etiquetas o URL de botones (p. ej., {example}).",
+        "desc": "Variables dinámicas disponibles en expresiones multimedia y botones"
+      }
+    },
+    "unsavedChanges": {
+      "discard": "¿Deseas descartar los cambios no guardados?",
+      "unsaved": "Hay cambios sin guardar"
+    },
+    "logs": {
+      "copy": "Copiar registros",
+      "empty": "[INFO] Aún no hay registros. Inicia sesión en Discord o realiza alguna acción para generar registros.",
+      "export": "Exportar registros",
+      "subtitle": "Salida de diagnóstico en tiempo real",
+      "title": "Registros de la aplicación"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "Color de acento principal",
+        "resetAccent": "Restablecer al naranja predeterminado",
+        "tapCustomize": "Toca para personalizar",
+        "themeMode": "Modo de tema"
+      },
+      "globalDefaults": {
+        "activityStatus": "Estado de actividad",
+        "activityType": "Tipo de actividad",
+        "note": "Estos valores predeterminados se utilizan automáticamente cuando una aplicación o una actividad de presencia no especifica su propio tipo de actividad o estado."
+      },
+      "imgBb": {
+        "apiPrivacy": "Si se deja este campo en blanco, se restablecerá la clave de API predeterminada integrada. Las claves personalizadas nunca se muestran en texto sin cifrar.",
+        "getApiKey": "para obtener una clave.",
+        "help": "Configura tu propia clave API de ImgBB para subir imágenes personalizadas de aplicaciones y recursos multimedia a la CDN de Discord. Visita",
+        "usingDefaultKey": "Se usa la clave predeterminada del sistema"
+      },
+      "language": {
+        "availableLanguages": "Idiomas disponibles",
+        "title": "Elegir idioma",
+        "desc": "Selecciona el idioma de la interfaz y las notificaciones."
+      },
+      "checkPermissions": {
+        "batteryDesc": "Evita que Android detenga el servicio de presencia",
+        "foregroundDesc": "Indicador en la barra de estado de la presencia activa",
+        "notificationAccessDesc": "Acceso especial para detectar medios",
+        "desc": "Estado de los permisos necesarios para leer notificaciones multimedia y aplicaciones en primer plano:",
+        "usageAccessDesc": "Detectar juegos y aplicaciones en primer plano"
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "Hay direcciones URL de imágenes vinculadas a {total}, incluidas las sustituciones de iconos de aplicaciones personalizadas de {custom}. Puedes borrar los enlaces almacenados en la caché conservando los iconos personalizados, o bien borrar todos los enlaces y eliminar las sustituciones personalizadas. Si eliminas las sustituciones, vuelve a subir esos iconos al Catálogo de aplicaciones.",
+        "buttons": {
+          "clearCacheAll": "Borrar todo, incluidos los iconos personalizados",
+          "clearCacheKeep": "Borrar la caché, conservar los iconos personalizados"
+        },
+        "clearedAll": "Se borraron todas las URL, incluidos los iconos personalizados.",
+        "clearedKeeping": "Se ha borrado la caché de las URL de las imágenes vinculadas. Se han conservado los iconos personalizados de las aplicaciones.",
+        "linkedImageUrls": "URL de las imágenes enlazadas"
+      },
+      "credits": {
+        "contributorsSection": "Colaboradores de Kizzy",
+        "developerSection": "Kruzty Dynamics",
+        "librariesSection": "Bibliotecas utilizadas",
+        "libraries": {
+          "lucide": "Iconos vectoriales creados por la comunidad",
+          "react": "Arquitectura moderna de componentes de interfaz",
+          "sdk": "Integración nativa de «Rich Presence» en Android",
+          "tailwind": "Estilos modernos y adaptables basados en utilidades",
+          "tauri": "Entorno nativo ligero y multiplataforma",
+          "tokio": "Entorno de ejecución de red asíncrono basado en eventos"
+        },
+        "maintainerRole": "Mantenedor y desarrollador actual"
+      },
+      "discordApp": {
+        "developerPortal": "Portal de desarrolladores de Discord",
+        "help": "Configura tu propio ID de aplicación de Discord desde el",
+        "idPrivacy": "Si dejas este campo en blanco, se restablecerá el ID de aplicación predeterminado de Kruzty Dynamics."
+      }
+    }
   },
-  "nav": {
-    "service": "Servicio",
-    "accounts": "Cuentas",
-    "settings": "Ajustes"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "Añadir Cuenta",
+            "switch": "Cambiar",
+            "unuse": "Dejar de usar"
+          },
+          "activePresence": "Presencia activa",
+          "modal": {
+            "logout": {
+              "confirmLogout": "Confirmar cierre de sesión",
+              "title": "Cerrar sesión - Cuenta",
+              "removePrefix": "¿Estás seguro de que quieres eliminar la cuenta?",
+              "removeSuffix": ". Esto eliminará las credenciales guardadas de este dispositivo."
+            }
+          },
+          "currentAccount": "Cuenta conectada actualmente",
+          "noActiveAccount": "No hay una cuenta seleccionada. Elige una de las cuentas conectadas.",
+          "storedAccounts": "Cuentas guardadas"
+        },
+        "noAccount": {
+          "desc": "Conecta tu cuenta de Discord para mostrar estados de Rich Presence de juegos, aplicaciones y contenido multimedia.",
+          "title": "No hay ninguna cuenta iniciada.",
+          "login": "Iniciar sesión en Discord"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "Sin cuentas de Discord",
+        "loggedInMany": "{n} cuentas conectadas.",
+        "loggedInOne": "{n} cuenta conectada."
+      },
+      "title": "Cuentas de Discord"
+    },
+    "service": {
+      "subtitle": "Panel de control de Kruzty Dynamics",
+      "title": {
+        "welcome": "¡Bienvenidos!",
+        "welcomeNamed": "¡Bienvenido, {name}!"
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "Se han concedido todos los permisos necesarios. Activa el servicio para continuar.",
+              "foregroundService": {
+                "desc": "Permite que Android muestre la notificación del servicio mientras este se está ejecutando.",
+                "title": "Notificaciones de servicio en primer plano"
+              },
+              "notificationAccess": {
+                "desc": "Es necesario para detectar la reproducción de contenidos multimedia y sus metadatos."
+              },
+              "subtitle": "Concede estos permisos de Android antes de iniciar el servicio.",
+              "title": "Permisos necesarios",
+              "returnHint": "Una vez que hayas concedido el acceso en los Ajustes de Android, vuelve aquí y activa el servicio.",
+              "usageAccess": {
+                "desc": "Es necesario para detectar qué aplicación se encuentra actualmente en primer plano."
+              }
+            }
+          },
+          "startError": "No se ha podido iniciar el servicio de presencia de Android.",
+          "running": "El servicio está en funcionamiento.",
+          "stopped": "El servicio no se ha iniciado.",
+          "title": "Servicio de Kruzty Dynamics"
+        },
+        "application": {
+          "desc": "Configura perfiles para detectar aplicaciones activas",
+          "title": "Presencia de aplicaciones"
+        },
+        "buttons": {
+          "applicationCatalogue": "Catálogo de aplicaciones",
+          "presenceConfiguration": "Configuración de presencia",
+          "statusFieldConfig": "Configuración del campo «Estado»"
+        },
+        "media": {
+          "desc": "Configura el comportamiento multimedia y sus plantillas",
+          "title": "Presencia multimedia"
+        },
+        "preview": {
+          "noPresence": "No se detectaron aplicaciones configuradas ni contenido multimedia activo.",
+          "stoppedDescription": "El servicio está detenido. Actívalo para detectar las aplicaciones habilitadas y los contenidos multimedia activos."
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "Preferencias de la App",
+        "checkPermissions": {
+          "title": "Comprobar Permisos",
+          "desc": "Revisa los permisos de acceso concedidos"
+        },
+        "deleteCachedUrls": {
+          "title": "Eliminar URLs de Imágenes",
+          "desc": "Borra las imágenes asociadas en caché"
+        },
+        "discordAppId": {
+          "title": "ID de Aplicación de Discord",
+          "desc": "Configura tu ID de Aplicación de Discord."
+        },
+        "globalDefaults": {
+          "title": "Valores Globales por Defecto",
+          "desc": "Tipo de actividad y estado para apps no configuradas"
+        },
+        "imgBbKey": {
+          "title": "Clave de API de ImgBB",
+          "desc": "Configura tu propia clave de API de ImgBB."
+        },
+        "language": {
+          "title": "Idioma",
+          "desc": "Establecido en:"
+        },
+        "notificationProjection": {
+          "title": "Personalizar la visualización del estado de las notificaciones",
+          "desc": "Personaliza los títulos y subtítulos de las notificaciones de aplicaciones y de contenidos multimedia."
+        },
+        "themes": {
+          "title": "Temas y Pantalla",
+          "desc": "Configura tu tema y color de énfasis."
+        },
+        "checkUpdates": {
+          "title": "Comprueba si hay una versión más reciente",
+          "desc": "Comprueba si hay una versión más reciente disponible."
+        }
+      },
+      "subtitle": "Preferencias y diagnósticos de la app",
+      "title": "Ajustes y Más",
+      "cardInfo": {
+        "architecture": "Desarrollado con Rust Core (Tokio + Tauri v2), React 19, TailwindCSS y el puente nativo de Android. Basado en Experimental RPC de Kizzy.",
+        "credits": "Agradecimientos",
+        "developedBy": "Desarrollado por",
+        "latestRelease": "Ir a la última versión",
+        "learnMore": "Más información sobre esta aplicación",
+        "repository": "Ver repositorio de GitHub",
+        "submitIssue": "Enviar una incidencia",
+        "version": "Kruzty Dynamics v{version}"
+      }
+    }
   },
-  "header": {
-    "serviceActive": "Activo",
-    "serviceInactive": "Inactivo",
-    "serviceStarting": "Iniciando",
-    "serviceStopped": "Detenido",
-    "welcome": "¡Bienvenidos!",
-    "welcomeNamed": "¡Bienvenido, {name}!",
-    "dashboardSubtitle": "Panel de control de Kruzty Dynamics",
-    "liveLogs": "Registros en directo",
-    "viewLogs": "Ver registros",
-    "accountsLoggedInOne": "{n} cuenta conectada.",
-    "accountsLoggedInMany": "{n} cuentas conectadas."
-  },
-  "accounts": {
-    "title": "Cuentas de Discord",
-    "subtitle": "Gestiona tokens e identidades",
-    "loginPortal": "Iniciar sesión con Portal Discord",
-    "loginWithToken": "Añadir cuenta con Token",
-    "addAccount": "Añadir Cuenta",
-    "activeIdentity": "Identidad Activa",
-    "stored": "Guardada",
+  "buttons": {
     "remove": "Eliminar",
-    "noAccounts": "Sin cuentas de Discord",
-    "noAccountsDesc": "Añade tu cuenta de Discord usando el portal o token para proyectar presencia."
-  },
-  "settings": {
-    "title": "Ajustes y Más",
-    "subtitle": "Preferencias y diagnósticos de la app",
-    "appPreferences": "Preferencias de la App",
-    "notificationProjection": "Personalizar la visualización del estado de las notificaciones",
-    "notificationProjectionDesc": "Personaliza los títulos y subtítulos de las notificaciones de aplicaciones y de contenidos multimedia.",
-    "themes": "Temas y Pantalla",
-    "themesDesc": "Configura tu tema y color de énfasis.",
-    "language": "Idioma",
-    "languageDesc": "Establecido en:",
-    "globalDefaults": "Valores Globales por Defecto",
-    "globalDefaultsDesc": "Tipo de actividad y estado para apps no configuradas",
-    "imgbbKey": "Clave de API de ImgBB",
-    "imgbbKeyDesc": "Configura tu propia clave de API de ImgBB.",
-    "discordAppId": "ID de Aplicación de Discord",
-    "discordAppIdDesc": "Configura tu ID de Aplicación de Discord.",
-    "checkPermissions": "Comprobar Permisos",
-    "checkPermissionsDesc": "Revisa los permisos de acceso concedidos",
-    "deleteCache": "Eliminar URLs de Imágenes",
-    "deleteCacheDesc": "Borra las imágenes asociadas en caché"
-  },
-  "service": {
-    "title": "Servicio de Kruzty Dynamics",
-    "running": "El servicio está en funcionamiento.",
-    "stopped": "El servicio no se ha iniciado.",
-    "applicationPresence": "Presencia de aplicaciones",
-    "appDescription": "Configura perfiles para detectar aplicaciones activas",
-    "applicationCatalogue": "Catálogo de aplicaciones",
-    "statusFieldConfig": "Configuración del campo «Estado»",
-    "presenceConfiguration": "Configuración de presencia",
-    "mediaPresence": "Presencia multimedia",
-    "mediaDescription": "Configura el comportamiento multimedia y sus plantillas",
-    "noPresence": "No se detectaron aplicaciones configuradas ni contenido multimedia activo.",
-    "stoppedDescription": "El servicio está detenido. Actívalo para detectar las aplicaciones habilitadas y los contenidos multimedia activos."
-  },
-  "accountsPage": {
-    "emptyTitle": "No hay ninguna cuenta iniciada.",
-    "emptyDescription": "Conecta tu cuenta de Discord para mostrar estados de Rich Presence de juegos, aplicaciones y contenido multimedia.",
-    "login": "Iniciar sesión en Discord",
-    "currentAccount": "Cuenta conectada actualmente",
-    "activePresence": "Presencia activa",
-    "storedAccounts": "Cuentas guardadas",
-    "switch": "Cambiar",
-    "unuse": "Dejar de usar",
-    "remove": "Eliminar",
-    "cancel": "Cancelar",
-    "deleteTitle": "¿Eliminar la cuenta de Discord?",
-    "loginTitle": "Portal de inicio de sesión de Discord",
-    "noActiveAccount": "No hay una cuenta seleccionada. Elige una de las cuentas conectadas.",
-    "addAccountTitle": "Conectar cuenta de Discord",
-    "portal": "Portal de inicio de sesión de Discord",
-    "signInPortal": "Inicia sesión de forma segura con la función integrada de Discord",
     "openPortal": "Abrir portal",
-    "privacyText": "La autorización de Discord solicita acceso a funciones sociales, además de a «Rich Presence». Kruzty Dynamics utiliza el SDK para identificar tu cuenta y publicar o borrar la actividad que hayas configurado; no utiliza funciones como añadir amigos, bloquear, invitar, enviar mensajes ni funciones de voz. En Android, los tokens se cifran y se almacenan en este dispositivo. Lee la",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "Cerrar sesión - Cuenta",
-    "removePrefix": "¿Estás seguro de que quieres eliminar la cuenta?",
-    "removeSuffix": ". Esto eliminará las credenciales guardadas de este dispositivo.",
-    "confirmLogout": "Confirmar cierre de sesión",
-    "addAccount": "Añadir cuenta de Discord",
-    "noSelection": "No hay una cuenta seleccionada. Elige una cuenta conectada.",
-    "addMoreAccounts": "Puedes añadir más cuentas haciendo clic en el botón de Discord que aparece a continuación."
-  },
-  "settingsUi": {
-    "chooseLanguage": "Elegir idioma",
-    "languageDescription": "Selecciona el idioma de la interfaz y las notificaciones.",
-    "availableLanguages": "Idiomas disponibles",
-    "close": "Cerrar",
-    "linkedImageUrls": "URL de las imágenes enlazadas",
-    "clearCacheKeep": "Borrar la caché, conservar los iconos personalizados",
-    "clearCacheAll": "Borrar todo, incluidos los iconos personalizados",
-    "credits": "Agradecimientos",
-    "themeMode": "Modo de tema",
-    "accentColor": "Color de acento principal",
-    "resetAccent": "Restablecer al naranja predeterminado",
-    "learnMore": "Más información sobre esta aplicación",
-    "privacyPolicy": "Política de privacidad",
-    "repository": "Ver repositorio de GitHub",
-    "latestRelease": "Ir a la última versión",
-    "submitIssue": "Enviar una incidencia",
-    "developerSection": "Kruzty Dynamics",
-    "librariesSection": "Bibliotecas utilizadas",
-    "contributorsSection": "Colaboradores de Kizzy",
-    "maintainerRole": "Mantenedor y desarrollador actual",
-    "view": "Ver",
-    "done": "Hecho",
-    "developedBy": "Desarrollado por",
-    "version": "Kruzty Dynamics v{version}",
-    "architecture": "Desarrollado con Rust Core (Tokio + Tauri v2), React 19, TailwindCSS y el puente nativo de Android. Basado en Experimental RPC de Kizzy.",
-    "cached": "en caché",
-    "tapCustomize": "Toca para personalizar",
-    "defaultNote": "Estos valores predeterminados se utilizan automáticamente cuando una aplicación o una actividad de presencia no especifica su propio tipo de actividad o estado.",
-    "activityType": "Tipo de actividad",
-    "activityStatus": "Estado de actividad",
-    "imgbbHelp": "Configura tu propia clave API de ImgBB para subir imágenes personalizadas de aplicaciones y recursos multimedia a la CDN de Discord. Visita",
-    "getApiKey": "para obtener una clave.",
-    "apiPrivacy": "Si se deja este campo en blanco, se restablecerá la clave de API predeterminada integrada. Las claves personalizadas nunca se muestran en texto sin cifrar.",
-    "saveKey": "Guardar clave",
-    "discordIdHelp": "Configura tu propio ID de aplicación de Discord desde el",
-    "developerPortal": "Portal de desarrolladores de Discord",
-    "idDefault": "Predeterminado",
-    "idPrivacy": "Si dejas este campo en blanco, se restablecerá el ID de aplicación predeterminado de Kruzty Dynamics.",
-    "saveId": "Guardar ID",
-    "permissionsDescription": "Estado de los permisos necesarios para leer notificaciones multimedia y aplicaciones en primer plano:",
-    "notificationAccessDesc": "Acceso especial para detectar medios",
-    "usageAccessDesc": "Detectar juegos y aplicaciones en primer plano",
-    "batteryDesc": "Evita que Android detenga el servicio de presencia",
-    "foregroundDesc": "Indicador en la barra de estado de la presencia activa",
-    "saveIdPlaceholder": "1572590527562391713 (Predeterminado)",
-    "resetDefault": "Restablecer valores",
-    "cancel": "Cancelar",
-    "cacheWarning": "Hay direcciones URL de imágenes vinculadas a {total}, incluidas las sustituciones de iconos de aplicaciones personalizadas de {custom}. Puedes borrar los enlaces almacenados en la caché conservando los iconos personalizados, o bien borrar todos los enlaces y eliminar las sustituciones personalizadas. Si eliminas las sustituciones, vuelve a subir esos iconos al Catálogo de aplicaciones.",
-    "allGranted": "Todos concedidos",
-    "clearedAll": "Se borraron todas las URL, incluidos los iconos personalizados.",
-    "clearedKeeping": "Se ha borrado la caché de las URL de las imágenes vinculadas. Se han conservado los iconos personalizados de las aplicaciones.",
-    "usingDefaultKey": "Se usa la clave predeterminada del sistema",
-    "customKeySet": "Clave personalizada configurada",
-    "light": "Claro",
-    "dark": "Oscuro",
-    "amoled": "AMOLED",
-    "libraryTauri": "Entorno nativo ligero y multiplataforma",
-    "libraryTokio": "Entorno de ejecución de red asíncrono basado en eventos",
-    "librarySdk": "Integración nativa de «Rich Presence» en Android",
-    "libraryReact": "Arquitectura moderna de componentes de interfaz",
-    "libraryTailwind": "Estilos modernos y adaptables basados en utilidades",
-    "libraryLucide": "Iconos vectoriales creados por la comunidad",
-    "checkForUpdates": "Comprueba si hay una versión más reciente",
-    "checkForUpdatesDesc": "Comprueba si hay una versión más reciente disponible.",
-    "check": "Comprobar",
-    "checkingUpdates": "Comprobación de actualizaciones"
-  },
-  "configFields": {
-    "appTitle": "Configuración de los campos de estado de la solicitud",
-    "mediaTitle": "Configuración del campo «Estado de los medios»",
-    "back": "Atrás",
-    "reset": "Restablecer valores",
-    "help": "Ayuda de tokens disponibles",
-    "title": "Título",
-    "line1": "Línea 1 (Detalles)",
-    "line2": "Línea 2 (Estado)",
-    "smallText": "Texto pequeño",
-    "smallImage": "Imagen pequeña",
-    "bigText": "Texto grande",
-    "bigImage": "Imagen grande",
-    "header": "Encabezado (Escuchando a / Viendo)",
-    "mediaTitleField": "Título del medio (Detalles de la actividad)",
-    "artist": "Línea 1 (Estado de la actividad / Artista)",
-    "album": "Línea 2 (Álbum / Texto de la imagen)",
-    "buttons": "Botones personalizados",
-    "button1": "Botón 1",
-    "button2": "Botón 2",
-    "save": "Guardar campos",
-    "appReference": "Referencia de tokens de aplicación",
-    "mediaReference": "Referencia de tokens multimedia",
-    "tokenDescription": "Variables dinámicas disponibles en las expresiones de campo",
-    "mediaTokenDescription": "Descripción del vídeo o contenido multimedia de sitios web o reproductores de vídeo.",
-    "discard": "¿Deseas descartar los cambios no guardados?",
-    "unsaved": "Hay cambios sin guardar",
-    "helpDone": "Entendido",
-    "appTokenName": "Nombre proyectado de la aplicación que aparece en la actividad.",
-    "appHeader": "Encabezado",
-    "titleHeader": "Título/Encabezado de la actividad",
-    "detailsField": "Detalles de la actividad",
-    "stateField": "Estado de la actividad",
-    "notificationConfigSubtitle": "Personaliza el título y el subtítulo que aparecen en la notificación de servicio en primer plano.",
-    "notificationAppSection": "Notificación sobre el estado de la aplicación",
-    "notificationMediaSection": "Notificación de reproducción multimedia",
-    "notificationSubtitleLabel": "Subtítulo de la notificación",
-    "notificationHelpIntro": "Utiliza getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") y getFieldCfgStr(\"MediaBigText\") para insertar los valores de los campos renderizados. Utiliza joinNonBlank(field1, field2) para unir los valores no vacíos con una viñeta. Las plantillas de notificaciones de aplicaciones admiten la condición AppActivityType == \"Playing\". Las expresiones también admiten las comparaciones == y !=.",
-    "notificationDiscardMessage": "Tienes cambios en la proyección de notificaciones que no has guardado. Si sales ahora, se descartarán.",
-    "appTokenActivityType": "Se ha seleccionado un tipo de actividad de «presencia enriquecida» para este perfil de aplicación, como «Reproduciendo», «Escuchando», «Viendo» o «Compitiendo».",
-    "appTokenPlatformType": "Token de plataforma de este perfil de aplicación, como Android, PC o Xbox.",
-    "appExpressionOperators": "Las expresiones admiten las comparaciones == y !=. Utiliza {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} para seleccionar AppName cuando el tipo de actividad sea «Playing» y, en caso contrario, AppPlatformType.",
-    "appTokenDetails": "Texto de detalles personalizado guardado en el perfil de esta aplicación; queda vacío si está desactivado o en blanco.",
-    "appTokenState": "Texto de estado personalizado guardado en el perfil de esta aplicación; queda vacío si está desactivado o en blanco.",
-    "appTokenSmallText": "Etiqueta personalizada de imagen pequeña guardada en el perfil de esta aplicación; queda vacía si está desactivada o en blanco.",
-    "appTokenSmallUrl": "URL personalizada de imagen pequeña guardada en el perfil de esta aplicación; queda vacía si está desactivada o en blanco.",
-    "appTokenImageUrl": "URL remota de ImgBB en caché del icono de la aplicación.",
-    "appTokenPackageName": "Identificador del paquete de Android (p. ej., com.mojang.minecraftpe).",
-    "mediaTokenIntro": "Puedes insertar tokens directamente en campos de texto y en etiquetas o URL de botones (p. ej., {example}).",
-    "mediaTokenAppName": "Nombre de la aplicación del reproductor que aparece en el encabezado Listening to o Watching de Discord.",
-    "mediaTokenTitle": "Título actual de la canción o el vídeo obtenido de los metadatos de notificación.",
-    "mediaTokenArtist": "Artista o creador del audio o vídeo que se está reproduciendo.",
-    "mediaTokenAlbum": "Nombre del álbum o de la lista de reproducción.",
-    "mediaTokenPlaybackState": "Estado actual de reproducción (Playing, Paused, Stopped).",
-    "mediaTokenImageUrl": "URL de ImgBB en caché de la portada del álbum o la miniatura.",
-    "mediaTokenPlaybackImageUrl": "URL del recurso de imagen del indicador de reproducción actual.",
-    "mediaTokenFallbackImageUrl": "Icono de la aplicación de respaldo si no hay una imagen disponible.",
-    "appConfigSubtitle": "Personaliza las expresiones para detectar aplicaciones.",
-    "mediaConfigSubtitle": "Personaliza las expresiones para la reproducción multimedia.",
-    "mediaHeaderDescription": "Nombre de la aplicación que aparece en el encabezado multimedia de Discord. El tipo de actividad determina si se muestra Listening to o Watching.",
-    "mediaTitleDescription": "Corresponde al título y los detalles del contenido multimedia. Configura el nombre del reproductor por separado en el encabezado anterior.",
-    "mediaAlbumDescription": "Se muestra debajo del artista en la tarjeta multimedia de Discord.",
-    "mediaButtonDescription": "Añade hasta 2 botones interactivos de presencia con expresiones de token.",
-    "mediaButtonLabel": "Etiqueta",
-    "mediaButtonUrl": "URL",
-    "mediaButtonExample": "p. ej. ",
-    "mediaButtonListen": "Escuchar en",
-    "appDiscardMessage": "Tienes cambios sin guardar en los campos de estado de la solicitud. Si sales ahora, se restablecer?n a su estado anterior.",
-    "mediaDiscardMessage": "Tienes cambios sin guardar en los campos de estado de los archivos multimedia. Si sales ahora, se restablecer?n a su estado anterior.",
-    "mediaTokenSubtitle": "Variables dinámicas disponibles en expresiones multimedia y botones"
-  },
-  "catalogue": {
-    "title": "Catálogo de aplicaciones",
-    "back": "Atrás",
+    "understood": "Entendido",
+    "apply": "Aplicar",
     "batch": "Operaciones por lotes",
-    "search": "Buscar aplicaciones...",
-    "filter": "Filtrar aplicaciones",
-    "clearFilters": "Borrar filtros",
-    "enabledOnly": "Solo habilitadas",
-    "allActivityTypes": "Todos los tipos de actividad",
-    "allActivityStatuses": "Todos los estados de actividad",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "confirm": "Confirmar y aplicar",
+    "discardChanges": "Descartar cambios",
+    "keepEditing": "Seguir editando",
+    "stageChanges": "Preparar cambios",
+    "uploadImage": "Subir imagen a ImgBB",
+    "helpDone": "Entendido",
+    "save": {
+      "fields": "Guardar campos",
+      "id": "Guardar ID",
+      "key": "Guardar clave"
+    },
+    "logs": {
+      "live": "Registros en directo",
+      "view": "Ver registros"
+    },
+    "grant": "Conceder",
+    "done": "Hecho",
+    "resetDefault": "Restablecer valores"
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "Nombre de actividad",
+          "bigImage": "Imagen grande",
+          "bigText": "Texto grande",
+          "details": "Detalles",
+          "imageUrl": "URL de imagen",
+          "smallImage": "Imagen pequeña",
+          "smallText": "Texto pequeño",
+          "state": "Estado",
+          "uploadImage": "Subir imagen",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "Catálogo de aplicaciones",
+          "desc": "Ver, filtrar y personalizar las previsiones de cada aplicación"
+        },
+        "configurationDetails": "Detalles de la configuración",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "Muestra inmediatamente la presencia alternativa personalizada.",
+              "drop": "Borra tu actividad en Discord hasta que vuelvas a una aplicación activa.",
+              "freeze": "Pone en pausa y conserva la última presencia proyectada hasta que se detecte de nuevo una aplicación activa."
+            },
+            "title": "Políticas sobre aplicaciones externas"
+          },
+          "fallbackPresence": "Presencia alternativa personalizada",
+          "desc": "Comportamiento al salir de las aplicaciones activas o cambiar de una a otra",
+          "title": "Políticas de aplicaciones detectadas fuera del entorno",
+          "help": "Ayuda sobre las políticas"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "Fija el temporizador de presencia en una fecha y hora de inicio específicas.",
+              "persistent": "Utiliza una marca de tiempo de ejecución compartida para las aplicaciones y los contenidos multimedia en pausa durante esta sesión del servicio.",
+              "reset": "Reinicia el temporizador en 00:00 al iniciar la aplicación o al volver a seleccionarla."
+            },
+            "title": "Estrategias de tiempo"
+          },
+          "fixedStart": "Marca de inicio fija",
+          "desc": "Cómo se gestionan los temporizadores de actividad entre sesiones de la aplicación",
+          "help": "Ayuda sobre el tiempo",
+          "title": "Estrategia de tiempo"
+        },
+        "statusFieldConfig": {
+          "title": "Configuración del campo «Estado»",
+          "desc": "Personalizar el título, los detalles, el estado y las ilustraciones"
+        },
+        "subtitle": "Política sobre aplicaciones externas y comportamiento de las marcas de tiempo",
+        "title": "Configuración de la presencia de la aplicación"
+      },
+      "catalogue": {
+        "androidOnly": "La función de búsqueda de aplicaciones instaladas está disponible en la aplicación para Android.",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "¿Aplicar cambios en bloque?",
+              "desc": "Est?s a punto de aplicar de forma permanente los cambios de configuraci?n por etapas a",
+              "subtitle": "Confirmación",
+              "selectedApps": "aplicaciones seleccionadas."
+            },
+            "title": "Configuración masiva",
+            "subtitle": "Aplicar a todas las aplicaciones seleccionadas",
+            "discard": {
+              "title": "¿Deseas descartar los cambios en la fase de preparación?",
+              "desc": "Tienes configuraciones de lotes sin confirmar. Si sales ahora del modo de lotes, se descartarán todos los cambios preparadas.",
+              "subtitle": "Cambios por lotes sin guardar"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "Elegir una imagen de icono",
+              "resetIcon": "Restablecer el icono original de la aplicación",
+              "resetLabel": "Restablecer nombre original"
+            },
+            "customBtnDesc": "Añade hasta 2 botones interactivos de presencia",
+            "title": "Personalizar",
+            "original": "Original:",
+            "subtitle": "Perfil de presencia y alias",
+            "projectedName": "Nombre mostrado",
+            "switchToggle": {
+              "buttons": "Alternar botones personalizados",
+              "details": "Alternar detalles y estado personalizados",
+              "small": "Mostrar/ocultar texto e imágenes pequeños personalizados"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Borrar filtros",
+          "filter": "Filtrar aplicaciones"
+        },
+        "loadAppsFailed": "No se pudieron cargar las aplicaciones instaladas.",
+        "loading": "",
+        "search": "Buscar aplicaciones...",
+        "subtitle": "{apps} aplicaciones | {enabled} habilitadas",
+        "title": "Catálogo de aplicaciones",
+        "uploadProgress": "Subir el icono de una aplicación a ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Personaliza las expresiones para detectar aplicaciones.",
+        "discardMsg": "Tienes cambios sin guardar en los campos de estado de la solicitud. Si sales ahora, se restablecer?n a su estado anterior.",
+        "title": "Configuración de los campos de estado de la solicitud"
+      }
+    },
+    "buttons": {
+      "back": "Atrás",
+      "help": "Ayuda de tokens disponibles",
+      "reset": "Restablecer valores"
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "Añade hasta 2 botones interactivos de presencia con expresiones de token.",
+        "subtitle": "Personaliza las expresiones para la reproducción multimedia.",
+        "discardMsg": "Tienes cambios sin guardar en los campos de estado de los archivos multimedia. Si sales ahora, se restablecer?n a su estado anterior.",
+        "title": "Configuración del campo «Estado de los medios»"
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "Tiempo restante",
+          "desc": "Muestra el tiempo restante habitual de inicio y fin"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Utiliza la aplicación detectada anteriormente o en ese momento, o bien una alternativa personalizada, mientras el contenido multimedia está en pausa.",
+              "hidePaused": "Oculta la presencia mientras el contenido multimedia está en pausa, incluidas las aplicaciones detectadas.",
+              "showPaused": "Mantiene la presencia multimedia activa al pausar y muestra indicadores de pausa."
+            },
+            "desc": "Opciones cuando se pausa la reproducción activa"
+          },
+          "desc": "Comportamiento de la presencia cuando se pausa la reproducción activa",
+          "help": "Ayuda sobre la resolución en pausa",
+          "title": "Resolución de los contenidos multimedia en pausa"
+        },
+        "mediaPriority": {
+          "title": "Prioridad multimedia",
+          "desc": "Controla si el contenido multimedia prevalece sobre juegos y aplicaciones",
+          "help": "Ayuda de prioridad",
+          "modal": {
+            "details": {
+              "priorityPlaying": "Cuando se está reproduciendo contenido multimedia, este tiene prioridad sobre la aplicación que estés utilizando y muestra la canción o el vídeo actual.",
+              "switchesBetween": "Solo se reproducen contenidos multimedia mientras estés en el reproductor multimedia. Si cambias a un juego o a una aplicación activa, esa aplicación tomará el control."
+            },
+            "title": "Estrategia de prioridad multimedia",
+            "desc": "Lógica de resolución entre sesiones de videojuegos y de consumo de contenidos multimedia"
+          }
+        },
+        "mediaScope": {
+          "title": "Ámbito de detección de soportes",
+          "desc": "Filtrar qué aplicaciones activan la presencia multimedia"
+        },
+        "statusFieldConfig": {
+          "title": "Campos de estado multimedia",
+          "desc": "Personalizar las expresiones de sustitución para el título, el intérprete, el álbum y la carátula"
+        },
+        "subtitle": "Prioridades de resolución, marcas de tiempo y estados de reproducción",
+        "title": "Configuración de la presencia en los medios",
+        "typeResolution": {
+          "title": "Tipo de medio Resolución",
+          "desc": "Cómo se clasifican las actividades de comprensión auditiva frente a las de comprensión visual"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "Notificación sobre el estado de la aplicación",
+        "media": "Notificación de reproducción multimedia"
+      },
+      "subtitle": "Personaliza el título y el subtítulo que aparecen en la notificación de servicio en primer plano.",
+      "discard": "Tienes cambios en la proyección de notificaciones que no has guardado. Si sales ahora, se descartarán.",
+      "helpIntro": "Utiliza getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\") y getFieldCfgStr(\"MediaBigText\") para insertar los valores de los campos renderizados. Utiliza joinNonBlank(field1, field2) para unir los valores no vacíos con una viñeta. Las plantillas de notificaciones de aplicaciones admiten la condición AppActivityType == \"Playing\". Las expresiones también admiten las comparaciones == y !=."
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Alternativa personalizada",
+      "drop": "Descartar (borrar presencia)",
+      "freeze": "Pausar (predeterminado)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "Hora fija personalizada",
+      "persistent": "Persistente (predeterminado)",
+      "resetOnLaunch": "Restablecer al iniciar"
+    },
+    "activityStatus": {
+      "all": "Todos los estados de actividad",
+      "dnd": "No molestar",
+      "idle": "Ausente",
+      "invisible": "Invisible",
+      "offline": "Desconectado",
+      "online": "En línea",
+      "streaming": "Transmitiendo"
+    },
+    "activityType": {
+      "all": "Todos los tipos de actividad",
+      "competing": "Compitiendo",
+      "listening": "Escuchando",
+      "playing": "Jugando",
+      "watching": "Viendo"
+    },
     "allPlatforms": "Todas las plataformas",
+    "disableAll": "Deshabilitar todas",
+    "enableAll": "Habilitar todas",
+    "enabledOnly": "Solo habilitadas",
     "globalDefault": "Predeterminado global",
-    "playing": "Jugando",
-    "streaming": "Transmitiendo",
-    "listening": "Escuchando",
-    "watching": "Viendo",
-    "competing": "Compitiendo",
-    "online": "En línea",
-    "idle": "Ausente",
-    "dnd": "No molestar",
-    "offline": "Desconectado",
-    "invisible": "Invisible",
-    "customize": "Personalizar",
-    "profileSubtitle": "Perfil de presencia y alias",
-    "activityType": "Tipo de actividad",
+    "keepCurrent": "Mantener actual",
+    "mediaScope": {
+      "allSessions": "Todas las sesiones multimedia (predeterminado)",
+      "enabledAppsOnly": "Solo aplicaciones habilitadas"
+    },
+    "typeResolution": {
+      "autoAdaptive": "Autoadaptativo (predeterminado)",
+      "profileOverride": "Anulación de la configuración de la aplicación"
+    },
+    "pausedResolution": {
+      "fallbackApp": "Recurrir a la aplicación detectada",
+      "hidePaused": "Ocultar estado pausado",
+      "showPaused": "Mostrar estado pausado (predeterminado)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Reproducción prioritaria de archivos multimedia (predeterminada)",
+      "switchesBetween": "Alternar entre ambos"
+    },
+    "theme": {
+      "amoled": "AMOLED",
+      "dark": "Oscuro",
+      "light": "Claro"
+    }
+  },
+  "labels": {
     "activityStatus": "Estado de actividad",
-    "platformType": "Tipo de plataforma",
+    "activityType": "Tipo de actividad",
+    "customButtons": "Botones personalizados",
     "customDetailsState": "Detalles y estado personalizados",
     "customSmallImage": "Texto e imagen pequeños personalizados",
-    "customButtons": "Botones personalizados",
-    "bulkConfigure": "Configuración masiva",
-    "cancel": "Cancelar",
-    "stageChanges": "Preparar cambios",
-    "apply": "Aplicar",
-    "confirm": "Confirmar y aplicar",
-    "keepCurrent": "Mantener actual",
-    "enableAll": "Habilitar todas",
-    "disableAll": "Deshabilitar todas",
-    "discardBatch": "¿Deseas descartar los cambios en la fase de preparación?",
-    "chooseIcon": "Elegir una imagen de icono",
-    "resetIcon": "Restablecer el icono original de la aplicación",
-    "resetLabel": "Restablecer nombre original",
-    "details": "Detalles",
-    "state": "Estado",
-    "smallText": "Texto pequeño",
-    "smallImageUrl": "URL de la imagen pequeña",
-    "uploadImage": "Subir imagen a ImgBB",
-    "buttonLabel": "Etiqueta (p. ej., Unirse al juego)",
-    "presenceToggle": "Activar presencia",
-    "bulkSubtitle": "Aplicar a todas las aplicaciones seleccionadas",
-    "applyBatchTitle": "¿Aplicar cambios en bloque?",
-    "confirmation": "Confirmación",
-    "unsavedBatch": "Cambios por lotes sin guardar",
-    "confirmApply": "Confirmar y aplicar",
     "filterOptions": "Opciones de filtro",
-    "close": "Cerrar",
-    "loading": "",
-    "original": "Original:",
-    "projectedName": "Nombre mostrado",
-    "customButtonDesc": "Añade hasta 2 botones interactivos de presencia",
-    "toggleDetails": "Alternar detalles y estado personalizados",
-    "toggleSmall": "Mostrar/ocultar texto e imágenes pequeños personalizados",
-    "toggleButtons": "Alternar botones personalizados",
-    "uploadProgress": "Subir el icono de una aplicación a ImgBB",
-    "keepEditing": "Seguir editando",
-    "discardChanges": "Descartar cambios",
-    "discardMessage": "Tienes configuraciones de lotes sin confirmar. Si sales ahora del modo de lotes, se descartarán todos los cambios preparadas.",
-    "applyMessage": "Est?s a punto de aplicar de forma permanente los cambios de configuraci?n por etapas a",
-    "selectedApps": "aplicaciones seleccionadas.",
-    "urlExample": "URL (https://...)",
-    "summary": "{apps} aplicaciones | {enabled} habilitadas",
-    "chooseImage": "Elige un archivo de imagen.",
-    "imageTooLarge": "Elige una imagen de menos de 32 MB.",
-    "imageUploadFailed": "No se pudo subir la imagen.",
-    "iconUploadFailed": "No se pudo subir el icono.",
-    "androidOnly": "La función de búsqueda de aplicaciones instaladas está disponible en la aplicación para Android.",
-    "loadAppsFailed": "No se pudieron cargar las aplicaciones instaladas.",
-    "appUnit": "Aplicación",
-    "appsUnit": "Aplicaciones"
+    "platformType": "Tipo de plataforma",
+    "presenceToggle": "Activar presencia",
+    "button1": "Botón 1",
+    "button2": "Botón 2",
+    "label": "Etiqueta",
+    "url": "URL"
   },
-  "appPresence": {
-    "title": "Configuración de la presencia de la aplicación",
-    "subtitle": "Política sobre aplicaciones externas y comportamiento de las marcas de tiempo",
-    "catalogue": "Catálogo de aplicaciones",
-    "catalogueDesc": "Ver, filtrar y personalizar las previsiones de cada aplicación",
-    "outsidePolicies": "Políticas de aplicaciones detectadas fuera del entorno",
-    "outsideDescription": "Comportamiento al salir de las aplicaciones activas o cambiar de una a otra",
-    "policyHelp": "Ayuda sobre las políticas",
-    "freeze": "Pausar (predeterminado)",
-    "customFallback": "Alternativa personalizada",
-    "drop": "Descartar (borrar presencia)",
-    "fallbackPresence": "Presencia alternativa personalizada",
-    "activityName": "Nombre de actividad",
+  "pluralization": {
+    "app": {
+      "plural": "Aplicaciones",
+      "singular": "Aplicación"
+    }
+  },
+  "placeholders": {
+    "labelExample": "Etiqueta (p. ej., Unirse al juego)",
     "details": "Detalles",
-    "state": "Estado",
+    "smallImageUrl": "URL de la imagen pequeña",
     "smallText": "Texto pequeño",
-    "bigText": "Texto grande",
-    "smallImage": "Imagen pequeña",
-    "bigImage": "Imagen grande",
-    "imageUrl": "URL de imagen",
-    "uploadingImage": "",
-    "timestampStrategy": "Estrategia de tiempo",
-    "timestampDescription": "Cómo se gestionan los temporizadores de actividad entre sesiones de la aplicación",
-    "timestampHelp": "Ayuda sobre el tiempo",
-    "persistent": "Persistente (predeterminado)",
-    "resetOnLaunch": "Restablecer al iniciar",
-    "customFixedTime": "Hora fija personalizada",
-    "fixedStart": "Marca de inicio fija",
-    "statusFieldConfig": "Configuración del campo «Estado»",
-    "statusFieldDescription": "Personalizar el título, los detalles, el estado y las ilustraciones",
-    "configurationDetails": "Detalles de la configuración",
-    "outsideHelpTitle": "Políticas sobre aplicaciones externas",
-    "timestampHelpTitle": "Estrategias de tiempo",
-    "understood": "Entendido",
-    "freezeHelp": "Pone en pausa y conserva la última presencia proyectada hasta que se detecte de nuevo una aplicación activa.",
-    "customHelp": "Muestra inmediatamente la presencia alternativa personalizada.",
-    "dropHelp": "Borra tu actividad en Discord hasta que vuelvas a una aplicación activa.",
-    "persistentHelp": "Utiliza una marca de tiempo de ejecución compartida para las aplicaciones y los contenidos multimedia en pausa durante esta sesión del servicio.",
-    "resetHelp": "Reinicia el temporizador en 00:00 al iniciar la aplicación o al volver a seleccionarla.",
-    "fixedHelp": "Fija el temporizador de presencia en una fecha y hora de inicio específicas.",
-    "uploadImage": "Subir imagen"
+    "state": "Estado",
+    "urlExample": "URL (https://...)",
+    "example": "p. ej. ",
+    "listenOn": "Escuchar en"
   },
-  "mediaPresence": {
-    "title": "Configuración de la presencia en los medios",
-    "subtitle": "Prioridades de resolución, marcas de tiempo y estados de reproducción",
-    "priority": "Prioridad multimedia",
-    "priorityDesc": "Controla si el contenido multimedia prevalece sobre juegos y aplicaciones",
-    "priorityHelp": "Ayuda de prioridad",
-    "priorityPlaying": "Reproducción prioritaria de archivos multimedia (predeterminada)",
-    "switchesBetween": "Alternar entre ambos",
-    "scope": "Ámbito de detección de soportes",
-    "scopeDesc": "Filtrar qué aplicaciones activan la presencia multimedia",
-    "allSessions": "Todas las sesiones multimedia (predeterminado)",
-    "enabledAppsOnly": "Solo aplicaciones habilitadas",
-    "typeResolution": "Tipo de medio Resolución",
-    "typeResolutionDesc": "Cómo se clasifican las actividades de comprensión auditiva frente a las de comprensión visual",
-    "autoAdaptive": "Autoadaptativo (predeterminado)",
-    "profileOverride": "Anulación de la configuración de la aplicación",
-    "timeRemaining": "Tiempo restante",
-    "timeRemainingDesc": "Muestra el tiempo restante habitual de inicio y fin",
-    "appTimestamp": "",
-    "pausedResolution": "Resolución de los contenidos multimedia en pausa",
-    "pausedDesc": "Comportamiento de la presencia cuando se pausa la reproducción activa",
-    "pausedHelp": "Ayuda sobre la resolución en pausa",
-    "showPaused": "Mostrar estado pausado (predeterminado)",
-    "fallbackApp": "Recurrir a la aplicación detectada",
-    "hidePaused": "Ocultar estado pausado",
-    "statusFields": "Campos de estado multimedia",
-    "statusFieldsDesc": "Personalizar las expresiones de sustitución para el título, el intérprete, el álbum y la carátula",
-    "priorityStrategy": "Estrategia de prioridad multimedia",
-    "priorityStrategyDesc": "Lógica de resolución entre sesiones de videojuegos y de consumo de contenidos multimedia",
-    "pausedOptions": "Opciones cuando se pausa la reproducción activa",
-    "priorityHelpText": "Cuando se está reproduciendo contenido multimedia, este tiene prioridad sobre la aplicación que estés utilizando y muestra la canción o el vídeo actual.",
-    "switchHelpText": "Solo se reproducen contenidos multimedia mientras estés en el reproductor multimedia. Si cambias a un juego o a una aplicación activa, esa aplicación tomará el control.",
-    "showPausedHelp": "Mantiene la presencia multimedia activa al pausar y muestra indicadores de pausa.",
-    "fallbackHelp": "Utiliza la aplicación detectada anteriormente o en ese momento, o bien una alternativa personalizada, mientras el contenido multimedia está en pausa.",
-    "hidePausedHelp": "Oculta la presencia mientras el contenido multimedia está en pausa, incluidas las aplicaciones detectadas."
+  "service": {
+    "imgbb": {
+      "chooseImage": "Elige un archivo de imagen.",
+      "iconUploadFailed": "No se pudo subir el icono.",
+      "imageTooLarge": "Elige una imagen de menos de 32 MB.",
+      "imageUploadFailed": "No se pudo subir la imagen."
+    }
   },
-  "permissions": {
-    "notificationSubtitle": "Configuración especial del acceso a aplicaciones",
-    "openAndroidSettings": "Abrir ajustes de Android",
-    "oemNotice": "Aviso para dispositivos OEM y Android 13+",
-    "notificationExplanation": "Android protege el acceso a los oyentes de notificaciones mediante capas especiales de permisos. Dependiendo de la marca de tu teléfono, sigue uno de los métodos que se indican a continuación.",
-    "methodA": "Método A: Acceso especial a aplicaciones (Pixel, Motorola, Infinix, versión de fábrica)",
-    "methodAStep1": "Toca Abrir ajustes de Android abajo.",
-    "methodAStep2": "Ve a Acceso especial a aplicaciones > Acceso a notificaciones.",
-    "methodAStep3": "Busca Kruzty Dynamics y activa Permitir acceso a notificaciones.",
-    "methodB": "Método B: Información de la aplicación > Tres puntos (Xiaomi/HyperOS, Samsung, Oppo)",
-    "methodBStep1": "Abre Ajustes del dispositivo > Aplicaciones > Gestionar aplicaciones / Lista de aplicaciones.",
-    "methodBStep2": "Busca y toca Kruzty Dynamics.",
-    "methodBStep3": "Toca los tres puntos de la esquina superior derecha.",
-    "methodBStep4": "Toca Permitir ajustes restringidos / Acceso especial a aplicaciones > Conceder.",
-    "methodBStep5": "Vuelve y activa el acceso a notificaciones.",
-    "notificationAccessDescription": "La función «Notification Access» permite a Kruzty Dynamics capturar eventos de reproducción de sesiones multimedia en tiempo real (título de la canción, artista, álbum y estado de reproducción) de Spotify, YouTube Music y reproductores multimedia.",
-    "usageDescription": "Se requiere acceso a «Uso» para detectar qué aplicación o juego estás ejecutando actualmente en primer plano, de modo que Kruzty Dynamics pueda compararlo con tu catálogo de aplicaciones configurado.",
-    "usageStep1": "Toca Abrir acceso de uso.",
-    "usageStep2": "Localiza Kruzty Dynamics.",
-    "usageStep3": "Activa Permitir acceso de uso.",
-    "batteryDescription": "Los sistemas Android modernos suspenden los procesos en segundo plano al cabo de unos minutos. Excluir Kruzty Dynamics de la optimización de la batería garantiza que las actualizaciones de Discord Rich Presence sean continuas e ininterrumpidas.",
-    "foregroundDescription": "Requisito de Android 13 y versiones posteriores para mostrar la notificación del servicio en primer plano activo en la barra de estado, lo que confirma que el motor de presencia de Discord está en funcionamiento.",
-    "requiredTitle": "Permisos necesarios",
-    "requiredSubtitle": "Concede estos permisos de Android antes de iniciar el servicio.",
-    "done": "Hecho",
-    "allGranted": "Se han concedido todos los permisos necesarios. Activa el servicio para continuar.",
-    "grant": "Subvención",
-    "returnHint": "Una vez que hayas concedido el acceso en los Ajustes de Android, vuelve aquí y activa el servicio.",
-    "notificationTitle": "Acceso a las notificaciones",
-    "usageTitle": "Acceso de uso",
-    "usageSubtitle": "Detección de aplicaciones en primer plano",
-    "openUsageAccess": "Acceso de uso libre",
-    "batteryTitle": "Optimización de la batería",
-    "batterySubtitle": "Lista blanca de servicios en segundo plano",
-    "requestExemption": "Solicitar una exención",
-    "foregroundTitle": "Notificación de servicio en primer plano",
-    "foregroundSubtitle": "Permiso de notificaciones en Android 13 y versiones posteriores",
-    "allowNotification": "Permitir notificaciones",
-    "foregroundGuardTitle": "Notificaciones de servicio en primer plano",
-    "usageGuardDescription": "Es necesario para detectar qué aplicación se encuentra actualmente en primer plano.",
-    "notificationGuardDescription": "Es necesario para detectar la reproducción de contenidos multimedia y sus metadatos.",
-    "foregroundGuardDescription": "Permite que Android muestre la notificación del servicio mientras este se está ejecutando.",
-    "serviceStartError": "No se ha podido iniciar el servicio de presencia de Android."
+  "configFields": {
+    "status": {
+      "bigImage": "Imagen grande",
+      "bigText": "Texto grande",
+      "line1": "Detalles de la actividad",
+      "smallImage": "Imagen pequeña",
+      "smallText": "Texto pequeño",
+      "line2": "Estado de la actividad",
+      "title": "Título/Encabezado de la actividad"
+    }
   },
-  "logs": {
-    "title": "Registros de la aplicación",
-    "subtitle": "Salida de diagnóstico en tiempo real",
-    "copy": "Copiar registros",
-    "export": "Exportar registros",
-    "empty": "[INFO] Aún no hay registros. Inicia sesión en Discord o realiza alguna acción para generar registros."
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "cuenta conectada.",
+          "desc": "Conecta tu cuenta de Discord para mostrar Rich Presence",
+          "title": "Iniciar Sesión en Discord"
+        },
+        "languageTitle": "Idioma",
+        "themeTitle": "Tema",
+        "desc": "Personalización y Cuenta",
+        "title": "Control de Usuario"
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Exime la app para evitar que se detenga en segundo plano",
+          "title": "Optimización de Batería",
+          "modal": {
+            "desc": "Los sistemas Android modernos suspenden los procesos en segundo plano al cabo de unos minutos. Excluir Kruzty Dynamics de la optimización de la batería garantiza que las actualizaciones de Discord Rich Presence sean continuas e ininterrumpidas.",
+            "subtitle": "Lista blanca de servicios en segundo plano",
+            "requestExemption": "Solicitar una exención"
+          }
+        },
+        "notificationAccess": {
+          "desc": "Acceso especial necesario para detectar medios y reproducción",
+          "title": "Acceso a Notificaciones",
+          "modal": {
+            "methodA": {
+              "title": "Método A: Acceso especial a aplicaciones (Pixel, Motorola, Infinix, versión de fábrica)",
+              "step1": "Toca Abrir ajustes de Android abajo.",
+              "step2": "Ve a Acceso especial a aplicaciones > Acceso a notificaciones.",
+              "step3": "Busca Kruzty Dynamics y activa Permitir acceso a notificaciones."
+            },
+            "methodB": {
+              "title": "Método B: Información de la aplicación > Tres puntos (Xiaomi/HyperOS, Samsung, Oppo)",
+              "step1": "Abre Ajustes del dispositivo > Aplicaciones > Gestionar aplicaciones / Lista de aplicaciones.",
+              "step2": "Busca y toca Kruzty Dynamics.",
+              "step4": "Toca Permitir ajustes restringidos / Acceso especial a aplicaciones > Conceder.",
+              "step5": "Vuelve y activa el acceso a notificaciones."
+            },
+            "desc": "La función «Notification Access» permite a Kruzty Dynamics capturar eventos de reproducción de sesiones multimedia en tiempo real (título de la canción, artista, álbum y estado de reproducción) de Spotify, YouTube Music y reproductores multimedia.",
+            "oemNotice": {
+              "desc": "Android protege el acceso a los oyentes de notificaciones mediante capas especiales de permisos. Dependiendo de la marca de tu teléfono, sigue uno de los métodos que se indican a continuación.",
+              "title": "Aviso para dispositivos OEM y Android 13+"
+            },
+            "subtitle": "Configuración especial del acceso a aplicaciones",
+            "openAndroidSettings": "Abrir ajustes de Android"
+          }
+        },
+        "desc": "Requerido para la detección",
+        "title": "Control de Permisos",
+        "foregroundNotification": {
+          "desc": "Permiso de Android 13+ para la notificación del servicio",
+          "title": "Notificación de Servicio",
+          "modal": {
+            "allowNotification": "Permitir notificaciones",
+            "desc": "Requisito de Android 13 y versiones posteriores para mostrar la notificación del servicio en primer plano activo en la barra de estado, lo que confirma que el motor de presencia de Discord está en funcionamiento.",
+            "subtitle": "Permiso de notificaciones en Android 13 y versiones posteriores",
+            "title": "Notificación de servicio en primer plano"
+          }
+        },
+        "usageAccess": {
+          "desc": "Requerido para detectar aplicaciones o juegos en primer plano",
+          "title": "Acceso de Uso",
+          "modal": {
+            "openUsageAccess": "Acceso de uso libre",
+            "desc": "Se requiere acceso a «Uso» para detectar qué aplicación o juego estás ejecutando actualmente en primer plano, de modo que Kruzty Dynamics pueda compararlo con tu catálogo de aplicaciones configurado.",
+            "step1": "Toca Abrir acceso de uso.",
+            "step2": "Localiza Kruzty Dynamics.",
+            "step3": "Activa Permitir acceso de uso.",
+            "subtitle": "Detección de aplicaciones en primer plano"
+          }
+        }
+      },
+      "privacyNotice": "Esta aplicación no recopila ni transmite datos del usuario.",
+      "subtitle": "Configura los permisos necesarios y cuentas para activar Discord Rich Presence.",
+      "title": "Configuración Inicial"
+    },
+    "footer": {
+      "allSet": "¡Todo listo para proyectar!",
+      "buttons": {
+        "continueForNow": "Continuar por Ahora",
+        "finishSetup": "Terminar Configuración",
+        "skipForNow": "Omitir por Ahora"
+      },
+      "readyWhenYouAre": "Listo cuando quieras"
+    }
   },
-  "toast": {
-    "duplicateAccount": "Esta cuenta de Discord ya está añadida.",
-    "insufficientPermissions": "Permisos insuficientes. Por favor, comprueba «Configuración y más» > «Comprobar permisos».",
-    "newVersionAvailable": "¡Ya está disponible la nueva versión!",
-    "updateDetected": "¡Se ha detectado una nueva versión más reciente!",
-    "latestVersion": "¡Esta es la última versión!",
-    "updateCheckFailed": "No se han podido buscar actualizaciones."
+  "tags": {
+    "granted": "Concedido",
+    "notificationCrucial": "Fundamental",
+    "allGranted": "Todos concedidos",
+    "cached": "en caché",
+    "check": "Comprobar",
+    "checkingUpdates": "Comprobación de actualizaciones",
+    "default": "Predeterminado",
+    "view": "Ver"
   }
 }
