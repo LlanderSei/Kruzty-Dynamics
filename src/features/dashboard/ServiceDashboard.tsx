@@ -174,6 +174,27 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
     ? (status.mediaType === 'video' ? MonitorPlay : Music2)
     : status?.domain === 'app' ? Gamepad2 : AppWindow
   const mediaHeader = status?.mediaType === 'video' ? 'Watching' : 'Listening to'
+  const isMediaSession = status?.domain === 'media'
+  const listeningWatchingCompetingLabels: Record<number, string> = {
+    2: 'Listening to',
+    3: 'Watching',
+    5: 'Competing in',
+  }
+  const listeningWatchingCompetingHeader = isMediaSession
+    ? mediaHeader
+    : listeningWatchingCompetingLabels[status?.activityType ?? -1] || null
+  const hasShiftableContent = Boolean(status?.details || status?.state || status?.bigText)
+  const shouldShiftFields = listeningWatchingCompetingHeader !== null && hasShiftableContent
+  const activityHeaderText = !hasActivity
+    ? 'Activity Preview'
+    : listeningWatchingCompetingHeader
+      ? shouldShiftFields
+        ? `${listeningWatchingCompetingHeader} ${status?.title ?? ''}`.trim()
+        : listeningWatchingCompetingHeader
+      : activityTypeLabels[status?.activityType ?? 0] || 'Playing'
+  const activityTitleText = shouldShiftFields ? status?.details : status?.title
+  const activityDetailsText = shouldShiftFields ? status?.state : status?.details
+  const activityStateText = shouldShiftFields ? status?.bigText : status?.state
   const elapsedMediaPosition = Math.max(0, (status?.mediaPositionMs || 0) + (
     status?.playbackState === 'Playing' && status.mediaUpdatedAt
       ? (now - status.mediaUpdatedAt) * (status.playbackRate || 1)
@@ -381,11 +402,7 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
         ) : (
           <div className="rounded-2xl border p-4 text-left" style={{ backgroundColor: 'var(--color-bg-surface)', borderColor: 'var(--color-border)', color: 'var(--color-text-base)' }}>
             <div className="mb-3 flex items-center justify-between text-xs" style={{ color: 'var(--color-text-muted)' }}>
-              <span>{hasActivity
-                ? status?.domain === 'media'
-                  ? `${mediaHeader} ${status.appName || 'Media'}`
-                  : activityTypeLabels[status?.activityType ?? 0] || 'Playing'
-                : 'Activity Preview'}</span>
+              <span>{activityHeaderText}</span>
               <Ellipsis className="h-4 w-4" />
             </div>
             {hasActivity ? (
@@ -406,9 +423,9 @@ export const ServiceDashboard: React.FC<ServiceDashboardProps> = ({
                   )}
                 </div>
                 <div className="min-w-0 space-y-0.5 text-[13px] leading-[1.35]" style={{ color: 'var(--color-text-muted)' }}>
-                  <div className="break-words font-semibold" style={{ color: 'var(--color-text-base)' }}>{status?.title}</div>
-                  {status?.details && <div className="break-words">{status.details}</div>}
-                  {status?.state && <div className="break-words">{status.state}</div>}
+                  <div className="break-words font-semibold" style={{ color: 'var(--color-text-base)' }}>{activityTitleText}</div>
+                  {activityDetailsText && <div className="break-words">{activityDetailsText}</div>}
+                  {activityStateText && <div className="break-words">{activityStateText}</div>}
                   {status?.domain === 'app' && status.sessionStartedAt && (
                     <div className="mt-1 flex items-center gap-1.5 text-xs tabular-nums text-emerald-500">
                       <Gamepad2 className="h-4 w-4" />

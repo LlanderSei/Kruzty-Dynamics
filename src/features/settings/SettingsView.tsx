@@ -104,7 +104,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
   const [cacheClearedSuccess, setCacheClearedSuccess] = useState<string | null>(null)
 
   const handleOpenImgbbModal = () => {
-    setTempImgbbKey(settings.customImgbbKey || '')
+    setTempImgbbKey('')
     setActiveModal('imgbb')
   }
 
@@ -115,7 +115,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
 
   const handleSaveImgbb = (e: React.FormEvent) => {
     e.preventDefault()
-    setCustomImgbbKey(tempImgbbKey)
+    const nextKey = tempImgbbKey.trim()
+    if (nextKey) setCustomImgbbKey(nextKey)
     setActiveModal(null)
   }
 
@@ -920,7 +921,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({ onNavigateToNotifica
                 onChange={e => setTempImgbbKey(e.target.value)}
                 placeholder={
                   settings.customImgbbKey
-                    ? '•••••••••••••••• (Custom Key Set)'
+                    ? `${'•'.repeat(12)} (${t.modals.settings.imgBb.customKeySet})`
                     : t.modals.settings.imgBb.usingDefaultKey
                 }
                 className="w-full px-3 py-2 text-xs rounded-xl border focus:outline-none transition-colors"
