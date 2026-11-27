@@ -1,482 +1,649 @@
 {
-  "onboarding": {
-    "title": "F-f-f-first Time S-setup, 👉🏻👈🏻 for a BAKA LIKE YOU HMPH!!",
-    "subtitle": "I-I guess I'll let you configure the permissions and accounts so you can e-enable dynamic Discord Rich Presence... N-not like I did it for you or anything! 💢",
-    "privacyNotice": "Hmph! Just so you know, this app doesn't collect or transmit user data... I-I mean, it's not like I care if you trust me! Baka!",
-    "permissionsSection": "P-p-p-permissions C-control... 😳",
-    "permissionsRequired": "N-needed for detection... obviously!",
-    "notificationTitle": "N-notification A-access...",
-    "notificationDesc": "Special App Access is needed to detect media & playback... D-don't make me repeat myself!",
-    "notificationCrucial": "I-it's Crucial! B-b-baka! BAKA!!!!!",
-    "usageTitle": "U-useage A-access... HMPH!..................",
-    "usageDesc": "Required to detect the current running foreground application or game... not that you'd understand!",
-    "batteryTitle": "B-battery O-o-o-optimiza...tion... 👉🏻👈🏻",
-    "batteryDesc": "Exempt the app to prevent the background service from sleeping... I-I just don't want it to crash, okay?!",
-    "postNotificationTitle": "F-f-foreground N-notification...",
-    "postNotificationDesc": "Android 13+ permission for the persistent service notification... Hmph!",
-    "grant": "Grant them stupid baka!",
-    "granted": "G-granted baka!",
-    "userControlSection": "U-use user c-control...",
-    "userControlDesc": "Customization & Account...",
-    "discordLoginTitle": "D-discord L-login...",
-    "discordLoginDesc": "Connect your Discord account to project Rich Presence... I-it's not like I want to see your status or anything!",
-    "accountsConnected": "account logged in...",
-    "themeTitle": "T-t-theme...",
-    "languageTitle": "L-language...",
-    "finishSetup": "F-finish Setup...",
-    "continueForNow": "💢💢💢 C-continue for now... 💢💢💢",
-    "skipForNow": "S-skip for now... whatever! Hmph! HMPH!!",
-    "allSet": "All set! N-not that I was waiting for you to finish or anything... 👉🏻👈🏻",
-    "readyWhenYouAre": "R-ready when you are... b-baka!"
+  "modals": {
+    "discordLogin": {
+      "onboarding": {
+        "activeIdentity": "A-a-active I-identity...",
+        "stored": "S-stored..."
+      },
+      "content": {
+        "subtitle": "Manage identities... I-I'm only doing this because I have to!",
+        "title": "D-discord L-login P-portal...",
+        "privacyText": "D-discord a-authorization requests access to social f-f-features 👉🏻👈🏻👉🏻👈🏻 alongside R-R-Rich Presence. Kuwuzty... Dynamics uses... t-the SDK (baka) to identify your a-account (I don't care about your account, baka!) and p-publish or clear your configured activity (stupid); it does not use friend, block, invite, message, or voice features (Hmph, stupid...). On A-Android, tokens are e-encrypted (obviously idiot, no one wants to expose it, stupid baka) and s-stored on this device (where should it go? Of course it belongs to t-this de-device! HMPH!). Read the... N-not like I want you to read it or anything!... H-here, go here stupid baka... ",
+        "revokeText": "",
+        "verifying": "",
+        "privacyPolicy": "P-privacy P-policy..."
+      },
+      "title": "C-connect D-discord A-account..."
+    },
+    "tokenReference": {
+      "application": {
+        "expressionOps": "E-expressions support == and != comparisons. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} to s-show A-AppName when Playing and AppPlatformType otherwise... B-baka! R-read it a-again, not that h-hard stupid baka.",
+        "title": "A-application T-token R-reference...",
+        "desc": "D-dynamic variables a-available in field expressions..."
+      },
+      "media": {
+        "title": "M-media T-token R-reference...",
+        "intro": "Tokens can be e-embedded directly in text fields and b-button labels or U-URLs (e.g. {example})... B-because I w-want this app to b-be c-customizable... Not like I care a-about users or what... Whatever you baka!💢💢💢💢💢💢💢💢",
+        "desc": "Dynamic variables available in media expressions & buttons..."
+      }
+    },
+    "unsavedChanges": {
+      "discard": "D-discard U-unsaved C-changes?... 💢...",
+      "unsaved": "U-unsaved modifications..."
+    },
+    "logs": {
+      "copy": "C-copy logs",
+      "empty": "[INFO] No logs yet. Open Discord login or perform actions to generate logs... B-baka!",
+      "export": "E-export l-logs",
+      "subtitle": "L-live diagnostics output",
+      "title": "A-application L-logs"
+    },
+    "settings": {
+      "themes": {
+        "accentColor": "P-primary A-accent C-color...",
+        "resetAccent": "R-reset to D-default O-orange...",
+        "tapCustomize": "T-tap to customize...",
+        "themeMode": "T-theme M-mode..."
+      },
+      "globalDefaults": {
+        "activityStatus": "A-activity S-status...",
+        "activityType": "A-activity T-type...",
+        "note": "T-t-these defaults are automatically used (hmph...) when an app or presence activity does not specify its own activity type or status... Whatever is that...Baka."
+      },
+      "imgBb": {
+        "apiPrivacy": "L-leaving this field empty resets to the built-in default API key. C-custom keys are never exposed in plaintext... B-baka!",
+        "getApiKey": "...to obtain a key, baka, not like you want to visit it...",
+        "help": "S-set your own ImgBB A-API K-k-Key to upload custom app and media asset images to Discord CDN. V-visit...",
+        "usingDefaultKey": "U-using default system key..."
+      },
+      "language": {
+        "availableLanguages": "A-available L-languages...",
+        "title": "C-choose L-language...",
+        "desc": "HMPH! You really selected t-this one... Still... It's not like I like you or something... Whatever, stupid baka!"
+      },
+      "checkPermissions": {
+        "batteryDesc": "P-prevents Android from killing presence service...",
+        "foregroundDesc": "S-status bar indicator for ongoing Discord presence...",
+        "notificationAccessDesc": "S-special A-app A-access for media detection...",
+        "desc": "Status of permissions required to read active media notifications and foreground applications...",
+        "usageAccessDesc": "D-detect running foreground games & apps..."
+      },
+      "deleteCachedUrls": {
+        "cacheWarning": "T-there are {total} l-linked image URLs, i-including {custom} (hmph...) custom app icon o-overrides. (*starts to shy out and lowers the voice*) You can clear cached links while keeping custom icons, or clear all links and remove custom overrides (HMPH!). I-if you remove overrides, upload those icons again in the Application Catalogue... D-don't delete them by accident! Don't make me l-liable for your stupid d-decisions! Stupid BAKA!",
+        "buttons": {
+          "clearCacheAll": "C-clear All, I-including C-custom I-icons...",
+          "clearCacheKeep": "C-clear C-cache, K-keep C-custom I-icons..."
+        },
+        "clearedAll": "All linked image URLs cleared, including custom app icons...",
+        "clearedKeeping": "Linked image URL cache cleared. Custom app icons were kept...",
+        "linkedImageUrls": "L-linked I-image URLs..."
+      },
+      "credits": {
+        "contributorsSection": "K-kizzy C-contributors...",
+        "developerSection": "K-kruzty D-dynamics...",
+        "librariesSection": "L-libraries U-used in this A-app...",
+        "libraries": {
+          "lucide": "C-community-crafted clean vector icons...",
+          "react": "M-modern user interface component architecture...",
+          "sdk": "N-native Android rich presence integration...",
+          "tailwind": "U-utility-first modern responsive styling...",
+          "tauri": "L-lightweight cross-platform native runtime...",
+          "tokio": "A-asynchronous event-driven network runtime..."
+        },
+        "maintainerRole": "C-current M-maintainer & D-developer..."
+      },
+      "discordApp": {
+        "developerPortal": "D-discord D-developer P-portal... 👉🏻👈🏻",
+        "help": "Set your own Discord Application ID from the...",
+        "idPrivacy": "Leaving this field empty will reset back to the default Kruzty Dynamics application ID... 💢"
+      }
+    }
   },
-  "nav": {
-    "service": "S-s-service, hmph!!!",
-    "accounts": "A-accounts...",
-    "settings": "S-settings & M-more...🙄🙄"
+  "pages": {
+    "accounts": {
+      "body": {
+        "hasAccount": {
+          "buttons": {
+            "addAccount": "A-add Account...",
+            "switch": "S-switch it, baka, hmph!!...",
+            "unuse": "U-unuse... B-baka, you have someone else that's why you're unusing me?? HMPH!..."
+          },
+          "activePresence": "A-active P-presence...",
+          "modal": {
+            "logout": {
+              "confirmLogout": "C-confirm L-logout...",
+              "title": "L-logout A-account...",
+              "removePrefix": "Are you sure you want to remove account ",
+              "removeSuffix": ". This will remove saved credentials from this device... Hmph! (I don't care, baka... BAKA... BAKAAAAAAA...)"
+            }
+          },
+          "currentAccount": "C-current ..logged I-in... A-account...",
+          "noActiveAccount": "No selected account. Choose one of the logged-in accounts below... B-baka!",
+          "storedAccounts": "S-stored A-accounts..."
+        },
+        "noAccount": {
+          "desc": "Connect your Discord account to begin projecting Rich Presence statuses for games, apps, and media... P-please connect it! 🥺🥺🥺🥺👉🏻👈🏻",
+          "title": "No account logged in yet... 👉🏻👈🏻",
+          "login": "L-login D-discord... HMPH!"
+        }
+      },
+      "subtitle": {
+        "noAccounts": "N-no D-discord Accounts...😔 BECAUSE YOU'RE STUPID! BAKA! HMPH!!!!!!!",
+        "loggedInMany": "{n} accounts logged in... D-don't let it get to your head!",
+        "loggedInOne": "{n} account logged in... Feeling lonely, baka?"
+      },
+      "title": "D-discord A-accounts..."
+    },
+    "service": {
+      "subtitle": "Kruzty Dynamics Dashboard, ugh... stupid...",
+      "title": {
+        "welcome": "W-welcome! I-I didn't miss you... 💢",
+        "welcomeNamed": "W-welcome, {name}!!! 👉🏻👈🏻 Hmph..."
+      },
+      "body": {
+        "service": {
+          "guard": {
+            "modal": {
+              "allGranted": "All required permissions are granted. Turn on the service to continue... Hmph!",
+              "foregroundService": {
+                "desc": "Allows Android to show the service notification while it runs...",
+                "title": "Foreground S-service N-notifications..."
+              },
+              "notificationAccess": {
+                "desc": "Required to d-detect media playback and its metadata..."
+              },
+              "subtitle": "Grant these Android p-permissions before starting the service... Hmph...💢",
+              "title": "P-permissions required...",
+              "returnHint": "After granting access in Android Settings, return here and enable the service... D-don't make me wait! Hmph!",
+              "usageAccess": {
+                "desc": "Required to detect which app is c-currently in the foreground..."
+              }
+            }
+          },
+          "startError": "C-could not start the A-android presence service... 😔😔 (Baka...)",
+          "running": "Service is running... I-I guess...??",
+          "stopped": "Service not started... Hmph! Stupid baka! Enable it!",
+          "title": "K-k-kruzty D-dynamics S-service 🙄🙄🙄💢🛠"
+        },
+        "application": {
+          "desc": "...C-c-configure app profiles for local presence detection... 🥺👉🏻👈🏻",
+          "title": "A-application P-presence..."
+        },
+        "buttons": {
+          "applicationCatalogue": "A-application C-catalogue...",
+          "presenceConfiguration": "P-presence C-configuration...",
+          "statusFieldConfig": "S-status F-field C-config..."
+        },
+        "media": {
+          "desc": "Configure media behavior and status templates... D-don't blame me if it breaks!",
+          "title": "M-media P-presence..."
+        },
+        "preview": {
+          "noPresence": "No configured app or active media detected... ",
+          "stoppedDescription": "Service is stopped 💢💢💢. Turn it on 👉🏻👈🏻 t-to detect enabled a-apps and active media... P-please turn it on! I don't want to beg a-again to turn it on STUPID BAKA!"
+        }
+      }
+    },
+    "settings": {
+      "appPreferences": {
+        "title": "A-app P-preferences...Baka...",
+        "checkPermissions": {
+          "title": "C-check P-permissions...",
+          "desc": "Review granted and optional system access permissions... HMPH!"
+        },
+        "deleteCachedUrls": {
+          "title": "D-delete L-linked I-image URLs...",
+          "desc": "C-clears associated URLs of uploaded images used on app or media status... Read it again because I don't want to make myself repeat the same thing again, BAKAAA!"
+        },
+        "discordAppId": {
+          "title": "S-set D-discord A-application ID...",
+          "desc": "Set your own Discord Application ID. Visit: discord.com/developers..."
+        },
+        "globalDefaults": {
+          "title": "G-global De-defaults 🙄",
+          "desc": "Activity t-type & status for unconfigured apps...Like I care about defaults..."
+        },
+        "imgBbKey": {
+          "title": "S-set I-imgBB A-API K-key...",
+          "desc": "Set your own ImgBB API Key. Visit: api.imgbb.com... B-baka!"
+        },
+        "language": {
+          "title": "L-language...",
+          "desc": "You are such a stupid baka for choosing this "
+        },
+        "notificationProjection": {
+          "title": "M-modify N-notification Status P-projection... 😳",
+          "desc": "C-customize 👉🏻👈🏻 application and media n-notification titles and subtitles... D-don't mess it up! And don't blame me for it if it breaks! Baka!"
+        },
+        "themes": {
+          "title": "T-themes and D-display... or something... Baka...",
+          "desc": "Set your theme and accent color... I-if you want... or whatever, not like I care your preference, stupid baka! Just admit you hate LIGHT GRRRRRRRR 💢💢💢💢 IDIOT!!!! HMPH!"
+        },
+        "checkUpdates": {
+          "title": "C-check for L-latest V-version...",
+          "desc": "Check whether a newer version is available... 👉🏻👈🏻 don't get too e-excited! Baka..."
+        }
+      },
+      "subtitle": "App preferences & d-diagnostics... Hmph!!",
+      "title": "S-settings a-a-and M-more...🙄 duh.",
+      "cardInfo": {
+        "architecture": "B-built using Rust Core (Tokio + Tauri v2) w-with React 19 and TailwindCSS Frontend including Native Android Plugin B-B. Based on the original Kizzy's Experimental RPC... S-so complicated! Hmph!!!!",
+        "credits": "C-credits...",
+        "developedBy": "D-developed by...this... stupid baka ",
+        "latestRelease": "G-go to L-latest R-release...",
+        "learnMore": "L-learn More About T-this A-a-app 👉🏻👈🏻... HMPH!!!!",
+        "repository": "C-check G-github R-repository...",
+        "submitIssue": "S-submit an I-issue... (not like I'll read it or something",
+        "version": "K-kruzty D-dynamics v{version} HMPH!!!"
+      }
+    }
   },
-  "header": {
-    "welcome": "W-welcome! I-I didn't miss you... 💢",
-    "welcomeNamed": "W-welcome, {name}!!! 👉🏻👈🏻 Hmph...",
-    "dashboardSubtitle": "Kruzty Dynamics Dashboard, ugh... stupid...",
-    "accountsLoggedInOne": "{n} account logged in... Feeling lonely, baka?",
-    "accountsLoggedInMany": "{n} accounts logged in... D-don't let it get to your head!",
-    "liveLogs": "L-live L-logs...",
-    "viewLogs": "V-view L-logs...",
-    "serviceActive": "A-active...",
-    "serviceInactive": "I-inactive...",
-    "serviceStarting": "S-s-starting...",
-    "serviceStopped": "S-stopped..."
-  },
-  "accounts": {
-    "title": "D-discord A-accounts...",
-    "subtitle": "Manage identities... I-I'm only doing this because I have to!",
-    "loginPortal": "L-login via D-discord P-portal...",
-    "loginWithToken": "A-add A-account via T-token...",
-    "addAccount": "A-add Account...",
-    "activeIdentity": "A-a-active I-identity...",
-    "stored": "S-stored...",
+  "buttons": {
     "remove": "R-remove...",
-    "noAccounts": "N-no D-discord Accounts...😔 BECAUSE YOU'RE STUPID! BAKA! HMPH!!!!!!!",
-    "noAccountsDesc": "A-a-add your Discord (...account) using the portal to start projecting... rich pres...ence... P-please? 🥺🥺🥺🥺 Don't make myself repeat it again, baka."
-  },
-  "settings": {
-    "title": "S-settings a-a-and M-more...🙄 duh.",
-    "subtitle": "App preferences & d-diagnostics... Hmph!!",
-    "appPreferences": "A-app P-preferences...Baka...",
-    "notificationProjection": "M-modify N-notification Status P-projection... 😳",
-    "notificationProjectionDesc": "C-customize 👉🏻👈🏻 application and media n-notification titles and subtitles... D-don't mess it up! And don't blame me for it if it breaks! Baka!",
-    "themes": "T-themes and D-display... or something... Baka...",
-    "themesDesc": "Set your theme and accent color... I-if you want... or whatever, not like I care your preference, stupid baka! Just admit you hate LIGHT GRRRRRRRR 💢💢💢💢 IDIOT!!!! HMPH!",
-    "language": "L-language...",
-    "languageDesc": "You are such a stupid baka for choosing this ",
-    "globalDefaults": "G-global De-defaults 🙄",
-    "globalDefaultsDesc": "Activity t-type & status for unconfigured apps...Like I care about defaults...",
-    "imgbbKey": "S-set I-imgBB A-API K-key...",
-    "imgbbKeyDesc": "Set your own ImgBB API Key. Visit: api.imgbb.com... B-baka!",
-    "discordAppId": "S-set D-discord A-application ID...",
-    "discordAppIdDesc": "Set your own Discord Application ID. Visit: discord.com/developers...",
-    "checkPermissions": "C-check P-permissions...",
-    "checkPermissionsDesc": "Review granted and optional system access permissions... HMPH!",
-    "deleteCache": "D-delete L-linked I-image URLs...",
-    "deleteCacheDesc": "C-clears associated URLs of uploaded images used on app or media status... Read it again because I don't want to make myself repeat the same thing again, BAKAAA!"
-  },
-  "service": {
-    "title": "K-k-kruzty D-dynamics S-service 🙄🙄🙄💢🛠",
-    "running": "Service is running... I-I guess...??",
-    "stopped": "Service not started... Hmph! Stupid baka! Enable it!",
-    "applicationPresence": "A-application P-presence...",
-    "appDescription": "...C-c-configure app profiles for local presence detection... 🥺👉🏻👈🏻",
-    "applicationCatalogue": "A-application C-catalogue...",
-    "statusFieldConfig": "S-status F-field C-config...",
-    "presenceConfiguration": "P-presence C-configuration...",
-    "mediaPresence": "M-media P-presence...",
-    "mediaDescription": "Configure media behavior and status templates... D-don't blame me if it breaks!",
-    "noPresence": "No configured app or active media detected... ",
-    "stoppedDescription": "Service is stopped 💢💢💢. Turn it on 👉🏻👈🏻 t-to detect enabled a-apps and active media... P-please turn it on! I don't want to beg a-again to turn it on STUPID BAKA!"
-  },
-  "logs": {
-    "title": "A-application L-logs",
-    "subtitle": "L-live diagnostics output",
-    "copy": "C-copy logs",
-    "export": "E-export l-logs",
-    "empty": "[INFO] No logs yet. Open Discord login or perform actions to generate logs... B-baka!"
-  },
-  "permissions": {
-    "requiredTitle": "P-permissions required...",
-    "requiredSubtitle": "Grant these Android p-permissions before starting the service... Hmph...💢",
-    "done": "D-done... I guess? Hmph!",
-    "allGranted": "All required permissions are granted. Turn on the service to continue... Hmph!",
-    "grant": "G-grant...PLEASE??????",
-    "returnHint": "After granting access in Android Settings, return here and enable the service... D-don't make me wait! Hmph!",
-    "notificationTitle": "N-notification A-access...",
-    "notificationSubtitle": "S-special A-app A-access C-configuration...",
-    "openAndroidSettings": "O-open A-android S-settings...",
-    "oemNotice": "N-notice for OEM & A-android 13+ D-devices... Yes read this you stupid baka! Because... a-again (*starts to shy out and lowers the voice*) (*speaks inaudibly*) UGH WHATEVER BAKA! 💢💢💢",
-    "notificationExplanation": "Android protects notification listener access behind special permission layers. Depending on your phone brand, follow one of the methods below... I-it's not like I want to explain this to you!",
-    "methodA": "M-method A: S-special A-app A-access (Pixel, Motorola, Infinix, Stock)...",
-    "methodAStep1": "T-tap O-open A-android S-settings below...",
-    "methodAStep2": "G-go to S-special A-app A-access > N-notification A-access...",
-    "methodAStep3": "F-find K-kruzty D-dynamics and switch on A-allow notification access...",
-    "methodB": "M-method B: A-app I-info > E-ellipsis (Xiaomi/HyperOS, Samsung, Oppo)...",
-    "methodBStep1": "O-open device S-settings > A-apps > M-manage A-apps / A-app L-list...",
-    "methodBStep2": "F-find and tap K-kruzty D-dynamics... 👉🏻👈🏻",
-    "methodBStep3": "T-tap the three dots at the top-right corner...",
-    "methodBStep4": "T-tap A-allow restricted settings / S-special A-app A-access > G-grant...",
-    "methodBStep5": "R-return and enable N-notification A-access...",
-    "notificationAccessDescription": "N-n-notification Access... (hmph stupid baka why am I explaining this... grrr... whatever...) ...enables K-kruzty Dynamics t-to capture live media s-session playback e-events (Song Title, Artist, Album, and Playback State) from S-spotify, YouTube Music, and media players... N-not that I care about your music taste! Baka...",
-    "usageTitle": "U-usage A-access...",
-    "usageSubtitle": "F-foreground A-app D-detection...",
-    "openUsageAccess": "O-open U-usage A-access...",
-    "usageDescription": "Usage A-access is required to detect w-which app or game you are currently running in the foreground, so Kruzty Dynamics can match it against your c-configured Application Catalog... B-baka!",
-    "usageStep1": "T-tap Open U-usage A-access...",
-    "usageStep2": "L-locate K-kruzty Dynamics...",
-    "usageStep3": "Switch on P-permit usage access...",
-    "batteryTitle": "B-battery O-o-optimization...",
-    "batterySubtitle": "B-background S-service W-whitelist...",
-    "requestExemption": "R-request E-exemption...",
-    "batteryDescription": "Modern A-Android systems put background p-p-processes to sleep after a few minutes. Exempting Kruzty D-Dynamics from battery optimization ensures continuous, uninterrupted Discord Rich Presence u-updates, HMMMPH... D-don't let it sleep!",
-    "foregroundTitle": "F-foreground Service N-notification...",
-    "foregroundSubtitle": "A-android 13+ N-notification P-permission...",
-    "foregroundGuardTitle": "Foreground S-service N-notifications...",
-    "usageGuardDescription": "Required to detect which app is c-currently in the foreground...",
-    "notificationGuardDescription": "Required to d-detect media playback and its metadata...",
-    "foregroundGuardDescription": "Allows Android to show the service notification while it runs...",
-    "serviceStartError": "C-could not start the A-android presence service... 😔😔 (Baka...)",
-    "allowNotification": "A-allow N-notification...",
-    "foregroundDescription": "Required by Android 13+ t-to d-d-display the ongoing foreground service notification in your status bar, confirming that the Discord presence engine is running... Hmph...💢..."
-  },
-  "toast": {
-    "duplicateAccount": "This Discord account is already added... B-baka!",
-    "insufficientPermissions": "Insufficient Permissions. Please check Settings & More > Check Permissions... I-I told you so!",
-    "newVersionAvailable": "N-new V-version is A-available!...",
-    "updateDetected": "A new latest version is detected!... Hmph!",
-    "latestVersion": "This is the latest version!... D-don't get too excited!",
-    "updateCheckFailed": "Could not check for updates...Stupid baka!!!"
-  },
-  "accountsPage": {
-    "emptyTitle": "No account logged in yet... 👉🏻👈🏻",
-    "emptyDescription": "Connect your Discord account to begin projecting Rich Presence statuses for games, apps, and media... P-please connect it! 🥺🥺🥺🥺👉🏻👈🏻",
-    "login": "L-login D-discord... HMPH!",
-    "currentAccount": "C-current ..logged I-in... A-account...",
-    "activePresence": "A-active P-presence...",
-    "storedAccounts": "S-stored A-accounts...",
-    "switch": "S-switch it, baka, hmph!!...",
-    "unuse": "U-unuse... B-baka, you have someone else that's why you're unusing me?? HMPH!...",
-    "remove": "R-remove... I don't care if y-you r-remove me... B-BAKA! HMMMMMMMMMMMMMPH!",
-    "cancel": "C-cancel...",
-    "deleteTitle": "R-remove D-discord A-account?...",
-    "loginTitle": "D-discord L-login P-portal...",
-    "noActiveAccount": "No selected account. Choose one of the logged-in accounts below... B-baka!",
-    "addAccountTitle": "C-connect D-discord A-account...",
-    "portal": "D-discord L-login P-portal...",
-    "signInPortal": "S-sign in securely with Discord in-app...",
     "openPortal": "O-open P-portal...",
-    "privacyText": "D-discord a-authorization requests access to social f-f-features 👉🏻👈🏻👉🏻👈🏻 alongside R-R-Rich Presence. Kuwuzty... Dynamics uses... t-the SDK (baka) to identify your a-account (I don't care about your account, baka!) and p-publish or clear your configured activity (stupid); it does not use friend, block, invite, message, or voice features (Hmph, stupid...). On A-Android, tokens are e-encrypted (obviously idiot, no one wants to expose it, stupid baka) and s-stored on this device (where should it go? Of course it belongs to t-this de-device! HMPH!). Read the... N-not like I want you to read it or anything!... H-here, go here stupid baka... ",
-    "revokeText": "",
-    "verifying": "",
-    "logoutTitle": "L-logout A-account...",
-    "removePrefix": "Are you sure you want to remove account ",
-    "removeSuffix": ". This will remove saved credentials from this device... Hmph! (I don't care, baka... BAKA... BAKAAAAAAA...)",
-    "confirmLogout": "C-confirm L-logout...",
-    "addAccount": "A-add D-discord A-account...",
-    "noSelection": "No selected account (stupid baka). C-choose one of the logged-in accounts below (you baka!)...",
-    "addMoreAccounts": "You can add more accounts by clicking the Discord button below... I-if you want to...Hmph... I'm not jealous or anything... AND I DON'T LIKE YOU, BAKA!"
-  },
-  "settingsUi": {
-    "chooseLanguage": "C-choose L-language...",
-    "languageDescription": "HMPH! You really selected t-this one... Still... It's not like I like you or something... Whatever, stupid baka!",
-    "availableLanguages": "A-available L-languages...",
-    "close": "C-close...",
-    "linkedImageUrls": "L-linked I-image URLs...",
-    "clearCacheKeep": "C-clear C-cache, K-keep C-custom I-icons...",
-    "clearCacheAll": "C-clear All, I-including C-custom I-icons...",
-    "credits": "C-credits...",
-    "themeMode": "T-theme M-mode...",
-    "accentColor": "P-primary A-accent C-color...",
-    "resetAccent": "R-reset to D-default O-orange...",
-    "learnMore": "L-learn More About T-this A-a-app 👉🏻👈🏻... HMPH!!!!",
-    "privacyPolicy": "P-privacy P-policy...",
-    "repository": "C-check G-github R-repository...",
-    "latestRelease": "G-go to L-latest R-release...",
-    "checkForUpdates": "C-check for L-latest V-version...",
-    "checkForUpdatesDesc": "Check whether a newer version is available... 👉🏻👈🏻 don't get too e-excited! Baka...",
-    "check": "C-check...",
-    "checkingUpdates": "C-checking for updates... S-stop being impatient!",
-    "submitIssue": "S-submit an I-issue... (not like I'll read it or something",
-    "developerSection": "K-kruzty D-dynamics...",
-    "librariesSection": "L-libraries U-used in this A-app...",
-    "contributorsSection": "K-kizzy C-contributors...",
-    "maintainerRole": "C-current M-maintainer & D-developer...",
-    "view": "V-view...",
-    "done": "D-done...",
-    "developedBy": "D-developed by...this... stupid baka ",
-    "version": "K-kruzty D-dynamics v{version} HMPH!!!",
-    "architecture": "B-built using Rust Core (Tokio + Tauri v2) w-with React 19 and TailwindCSS Frontend including Native Android Plugin B-B. Based on the original Kizzy's Experimental RPC... S-so complicated! Hmph!!!!",
-    "cached": "c-cached...",
-    "tapCustomize": "T-tap to customize...",
-    "defaultNote": "T-t-these defaults are automatically used (hmph...) when an app or presence activity does not specify its own activity type or status... Whatever is that...Baka.",
-    "activityType": "A-activity T-type...",
-    "activityStatus": "A-activity S-status...",
-    "imgbbHelp": "S-set your own ImgBB A-API K-k-Key to upload custom app and media asset images to Discord CDN. V-visit...",
-    "getApiKey": "...to obtain a key, baka, not like you want to visit it...",
-    "apiPrivacy": "L-leaving this field empty resets to the built-in default API key. C-custom keys are never exposed in plaintext... B-baka!",
-    "saveKey": "S-save K-key...",
-    "discordIdHelp": "Set your own Discord Application ID from the...",
-    "developerPortal": "D-discord D-developer P-portal... 👉🏻👈🏻",
-    "idDefault": "D-default...",
-    "idPrivacy": "Leaving this field empty will reset back to the default Kruzty Dynamics application ID... 💢",
-    "saveId": "S-save ID...",
-    "permissionsDescription": "Status of permissions required to read active media notifications and foreground applications...",
-    "notificationAccessDesc": "S-special A-app A-access for media detection...",
-    "usageAccessDesc": "D-detect running foreground games & apps...",
-    "batteryDesc": "P-prevents Android from killing presence service...",
-    "foregroundDesc": "S-status bar indicator for ongoing Discord presence...",
-    "saveIdPlaceholder": "1572590527562391713 (D-default, of course, duh, baka)...",
-    "resetDefault": "R-reset to D-default...",
-    "cancel": "C-cancel...",
-    "cacheWarning": "T-there are {total} l-linked image URLs, i-including {custom} (hmph...) custom app icon o-overrides. (*starts to shy out and lowers the voice*) You can clear cached links while keeping custom icons, or clear all links and remove custom overrides (HMPH!). I-if you remove overrides, upload those icons again in the Application Catalogue... D-don't delete them by accident! Don't make me l-liable for your stupid d-decisions! Stupid BAKA!",
-    "allGranted": "A-all G-granted...",
-    "clearedAll": "All linked image URLs cleared, including custom app icons...",
-    "clearedKeeping": "Linked image URL cache cleared. Custom app icons were kept...",
-    "usingDefaultKey": "U-using default system key...",
-    "customKeySet": "C-custom K-key S-set...",
-    "light": "L-light...",
-    "dark": "D-dark...",
-    "amoled": "AMOLED...",
-    "libraryTauri": "L-lightweight cross-platform native runtime...",
-    "libraryTokio": "A-asynchronous event-driven network runtime...",
-    "librarySdk": "N-native Android rich presence integration...",
-    "libraryReact": "M-modern user interface component architecture...",
-    "libraryTailwind": "U-utility-first modern responsive styling...",
-    "libraryLucide": "C-community-crafted clean vector icons..."
-  },
-  "configFields": {
-    "appTitle": "A-application S-status F-field C-config...",
-    "mediaTitle": "M-media S-status F-field C-config...",
-    "back": "B-back...",
-    "reset": "R-reset to D-defaults...",
-    "help": "A-a-a-available T-tokens H-help... Not like I want to help you or anything.... B-baka!💢💢💢",
-    "title": "T-title...",
-    "line1": "L-line 1 (D-details)...",
-    "line2": "L-line 2 (S-state)...",
-    "smallText": "S-small T-text...",
-    "smallImage": "S-small I-image...(HMPH!)",
-    "bigText": "B-big T-text...",
-    "bigImage": "B-big I-image...",
-    "header": "H-header (L-listening to / W-watching)...",
-    "appHeader": "H-header...",
-    "titleHeader": "T-title/H-h-h-header...(Stupid)",
-    "detailsField": "D-d-d-details...",
-    "stateField": "S-s-tate...(Baka)",
-    "notificationConfigSubtitle": "Customize the title and subtitle shown in the foreground service notification... 👉🏻👈🏻 M-maybe?? HMPH!",
-    "notificationAppSection": "A-app S-status N-notification...",
-    "notificationMediaSection": "M-media P-playback N-notification...",
-    "notificationSubtitleLabel": "S-subtitle...",
-    "notificationHelpIntro": "Use getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), and getFieldCfgStr(\"MediaBigText\") to insert the rendered field values. Use joinNonBlank(field1, field2) to join nonempty values with a bullet. App notification templates support the AppActivityType == \"Playing\" conditional. Expressions also support == and != comparisons... I-it's not that hard, baka!",
-    "notificationDiscardMessage": "You have unsaved notification projection changes. Leaving now will discard them... D-don't say I didn't warn you!",
-    "mediaTitleField": "M-media T-title (A-activity D-details)...",
-    "artist": "L-line 1 (A-activity S-state / A-artist)...",
-    "album": "L-line 2 (A-album / I-image T-text)...",
-    "buttons": "C-custom B-buttons...",
-    "button1": "B-button 1...",
-    "button2": "B-button 2...",
-    "save": "S-save F-fields...",
-    "appReference": "A-application T-token R-reference...",
-    "mediaReference": "M-media T-token R-reference...",
-    "tokenDescription": "D-dynamic variables a-available in field expressions...",
-    "mediaTokenDescription": "V-video or media description from web or video players...",
-    "discard": "D-discard U-unsaved C-changes?... 💢...",
-    "unsaved": "U-unsaved modifications...",
-    "helpDone": "G-got it... (you baka)",
-    "appTokenName": "P-projected application name shown in the activity...",
-    "appTokenActivityType": "Selected Rich Presence activity type for this app profile, such as Playing, Listening, Watching, or Competing... S-so many choices!",
-    "appTokenPlatformType": "P-platform selected in this app profile, such as Android, PC, PlayStation, or Xbox...Like I care which p-platform you are, BAKA!",
-    "appExpressionOperators": "E-expressions support == and != comparisons. Use {{AppActivityType == \"Playing\" ?? AppName : AppPlatformType}} to s-show A-AppName when Playing and AppPlatformType otherwise... B-baka! R-read it a-again, not that h-hard stupid baka.",
-    "appTokenDetails": "C-custom D-details text saved on this app p-profile 👉🏻👈🏻👉🏻👈🏻, o-or empty when disabled or blank. (HMPH)",
-    "appTokenState": "C-custom State t-text saved on this a-app profile, or empty when disabled or blank. (you baka)...",
-    "appTokenSmallText": "C-custom small image label saved on this app profile, or empty when disabled or blank...",
-    "appTokenSmallUrl": "C-custom small image URL saved on this app profile, or empty when disabled or blank...",
-    "appTokenImageUrl": "C-cached ImgBB remote URL of the application icon... J-just to make sure your U-URL is working, don't blame me for it i-if it's not! BAKA!",
-    "appTokenPackageName": "Android package identifier (e.g. com.mojang.minecraftpe)...",
-    "mediaTokenIntro": "Tokens can be e-embedded directly in text fields and b-button labels or U-URLs (e.g. {example})... B-because I w-want this app to b-be c-customizable... Not like I care a-about users or what... Whatever you baka!💢💢💢💢💢💢💢💢",
-    "mediaTokenAppName": "Player a-application name shown in Discord's Listening to or Watching header. HMPH!!!",
-    "mediaTokenTitle": "Active m-media song (hmph) or video title from notification metadata... I don't care about your tastes... Baka...",
-    "mediaTokenArtist": "Artist or creator of the playing audio or video... Whatever your preferences, hmph!",
-    "mediaTokenAlbum": "Album name or playlist container... J-just to make s-sure it's not the boring one.",
-    "mediaTokenPlaybackState": "Current playback state (Playing, Paused, Stopped)...",
-    "mediaTokenImageUrl": "Cached ImgBB URL of the media album art or thumbnail...",
-    "mediaTokenPlaybackImageUrl": "Asset image URL for the current playback indicator...",
-    "mediaTokenFallbackImageUrl": "F-fallback application icon if no artwork is available... 👉🏻👈🏻",
-    "appConfigSubtitle": "Customize expressions for app detection...",
-    "mediaConfigSubtitle": "Customize expressions for media playback...",
-    "mediaHeaderDescription": "The app name shown in Discord's media header. Activity type selects Listening to or Watching...",
-    "mediaTitleDescription": "This maps to the media title/details text. Configure the player name separately in Header above...",
-    "mediaAlbumDescription": "Shown beneath the artist on Discord's media card...",
-    "mediaButtonDescription": "A-add up to 2 interactive presence buttons with token expressions...",
-    "mediaButtonLabel": "L-label...",
-    "mediaButtonUrl": "URL...",
-    "mediaButtonExample": "e.g. ...",
-    "mediaButtonListen": "L-listen on...",
-    "appDiscardMessage": "You have unsaved changes in your Application Status Fields. Leaving now will revert them to the previous state... I-I didn't want to save them anyway!",
-    "mediaDiscardMessage": "You have unsaved changes in your Media Status Fields. Leaving now will revert them to the previous state... Hmph!",
-    "mediaTokenSubtitle": "Dynamic variables available in media expressions & buttons..."
-  },
-  "catalogue": {
-    "title": "A-application C-catalogue",
-    "back": "B-back",
+    "understood": "U-understood",
+    "apply": "Not l-like I care if you a-apply it, HMPH!",
     "batch": "B-batch O-o-operations",
-    "search": "Start searching applications you stupid baka!!! HMPH!",
-    "filter": "F-filter A-apps",
-    "clearFilters": "Clear F-filters",
-    "enabledOnly": "E-enabled O-only",
-    "allActivityTypes": "A-all Activity T-types",
-    "allActivityStatuses": "A-all Activity S-statuses",
+    "cancel": "C-cancel this stupid b-baka!!!",
+    "close": "C-close",
+    "confirm": "C-confirm & A-apply",
+    "discardChanges": "D-discard C-changes",
+    "keepEditing": "K-keep E-editing",
+    "stageChanges": "S-stage C-changes",
+    "uploadImage": "U-upload image to ImgBB",
+    "helpDone": "G-got it... (you baka)",
+    "save": {
+      "fields": "S-save F-fields...",
+      "id": "S-save ID...",
+      "key": "S-save K-key..."
+    },
+    "logs": {
+      "live": "L-live L-logs...",
+      "view": "V-view L-logs..."
+    },
+    "grant": "Grant them stupid baka!",
+    "done": "D-done... I guess? Hmph!",
+    "resetDefault": "R-reset to D-default..."
+  },
+  "subPages": {
+    "application": {
+      "presenceConfig": {
+        "fallbackFields": {
+          "activityName": "A-activity N-name",
+          "bigImage": "B-big I-image",
+          "bigText": "B-big Text",
+          "details": "D-details",
+          "imageUrl": "I-image URL",
+          "smallImage": "S-small I-image",
+          "smallText": "S-small T-text",
+          "state": "S-state",
+          "uploadImage": "U-upload image 👉🏻👈🏻",
+          "uploadingImage": ""
+        },
+        "catalogue": {
+          "title": "A-application C-catalogue",
+          "desc": "V-view, f-filter, and customize i-i-individual app projections, hmph! I-it's not like I care whatever a-apps installed t-to this system... Baka... Baka!"
+        },
+        "configurationDetails": "C-configuration details",
+        "outsidePolicies": {
+          "modal": {
+            "details": {
+              "custom": "I-Immediately projects the cu-customized fallback presence",
+              "drop": "Clears your D-discord activity (you baka...) until you return to an enabled application (HMPH...!)",
+              "freeze": "P-pauses and preserves the last p-p-projected... (hmph...) presence until an enabled app is detected again, baka..."
+            },
+            "title": "O-outside A-app P-policies"
+          },
+          "fallbackPresence": "C-custom F-fallback Presence",
+          "desc": "B-behavior when you leave or switch away from enabled apps",
+          "title": "O-outside D-detected A-app P-policies",
+          "help": "P-policy Help"
+        },
+        "timestampStrategy": {
+          "modal": {
+            "details": {
+              "fixed": "L-locks the presence timer to a s-specific fixed start date and time",
+              "persistent": "Uses one sh-shared runtime timestamp for a-apps and paused m-media during this service session",
+              "reset": "Restarts the timer at 00:00 when the app is launched or refocused"
+            },
+            "title": "T-timestamp S-strategies"
+          },
+          "fixedStart": "F-fixed S-start T-timestamp",
+          "desc": "H-how activity t-timers are resolved across a-app s-s-sessions (Baka... That should b-be s-self............... explanatory... Idiot!)",
+          "help": "T-timestamp H-help",
+          "title": "T-timestamp S-strategy"
+        },
+        "statusFieldConfig": {
+          "title": "S-status F-field C-configuration",
+          "desc": "Customize t-title, details, state, a-a-and artwork expressions... H-hmph!!..."
+        },
+        "subtitle": "O-outside app policy and timestamp behavior, baka...",
+        "title": "Application P-presence C-configuration 👉🏻👈🏻👉🏻👈🏻"
+      },
+      "catalogue": {
+        "androidOnly": "Installed app discovery is available in the Android app",
+        "modal": {
+          "bulkConfigure": {
+            "apply": {
+              "title": "A-apply B-batch C-changes?",
+              "desc": "Y-you are about to permanently apply staged configuration changes to",
+              "subtitle": "C-confirmation",
+              "selectedApps": "selected applications"
+            },
+            "title": "B-bulk C-configure",
+            "subtitle": "A-apply changes to all selected applications",
+            "discard": {
+              "title": "D-discard S-staged C-changes?",
+              "desc": "You have uncommitted batch configurations. Leaving batch mode now will discard all staged changes B-baka! Don't f-forget them!!!",
+              "subtitle": "U-unsaved batch modifications"
+            }
+          },
+          "appProfileCustomization": {
+            "buttons": {
+              "chooseIcon": "C-choose an icon image",
+              "resetIcon": "R-reset to original app icon",
+              "resetLabel": "R-reset to O-original L-label"
+            },
+            "customBtnDesc": "A-add up to 2 interactive presence buttons",
+            "title": "C-c-customize 🛠💢💢",
+            "original": "O-original:",
+            "subtitle": "P-presence profile & projection aliases",
+            "projectedName": "P-projected Name",
+            "switchToggle": {
+              "buttons": "T-toggle C-custom B-buttons",
+              "details": "T-toggle C-custom D-details and S-state",
+              "small": "T-toggle C-custom S-small T-text and I-image"
+            }
+          }
+        },
+        "buttons": {
+          "clearFilters": "Clear F-filters",
+          "filter": "F-filter A-apps"
+        },
+        "loadAppsFailed": "Unable to load installed apps",
+        "loading": "",
+        "search": "Start searching applications you stupid baka!!! HMPH!",
+        "subtitle": "{apps} apps | {enabled} enabled... HMPH!",
+        "title": "A-application C-catalogue",
+        "uploadProgress": "U-uploading app icon to ImgBB"
+      },
+      "statusFieldConfig": {
+        "subtitle": "Customize expressions for app detection...",
+        "discardMsg": "You have unsaved changes in your Application Status Fields. Leaving now will revert them to the previous state... I-I didn't want to save them anyway!",
+        "title": "A-application S-status F-field C-config..."
+      }
+    },
+    "buttons": {
+      "back": "B-back",
+      "help": "A-a-a-available T-tokens H-help... Not like I want to help you or anything.... B-baka!💢💢💢",
+      "reset": "R-reset to D-defaults..."
+    },
+    "media": {
+      "statusFieldConfig": {
+        "customBtnDesc": "A-add up to 2 interactive presence buttons with token expressions...",
+        "subtitle": "Customize expressions for media playback...",
+        "discardMsg": "You have unsaved changes in your Media Status Fields. Leaving now will revert them to the previous state... Hmph!",
+        "title": "M-media S-status F-field C-config..."
+      },
+      "presenceConfig": {
+        "timeRemaining": {
+          "appTimestamp": "",
+          "title": "T-time R-remaining",
+          "desc": "Shows the u-usual start/current-end time remaining, that's obvious, stupid baka"
+        },
+        "pausedResolution": {
+          "modal": {
+            "details": {
+              "fallback": "Uses the previously or currently detected app or custom f-fallback while media is p-paused, baka.",
+              "hidePaused": "Hides presence w-while media is paused (hmph... hmph...), i-including any detected app, it's not like I'm shy or something, idiot stupid idiot you baka!",
+              "showPaused": "K-keeps media presence active w-while paused and shows paused indicators (hmph)"
+            },
+            "desc": "Options when active p-playback is paused"
+          },
+          "desc": "Presence b-be-behavior when active playback is paused",
+          "help": "P-paused R-resolution H-help",
+          "title": "P-paused Media R-re-resolution"
+        },
+        "mediaPriority": {
+          "title": "M-media P-priority",
+          "desc": "Controls whether media overrides gaming/app sessions",
+          "help": "P-priority Help",
+          "modal": {
+            "details": {
+              "priorityPlaying": "When media is actively playing, it takes p-precedence over the app you are using and projects the current track or video. I h-hate e-explaining it to you! S-so understand it y-yourself BAKA! HMPH!",
+              "switchesBetween": "Projects media only while you a-are inside the media player. S-switching to a game or enabled app lets t-that app take over, hmph, allat to talk, hmph hmph!"
+            },
+            "title": "M-media P-priority S-strategy",
+            "desc": "R-resolution logic between gaming and m-media sessions"
+          }
+        },
+        "mediaScope": {
+          "title": "M-media D-detection S-scope",
+          "desc": "F-filter which apps trigger media r-rich presence"
+        },
+        "statusFieldConfig": {
+          "title": "M-media S-status F-field C-configuration",
+          "desc": "Customize title, artist, album, and artwork fallback expressions"
+        },
+        "subtitle": "R-resolution priorities, timestamps, and playback states, ugh... Baka...",
+        "title": "M-media P-presence C-configuration",
+        "typeResolution": {
+          "title": "M-media T-type R-resolution",
+          "desc": "How listening vs watching activities are classified"
+        }
+      }
+    },
+    "notification": {
+      "sections": {
+        "application": "A-app S-status N-notification...",
+        "media": "M-media P-playback N-notification..."
+      },
+      "subtitle": "Customize the title and subtitle shown in the foreground service notification... 👉🏻👈🏻 M-maybe?? HMPH!",
+      "discard": "You have unsaved notification projection changes. Leaving now will discard them... D-don't say I didn't warn you!",
+      "helpIntro": "Use getFieldCfgStr(\"AppTitle\"), getFieldCfgStr(\"AppDetails\"), getFieldCfgStr(\"AppState\"), getFieldCfgStr(\"AppBigText\"), getFieldCfgStr(\"MediaDetails\"), getFieldCfgStr(\"MediaState\"), and getFieldCfgStr(\"MediaBigText\") to insert the rendered field values. Use joinNonBlank(field1, field2) to join nonempty values with a bullet. App notification templates support the AppActivityType == \"Playing\" conditional. Expressions also support == and != comparisons... I-it's not that hard, baka!"
+    }
+  },
+  "choices": {
+    "outsidePolicies": {
+      "customFallback": "Custom F-fallback",
+      "drop": "D-drop (C-clear presence)",
+      "freeze": "F-freeze (Default)"
+    },
+    "timestampStrategy": {
+      "customFixedTime": "C-custom F-fixed T-time",
+      "persistent": "P-persistent (D-default)",
+      "resetOnLaunch": "R-reset on L-launch"
+    },
+    "activityStatus": {
+      "all": "A-all Activity S-statuses",
+      "dnd": "D-do not D-disturb!!! 🔴💢💢💢💢💢💢 HMPH!!!",
+      "idle": "I-idle 🟠💢",
+      "invisible": "I-invisible ⚪💢",
+      "offline": "O-offline ⚫💢💢💢",
+      "online": "O-online 🟢💢",
+      "streaming": "S-streaming 🤳🏻💢"
+    },
+    "activityType": {
+      "all": "A-all Activity T-types",
+      "competing": "C-competing ⚔💢",
+      "listening": "L-listening 🎧💢",
+      "playing": "P-p-playing 🎮💢",
+      "watching": "W-wat....ching 👁💢"
+    },
     "allPlatforms": "A-all Platforms",
+    "disableAll": "D-disable A-all",
+    "enableAll": "E-enable A-all",
+    "enabledOnly": "E-enabled O-only",
     "globalDefault": "G-global D-default",
-    "playing": "P-p-playing 🎮💢",
-    "streaming": "S-streaming 🤳🏻💢",
-    "listening": "L-listening 🎧💢",
-    "watching": "W-wat....ching 👁💢",
-    "competing": "C-competing ⚔💢",
-    "online": "O-online 🟢💢",
-    "idle": "I-idle 🟠💢",
-    "dnd": "D-do not D-disturb!!! 🔴💢💢💢💢💢💢 HMPH!!!",
-    "offline": "O-offline ⚫💢💢💢",
-    "invisible": "I-invisible ⚪💢",
-    "customize": "C-c-customize 🛠💢💢",
-    "profileSubtitle": "P-presence profile & projection aliases",
-    "activityType": "A-activity T-type",
+    "keepCurrent": "K-keep C-current",
+    "mediaScope": {
+      "allSessions": "A-all M-media Sessions (D-default)",
+      "enabledAppsOnly": "Only E-enabled A-apps"
+    },
+    "typeResolution": {
+      "autoAdaptive": "A-auto-A-adaptive (D-default)",
+      "profileOverride": "A-app Profile O-override"
+    },
+    "pausedResolution": {
+      "fallbackApp": "F-fallback to D-detected A-app",
+      "hidePaused": "H-hide P-paused S-state",
+      "showPaused": "S-show P-paused S-state (Default, hmph)"
+    },
+    "mediaPriority": {
+      "priorityPlaying": "Priority P-playing M-media (Default)",
+      "switchesBetween": "Switches Between"
+    },
+    "theme": {
+      "amoled": "AMOLED...",
+      "dark": "D-dark...",
+      "light": "L-light..."
+    }
+  },
+  "labels": {
     "activityStatus": "A-activity S-status",
-    "platformType": "P-platform T-type",
+    "activityType": "A-activity T-type",
+    "customButtons": "C-custom B-buttons",
     "customDetailsState": "C-custom D-details & S-state",
     "customSmallImage": "C-custom S-small T-text and I-image",
-    "customButtons": "C-custom B-buttons",
-    "bulkConfigure": "B-bulk C-configure",
-    "cancel": "C-cancel this stupid b-baka!!!",
-    "stageChanges": "S-stage C-changes",
-    "apply": "Not l-like I care if you a-apply it, HMPH!",
-    "confirm": "C-confirm & A-apply",
-    "keepCurrent": "K-keep C-current",
-    "enableAll": "E-enable A-all",
-    "disableAll": "D-disable A-all",
-    "discardBatch": "D-discard S-staged C-changes?",
-    "chooseIcon": "C-choose an icon image",
-    "resetIcon": "R-reset to original app icon",
-    "resetLabel": "R-reset to O-original L-label",
-    "details": "D-details",
-    "state": "S-state",
-    "smallText": "S-small T-text",
-    "smallImageUrl": "S-small image URL",
-    "uploadImage": "U-upload image to ImgBB",
-    "buttonLabel": "L-label (e.g. J-join G-game)",
-    "presenceToggle": "P-presence T-toggle",
-    "bulkSubtitle": "A-apply changes to all selected applications",
-    "applyBatchTitle": "A-apply B-batch C-changes?",
-    "confirmation": "C-confirmation",
-    "unsavedBatch": "U-unsaved batch modifications",
-    "confirmApply": "C-confirm & A-apply",
     "filterOptions": "F-filter O-options",
-    "close": "C-close",
-    "loading": "",
-    "original": "O-original:",
-    "projectedName": "P-projected Name",
-    "customButtonDesc": "A-add up to 2 interactive presence buttons",
-    "toggleDetails": "T-toggle C-custom D-details and S-state",
-    "toggleSmall": "T-toggle C-custom S-small T-text and I-image",
-    "toggleButtons": "T-toggle C-custom B-buttons",
-    "uploadProgress": "U-uploading app icon to ImgBB",
-    "keepEditing": "K-keep E-editing",
-    "discardChanges": "D-discard C-changes",
-    "discardMessage": "You have uncommitted batch configurations. Leaving batch mode now will discard all staged changes B-baka! Don't f-forget them!!!",
-    "applyMessage": "Y-you are about to permanently apply staged configuration changes to",
-    "selectedApps": "selected applications",
-    "urlExample": "URL (https://)",
-    "summary": "{apps} apps | {enabled} enabled... HMPH!",
-    "chooseImage": "C-choose an image file",
-    "imageTooLarge": "C-choose an image smaller than 32 MB BAKA! Make it s-smaller!",
-    "imageUploadFailed": "I-image upload failed, sad day f-for y-you!",
-    "iconUploadFailed": "I-icon upload failed, th-that s-sucks!",
-    "androidOnly": "Installed app discovery is available in the Android app",
-    "loadAppsFailed": "Unable to load installed apps",
-    "appUnit": "A-app",
-    "appsUnit": "A-apps"
+    "platformType": "P-platform T-type",
+    "presenceToggle": "P-presence T-toggle",
+    "button1": "B-button 1...",
+    "button2": "B-button 2...",
+    "label": "L-label...",
+    "url": "URL..."
   },
-  "appPresence": {
-    "title": "Application P-presence C-configuration 👉🏻👈🏻👉🏻👈🏻",
-    "subtitle": "O-outside app policy and timestamp behavior, baka...",
-    "catalogue": "A-application C-catalogue",
-    "catalogueDesc": "V-view, f-filter, and customize i-i-individual app projections, hmph! I-it's not like I care whatever a-apps installed t-to this system... Baka... Baka!",
-    "outsidePolicies": "O-outside D-detected A-app P-policies",
-    "outsideDescription": "B-behavior when you leave or switch away from enabled apps",
-    "policyHelp": "P-policy Help",
-    "freeze": "F-freeze (Default)",
-    "customFallback": "Custom F-fallback",
-    "drop": "D-drop (C-clear presence)",
-    "fallbackPresence": "C-custom F-fallback Presence",
-    "activityName": "A-activity N-name",
+  "pluralization": {
+    "app": {
+      "plural": "A-apps",
+      "singular": "A-app"
+    }
+  },
+  "placeholders": {
+    "labelExample": "L-label (e.g. J-join G-game)",
     "details": "D-details",
-    "state": "S-state",
+    "smallImageUrl": "S-small image URL",
     "smallText": "S-small T-text",
-    "bigText": "B-big Text",
-    "smallImage": "S-small I-image",
-    "bigImage": "B-big I-image",
-    "imageUrl": "I-image URL",
-    "uploadingImage": "",
-    "timestampStrategy": "T-timestamp S-strategy",
-    "timestampDescription": "H-how activity t-timers are resolved across a-app s-s-sessions (Baka... That should b-be s-self............... explanatory... Idiot!)",
-    "timestampHelp": "T-timestamp H-help",
-    "persistent": "P-persistent (D-default)",
-    "resetOnLaunch": "R-reset on L-launch",
-    "customFixedTime": "C-custom F-fixed T-time",
-    "fixedStart": "F-fixed S-start T-timestamp",
-    "statusFieldConfig": "S-status F-field C-configuration",
-    "statusFieldDescription": "Customize t-title, details, state, a-a-and artwork expressions... H-hmph!!...",
-    "configurationDetails": "C-configuration details",
-    "outsideHelpTitle": "O-outside A-app P-policies",
-    "timestampHelpTitle": "T-timestamp S-strategies",
-    "understood": "U-understood",
-    "freezeHelp": "P-pauses and preserves the last p-p-projected... (hmph...) presence until an enabled app is detected again, baka...",
-    "customHelp": "I-Immediately projects the cu-customized fallback presence",
-    "dropHelp": "Clears your D-discord activity (you baka...) until you return to an enabled application (HMPH...!)",
-    "persistentHelp": "Uses one sh-shared runtime timestamp for a-apps and paused m-media during this service session",
-    "resetHelp": "Restarts the timer at 00:00 when the app is launched or refocused",
-    "fixedHelp": "L-locks the presence timer to a s-specific fixed start date and time",
-    "uploadImage": "U-upload image 👉🏻👈🏻"
+    "state": "S-state",
+    "urlExample": "URL (https://)",
+    "example": "e.g. ...",
+    "listenOn": "L-listen on..."
   },
-  "mediaPresence": {
-    "title": "M-media P-presence C-configuration",
-    "subtitle": "R-resolution priorities, timestamps, and playback states, ugh... Baka...",
-    "priority": "M-media P-priority",
-    "priorityDesc": "Controls whether media overrides gaming/app sessions",
-    "priorityHelp": "P-priority Help",
-    "priorityPlaying": "Priority P-playing M-media (Default)",
-    "switchesBetween": "Switches Between",
-    "scope": "M-media D-detection S-scope",
-    "scopeDesc": "F-filter which apps trigger media r-rich presence",
-    "allSessions": "A-all M-media Sessions (D-default)",
-    "enabledAppsOnly": "Only E-enabled A-apps",
-    "typeResolution": "M-media T-type R-resolution",
-    "typeResolutionDesc": "How listening vs watching activities are classified",
-    "autoAdaptive": "A-auto-A-adaptive (D-default)",
-    "profileOverride": "A-app Profile O-override",
-    "timeRemaining": "T-time R-remaining",
-    "timeRemainingDesc": "Shows the u-usual start/current-end time remaining, that's obvious, stupid baka",
-    "appTimestamp": "",
-    "pausedResolution": "P-paused Media R-re-resolution",
-    "pausedDesc": "Presence b-be-behavior when active playback is paused",
-    "pausedHelp": "P-paused R-resolution H-help",
-    "showPaused": "S-show P-paused S-state (Default, hmph)",
-    "fallbackApp": "F-fallback to D-detected A-app",
-    "hidePaused": "H-hide P-paused S-state",
-    "statusFields": "M-media S-status F-field C-configuration",
-    "statusFieldsDesc": "Customize title, artist, album, and artwork fallback expressions",
-    "priorityStrategy": "M-media P-priority S-strategy",
-    "priorityStrategyDesc": "R-resolution logic between gaming and m-media sessions",
-    "pausedOptions": "Options when active p-playback is paused",
-    "priorityHelpText": "When media is actively playing, it takes p-precedence over the app you are using and projects the current track or video. I h-hate e-explaining it to you! S-so understand it y-yourself BAKA! HMPH!",
-    "switchHelpText": "Projects media only while you a-are inside the media player. S-switching to a game or enabled app lets t-that app take over, hmph, allat to talk, hmph hmph!",
-    "showPausedHelp": "K-keeps media presence active w-while paused and shows paused indicators (hmph)",
-    "fallbackHelp": "Uses the previously or currently detected app or custom f-fallback while media is p-paused, baka.",
-    "hidePausedHelp": "Hides presence w-while media is paused (hmph... hmph...), i-including any detected app, it's not like I'm shy or something, idiot stupid idiot you baka!"
+  "service": {
+    "imgbb": {
+      "chooseImage": "C-choose an image file",
+      "iconUploadFailed": "I-icon upload failed, th-that s-sucks!",
+      "imageTooLarge": "C-choose an image smaller than 32 MB BAKA! Make it s-smaller!",
+      "imageUploadFailed": "I-image upload failed, sad day f-for y-you!"
+    }
+  },
+  "configFields": {
+    "status": {
+      "bigImage": "B-big I-image...",
+      "bigText": "B-big T-text...",
+      "line1": "D-d-d-details...",
+      "smallImage": "S-small I-image...(HMPH!)",
+      "smallText": "S-small T-text...",
+      "line2": "S-s-tate...(Baka)",
+      "title": "T-title/H-h-h-header...(Stupid)"
+    }
+  },
+  "onboarding": {
+    "surface": {
+      "userSection": {
+        "discordLogin": {
+          "accountsConnected": "account logged in...",
+          "desc": "Connect your Discord account to project Rich Presence... I-it's not like I want to see your status or anything!",
+          "title": "D-discord L-login..."
+        },
+        "languageTitle": "L-language...",
+        "themeTitle": "T-t-theme...",
+        "desc": "Customization & Account...",
+        "title": "U-use user c-control..."
+      },
+      "permissionsSection": {
+        "batteryOptimization": {
+          "desc": "Exempt the app to prevent the background service from sleeping... I-I just don't want it to crash, okay?!",
+          "title": "B-battery O-o-o-optimiza...tion... 👉🏻👈🏻",
+          "modal": {
+            "desc": "Modern A-Android systems put background p-p-processes to sleep after a few minutes. Exempting Kruzty D-Dynamics from battery optimization ensures continuous, uninterrupted Discord Rich Presence u-updates, HMMMPH... D-don't let it sleep!",
+            "subtitle": "B-background S-service W-whitelist...",
+            "requestExemption": "R-request E-exemption..."
+          }
+        },
+        "notificationAccess": {
+          "desc": "Special App Access is needed to detect media & playback... D-don't make me repeat myself!",
+          "title": "N-notification A-access...",
+          "modal": {
+            "methodA": {
+              "title": "M-method A: S-special A-app A-access (Pixel, Motorola, Infinix, Stock)...",
+              "step1": "T-tap O-open A-android S-settings below...",
+              "step2": "G-go to S-special A-app A-access > N-notification A-access...",
+              "step3": "F-find K-kruzty D-dynamics and switch on A-allow notification access..."
+            },
+            "methodB": {
+              "title": "M-method B: A-app I-info > E-ellipsis (Xiaomi/HyperOS, Samsung, Oppo)...",
+              "step1": "O-open device S-settings > A-apps > M-manage A-apps / A-app L-list...",
+              "step2": "F-find and tap K-kruzty D-dynamics... 👉🏻👈🏻",
+              "step4": "T-tap A-allow restricted settings / S-special A-app A-access > G-grant...",
+              "step5": "R-return and enable N-notification A-access..."
+            },
+            "desc": "N-n-notification Access... (hmph stupid baka why am I explaining this... grrr... whatever...) ...enables K-kruzty Dynamics t-to capture live media s-session playback e-events (Song Title, Artist, Album, and Playback State) from S-spotify, YouTube Music, and media players... N-not that I care about your music taste! Baka...",
+            "oemNotice": {
+              "desc": "Android protects notification listener access behind special permission layers. Depending on your phone brand, follow one of the methods below... I-it's not like I want to explain this to you!",
+              "title": "N-notice for OEM & A-android 13+ D-devices... Yes read this you stupid baka! Because... a-again (*starts to shy out and lowers the voice*) (*speaks inaudibly*) UGH WHATEVER BAKA! 💢💢💢"
+            },
+            "subtitle": "S-special A-app A-access C-configuration...",
+            "openAndroidSettings": "O-open A-android S-settings..."
+          }
+        },
+        "desc": "N-needed for detection... obviously!",
+        "title": "P-p-p-permissions C-control... 😳",
+        "foregroundNotification": {
+          "desc": "Android 13+ permission for the persistent service notification... Hmph!",
+          "title": "F-f-foreground N-notification...",
+          "modal": {
+            "allowNotification": "A-allow N-notification...",
+            "desc": "Required by Android 13+ t-to d-d-display the ongoing foreground service notification in your status bar, confirming that the Discord presence engine is running... Hmph...💢...",
+            "subtitle": "A-android 13+ N-notification P-permission...",
+            "title": "F-foreground Service N-notification..."
+          }
+        },
+        "usageAccess": {
+          "desc": "Required to detect the current running foreground application or game... not that you'd understand!",
+          "title": "U-useage A-access... HMPH!..................",
+          "modal": {
+            "openUsageAccess": "O-open U-usage A-access...",
+            "desc": "Usage A-access is required to detect w-which app or game you are currently running in the foreground, so Kruzty Dynamics can match it against your c-configured Application Catalog... B-baka!",
+            "step1": "T-tap Open U-usage A-access...",
+            "step2": "L-locate K-kruzty Dynamics...",
+            "step3": "Switch on P-permit usage access...",
+            "subtitle": "F-foreground A-app D-detection..."
+          }
+        }
+      },
+      "privacyNotice": "Hmph! Just so you know, this app doesn't collect or transmit user data... I-I mean, it's not like I care if you trust me! Baka!",
+      "subtitle": "I-I guess I'll let you configure the permissions and accounts so you can e-enable dynamic Discord Rich Presence... N-not like I did it for you or anything! 💢",
+      "title": "F-f-f-first Time S-setup, 👉🏻👈🏻 for a BAKA LIKE YOU HMPH!!"
+    },
+    "footer": {
+      "allSet": "All set! N-not that I was waiting for you to finish or anything... 👉🏻👈🏻",
+      "buttons": {
+        "continueForNow": "💢💢💢 C-continue for now... 💢💢💢",
+        "finishSetup": "F-finish Setup...",
+        "skipForNow": "S-skip for now... whatever! Hmph! HMPH!!"
+      },
+      "readyWhenYouAre": "R-ready when you are... b-baka!"
+    }
+  },
+  "tags": {
+    "granted": "G-granted baka!",
+    "notificationCrucial": "I-it's Crucial! B-b-baka! BAKA!!!!!",
+    "allGranted": "A-all G-granted...",
+    "cached": "c-cached...",
+    "check": "C-check...",
+    "checkingUpdates": "C-checking for updates... S-stop being impatient!",
+    "default": "D-default...",
+    "view": "V-view..."
   }
 }
