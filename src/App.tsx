@@ -134,6 +134,7 @@ function MainShell() {
     iconData?: string
   } | null>(null)
   const uploadingImageKeys = useRef(new Set<string>())
+  const lastSentConfig = useRef<string | null>(null)
   const {
     accounts,
     activeAccount,
@@ -147,7 +148,11 @@ function MainShell() {
     const bridge = (window as Window & { AndroidNativeBridge?: { isPresenceServiceRunning?: () => boolean; startPresenceService?: (config: string) => void } }).AndroidNativeBridge
     const refreshConfig = (event: Event) => {
       const linkedAccountId = (event as CustomEvent<{ activeAccountId?: string }>).detail?.activeAccountId
-      if (bridge?.isPresenceServiceRunning?.()) bridge.startPresenceService?.(collectPresenceConfig(linkedAccountId || activeAccount?.id))
+      if (!bridge?.isPresenceServiceRunning?.()) return
+      const nextConfig = collectPresenceConfig(linkedAccountId || activeAccount?.id)
+      if (nextConfig === lastSentConfig.current) return
+      lastSentConfig.current = nextConfig
+      bridge.startPresenceService?.(nextConfig)
     }
     window.addEventListener('kd-presence-config-changed', refreshConfig)
     return () => window.removeEventListener('kd-presence-config-changed', refreshConfig)
@@ -156,7 +161,10 @@ function MainShell() {
   useEffect(() => {
     const bridge = (window as Window & { AndroidNativeBridge?: { isPresenceServiceRunning?: () => boolean; startPresenceService?: (config: string) => void } }).AndroidNativeBridge
     if (bridge?.isPresenceServiceRunning?.()) {
-      bridge.startPresenceService?.(collectPresenceConfig(activeAccount?.id))
+      const nextConfig = collectPresenceConfig(activeAccount?.id)
+      if (nextConfig === lastSentConfig.current) return
+      lastSentConfig.current = nextConfig
+      bridge.startPresenceService?.(nextConfig)
     }
   }, [activeAccount?.id])
 

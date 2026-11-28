@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Activity, Users, Settings } from 'lucide-react'
 import { useTranslation } from '../i18n/useTranslation'
 
@@ -14,6 +14,22 @@ export const NavigationFooter: React.FC<NavigationFooterProps> = ({
   onTabChange,
 }) => {
   const { t } = useTranslation()
+  const footerRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const element = footerRef.current
+    if (!element) return
+    const updateFooterHeight = () => {
+      document.documentElement.style.setProperty(
+        '--kd-footer-height',
+        `${element.getBoundingClientRect().height}px`,
+      )
+    }
+    updateFooterHeight()
+    const observer = new ResizeObserver(updateFooterHeight)
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [])
 
   const tabs = [
     {
@@ -35,6 +51,7 @@ export const NavigationFooter: React.FC<NavigationFooterProps> = ({
 
   return (
     <footer
+      ref={footerRef}
       className="shrink-0 z-30 w-full border-t backdrop-blur-lg select-none transition-colors"
       style={{
         backgroundColor: 'var(--color-bg-surface)',

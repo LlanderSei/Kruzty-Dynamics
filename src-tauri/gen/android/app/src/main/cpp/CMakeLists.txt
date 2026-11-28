@@ -1,6 +1,10 @@
 ﻿cmake_minimum_required(VERSION 3.22.1)
 project(discord_social_bridge LANGUAGES CXX)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
 find_package(discord_partner_sdk REQUIRED CONFIG)
 add_library(discord_social_bridge SHARED discord_social_bridge.cpp)
 find_library(log-lib log)

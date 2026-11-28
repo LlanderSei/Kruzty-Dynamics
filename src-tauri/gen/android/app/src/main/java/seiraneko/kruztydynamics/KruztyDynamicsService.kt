@@ -18,6 +18,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
+import android.os.PowerManager
 import android.util.Base64
 import android.os.SystemClock
 import android.util.Log
@@ -28,6 +29,7 @@ import org.json.JSONObject
 class KruztyDynamicsService : Service() {
   private val handler = Handler(Looper.getMainLooper())
   private var config = JSONObject()
+  private var wakeLock: PowerManager.WakeLock? = null
   private var lastFingerprint = ""
   private var lastState: JSONObject? = null
   private var foregroundPackage = ""
@@ -51,6 +53,7 @@ class KruztyDynamicsService : Service() {
   override fun onCreate() {
     super.onCreate()
     createChannel()
+    acquireWakeLock()
     isRunning = true
     MainActivity.updateServiceShortcut(this)
     serviceStartedAt = System.currentTimeMillis()
@@ -91,8 +94,10 @@ class KruztyDynamicsService : Service() {
       runCatching {
         config = JSONObject(raw)
         getSharedPreferences(PREFS, MODE_PRIVATE).edit().putString(EXTRA_CONFIG, raw).apply()
-        lastFingerprint = ""
-        DiscordSocialPublisher.publish(this, config, JSONObject().put("domain", "idle").put("active", false))
+        // Do not clear the presence here: config reloads (including redundant
+        // restarts from the WebView) must not reset the published activity.
+        // The next poll re-evaluates and republishes only when the resolved
+        // fingerprint actually changes.
       }
         .onFailure { emitLog("warn", "Could not load service configuration") }
     }
@@ -108,6 +113,7 @@ class KruztyDynamicsService : Service() {
 
   override fun onDestroy() {
     handler.removeCallbacks(poll)
+    releaseWakeLock()
     isRunning = false
     MainActivity.updateServiceShortcut(this)
     emitLog("info", "Service stopped")
@@ -200,7 +206,7 @@ class KruztyDynamicsService : Service() {
       state.optString("domain"), state.optString("packageName"), state.optString("title"),
       state.optString("details"), state.optString("state"), state.optString("playbackState"),
       state.optString("sessionStartedAt"), state.optString("activityType"), state.optString("iconUrl"),
-      state.optString("smallImage"), state.optString("bigText"), state.optString("appName"),
+      state.optString("smallText"), state.optString("smallImage"), state.optString("bigText"), state.optString("appName"),
       state.optString("discordStatus"), state.optString("platform"),
       state.optString("mediaType"), state.optString("buttons"),
       config.optString("activeAccountId"),
@@ -670,6 +676,22 @@ class KruztyDynamicsService : Service() {
   }
 
   private fun immutableFlag(): Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) android.app.PendingIntent.FLAG_IMMUTABLE else 0
+
+  private fun acquireWakeLock() {
+    if (wakeLock != null) return
+    runCatching {
+      val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+      wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "KruztyDynamics:PresenceDetection").apply {
+        setReferenceCounted(false)
+        acquire()
+      }
+    }.onFailure { emitLog("warn", "Could not acquire wake lock: ${it.javaClass.simpleName}") }
+  }
+
+  private fun releaseWakeLock() {
+    runCatching { wakeLock?.let { if (it.isHeld) it.release() } }
+    wakeLock = null
+  }
 
   private fun createChannel() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

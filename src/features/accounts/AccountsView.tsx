@@ -402,8 +402,11 @@ export const AccountsView: React.FC<AccountsViewProps> = ({
         <button
           type="button"
           onClick={() => setIsLoginModalOpen(true)}
-          className="fixed right-5 bottom-20 z-30 p-3.5 rounded-full text-white shadow-xl flex items-center justify-center cursor-pointer transition-transform hover:scale-105 active:scale-95"
-          style={{ backgroundColor: 'var(--color-accent)' }}
+          className="fixed right-5 z-30 p-3.5 rounded-full text-white shadow-xl flex items-center justify-center cursor-pointer transition-transform hover:scale-105 active:scale-95"
+          style={{
+            backgroundColor: 'var(--color-accent)',
+            bottom: 'calc(var(--kd-footer-height, 5rem) + 1rem)',
+          }}
           title={t.pages.accounts.body.hasAccount.buttons.addAccount}
           aria-label={t.pages.accounts.body.hasAccount.buttons.addAccount}
         >
