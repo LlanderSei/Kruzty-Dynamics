@@ -1,0 +1,89 @@
+# CodeQL Advanced configuration for Kruzty Dynamics.
+# The java-kotlin matrix entry uses build-mode "manual": the manual build step
+# below compiles the Android module's Kotlin sources (src-tauri/gen/android)
+# so CodeQL can trace kotlinc. All other languages use build-mode "none".
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  schedule:
+    - cron: '34 1 * * 2'
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    permissions:
+      # required for all workflows
+      security-events: write
+
+      # required to fetch internal or private CodeQL packs
+      packages: read
+
+      # only required for workflows in private repositories
+      actions: read
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - language: actions
+          build-mode: none
+        - language: c-cpp
+          build-mode: none
+        - language: java-kotlin
+          build-mode: manual
+        - language: javascript-typescript
+          build-mode: none
+        - language: rust
+          build-mode: none
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v7
+
+    # Set up JDK for the manual java-kotlin build below. The Android SDK is
+    # already preinstalled on ubuntu-latest (ANDROID_HOME is set); the manual
+    # build step installs the required platform with the bundled sdkmanager.
+    - name: Set up JDK
+      if: matrix.build-mode == 'manual'
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '21'
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v4
+      with:
+        languages: ${{ matrix.language }}
+        build-mode: ${{ matrix.build-mode }}
+
+    # Manual build for java-kotlin: run the real Tauri Android debug build.
+    # It generates all gitignored Gradle glue (tauri.settings.gradle,
+    # tauri.build.gradle.kts, tauri.properties) and the wry Kotlin sources
+    # (TauriActivity, RustWebView, ...) that MainActivity extends, then
+    # compiles the app's Kotlin sources — which is what CodeQL traces.
+    # Requires the NDK (cargo Android target) and the aarch64 rust target.
+    - name: Run manual build steps
+      if: matrix.build-mode == 'manual'
+      shell: bash
+      run: |
+        set -euo pipefail
+        SDKMANAGER="$(command -v sdkmanager || ls "$ANDROID_HOME"/cmdline-tools/*/bin/sdkmanager | head -n1)"
+        yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+        for pkg in "platforms;android-36" "platforms;android-37" "ndk;30.0.16248370"; do
+          "$SDKMANAGER" "$pkg" > /dev/null 2>&1 || echo "could not install $pkg via sdkmanager"
+        done
+        rustup target add aarch64-linux-android
+        npm ci
+        npm run tauri -- android build --apk --target aarch64 --debug
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v4
+      with:
+        category: "/language:${{matrix.language}}"
